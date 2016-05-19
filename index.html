@@ -1,0 +1,57 @@
+<head>
+    <script src='lib/signature_parser.js'></script>
+    <script src='lib/TypesBaseDatatypes.js'></script>
+    <script src='lib/TypesManagementDatatypes.js'></script>
+    <script src='lib/TypesFrameworkDatatypes.js'></script>
+    <script src='lib/TypesAgentDatatypes.js'></script>
+    <script src='lib/TypesBlockandMatrixDatatypes.js'></script>
+    <script src='lib/TypesEvent&SubscriptionDatatypes.js'></script>
+    <script src='lib/TypesWorkerDatatypes.js'></script>
+    <script src='lib/TypesLibraryDatatypes.js'></script>
+    <script src='lib/TypesNetworkDatatypes.js'></script>
+    <script src='lib/TypesSamplingDatatypes.js'></script>
+    <script src='lib/RemoteControlClasses.js'></script>
+    <script src='lib/OCA.js'></script>
+    <script src='lib/WebSocket.js'></script>
+    <script>
+        var ws = new WebSocket('ws://localhost:8080/'); 
+        var device;
+        var objects;
+
+        function dump() {
+            var a = [ "Promise returned:" ];
+            var tmp, i;
+            for (i = 0; i < arguments.length; i++) {
+                tmp = arguments[i];
+                if (typeof(tmp) === "object" && tmp.is_enum) {
+                    a.push(tmp.toString());
+                } else {
+                    a.push(tmp);
+                }
+            }
+            console.log.apply(console, a);
+        }
+
+        ws.onopen = function() {
+            device = new OCA.RemoteDevice(new OCA.WebSocketConnection(ws));
+
+            device.discover_all().then(function (res) {
+                objects = res;
+                var text = 'Found '+objects.length+' Objects: \n';
+
+                for (var i = 0; i < res.length; i++) {
+                    text += res[i].ClassName + ' with ObjectNumber ' + res[i].ObjectNumber + '\n';
+                }
+
+                document.getElementById('messages').innerText = text;
+            }).catch(function(res) { console.error(res); });
+        };
+    </script>
+    <body>
+        Please open your javascript console.
+
+        <pre id='messages'>
+        </pre>
+
+    </body>
+</head>
