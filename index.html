@@ -14,7 +14,7 @@
     <script src='lib/OCA.js'></script>
     <script src='lib/WebSocket.js'></script>
     <script>
-        var ws = new WebSocket('ws://localhost:8080/'); 
+        var ws = new WebSocket('ws://'+document.location.host);
 
         function dump() {
             var a = [ "Promise returned:" ];
