@@ -41,7 +41,7 @@
                     text += res[i].ClassName + ' with ObjectNumber ' + res[i].ObjectNumber + '\n';
                 }
 
-                document.getElementById('messages').innerText = text;
+                document.getElementById('messages').innerHTML = text;
             }).catch(function(res) { console.error(res); });
         };
     </script>
