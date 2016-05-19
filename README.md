@@ -50,7 +50,8 @@ For example type into the JavaScript console:
 ## Requirements
 
 This library uses some ECMAScript 6 features. It is supposed to work in modern
-versions of chrome and firefox.
+versions of chrome, firefox and safari. It should work in Microsoft Edge.
+This code will not work in IE11 or old versions of other browsers.
 
 ## License
 
