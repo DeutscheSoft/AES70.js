@@ -1,3 +1,4 @@
+#if constant(Protocols.WebSocket)
 Protocols.WebSocket.Port http = Protocols.WebSocket.Port(http_cb, websocket_cb, 8080);
 
 mapping(Protocols.WebSocket.Connection:Stdio.File) websocket_to_socket = ([]);
@@ -76,7 +77,7 @@ class WebSocketBridge {
         socket->set_nonblocking(socket_read, socket_write, socket_close);
     }
 
-    void socket_send(string(8bit) data) {
+    void socket_send(string data) {
         out_buf += data;
 
         if (!will_write) socket_write();
@@ -97,7 +98,7 @@ class WebSocketBridge {
         will_write = 1;
     }
 
-    void socket_read(mixed id, string(8bit) data) {
+    void socket_read(mixed id, string data) {
         werror("Passed %d bytes of data from socket to websocket.\n", sizeof(data));
         websocket->send_binary(data);
     }
@@ -171,3 +172,6 @@ int main(int argc, array(string) argv) {
 
     return -1;
 }
+#else
+#error This Program requires WebSocket support. Support for WebSockets was added in Pike version 8.
+#endif
