@@ -15,8 +15,6 @@
     <script src='lib/WebSocket.js'></script>
     <script>
         var ws = new WebSocket('ws://localhost:8080/'); 
-        var device;
-        var objects;
 
         function dump() {
             var a = [ "Promise returned:" ];
@@ -33,10 +31,10 @@
         }
 
         ws.onopen = function() {
-            device = new OCA.RemoteDevice(new OCA.WebSocketConnection(ws));
+            window.device = new OCA.RemoteDevice(new OCA.WebSocketConnection(ws));
 
             device.discover_all().then(function (res) {
-                objects = res;
+                window.objects = res;
                 var text = 'Found '+objects.length+' Objects: \n';
 
                 for (var i = 0; i < res.length; i++) {
