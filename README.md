@@ -37,7 +37,7 @@ To start this webserver:
 
     pike bin/server.pike <ip> <port>
 
-You can then navigate a browser to http://localhost:8080/, which will server the `index.html` file.
+You can then navigate a browser to http://localhost:8080/, which will serve the `index.html` file.
 After the browser has connected through the proxy to the OCA device, it will read out the OCA object
 tree and print all objects to the page.
 The local representation of these OCA objects can then be found in the global variable `objects` and 
