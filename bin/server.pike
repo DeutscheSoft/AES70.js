@@ -4,6 +4,8 @@ Protocols.WebSocket.Port http = Protocols.WebSocket.Port(http_cb, websocket_cb, 
 mapping(Protocols.WebSocket.Connection:Stdio.File) websocket_to_socket = ([]);
 mapping(Protocols.WebSocket.Connection:Stdio.File) socket_to_websocket = ([]);
 
+string HTDOCS = combine_path(dirname(__DIR__));
+
 string file_to_mime(string name) {
     name = (name/".")[-1];
     switch (lower_case(name)) {
@@ -32,7 +34,7 @@ void http_cb(object r) {
 
         fname = Stdio.simplify_path("./" + fname);
 
-        fname = combine_path(getcwd(), fname);
+        fname = combine_path(HTDOCS, fname);
 
         if (Stdio.is_dir(fname)) {
             if (!has_suffix(r->not_query, "/")) {
