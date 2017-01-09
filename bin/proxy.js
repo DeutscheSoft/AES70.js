@@ -4,8 +4,6 @@ const OCA = require("../lib/").OCA;
 const SP = require("../lib/").SP;
 const process = require('process');
 
-const clients = new Set();
-
 class ProxyClient extends OCA.ClientConnection {
     constructor(socket) {
         super();
@@ -27,17 +25,22 @@ class ProxyClient extends OCA.ClientConnection {
 const event_signature = new SP.signature(OCA.OcaEvent, OCA.OcaMethod, SP.BLOB,
                                          OCA.OcaNotificationDeliveryMode, SP.BLOB);
 
-class ProxyServer extends OCA.Connection {
+class ProxyConnection extends OCA.Connection {
     constructor(socket) {
         super();
         this.socket = socket;
+        this.subscriptions = [];
 
         socket.on('data', function(b) {
           this.read(new Uint8Array(b).buffer);
         }.bind(this));
-        socket.on('end', function() {
-          console.log("end");
-        });
+        socket.on('end', function(e) {
+          this.destroy();
+        }.bind(this));
+        socket.on('error', function(e) {
+          console.log("Connection error:", e);
+          this.destroy();
+        }.bind(this));
     }
 
     write(buf) {
@@ -45,13 +48,31 @@ class ProxyServer extends OCA.Connection {
         this.socket.write(buf, 'binary');
     }
 
+    destroy() {
+        var a = this.subscriptions;
+
+        if (a) {
+            for (let i = 0; i < a.length; i++)
+                client.remove_subscription(a[i][0], a[i][1]).catch(function(reason) {
+                    console.log("Unsubscribe failed:", reason);
+                });
+
+            this.subscriptions = null;
+        }
+
+        this.socket.destroy();
+        this.socket = null;
+    }
+
     add_subscription(event, method, context, mode, blob) {
-        client.add_subscription(event, function(n) {
+        var cb = function(n) {
             /* clone the notification and send it down to the client */
             var m = new OCA.Notification(method.ONo, method.MethodID.DefLevel, method.MethodID.MethodIndex,
                                          context, event, n.param_count, n.parameters);
             this.write(OCA.encodeMessage(m));
-        }.bind(this));
+        }.bind(this);
+        client.add_subscription(event, cb);
+        this.subscriptions.push([ event, cb ]);
     }
 
     incoming(messages) {
@@ -79,8 +100,8 @@ class ProxyServer extends OCA.Connection {
                 p.then(function(id, response) {
                     response.handle = id;
                     this.write(OCA.encodeMessage(response));
-                }.bind(this, id), function() {
-                    console.log("error");
+                }.bind(this, id), function(e) {
+                    console.log("error", e);
                 });
             }
         }
@@ -98,8 +119,7 @@ const host = argv[2];
 const port = parseInt(argv[3]);
 
 const server = net.createServer(function(client) {
-    var c = new ProxyServer(client);
-    clients.add(c);
+    var c = new ProxyConnection(client);
 });
 
 var client;
