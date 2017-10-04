@@ -30,6 +30,10 @@
             console.log.apply(console, a);
         }
 
+        function msg(text) {
+          document.getElementById('messages').textContent += text;
+        }
+
         ws.onopen = function() {
             window.device = new OCA.RemoteDevice(new OCA.WebSocketConnection(ws));
 
@@ -39,9 +43,12 @@
 
                 for (var i = 0; i < res.length; i++) {
                     text += res[i].ClassName + ' with ObjectNumber ' + res[i].ObjectNumber + '\n';
+                    res[i].GetRole().then(function(ono, role) {
+                      msg("Object number "+ono+" has role: "+role+"\n");
+                    }.bind(this, res[i].ObjectNumber));
                 }
 
-                document.getElementById('messages').innerHTML = text;
+                msg(text);
             }).catch(function(res) { console.error(res); });
         };
     </script>
