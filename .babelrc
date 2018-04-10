@@ -1,12 +1,19 @@
 {
   "comments": false,
-  "presets": [
-    ["env", {
-      "targets": {
-        "browsers": [
-          "last 2 versions",
-        ]
-      }
-    }]
-  ]
+  "env": {
+    "browser" : {
+      "presets": [
+        ["env", {
+          "targets": {
+            "browsers": [
+              "last 2 versions",
+            ]
+          }
+        }]
+      ]
+    },
+    "node": {
+      "presets": [ "node6" ]
+    }
+  },
 }

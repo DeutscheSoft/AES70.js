@@ -17,8 +17,8 @@ all: dist/OCA.es5.js
 dist/rollup.js: $(LIBRARY_FILES) Makefile rollup.conf.js
 	rollup --o $@ --f iife -c rollup.conf.js lib/index.js -m dist/rollup.js.map
 
-dist/babel.js: dist/rollup.js Makefile .babelrc
-	babel $< -o $@
+dist/babel.browser.js: dist/rollup.js Makefile .babelrc
+	BABEL_ENV=browser babel $< -o $@
 
-dist/OCA.es5.js: dist/babel.js Makefile
+dist/OCA.es5.js: dist/babel.browser.js Makefile
 	closure-compiler --js $< --js_output_file $@ --language_in ECMASCRIPT5 --language_out ECMASCRIPT5
