@@ -1,0 +1,37 @@
+{
+  "name": "oca.js",
+  "version": "0.0.2",
+  "description": "A controller library for the AES70 standard.",
+  "main": "lib/index.js",
+  "bin": {
+    "oca.js": "proxy.js"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeutscheSoft/OCA.js.git"
+  },
+  "keywords": [
+    "Audio",
+    "Control",
+    "Protocol",
+    "RPC"
+  ],
+  "author": "Arne Goedeke",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/DeutscheSoft/OCA.js/issues"
+  },
+  "homepage": "https://github.com/DeutscheSoft/OCA.js#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "rollup": "^0.57.1",
+    "babel-preset-node6": "^11.0.0"
+  }
+}
