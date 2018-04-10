@@ -1,3 +1,9 @@
+import {
+    buffer_to_utf8,
+    utf8_to_buffer,
+    utf8_encoded_length,
+  } from './utf8.js';
+
 export const
   BOOLEAN = 0,
   UINT8 = 1,
@@ -37,77 +43,8 @@ export class Arguments
  }
 }
 
- function encode_utf8(s) {
-   return unescape(encodeURIComponent(s));
- }
-
- function decode_utf8(s) {
-   return decodeURIComponent(escape(s));
- }
-
- function buffer_to_string(b) {
-   var a = new Uint8Array(b);
-   var tmp = [];
-   var chunksize = 128;
-
-   for (var i = 0; i < a.length; i+= chunksize) {
-     tmp.push(String.fromCharCode.apply(String, a.subarray(i, i+chunksize)));
-   }
-
-   return tmp.join("");
- }
-
- function string_to_buffer(s) {
-   var len = s.length;
-   var buf = new Uint8Array(len);
-   for (var i=0; i < len; i++) {
-     buf[i] = s.charCodeAt(i);
-   }
-   return buf.buffer;
- }
-
- export var utf8_to_buffer, buffer_to_utf8, utf8_encoded_length;
- if ('TextEncoder' in window && 'TextDecoder' in window) {
-   (function() {
-     const E = new TextEncoder();
-     const D = new TextDecoder();
-     buffer_to_utf8 = D.decode.bind(D);
-     utf8_to_buffer = E.encode.bind(E);
-     utf8_encoded_length = function(s) {
-      return utf8_to_buffer(s).byteLength;
-     };
-   })();
- } else if (false && 'StringDecoder' in window) {
-   /* This is only for nodejs. However, the
-    * StringDecoder does not seem to work correctly
-    * at the moment... */
-   (function() {
-     const D = new window.StringDecoder();
-     buffer_to_utf8 = function(b) {
-       return D.end(Buffer.from(b));
-     };
-     utf8_to_buffer = function(s) {
-       var b = Buffer.from(s, "utf8");
-       return b.buffer.slice(0, b.length);
-     };
-     utf8_encoded_length = function(s) {
-       return Buffer.from(s, "utf8").length;
-     };
-   })();
- } else {
-   buffer_to_utf8 = function(b) {
-     return decode_utf8(buffer_to_string(b));
-   };
-   utf8_to_buffer = function(s) {
-     return string_to_buffer(encode_utf8(s));
-   };
-   utf8_encoded_length = function(s) {
-     return utf8_to_buffer(s).byteLength;
-   };
- }
-
- function utf8_codepoint_length(buf, pos, codepoints) {
-   var tmp = pos;
+function utf8_codepoint_length(buf, pos, codepoints) {
+  var tmp = pos;
 
   /* From table 3-6 in the Unicode standard 4.0: Well-Formed UTF-8
    * Byte Sequences
@@ -124,26 +61,26 @@ export class Arguments
    * 100000-10ffff    f4       80-8f     80-bf     80-bf
    */
 
-   while (codepoints--) {
-     var c = buf.getUint8(pos);
-     pos ++;
-     if (c <= 0x7f) continue;
-     pos ++;
-     if (c <= 0xdf) continue;
-     pos ++;
-     if (c <= 0xef) continue;
-     pos ++;
-   }
+  while (codepoints--) {
+    var c = buf.getUint8(pos);
+    pos ++;
+    if (c <= 0x7f) continue;
+    pos ++;
+    if (c <= 0xdf) continue;
+    pos ++;
+    if (c <= 0xef) continue;
+    pos ++;
+  }
 
-   return pos - tmp;
- }
+  return pos - tmp;
+}
 
- function memcpy(dst, src, len) {
-     var i;
-     for (i = 0; i < len; i++) {
-         dst[i] = src[i];
-     }
- }
+function memcpy(dst, src, len) {
+  var i;
+  for (i = 0; i < len; i++) {
+    dst[i] = src[i];
+  }
+}
 
 export class encoder
 {
