@@ -4,6 +4,8 @@ import {
 
 import {
     ObjectBase,
+    Event,
+    PropertyEvent,
   } from './controller/Base.js';
 
 import {
@@ -173,6 +175,9 @@ export class OcaRoot extends ObjectBase
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._PropertyChanged = null;
+    this._LockableChanged = null;
+    this._RoleChanged = null;
   }
 
   /**
@@ -281,6 +286,95 @@ export class OcaRoot extends ObjectBase
     const cmd = new CommandRrq(this.ono, 1, 6, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * General event that is emitted when a property changes. In each setter
+   * method (of derived classes) this event must be raised with the proper
+   * derived event data structure.
+   */
+  get OnPropertyChanged()
+  {
+    const event = this._PropertyChanged;
+
+    if (event) return event;
+
+    const s = new signature(OcaPropertyID, REST);
+
+    return this._PropertyChanged = new Event(this, new OcaEventID(1, 1), s);
+  }
+
+  /**
+   * Event that is triggered when Lockable changes.
+   */
+  get OnLockableChanged()
+  {
+    const event = this._LockableChanged;
+
+    if (event) return event;
+
+    return this._LockableChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(1, 4), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when Role changes.
+   */
+  get OnRoleChanged()
+  {
+    const event = this._RoleChanged;
+
+    if (event) return event;
+
+    return this._RoleChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(1, 5), new signature(STRING));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 1) return null;
+    if (id.DefLevel < 1) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ClassID";
+    if (id.PropertyIndex == 2)
+      return "ClassVersion";
+    if (id.PropertyIndex == 3)
+      return "ObjectNumber";
+    if (id.PropertyIndex == 4)
+      return "Lockable";
+    if (id.PropertyIndex == 5)
+      return "Role";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ClassID":
+      return new OcaPropertyID(1, 1);
+    case "ClassVersion":
+      return new OcaPropertyID(1, 2);
+    case "ObjectNumber":
+      return new OcaPropertyID(1, 3);
+    case "Lockable":
+      return new OcaPropertyID(1, 4);
+    case "Role":
+      return new OcaPropertyID(1, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._PropertyChanged) event.Dispose();
+    if (event = this._LockableChanged) event.Dispose();
+    if (event = this._RoleChanged) event.Dispose();
+  }
 }
 
 
@@ -309,6 +403,11 @@ export class OcaWorker extends OcaRoot
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._EnabledChanged = null;
+    this._PortsChanged = null;
+    this._LabelChanged = null;
+    this._OwnerChanged = null;
+    this._LatencyChanged = null;
   }
 
   /**
@@ -530,6 +629,120 @@ export class OcaWorker extends OcaRoot
     const cmd = new CommandRrq(this.ono, 2, 13, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Enabled changes.
+   */
+  get OnEnabledChanged()
+  {
+    const event = this._EnabledChanged;
+
+    if (event) return event;
+
+    return this._EnabledChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 1), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when Ports changes.
+   */
+  get OnPortsChanged()
+  {
+    const event = this._PortsChanged;
+
+    if (event) return event;
+
+    return this._PortsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 2), new signature(LIST(OcaPort)));
+  }
+
+  /**
+   * Event that is triggered when Label changes.
+   */
+  get OnLabelChanged()
+  {
+    const event = this._LabelChanged;
+
+    if (event) return event;
+
+    return this._LabelChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 3), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when Owner changes.
+   */
+  get OnOwnerChanged()
+  {
+    const event = this._OwnerChanged;
+
+    if (event) return event;
+
+    return this._OwnerChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 4), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when Latency changes.
+   */
+  get OnLatencyChanged()
+  {
+    const event = this._LatencyChanged;
+
+    if (event) return event;
+
+    return this._LatencyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 5), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 2) return null;
+    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Enabled";
+    if (id.PropertyIndex == 2)
+      return "Ports";
+    if (id.PropertyIndex == 3)
+      return "Label";
+    if (id.PropertyIndex == 4)
+      return "Owner";
+    if (id.PropertyIndex == 5)
+      return "Latency";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Enabled":
+      return new OcaPropertyID(2, 1);
+    case "Ports":
+      return new OcaPropertyID(2, 2);
+    case "Label":
+      return new OcaPropertyID(2, 3);
+    case "Owner":
+      return new OcaPropertyID(2, 4);
+    case "Latency":
+      return new OcaPropertyID(2, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._EnabledChanged) event.Dispose();
+    if (event = this._PortsChanged) event.Dispose();
+    if (event = this._LabelChanged) event.Dispose();
+    if (event = this._OwnerChanged) event.Dispose();
+    if (event = this._LatencyChanged) event.Dispose();
+  }
 }
 
 
@@ -562,6 +775,30 @@ export class OcaActuator extends OcaWorker
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -576,6 +813,7 @@ export class OcaMute extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StateChanged = null;
   }
 
   /**
@@ -627,6 +865,48 @@ export class OcaMute extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StateChanged) event.Dispose();
+  }
 }
 
 
@@ -641,6 +921,7 @@ export class OcaPolarity extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StateChanged = null;
   }
 
   /**
@@ -692,6 +973,48 @@ export class OcaPolarity extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StateChanged) event.Dispose();
+  }
 }
 
 
@@ -716,6 +1039,9 @@ export class OcaSwitch extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._PositionChanged = null;
+    this._PositionNamesChanged = null;
+    this._PositionEnableChanged = null;
   }
 
   /**
@@ -898,6 +1224,84 @@ export class OcaSwitch extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Position changes.
+   */
+  get OnPositionChanged()
+  {
+    const event = this._PositionChanged;
+
+    if (event) return event;
+
+    return this._PositionChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when PositionNames changes.
+   */
+  get OnPositionNamesChanged()
+  {
+    const event = this._PositionNamesChanged;
+
+    if (event) return event;
+
+    return this._PositionNamesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(STRING)));
+  }
+
+  /**
+   * Event that is triggered when PositionEnable changes.
+   */
+  get OnPositionEnableChanged()
+  {
+    const event = this._PositionEnableChanged;
+
+    if (event) return event;
+
+    return this._PositionEnableChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(LIST(BOOLEAN)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Position";
+    if (id.PropertyIndex == 2)
+      return "PositionNames";
+    if (id.PropertyIndex == 3)
+      return "PositionEnable";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Position":
+      return new OcaPropertyID(4, 1);
+    case "PositionNames":
+      return new OcaPropertyID(4, 2);
+    case "PositionEnable":
+      return new OcaPropertyID(4, 3);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._PositionChanged) event.Dispose();
+    if (event = this._PositionNamesChanged) event.Dispose();
+    if (event = this._PositionEnableChanged) event.Dispose();
+  }
 }
 
 
@@ -912,6 +1316,7 @@ export class OcaGain extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._GainChanged = null;
   }
 
   /**
@@ -963,6 +1368,48 @@ export class OcaGain extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Gain changes.
+   */
+  get OnGainChanged()
+  {
+    const event = this._GainChanged;
+
+    if (event) return event;
+
+    return this._GainChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Gain";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Gain":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._GainChanged) event.Dispose();
+  }
 }
 
 
@@ -979,6 +1426,8 @@ export class OcaPanBalance extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._PositionChanged = null;
+    this._MidpointGainChanged = null;
   }
 
   /**
@@ -1059,6 +1508,66 @@ export class OcaPanBalance extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Position changes.
+   */
+  get OnPositionChanged()
+  {
+    const event = this._PositionChanged;
+
+    if (event) return event;
+
+    return this._PositionChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when MidpointGain changes.
+   */
+  get OnMidpointGainChanged()
+  {
+    const event = this._MidpointGainChanged;
+
+    if (event) return event;
+
+    return this._MidpointGainChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Position";
+    if (id.PropertyIndex == 2)
+      return "MidpointGain";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Position":
+      return new OcaPropertyID(4, 1);
+    case "MidpointGain":
+      return new OcaPropertyID(4, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._PositionChanged) event.Dispose();
+    if (event = this._MidpointGainChanged) event.Dispose();
+  }
 }
 
 
@@ -1073,6 +1582,7 @@ export class OcaDelay extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._DelayTimeChanged = null;
   }
 
   /**
@@ -1124,6 +1634,48 @@ export class OcaDelay extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when DelayTime changes.
+   */
+  get OnDelayTimeChanged()
+  {
+    const event = this._DelayTimeChanged;
+
+    if (event) return event;
+
+    return this._DelayTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "DelayTime";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "DelayTime":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._DelayTimeChanged) event.Dispose();
+  }
 }
 
 
@@ -1142,6 +1694,7 @@ export class OcaDelayExtended extends OcaDelay
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._DelayValueChanged = null;
   }
 
   /**
@@ -1211,6 +1764,48 @@ export class OcaDelayExtended extends OcaDelay
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when DelayValue changes.
+   */
+  get OnDelayValueChanged()
+  {
+    const event = this._DelayValueChanged;
+
+    if (event) return event;
+
+    return this._DelayValueChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(OcaDelayValue));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "DelayValue";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "DelayValue":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._DelayValueChanged) event.Dispose();
+  }
 }
 
 
@@ -1225,6 +1820,7 @@ export class OcaFrequencyActuator extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._FrequencyChanged = null;
   }
 
   /**
@@ -1276,6 +1872,48 @@ export class OcaFrequencyActuator extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Frequency changes.
+   */
+  get OnFrequencyChanged()
+  {
+    const event = this._FrequencyChanged;
+
+    if (event) return event;
+
+    return this._FrequencyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Frequency";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Frequency":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._FrequencyChanged) event.Dispose();
+  }
 }
 
 
@@ -1300,6 +1938,11 @@ export class OcaFilterClassical extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._FrequencyChanged = null;
+    this._PassbandChanged = null;
+    this._ShapeChanged = null;
+    this._OrderChanged = null;
+    this._ParameterChanged = null;
   }
 
   /**
@@ -1467,6 +2110,120 @@ export class OcaFilterClassical extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Frequency changes.
+   */
+  get OnFrequencyChanged()
+  {
+    const event = this._FrequencyChanged;
+
+    if (event) return event;
+
+    return this._FrequencyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Passband changes.
+   */
+  get OnPassbandChanged()
+  {
+    const event = this._PassbandChanged;
+
+    if (event) return event;
+
+    return this._PassbandChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Shape changes.
+   */
+  get OnShapeChanged()
+  {
+    const event = this._ShapeChanged;
+
+    if (event) return event;
+
+    return this._ShapeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Order changes.
+   */
+  get OnOrderChanged()
+  {
+    const event = this._OrderChanged;
+
+    if (event) return event;
+
+    return this._OrderChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when Parameter changes.
+   */
+  get OnParameterChanged()
+  {
+    const event = this._ParameterChanged;
+
+    if (event) return event;
+
+    return this._ParameterChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Frequency";
+    if (id.PropertyIndex == 2)
+      return "Passband";
+    if (id.PropertyIndex == 3)
+      return "Shape";
+    if (id.PropertyIndex == 4)
+      return "Order";
+    if (id.PropertyIndex == 5)
+      return "Parameter";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Frequency":
+      return new OcaPropertyID(4, 1);
+    case "Passband":
+      return new OcaPropertyID(4, 2);
+    case "Shape":
+      return new OcaPropertyID(4, 3);
+    case "Order":
+      return new OcaPropertyID(4, 4);
+    case "Parameter":
+      return new OcaPropertyID(4, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._FrequencyChanged) event.Dispose();
+    if (event = this._PassbandChanged) event.Dispose();
+    if (event = this._ShapeChanged) event.Dispose();
+    if (event = this._OrderChanged) event.Dispose();
+    if (event = this._ParameterChanged) event.Dispose();
+  }
 }
 
 
@@ -1489,6 +2246,11 @@ export class OcaFilterParametric extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._FrequencyChanged = null;
+    this._ShapeChanged = null;
+    this._WidthParameterChanged = null;
+    this._InBandGainChanged = null;
+    this._ShapeParameterChanged = null;
   }
 
   /**
@@ -1656,6 +2418,120 @@ export class OcaFilterParametric extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Frequency changes.
+   */
+  get OnFrequencyChanged()
+  {
+    const event = this._FrequencyChanged;
+
+    if (event) return event;
+
+    return this._FrequencyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Shape changes.
+   */
+  get OnShapeChanged()
+  {
+    const event = this._ShapeChanged;
+
+    if (event) return event;
+
+    return this._ShapeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when WidthParameter changes.
+   */
+  get OnWidthParameterChanged()
+  {
+    const event = this._WidthParameterChanged;
+
+    if (event) return event;
+
+    return this._WidthParameterChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when InBandGain changes.
+   */
+  get OnInBandGainChanged()
+  {
+    const event = this._InBandGainChanged;
+
+    if (event) return event;
+
+    return this._InBandGainChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when ShapeParameter changes.
+   */
+  get OnShapeParameterChanged()
+  {
+    const event = this._ShapeParameterChanged;
+
+    if (event) return event;
+
+    return this._ShapeParameterChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Frequency";
+    if (id.PropertyIndex == 2)
+      return "Shape";
+    if (id.PropertyIndex == 3)
+      return "WidthParameter";
+    if (id.PropertyIndex == 4)
+      return "InBandGain";
+    if (id.PropertyIndex == 5)
+      return "ShapeParameter";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Frequency":
+      return new OcaPropertyID(4, 1);
+    case "Shape":
+      return new OcaPropertyID(4, 2);
+    case "WidthParameter":
+      return new OcaPropertyID(4, 3);
+    case "InBandGain":
+      return new OcaPropertyID(4, 4);
+    case "ShapeParameter":
+      return new OcaPropertyID(4, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._FrequencyChanged) event.Dispose();
+    if (event = this._ShapeChanged) event.Dispose();
+    if (event = this._WidthParameterChanged) event.Dispose();
+    if (event = this._InBandGainChanged) event.Dispose();
+    if (event = this._ShapeParameterChanged) event.Dispose();
+  }
 }
 
 
@@ -1674,6 +2550,10 @@ export class OcaFilterPolynomial extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._AChanged = null;
+    this._BChanged = null;
+    this._SampleRateChanged = null;
+    this._MaxOrderChanged = null;
   }
 
   /**
@@ -1765,6 +2645,102 @@ export class OcaFilterPolynomial extends OcaActuator
     const cmd = new CommandRrq(this.ono, 4, 5, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when A changes.
+   */
+  get OnAChanged()
+  {
+    const event = this._AChanged;
+
+    if (event) return event;
+
+    return this._AChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(LIST(FLOAT32)));
+  }
+
+  /**
+   * Event that is triggered when B changes.
+   */
+  get OnBChanged()
+  {
+    const event = this._BChanged;
+
+    if (event) return event;
+
+    return this._BChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
+  }
+
+  /**
+   * Event that is triggered when SampleRate changes.
+   */
+  get OnSampleRateChanged()
+  {
+    const event = this._SampleRateChanged;
+
+    if (event) return event;
+
+    return this._SampleRateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when MaxOrder changes.
+   */
+  get OnMaxOrderChanged()
+  {
+    const event = this._MaxOrderChanged;
+
+    if (event) return event;
+
+    return this._MaxOrderChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "A";
+    if (id.PropertyIndex == 2)
+      return "B";
+    if (id.PropertyIndex == 3)
+      return "SampleRate";
+    if (id.PropertyIndex == 4)
+      return "MaxOrder";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "A":
+      return new OcaPropertyID(4, 1);
+    case "B":
+      return new OcaPropertyID(4, 2);
+    case "SampleRate":
+      return new OcaPropertyID(4, 3);
+    case "MaxOrder":
+      return new OcaPropertyID(4, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._AChanged) event.Dispose();
+    if (event = this._BChanged) event.Dispose();
+    if (event = this._SampleRateChanged) event.Dispose();
+    if (event = this._MaxOrderChanged) event.Dispose();
+  }
 }
 
 
@@ -1782,6 +2758,9 @@ export class OcaFilterFIR extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._LengthChanged = null;
+    this._CoefficientsChanged = null;
+    this._SampleRateChanged = null;
   }
 
   /**
@@ -1875,6 +2854,84 @@ export class OcaFilterFIR extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Length changes.
+   */
+  get OnLengthChanged()
+  {
+    const event = this._LengthChanged;
+
+    if (event) return event;
+
+    return this._LengthChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when Coefficients changes.
+   */
+  get OnCoefficientsChanged()
+  {
+    const event = this._CoefficientsChanged;
+
+    if (event) return event;
+
+    return this._CoefficientsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
+  }
+
+  /**
+   * Event that is triggered when SampleRate changes.
+   */
+  get OnSampleRateChanged()
+  {
+    const event = this._SampleRateChanged;
+
+    if (event) return event;
+
+    return this._SampleRateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Length";
+    if (id.PropertyIndex == 2)
+      return "Coefficients";
+    if (id.PropertyIndex == 3)
+      return "SampleRate";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Length":
+      return new OcaPropertyID(4, 1);
+    case "Coefficients":
+      return new OcaPropertyID(4, 2);
+    case "SampleRate":
+      return new OcaPropertyID(4, 3);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._LengthChanged) event.Dispose();
+    if (event = this._CoefficientsChanged) event.Dispose();
+    if (event = this._SampleRateChanged) event.Dispose();
+  }
 }
 
 
@@ -1894,6 +2951,10 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TransferFunctionChanged = null;
+    this._SampleRateChanged = null;
+    this._TFMinLengthChanged = null;
+    this._TFMaxLengthChanged = null;
   }
 
   /**
@@ -1996,6 +3057,102 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     const cmd = new CommandRrq(this.ono, 4, 6, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when TransferFunction changes.
+   */
+  get OnTransferFunctionChanged()
+  {
+    const event = this._TransferFunctionChanged;
+
+    if (event) return event;
+
+    return this._TransferFunctionChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(OcaTransferFunction));
+  }
+
+  /**
+   * Event that is triggered when SampleRate changes.
+   */
+  get OnSampleRateChanged()
+  {
+    const event = this._SampleRateChanged;
+
+    if (event) return event;
+
+    return this._SampleRateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when TFMinLength changes.
+   */
+  get OnTFMinLengthChanged()
+  {
+    const event = this._TFMinLengthChanged;
+
+    if (event) return event;
+
+    return this._TFMinLengthChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when TFMaxLength changes.
+   */
+  get OnTFMaxLengthChanged()
+  {
+    const event = this._TFMaxLengthChanged;
+
+    if (event) return event;
+
+    return this._TFMaxLengthChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "TransferFunction";
+    if (id.PropertyIndex == 2)
+      return "SampleRate";
+    if (id.PropertyIndex == 3)
+      return "TFMinLength";
+    if (id.PropertyIndex == 4)
+      return "TFMaxLength";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "TransferFunction":
+      return new OcaPropertyID(4, 1);
+    case "SampleRate":
+      return new OcaPropertyID(4, 2);
+    case "TFMinLength":
+      return new OcaPropertyID(4, 3);
+    case "TFMaxLength":
+      return new OcaPropertyID(4, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TransferFunctionChanged) event.Dispose();
+    if (event = this._SampleRateChanged) event.Dispose();
+    if (event = this._TFMinLengthChanged) event.Dispose();
+    if (event = this._TFMaxLengthChanged) event.Dispose();
+  }
 }
 
 
@@ -2039,6 +3196,20 @@ export class OcaDynamics extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TriggeredChanged = null;
+    this._DynamicGainChanged = null;
+    this._FunctionChanged = null;
+    this._RatioChanged = null;
+    this._ThresholdChanged = null;
+    this._ThresholdPresentationUnitsChanged = null;
+    this._DetectorLawChanged = null;
+    this._AttackTimeChanged = null;
+    this._ReleaseTimeChanged = null;
+    this._HoldTimeChanged = null;
+    this._DynamicGainCeilingChanged = null;
+    this._DynamicGainFloorChanged = null;
+    this._KneeParameterChanged = null;
+    this._SlopeChanged = null;
   }
 
   /**
@@ -2437,6 +3608,282 @@ export class OcaDynamics extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Triggered changes.
+   */
+  get OnTriggeredChanged()
+  {
+    const event = this._TriggeredChanged;
+
+    if (event) return event;
+
+    return this._TriggeredChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when DynamicGain changes.
+   */
+  get OnDynamicGainChanged()
+  {
+    const event = this._DynamicGainChanged;
+
+    if (event) return event;
+
+    return this._DynamicGainChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Function changes.
+   */
+  get OnFunctionChanged()
+  {
+    const event = this._FunctionChanged;
+
+    if (event) return event;
+
+    return this._FunctionChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Ratio changes.
+   */
+  get OnRatioChanged()
+  {
+    const event = this._RatioChanged;
+
+    if (event) return event;
+
+    return this._RatioChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Threshold changes.
+   */
+  get OnThresholdChanged()
+  {
+    const event = this._ThresholdChanged;
+
+    if (event) return event;
+
+    return this._ThresholdChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when ThresholdPresentationUnits changes.
+   */
+  get OnThresholdPresentationUnitsChanged()
+  {
+    const event = this._ThresholdPresentationUnitsChanged;
+
+    if (event) return event;
+
+    return this._ThresholdPresentationUnitsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 6), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when DetectorLaw changes.
+   */
+  get OnDetectorLawChanged()
+  {
+    const event = this._DetectorLawChanged;
+
+    if (event) return event;
+
+    return this._DetectorLawChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 7), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when AttackTime changes.
+   */
+  get OnAttackTimeChanged()
+  {
+    const event = this._AttackTimeChanged;
+
+    if (event) return event;
+
+    return this._AttackTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 8), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when ReleaseTime changes.
+   */
+  get OnReleaseTimeChanged()
+  {
+    const event = this._ReleaseTimeChanged;
+
+    if (event) return event;
+
+    return this._ReleaseTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 9), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when HoldTime changes.
+   */
+  get OnHoldTimeChanged()
+  {
+    const event = this._HoldTimeChanged;
+
+    if (event) return event;
+
+    return this._HoldTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 10), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when DynamicGainCeiling changes.
+   */
+  get OnDynamicGainCeilingChanged()
+  {
+    const event = this._DynamicGainCeilingChanged;
+
+    if (event) return event;
+
+    return this._DynamicGainCeilingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 11), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when DynamicGainFloor changes.
+   */
+  get OnDynamicGainFloorChanged()
+  {
+    const event = this._DynamicGainFloorChanged;
+
+    if (event) return event;
+
+    return this._DynamicGainFloorChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 12), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when KneeParameter changes.
+   */
+  get OnKneeParameterChanged()
+  {
+    const event = this._KneeParameterChanged;
+
+    if (event) return event;
+
+    return this._KneeParameterChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 13), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Slope changes.
+   */
+  get OnSlopeChanged()
+  {
+    const event = this._SlopeChanged;
+
+    if (event) return event;
+
+    return this._SlopeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 14), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Triggered";
+    if (id.PropertyIndex == 2)
+      return "DynamicGain";
+    if (id.PropertyIndex == 3)
+      return "Function";
+    if (id.PropertyIndex == 4)
+      return "Ratio";
+    if (id.PropertyIndex == 5)
+      return "Threshold";
+    if (id.PropertyIndex == 6)
+      return "ThresholdPresentationUnits";
+    if (id.PropertyIndex == 7)
+      return "DetectorLaw";
+    if (id.PropertyIndex == 8)
+      return "AttackTime";
+    if (id.PropertyIndex == 9)
+      return "ReleaseTime";
+    if (id.PropertyIndex == 10)
+      return "HoldTime";
+    if (id.PropertyIndex == 11)
+      return "DynamicGainCeiling";
+    if (id.PropertyIndex == 12)
+      return "DynamicGainFloor";
+    if (id.PropertyIndex == 13)
+      return "KneeParameter";
+    if (id.PropertyIndex == 14)
+      return "Slope";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Triggered":
+      return new OcaPropertyID(4, 1);
+    case "DynamicGain":
+      return new OcaPropertyID(4, 2);
+    case "Function":
+      return new OcaPropertyID(4, 3);
+    case "Ratio":
+      return new OcaPropertyID(4, 4);
+    case "Threshold":
+      return new OcaPropertyID(4, 5);
+    case "ThresholdPresentationUnits":
+      return new OcaPropertyID(4, 6);
+    case "DetectorLaw":
+      return new OcaPropertyID(4, 7);
+    case "AttackTime":
+      return new OcaPropertyID(4, 8);
+    case "ReleaseTime":
+      return new OcaPropertyID(4, 9);
+    case "HoldTime":
+      return new OcaPropertyID(4, 10);
+    case "DynamicGainCeiling":
+      return new OcaPropertyID(4, 11);
+    case "DynamicGainFloor":
+      return new OcaPropertyID(4, 12);
+    case "KneeParameter":
+      return new OcaPropertyID(4, 13);
+    case "Slope":
+      return new OcaPropertyID(4, 14);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TriggeredChanged) event.Dispose();
+    if (event = this._DynamicGainChanged) event.Dispose();
+    if (event = this._FunctionChanged) event.Dispose();
+    if (event = this._RatioChanged) event.Dispose();
+    if (event = this._ThresholdChanged) event.Dispose();
+    if (event = this._ThresholdPresentationUnitsChanged) event.Dispose();
+    if (event = this._DetectorLawChanged) event.Dispose();
+    if (event = this._AttackTimeChanged) event.Dispose();
+    if (event = this._ReleaseTimeChanged) event.Dispose();
+    if (event = this._HoldTimeChanged) event.Dispose();
+    if (event = this._DynamicGainCeilingChanged) event.Dispose();
+    if (event = this._DynamicGainFloorChanged) event.Dispose();
+    if (event = this._KneeParameterChanged) event.Dispose();
+    if (event = this._SlopeChanged) event.Dispose();
+  }
 }
 
 
@@ -2457,6 +3904,10 @@ export class OcaDynamicsDetector extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._LawChanged = null;
+    this._AttackTimeChanged = null;
+    this._ReleaseTimeChanged = null;
+    this._HoldTimeChanged = null;
   }
 
   /**
@@ -2595,6 +4046,102 @@ export class OcaDynamicsDetector extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Law changes.
+   */
+  get OnLawChanged()
+  {
+    const event = this._LawChanged;
+
+    if (event) return event;
+
+    return this._LawChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when AttackTime changes.
+   */
+  get OnAttackTimeChanged()
+  {
+    const event = this._AttackTimeChanged;
+
+    if (event) return event;
+
+    return this._AttackTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when ReleaseTime changes.
+   */
+  get OnReleaseTimeChanged()
+  {
+    const event = this._ReleaseTimeChanged;
+
+    if (event) return event;
+
+    return this._ReleaseTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when HoldTime changes.
+   */
+  get OnHoldTimeChanged()
+  {
+    const event = this._HoldTimeChanged;
+
+    if (event) return event;
+
+    return this._HoldTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Law";
+    if (id.PropertyIndex == 2)
+      return "AttackTime";
+    if (id.PropertyIndex == 3)
+      return "ReleaseTime";
+    if (id.PropertyIndex == 4)
+      return "HoldTime";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Law":
+      return new OcaPropertyID(4, 1);
+    case "AttackTime":
+      return new OcaPropertyID(4, 2);
+    case "ReleaseTime":
+      return new OcaPropertyID(4, 3);
+    case "HoldTime":
+      return new OcaPropertyID(4, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._LawChanged) event.Dispose();
+    if (event = this._AttackTimeChanged) event.Dispose();
+    if (event = this._ReleaseTimeChanged) event.Dispose();
+    if (event = this._HoldTimeChanged) event.Dispose();
+  }
 }
 
 
@@ -2662,6 +4209,12 @@ export class OcaDynamicsCurve extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._nSegmentsChanged = null;
+    this._ThresholdChanged = null;
+    this._SlopeChanged = null;
+    this._KneeParameterChanged = null;
+    this._DynamicGainFloorChanged = null;
+    this._DynamicGainCeilingChanged = null;
   }
 
   /**
@@ -2861,6 +4414,138 @@ export class OcaDynamicsCurve extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when nSegments changes.
+   */
+  get OnnSegmentsChanged()
+  {
+    const event = this._nSegmentsChanged;
+
+    if (event) return event;
+
+    return this._nSegmentsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Threshold changes.
+   */
+  get OnThresholdChanged()
+  {
+    const event = this._ThresholdChanged;
+
+    if (event) return event;
+
+    return this._ThresholdChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
+  }
+
+  /**
+   * Event that is triggered when Slope changes.
+   */
+  get OnSlopeChanged()
+  {
+    const event = this._SlopeChanged;
+
+    if (event) return event;
+
+    return this._SlopeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(LIST(FLOAT32)));
+  }
+
+  /**
+   * Event that is triggered when KneeParameter changes.
+   */
+  get OnKneeParameterChanged()
+  {
+    const event = this._KneeParameterChanged;
+
+    if (event) return event;
+
+    return this._KneeParameterChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(LIST(FLOAT32)));
+  }
+
+  /**
+   * Event that is triggered when DynamicGainFloor changes.
+   */
+  get OnDynamicGainFloorChanged()
+  {
+    const event = this._DynamicGainFloorChanged;
+
+    if (event) return event;
+
+    return this._DynamicGainFloorChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when DynamicGainCeiling changes.
+   */
+  get OnDynamicGainCeilingChanged()
+  {
+    const event = this._DynamicGainCeilingChanged;
+
+    if (event) return event;
+
+    return this._DynamicGainCeilingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "nSegments";
+    if (id.PropertyIndex == 2)
+      return "Threshold";
+    if (id.PropertyIndex == 3)
+      return "Slope";
+    if (id.PropertyIndex == 4)
+      return "KneeParameter";
+    if (id.PropertyIndex == 5)
+      return "DynamicGainFloor";
+    if (id.PropertyIndex == 6)
+      return "DynamicGainCeiling";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "nSegments":
+      return new OcaPropertyID(4, 1);
+    case "Threshold":
+      return new OcaPropertyID(4, 2);
+    case "Slope":
+      return new OcaPropertyID(4, 3);
+    case "KneeParameter":
+      return new OcaPropertyID(4, 4);
+    case "DynamicGainFloor":
+      return new OcaPropertyID(4, 5);
+    case "DynamicGainCeiling":
+      return new OcaPropertyID(4, 6);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._nSegmentsChanged) event.Dispose();
+    if (event = this._ThresholdChanged) event.Dispose();
+    if (event = this._SlopeChanged) event.Dispose();
+    if (event = this._KneeParameterChanged) event.Dispose();
+    if (event = this._DynamicGainFloorChanged) event.Dispose();
+    if (event = this._DynamicGainCeilingChanged) event.Dispose();
+  }
 }
 
 
@@ -2888,6 +4573,14 @@ export class OcaSignalGenerator extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._Frequency1Changed = null;
+    this._Frequency2Changed = null;
+    this._LevelChanged = null;
+    this._WaveformChanged = null;
+    this._SweepTypeChanged = null;
+    this._SweepTimeChanged = null;
+    this._SweepRepeatChanged = null;
+    this._GeneratingChanged = null;
   }
 
   /**
@@ -3148,6 +4841,174 @@ export class OcaSignalGenerator extends OcaActuator
     const cmd = new CommandRrq(this.ono, 4, 17, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Frequency1 changes.
+   */
+  get OnFrequency1Changed()
+  {
+    const event = this._Frequency1Changed;
+
+    if (event) return event;
+
+    return this._Frequency1Changed =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Frequency2 changes.
+   */
+  get OnFrequency2Changed()
+  {
+    const event = this._Frequency2Changed;
+
+    if (event) return event;
+
+    return this._Frequency2Changed =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Level changes.
+   */
+  get OnLevelChanged()
+  {
+    const event = this._LevelChanged;
+
+    if (event) return event;
+
+    return this._LevelChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Waveform changes.
+   */
+  get OnWaveformChanged()
+  {
+    const event = this._WaveformChanged;
+
+    if (event) return event;
+
+    return this._WaveformChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when SweepType changes.
+   */
+  get OnSweepTypeChanged()
+  {
+    const event = this._SweepTypeChanged;
+
+    if (event) return event;
+
+    return this._SweepTypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when SweepTime changes.
+   */
+  get OnSweepTimeChanged()
+  {
+    const event = this._SweepTimeChanged;
+
+    if (event) return event;
+
+    return this._SweepTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when SweepRepeat changes.
+   */
+  get OnSweepRepeatChanged()
+  {
+    const event = this._SweepRepeatChanged;
+
+    if (event) return event;
+
+    return this._SweepRepeatChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 7), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when Generating changes.
+   */
+  get OnGeneratingChanged()
+  {
+    const event = this._GeneratingChanged;
+
+    if (event) return event;
+
+    return this._GeneratingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 8), new signature(BOOLEAN));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Frequency1";
+    if (id.PropertyIndex == 2)
+      return "Frequency2";
+    if (id.PropertyIndex == 3)
+      return "Level";
+    if (id.PropertyIndex == 4)
+      return "Waveform";
+    if (id.PropertyIndex == 5)
+      return "SweepType";
+    if (id.PropertyIndex == 6)
+      return "SweepTime";
+    if (id.PropertyIndex == 7)
+      return "SweepRepeat";
+    if (id.PropertyIndex == 8)
+      return "Generating";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Frequency1":
+      return new OcaPropertyID(4, 1);
+    case "Frequency2":
+      return new OcaPropertyID(4, 2);
+    case "Level":
+      return new OcaPropertyID(4, 3);
+    case "Waveform":
+      return new OcaPropertyID(4, 4);
+    case "SweepType":
+      return new OcaPropertyID(4, 5);
+    case "SweepTime":
+      return new OcaPropertyID(4, 6);
+    case "SweepRepeat":
+      return new OcaPropertyID(4, 7);
+    case "Generating":
+      return new OcaPropertyID(4, 8);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._Frequency1Changed) event.Dispose();
+    if (event = this._Frequency2Changed) event.Dispose();
+    if (event = this._LevelChanged) event.Dispose();
+    if (event = this._WaveformChanged) event.Dispose();
+    if (event = this._SweepTypeChanged) event.Dispose();
+    if (event = this._SweepTimeChanged) event.Dispose();
+    if (event = this._SweepRepeatChanged) event.Dispose();
+    if (event = this._GeneratingChanged) event.Dispose();
+  }
 }
 
 
@@ -3186,6 +5047,30 @@ export class OcaSignalInput extends OcaActuator
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -3224,6 +5109,30 @@ export class OcaSignalOutput extends OcaActuator
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -3238,6 +5147,7 @@ export class OcaTemperatureActuator extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TemperatureChanged = null;
   }
 
   /**
@@ -3289,6 +5199,48 @@ export class OcaTemperatureActuator extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Temperature changes.
+   */
+  get OnTemperatureChanged()
+  {
+    const event = this._TemperatureChanged;
+
+    if (event) return event;
+
+    return this._TemperatureChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Temperature";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Temperature":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TemperatureChanged) event.Dispose();
+  }
 }
 
 
@@ -3308,6 +5260,7 @@ export class OcaIdentificationActuator extends OcaActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._activeChanged = null;
   }
 
   /**
@@ -3359,6 +5312,48 @@ export class OcaIdentificationActuator extends OcaActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when active changes.
+   */
+  get OnactiveChanged()
+  {
+    const event = this._activeChanged;
+
+    if (event) return event;
+
+    return this._activeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "active";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "active":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._activeChanged) event.Dispose();
+  }
 }
 
 
@@ -3390,6 +5385,30 @@ export class OcaSummingPoint extends OcaActuator
     return 1;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -3424,6 +5443,30 @@ export class OcaBasicActuator extends OcaActuator
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -3438,6 +5481,7 @@ export class OcaBooleanActuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3489,6 +5533,48 @@ export class OcaBooleanActuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3503,6 +5589,7 @@ export class OcaInt8Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3554,6 +5641,48 @@ export class OcaInt8Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3568,6 +5697,7 @@ export class OcaInt16Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3619,6 +5749,48 @@ export class OcaInt16Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3633,6 +5805,7 @@ export class OcaInt32Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3684,6 +5857,48 @@ export class OcaInt32Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3698,6 +5913,7 @@ export class OcaInt64Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3749,6 +5965,48 @@ export class OcaInt64Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3763,6 +6021,7 @@ export class OcaUint8Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3814,6 +6073,48 @@ export class OcaUint8Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3828,6 +6129,7 @@ export class OcaUint16Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3879,6 +6181,48 @@ export class OcaUint16Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3893,6 +6237,7 @@ export class OcaUint32Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -3943,6 +6288,48 @@ export class OcaUint32Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -3957,6 +6344,7 @@ export class OcaUint64Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -4008,6 +6396,48 @@ export class OcaUint64Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -4022,6 +6452,7 @@ export class OcaFloat32Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -4073,6 +6504,48 @@ export class OcaFloat32Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -4087,6 +6560,7 @@ export class OcaFloat64Actuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
   }
 
   /**
@@ -4138,6 +6612,48 @@ export class OcaFloat64Actuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+  }
 }
 
 
@@ -4153,6 +6669,8 @@ export class OcaStringActuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SettingChanged = null;
+    this._MaxLenChanged = null;
   }
 
   /**
@@ -4216,6 +6734,66 @@ export class OcaStringActuator extends OcaBasicActuator
     const cmd = new CommandRrq(this.ono, 5, 3, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Setting changes.
+   */
+  get OnSettingChanged()
+  {
+    const event = this._SettingChanged;
+
+    if (event) return event;
+
+    return this._SettingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when MaxLen changes.
+   */
+  get OnMaxLenChanged()
+  {
+    const event = this._MaxLenChanged;
+
+    if (event) return event;
+
+    return this._MaxLenChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Setting";
+    if (id.PropertyIndex == 2)
+      return "MaxLen";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Setting":
+      return new OcaPropertyID(5, 1);
+    case "MaxLen":
+      return new OcaPropertyID(5, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SettingChanged) event.Dispose();
+    if (event = this._MaxLenChanged) event.Dispose();
+  }
 }
 
 
@@ -4234,6 +6812,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._BitstringChanged = null;
   }
 
   /**
@@ -4334,6 +6913,48 @@ export class OcaBitstringActuator extends OcaBasicActuator
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Bitstring changes.
+   */
+  get OnBitstringChanged()
+  {
+    const event = this._BitstringChanged;
+
+    if (event) return event;
+
+    return this._BitstringChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Bitstring";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Bitstring":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._BitstringChanged) event.Dispose();
+  }
 }
 
 
@@ -4347,6 +6968,7 @@ export class OcaSensor extends OcaWorker
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingStateChanged = null;
   }
 
   /**
@@ -4383,6 +7005,48 @@ export class OcaSensor extends OcaWorker
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when ReadingState changes.
+   */
+  get OnReadingStateChanged()
+  {
+    const event = this._ReadingStateChanged;
+
+    if (event) return event;
+
+    return this._ReadingStateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ReadingState";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ReadingState":
+      return new OcaPropertyID(3, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingStateChanged) event.Dispose();
+  }
 }
 
 
@@ -4396,6 +7060,7 @@ export class OcaLevelSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4431,6 +7096,48 @@ export class OcaLevelSensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4447,6 +7154,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._LawChanged = null;
   }
 
   /**
@@ -4499,6 +7207,48 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Law changes.
+   */
+  get OnLawChanged()
+  {
+    const event = this._LawChanged;
+
+    if (event) return event;
+
+    return this._LawChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Law";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Law":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._LawChanged) event.Dispose();
+  }
 }
 
 
@@ -4512,6 +7262,7 @@ export class OcaTimeIntervalSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4547,6 +7298,48 @@ export class OcaTimeIntervalSensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4560,6 +7353,7 @@ export class OcaFrequencySensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4595,6 +7389,48 @@ export class OcaFrequencySensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4608,6 +7444,7 @@ export class OcaTemperatureSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4643,6 +7480,48 @@ export class OcaTemperatureSensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4658,6 +7537,7 @@ export class OcaIdentificationSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._Identify = null;
   }
 
   /**
@@ -4680,6 +7560,46 @@ export class OcaIdentificationSensor extends OcaSensor
     return 2;
   }
 
+
+  /**
+   * Event that is emitted when someone actuates the device identification
+   * control.
+   */
+  get OnIdentify()
+  {
+    const event = this._Identify;
+
+    if (event) return event;
+
+    const s = null;
+
+    return this._Identify = new Event(this, new OcaEventID(4, 1), s);
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._Identify) event.Dispose();
+  }
 }
 
 
@@ -4693,6 +7613,7 @@ export class OcaVoltageSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4728,6 +7649,48 @@ export class OcaVoltageSensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4741,6 +7704,7 @@ export class OcaCurrentSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4776,6 +7740,48 @@ export class OcaCurrentSensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4789,6 +7795,7 @@ export class OcaImpedanceSensor extends OcaSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4824,6 +7831,48 @@ export class OcaImpedanceSensor extends OcaSensor
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(OcaImpedance));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(4, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4858,6 +7907,30 @@ export class OcaBasicSensor extends OcaSensor
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -4871,6 +7944,7 @@ export class OcaBooleanSensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4906,6 +7980,48 @@ export class OcaBooleanSensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4919,6 +8035,7 @@ export class OcaInt8Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -4954,6 +8071,48 @@ export class OcaInt8Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -4967,6 +8126,7 @@ export class OcaInt16Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5002,6 +8162,48 @@ export class OcaInt16Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5015,6 +8217,7 @@ export class OcaInt32Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5050,6 +8253,48 @@ export class OcaInt32Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5063,6 +8308,7 @@ export class OcaInt64Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5098,6 +8344,48 @@ export class OcaInt64Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5111,6 +8399,7 @@ export class OcaUint8Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5146,6 +8435,48 @@ export class OcaUint8Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5159,6 +8490,7 @@ export class OcaUint16Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5194,6 +8526,48 @@ export class OcaUint16Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5207,6 +8581,7 @@ export class OcaUint32Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5242,6 +8617,48 @@ export class OcaUint32Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5255,6 +8672,7 @@ export class OcaUint64Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5290,6 +8708,48 @@ export class OcaUint64Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5303,6 +8763,7 @@ export class OcaFloat32Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5338,6 +8799,48 @@ export class OcaFloat32Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5351,6 +8854,7 @@ export class OcaFloat64Sensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ReadingChanged = null;
   }
 
   /**
@@ -5386,6 +8890,48 @@ export class OcaFloat64Sensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Reading changes.
+   */
+  get OnReadingChanged()
+  {
+    const event = this._ReadingChanged;
+
+    if (event) return event;
+
+    return this._ReadingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Reading";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Reading":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ReadingChanged) event.Dispose();
+  }
 }
 
 
@@ -5401,6 +8947,8 @@ export class OcaStringSensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StringChanged = null;
+    this._MaxLenChanged = null;
   }
 
   /**
@@ -5465,6 +9013,66 @@ export class OcaStringSensor extends OcaBasicSensor
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when String changes.
+   */
+  get OnStringChanged()
+  {
+    const event = this._StringChanged;
+
+    if (event) return event;
+
+    return this._StringChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when MaxLen changes.
+   */
+  get OnMaxLenChanged()
+  {
+    const event = this._MaxLenChanged;
+
+    if (event) return event;
+
+    return this._MaxLenChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "String";
+    if (id.PropertyIndex == 2)
+      return "MaxLen";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "String":
+      return new OcaPropertyID(5, 1);
+    case "MaxLen":
+      return new OcaPropertyID(5, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StringChanged) event.Dispose();
+    if (event = this._MaxLenChanged) event.Dispose();
+  }
 }
 
 
@@ -5481,6 +9089,7 @@ export class OcaBitstringSensor extends OcaBasicSensor
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._BitStringChanged = null;
   }
 
   /**
@@ -5547,6 +9156,48 @@ export class OcaBitstringSensor extends OcaBasicSensor
     const cmd = new CommandRrq(this.ono, 5, 3, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when BitString changes.
+   */
+  get OnBitStringChanged()
+  {
+    const event = this._BitStringChanged;
+
+    if (event) return event;
+
+    return this._BitStringChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 5) return null;
+    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "BitString";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "BitString":
+      return new OcaPropertyID(5, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._BitStringChanged) event.Dispose();
+  }
 }
 
 
@@ -5593,6 +9244,12 @@ export class OcaBlock extends OcaWorker
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TypeChanged = null;
+    this._MembersChanged = null;
+    this._SignalPathsChanged = null;
+    this._MostRecentParamSetIdentifierChanged = null;
+    this._GlobalTypeChanged = null;
+    this._ONoMapChanged = null;
   }
 
   /**
@@ -5960,6 +9617,138 @@ export class OcaBlock extends OcaWorker
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Type changes.
+   */
+  get OnTypeChanged()
+  {
+    const event = this._TypeChanged;
+
+    if (event) return event;
+
+    return this._TypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when Members changes.
+   */
+  get OnMembersChanged()
+  {
+    const event = this._MembersChanged;
+
+    if (event) return event;
+
+    return this._MembersChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaObjectIdentification)));
+  }
+
+  /**
+   * Event that is triggered when SignalPaths changes.
+   */
+  get OnSignalPathsChanged()
+  {
+    const event = this._SignalPathsChanged;
+
+    if (event) return event;
+
+    return this._SignalPathsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT16, OcaSignalPath)));
+  }
+
+  /**
+   * Event that is triggered when MostRecentParamSetIdentifier changes.
+   */
+  get OnMostRecentParamSetIdentifierChanged()
+  {
+    const event = this._MostRecentParamSetIdentifierChanged;
+
+    if (event) return event;
+
+    return this._MostRecentParamSetIdentifierChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when GlobalType changes.
+   */
+  get OnGlobalTypeChanged()
+  {
+    const event = this._GlobalTypeChanged;
+
+    if (event) return event;
+
+    return this._GlobalTypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(OcaGlobalBlockTypeIdentifier));
+  }
+
+  /**
+   * Event that is triggered when ONoMap changes.
+   */
+  get OnONoMapChanged()
+  {
+    const event = this._ONoMapChanged;
+
+    if (event) return event;
+
+    return this._ONoMapChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(MAP(UINT32, UINT32)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Type";
+    if (id.PropertyIndex == 2)
+      return "Members";
+    if (id.PropertyIndex == 3)
+      return "SignalPaths";
+    if (id.PropertyIndex == 4)
+      return "MostRecentParamSetIdentifier";
+    if (id.PropertyIndex == 5)
+      return "GlobalType";
+    if (id.PropertyIndex == 6)
+      return "ONoMap";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Type":
+      return new OcaPropertyID(3, 1);
+    case "Members":
+      return new OcaPropertyID(3, 2);
+    case "SignalPaths":
+      return new OcaPropertyID(3, 3);
+    case "MostRecentParamSetIdentifier":
+      return new OcaPropertyID(3, 4);
+    case "GlobalType":
+      return new OcaPropertyID(3, 5);
+    case "ONoMap":
+      return new OcaPropertyID(3, 6);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TypeChanged) event.Dispose();
+    if (event = this._MembersChanged) event.Dispose();
+    if (event = this._SignalPathsChanged) event.Dispose();
+    if (event = this._MostRecentParamSetIdentifierChanged) event.Dispose();
+    if (event = this._GlobalTypeChanged) event.Dispose();
+    if (event = this._ONoMapChanged) event.Dispose();
+  }
 }
 
 
@@ -6015,6 +9804,10 @@ export class OcaBlockFactory extends OcaWorker
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ProtoPortsChanged = null;
+    this._ProtoMembersChanged = null;
+    this._ProtoSignalPathsChanged = null;
+    this._GlobalTypeChanged = null;
   }
 
   /**
@@ -6232,6 +10025,102 @@ export class OcaBlockFactory extends OcaWorker
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when ProtoPorts changes.
+   */
+  get OnProtoPortsChanged()
+  {
+    const event = this._ProtoPortsChanged;
+
+    if (event) return event;
+
+    return this._ProtoPortsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaProtoPort)));
+  }
+
+  /**
+   * Event that is triggered when ProtoMembers changes.
+   */
+  get OnProtoMembersChanged()
+  {
+    const event = this._ProtoMembersChanged;
+
+    if (event) return event;
+
+    return this._ProtoMembersChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaProtoObjectIdentification)));
+  }
+
+  /**
+   * Event that is triggered when ProtoSignalPaths changes.
+   */
+  get OnProtoSignalPathsChanged()
+  {
+    const event = this._ProtoSignalPathsChanged;
+
+    if (event) return event;
+
+    return this._ProtoSignalPathsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT16, OcaProtoSignalPath)));
+  }
+
+  /**
+   * Event that is triggered when GlobalType changes.
+   */
+  get OnGlobalTypeChanged()
+  {
+    const event = this._GlobalTypeChanged;
+
+    if (event) return event;
+
+    return this._GlobalTypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(OcaGlobalBlockTypeIdentifier));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ProtoPorts";
+    if (id.PropertyIndex == 2)
+      return "ProtoMembers";
+    if (id.PropertyIndex == 3)
+      return "ProtoSignalPaths";
+    if (id.PropertyIndex == 4)
+      return "GlobalType";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ProtoPorts":
+      return new OcaPropertyID(3, 1);
+    case "ProtoMembers":
+      return new OcaPropertyID(3, 2);
+    case "ProtoSignalPaths":
+      return new OcaPropertyID(3, 3);
+    case "GlobalType":
+      return new OcaPropertyID(3, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ProtoPortsChanged) event.Dispose();
+    if (event = this._ProtoMembersChanged) event.Dispose();
+    if (event = this._ProtoSignalPathsChanged) event.Dispose();
+    if (event = this._GlobalTypeChanged) event.Dispose();
+  }
 }
 
 
@@ -6319,6 +10208,14 @@ export class OcaMatrix extends OcaWorker
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._XChanged = null;
+    this._YChanged = null;
+    this._xSizeChanged = null;
+    this._ySizeChanged = null;
+    this._MembersChanged = null;
+    this._ProxyChanged = null;
+    this._PortsPerRowChanged = null;
+    this._PortsPerColumnChanged = null;
   }
 
   /**
@@ -6590,6 +10487,174 @@ export class OcaMatrix extends OcaWorker
     const cmd = new CommandRrq(this.ono, 3, 16, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when X changes.
+   */
+  get OnXChanged()
+  {
+    const event = this._XChanged;
+
+    if (event) return event;
+
+    return this._XChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when Y changes.
+   */
+  get OnYChanged()
+  {
+    const event = this._YChanged;
+
+    if (event) return event;
+
+    return this._YChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when xSize changes.
+   */
+  get OnxSizeChanged()
+  {
+    const event = this._xSizeChanged;
+
+    if (event) return event;
+
+    return this._xSizeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when ySize changes.
+   */
+  get OnySizeChanged()
+  {
+    const event = this._ySizeChanged;
+
+    if (event) return event;
+
+    return this._ySizeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when Members changes.
+   */
+  get OnMembersChanged()
+  {
+    const event = this._MembersChanged;
+
+    if (event) return event;
+
+    return this._MembersChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(LIST2D(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when Proxy changes.
+   */
+  get OnProxyChanged()
+  {
+    const event = this._ProxyChanged;
+
+    if (event) return event;
+
+    return this._ProxyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when PortsPerRow changes.
+   */
+  get OnPortsPerRowChanged()
+  {
+    const event = this._PortsPerRowChanged;
+
+    if (event) return event;
+
+    return this._PortsPerRowChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when PortsPerColumn changes.
+   */
+  get OnPortsPerColumnChanged()
+  {
+    const event = this._PortsPerColumnChanged;
+
+    if (event) return event;
+
+    return this._PortsPerColumnChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "X";
+    if (id.PropertyIndex == 2)
+      return "Y";
+    if (id.PropertyIndex == 3)
+      return "xSize";
+    if (id.PropertyIndex == 4)
+      return "ySize";
+    if (id.PropertyIndex == 5)
+      return "Members";
+    if (id.PropertyIndex == 6)
+      return "Proxy";
+    if (id.PropertyIndex == 7)
+      return "PortsPerRow";
+    if (id.PropertyIndex == 8)
+      return "PortsPerColumn";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "X":
+      return new OcaPropertyID(3, 1);
+    case "Y":
+      return new OcaPropertyID(3, 2);
+    case "xSize":
+      return new OcaPropertyID(3, 3);
+    case "ySize":
+      return new OcaPropertyID(3, 4);
+    case "Members":
+      return new OcaPropertyID(3, 5);
+    case "Proxy":
+      return new OcaPropertyID(3, 6);
+    case "PortsPerRow":
+      return new OcaPropertyID(3, 7);
+    case "PortsPerColumn":
+      return new OcaPropertyID(3, 8);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._XChanged) event.Dispose();
+    if (event = this._YChanged) event.Dispose();
+    if (event = this._xSizeChanged) event.Dispose();
+    if (event = this._ySizeChanged) event.Dispose();
+    if (event = this._MembersChanged) event.Dispose();
+    if (event = this._ProxyChanged) event.Dispose();
+    if (event = this._PortsPerRowChanged) event.Dispose();
+    if (event = this._PortsPerColumnChanged) event.Dispose();
+  }
 }
 
 
@@ -6606,6 +10671,8 @@ export class OcaAgent extends OcaRoot
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._LabelChanged = null;
+    this._OwnerChanged = null;
   }
 
   /**
@@ -6682,6 +10749,66 @@ export class OcaAgent extends OcaRoot
     if (!rs) rs = OcaAgent_GetPath_rs = new signature(LIST(STRING), LIST(UINT32));
     const cmd = new CommandRrq(this.ono, 2, 4, 0);
     return this.device.send_command(cmd, rs);
+  }
+
+  /**
+   * Event that is triggered when Label changes.
+   */
+  get OnLabelChanged()
+  {
+    const event = this._LabelChanged;
+
+    if (event) return event;
+
+    return this._LabelChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 1), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when Owner changes.
+   */
+  get OnOwnerChanged()
+  {
+    const event = this._OwnerChanged;
+
+    if (event) return event;
+
+    return this._OwnerChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 2) return null;
+    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Label";
+    if (id.PropertyIndex == 2)
+      return "Owner";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Label":
+      return new OcaPropertyID(2, 1);
+    case "Owner":
+      return new OcaPropertyID(2, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._LabelChanged) event.Dispose();
+    if (event = this._OwnerChanged) event.Dispose();
   }
 }
 
@@ -6802,6 +10929,12 @@ export class OcaGrouper extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StatusChange = null;
+    this._ActuatorOrSensorChanged = null;
+    this._GroupsChanged = null;
+    this._CitizensChanged = null;
+    this._EnrollmentsChanged = null;
+    this._ModeChanged = null;
   }
 
   /**
@@ -7063,6 +11196,140 @@ export class OcaGrouper extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is emitted whenever key aspects of a group's status change.
+   * Status events include: <ul> <li>Citizen joins grouper</li> <li>Citizen
+   * leaves grouper</li> <li>Citizen fails to execute grouper value change
+   * request</li> <li>Connection to online citizen is lost</li>
+   * <li>Connection to offline citizen is reestablished</li> <li>Citizen
+   * enrolls in group</li> <li>Citizen de-enrolls from group</li> </ul>
+   */
+  get OnStatusChange()
+  {
+    const event = this._StatusChange;
+
+    if (event) return event;
+
+    const s = new signature(UINT16, UINT16, UINT8);
+
+    return this._StatusChange = new Event(this, new OcaEventID(3, 1), s);
+  }
+
+  /**
+   * Event that is triggered when ActuatorOrSensor changes.
+   */
+  get OnActuatorOrSensorChanged()
+  {
+    const event = this._ActuatorOrSensorChanged;
+
+    if (event) return event;
+
+    return this._ActuatorOrSensorChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when Groups changes.
+   */
+  get OnGroupsChanged()
+  {
+    const event = this._GroupsChanged;
+
+    if (event) return event;
+
+    return this._GroupsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaGrouperGroup)));
+  }
+
+  /**
+   * Event that is triggered when Citizens changes.
+   */
+  get OnCitizensChanged()
+  {
+    const event = this._CitizensChanged;
+
+    if (event) return event;
+
+    return this._CitizensChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(OcaGrouperCitizen)));
+  }
+
+  /**
+   * Event that is triggered when Enrollments changes.
+   */
+  get OnEnrollmentsChanged()
+  {
+    const event = this._EnrollmentsChanged;
+
+    if (event) return event;
+
+    return this._EnrollmentsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(LIST(OcaGrouperEnrollment)));
+  }
+
+  /**
+   * Event that is triggered when Mode changes.
+   */
+  get OnModeChanged()
+  {
+    const event = this._ModeChanged;
+
+    if (event) return event;
+
+    return this._ModeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ActuatorOrSensor";
+    if (id.PropertyIndex == 2)
+      return "Groups";
+    if (id.PropertyIndex == 3)
+      return "Citizens";
+    if (id.PropertyIndex == 4)
+      return "Enrollments";
+    if (id.PropertyIndex == 5)
+      return "Mode";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ActuatorOrSensor":
+      return new OcaPropertyID(3, 1);
+    case "Groups":
+      return new OcaPropertyID(3, 2);
+    case "Citizens":
+      return new OcaPropertyID(3, 3);
+    case "Enrollments":
+      return new OcaPropertyID(3, 4);
+    case "Mode":
+      return new OcaPropertyID(3, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StatusChange) event.Dispose();
+    if (event = this._ActuatorOrSensorChanged) event.Dispose();
+    if (event = this._GroupsChanged) event.Dispose();
+    if (event = this._CitizensChanged) event.Dispose();
+    if (event = this._EnrollmentsChanged) event.Dispose();
+    if (event = this._ModeChanged) event.Dispose();
+  }
 }
 
 
@@ -7121,6 +11388,14 @@ export class OcaNumericObserver extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._Observation = null;
+    this._StateChanged = null;
+    this._ObservedPropertyChanged = null;
+    this._ThresholdChanged = null;
+    this._OperatorChanged = null;
+    this._TwoWayChanged = null;
+    this._HysteresisChanged = null;
+    this._PeriodChanged = null;
   }
 
   /**
@@ -7348,6 +11623,172 @@ export class OcaNumericObserver extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event emitted to signal an asynchronous, periodic, or
+   * conditional-periodic observation.
+   */
+  get OnObservation()
+  {
+    const event = this._Observation;
+
+    if (event) return event;
+
+    const s = new signature(OcaEvent, FLOAT64);
+
+    return this._Observation = new Event(this, new OcaEventID(3, 1), s);
+  }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when ObservedProperty changes.
+   */
+  get OnObservedPropertyChanged()
+  {
+    const event = this._ObservedPropertyChanged;
+
+    if (event) return event;
+
+    return this._ObservedPropertyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(OcaProperty));
+  }
+
+  /**
+   * Event that is triggered when Threshold changes.
+   */
+  get OnThresholdChanged()
+  {
+    const event = this._ThresholdChanged;
+
+    if (event) return event;
+
+    return this._ThresholdChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(FLOAT64));
+  }
+
+  /**
+   * Event that is triggered when Operator changes.
+   */
+  get OnOperatorChanged()
+  {
+    const event = this._OperatorChanged;
+
+    if (event) return event;
+
+    return this._OperatorChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when TwoWay changes.
+   */
+  get OnTwoWayChanged()
+  {
+    const event = this._TwoWayChanged;
+
+    if (event) return event;
+
+    return this._TwoWayChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when Hysteresis changes.
+   */
+  get OnHysteresisChanged()
+  {
+    const event = this._HysteresisChanged;
+
+    if (event) return event;
+
+    return this._HysteresisChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT64));
+  }
+
+  /**
+   * Event that is triggered when Period changes.
+   */
+  get OnPeriodChanged()
+  {
+    const event = this._PeriodChanged;
+
+    if (event) return event;
+
+    return this._PeriodChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+    if (id.PropertyIndex == 2)
+      return "ObservedProperty";
+    if (id.PropertyIndex == 3)
+      return "Threshold";
+    if (id.PropertyIndex == 4)
+      return "Operator";
+    if (id.PropertyIndex == 5)
+      return "TwoWay";
+    if (id.PropertyIndex == 6)
+      return "Hysteresis";
+    if (id.PropertyIndex == 7)
+      return "Period";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(3, 1);
+    case "ObservedProperty":
+      return new OcaPropertyID(3, 2);
+    case "Threshold":
+      return new OcaPropertyID(3, 3);
+    case "Operator":
+      return new OcaPropertyID(3, 4);
+    case "TwoWay":
+      return new OcaPropertyID(3, 5);
+    case "Hysteresis":
+      return new OcaPropertyID(3, 6);
+    case "Period":
+      return new OcaPropertyID(3, 7);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._Observation) event.Dispose();
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._ObservedPropertyChanged) event.Dispose();
+    if (event = this._ThresholdChanged) event.Dispose();
+    if (event = this._OperatorChanged) event.Dispose();
+    if (event = this._TwoWayChanged) event.Dispose();
+    if (event = this._HysteresisChanged) event.Dispose();
+    if (event = this._PeriodChanged) event.Dispose();
+  }
 }
 
 
@@ -7387,6 +11828,9 @@ export class OcaLibrary extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._DataTypeChanged = null;
+    this._AccessChanged = null;
+    this._VolumesChanged = null;
   }
 
   /**
@@ -7530,6 +11974,84 @@ export class OcaLibrary extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when DataType changes.
+   */
+  get OnDataTypeChanged()
+  {
+    const event = this._DataTypeChanged;
+
+    if (event) return event;
+
+    return this._DataTypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Access changes.
+   */
+  get OnAccessChanged()
+  {
+    const event = this._AccessChanged;
+
+    if (event) return event;
+
+    return this._AccessChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Volumes changes.
+   */
+  get OnVolumesChanged()
+  {
+    const event = this._VolumesChanged;
+
+    if (event) return event;
+
+    return this._VolumesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, OcaLibVol)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "DataType";
+    if (id.PropertyIndex == 2)
+      return "Access";
+    if (id.PropertyIndex == 3)
+      return "Volumes";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "DataType":
+      return new OcaPropertyID(3, 1);
+    case "Access":
+      return new OcaPropertyID(3, 2);
+    case "Volumes":
+      return new OcaPropertyID(3, 3);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._DataTypeChanged) event.Dispose();
+    if (event = this._AccessChanged) event.Dispose();
+    if (event = this._VolumesChanged) event.Dispose();
+  }
 }
 
 
@@ -7550,6 +12072,13 @@ export class OcaPowerSupply extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TypeChanged = null;
+    this._ModelInfoChanged = null;
+    this._StateChanged = null;
+    this._ChargingChanged = null;
+    this._LoadFractionAvailableChanged = null;
+    this._StorageFractionAvailableChanged = null;
+    this._LocationChanged = null;
   }
 
   /**
@@ -7679,6 +12208,156 @@ export class OcaPowerSupply extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 8, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Type changes.
+   */
+  get OnTypeChanged()
+  {
+    const event = this._TypeChanged;
+
+    if (event) return event;
+
+    return this._TypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when ModelInfo changes.
+   */
+  get OnModelInfoChanged()
+  {
+    const event = this._ModelInfoChanged;
+
+    if (event) return event;
+
+    return this._ModelInfoChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Charging changes.
+   */
+  get OnChargingChanged()
+  {
+    const event = this._ChargingChanged;
+
+    if (event) return event;
+
+    return this._ChargingChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when LoadFractionAvailable changes.
+   */
+  get OnLoadFractionAvailableChanged()
+  {
+    const event = this._LoadFractionAvailableChanged;
+
+    if (event) return event;
+
+    return this._LoadFractionAvailableChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when StorageFractionAvailable changes.
+   */
+  get OnStorageFractionAvailableChanged()
+  {
+    const event = this._StorageFractionAvailableChanged;
+
+    if (event) return event;
+
+    return this._StorageFractionAvailableChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when Location changes.
+   */
+  get OnLocationChanged()
+  {
+    const event = this._LocationChanged;
+
+    if (event) return event;
+
+    return this._LocationChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Type";
+    if (id.PropertyIndex == 2)
+      return "ModelInfo";
+    if (id.PropertyIndex == 3)
+      return "State";
+    if (id.PropertyIndex == 4)
+      return "Charging";
+    if (id.PropertyIndex == 5)
+      return "LoadFractionAvailable";
+    if (id.PropertyIndex == 6)
+      return "StorageFractionAvailable";
+    if (id.PropertyIndex == 7)
+      return "Location";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Type":
+      return new OcaPropertyID(3, 1);
+    case "ModelInfo":
+      return new OcaPropertyID(3, 2);
+    case "State":
+      return new OcaPropertyID(3, 3);
+    case "Charging":
+      return new OcaPropertyID(3, 4);
+    case "LoadFractionAvailable":
+      return new OcaPropertyID(3, 5);
+    case "StorageFractionAvailable":
+      return new OcaPropertyID(3, 6);
+    case "Location":
+      return new OcaPropertyID(3, 7);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TypeChanged) event.Dispose();
+    if (event = this._ModelInfoChanged) event.Dispose();
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._ChargingChanged) event.Dispose();
+    if (event = this._LoadFractionAvailableChanged) event.Dispose();
+    if (event = this._StorageFractionAvailableChanged) event.Dispose();
+    if (event = this._LocationChanged) event.Dispose();
+  }
 }
 
 
@@ -7733,6 +12412,30 @@ export class OcaEventHandler extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 1, 2,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
   }
 }
 
@@ -7795,6 +12498,14 @@ export class OcaNumericObserverList extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._Observation = null;
+    this._StateChanged = null;
+    this._ObservedPropertiesChanged = null;
+    this._ThresholdChanged = null;
+    this._OperatorChanged = null;
+    this._TwoWayChanged = null;
+    this._HysteresisChanged = null;
+    this._PeriodChanged = null;
   }
 
   /**
@@ -8032,6 +12743,178 @@ export class OcaNumericObserverList extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event emitted to signal an asynchronous, periodic, or
+   * conditional-periodic observation. This event returns the complete list
+   * of values being observed, regardless of which one(s) may have
+   * triggered it in the first place. The order of values in the returned
+   * list is determined by the order of values set by
+   * SetObservedProperties, and is the same as the order of values returned
+   * by GetLastObservation, and the same as the order of object
+   * identifications returned by GetObservedProperties.
+   */
+  get OnObservation()
+  {
+    const event = this._Observation;
+
+    if (event) return event;
+
+    const s = new signature(OcaEvent, LIST(FLOAT64));
+
+    return this._Observation = new Event(this, new OcaEventID(3, 1), s);
+  }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when ObservedProperties changes.
+   */
+  get OnObservedPropertiesChanged()
+  {
+    const event = this._ObservedPropertiesChanged;
+
+    if (event) return event;
+
+    return this._ObservedPropertiesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaProperty)));
+  }
+
+  /**
+   * Event that is triggered when Threshold changes.
+   */
+  get OnThresholdChanged()
+  {
+    const event = this._ThresholdChanged;
+
+    if (event) return event;
+
+    return this._ThresholdChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(FLOAT64));
+  }
+
+  /**
+   * Event that is triggered when Operator changes.
+   */
+  get OnOperatorChanged()
+  {
+    const event = this._OperatorChanged;
+
+    if (event) return event;
+
+    return this._OperatorChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when TwoWay changes.
+   */
+  get OnTwoWayChanged()
+  {
+    const event = this._TwoWayChanged;
+
+    if (event) return event;
+
+    return this._TwoWayChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when Hysteresis changes.
+   */
+  get OnHysteresisChanged()
+  {
+    const event = this._HysteresisChanged;
+
+    if (event) return event;
+
+    return this._HysteresisChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT64));
+  }
+
+  /**
+   * Event that is triggered when Period changes.
+   */
+  get OnPeriodChanged()
+  {
+    const event = this._PeriodChanged;
+
+    if (event) return event;
+
+    return this._PeriodChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+    if (id.PropertyIndex == 2)
+      return "ObservedProperties";
+    if (id.PropertyIndex == 3)
+      return "Threshold";
+    if (id.PropertyIndex == 4)
+      return "Operator";
+    if (id.PropertyIndex == 5)
+      return "TwoWay";
+    if (id.PropertyIndex == 6)
+      return "Hysteresis";
+    if (id.PropertyIndex == 7)
+      return "Period";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(3, 1);
+    case "ObservedProperties":
+      return new OcaPropertyID(3, 2);
+    case "Threshold":
+      return new OcaPropertyID(3, 3);
+    case "Operator":
+      return new OcaPropertyID(3, 4);
+    case "TwoWay":
+      return new OcaPropertyID(3, 5);
+    case "Hysteresis":
+      return new OcaPropertyID(3, 6);
+    case "Period":
+      return new OcaPropertyID(3, 7);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._Observation) event.Dispose();
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._ObservedPropertiesChanged) event.Dispose();
+    if (event = this._ThresholdChanged) event.Dispose();
+    if (event = this._OperatorChanged) event.Dispose();
+    if (event = this._TwoWayChanged) event.Dispose();
+    if (event = this._HysteresisChanged) event.Dispose();
+    if (event = this._PeriodChanged) event.Dispose();
+  }
 }
 
 
@@ -8082,6 +12965,13 @@ export class OcaTask extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StatusChanged = null;
+    this._SlotChanged = null;
+    this._TimeModeChanged = null;
+    this._TimeUnitsChanged = null;
+    this._ClockONoChanged = null;
+    this._StartTimeChanged = null;
+    this._DurationChanged = null;
   }
 
   /**
@@ -8313,6 +13203,156 @@ export class OcaTask extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Status changes.
+   */
+  get OnStatusChanged()
+  {
+    const event = this._StatusChanged;
+
+    if (event) return event;
+
+    return this._StatusChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(OcaTaskStatus));
+  }
+
+  /**
+   * Event that is triggered when Slot changes.
+   */
+  get OnSlotChanged()
+  {
+    const event = this._SlotChanged;
+
+    if (event) return event;
+
+    return this._SlotChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when TimeMode changes.
+   */
+  get OnTimeModeChanged()
+  {
+    const event = this._TimeModeChanged;
+
+    if (event) return event;
+
+    return this._TimeModeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when TimeUnits changes.
+   */
+  get OnTimeUnitsChanged()
+  {
+    const event = this._TimeUnitsChanged;
+
+    if (event) return event;
+
+    return this._TimeUnitsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when ClockONo changes.
+   */
+  get OnClockONoChanged()
+  {
+    const event = this._ClockONoChanged;
+
+    if (event) return event;
+
+    return this._ClockONoChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when StartTime changes.
+   */
+  get OnStartTimeChanged()
+  {
+    const event = this._StartTimeChanged;
+
+    if (event) return event;
+
+    return this._StartTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT64));
+  }
+
+  /**
+   * Event that is triggered when Duration changes.
+   */
+  get OnDurationChanged()
+  {
+    const event = this._DurationChanged;
+
+    if (event) return event;
+
+    return this._DurationChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Status";
+    if (id.PropertyIndex == 2)
+      return "Slot";
+    if (id.PropertyIndex == 3)
+      return "TimeMode";
+    if (id.PropertyIndex == 4)
+      return "TimeUnits";
+    if (id.PropertyIndex == 5)
+      return "ClockONo";
+    if (id.PropertyIndex == 6)
+      return "StartTime";
+    if (id.PropertyIndex == 7)
+      return "Duration";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Status":
+      return new OcaPropertyID(3, 1);
+    case "Slot":
+      return new OcaPropertyID(3, 2);
+    case "TimeMode":
+      return new OcaPropertyID(3, 3);
+    case "TimeUnits":
+      return new OcaPropertyID(3, 4);
+    case "ClockONo":
+      return new OcaPropertyID(3, 5);
+    case "StartTime":
+      return new OcaPropertyID(3, 6);
+    case "Duration":
+      return new OcaPropertyID(3, 7);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StatusChanged) event.Dispose();
+    if (event = this._SlotChanged) event.Dispose();
+    if (event = this._TimeModeChanged) event.Dispose();
+    if (event = this._TimeUnitsChanged) event.Dispose();
+    if (event = this._ClockONoChanged) event.Dispose();
+    if (event = this._StartTimeChanged) event.Dispose();
+    if (event = this._DurationChanged) event.Dispose();
+  }
 }
 
 
@@ -8336,6 +13376,10 @@ export class OcaTaskFactory extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SlotChanged = null;
+    this._TimeModeChanged = null;
+    this._StartTimeChanged = null;
+    this._DurationChanged = null;
   }
 
   /**
@@ -8501,6 +13545,102 @@ export class OcaTaskFactory extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Slot changes.
+   */
+  get OnSlotChanged()
+  {
+    const event = this._SlotChanged;
+
+    if (event) return event;
+
+    return this._SlotChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when TimeMode changes.
+   */
+  get OnTimeModeChanged()
+  {
+    const event = this._TimeModeChanged;
+
+    if (event) return event;
+
+    return this._TimeModeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when StartTime changes.
+   */
+  get OnStartTimeChanged()
+  {
+    const event = this._StartTimeChanged;
+
+    if (event) return event;
+
+    return this._StartTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT64));
+  }
+
+  /**
+   * Event that is triggered when Duration changes.
+   */
+  get OnDurationChanged()
+  {
+    const event = this._DurationChanged;
+
+    if (event) return event;
+
+    return this._DurationChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(FLOAT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Slot";
+    if (id.PropertyIndex == 2)
+      return "TimeMode";
+    if (id.PropertyIndex == 3)
+      return "StartTime";
+    if (id.PropertyIndex == 4)
+      return "Duration";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Slot":
+      return new OcaPropertyID(3, 1);
+    case "TimeMode":
+      return new OcaPropertyID(3, 2);
+    case "StartTime":
+      return new OcaPropertyID(3, 3);
+    case "Duration":
+      return new OcaPropertyID(3, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SlotChanged) event.Dispose();
+    if (event = this._TimeModeChanged) event.Dispose();
+    if (event = this._StartTimeChanged) event.Dispose();
+    if (event = this._DurationChanged) event.Dispose();
+  }
 }
 
 
@@ -8519,6 +13659,8 @@ export class OcaTaskGroup extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._IDChanged = null;
+    this._TasksChanged = null;
   }
 
   /**
@@ -8635,6 +13777,66 @@ export class OcaTaskGroup extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when ID changes.
+   */
+  get OnIDChanged()
+  {
+    const event = this._IDChanged;
+
+    if (event) return event;
+
+    return this._IDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when Tasks changes.
+   */
+  get OnTasksChanged()
+  {
+    const event = this._TasksChanged;
+
+    if (event) return event;
+
+    return this._TasksChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ID";
+    if (id.PropertyIndex == 2)
+      return "Tasks";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ID":
+      return new OcaPropertyID(3, 1);
+    case "Tasks":
+      return new OcaPropertyID(3, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._IDChanged) event.Dispose();
+    if (event = this._TasksChanged) event.Dispose();
+  }
 }
 
 
@@ -8665,6 +13867,9 @@ export class OcaRamperTask extends OcaTask
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._RampedPropertyChanged = null;
+    this._InterpolationLawChanged = null;
+    this._GoalChanged = null;
   }
 
   /**
@@ -8770,6 +13975,84 @@ export class OcaRamperTask extends OcaTask
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when RampedProperty changes.
+   */
+  get OnRampedPropertyChanged()
+  {
+    const event = this._RampedPropertyChanged;
+
+    if (event) return event;
+
+    return this._RampedPropertyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(OcaProperty));
+  }
+
+  /**
+   * Event that is triggered when InterpolationLaw changes.
+   */
+  get OnInterpolationLawChanged()
+  {
+    const event = this._InterpolationLawChanged;
+
+    if (event) return event;
+
+    return this._InterpolationLawChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Goal changes.
+   */
+  get OnGoalChanged()
+  {
+    const event = this._GoalChanged;
+
+    if (event) return event;
+
+    return this._GoalChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 4) return null;
+    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "RampedProperty";
+    if (id.PropertyIndex == 2)
+      return "InterpolationLaw";
+    if (id.PropertyIndex == 3)
+      return "Goal";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "RampedProperty":
+      return new OcaPropertyID(4, 1);
+    case "InterpolationLaw":
+      return new OcaPropertyID(4, 2);
+    case "Goal":
+      return new OcaPropertyID(4, 3);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._RampedPropertyChanged) event.Dispose();
+    if (event = this._InterpolationLawChanged) event.Dispose();
+    if (event = this._GoalChanged) event.Dispose();
+  }
 }
 
 
@@ -8790,6 +14073,10 @@ export class OcaMediaClock3 extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._AvailabilityChanged = null;
+    this._TimeSourceONoChanged = null;
+    this._OffsetChanged = null;
+    this._CurrentRateChanged = null;
   }
 
   /**
@@ -8931,6 +14218,102 @@ export class OcaMediaClock3 extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Availability changes.
+   */
+  get OnAvailabilityChanged()
+  {
+    const event = this._AvailabilityChanged;
+
+    if (event) return event;
+
+    return this._AvailabilityChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when TimeSourceONo changes.
+   */
+  get OnTimeSourceONoChanged()
+  {
+    const event = this._TimeSourceONoChanged;
+
+    if (event) return event;
+
+    return this._TimeSourceONoChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when Offset changes.
+   */
+  get OnOffsetChanged()
+  {
+    const event = this._OffsetChanged;
+
+    if (event) return event;
+
+    return this._OffsetChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT64));
+  }
+
+  /**
+   * Event that is triggered when CurrentRate changes.
+   */
+  get OnCurrentRateChanged()
+  {
+    const event = this._CurrentRateChanged;
+
+    if (event) return event;
+
+    return this._CurrentRateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Availability";
+    if (id.PropertyIndex == 2)
+      return "TimeSourceONo";
+    if (id.PropertyIndex == 3)
+      return "Offset";
+    if (id.PropertyIndex == 4)
+      return "CurrentRate";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Availability":
+      return new OcaPropertyID(3, 1);
+    case "TimeSourceONo":
+      return new OcaPropertyID(3, 2);
+    case "Offset":
+      return new OcaPropertyID(3, 3);
+    case "CurrentRate":
+      return new OcaPropertyID(3, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._AvailabilityChanged) event.Dispose();
+    if (event = this._TimeSourceONoChanged) event.Dispose();
+    if (event = this._OffsetChanged) event.Dispose();
+    if (event = this._CurrentRateChanged) event.Dispose();
+  }
 }
 
 
@@ -8954,6 +14337,12 @@ export class OcaTimeSource extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._AvailabilityChanged = null;
+    this._ProtocolChanged = null;
+    this._ParametersChanged = null;
+    this._ReferenceTypeChanged = null;
+    this._ReferenceIDChanged = null;
+    this._SyncStatusChanged = null;
   }
 
   /**
@@ -9132,6 +14521,138 @@ export class OcaTimeSource extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 11, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when Availability changes.
+   */
+  get OnAvailabilityChanged()
+  {
+    const event = this._AvailabilityChanged;
+
+    if (event) return event;
+
+    return this._AvailabilityChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Protocol changes.
+   */
+  get OnProtocolChanged()
+  {
+    const event = this._ProtocolChanged;
+
+    if (event) return event;
+
+    return this._ProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Parameters changes.
+   */
+  get OnParametersChanged()
+  {
+    const event = this._ParametersChanged;
+
+    if (event) return event;
+
+    return this._ParametersChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when ReferenceType changes.
+   */
+  get OnReferenceTypeChanged()
+  {
+    const event = this._ReferenceTypeChanged;
+
+    if (event) return event;
+
+    return this._ReferenceTypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when ReferenceID changes.
+   */
+  get OnReferenceIDChanged()
+  {
+    const event = this._ReferenceIDChanged;
+
+    if (event) return event;
+
+    return this._ReferenceIDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when SyncStatus changes.
+   */
+  get OnSyncStatusChanged()
+  {
+    const event = this._SyncStatusChanged;
+
+    if (event) return event;
+
+    return this._SyncStatusChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Availability";
+    if (id.PropertyIndex == 2)
+      return "Protocol";
+    if (id.PropertyIndex == 3)
+      return "Parameters";
+    if (id.PropertyIndex == 4)
+      return "ReferenceType";
+    if (id.PropertyIndex == 5)
+      return "ReferenceID";
+    if (id.PropertyIndex == 6)
+      return "SyncStatus";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Availability":
+      return new OcaPropertyID(3, 1);
+    case "Protocol":
+      return new OcaPropertyID(3, 2);
+    case "Parameters":
+      return new OcaPropertyID(3, 3);
+    case "ReferenceType":
+      return new OcaPropertyID(3, 4);
+    case "ReferenceID":
+      return new OcaPropertyID(3, 5);
+    case "SyncStatus":
+      return new OcaPropertyID(3, 6);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._AvailabilityChanged) event.Dispose();
+    if (event = this._ProtocolChanged) event.Dispose();
+    if (event = this._ParametersChanged) event.Dispose();
+    if (event = this._ReferenceTypeChanged) event.Dispose();
+    if (event = this._ReferenceIDChanged) event.Dispose();
+    if (event = this._SyncStatusChanged) event.Dispose();
+  }
 }
 
 
@@ -9149,6 +14670,8 @@ export class OcaPhysicalPosition extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._PositionAndRotationChanged = null;
+    this._PositionAndRotationFlagsChanged = null;
   }
 
   /**
@@ -9229,6 +14752,66 @@ export class OcaPhysicalPosition extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when PositionAndRotation changes.
+   */
+  get OnPositionAndRotationChanged()
+  {
+    const event = this._PositionAndRotationChanged;
+
+    if (event) return event;
+
+    return this._PositionAndRotationChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when PositionAndRotationFlags changes.
+   */
+  get OnPositionAndRotationFlagsChanged()
+  {
+    const event = this._PositionAndRotationFlagsChanged;
+
+    if (event) return event;
+
+    return this._PositionAndRotationFlagsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "PositionAndRotation";
+    if (id.PropertyIndex == 2)
+      return "PositionAndRotationFlags";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "PositionAndRotation":
+      return new OcaPropertyID(3, 1);
+    case "PositionAndRotationFlags":
+      return new OcaPropertyID(3, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._PositionAndRotationChanged) event.Dispose();
+    if (event = this._PositionAndRotationFlagsChanged) event.Dispose();
+  }
 }
 
 
@@ -9252,6 +14835,12 @@ export class OcaApplicationNetwork extends OcaRoot
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._LabelChanged = null;
+    this._OwnerChanged = null;
+    this._ServiceIDChanged = null;
+    this._SystemInterfacesChanged = null;
+    this._StateChanged = null;
+    this._ErrorCodeChanged = null;
   }
 
   /**
@@ -9410,6 +14999,138 @@ export class OcaApplicationNetwork extends OcaRoot
     const cmd = new CommandRrq(this.ono, 2, 10, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Label changes.
+   */
+  get OnLabelChanged()
+  {
+    const event = this._LabelChanged;
+
+    if (event) return event;
+
+    return this._LabelChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 1), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when Owner changes.
+   */
+  get OnOwnerChanged()
+  {
+    const event = this._OwnerChanged;
+
+    if (event) return event;
+
+    return this._OwnerChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when ServiceID changes.
+   */
+  get OnServiceIDChanged()
+  {
+    const event = this._ServiceIDChanged;
+
+    if (event) return event;
+
+    return this._ServiceIDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 3), new signature(BLOB));
+  }
+
+  /**
+   * Event that is triggered when SystemInterfaces changes.
+   */
+  get OnSystemInterfacesChanged()
+  {
+    const event = this._SystemInterfacesChanged;
+
+    if (event) return event;
+
+    return this._SystemInterfacesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 4), new signature(LIST(OcaNetworkSystemInterfaceDescriptor)));
+  }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 5), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when ErrorCode changes.
+   */
+  get OnErrorCodeChanged()
+  {
+    const event = this._ErrorCodeChanged;
+
+    if (event) return event;
+
+    return this._ErrorCodeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(2, 6), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 2) return null;
+    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Label";
+    if (id.PropertyIndex == 2)
+      return "Owner";
+    if (id.PropertyIndex == 3)
+      return "ServiceID";
+    if (id.PropertyIndex == 4)
+      return "SystemInterfaces";
+    if (id.PropertyIndex == 5)
+      return "State";
+    if (id.PropertyIndex == 6)
+      return "ErrorCode";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Label":
+      return new OcaPropertyID(2, 1);
+    case "Owner":
+      return new OcaPropertyID(2, 2);
+    case "ServiceID":
+      return new OcaPropertyID(2, 3);
+    case "SystemInterfaces":
+      return new OcaPropertyID(2, 4);
+    case "State":
+      return new OcaPropertyID(2, 5);
+    case "ErrorCode":
+      return new OcaPropertyID(2, 6);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._LabelChanged) event.Dispose();
+    if (event = this._OwnerChanged) event.Dispose();
+    if (event = this._ServiceIDChanged) event.Dispose();
+    if (event = this._SystemInterfacesChanged) event.Dispose();
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._ErrorCodeChanged) event.Dispose();
+  }
 }
 
 
@@ -9423,6 +15144,7 @@ export class OcaControlNetwork extends OcaApplicationNetwork
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ProtocolChanged = null;
   }
 
   /**
@@ -9453,6 +15175,48 @@ export class OcaControlNetwork extends OcaApplicationNetwork
     if (!rs) rs = OcaControlNetwork_GetControlProtocol_rs = new signature(UINT8);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
+  }
+
+  /**
+   * Event that is triggered when Protocol changes.
+   */
+  get OnProtocolChanged()
+  {
+    const event = this._ProtocolChanged;
+
+    if (event) return event;
+
+    return this._ProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Protocol";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Protocol":
+      return new OcaPropertyID(3, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ProtocolChanged) event.Dispose();
   }
 }
 
@@ -9496,6 +15260,19 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._SourceConnectorChanged = null;
+    this._SinkConnectorChanged = null;
+    this._ConnectorStatusChanged = null;
+    this._ProtocolChanged = null;
+    this._PortsChanged = null;
+    this._MaxSourceConnectorsChanged = null;
+    this._MaxSinkConnectorsChanged = null;
+    this._MaxPinsPerConnectorChanged = null;
+    this._MaxPortsPerPinChanged = null;
+    this._AlignmentLevelChanged = null;
+    this._AlignmentGainChanged = null;
+    this._SinkConnectorsChanged = null;
+    this._SourceConnectorsChanged = null;
   }
 
   /**
@@ -9907,6 +15684,250 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     const cmd = new CommandRrq(this.ono, 3, 24, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event indicating that a media source connector has changed. The change
+   * type indicates if the connector was added, deleted or changed.
+   */
+  get OnSourceConnectorChanged()
+  {
+    const event = this._SourceConnectorChanged;
+
+    if (event) return event;
+
+    const s = new signature(OcaMediaSourceConnector, UINT8, UINT16);
+
+    return this._SourceConnectorChanged = new Event(this, new OcaEventID(3, 1), s);
+  }
+
+  /**
+   * Event indicating that a media sink connector has changed. The change
+   * type indicates if the connector was added, deleted or changed.
+   */
+  get OnSinkConnectorChanged()
+  {
+    const event = this._SinkConnectorChanged;
+
+    if (event) return event;
+
+    const s = new signature(OcaMediaSinkConnector, UINT8, UINT16);
+
+    return this._SinkConnectorChanged = new Event(this, new OcaEventID(3, 2), s);
+  }
+
+  /**
+   * Event indicating that the status of a source or sink connector has
+   * changed.
+   */
+  get OnConnectorStatusChanged()
+  {
+    const event = this._ConnectorStatusChanged;
+
+    if (event) return event;
+
+    const s = new signature(OcaMediaConnectorStatus);
+
+    return this._ConnectorStatusChanged = new Event(this, new OcaEventID(3, 3), s);
+  }
+
+  /**
+   * Event that is triggered when Protocol changes.
+   */
+  get OnProtocolChanged()
+  {
+    const event = this._ProtocolChanged;
+
+    if (event) return event;
+
+    return this._ProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Ports changes.
+   */
+  get OnPortsChanged()
+  {
+    const event = this._PortsChanged;
+
+    if (event) return event;
+
+    return this._PortsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaPort)));
+  }
+
+  /**
+   * Event that is triggered when MaxSourceConnectors changes.
+   */
+  get OnMaxSourceConnectorsChanged()
+  {
+    const event = this._MaxSourceConnectorsChanged;
+
+    if (event) return event;
+
+    return this._MaxSourceConnectorsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when MaxSinkConnectors changes.
+   */
+  get OnMaxSinkConnectorsChanged()
+  {
+    const event = this._MaxSinkConnectorsChanged;
+
+    if (event) return event;
+
+    return this._MaxSinkConnectorsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when MaxPinsPerConnector changes.
+   */
+  get OnMaxPinsPerConnectorChanged()
+  {
+    const event = this._MaxPinsPerConnectorChanged;
+
+    if (event) return event;
+
+    return this._MaxPinsPerConnectorChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when MaxPortsPerPin changes.
+   */
+  get OnMaxPortsPerPinChanged()
+  {
+    const event = this._MaxPortsPerPinChanged;
+
+    if (event) return event;
+
+    return this._MaxPortsPerPinChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when AlignmentLevel changes.
+   */
+  get OnAlignmentLevelChanged()
+  {
+    const event = this._AlignmentLevelChanged;
+
+    if (event) return event;
+
+    return this._AlignmentLevelChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when AlignmentGain changes.
+   */
+  get OnAlignmentGainChanged()
+  {
+    const event = this._AlignmentGainChanged;
+
+    if (event) return event;
+
+    return this._AlignmentGainChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when SinkConnectors changes.
+   */
+  get OnSinkConnectorsChanged()
+  {
+    const event = this._SinkConnectorsChanged;
+
+    if (event) return event;
+
+    return this._SinkConnectorsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSinkConnector)));
+  }
+
+  /**
+   * Event that is triggered when SourceConnectors changes.
+   */
+  get OnSourceConnectorsChanged()
+  {
+    const event = this._SourceConnectorsChanged;
+
+    if (event) return event;
+
+    return this._SourceConnectorsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSourceConnector)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Protocol";
+    if (id.PropertyIndex == 2)
+      return "Ports";
+    if (id.PropertyIndex == 3)
+      return "MaxSourceConnectors";
+    if (id.PropertyIndex == 4)
+      return "MaxSinkConnectors";
+    if (id.PropertyIndex == 5)
+      return "MaxPinsPerConnector";
+    if (id.PropertyIndex == 6)
+      return "MaxPortsPerPin";
+    if (id.PropertyIndex == 7)
+      return "AlignmentLevel";
+    if (id.PropertyIndex == 8)
+      return "AlignmentGain";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Protocol":
+      return new OcaPropertyID(3, 1);
+    case "Ports":
+      return new OcaPropertyID(3, 2);
+    case "MaxSourceConnectors":
+      return new OcaPropertyID(3, 3);
+    case "MaxSinkConnectors":
+      return new OcaPropertyID(3, 4);
+    case "MaxPinsPerConnector":
+      return new OcaPropertyID(3, 5);
+    case "MaxPortsPerPin":
+      return new OcaPropertyID(3, 6);
+    case "AlignmentLevel":
+      return new OcaPropertyID(3, 7);
+    case "AlignmentGain":
+      return new OcaPropertyID(3, 8);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._SourceConnectorChanged) event.Dispose();
+    if (event = this._SinkConnectorChanged) event.Dispose();
+    if (event = this._ConnectorStatusChanged) event.Dispose();
+    if (event = this._ProtocolChanged) event.Dispose();
+    if (event = this._PortsChanged) event.Dispose();
+    if (event = this._MaxSourceConnectorsChanged) event.Dispose();
+    if (event = this._MaxSinkConnectorsChanged) event.Dispose();
+    if (event = this._MaxPinsPerConnectorChanged) event.Dispose();
+    if (event = this._MaxPortsPerPinChanged) event.Dispose();
+    if (event = this._AlignmentLevelChanged) event.Dispose();
+    if (event = this._AlignmentGainChanged) event.Dispose();
+    if (event = this._SinkConnectorsChanged) event.Dispose();
+    if (event = this._SourceConnectorsChanged) event.Dispose();
+  }
 }
 
 
@@ -9944,6 +15965,30 @@ export class OcaManager extends OcaRoot
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 2) return null;
+    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -9977,6 +16022,20 @@ export class OcaDeviceManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ModelGUIDChanged = null;
+    this._SerialNumberChanged = null;
+    this._ModelDescriptionChanged = null;
+    this._DeviceNameChanged = null;
+    this._OcaVersionChanged = null;
+    this._DeviceRoleChanged = null;
+    this._UserInventoryCodeChanged = null;
+    this._EnabledChanged = null;
+    this._StateChanged = null;
+    this._BusyChanged = null;
+    this._ResetCauseChanged = null;
+    this._MessageChanged = null;
+    this._ManagersChanged = null;
+    this._DeviceRevisionIDChanged = null;
   }
 
   /**
@@ -10287,6 +16346,282 @@ export class OcaDeviceManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 20, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when ModelGUID changes.
+   */
+  get OnModelGUIDChanged()
+  {
+    const event = this._ModelGUIDChanged;
+
+    if (event) return event;
+
+    return this._ModelGUIDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(OcaModelGUID));
+  }
+
+  /**
+   * Event that is triggered when SerialNumber changes.
+   */
+  get OnSerialNumberChanged()
+  {
+    const event = this._SerialNumberChanged;
+
+    if (event) return event;
+
+    return this._SerialNumberChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when ModelDescription changes.
+   */
+  get OnModelDescriptionChanged()
+  {
+    const event = this._ModelDescriptionChanged;
+
+    if (event) return event;
+
+    return this._ModelDescriptionChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(OcaModelDescription));
+  }
+
+  /**
+   * Event that is triggered when DeviceName changes.
+   */
+  get OnDeviceNameChanged()
+  {
+    const event = this._DeviceNameChanged;
+
+    if (event) return event;
+
+    return this._DeviceNameChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when OcaVersion changes.
+   */
+  get OnOcaVersionChanged()
+  {
+    const event = this._OcaVersionChanged;
+
+    if (event) return event;
+
+    return this._OcaVersionChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when DeviceRole changes.
+   */
+  get OnDeviceRoleChanged()
+  {
+    const event = this._DeviceRoleChanged;
+
+    if (event) return event;
+
+    return this._DeviceRoleChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when UserInventoryCode changes.
+   */
+  get OnUserInventoryCodeChanged()
+  {
+    const event = this._UserInventoryCodeChanged;
+
+    if (event) return event;
+
+    return this._UserInventoryCodeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when Enabled changes.
+   */
+  get OnEnabledChanged()
+  {
+    const event = this._EnabledChanged;
+
+    if (event) return event;
+
+    return this._EnabledChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 9), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when Busy changes.
+   */
+  get OnBusyChanged()
+  {
+    const event = this._BusyChanged;
+
+    if (event) return event;
+
+    return this._BusyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 10), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when ResetCause changes.
+   */
+  get OnResetCauseChanged()
+  {
+    const event = this._ResetCauseChanged;
+
+    if (event) return event;
+
+    return this._ResetCauseChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 11), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Message changes.
+   */
+  get OnMessageChanged()
+  {
+    const event = this._MessageChanged;
+
+    if (event) return event;
+
+    return this._MessageChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 12), new signature(STRING));
+  }
+
+  /**
+   * Event that is triggered when Managers changes.
+   */
+  get OnManagersChanged()
+  {
+    const event = this._ManagersChanged;
+
+    if (event) return event;
+
+    return this._ManagersChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 13), new signature(LIST(OcaManagerDescriptor)));
+  }
+
+  /**
+   * Event that is triggered when DeviceRevisionID changes.
+   */
+  get OnDeviceRevisionIDChanged()
+  {
+    const event = this._DeviceRevisionIDChanged;
+
+    if (event) return event;
+
+    return this._DeviceRevisionIDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 14), new signature(STRING));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ModelGUID";
+    if (id.PropertyIndex == 2)
+      return "SerialNumber";
+    if (id.PropertyIndex == 3)
+      return "ModelDescription";
+    if (id.PropertyIndex == 4)
+      return "DeviceName";
+    if (id.PropertyIndex == 5)
+      return "OcaVersion";
+    if (id.PropertyIndex == 6)
+      return "DeviceRole";
+    if (id.PropertyIndex == 7)
+      return "UserInventoryCode";
+    if (id.PropertyIndex == 8)
+      return "Enabled";
+    if (id.PropertyIndex == 9)
+      return "State";
+    if (id.PropertyIndex == 10)
+      return "Busy";
+    if (id.PropertyIndex == 11)
+      return "ResetCause";
+    if (id.PropertyIndex == 12)
+      return "Message";
+    if (id.PropertyIndex == 13)
+      return "Managers";
+    if (id.PropertyIndex == 14)
+      return "DeviceRevisionID";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ModelGUID":
+      return new OcaPropertyID(3, 1);
+    case "SerialNumber":
+      return new OcaPropertyID(3, 2);
+    case "ModelDescription":
+      return new OcaPropertyID(3, 3);
+    case "DeviceName":
+      return new OcaPropertyID(3, 4);
+    case "OcaVersion":
+      return new OcaPropertyID(3, 5);
+    case "DeviceRole":
+      return new OcaPropertyID(3, 6);
+    case "UserInventoryCode":
+      return new OcaPropertyID(3, 7);
+    case "Enabled":
+      return new OcaPropertyID(3, 8);
+    case "State":
+      return new OcaPropertyID(3, 9);
+    case "Busy":
+      return new OcaPropertyID(3, 10);
+    case "ResetCause":
+      return new OcaPropertyID(3, 11);
+    case "Message":
+      return new OcaPropertyID(3, 12);
+    case "Managers":
+      return new OcaPropertyID(3, 13);
+    case "DeviceRevisionID":
+      return new OcaPropertyID(3, 14);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ModelGUIDChanged) event.Dispose();
+    if (event = this._SerialNumberChanged) event.Dispose();
+    if (event = this._ModelDescriptionChanged) event.Dispose();
+    if (event = this._DeviceNameChanged) event.Dispose();
+    if (event = this._OcaVersionChanged) event.Dispose();
+    if (event = this._DeviceRoleChanged) event.Dispose();
+    if (event = this._UserInventoryCodeChanged) event.Dispose();
+    if (event = this._EnabledChanged) event.Dispose();
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._BusyChanged) event.Dispose();
+    if (event = this._ResetCauseChanged) event.Dispose();
+    if (event = this._MessageChanged) event.Dispose();
+    if (event = this._ManagersChanged) event.Dispose();
+    if (event = this._DeviceRevisionIDChanged) event.Dispose();
+  }
 }
 
 
@@ -10306,6 +16641,7 @@ export class OcaSecurityManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._secureControlDataChanged = null;
   }
 
   /**
@@ -10416,6 +16752,48 @@ export class OcaSecurityManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when secureControlData changes.
+   */
+  get OnsecureControlDataChanged()
+  {
+    const event = this._secureControlDataChanged;
+
+    if (event) return event;
+
+    return this._secureControlDataChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "secureControlData";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "secureControlData":
+      return new OcaPropertyID(3, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._secureControlDataChanged) event.Dispose();
+  }
 }
 
 
@@ -10452,6 +16830,7 @@ export class OcaFirmwareManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ComponentVersionsChanged = null;
   }
 
   /**
@@ -10622,6 +17001,48 @@ export class OcaFirmwareManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 8, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when ComponentVersions changes.
+   */
+  get OnComponentVersionsChanged()
+  {
+    const event = this._ComponentVersionsChanged;
+
+    if (event) return event;
+
+    return this._ComponentVersionsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaVersion)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ComponentVersions";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ComponentVersions":
+      return new OcaPropertyID(3, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ComponentVersionsChanged) event.Dispose();
+  }
 }
 
 
@@ -10644,6 +17065,9 @@ export class OcaSubscriptionManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._NotificationsDisabled = null;
+    this._SynchronizeState = null;
+    this._StateChanged = null;
   }
 
   /**
@@ -10826,6 +17250,82 @@ export class OcaSubscriptionManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is raised when the value of the <b>State </b>property
+   * changes from <b><i>Normal </i></b>to <b><i>EventsDisabled.</i></b>
+   */
+  get OnNotificationsDisabled()
+  {
+    const event = this._NotificationsDisabled;
+
+    if (event) return event;
+
+    const s = null;
+
+    return this._NotificationsDisabled = new Event(this, new OcaEventID(3, 1), s);
+  }
+
+  /**
+   * Event that is raised when the value of the <b>State </b>property
+   * changes from <b><i>EventsDisabled </i></b>to <b><i>Normal.</i></b>
+   * Event data includes a lists of which objects changed state during the
+   * period that notifications were disabled.
+   */
+  get OnSynchronizeState()
+  {
+    const event = this._SynchronizeState;
+
+    if (event) return event;
+
+    const s = new signature(LIST(UINT32));
+
+    return this._SynchronizeState = new Event(this, new OcaEventID(3, 2), s);
+  }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(3, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._NotificationsDisabled) event.Dispose();
+    if (event = this._SynchronizeState) event.Dispose();
+    if (event = this._StateChanged) event.Dispose();
+  }
 }
 
 
@@ -10846,6 +17346,11 @@ export class OcaPowerManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StateChanged = null;
+    this._PowerSuppliesChanged = null;
+    this._ActivePowerSuppliesChanged = null;
+    this._AutoStateChanged = null;
+    this._TargetStateChanged = null;
   }
 
   /**
@@ -10960,6 +17465,120 @@ export class OcaPowerManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 6, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when PowerSupplies changes.
+   */
+  get OnPowerSuppliesChanged()
+  {
+    const event = this._PowerSuppliesChanged;
+
+    if (event) return event;
+
+    return this._PowerSuppliesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when ActivePowerSupplies changes.
+   */
+  get OnActivePowerSuppliesChanged()
+  {
+    const event = this._ActivePowerSuppliesChanged;
+
+    if (event) return event;
+
+    return this._ActivePowerSuppliesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when AutoState changes.
+   */
+  get OnAutoStateChanged()
+  {
+    const event = this._AutoStateChanged;
+
+    if (event) return event;
+
+    return this._AutoStateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(BOOLEAN));
+  }
+
+  /**
+   * Event that is triggered when TargetState changes.
+   */
+  get OnTargetStateChanged()
+  {
+    const event = this._TargetStateChanged;
+
+    if (event) return event;
+
+    return this._TargetStateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+    if (id.PropertyIndex == 2)
+      return "PowerSupplies";
+    if (id.PropertyIndex == 3)
+      return "ActivePowerSupplies";
+    if (id.PropertyIndex == 4)
+      return "AutoState";
+    if (id.PropertyIndex == 5)
+      return "TargetState";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(3, 1);
+    case "PowerSupplies":
+      return new OcaPropertyID(3, 2);
+    case "ActivePowerSupplies":
+      return new OcaPropertyID(3, 3);
+    case "AutoState":
+      return new OcaPropertyID(3, 4);
+    case "TargetState":
+      return new OcaPropertyID(3, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._PowerSuppliesChanged) event.Dispose();
+    if (event = this._ActivePowerSuppliesChanged) event.Dispose();
+    if (event = this._AutoStateChanged) event.Dispose();
+    if (event = this._TargetStateChanged) event.Dispose();
+  }
 }
 
 
@@ -10982,6 +17601,10 @@ export class OcaNetworkManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._NetworksChanged = null;
+    this._StreamNetworksChanged = null;
+    this._ControlNetworksChanged = null;
+    this._MediaTransportNetworksChanged = null;
   }
 
   /**
@@ -11061,6 +17684,102 @@ export class OcaNetworkManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 4, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Networks changes.
+   */
+  get OnNetworksChanged()
+  {
+    const event = this._NetworksChanged;
+
+    if (event) return event;
+
+    return this._NetworksChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when StreamNetworks changes.
+   */
+  get OnStreamNetworksChanged()
+  {
+    const event = this._StreamNetworksChanged;
+
+    if (event) return event;
+
+    return this._StreamNetworksChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when ControlNetworks changes.
+   */
+  get OnControlNetworksChanged()
+  {
+    const event = this._ControlNetworksChanged;
+
+    if (event) return event;
+
+    return this._ControlNetworksChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when MediaTransportNetworks changes.
+   */
+  get OnMediaTransportNetworksChanged()
+  {
+    const event = this._MediaTransportNetworksChanged;
+
+    if (event) return event;
+
+    return this._MediaTransportNetworksChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(LIST(UINT32)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Networks";
+    if (id.PropertyIndex == 2)
+      return "StreamNetworks";
+    if (id.PropertyIndex == 3)
+      return "ControlNetworks";
+    if (id.PropertyIndex == 4)
+      return "MediaTransportNetworks";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Networks":
+      return new OcaPropertyID(3, 1);
+    case "StreamNetworks":
+      return new OcaPropertyID(3, 2);
+    case "ControlNetworks":
+      return new OcaPropertyID(3, 3);
+    case "MediaTransportNetworks":
+      return new OcaPropertyID(3, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._NetworksChanged) event.Dispose();
+    if (event = this._StreamNetworksChanged) event.Dispose();
+    if (event = this._ControlNetworksChanged) event.Dispose();
+    if (event = this._MediaTransportNetworksChanged) event.Dispose();
+  }
 }
 
 
@@ -11081,6 +17800,9 @@ export class OcaMediaClockManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ClockSourceTypesSupportedChanged = null;
+    this._ClocksChanged = null;
+    this._Clock3sChanged = null;
   }
 
   /**
@@ -11146,6 +17868,84 @@ export class OcaMediaClockManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 3, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when ClockSourceTypesSupported changes.
+   */
+  get OnClockSourceTypesSupportedChanged()
+  {
+    const event = this._ClockSourceTypesSupportedChanged;
+
+    if (event) return event;
+
+    return this._ClockSourceTypesSupportedChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT8)));
+  }
+
+  /**
+   * Event that is triggered when Clocks changes.
+   */
+  get OnClocksChanged()
+  {
+    const event = this._ClocksChanged;
+
+    if (event) return event;
+
+    return this._ClocksChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when Clock3s changes.
+   */
+  get OnClock3sChanged()
+  {
+    const event = this._Clock3sChanged;
+
+    if (event) return event;
+
+    return this._Clock3sChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "ClockSourceTypesSupported";
+    if (id.PropertyIndex == 2)
+      return "Clocks";
+    if (id.PropertyIndex == 3)
+      return "Clock3s";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ClockSourceTypesSupported":
+      return new OcaPropertyID(3, 1);
+    case "Clocks":
+      return new OcaPropertyID(3, 2);
+    case "Clock3s":
+      return new OcaPropertyID(3, 3);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ClockSourceTypesSupportedChanged) event.Dispose();
+    if (event = this._ClocksChanged) event.Dispose();
+    if (event = this._Clock3sChanged) event.Dispose();
+  }
 }
 
 
@@ -11169,6 +17969,9 @@ export class OcaLibraryManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._PatchLibrariesChanged = null;
+    this._ParsetLibrariesChanged = null;
+    this._CurrentPatchChanged = null;
   }
 
   /**
@@ -11288,6 +18091,84 @@ export class OcaLibraryManager extends OcaManager
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when PatchLibraries changes.
+   */
+  get OnPatchLibrariesChanged()
+  {
+    const event = this._PatchLibrariesChanged;
+
+    if (event) return event;
+
+    return this._PatchLibrariesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when ParsetLibraries changes.
+   */
+  get OnParsetLibrariesChanged()
+  {
+    const event = this._ParsetLibrariesChanged;
+
+    if (event) return event;
+
+    return this._ParsetLibrariesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when CurrentPatch changes.
+   */
+  get OnCurrentPatchChanged()
+  {
+    const event = this._CurrentPatchChanged;
+
+    if (event) return event;
+
+    return this._CurrentPatchChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "PatchLibraries";
+    if (id.PropertyIndex == 2)
+      return "ParsetLibraries";
+    if (id.PropertyIndex == 3)
+      return "CurrentPatch";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "PatchLibraries":
+      return new OcaPropertyID(3, 1);
+    case "ParsetLibraries":
+      return new OcaPropertyID(3, 2);
+    case "CurrentPatch":
+      return new OcaPropertyID(3, 3);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._PatchLibrariesChanged) event.Dispose();
+    if (event = this._ParsetLibrariesChanged) event.Dispose();
+    if (event = this._CurrentPatchChanged) event.Dispose();
+  }
 }
 
 
@@ -11325,6 +18206,30 @@ export class OcaAudioProcessingManager extends OcaManager
     return 2;
   }
 
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -11351,6 +18256,8 @@ export class OcaDeviceTimeManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TimeSourcesChanged = null;
+    this._CurrentDeviceTimeSourceChanged = null;
   }
 
   /**
@@ -11445,6 +18352,66 @@ export class OcaDeviceTimeManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 5, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
+  }
+
+  /**
+   * Event that is triggered when TimeSources changes.
+   */
+  get OnTimeSourcesChanged()
+  {
+    const event = this._TimeSourcesChanged;
+
+    if (event) return event;
+
+    return this._TimeSourcesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when CurrentDeviceTimeSource changes.
+   */
+  get OnCurrentDeviceTimeSourceChanged()
+  {
+    const event = this._CurrentDeviceTimeSourceChanged;
+
+    if (event) return event;
+
+    return this._CurrentDeviceTimeSourceChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "TimeSources";
+    if (id.PropertyIndex == 1)
+      return "CurrentDeviceTimeSource";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "TimeSources":
+      return new OcaPropertyID(3, 1);
+    case "CurrentDeviceTimeSource":
+      return new OcaPropertyID(3, 1);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TimeSourcesChanged) event.Dispose();
+    if (event = this._CurrentDeviceTimeSourceChanged) event.Dispose();
   }
 }
 
@@ -11641,6 +18608,46 @@ export class OcaTaskManager extends OcaManager
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+    if (id.PropertyIndex == 2)
+      return "Tasks";
+    if (id.PropertyIndex == 3)
+      return "TaskGroups";
+    if (id.PropertyIndex == 4)
+      return "Slots";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(3, 1);
+    case "Tasks":
+      return new OcaPropertyID(3, 2);
+    case "TaskGroups":
+      return new OcaPropertyID(3, 3);
+    case "Slots":
+      return new OcaPropertyID(3, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -11659,6 +18666,8 @@ export class OcaCodingManager extends OcaManager
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._AvailableEncodingSchemesChanged = null;
+    this._AvailableDecodingSchemesChanged = null;
   }
 
   /**
@@ -11706,6 +18715,66 @@ export class OcaCodingManager extends OcaManager
     if (!rs) rs = OcaCodingManager_GetAvailableDecodingSchemes_rs = new signature(MAP(UINT16, STRING));
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
+  }
+
+  /**
+   * Event that is triggered when AvailableEncodingSchemes changes.
+   */
+  get OnAvailableEncodingSchemesChanged()
+  {
+    const event = this._AvailableEncodingSchemesChanged;
+
+    if (event) return event;
+
+    return this._AvailableEncodingSchemesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(MAP(UINT16, STRING)));
+  }
+
+  /**
+   * Event that is triggered when AvailableDecodingSchemes changes.
+   */
+  get OnAvailableDecodingSchemesChanged()
+  {
+    const event = this._AvailableDecodingSchemesChanged;
+
+    if (event) return event;
+
+    return this._AvailableDecodingSchemesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(MAP(UINT16, STRING)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "AvailableEncodingSchemes";
+    if (id.PropertyIndex == 2)
+      return "AvailableDecodingSchemes";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "AvailableEncodingSchemes":
+      return new OcaPropertyID(3, 1);
+    case "AvailableDecodingSchemes":
+      return new OcaPropertyID(3, 2);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._AvailableEncodingSchemesChanged) event.Dispose();
+    if (event = this._AvailableDecodingSchemesChanged) event.Dispose();
   }
 }
 
@@ -11765,6 +18834,30 @@ export class OcaDiagnosticManager extends OcaManager
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd, rs);
   }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+  }
 }
 
 
@@ -11798,6 +18891,12 @@ export class OcaNetworkSignalChannel extends OcaWorker
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ConnectorPinsChanged = null;
+    this._IDAdvertisedChanged = null;
+    this._NetworkChanged = null;
+    this._RemoteChannelIDChanged = null;
+    this._SourceOrSinkChanged = null;
+    this._StatusChanged = null;
   }
 
   /**
@@ -11985,6 +19084,138 @@ export class OcaNetworkSignalChannel extends OcaWorker
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when ConnectorPins changes.
+   */
+  get OnConnectorPinsChanged()
+  {
+    const event = this._ConnectorPinsChanged;
+
+    if (event) return event;
+
+    return this._ConnectorPinsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, UINT16)));
+  }
+
+  /**
+   * Event that is triggered when IDAdvertised changes.
+   */
+  get OnIDAdvertisedChanged()
+  {
+    const event = this._IDAdvertisedChanged;
+
+    if (event) return event;
+
+    return this._IDAdvertisedChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(BLOB));
+  }
+
+  /**
+   * Event that is triggered when Network changes.
+   */
+  get OnNetworkChanged()
+  {
+    const event = this._NetworkChanged;
+
+    if (event) return event;
+
+    return this._NetworkChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when RemoteChannelID changes.
+   */
+  get OnRemoteChannelIDChanged()
+  {
+    const event = this._RemoteChannelIDChanged;
+
+    if (event) return event;
+
+    return this._RemoteChannelIDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(BLOB));
+  }
+
+  /**
+   * Event that is triggered when SourceOrSink changes.
+   */
+  get OnSourceOrSinkChanged()
+  {
+    const event = this._SourceOrSinkChanged;
+
+    if (event) return event;
+
+    return this._SourceOrSinkChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Status changes.
+   */
+  get OnStatusChanged()
+  {
+    const event = this._StatusChanged;
+
+    if (event) return event;
+
+    return this._StatusChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 3)
+      return "ConnectorPins";
+    if (id.PropertyIndex == 1)
+      return "IDAdvertised";
+    if (id.PropertyIndex == 2)
+      return "Network";
+    if (id.PropertyIndex == 4)
+      return "RemoteChannelID";
+    if (id.PropertyIndex == 5)
+      return "SourceOrSink";
+    if (id.PropertyIndex == 6)
+      return "Status";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ConnectorPins":
+      return new OcaPropertyID(3, 3);
+    case "IDAdvertised":
+      return new OcaPropertyID(3, 1);
+    case "Network":
+      return new OcaPropertyID(3, 2);
+    case "RemoteChannelID":
+      return new OcaPropertyID(3, 4);
+    case "SourceOrSink":
+      return new OcaPropertyID(3, 5);
+    case "Status":
+      return new OcaPropertyID(3, 6);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ConnectorPinsChanged) event.Dispose();
+    if (event = this._IDAdvertisedChanged) event.Dispose();
+    if (event = this._NetworkChanged) event.Dispose();
+    if (event = this._RemoteChannelIDChanged) event.Dispose();
+    if (event = this._SourceOrSinkChanged) event.Dispose();
+    if (event = this._StatusChanged) event.Dispose();
+  }
 }
 
 
@@ -12013,6 +19244,13 @@ export class OcaNetwork extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._IDAdvertisedChanged = null;
+    this._ControlProtocolChanged = null;
+    this._MediaProtocolChanged = null;
+    this._StatusChanged = null;
+    this._SystemInterfacesChanged = null;
+    this._MediaPortsChanged = null;
+    this._StatisticsChanged = null;
   }
 
   /**
@@ -12210,6 +19448,160 @@ export class OcaNetwork extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 13, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when IDAdvertised changes.
+   */
+  get OnIDAdvertisedChanged()
+  {
+    const event = this._IDAdvertisedChanged;
+
+    if (event) return event;
+
+    return this._IDAdvertisedChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
+  }
+
+  /**
+   * Event that is triggered when ControlProtocol changes.
+   */
+  get OnControlProtocolChanged()
+  {
+    const event = this._ControlProtocolChanged;
+
+    if (event) return event;
+
+    return this._ControlProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when MediaProtocol changes.
+   */
+  get OnMediaProtocolChanged()
+  {
+    const event = this._MediaProtocolChanged;
+
+    if (event) return event;
+
+    return this._MediaProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Status changes.
+   */
+  get OnStatusChanged()
+  {
+    const event = this._StatusChanged;
+
+    if (event) return event;
+
+    return this._StatusChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when SystemInterfaces changes.
+   */
+  get OnSystemInterfacesChanged()
+  {
+    const event = this._SystemInterfacesChanged;
+
+    if (event) return event;
+
+    return this._SystemInterfacesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
+  }
+
+  /**
+   * Event that is triggered when MediaPorts changes.
+   */
+  get OnMediaPortsChanged()
+  {
+    const event = this._MediaPortsChanged;
+
+    if (event) return event;
+
+    return this._MediaPortsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when Statistics changes.
+   */
+  get OnStatisticsChanged()
+  {
+    const event = this._StatisticsChanged;
+
+    if (event) return event;
+
+    return this._StatisticsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(OcaNetworkStatistics));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "LinkType";
+    if (id.PropertyIndex == 2)
+      return "IDAdvertised";
+    if (id.PropertyIndex == 3)
+      return "ControlProtocol";
+    if (id.PropertyIndex == 4)
+      return "MediaProtocol";
+    if (id.PropertyIndex == 5)
+      return "Status";
+    if (id.PropertyIndex == 6)
+      return "SystemInterfaces";
+    if (id.PropertyIndex == 7)
+      return "MediaPorts";
+    if (id.PropertyIndex == 8)
+      return "Statistics";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "LinkType":
+      return new OcaPropertyID(3, 1);
+    case "IDAdvertised":
+      return new OcaPropertyID(3, 2);
+    case "ControlProtocol":
+      return new OcaPropertyID(3, 3);
+    case "MediaProtocol":
+      return new OcaPropertyID(3, 4);
+    case "Status":
+      return new OcaPropertyID(3, 5);
+    case "SystemInterfaces":
+      return new OcaPropertyID(3, 6);
+    case "MediaPorts":
+      return new OcaPropertyID(3, 7);
+    case "Statistics":
+      return new OcaPropertyID(3, 8);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._IDAdvertisedChanged) event.Dispose();
+    if (event = this._ControlProtocolChanged) event.Dispose();
+    if (event = this._MediaProtocolChanged) event.Dispose();
+    if (event = this._StatusChanged) event.Dispose();
+    if (event = this._SystemInterfacesChanged) event.Dispose();
+    if (event = this._MediaPortsChanged) event.Dispose();
+    if (event = this._StatisticsChanged) event.Dispose();
+  }
 }
 
 
@@ -12248,6 +19640,13 @@ export class OcaRamper extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._StateChanged = null;
+    this._RampedPropertyChanged = null;
+    this._TimeModeChanged = null;
+    this._StartTimeChanged = null;
+    this._DurationChanged = null;
+    this._InterpolationLawChanged = null;
+    this._GoalChanged = null;
   }
 
   /**
@@ -12469,6 +19868,156 @@ export class OcaRamper extends OcaAgent
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when State changes.
+   */
+  get OnStateChanged()
+  {
+    const event = this._StateChanged;
+
+    if (event) return event;
+
+    return this._StateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when RampedProperty changes.
+   */
+  get OnRampedPropertyChanged()
+  {
+    const event = this._RampedPropertyChanged;
+
+    if (event) return event;
+
+    return this._RampedPropertyChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(OcaProperty));
+  }
+
+  /**
+   * Event that is triggered when TimeMode changes.
+   */
+  get OnTimeModeChanged()
+  {
+    const event = this._TimeModeChanged;
+
+    if (event) return event;
+
+    return this._TimeModeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when StartTime changes.
+   */
+  get OnStartTimeChanged()
+  {
+    const event = this._StartTimeChanged;
+
+    if (event) return event;
+
+    return this._StartTimeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT64));
+  }
+
+  /**
+   * Event that is triggered when Duration changes.
+   */
+  get OnDurationChanged()
+  {
+    const event = this._DurationChanged;
+
+    if (event) return event;
+
+    return this._DurationChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(FLOAT32));
+  }
+
+  /**
+   * Event that is triggered when InterpolationLaw changes.
+   */
+  get OnInterpolationLawChanged()
+  {
+    const event = this._InterpolationLawChanged;
+
+    if (event) return event;
+
+    return this._InterpolationLawChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Goal changes.
+   */
+  get OnGoalChanged()
+  {
+    const event = this._GoalChanged;
+
+    if (event) return event;
+
+    return this._GoalChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT64));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "State";
+    if (id.PropertyIndex == 2)
+      return "RampedProperty";
+    if (id.PropertyIndex == 3)
+      return "TimeMode";
+    if (id.PropertyIndex == 4)
+      return "StartTime";
+    if (id.PropertyIndex == 5)
+      return "Duration";
+    if (id.PropertyIndex == 6)
+      return "InterpolationLaw";
+    if (id.PropertyIndex == 7)
+      return "Goal";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "State":
+      return new OcaPropertyID(3, 1);
+    case "RampedProperty":
+      return new OcaPropertyID(3, 2);
+    case "TimeMode":
+      return new OcaPropertyID(3, 3);
+    case "StartTime":
+      return new OcaPropertyID(3, 4);
+    case "Duration":
+      return new OcaPropertyID(3, 5);
+    case "InterpolationLaw":
+      return new OcaPropertyID(3, 6);
+    case "Goal":
+      return new OcaPropertyID(3, 7);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._StateChanged) event.Dispose();
+    if (event = this._RampedPropertyChanged) event.Dispose();
+    if (event = this._TimeModeChanged) event.Dispose();
+    if (event = this._StartTimeChanged) event.Dispose();
+    if (event = this._DurationChanged) event.Dispose();
+    if (event = this._InterpolationLawChanged) event.Dispose();
+    if (event = this._GoalChanged) event.Dispose();
+  }
 }
 
 
@@ -12490,6 +20039,10 @@ export class OcaMediaClock extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._TypeChanged = null;
+    this._DomainIDChanged = null;
+    this._CurrentRateChanged = null;
+    this._LockStateChanged = null;
   }
 
   /**
@@ -12633,6 +20186,106 @@ export class OcaMediaClock extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 8, 0);
     return this.device.send_command(cmd, rs);
   }
+
+  /**
+   * Event that is triggered when Type changes.
+   */
+  get OnTypeChanged()
+  {
+    const event = this._TypeChanged;
+
+    if (event) return event;
+
+    return this._TypeChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when DomainID changes.
+   */
+  get OnDomainIDChanged()
+  {
+    const event = this._DomainIDChanged;
+
+    if (event) return event;
+
+    return this._DomainIDChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+  }
+
+  /**
+   * Event that is triggered when CurrentRate changes.
+   */
+  get OnCurrentRateChanged()
+  {
+    const event = this._CurrentRateChanged;
+
+    if (event) return event;
+
+    return this._CurrentRateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
+  }
+
+  /**
+   * Event that is triggered when LockState changes.
+   */
+  get OnLockStateChanged()
+  {
+    const event = this._LockStateChanged;
+
+    if (event) return event;
+
+    return this._LockStateChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 1)
+      return "Type";
+    if (id.PropertyIndex == 2)
+      return "DomainID";
+    if (id.PropertyIndex == 3)
+      return "RatesSupported";
+    if (id.PropertyIndex == 4)
+      return "CurrentRate";
+    if (id.PropertyIndex == 5)
+      return "LockState";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "Type":
+      return new OcaPropertyID(3, 1);
+    case "DomainID":
+      return new OcaPropertyID(3, 2);
+    case "RatesSupported":
+      return new OcaPropertyID(3, 3);
+    case "CurrentRate":
+      return new OcaPropertyID(3, 4);
+    case "LockState":
+      return new OcaPropertyID(3, 5);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._TypeChanged) event.Dispose();
+    if (event = this._DomainIDChanged) event.Dispose();
+    if (event = this._CurrentRateChanged) event.Dispose();
+    if (event = this._LockStateChanged) event.Dispose();
+  }
 }
 
 
@@ -12669,6 +20322,16 @@ export class OcaStreamNetwork extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._ControlProtocolChanged = null;
+    this._IDAdvertisedChanged = null;
+    this._MediaProtocolChanged = null;
+    this._SignalChannelsSinkChanged = null;
+    this._SignalChannelsSourceChanged = null;
+    this._StatisticsChanged = null;
+    this._StatusChanged = null;
+    this._StreamConnectorsSinkChanged = null;
+    this._StreamConnectorsSourceChanged = null;
+    this._SystemInterfacesChanged = null;
   }
 
   /**
@@ -13025,6 +20688,214 @@ export class OcaStreamNetwork extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 20, 0);
     return this.device.send_command(cmd);
   }
+
+  /**
+   * Event that is triggered when ControlProtocol changes.
+   */
+  get OnControlProtocolChanged()
+  {
+    const event = this._ControlProtocolChanged;
+
+    if (event) return event;
+
+    return this._ControlProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when IDAdvertised changes.
+   */
+  get OnIDAdvertisedChanged()
+  {
+    const event = this._IDAdvertisedChanged;
+
+    if (event) return event;
+
+    return this._IDAdvertisedChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
+  }
+
+  /**
+   * Event that is triggered when MediaProtocol changes.
+   */
+  get OnMediaProtocolChanged()
+  {
+    const event = this._MediaProtocolChanged;
+
+    if (event) return event;
+
+    return this._MediaProtocolChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when SignalChannelsSink changes.
+   */
+  get OnSignalChannelsSinkChanged()
+  {
+    const event = this._SignalChannelsSinkChanged;
+
+    if (event) return event;
+
+    return this._SignalChannelsSinkChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 10), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when SignalChannelsSource changes.
+   */
+  get OnSignalChannelsSourceChanged()
+  {
+    const event = this._SignalChannelsSourceChanged;
+
+    if (event) return event;
+
+    return this._SignalChannelsSourceChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 9), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when Statistics changes.
+   */
+  get OnStatisticsChanged()
+  {
+    const event = this._StatisticsChanged;
+
+    if (event) return event;
+
+    return this._StatisticsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 11), new signature(OcaNetworkStatistics));
+  }
+
+  /**
+   * Event that is triggered when Status changes.
+   */
+  get OnStatusChanged()
+  {
+    const event = this._StatusChanged;
+
+    if (event) return event;
+
+    return this._StatusChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when StreamConnectorsSink changes.
+   */
+  get OnStreamConnectorsSinkChanged()
+  {
+    const event = this._StreamConnectorsSinkChanged;
+
+    if (event) return event;
+
+    return this._StreamConnectorsSinkChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when StreamConnectorsSource changes.
+   */
+  get OnStreamConnectorsSourceChanged()
+  {
+    const event = this._StreamConnectorsSourceChanged;
+
+    if (event) return event;
+
+    return this._StreamConnectorsSourceChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(LIST(UINT32)));
+  }
+
+  /**
+   * Event that is triggered when SystemInterfaces changes.
+   */
+  get OnSystemInterfacesChanged()
+  {
+    const event = this._SystemInterfacesChanged;
+
+    if (event) return event;
+
+    return this._SystemInterfacesChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 3)
+      return "ControlProtocol";
+    if (id.PropertyIndex == 2)
+      return "IDAdvertised";
+    if (id.PropertyIndex == 1)
+      return "LinkType";
+    if (id.PropertyIndex == 4)
+      return "MediaProtocol";
+    if (id.PropertyIndex == 10)
+      return "SignalChannelsSink";
+    if (id.PropertyIndex == 9)
+      return "SignalChannelsSource";
+    if (id.PropertyIndex == 11)
+      return "Statistics";
+    if (id.PropertyIndex == 5)
+      return "Status";
+    if (id.PropertyIndex == 8)
+      return "StreamConnectorsSink";
+    if (id.PropertyIndex == 7)
+      return "StreamConnectorsSource";
+    if (id.PropertyIndex == 6)
+      return "SystemInterfaces";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "ControlProtocol":
+      return new OcaPropertyID(3, 3);
+    case "IDAdvertised":
+      return new OcaPropertyID(3, 2);
+    case "LinkType":
+      return new OcaPropertyID(3, 1);
+    case "MediaProtocol":
+      return new OcaPropertyID(3, 4);
+    case "SignalChannelsSink":
+      return new OcaPropertyID(3, 10);
+    case "SignalChannelsSource":
+      return new OcaPropertyID(3, 9);
+    case "Statistics":
+      return new OcaPropertyID(3, 11);
+    case "Status":
+      return new OcaPropertyID(3, 5);
+    case "StreamConnectorsSink":
+      return new OcaPropertyID(3, 8);
+    case "StreamConnectorsSource":
+      return new OcaPropertyID(3, 7);
+    case "SystemInterfaces":
+      return new OcaPropertyID(3, 6);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._ControlProtocolChanged) event.Dispose();
+    if (event = this._IDAdvertisedChanged) event.Dispose();
+    if (event = this._MediaProtocolChanged) event.Dispose();
+    if (event = this._SignalChannelsSinkChanged) event.Dispose();
+    if (event = this._SignalChannelsSourceChanged) event.Dispose();
+    if (event = this._StatisticsChanged) event.Dispose();
+    if (event = this._StatusChanged) event.Dispose();
+    if (event = this._StreamConnectorsSinkChanged) event.Dispose();
+    if (event = this._StreamConnectorsSourceChanged) event.Dispose();
+    if (event = this._SystemInterfacesChanged) event.Dispose();
+  }
 }
 
 
@@ -13075,6 +20946,12 @@ export class OcaStreamConnector extends OcaAgent
   constructor(device, ObjectNumber)
   {
     super(device, ObjectNumber);
+    this._IDAdvertisedChanged = null;
+    this._OwnerNetworkChanged = null;
+    this._PinsChanged = null;
+    this._SourceOrSinkChanged = null;
+    this._StatusChanged = null;
+    this._StreamsChanged = null;
   }
 
   /**
@@ -13256,5 +21133,137 @@ export class OcaStreamConnector extends OcaAgent
     const cmd = new CommandRrq(this.ono, 3, 6, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
+  }
+
+  /**
+   * Event that is triggered when IDAdvertised changes.
+   */
+  get OnIDAdvertisedChanged()
+  {
+    const event = this._IDAdvertisedChanged;
+
+    if (event) return event;
+
+    return this._IDAdvertisedChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
+  }
+
+  /**
+   * Event that is triggered when OwnerNetwork changes.
+   */
+  get OnOwnerNetworkChanged()
+  {
+    const event = this._OwnerNetworkChanged;
+
+    if (event) return event;
+
+    return this._OwnerNetworkChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
+  }
+
+  /**
+   * Event that is triggered when Pins changes.
+   */
+  get OnPinsChanged()
+  {
+    const event = this._PinsChanged;
+
+    if (event) return event;
+
+    return this._PinsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(MAP(UINT16, UINT32)));
+  }
+
+  /**
+   * Event that is triggered when SourceOrSink changes.
+   */
+  get OnSourceOrSinkChanged()
+  {
+    const event = this._SourceOrSinkChanged;
+
+    if (event) return event;
+
+    return this._SourceOrSinkChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Status changes.
+   */
+  get OnStatusChanged()
+  {
+    const event = this._StatusChanged;
+
+    if (event) return event;
+
+    return this._StatusChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+  }
+
+  /**
+   * Event that is triggered when Streams changes.
+   */
+  get OnStreamsChanged()
+  {
+    const event = this._StreamsChanged;
+
+    if (event) return event;
+
+    return this._StreamsChanged =
+      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(MAP(UINT16, OcaStream)));
+  }
+
+  GetPropertyName(id)
+  {
+    if (id.DefLevel > 3) return null;
+    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
+
+    if (id.PropertyIndex == 2)
+      return "IDAdvertised";
+    if (id.PropertyIndex == 1)
+      return "OwnerNetwork";
+    if (id.PropertyIndex == 5)
+      return "Pins";
+    if (id.PropertyIndex == 3)
+      return "SourceOrSink";
+    if (id.PropertyIndex == 6)
+      return "Status";
+    if (id.PropertyIndex == 4)
+      return "Streams";
+
+    return null;
+  }
+
+  GetPropertyID(name)
+  {
+    switch (name) {
+    case "IDAdvertised":
+      return new OcaPropertyID(3, 2);
+    case "OwnerNetwork":
+      return new OcaPropertyID(3, 1);
+    case "Pins":
+      return new OcaPropertyID(3, 5);
+    case "SourceOrSink":
+      return new OcaPropertyID(3, 3);
+    case "Status":
+      return new OcaPropertyID(3, 6);
+    case "Streams":
+      return new OcaPropertyID(3, 4);
+    }
+
+    return super.GetOcaPropertyID(name);
+  }
+
+
+  Dispose()
+  {
+    super.Dispose();
+    let event;
+    if (event = this._IDAdvertisedChanged) event.Dispose();
+    if (event = this._OwnerNetworkChanged) event.Dispose();
+    if (event = this._PinsChanged) event.Dispose();
+    if (event = this._SourceOrSinkChanged) event.Dispose();
+    if (event = this._StatusChanged) event.Dispose();
+    if (event = this._StreamsChanged) event.Dispose();
   }
 }

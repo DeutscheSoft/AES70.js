@@ -37,6 +37,20 @@ export class Base {
   {
     return [];
   }
+
+  isEqual(to)
+  {
+    if (typeof to !== 'object') return false;
+    if (to.constructor !== this.constructor) return false;
+    const v1 = this.values();
+    const v2 = to.values();
+
+    for (let i = 0; i < v1.length; i++) {
+      if (v1[i] !== v2[i]) return false;
+    }
+
+    return false;
+  }
 }
 
 /**
