@@ -1,7 +1,7 @@
 /* modules */
 const SP = require("../lib/signature_parser.js");
 
-const utils = require('./utils.js');
+const utils = require('./utils');
 const memcmp = utils.memcmp;
 const equal = utils.equal;
 
