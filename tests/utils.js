@@ -1,8 +1,9 @@
-const SP = require("..").SP;
+const SP = require("../lib/signature_parser.js");
 
 function get_random_int(N) {
   return Math.floor(Math.random()*N);
 }
+
 function low_get_random_signature(len, basic) {
   var args = [];
 
@@ -32,9 +33,7 @@ function get_random_signature(len) {
   var args = low_get_random_signature(len);
 
   try {
-    var ret = Object.create(SP.signature.prototype);
-    SP.signature.apply(ret, args);
-    return ret;
+    return new SP.signature(...args);
   } catch (e) {
     console.error('Failed to create signature:', args);
   }
