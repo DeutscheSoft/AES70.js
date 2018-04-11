@@ -8,6 +8,9 @@ import {
     CommandRrq,
     Response,
     Notification,
+    KeepAlive,
+    encodeMessage,
+    decodeMessage,
   } from './OCA.js';
 
 import * as Types from './Types.js';
@@ -23,6 +26,9 @@ export {
   CommandRrq,
   Response,
   Notification,
+  KeepAlive,
   Types,
   RemoteControlClasses,
+  encodeMessage,
+  decodeMessage,
 };
