@@ -1,16 +1,19 @@
-(function(OCA) {
- function websocket_incoming(ev) {
-    this.read(ev.data);  
- }
- var WebSocketConnection = function(ws) {
-    OCA.ClientConnection.call(this);
+import ClientConnection from './OCA';
+
+export class WebSocketConnection extends ClientConnection
+{
+  constructor(ws)
+  {
+    super();
     ws.binaryType = "arraybuffer";
-    ws.onmessage = websocket_incoming.bind(this);
+    ws.onmessage = (ev) => {
+      this.read(ev.data);
+    };
     this.ws = ws;
- };
- WebSocketConnection.prototype = Object.create(OCA.ClientConnection.prototype);
- WebSocketConnection.prototype.write = function(buf) {
+  }
+
+  write(buf)
+  {
     this.ws.send(buf);
- };
- OCA.WebSocketConnection = WebSocketConnection;
-})(this.OCA || (this.OCA = {}));
+  }
+}
