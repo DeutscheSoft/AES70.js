@@ -313,7 +313,7 @@ export class OcaRoot extends ObjectBase
     if (event) return event;
 
     return this._LockableChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(1, 4), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(1, 4), new signature(BOOLEAN));
   }
 
   /**
@@ -326,7 +326,7 @@ export class OcaRoot extends ObjectBase
     if (event) return event;
 
     return this._RoleChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(1, 5), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(1, 5), new signature(STRING));
   }
 
   GetPropertyName(id)
@@ -640,7 +640,7 @@ export class OcaWorker extends OcaRoot
     if (event) return event;
 
     return this._EnabledChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(2, 1), new signature(BOOLEAN));
   }
 
   /**
@@ -653,7 +653,7 @@ export class OcaWorker extends OcaRoot
     if (event) return event;
 
     return this._PortsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 2), new signature(LIST(OcaPort)));
+      new PropertyEvent(this, new OcaPropertyID(2, 2), new signature(LIST(OcaPort)));
   }
 
   /**
@@ -666,7 +666,7 @@ export class OcaWorker extends OcaRoot
     if (event) return event;
 
     return this._LabelChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 3), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(2, 3), new signature(STRING));
   }
 
   /**
@@ -679,7 +679,7 @@ export class OcaWorker extends OcaRoot
     if (event) return event;
 
     return this._OwnerChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 4), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(2, 4), new signature(UINT32));
   }
 
   /**
@@ -692,7 +692,7 @@ export class OcaWorker extends OcaRoot
     if (event) return event;
 
     return this._LatencyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(2, 5), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -876,7 +876,7 @@ export class OcaMute extends OcaActuator
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -984,7 +984,7 @@ export class OcaPolarity extends OcaActuator
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -1235,7 +1235,7 @@ export class OcaSwitch extends OcaActuator
     if (event) return event;
 
     return this._PositionChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT16));
   }
 
   /**
@@ -1248,7 +1248,7 @@ export class OcaSwitch extends OcaActuator
     if (event) return event;
 
     return this._PositionNamesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(STRING)));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(LIST(STRING)));
   }
 
   /**
@@ -1261,7 +1261,7 @@ export class OcaSwitch extends OcaActuator
     if (event) return event;
 
     return this._PositionEnableChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(LIST(BOOLEAN)));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(LIST(BOOLEAN)));
   }
 
   GetPropertyName(id)
@@ -1379,7 +1379,7 @@ export class OcaGain extends OcaActuator
     if (event) return event;
 
     return this._GainChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -1519,7 +1519,7 @@ export class OcaPanBalance extends OcaActuator
     if (event) return event;
 
     return this._PositionChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   /**
@@ -1532,7 +1532,7 @@ export class OcaPanBalance extends OcaActuator
     if (event) return event;
 
     return this._MidpointGainChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -1645,7 +1645,7 @@ export class OcaDelay extends OcaActuator
     if (event) return event;
 
     return this._DelayTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -1775,7 +1775,7 @@ export class OcaDelayExtended extends OcaDelay
     if (event) return event;
 
     return this._DelayValueChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(OcaDelayValue));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(OcaDelayValue));
   }
 
   GetPropertyName(id)
@@ -1883,7 +1883,7 @@ export class OcaFrequencyActuator extends OcaActuator
     if (event) return event;
 
     return this._FrequencyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -2121,7 +2121,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._FrequencyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   /**
@@ -2134,7 +2134,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._PassbandChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
   }
 
   /**
@@ -2147,7 +2147,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._ShapeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
   }
 
   /**
@@ -2160,7 +2160,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._OrderChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT16));
   }
 
   /**
@@ -2173,7 +2173,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._ParameterChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -2429,7 +2429,7 @@ export class OcaFilterParametric extends OcaActuator
     if (event) return event;
 
     return this._FrequencyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   /**
@@ -2442,7 +2442,7 @@ export class OcaFilterParametric extends OcaActuator
     if (event) return event;
 
     return this._ShapeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
   }
 
   /**
@@ -2455,7 +2455,7 @@ export class OcaFilterParametric extends OcaActuator
     if (event) return event;
 
     return this._WidthParameterChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
   }
 
   /**
@@ -2468,7 +2468,7 @@ export class OcaFilterParametric extends OcaActuator
     if (event) return event;
 
     return this._InBandGainChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
   }
 
   /**
@@ -2481,7 +2481,7 @@ export class OcaFilterParametric extends OcaActuator
     if (event) return event;
 
     return this._ShapeParameterChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -2656,7 +2656,7 @@ export class OcaFilterPolynomial extends OcaActuator
     if (event) return event;
 
     return this._AChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(LIST(FLOAT32)));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(LIST(FLOAT32)));
   }
 
   /**
@@ -2669,7 +2669,7 @@ export class OcaFilterPolynomial extends OcaActuator
     if (event) return event;
 
     return this._BChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
   }
 
   /**
@@ -2682,7 +2682,7 @@ export class OcaFilterPolynomial extends OcaActuator
     if (event) return event;
 
     return this._SampleRateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
   }
 
   /**
@@ -2695,7 +2695,7 @@ export class OcaFilterPolynomial extends OcaActuator
     if (event) return event;
 
     return this._MaxOrderChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -2865,7 +2865,7 @@ export class OcaFilterFIR extends OcaActuator
     if (event) return event;
 
     return this._LengthChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT32));
   }
 
   /**
@@ -2878,7 +2878,7 @@ export class OcaFilterFIR extends OcaActuator
     if (event) return event;
 
     return this._CoefficientsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
   }
 
   /**
@@ -2891,7 +2891,7 @@ export class OcaFilterFIR extends OcaActuator
     if (event) return event;
 
     return this._SampleRateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -3068,7 +3068,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     if (event) return event;
 
     return this._TransferFunctionChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(OcaTransferFunction));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaTransferFunction));
   }
 
   /**
@@ -3081,7 +3081,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     if (event) return event;
 
     return this._SampleRateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
   }
 
   /**
@@ -3094,7 +3094,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     if (event) return event;
 
     return this._TFMinLengthChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(UINT32));
   }
 
   /**
@@ -3107,7 +3107,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     if (event) return event;
 
     return this._TFMaxLengthChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT32));
   }
 
   GetPropertyName(id)
@@ -3619,7 +3619,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._TriggeredChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
   }
 
   /**
@@ -3632,7 +3632,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._DynamicGainChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
   }
 
   /**
@@ -3645,7 +3645,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._FunctionChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
   }
 
   /**
@@ -3658,7 +3658,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._RatioChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
   }
 
   /**
@@ -3671,7 +3671,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._ThresholdChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
   }
 
   /**
@@ -3684,7 +3684,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._ThresholdPresentationUnitsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 6), new signature(UINT8));
   }
 
   /**
@@ -3697,7 +3697,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._DetectorLawChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 7), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 7), new signature(UINT8));
   }
 
   /**
@@ -3710,7 +3710,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._AttackTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 8), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 8), new signature(FLOAT32));
   }
 
   /**
@@ -3723,7 +3723,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._ReleaseTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 9), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 9), new signature(FLOAT32));
   }
 
   /**
@@ -3736,7 +3736,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._HoldTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 10), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 10), new signature(FLOAT32));
   }
 
   /**
@@ -3749,7 +3749,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._DynamicGainCeilingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 11), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 11), new signature(FLOAT32));
   }
 
   /**
@@ -3762,7 +3762,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._DynamicGainFloorChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 12), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 12), new signature(FLOAT32));
   }
 
   /**
@@ -3775,7 +3775,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._KneeParameterChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 13), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 13), new signature(FLOAT32));
   }
 
   /**
@@ -3788,7 +3788,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._SlopeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 14), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 14), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -4057,7 +4057,7 @@ export class OcaDynamicsDetector extends OcaActuator
     if (event) return event;
 
     return this._LawChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
   }
 
   /**
@@ -4070,7 +4070,7 @@ export class OcaDynamicsDetector extends OcaActuator
     if (event) return event;
 
     return this._AttackTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
   }
 
   /**
@@ -4083,7 +4083,7 @@ export class OcaDynamicsDetector extends OcaActuator
     if (event) return event;
 
     return this._ReleaseTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
   }
 
   /**
@@ -4096,7 +4096,7 @@ export class OcaDynamicsDetector extends OcaActuator
     if (event) return event;
 
     return this._HoldTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -4425,7 +4425,7 @@ export class OcaDynamicsCurve extends OcaActuator
     if (event) return event;
 
     return this._nSegmentsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
   }
 
   /**
@@ -4438,7 +4438,7 @@ export class OcaDynamicsCurve extends OcaActuator
     if (event) return event;
 
     return this._ThresholdChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(LIST(FLOAT32)));
   }
 
   /**
@@ -4451,7 +4451,7 @@ export class OcaDynamicsCurve extends OcaActuator
     if (event) return event;
 
     return this._SlopeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(LIST(FLOAT32)));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(LIST(FLOAT32)));
   }
 
   /**
@@ -4464,7 +4464,7 @@ export class OcaDynamicsCurve extends OcaActuator
     if (event) return event;
 
     return this._KneeParameterChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(LIST(FLOAT32)));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(LIST(FLOAT32)));
   }
 
   /**
@@ -4477,7 +4477,7 @@ export class OcaDynamicsCurve extends OcaActuator
     if (event) return event;
 
     return this._DynamicGainFloorChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
   }
 
   /**
@@ -4490,7 +4490,7 @@ export class OcaDynamicsCurve extends OcaActuator
     if (event) return event;
 
     return this._DynamicGainCeilingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -4852,7 +4852,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._Frequency1Changed =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   /**
@@ -4865,7 +4865,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._Frequency2Changed =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
   }
 
   /**
@@ -4878,7 +4878,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._LevelChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
   }
 
   /**
@@ -4891,7 +4891,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._WaveformChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
   }
 
   /**
@@ -4904,7 +4904,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._SweepTypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(UINT8));
   }
 
   /**
@@ -4917,7 +4917,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._SweepTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
   }
 
   /**
@@ -4930,7 +4930,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._SweepRepeatChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 7), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(4, 7), new signature(BOOLEAN));
   }
 
   /**
@@ -4943,7 +4943,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._GeneratingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 8), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(4, 8), new signature(BOOLEAN));
   }
 
   GetPropertyName(id)
@@ -5210,7 +5210,7 @@ export class OcaTemperatureActuator extends OcaActuator
     if (event) return event;
 
     return this._TemperatureChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -5323,7 +5323,7 @@ export class OcaIdentificationActuator extends OcaActuator
     if (event) return event;
 
     return this._activeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
   }
 
   GetPropertyName(id)
@@ -5544,7 +5544,7 @@ export class OcaBooleanActuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
   }
 
   GetPropertyName(id)
@@ -5652,7 +5652,7 @@ export class OcaInt8Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
   }
 
   GetPropertyName(id)
@@ -5760,7 +5760,7 @@ export class OcaInt16Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
   }
 
   GetPropertyName(id)
@@ -5868,7 +5868,7 @@ export class OcaInt32Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
   }
 
   GetPropertyName(id)
@@ -5976,7 +5976,7 @@ export class OcaInt64Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
   }
 
   GetPropertyName(id)
@@ -6084,7 +6084,7 @@ export class OcaUint8Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -6192,7 +6192,7 @@ export class OcaUint16Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -6299,7 +6299,7 @@ export class OcaUint32Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
   }
 
   GetPropertyName(id)
@@ -6407,7 +6407,7 @@ export class OcaUint64Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
   }
 
   GetPropertyName(id)
@@ -6515,7 +6515,7 @@ export class OcaFloat32Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -6623,7 +6623,7 @@ export class OcaFloat64Actuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
   }
 
   GetPropertyName(id)
@@ -6745,7 +6745,7 @@ export class OcaStringActuator extends OcaBasicActuator
     if (event) return event;
 
     return this._SettingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(STRING));
   }
 
   /**
@@ -6758,7 +6758,7 @@ export class OcaStringActuator extends OcaBasicActuator
     if (event) return event;
 
     return this._MaxLenChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -6924,7 +6924,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
     if (event) return event;
 
     return this._BitstringChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
   }
 
   GetPropertyName(id)
@@ -7016,7 +7016,7 @@ export class OcaSensor extends OcaWorker
     if (event) return event;
 
     return this._ReadingStateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -7107,7 +7107,7 @@ export class OcaLevelSensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -7218,7 +7218,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
     if (event) return event;
 
     return this._LawChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -7309,7 +7309,7 @@ export class OcaTimeIntervalSensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -7400,7 +7400,7 @@ export class OcaFrequencySensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -7491,7 +7491,7 @@ export class OcaTemperatureSensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -7660,7 +7660,7 @@ export class OcaVoltageSensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -7751,7 +7751,7 @@ export class OcaCurrentSensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -7842,7 +7842,7 @@ export class OcaImpedanceSensor extends OcaSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(OcaImpedance));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaImpedance));
   }
 
   GetPropertyName(id)
@@ -7991,7 +7991,7 @@ export class OcaBooleanSensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
   }
 
   GetPropertyName(id)
@@ -8082,7 +8082,7 @@ export class OcaInt8Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
   }
 
   GetPropertyName(id)
@@ -8173,7 +8173,7 @@ export class OcaInt16Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
   }
 
   GetPropertyName(id)
@@ -8264,7 +8264,7 @@ export class OcaInt32Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
   }
 
   GetPropertyName(id)
@@ -8355,7 +8355,7 @@ export class OcaInt64Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
   }
 
   GetPropertyName(id)
@@ -8446,7 +8446,7 @@ export class OcaUint8Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -8537,7 +8537,7 @@ export class OcaUint16Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -8628,7 +8628,7 @@ export class OcaUint32Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
   }
 
   GetPropertyName(id)
@@ -8719,7 +8719,7 @@ export class OcaUint64Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
   }
 
   GetPropertyName(id)
@@ -8810,7 +8810,7 @@ export class OcaFloat32Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -8901,7 +8901,7 @@ export class OcaFloat64Sensor extends OcaBasicSensor
     if (event) return event;
 
     return this._ReadingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
   }
 
   GetPropertyName(id)
@@ -9024,7 +9024,7 @@ export class OcaStringSensor extends OcaBasicSensor
     if (event) return event;
 
     return this._StringChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(STRING));
   }
 
   /**
@@ -9037,7 +9037,7 @@ export class OcaStringSensor extends OcaBasicSensor
     if (event) return event;
 
     return this._MaxLenChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -9167,7 +9167,7 @@ export class OcaBitstringSensor extends OcaBasicSensor
     if (event) return event;
 
     return this._BitStringChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
   }
 
   GetPropertyName(id)
@@ -9628,7 +9628,7 @@ export class OcaBlock extends OcaWorker
     if (event) return event;
 
     return this._TypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
   }
 
   /**
@@ -9641,7 +9641,7 @@ export class OcaBlock extends OcaWorker
     if (event) return event;
 
     return this._MembersChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaObjectIdentification)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaObjectIdentification)));
   }
 
   /**
@@ -9654,7 +9654,7 @@ export class OcaBlock extends OcaWorker
     if (event) return event;
 
     return this._SignalPathsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT16, OcaSignalPath)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT16, OcaSignalPath)));
   }
 
   /**
@@ -9667,7 +9667,7 @@ export class OcaBlock extends OcaWorker
     if (event) return event;
 
     return this._MostRecentParamSetIdentifierChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
   }
 
   /**
@@ -9680,7 +9680,7 @@ export class OcaBlock extends OcaWorker
     if (event) return event;
 
     return this._GlobalTypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(OcaGlobalBlockTypeIdentifier));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaGlobalBlockTypeIdentifier));
   }
 
   /**
@@ -9693,7 +9693,7 @@ export class OcaBlock extends OcaWorker
     if (event) return event;
 
     return this._ONoMapChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(MAP(UINT32, UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(MAP(UINT32, UINT32)));
   }
 
   GetPropertyName(id)
@@ -10036,7 +10036,7 @@ export class OcaBlockFactory extends OcaWorker
     if (event) return event;
 
     return this._ProtoPortsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaProtoPort)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaProtoPort)));
   }
 
   /**
@@ -10049,7 +10049,7 @@ export class OcaBlockFactory extends OcaWorker
     if (event) return event;
 
     return this._ProtoMembersChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaProtoObjectIdentification)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaProtoObjectIdentification)));
   }
 
   /**
@@ -10062,7 +10062,7 @@ export class OcaBlockFactory extends OcaWorker
     if (event) return event;
 
     return this._ProtoSignalPathsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT16, OcaProtoSignalPath)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT16, OcaProtoSignalPath)));
   }
 
   /**
@@ -10075,7 +10075,7 @@ export class OcaBlockFactory extends OcaWorker
     if (event) return event;
 
     return this._GlobalTypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(OcaGlobalBlockTypeIdentifier));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaGlobalBlockTypeIdentifier));
   }
 
   GetPropertyName(id)
@@ -10498,7 +10498,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._XChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
   }
 
   /**
@@ -10511,7 +10511,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._YChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
   }
 
   /**
@@ -10524,7 +10524,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._xSizeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
   }
 
   /**
@@ -10537,7 +10537,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._ySizeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
   }
 
   /**
@@ -10550,7 +10550,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._MembersChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(LIST2D(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(LIST2D(UINT32)));
   }
 
   /**
@@ -10563,7 +10563,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._ProxyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT32));
   }
 
   /**
@@ -10576,7 +10576,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._PortsPerRowChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
   }
 
   /**
@@ -10589,7 +10589,7 @@ export class OcaMatrix extends OcaWorker
     if (event) return event;
 
     return this._PortsPerColumnChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -10761,7 +10761,7 @@ export class OcaAgent extends OcaRoot
     if (event) return event;
 
     return this._LabelChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 1), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(2, 1), new signature(STRING));
   }
 
   /**
@@ -10774,7 +10774,7 @@ export class OcaAgent extends OcaRoot
     if (event) return event;
 
     return this._OwnerChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
   }
 
   GetPropertyName(id)
@@ -11226,7 +11226,7 @@ export class OcaGrouper extends OcaAgent
     if (event) return event;
 
     return this._ActuatorOrSensorChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
   }
 
   /**
@@ -11239,7 +11239,7 @@ export class OcaGrouper extends OcaAgent
     if (event) return event;
 
     return this._GroupsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaGrouperGroup)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaGrouperGroup)));
   }
 
   /**
@@ -11252,7 +11252,7 @@ export class OcaGrouper extends OcaAgent
     if (event) return event;
 
     return this._CitizensChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(OcaGrouperCitizen)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(LIST(OcaGrouperCitizen)));
   }
 
   /**
@@ -11265,7 +11265,7 @@ export class OcaGrouper extends OcaAgent
     if (event) return event;
 
     return this._EnrollmentsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(LIST(OcaGrouperEnrollment)));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(LIST(OcaGrouperEnrollment)));
   }
 
   /**
@@ -11278,7 +11278,7 @@ export class OcaGrouper extends OcaAgent
     if (event) return event;
 
     return this._ModeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -11649,7 +11649,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -11662,7 +11662,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._ObservedPropertyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(OcaProperty));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(OcaProperty));
   }
 
   /**
@@ -11675,7 +11675,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._ThresholdChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(FLOAT64));
   }
 
   /**
@@ -11688,7 +11688,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._OperatorChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
   }
 
   /**
@@ -11701,7 +11701,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._TwoWayChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(BOOLEAN));
   }
 
   /**
@@ -11714,7 +11714,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._HysteresisChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT64));
   }
 
   /**
@@ -11727,7 +11727,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._PeriodChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -11985,7 +11985,7 @@ export class OcaLibrary extends OcaAgent
     if (event) return event;
 
     return this._DataTypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -11998,7 +11998,7 @@ export class OcaLibrary extends OcaAgent
     if (event) return event;
 
     return this._AccessChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
   }
 
   /**
@@ -12011,7 +12011,7 @@ export class OcaLibrary extends OcaAgent
     if (event) return event;
 
     return this._VolumesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, OcaLibVol)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, OcaLibVol)));
   }
 
   GetPropertyName(id)
@@ -12219,7 +12219,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._TypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -12232,7 +12232,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._ModelInfoChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(STRING));
   }
 
   /**
@@ -12245,7 +12245,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
   }
 
   /**
@@ -12258,7 +12258,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._ChargingChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(BOOLEAN));
   }
 
   /**
@@ -12271,7 +12271,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._LoadFractionAvailableChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(FLOAT32));
   }
 
   /**
@@ -12284,7 +12284,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._StorageFractionAvailableChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT32));
   }
 
   /**
@@ -12297,7 +12297,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._LocationChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -12775,7 +12775,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -12788,7 +12788,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._ObservedPropertiesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaProperty)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaProperty)));
   }
 
   /**
@@ -12801,7 +12801,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._ThresholdChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(FLOAT64));
   }
 
   /**
@@ -12814,7 +12814,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._OperatorChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
   }
 
   /**
@@ -12827,7 +12827,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._TwoWayChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(BOOLEAN));
   }
 
   /**
@@ -12840,7 +12840,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._HysteresisChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(FLOAT64));
   }
 
   /**
@@ -12853,7 +12853,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._PeriodChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -13214,7 +13214,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(OcaTaskStatus));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaTaskStatus));
   }
 
   /**
@@ -13227,7 +13227,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._SlotChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
   }
 
   /**
@@ -13240,7 +13240,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._TimeModeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
   }
 
   /**
@@ -13253,7 +13253,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._TimeUnitsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
   }
 
   /**
@@ -13266,7 +13266,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._ClockONoChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT32));
   }
 
   /**
@@ -13279,7 +13279,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._StartTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT64));
   }
 
   /**
@@ -13292,7 +13292,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._DurationChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -13556,7 +13556,7 @@ export class OcaTaskFactory extends OcaAgent
     if (event) return event;
 
     return this._SlotChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
   }
 
   /**
@@ -13569,7 +13569,7 @@ export class OcaTaskFactory extends OcaAgent
     if (event) return event;
 
     return this._TimeModeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
   }
 
   /**
@@ -13582,7 +13582,7 @@ export class OcaTaskFactory extends OcaAgent
     if (event) return event;
 
     return this._StartTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT64));
   }
 
   /**
@@ -13595,7 +13595,7 @@ export class OcaTaskFactory extends OcaAgent
     if (event) return event;
 
     return this._DurationChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(FLOAT32));
   }
 
   GetPropertyName(id)
@@ -13788,7 +13788,7 @@ export class OcaTaskGroup extends OcaAgent
     if (event) return event;
 
     return this._IDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT16));
   }
 
   /**
@@ -13801,7 +13801,7 @@ export class OcaTaskGroup extends OcaAgent
     if (event) return event;
 
     return this._TasksChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
   }
 
   GetPropertyName(id)
@@ -13986,7 +13986,7 @@ export class OcaRamperTask extends OcaTask
     if (event) return event;
 
     return this._RampedPropertyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 1), new signature(OcaProperty));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaProperty));
   }
 
   /**
@@ -13999,7 +13999,7 @@ export class OcaRamperTask extends OcaTask
     if (event) return event;
 
     return this._InterpolationLawChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
   }
 
   /**
@@ -14012,7 +14012,7 @@ export class OcaRamperTask extends OcaTask
     if (event) return event;
 
     return this._GoalChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT64));
   }
 
   GetPropertyName(id)
@@ -14229,7 +14229,7 @@ export class OcaMediaClock3 extends OcaAgent
     if (event) return event;
 
     return this._AvailabilityChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -14242,7 +14242,7 @@ export class OcaMediaClock3 extends OcaAgent
     if (event) return event;
 
     return this._TimeSourceONoChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT32));
   }
 
   /**
@@ -14255,7 +14255,7 @@ export class OcaMediaClock3 extends OcaAgent
     if (event) return event;
 
     return this._OffsetChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT64));
   }
 
   /**
@@ -14268,7 +14268,7 @@ export class OcaMediaClock3 extends OcaAgent
     if (event) return event;
 
     return this._CurrentRateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
   }
 
   GetPropertyName(id)
@@ -14532,7 +14532,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._AvailabilityChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -14545,7 +14545,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._ProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
   }
 
   /**
@@ -14558,7 +14558,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._ParametersChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(STRING));
   }
 
   /**
@@ -14571,7 +14571,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._ReferenceTypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
   }
 
   /**
@@ -14584,7 +14584,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._ReferenceIDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(STRING));
   }
 
   /**
@@ -14597,7 +14597,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._SyncStatusChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -14763,7 +14763,7 @@ export class OcaPhysicalPosition extends OcaAgent
     if (event) return event;
 
     return this._PositionAndRotationChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(FLOAT32));
   }
 
   /**
@@ -14776,7 +14776,7 @@ export class OcaPhysicalPosition extends OcaAgent
     if (event) return event;
 
     return this._PositionAndRotationFlagsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -15010,7 +15010,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._LabelChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 1), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(2, 1), new signature(STRING));
   }
 
   /**
@@ -15023,7 +15023,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._OwnerChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
   }
 
   /**
@@ -15036,7 +15036,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._ServiceIDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 3), new signature(BLOB));
+      new PropertyEvent(this, new OcaPropertyID(2, 3), new signature(BLOB));
   }
 
   /**
@@ -15049,7 +15049,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._SystemInterfacesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 4), new signature(LIST(OcaNetworkSystemInterfaceDescriptor)));
+      new PropertyEvent(this, new OcaPropertyID(2, 4), new signature(LIST(OcaNetworkSystemInterfaceDescriptor)));
   }
 
   /**
@@ -15062,7 +15062,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(2, 5), new signature(UINT8));
   }
 
   /**
@@ -15075,7 +15075,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._ErrorCodeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(2, 6), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(2, 6), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -15187,7 +15187,7 @@ export class OcaControlNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._ProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -15740,7 +15740,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._ProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -15753,7 +15753,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._PortsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaPort)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(OcaPort)));
   }
 
   /**
@@ -15766,7 +15766,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._MaxSourceConnectorsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
   }
 
   /**
@@ -15779,7 +15779,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._MaxSinkConnectorsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT16));
   }
 
   /**
@@ -15792,7 +15792,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._MaxPinsPerConnectorChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT16));
   }
 
   /**
@@ -15805,7 +15805,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._MaxPortsPerPinChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT16));
   }
 
   /**
@@ -15818,7 +15818,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._AlignmentLevelChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
   /**
@@ -15831,7 +15831,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._AlignmentGainChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(FLOAT32));
   }
 
   /**
@@ -15844,7 +15844,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._SinkConnectorsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSinkConnector)));
+      new PropertyEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSinkConnector)));
   }
 
   /**
@@ -15857,7 +15857,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._SourceConnectorsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSourceConnector)));
+      new PropertyEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSourceConnector)));
   }
 
   GetPropertyName(id)
@@ -16357,7 +16357,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._ModelGUIDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(OcaModelGUID));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaModelGUID));
   }
 
   /**
@@ -16370,7 +16370,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._SerialNumberChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(STRING));
   }
 
   /**
@@ -16383,7 +16383,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._ModelDescriptionChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(OcaModelDescription));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaModelDescription));
   }
 
   /**
@@ -16396,7 +16396,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._DeviceNameChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(STRING));
   }
 
   /**
@@ -16409,7 +16409,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._OcaVersionChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT16));
   }
 
   /**
@@ -16422,7 +16422,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._DeviceRoleChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(STRING));
   }
 
   /**
@@ -16435,7 +16435,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._UserInventoryCodeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(STRING));
   }
 
   /**
@@ -16448,7 +16448,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._EnabledChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(BOOLEAN));
   }
 
   /**
@@ -16461,7 +16461,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 9), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 9), new signature(UINT16));
   }
 
   /**
@@ -16474,7 +16474,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._BusyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 10), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 10), new signature(BOOLEAN));
   }
 
   /**
@@ -16487,7 +16487,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._ResetCauseChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 11), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 11), new signature(UINT8));
   }
 
   /**
@@ -16500,7 +16500,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._MessageChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 12), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 12), new signature(STRING));
   }
 
   /**
@@ -16513,7 +16513,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._ManagersChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 13), new signature(LIST(OcaManagerDescriptor)));
+      new PropertyEvent(this, new OcaPropertyID(3, 13), new signature(LIST(OcaManagerDescriptor)));
   }
 
   /**
@@ -16526,7 +16526,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._DeviceRevisionIDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 14), new signature(STRING));
+      new PropertyEvent(this, new OcaPropertyID(3, 14), new signature(STRING));
   }
 
   GetPropertyName(id)
@@ -16763,7 +16763,7 @@ export class OcaSecurityManager extends OcaManager
     if (event) return event;
 
     return this._secureControlDataChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
   }
 
   GetPropertyName(id)
@@ -17012,7 +17012,7 @@ export class OcaFirmwareManager extends OcaManager
     if (event) return event;
 
     return this._ComponentVersionsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaVersion)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaVersion)));
   }
 
   GetPropertyName(id)
@@ -17293,7 +17293,7 @@ export class OcaSubscriptionManager extends OcaManager
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -17476,7 +17476,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -17489,7 +17489,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._PowerSuppliesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
   }
 
   /**
@@ -17502,7 +17502,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._ActivePowerSuppliesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
   }
 
   /**
@@ -17515,7 +17515,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._AutoStateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(BOOLEAN));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(BOOLEAN));
   }
 
   /**
@@ -17528,7 +17528,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._TargetStateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -17695,7 +17695,7 @@ export class OcaNetworkManager extends OcaManager
     if (event) return event;
 
     return this._NetworksChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
   }
 
   /**
@@ -17708,7 +17708,7 @@ export class OcaNetworkManager extends OcaManager
     if (event) return event;
 
     return this._StreamNetworksChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
   }
 
   /**
@@ -17721,7 +17721,7 @@ export class OcaNetworkManager extends OcaManager
     if (event) return event;
 
     return this._ControlNetworksChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
   }
 
   /**
@@ -17734,7 +17734,7 @@ export class OcaNetworkManager extends OcaManager
     if (event) return event;
 
     return this._MediaTransportNetworksChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(LIST(UINT32)));
   }
 
   GetPropertyName(id)
@@ -17879,7 +17879,7 @@ export class OcaMediaClockManager extends OcaManager
     if (event) return event;
 
     return this._ClockSourceTypesSupportedChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT8)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT8)));
   }
 
   /**
@@ -17892,7 +17892,7 @@ export class OcaMediaClockManager extends OcaManager
     if (event) return event;
 
     return this._ClocksChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
   }
 
   /**
@@ -17905,7 +17905,7 @@ export class OcaMediaClockManager extends OcaManager
     if (event) return event;
 
     return this._Clock3sChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
   }
 
   GetPropertyName(id)
@@ -18102,7 +18102,7 @@ export class OcaLibraryManager extends OcaManager
     if (event) return event;
 
     return this._PatchLibrariesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
   }
 
   /**
@@ -18115,7 +18115,7 @@ export class OcaLibraryManager extends OcaManager
     if (event) return event;
 
     return this._ParsetLibrariesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
   }
 
   /**
@@ -18128,7 +18128,7 @@ export class OcaLibraryManager extends OcaManager
     if (event) return event;
 
     return this._CurrentPatchChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
   }
 
   GetPropertyName(id)
@@ -18364,7 +18364,7 @@ export class OcaDeviceTimeManager extends OcaManager
     if (event) return event;
 
     return this._TimeSourcesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT32)));
   }
 
   /**
@@ -18377,7 +18377,7 @@ export class OcaDeviceTimeManager extends OcaManager
     if (event) return event;
 
     return this._CurrentDeviceTimeSourceChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
   }
 
   GetPropertyName(id)
@@ -18727,7 +18727,7 @@ export class OcaCodingManager extends OcaManager
     if (event) return event;
 
     return this._AvailableEncodingSchemesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(MAP(UINT16, STRING)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(MAP(UINT16, STRING)));
   }
 
   /**
@@ -18740,7 +18740,7 @@ export class OcaCodingManager extends OcaManager
     if (event) return event;
 
     return this._AvailableDecodingSchemesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(MAP(UINT16, STRING)));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(MAP(UINT16, STRING)));
   }
 
   GetPropertyName(id)
@@ -19095,7 +19095,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._ConnectorPinsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, UINT16)));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, UINT16)));
   }
 
   /**
@@ -19108,7 +19108,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._IDAdvertisedChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(BLOB));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(BLOB));
   }
 
   /**
@@ -19121,7 +19121,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._NetworkChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT32));
   }
 
   /**
@@ -19134,7 +19134,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._RemoteChannelIDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(BLOB));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(BLOB));
   }
 
   /**
@@ -19147,7 +19147,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._SourceOrSinkChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
   /**
@@ -19160,7 +19160,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -19459,7 +19459,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._IDAdvertisedChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
   }
 
   /**
@@ -19472,7 +19472,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._ControlProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
   }
 
   /**
@@ -19485,7 +19485,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._MediaProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
   }
 
   /**
@@ -19498,7 +19498,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
   /**
@@ -19511,7 +19511,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._SystemInterfacesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
   }
 
   /**
@@ -19524,7 +19524,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._MediaPortsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(LIST(UINT32)));
   }
 
   /**
@@ -19537,7 +19537,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._StatisticsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(OcaNetworkStatistics));
+      new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(OcaNetworkStatistics));
   }
 
   GetPropertyName(id)
@@ -19879,7 +19879,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -19892,7 +19892,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._RampedPropertyChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(OcaProperty));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(OcaProperty));
   }
 
   /**
@@ -19905,7 +19905,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._TimeModeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
   }
 
   /**
@@ -19918,7 +19918,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._StartTimeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT64));
   }
 
   /**
@@ -19931,7 +19931,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._DurationChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(FLOAT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(FLOAT32));
   }
 
   /**
@@ -19944,7 +19944,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._InterpolationLawChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
   }
 
   /**
@@ -19957,7 +19957,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._GoalChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT64));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT64));
   }
 
   GetPropertyName(id)
@@ -20197,7 +20197,7 @@ export class OcaMediaClock extends OcaAgent
     if (event) return event;
 
     return this._TypeChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
   /**
@@ -20210,7 +20210,7 @@ export class OcaMediaClock extends OcaAgent
     if (event) return event;
 
     return this._DomainIDChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
   }
 
   /**
@@ -20223,7 +20223,7 @@ export class OcaMediaClock extends OcaAgent
     if (event) return event;
 
     return this._CurrentRateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
   }
 
   /**
@@ -20236,7 +20236,7 @@ export class OcaMediaClock extends OcaAgent
     if (event) return event;
 
     return this._LockStateChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
   GetPropertyName(id)
@@ -20699,7 +20699,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._ControlProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
   }
 
   /**
@@ -20712,7 +20712,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._IDAdvertisedChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
   }
 
   /**
@@ -20725,7 +20725,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._MediaProtocolChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
   }
 
   /**
@@ -20738,7 +20738,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._SignalChannelsSinkChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 10), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 10), new signature(LIST(UINT32)));
   }
 
   /**
@@ -20751,7 +20751,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._SignalChannelsSourceChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 9), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 9), new signature(LIST(UINT32)));
   }
 
   /**
@@ -20764,7 +20764,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._StatisticsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 11), new signature(OcaNetworkStatistics));
+      new PropertyEvent(this, new OcaPropertyID(3, 11), new signature(OcaNetworkStatistics));
   }
 
   /**
@@ -20777,7 +20777,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
   /**
@@ -20790,7 +20790,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._StreamConnectorsSinkChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 8), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(LIST(UINT32)));
   }
 
   /**
@@ -20803,7 +20803,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._StreamConnectorsSourceChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 7), new signature(LIST(UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(LIST(UINT32)));
   }
 
   /**
@@ -20816,7 +20816,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._SystemInterfacesChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
   }
 
   GetPropertyName(id)
@@ -21145,7 +21145,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._IDAdvertisedChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(BLOB));
   }
 
   /**
@@ -21158,7 +21158,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._OwnerNetworkChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
   }
 
   /**
@@ -21171,7 +21171,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._PinsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 5), new signature(MAP(UINT16, UINT32)));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(MAP(UINT16, UINT32)));
   }
 
   /**
@@ -21184,7 +21184,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._SourceOrSinkChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
   }
 
   /**
@@ -21197,7 +21197,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
   }
 
   /**
@@ -21210,7 +21210,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._StreamsChanged =
-      new PropertyChangedEvent(this, new OcaPropertyID(3, 4), new signature(MAP(UINT16, OcaStream)));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(MAP(UINT16, OcaStream)));
   }
 
   GetPropertyName(id)
