@@ -15,7 +15,7 @@ import {
 
 import * as Types from './Types.js';
 import * as RemoteControlClasses from './RemoteControlClasses.js';
-import WebSocketConnection from './WebSocket.js';
+import { WebSocketConnection } from './WebSocket.js';
 
 export {
   warn,
