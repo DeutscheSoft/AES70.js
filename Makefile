@@ -7,7 +7,7 @@ LIBRARY_FILES = \
   src/OCA.js\
   src/WebSocket.js\
   src/controller/Base.js\
-  src/RemoteControlClasses.js
+  src/controller/ControlClasses.js
 
 SRC = $(filter-out src/utf8_node.js, $(wildcard src/*.js))
 SRC += $(wildcard src/controller/*.js)

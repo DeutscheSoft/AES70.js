@@ -1,12 +1,12 @@
 import {
     CommandRrq,
-  } from './OCA.js';
+  } from '../OCA';
 
 import {
     ObjectBase,
     Event,
     PropertyEvent,
-  } from './controller/Base.js';
+  } from './Base.js';
 
 import {
     OcaBaseDataType,
@@ -131,7 +131,7 @@ import {
     OcaStreamConnectorStatus,
     OcaNetworkSignalChannelStatus,
     OcaNetworkMediaSourceOrSink,
-  } from './Types.js';
+  } from '../Types';
 
 import {
     signature,
@@ -157,7 +157,7 @@ import {
     MAP,
     BLOBFIXED,
     BITSTRINGFIXED,
-  } from './signature_parser.js';
+  } from '../signature_parser';
 
 
 

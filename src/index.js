@@ -14,7 +14,7 @@ import {
   } from './OCA.js';
 
 import * as Types from './Types.js';
-import * as RemoteControlClasses from './RemoteControlClasses.js';
+import * as RemoteControlClasses from './controller/ControlClasses.js';
 import { WebSocketConnection } from './WebSocket.js';
 
 export {
