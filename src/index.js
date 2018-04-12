@@ -3,7 +3,6 @@ import {
     log,
     error,
     Connection,
-    ClientConnection,
     Command,
     CommandRrq,
     Response,
@@ -12,6 +11,11 @@ import {
     encodeMessage,
     decodeMessage,
   } from './OCA.js';
+
+import {
+    ClientConnection,
+    RemoteDevice,
+  } from './Controller';
 
 import * as Types from './Types.js';
 import * as RemoteControlClasses from './controller/ControlClasses.js';

@@ -1,4 +1,4 @@
-import { ClientConnection } from './OCA.js';
+import { ClientConnection } from './Controller';
 
 export class WebSocketConnection extends ClientConnection
 {
