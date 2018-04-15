@@ -138,24 +138,24 @@ export class RemoteDevice
     this.objects = new Map();
     this.connection = connection;
     if (!modules.length) {
-      modules = [ ControlClasses ];
+      modules = [ Classes ];
     }
     this.modules = modules;
 
-    this.DeviceManager = new OcaDeviceManager(this, OcaManagerDefaultObjectNumbers.DeviceManager);
-    this.SecurityManager = new OcaSecurityManager(this, OcaManagerDefaultObjectNumbers.SecurityManager);
-    this.FirmwareManager = new OcaFirmwareManager(this, OcaManagerDefaultObjectNumbers.FirmwareManager);
-    this.SubscriptionManager = new OcaSubscriptionManager(this, OcaManagerDefaultObjectNumbers.SubscriptionManager);
-    this.PowerManager = new OcaPowerManager(this, OcaManagerDefaultObjectNumbers.PowerManager);
-    this.NetworkManager = new OcaNetworkManager(this, OcaManagerDefaultObjectNumbers.NetworkManager);
-    this.MediaClockManager = new OcaMediaClockManager(this, OcaManagerDefaultObjectNumbers.MediaClockManager);
-    this.LibraryManager = new OcaLibraryManager(this, OcaManagerDefaultObjectNumbers.LibraryManager);
-    this.AudioProcessingManager = new OcaAudioProcessingManager(this, OcaManagerDefaultObjectNumbers.AudioProcessingManager);
-    this.DeviceTimeManager = new OcaDeviceTimeManager(this, OcaManagerDefaultObjectNumbers.DeviceTimeManager);
-    this.TaskManager = new OcaTaskManager(this, OcaManagerDefaultObjectNumbers.TaskManager);
-    this.CodingManager = new OcaCodingManager(this, OcaManagerDefaultObjectNumbers.CodingManager);
-    this.DiagnosticManager = new OcaDiagnosticManager(this, OcaManagerDefaultObjectNumbers.DiagnosticManager);
-    this.Root = new OcaRoot(this, 100);
+    this.DeviceManager = new OcaDeviceManager(OcaManagerDefaultObjectNumbers.DeviceManager, this);
+    this.SecurityManager = new OcaSecurityManager(OcaManagerDefaultObjectNumbers.SecurityManager, this);
+    this.FirmwareManager = new OcaFirmwareManager(OcaManagerDefaultObjectNumbers.FirmwareManager, this);
+    this.SubscriptionManager = new OcaSubscriptionManager(OcaManagerDefaultObjectNumbers.SubscriptionManager, this);
+    this.PowerManager = new OcaPowerManager(OcaManagerDefaultObjectNumbers.PowerManager, this);
+    this.NetworkManager = new OcaNetworkManager(OcaManagerDefaultObjectNumbers.NetworkManager, this);
+    this.MediaClockManager = new OcaMediaClockManager(OcaManagerDefaultObjectNumbers.MediaClockManager, this);
+    this.LibraryManager = new OcaLibraryManager(OcaManagerDefaultObjectNumbers.LibraryManager, this);
+    this.AudioProcessingManager = new OcaAudioProcessingManager(OcaManagerDefaultObjectNumbers.AudioProcessingManager, this);
+    this.DeviceTimeManager = new OcaDeviceTimeManager(OcaManagerDefaultObjectNumbers.DeviceTimeManager, this);
+    this.TaskManager = new OcaTaskManager(OcaManagerDefaultObjectNumbers.TaskManager, this);
+    this.CodingManager = new OcaCodingManager(OcaManagerDefaultObjectNumbers.CodingManager, this);
+    this.DiagnosticManager = new OcaDiagnosticManager(OcaManagerDefaultObjectNumbers.DiagnosticManager, this);
+    this.Root = new OcaBlock(100, this);
 
     this.subscriptions = new Map();
   }
