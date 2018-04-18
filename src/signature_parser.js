@@ -178,7 +178,7 @@ export class signature
       case "function":
         S[i] = PT_CUSTOM;
         C[num_custom] = args[i];
-        O[num_custom] = args[i].prototype.signature;
+        O[num_custom] = args[i].signature;
         num_custom++;
         break;
       case "object":
@@ -364,8 +364,7 @@ export class signature
       case PT_CUSTOM:
         tmp = [];
         pos = O[num_custom].do_decode(data, pos, tmp, 0);
-        dst[dst_pos] = Object.create(C[num_custom].prototype);
-        C[num_custom].apply(dst[dst_pos], tmp);
+        dst[dst_pos] = new C[num_custom](...tmp);
         num_custom++;
         break;
       }
