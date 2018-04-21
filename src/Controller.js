@@ -35,6 +35,8 @@ import {
     OcaEvent,
     OcaMethodID,
     OcaMethod,
+    OcaObjectIdentification,
+    OcaBlockMember,
   } from './Types';
 
 import {
@@ -81,17 +83,14 @@ export class ClientConnection extends Connection
 
   send_command(cmd, return_signature)
   {
-    var id = this.get_command_handle();
+    const id = this.get_command_handle();
     cmd.handle = id;
-    var buf = encodeMessage(cmd); 
+    const buf = encodeMessage(cmd); 
 
-    var promise = new Promise(function(success, failure) {
-                              this.command_handles.set(id, [ return_signature, success, failure ]);
-                              }.bind(this));
-
-    this.write(buf);
-
-    return promise;
+    return new Promise((resolve, reject) => {
+      this.command_handles.set(id, [ return_signature, resolve, reject ]);
+      this.write(buf);
+    });
   }
 
   incoming(a)
@@ -100,13 +99,14 @@ export class ClientConnection extends Connection
 
     for (i = 0; i < a.length; i++) {
       o = a[i];
-      //log("INCOMING", o);
+      log("INCOMING", o);
       if (o instanceof Response) {
-        var h = this.command_handles.get(o.handle);
+        const handles = this.command_handles;
+        const h = handles.get(o.handle);
         if (!h) {
           error("Unknown handle in response %o", o);
         }
-        this.command_handles.delete(o.handle);
+        handles.delete(o.handle);
         if (o.status_code !== 0) {
           h[2](o);
         } else if (!h[0]) {
@@ -119,11 +119,12 @@ export class ClientConnection extends Connection
           h[1](retval);
         }
       } else if (o instanceof Notification) {
-        if (!this.subscribers.has(o.target)) {
+        const subscribers = this.subscribers;
+        if (!subscribers.has(o.target)) {
           error("Bad target for notification", o);
           continue;
         }
-        this.subscribers.get(o.target)(o);
+        subscribers.get(o.target)(o);
       } else {
         warn("Unhandled OCA packet: %o", o);
       }
