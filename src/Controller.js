@@ -99,7 +99,7 @@ export class ClientConnection extends Connection
 
     for (i = 0; i < a.length; i++) {
       o = a[i];
-      log("INCOMING", o);
+      //log("INCOMING", o);
       if (o instanceof Response) {
         const handles = this.command_handles;
         const h = handles.get(o.handle);
