@@ -1,8 +1,206 @@
 import { error } from "../OCA.js";
 
-import { OcaPropertyChangeType } from '../Types';
+import {
+    OcaPropertyChangeType,
+    OcaPropertyID,
+  } from '../Types';
 
 import { signature } from '../signature_parser';
+
+export class Property
+{
+  constructor(name, signature, level, index, readonly, is_static, aliases)
+  {
+    this.name = name;
+    this.signature = signature;
+    this.level = level;
+    this.index = index;
+    this.readonly = readonly;
+    this.static = is_static;
+    this.aliases = aliases;
+  }
+
+  GetPropertyID()
+  {
+    return new OcaPropertyID(this.level, this.index);
+  }
+
+  GetName()
+  {
+    return this.name;
+  }
+
+  getter(o)
+  {
+    let name = this.name,
+        i = 0,
+        aliases = this.aliases;
+
+    do {
+      if (this.static)
+      {
+        const c = o.constructor;
+        const v = c[name];
+
+        if (v !== void(0))
+        {
+          return Promise.resolve.bind(Promise, v);
+        }
+      }
+      else
+      {
+        const fun = o['Get'+name];
+
+        if (fun) return fun.bind(o);
+      }
+
+      if (aliases && i < aliases.length) {
+        name = aliases[i++];
+        continue;
+      }
+    } while (false);
+
+    return null;
+  }
+
+  setter(o)
+  {
+    if (this.readonly || this.static) return null;
+
+    let name = this.name,
+        i = 0,
+        aliases = this.aliases;
+
+    do {
+      const fun = o['Set'+name];
+
+      if (fun) return fun.bind(o);
+
+      if (aliases && i < aliases.length) {
+        name = aliases[i++];
+        continue;
+      }
+    } while (false);
+
+    return null;
+  }
+
+  event(o)
+  {
+    let name = this.name,
+        i = 0,
+        aliases = this.aliases;
+
+    do {
+      const event = o['On'+name+'Changed'];
+
+      if (event) return event;
+
+      if (aliases && i < aliases.length) {
+        name = aliases[i++];
+        continue;
+      }
+    } while (false);
+
+    return null;
+  }
+
+  subscribe(o, cb)
+  {
+    const event = this.event(o);
+    const getter = this.getter(o);
+    const a = [];
+
+    if (event) event.subscribe(cb).catch(error);
+
+    if (getter) getter().then(cb, error);
+
+    if (event) return event;
+
+    return !!getter;
+  }
+}
+
+export class Properties
+{
+  constructor(properties, level, parent)
+  {
+    const N = new Map();
+    const P = [];
+    this.by_name = N;
+    this.parent = parent;
+    this.properties = P;
+    this.level = level;
+
+    for (let i = 0; i < properties.length; i++)
+    {
+      const p = properties[i];
+      N.set(p.name, p);
+      P[p.index] = p;
+
+      if (p.aliases)
+      {
+        const aliases = p.aliases;
+        for (let j = 0; j < aliases.length; j++)
+        {
+          N.set(aliases[j], p);
+        }
+      }
+    }
+  }
+
+  find_property(id)
+  {
+    if (id instanceof OcaPropertyID)
+    {
+      if (id.DefLevel == this.level)
+      {
+        return this.properties[id.PropertyIndex];
+      }
+      else if (this.parent)
+      {
+        return this.parent.find_property(id);
+      }
+    }
+    else if (typeof id === 'string')
+    {
+      const p = this.by_name.get(id);
+
+      if (p) return p;
+
+      if (this.parent) return this.parent.find_property(id);
+    }
+    else throw new Error("Expected PropertyID");
+  }
+
+  find_name(id)
+  {
+    const p = this.find_property(id);
+
+    if (p) return p.name;
+  }
+
+  find_signature(id)
+  {
+    const p = this.find_property(id);
+
+    if (p) return p.signature;
+  }
+
+  forEach(cb, ctx)
+  {
+    if (this.parent) this.parent.forEach(cb, ctx);
+
+    const P = this.properties;
+
+    for (let i = 0; i < P.length; i++)
+    {
+      const p = P[i];
+      if (p !== void(0))
+        cb.call(ctx, P[i]);
+    }
+  }
+}
 
 export class ObjectBase
 {
@@ -33,14 +231,32 @@ export class ObjectBase
     return this.device.send_command(cmd, rs);
   }
 
+
   GetPropertyName(id)
   {
-    return null;
+    return this.get_properties().find_name(id);
   }
 
   GetPropertyID(name)
   {
+    const p = this.get_properties().find_property(name);
+
+    if (p) return p.GetPropertyID();
+  }
+
+  static get_properties()
+  {
     return null;
+  }
+
+  get_properties()
+  {
+    return this.constructor.get_properties();
+  }
+
+  get __oca_properties__()
+  {
+    return this.get_properties();
   }
 
   Dispose()

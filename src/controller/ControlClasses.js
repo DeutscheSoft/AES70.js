@@ -6,6 +6,8 @@ import {
     ObjectBase,
     Event,
     PropertyEvent,
+    Property,
+    Properties
   } from './Base.js';
 
 import {
@@ -164,6 +166,7 @@ import {
 let OcaRoot_GetClassIdentification_rs = null;
 let OcaRoot_GetLockable_rs = null;
 let OcaRoot_GetRole_rs = null;
+let OcaRoot_p = null;
 
 /**
  * The abstract root class of which all OCA classes derive. It offers
@@ -329,43 +332,21 @@ export class OcaRoot extends ObjectBase
       new PropertyEvent(this, new OcaPropertyID(1, 5), new signature(STRING));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 1) return null;
-    if (id.DefLevel < 1) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ClassID";
-    if (id.PropertyIndex == 2)
-      return "ClassVersion";
-    if (id.PropertyIndex == 3)
-      return "ObjectNumber";
-    if (id.PropertyIndex == 4)
-      return "Lockable";
-    if (id.PropertyIndex == 5)
-      return "Role";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ClassID":
-      return new OcaPropertyID(1, 1);
-    case "ClassVersion":
-      return new OcaPropertyID(1, 2);
-    case "ObjectNumber":
-      return new OcaPropertyID(1, 3);
-    case "Lockable":
-      return new OcaPropertyID(1, 4);
-    case "Role":
-      return new OcaPropertyID(1, 5);
+    if (!OcaRoot_p)
+    {
+      OcaRoot_p = new Properties([
+          new Property("ClassID", new signature(BLOB16), 1, 1, true, true, null),
+          new Property("ClassVersion", new signature(UINT16), 1, 2, true, true, null),
+          new Property("ObjectNumber", new signature(UINT32), 1, 3, true, false, null),
+          new Property("Lockable", new signature(BOOLEAN), 1, 4, true, false, null),
+          new Property("Role", new signature(STRING), 1, 5, true, false, null),
+        ], 1, ObjectBase.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaRoot_p;
   }
-
 
   Dispose()
   {
@@ -393,6 +374,7 @@ let OcaWorker_GetOwner_rs = null;
 let OcaWorker_GetLatency_rs = null;
 let OcaWorker_SetLatency_as = null;
 let OcaWorker_GetPath_rs = null;
+let OcaWorker_p = null;
 
 /**
  * Abstract base class for classes that represent the device's
@@ -695,43 +677,21 @@ export class OcaWorker extends OcaRoot
       new PropertyEvent(this, new OcaPropertyID(2, 5), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 2) return null;
-    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Enabled";
-    if (id.PropertyIndex == 2)
-      return "Ports";
-    if (id.PropertyIndex == 3)
-      return "Label";
-    if (id.PropertyIndex == 4)
-      return "Owner";
-    if (id.PropertyIndex == 5)
-      return "Latency";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Enabled":
-      return new OcaPropertyID(2, 1);
-    case "Ports":
-      return new OcaPropertyID(2, 2);
-    case "Label":
-      return new OcaPropertyID(2, 3);
-    case "Owner":
-      return new OcaPropertyID(2, 4);
-    case "Latency":
-      return new OcaPropertyID(2, 5);
+    if (!OcaWorker_p)
+    {
+      OcaWorker_p = new Properties([
+          new Property("Enabled", new signature(BOOLEAN), 2, 1, false, false, null),
+          new Property("Ports", new signature(LIST(OcaPort)), 2, 2, false, false, null),
+          new Property("Label", new signature(STRING), 2, 3, false, false, null),
+          new Property("Owner", new signature(UINT32), 2, 4, false, false, null),
+          new Property("Latency", new signature(FLOAT32), 2, 5, false, false, null),
+        ], 2, OcaRoot.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaWorker_p;
   }
-
 
   Dispose()
   {
@@ -746,6 +706,7 @@ export class OcaWorker extends OcaRoot
 }
 
 
+let OcaActuator_p = null;
 
 /**
  * Abstract base class for all actuators (i.e. devices that affect the
@@ -776,23 +737,16 @@ export class OcaActuator extends OcaWorker
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaActuator_p)
+    {
+      OcaActuator_p = new Properties([
+        ], 3, OcaWorker.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaActuator_p;
   }
-
 
   Dispose()
   {
@@ -804,6 +758,7 @@ export class OcaActuator extends OcaWorker
 
 let OcaMute_GetState_rs = null;
 let OcaMute_SetState_as = null;
+let OcaMute_p = null;
 
 /**
  * Signal mute.
@@ -879,27 +834,17 @@ export class OcaMute extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(4, 1);
+    if (!OcaMute_p)
+    {
+      OcaMute_p = new Properties([
+          new Property("State", new signature(UINT8), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaMute_p;
   }
-
 
   Dispose()
   {
@@ -912,6 +857,7 @@ export class OcaMute extends OcaActuator
 
 let OcaPolarity_GetState_rs = null;
 let OcaPolarity_SetState_as = null;
+let OcaPolarity_p = null;
 
 /**
  * Signal inverter
@@ -987,27 +933,17 @@ export class OcaPolarity extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(4, 1);
+    if (!OcaPolarity_p)
+    {
+      OcaPolarity_p = new Properties([
+          new Property("State", new signature(UINT8), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaPolarity_p;
   }
-
 
   Dispose()
   {
@@ -1030,6 +966,7 @@ let OcaSwitch_GetPositionEnabled_rs = null;
 let OcaSwitch_SetPositionEnabled_as = null;
 let OcaSwitch_GetPositionEnableds_rs = null;
 let OcaSwitch_SetPositionEnableds_as = null;
+let OcaSwitch_p = null;
 
 /**
  * (n)-position single-pole switch.
@@ -1264,35 +1201,19 @@ export class OcaSwitch extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(LIST(BOOLEAN)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Position";
-    if (id.PropertyIndex == 2)
-      return "PositionNames";
-    if (id.PropertyIndex == 3)
-      return "PositionEnable";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Position":
-      return new OcaPropertyID(4, 1);
-    case "PositionNames":
-      return new OcaPropertyID(4, 2);
-    case "PositionEnable":
-      return new OcaPropertyID(4, 3);
+    if (!OcaSwitch_p)
+    {
+      OcaSwitch_p = new Properties([
+          new Property("Position", new signature(UINT16), 4, 1, false, false, null),
+          new Property("PositionNames", new signature(LIST(STRING)), 4, 2, false, false, null),
+          new Property("PositionEnable", new signature(LIST(BOOLEAN)), 4, 3, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSwitch_p;
   }
-
 
   Dispose()
   {
@@ -1307,6 +1228,7 @@ export class OcaSwitch extends OcaActuator
 
 let OcaGain_GetGain_rs = null;
 let OcaGain_SetGain_as = null;
+let OcaGain_p = null;
 
 /**
  * Gain (or attenuation) element.
@@ -1382,27 +1304,17 @@ export class OcaGain extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Gain";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Gain":
-      return new OcaPropertyID(4, 1);
+    if (!OcaGain_p)
+    {
+      OcaGain_p = new Properties([
+          new Property("Gain", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaGain_p;
   }
-
 
   Dispose()
   {
@@ -1417,6 +1329,7 @@ let OcaPanBalance_GetPosition_rs = null;
 let OcaPanBalance_SetPosition_as = null;
 let OcaPanBalance_GetMidpointGain_rs = null;
 let OcaPanBalance_SetMidpointGain_as = null;
+let OcaPanBalance_p = null;
 
 /**
  * Pan or Balance control.
@@ -1535,31 +1448,18 @@ export class OcaPanBalance extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Position";
-    if (id.PropertyIndex == 2)
-      return "MidpointGain";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Position":
-      return new OcaPropertyID(4, 1);
-    case "MidpointGain":
-      return new OcaPropertyID(4, 2);
+    if (!OcaPanBalance_p)
+    {
+      OcaPanBalance_p = new Properties([
+          new Property("Position", new signature(FLOAT32), 4, 1, false, false, null),
+          new Property("MidpointGain", new signature(FLOAT32), 4, 2, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaPanBalance_p;
   }
-
 
   Dispose()
   {
@@ -1573,6 +1473,7 @@ export class OcaPanBalance extends OcaActuator
 
 let OcaDelay_GetDelayTime_rs = null;
 let OcaDelay_SetDelayTime_as = null;
+let OcaDelay_p = null;
 
 /**
  * Signal delay - basic version.
@@ -1648,27 +1549,17 @@ export class OcaDelay extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "DelayTime";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "DelayTime":
-      return new OcaPropertyID(4, 1);
+    if (!OcaDelay_p)
+    {
+      OcaDelay_p = new Properties([
+          new Property("DelayTime", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDelay_p;
   }
-
 
   Dispose()
   {
@@ -1683,6 +1574,7 @@ let OcaDelayExtended_GetDelayValue_rs = null;
 let OcaDelayExtended_SetDelayValue_as = null;
 let OcaDelayExtended_GetDelayValueConverted_as = null;
 let OcaDelayExtended_GetDelayValueConverted_rs = null;
+let OcaDelayExtended_p = null;
 
 /**
  * Signal delay - extended version. Allows setting delay value in various
@@ -1778,27 +1670,17 @@ export class OcaDelayExtended extends OcaDelay
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(OcaDelayValue));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "DelayValue";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "DelayValue":
-      return new OcaPropertyID(5, 1);
+    if (!OcaDelayExtended_p)
+    {
+      OcaDelayExtended_p = new Properties([
+          new Property("DelayValue", new signature(OcaDelayValue), 5, 1, false, false, null),
+        ], 5, OcaDelay.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDelayExtended_p;
   }
-
 
   Dispose()
   {
@@ -1811,6 +1693,7 @@ export class OcaDelayExtended extends OcaDelay
 
 let OcaFrequencyActuator_GetFrequency_rs = null;
 let OcaFrequencyActuator_SetFrequency_as = null;
+let OcaFrequencyActuator_p = null;
 
 /**
  * Simple frequency actuator.
@@ -1886,27 +1769,17 @@ export class OcaFrequencyActuator extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Frequency";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Frequency":
-      return new OcaPropertyID(4, 1);
+    if (!OcaFrequencyActuator_p)
+    {
+      OcaFrequencyActuator_p = new Properties([
+          new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFrequencyActuator_p;
   }
-
 
   Dispose()
   {
@@ -1927,6 +1800,7 @@ let OcaFilterClassical_GetOrder_rs = null;
 let OcaFilterClassical_SetOrder_as = null;
 let OcaFilterClassical_GetParameter_rs = null;
 let OcaFilterClassical_SetParameter_as = null;
+let OcaFilterClassical_p = null;
 
 /**
  * A classical analog-style filter - highpass, lowpass, bandpass, etc.,
@@ -2176,43 +2050,21 @@ export class OcaFilterClassical extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Frequency";
-    if (id.PropertyIndex == 2)
-      return "Passband";
-    if (id.PropertyIndex == 3)
-      return "Shape";
-    if (id.PropertyIndex == 4)
-      return "Order";
-    if (id.PropertyIndex == 5)
-      return "Parameter";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Frequency":
-      return new OcaPropertyID(4, 1);
-    case "Passband":
-      return new OcaPropertyID(4, 2);
-    case "Shape":
-      return new OcaPropertyID(4, 3);
-    case "Order":
-      return new OcaPropertyID(4, 4);
-    case "Parameter":
-      return new OcaPropertyID(4, 5);
+    if (!OcaFilterClassical_p)
+    {
+      OcaFilterClassical_p = new Properties([
+          new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
+          new Property("Passband", new signature(UINT8), 4, 2, false, false, null),
+          new Property("Shape", new signature(UINT8), 4, 3, false, false, null),
+          new Property("Order", new signature(UINT16), 4, 4, false, false, null),
+          new Property("Parameter", new signature(FLOAT32), 4, 5, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFilterClassical_p;
   }
-
 
   Dispose()
   {
@@ -2237,6 +2089,7 @@ let OcaFilterParametric_GetInbandGain_rs = null;
 let OcaFilterParametric_SetInbandgain_as = null;
 let OcaFilterParametric_GetShapeParameter_rs = null;
 let OcaFilterParametric_SetShapeParameter_as = null;
+let OcaFilterParametric_p = null;
 
 /**
  * A parametric equalizer section with various shape options.
@@ -2484,43 +2337,21 @@ export class OcaFilterParametric extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Frequency";
-    if (id.PropertyIndex == 2)
-      return "Shape";
-    if (id.PropertyIndex == 3)
-      return "WidthParameter";
-    if (id.PropertyIndex == 4)
-      return "InBandGain";
-    if (id.PropertyIndex == 5)
-      return "ShapeParameter";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Frequency":
-      return new OcaPropertyID(4, 1);
-    case "Shape":
-      return new OcaPropertyID(4, 2);
-    case "WidthParameter":
-      return new OcaPropertyID(4, 3);
-    case "InBandGain":
-      return new OcaPropertyID(4, 4);
-    case "ShapeParameter":
-      return new OcaPropertyID(4, 5);
+    if (!OcaFilterParametric_p)
+    {
+      OcaFilterParametric_p = new Properties([
+          new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
+          new Property("Shape", new signature(UINT8), 4, 2, false, false, null),
+          new Property("WidthParameter", new signature(FLOAT32), 4, 3, false, false, ["Q"]),
+          new Property("InBandGain", new signature(FLOAT32), 4, 4, false, false, null),
+          new Property("ShapeParameter", new signature(FLOAT32), 4, 5, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFilterParametric_p;
   }
-
 
   Dispose()
   {
@@ -2540,6 +2371,7 @@ let OcaFilterPolynomial_SetCoefficients_as = null;
 let OcaFilterPolynomial_GetSampleRate_rs = null;
 let OcaFilterPolynomial_SetSampleRate_as = null;
 let OcaFilterPolynomial_GetMaxOrder_rs = null;
+let OcaFilterPolynomial_p = null;
 
 /**
  * A generic Z-domain rational polynomial filter section: <u>A(0) + A(1)z
@@ -2698,39 +2530,20 @@ export class OcaFilterPolynomial extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "A";
-    if (id.PropertyIndex == 2)
-      return "B";
-    if (id.PropertyIndex == 3)
-      return "SampleRate";
-    if (id.PropertyIndex == 4)
-      return "MaxOrder";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "A":
-      return new OcaPropertyID(4, 1);
-    case "B":
-      return new OcaPropertyID(4, 2);
-    case "SampleRate":
-      return new OcaPropertyID(4, 3);
-    case "MaxOrder":
-      return new OcaPropertyID(4, 4);
+    if (!OcaFilterPolynomial_p)
+    {
+      OcaFilterPolynomial_p = new Properties([
+          new Property("A", new signature(LIST(FLOAT32)), 4, 1, false, false, null),
+          new Property("B", new signature(LIST(FLOAT32)), 4, 2, false, false, null),
+          new Property("SampleRate", new signature(FLOAT32), 4, 3, false, false, null),
+          new Property("MaxOrder", new signature(UINT8), 4, 4, true, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFilterPolynomial_p;
   }
-
 
   Dispose()
   {
@@ -2749,6 +2562,7 @@ let OcaFilterFIR_GetCoefficients_rs = null;
 let OcaFilterFIR_SetCoefficients_as = null;
 let OcaFilterFIR_GetSampleRate_rs = null;
 let OcaFilterFIR_SetSampleRate_as = null;
+let OcaFilterFIR_p = null;
 
 /**
  * A finite impulse response (FIR) filter.
@@ -2894,35 +2708,19 @@ export class OcaFilterFIR extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Length";
-    if (id.PropertyIndex == 2)
-      return "Coefficients";
-    if (id.PropertyIndex == 3)
-      return "SampleRate";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Length":
-      return new OcaPropertyID(4, 1);
-    case "Coefficients":
-      return new OcaPropertyID(4, 2);
-    case "SampleRate":
-      return new OcaPropertyID(4, 3);
+    if (!OcaFilterFIR_p)
+    {
+      OcaFilterFIR_p = new Properties([
+          new Property("Length", new signature(UINT32), 4, 1, true, false, null),
+          new Property("Coefficients", new signature(LIST(FLOAT32)), 4, 2, false, false, null),
+          new Property("SampleRate", new signature(FLOAT32), 4, 3, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFilterFIR_p;
   }
-
 
   Dispose()
   {
@@ -2941,6 +2739,7 @@ let OcaFilterArbitraryCurve_GetSampleRate_rs = null;
 let OcaFilterArbitraryCurve_SetSampleRate_as = null;
 let OcaFilterArbitraryCurve_GetTFMaxLength_rs = null;
 let OcaFilterArbitraryCurve_GetTFMinLength_rs = null;
+let OcaFilterArbitraryCurve_p = null;
 
 /**
  * An arbitrary-curve filter, with transfer function specified as
@@ -3110,39 +2909,20 @@ export class OcaFilterArbitraryCurve extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "TransferFunction";
-    if (id.PropertyIndex == 2)
-      return "SampleRate";
-    if (id.PropertyIndex == 3)
-      return "TFMinLength";
-    if (id.PropertyIndex == 4)
-      return "TFMaxLength";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "TransferFunction":
-      return new OcaPropertyID(4, 1);
-    case "SampleRate":
-      return new OcaPropertyID(4, 2);
-    case "TFMinLength":
-      return new OcaPropertyID(4, 3);
-    case "TFMaxLength":
-      return new OcaPropertyID(4, 4);
+    if (!OcaFilterArbitraryCurve_p)
+    {
+      OcaFilterArbitraryCurve_p = new Properties([
+          new Property("TransferFunction", new signature(OcaTransferFunction), 4, 1, false, false, null),
+          new Property("SampleRate", new signature(FLOAT32), 4, 2, false, false, null),
+          new Property("TFMinLength", new signature(UINT32), 4, 3, false, false, null),
+          new Property("TFMaxLength", new signature(UINT32), 4, 4, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFilterArbitraryCurve_p;
   }
-
 
   Dispose()
   {
@@ -3182,6 +2962,7 @@ let OcaDynamics_GetKneeParameter_rs = null;
 let OcaDynamics_SetKneeParameter_as = null;
 let OcaDynamics_GetSlope_rs = null;
 let OcaDynamics_SetSlope_as = null;
+let OcaDynamics_p = null;
 
 /**
  * A multipurpose dynamics processor. Can be configured as compressor,
@@ -3791,79 +3572,30 @@ export class OcaDynamics extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 14), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Triggered";
-    if (id.PropertyIndex == 2)
-      return "DynamicGain";
-    if (id.PropertyIndex == 3)
-      return "Function";
-    if (id.PropertyIndex == 4)
-      return "Ratio";
-    if (id.PropertyIndex == 5)
-      return "Threshold";
-    if (id.PropertyIndex == 6)
-      return "ThresholdPresentationUnits";
-    if (id.PropertyIndex == 7)
-      return "DetectorLaw";
-    if (id.PropertyIndex == 8)
-      return "AttackTime";
-    if (id.PropertyIndex == 9)
-      return "ReleaseTime";
-    if (id.PropertyIndex == 10)
-      return "HoldTime";
-    if (id.PropertyIndex == 11)
-      return "DynamicGainCeiling";
-    if (id.PropertyIndex == 12)
-      return "DynamicGainFloor";
-    if (id.PropertyIndex == 13)
-      return "KneeParameter";
-    if (id.PropertyIndex == 14)
-      return "Slope";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Triggered":
-      return new OcaPropertyID(4, 1);
-    case "DynamicGain":
-      return new OcaPropertyID(4, 2);
-    case "Function":
-      return new OcaPropertyID(4, 3);
-    case "Ratio":
-      return new OcaPropertyID(4, 4);
-    case "Threshold":
-      return new OcaPropertyID(4, 5);
-    case "ThresholdPresentationUnits":
-      return new OcaPropertyID(4, 6);
-    case "DetectorLaw":
-      return new OcaPropertyID(4, 7);
-    case "AttackTime":
-      return new OcaPropertyID(4, 8);
-    case "ReleaseTime":
-      return new OcaPropertyID(4, 9);
-    case "HoldTime":
-      return new OcaPropertyID(4, 10);
-    case "DynamicGainCeiling":
-      return new OcaPropertyID(4, 11);
-    case "DynamicGainFloor":
-      return new OcaPropertyID(4, 12);
-    case "KneeParameter":
-      return new OcaPropertyID(4, 13);
-    case "Slope":
-      return new OcaPropertyID(4, 14);
+    if (!OcaDynamics_p)
+    {
+      OcaDynamics_p = new Properties([
+          new Property("Triggered", new signature(BOOLEAN), 4, 1, false, false, null),
+          new Property("DynamicGain", new signature(FLOAT32), 4, 2, false, false, null),
+          new Property("Function", new signature(UINT8), 4, 3, false, false, null),
+          new Property("Ratio", new signature(FLOAT32), 4, 4, false, false, null),
+          new Property("Threshold", new signature(FLOAT32), 4, 5, false, false, null),
+          new Property("ThresholdPresentationUnits", new signature(UINT8), 4, 6, false, false, null),
+          new Property("DetectorLaw", new signature(UINT8), 4, 7, false, false, null),
+          new Property("AttackTime", new signature(FLOAT32), 4, 8, false, false, null),
+          new Property("ReleaseTime", new signature(FLOAT32), 4, 9, false, false, null),
+          new Property("HoldTime", new signature(FLOAT32), 4, 10, false, false, null),
+          new Property("DynamicGainCeiling", new signature(FLOAT32), 4, 11, false, false, null),
+          new Property("DynamicGainFloor", new signature(FLOAT32), 4, 12, false, false, null),
+          new Property("KneeParameter", new signature(FLOAT32), 4, 13, false, false, null),
+          new Property("Slope", new signature(FLOAT32), 4, 14, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDynamics_p;
   }
-
 
   Dispose()
   {
@@ -3895,6 +3627,7 @@ let OcaDynamicsDetector_GetReleaseTime_rs = null;
 let OcaDynamicsDetector_SetReleaseTime_as = null;
 let OcaDynamicsDetector_GetHoldTime_rs = null;
 let OcaDynamicsDetector_SetHoldTime_as = null;
+let OcaDynamicsDetector_p = null;
 
 /**
  * Dynamics element : side-chain detector.
@@ -4099,39 +3832,20 @@ export class OcaDynamicsDetector extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Law";
-    if (id.PropertyIndex == 2)
-      return "AttackTime";
-    if (id.PropertyIndex == 3)
-      return "ReleaseTime";
-    if (id.PropertyIndex == 4)
-      return "HoldTime";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Law":
-      return new OcaPropertyID(4, 1);
-    case "AttackTime":
-      return new OcaPropertyID(4, 2);
-    case "ReleaseTime":
-      return new OcaPropertyID(4, 3);
-    case "HoldTime":
-      return new OcaPropertyID(4, 4);
+    if (!OcaDynamicsDetector_p)
+    {
+      OcaDynamicsDetector_p = new Properties([
+          new Property("Law", new signature(UINT8), 4, 1, false, false, null),
+          new Property("AttackTime", new signature(FLOAT32), 4, 2, false, false, null),
+          new Property("ReleaseTime", new signature(FLOAT32), 4, 3, false, false, null),
+          new Property("HoldTime", new signature(FLOAT32), 4, 4, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDynamicsDetector_p;
   }
-
 
   Dispose()
   {
@@ -4157,6 +3871,7 @@ let OcaDynamicsCurve_GetDynamicGainCeiling_rs = null;
 let OcaDynamicsCurve_SetDynamicGainCeiling_as = null;
 let OcaDynamicsCurve_GetDynamicGainFloor_rs = null;
 let OcaDynamicsCurve_SetDynamicGainFloor_as = null;
+let OcaDynamicsCurve_p = null;
 
 /**
  * Dynamic compression / expansion curve. <b>Curve</b> means a function
@@ -4493,47 +4208,22 @@ export class OcaDynamicsCurve extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 6), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "nSegments";
-    if (id.PropertyIndex == 2)
-      return "Threshold";
-    if (id.PropertyIndex == 3)
-      return "Slope";
-    if (id.PropertyIndex == 4)
-      return "KneeParameter";
-    if (id.PropertyIndex == 5)
-      return "DynamicGainFloor";
-    if (id.PropertyIndex == 6)
-      return "DynamicGainCeiling";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "nSegments":
-      return new OcaPropertyID(4, 1);
-    case "Threshold":
-      return new OcaPropertyID(4, 2);
-    case "Slope":
-      return new OcaPropertyID(4, 3);
-    case "KneeParameter":
-      return new OcaPropertyID(4, 4);
-    case "DynamicGainFloor":
-      return new OcaPropertyID(4, 5);
-    case "DynamicGainCeiling":
-      return new OcaPropertyID(4, 6);
+    if (!OcaDynamicsCurve_p)
+    {
+      OcaDynamicsCurve_p = new Properties([
+          new Property("nSegments", new signature(UINT8), 4, 1, false, false, null),
+          new Property("Threshold", new signature(LIST(FLOAT32)), 4, 2, false, false, null),
+          new Property("Slope", new signature(LIST(FLOAT32)), 4, 3, false, false, null),
+          new Property("KneeParameter", new signature(LIST(FLOAT32)), 4, 4, false, false, null),
+          new Property("DynamicGainFloor", new signature(FLOAT32), 4, 5, false, false, null),
+          new Property("DynamicGainCeiling", new signature(FLOAT32), 4, 6, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDynamicsCurve_p;
   }
-
 
   Dispose()
   {
@@ -4564,6 +4254,7 @@ let OcaSignalGenerator_SetSweepTime_as = null;
 let OcaSignalGenerator_GetSweepRepeat_rs = null;
 let OcaSignalGenerator_SetSweepRepeat_as = null;
 let OcaSignalGenerator_GetGenerating_rs = null;
+let OcaSignalGenerator_p = null;
 
 /**
  * Multiwaveform signal generator with optional sweep capability.
@@ -4946,55 +4637,24 @@ export class OcaSignalGenerator extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 8), new signature(BOOLEAN));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Frequency1";
-    if (id.PropertyIndex == 2)
-      return "Frequency2";
-    if (id.PropertyIndex == 3)
-      return "Level";
-    if (id.PropertyIndex == 4)
-      return "Waveform";
-    if (id.PropertyIndex == 5)
-      return "SweepType";
-    if (id.PropertyIndex == 6)
-      return "SweepTime";
-    if (id.PropertyIndex == 7)
-      return "SweepRepeat";
-    if (id.PropertyIndex == 8)
-      return "Generating";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Frequency1":
-      return new OcaPropertyID(4, 1);
-    case "Frequency2":
-      return new OcaPropertyID(4, 2);
-    case "Level":
-      return new OcaPropertyID(4, 3);
-    case "Waveform":
-      return new OcaPropertyID(4, 4);
-    case "SweepType":
-      return new OcaPropertyID(4, 5);
-    case "SweepTime":
-      return new OcaPropertyID(4, 6);
-    case "SweepRepeat":
-      return new OcaPropertyID(4, 7);
-    case "Generating":
-      return new OcaPropertyID(4, 8);
+    if (!OcaSignalGenerator_p)
+    {
+      OcaSignalGenerator_p = new Properties([
+          new Property("Frequency1", new signature(FLOAT32), 4, 1, false, false, null),
+          new Property("Frequency2", new signature(FLOAT32), 4, 2, false, false, null),
+          new Property("Level", new signature(FLOAT32), 4, 3, false, false, null),
+          new Property("Waveform", new signature(UINT8), 4, 4, false, false, null),
+          new Property("SweepType", new signature(UINT8), 4, 5, false, false, null),
+          new Property("SweepTime", new signature(FLOAT32), 4, 6, false, false, null),
+          new Property("SweepRepeat", new signature(BOOLEAN), 4, 7, false, false, null),
+          new Property("Generating", new signature(BOOLEAN), 4, 8, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSignalGenerator_p;
   }
-
 
   Dispose()
   {
@@ -5012,6 +4672,7 @@ export class OcaSignalGenerator extends OcaActuator
 }
 
 
+let OcaSignalInput_p = null;
 
 /**
  * A set of one or more non-network signal inputs. Number of channels is
@@ -5048,23 +4709,16 @@ export class OcaSignalInput extends OcaActuator
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaSignalInput_p)
+    {
+      OcaSignalInput_p = new Properties([
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSignalInput_p;
   }
-
 
   Dispose()
   {
@@ -5074,6 +4728,7 @@ export class OcaSignalInput extends OcaActuator
 }
 
 
+let OcaSignalOutput_p = null;
 
 /**
  * A set of one or more non-network signal outputs. Number of channels is
@@ -5110,23 +4765,16 @@ export class OcaSignalOutput extends OcaActuator
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaSignalOutput_p)
+    {
+      OcaSignalOutput_p = new Properties([
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSignalOutput_p;
   }
-
 
   Dispose()
   {
@@ -5138,6 +4786,7 @@ export class OcaSignalOutput extends OcaActuator
 
 let OcaTemperatureActuator_GetTemperature_rs = null;
 let OcaTemperatureActuator_SetTemperature_as = null;
+let OcaTemperatureActuator_p = null;
 
 /**
  * A temperature actuator. Works in Celsius.
@@ -5213,27 +4862,17 @@ export class OcaTemperatureActuator extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Temperature";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Temperature":
-      return new OcaPropertyID(4, 1);
+    if (!OcaTemperatureActuator_p)
+    {
+      OcaTemperatureActuator_p = new Properties([
+          new Property("Temperature", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTemperatureActuator_p;
   }
-
 
   Dispose()
   {
@@ -5246,6 +4885,7 @@ export class OcaTemperatureActuator extends OcaActuator
 
 let OcaIdentificationActuator_GetActive_rs = null;
 let OcaIdentificationActuator_SetActive_as = null;
+let OcaIdentificationActuator_p = null;
 
 /**
  * Represents a function that turns on some kind of human-detectable
@@ -5326,27 +4966,17 @@ export class OcaIdentificationActuator extends OcaActuator
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(BOOLEAN));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "active";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "active":
-      return new OcaPropertyID(4, 1);
+    if (!OcaIdentificationActuator_p)
+    {
+      OcaIdentificationActuator_p = new Properties([
+          new Property("active", new signature(BOOLEAN), 4, 1, false, false, null),
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaIdentificationActuator_p;
   }
-
 
   Dispose()
   {
@@ -5357,6 +4987,7 @@ export class OcaIdentificationActuator extends OcaActuator
 }
 
 
+let OcaSummingPoint_p = null;
 
 /**
  * Actuator with no control parameters, used as a simple node to
@@ -5386,23 +5017,16 @@ export class OcaSummingPoint extends OcaActuator
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaSummingPoint_p)
+    {
+      OcaSummingPoint_p = new Properties([
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSummingPoint_p;
   }
-
 
   Dispose()
   {
@@ -5412,6 +5036,7 @@ export class OcaSummingPoint extends OcaActuator
 }
 
 
+let OcaBasicActuator_p = null;
 
 /**
  * Abstract base class for weakly typed actuators.
@@ -5444,23 +5069,16 @@ export class OcaBasicActuator extends OcaActuator
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaBasicActuator_p)
+    {
+      OcaBasicActuator_p = new Properties([
+        ], 4, OcaActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBasicActuator_p;
   }
-
 
   Dispose()
   {
@@ -5472,6 +5090,7 @@ export class OcaBasicActuator extends OcaActuator
 
 let OcaBooleanActuator_GetSetting_rs = null;
 let OcaBooleanActuator_SetSetting_as = null;
+let OcaBooleanActuator_p = null;
 
 /**
  * Basic boolean actuator.
@@ -5547,27 +5166,17 @@ export class OcaBooleanActuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaBooleanActuator_p)
+    {
+      OcaBooleanActuator_p = new Properties([
+          new Property("Setting", new signature(BOOLEAN), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBooleanActuator_p;
   }
-
 
   Dispose()
   {
@@ -5580,6 +5189,7 @@ export class OcaBooleanActuator extends OcaBasicActuator
 
 let OcaInt8Actuator_GetSetting_rs = null;
 let OcaInt8Actuator_SetSetting_as = null;
+let OcaInt8Actuator_p = null;
 
 /**
  * Basic int8 actuator.
@@ -5655,27 +5265,17 @@ export class OcaInt8Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt8Actuator_p)
+    {
+      OcaInt8Actuator_p = new Properties([
+          new Property("Setting", new signature(INT8), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt8Actuator_p;
   }
-
 
   Dispose()
   {
@@ -5688,6 +5288,7 @@ export class OcaInt8Actuator extends OcaBasicActuator
 
 let OcaInt16Actuator_GetSetting_rs = null;
 let OcaInt16Actuator_SetSetting_as = null;
+let OcaInt16Actuator_p = null;
 
 /**
  * Basic int16 actuator.
@@ -5763,27 +5364,17 @@ export class OcaInt16Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt16Actuator_p)
+    {
+      OcaInt16Actuator_p = new Properties([
+          new Property("Setting", new signature(INT16), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt16Actuator_p;
   }
-
 
   Dispose()
   {
@@ -5796,6 +5387,7 @@ export class OcaInt16Actuator extends OcaBasicActuator
 
 let OcaInt32Actuator_GetSetting_rs = null;
 let OcaInt32Actuator_SetSetting_as = null;
+let OcaInt32Actuator_p = null;
 
 /**
  * Basic int32 actuator.
@@ -5871,27 +5463,17 @@ export class OcaInt32Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt32Actuator_p)
+    {
+      OcaInt32Actuator_p = new Properties([
+          new Property("Setting", new signature(INT32), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt32Actuator_p;
   }
-
 
   Dispose()
   {
@@ -5904,6 +5486,7 @@ export class OcaInt32Actuator extends OcaBasicActuator
 
 let OcaInt64Actuator_GetSetting_rs = null;
 let OcaInt64Actuator_SetSetting_as = null;
+let OcaInt64Actuator_p = null;
 
 /**
  * Basic int64 actuator.
@@ -5979,27 +5562,17 @@ export class OcaInt64Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt64Actuator_p)
+    {
+      OcaInt64Actuator_p = new Properties([
+          new Property("Setting", new signature(INT64), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt64Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6012,6 +5585,7 @@ export class OcaInt64Actuator extends OcaBasicActuator
 
 let OcaUint8Actuator_GetSetting_rs = null;
 let OcaUint8Actuator_SetSetting_as = null;
+let OcaUint8Actuator_p = null;
 
 /**
  * Basic uint8 actuator.
@@ -6087,27 +5661,17 @@ export class OcaUint8Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint8Actuator_p)
+    {
+      OcaUint8Actuator_p = new Properties([
+          new Property("Setting", new signature(UINT8), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint8Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6120,6 +5684,7 @@ export class OcaUint8Actuator extends OcaBasicActuator
 
 let OcaUint16Actuator_GetSetting_rs = null;
 let OcaUint16Actuator_SetSetting_as = null;
+let OcaUint16Actuator_p = null;
 
 /**
  * Basic uint16 actuator.
@@ -6195,27 +5760,17 @@ export class OcaUint16Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint16Actuator_p)
+    {
+      OcaUint16Actuator_p = new Properties([
+          new Property("Setting", new signature(UINT16), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint16Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6228,6 +5783,7 @@ export class OcaUint16Actuator extends OcaBasicActuator
 
 let OcaUint32Actuator_GetSetting_rs = null;
 let OcaUint32Actuator_SetSetting_as = null;
+let OcaUint32Actuator_p = null;
 
 /**
  * Basic uint32 actuator.
@@ -6302,27 +5858,17 @@ export class OcaUint32Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint32Actuator_p)
+    {
+      OcaUint32Actuator_p = new Properties([
+          new Property("Setting", new signature(UINT32), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint32Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6335,6 +5881,7 @@ export class OcaUint32Actuator extends OcaBasicActuator
 
 let OcaUint64Actuator_GetSetting_rs = null;
 let OcaUint64Actuator_SetSetting_as = null;
+let OcaUint64Actuator_p = null;
 
 /**
  * Basic Uint64 actuator.
@@ -6410,27 +5957,17 @@ export class OcaUint64Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint64Actuator_p)
+    {
+      OcaUint64Actuator_p = new Properties([
+          new Property("Setting", new signature(UINT64), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint64Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6443,6 +5980,7 @@ export class OcaUint64Actuator extends OcaBasicActuator
 
 let OcaFloat32Actuator_GetSetting_rs = null;
 let OcaFloat32Actuator_SetSetting_as = null;
+let OcaFloat32Actuator_p = null;
 
 /**
  * Basic float32 actuator.
@@ -6518,27 +6056,17 @@ export class OcaFloat32Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaFloat32Actuator_p)
+    {
+      OcaFloat32Actuator_p = new Properties([
+          new Property("Setting", new signature(FLOAT32), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFloat32Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6551,6 +6079,7 @@ export class OcaFloat32Actuator extends OcaBasicActuator
 
 let OcaFloat64Actuator_GetSetting_rs = null;
 let OcaFloat64Actuator_SetSetting_as = null;
+let OcaFloat64Actuator_p = null;
 
 /**
  * Basic Float64 actuator.
@@ -6626,27 +6155,17 @@ export class OcaFloat64Actuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
+    if (!OcaFloat64Actuator_p)
+    {
+      OcaFloat64Actuator_p = new Properties([
+          new Property("Setting", new signature(FLOAT64), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFloat64Actuator_p;
   }
-
 
   Dispose()
   {
@@ -6660,6 +6179,7 @@ export class OcaFloat64Actuator extends OcaBasicActuator
 let OcaStringActuator_GetValue_rs = null;
 let OcaStringActuator_SetValue_as = null;
 let OcaStringActuator_GetMaxLen_rs = null;
+let OcaStringActuator_p = null;
 
 /**
  * String actuator.
@@ -6761,31 +6281,18 @@ export class OcaStringActuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Setting";
-    if (id.PropertyIndex == 2)
-      return "MaxLen";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Setting":
-      return new OcaPropertyID(5, 1);
-    case "MaxLen":
-      return new OcaPropertyID(5, 2);
+    if (!OcaStringActuator_p)
+    {
+      OcaStringActuator_p = new Properties([
+          new Property("Setting", new signature(STRING), 5, 1, false, false, null),
+          new Property("MaxLen", new signature(UINT16), 5, 2, true, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaStringActuator_p;
   }
-
 
   Dispose()
   {
@@ -6803,6 +6310,7 @@ let OcaBitstringActuator_GetBit_rs = null;
 let OcaBitstringActuator_SetBit_as = null;
 let OcaBitstringActuator_GetBitstring_rs = null;
 let OcaBitstringActuator_SetBitstring_as = null;
+let OcaBitstringActuator_p = null;
 
 /**
  * Bitstring actuator. Maximum bitstring length is 65,536 bits.
@@ -6927,27 +6435,17 @@ export class OcaBitstringActuator extends OcaBasicActuator
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Bitstring";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Bitstring":
-      return new OcaPropertyID(5, 1);
+    if (!OcaBitstringActuator_p)
+    {
+      OcaBitstringActuator_p = new Properties([
+          new Property("Bitstring", new signature(BITSTRING), 5, 1, false, false, null),
+        ], 5, OcaBasicActuator.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBitstringActuator_p;
   }
-
 
   Dispose()
   {
@@ -6959,6 +6457,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
 
 
 let OcaSensor_GetReadingState_rs = null;
+let OcaSensor_p = null;
 
 /**
  * Abstract base class for all sensor classes.
@@ -7019,27 +6518,17 @@ export class OcaSensor extends OcaWorker
       new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ReadingState";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ReadingState":
-      return new OcaPropertyID(3, 1);
+    if (!OcaSensor_p)
+    {
+      OcaSensor_p = new Properties([
+          new Property("ReadingState", new signature(UINT8), 3, 1, false, true, null),
+        ], 3, OcaWorker.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSensor_p;
   }
-
 
   Dispose()
   {
@@ -7051,6 +6540,7 @@ export class OcaSensor extends OcaWorker
 
 
 let OcaLevelSensor_GetReading_rs = null;
+let OcaLevelSensor_p = null;
 
 /**
  * Signal level sensor.
@@ -7110,27 +6600,17 @@ export class OcaLevelSensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaLevelSensor_p)
+    {
+      OcaLevelSensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaLevelSensor_p;
   }
-
 
   Dispose()
   {
@@ -7143,6 +6623,7 @@ export class OcaLevelSensor extends OcaSensor
 
 let OcaAudioLevelSensor_GetLaw_rs = null;
 let OcaAudioLevelSensor_SetLaw_as = null;
+let OcaAudioLevelSensor_p = null;
 
 /**
  * Child of <b>OcaLevelSensor </b>that returns an audio meter reading in
@@ -7221,27 +6702,17 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Law";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Law":
-      return new OcaPropertyID(5, 1);
+    if (!OcaAudioLevelSensor_p)
+    {
+      OcaAudioLevelSensor_p = new Properties([
+          new Property("Law", new signature(UINT8), 5, 1, false, false, null),
+        ], 5, OcaLevelSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaAudioLevelSensor_p;
   }
-
 
   Dispose()
   {
@@ -7253,6 +6724,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
 
 
 let OcaTimeIntervalSensor_GetReading_rs = null;
+let OcaTimeIntervalSensor_p = null;
 
 /**
  * Time interval sensor.
@@ -7312,27 +6784,17 @@ export class OcaTimeIntervalSensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaTimeIntervalSensor_p)
+    {
+      OcaTimeIntervalSensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTimeIntervalSensor_p;
   }
-
 
   Dispose()
   {
@@ -7344,6 +6806,7 @@ export class OcaTimeIntervalSensor extends OcaSensor
 
 
 let OcaFrequencySensor_GetReading_rs = null;
+let OcaFrequencySensor_p = null;
 
 /**
  * Frequency sensor.
@@ -7403,27 +6866,17 @@ export class OcaFrequencySensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaFrequencySensor_p)
+    {
+      OcaFrequencySensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFrequencySensor_p;
   }
-
 
   Dispose()
   {
@@ -7435,6 +6888,7 @@ export class OcaFrequencySensor extends OcaSensor
 
 
 let OcaTemperatureSensor_GetReading_rs = null;
+let OcaTemperatureSensor_p = null;
 
 /**
  * Basic temperature sensor.
@@ -7494,27 +6948,17 @@ export class OcaTemperatureSensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaTemperatureSensor_p)
+    {
+      OcaTemperatureSensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTemperatureSensor_p;
   }
-
 
   Dispose()
   {
@@ -7525,6 +6969,7 @@ export class OcaTemperatureSensor extends OcaSensor
 }
 
 
+let OcaIdentificationSensor_p = null;
 
 /**
  * Sensor for device identification mechanism. The idea of this mechanism
@@ -7576,23 +7021,16 @@ export class OcaIdentificationSensor extends OcaSensor
     return this._Identify = new Event(this, new OcaEventID(4, 1), s);
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaIdentificationSensor_p)
+    {
+      OcaIdentificationSensor_p = new Properties([
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaIdentificationSensor_p;
   }
-
 
   Dispose()
   {
@@ -7604,6 +7042,7 @@ export class OcaIdentificationSensor extends OcaSensor
 
 
 let OcaVoltageSensor_GetReading_rs = null;
+let OcaVoltageSensor_p = null;
 
 /**
  * Basic voltage sensor.
@@ -7663,27 +7102,17 @@ export class OcaVoltageSensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaVoltageSensor_p)
+    {
+      OcaVoltageSensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaVoltageSensor_p;
   }
-
 
   Dispose()
   {
@@ -7695,6 +7124,7 @@ export class OcaVoltageSensor extends OcaSensor
 
 
 let OcaCurrentSensor_GetReading_rs = null;
+let OcaCurrentSensor_p = null;
 
 /**
  * Basic current sensor.
@@ -7754,27 +7184,17 @@ export class OcaCurrentSensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaCurrentSensor_p)
+    {
+      OcaCurrentSensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaCurrentSensor_p;
   }
-
 
   Dispose()
   {
@@ -7786,6 +7206,7 @@ export class OcaCurrentSensor extends OcaSensor
 
 
 let OcaImpedanceSensor_GetReading_rs = null;
+let OcaImpedanceSensor_p = null;
 
 /**
  * Basic impedance sensor. Value is complex (magnitude and phase).
@@ -7845,27 +7266,17 @@ export class OcaImpedanceSensor extends OcaSensor
       new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaImpedance));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(4, 1);
+    if (!OcaImpedanceSensor_p)
+    {
+      OcaImpedanceSensor_p = new Properties([
+          new Property("Reading", new signature(OcaImpedance), 4, 1, false, false, null),
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaImpedanceSensor_p;
   }
-
 
   Dispose()
   {
@@ -7876,6 +7287,7 @@ export class OcaImpedanceSensor extends OcaSensor
 }
 
 
+let OcaBasicSensor_p = null;
 
 /**
  * Abstract base class for weakly typed sensors.
@@ -7908,23 +7320,16 @@ export class OcaBasicSensor extends OcaSensor
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaBasicSensor_p)
+    {
+      OcaBasicSensor_p = new Properties([
+        ], 4, OcaSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBasicSensor_p;
   }
-
 
   Dispose()
   {
@@ -7935,6 +7340,7 @@ export class OcaBasicSensor extends OcaSensor
 
 
 let OcaBooleanSensor_GetReading_rs = null;
+let OcaBooleanSensor_p = null;
 
 /**
  * Basic boolean sensor.
@@ -7994,27 +7400,17 @@ export class OcaBooleanSensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BOOLEAN));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaBooleanSensor_p)
+    {
+      OcaBooleanSensor_p = new Properties([
+          new Property("Reading", new signature(BOOLEAN), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBooleanSensor_p;
   }
-
 
   Dispose()
   {
@@ -8026,6 +7422,7 @@ export class OcaBooleanSensor extends OcaBasicSensor
 
 
 let OcaInt8Sensor_GetReading_rs = null;
+let OcaInt8Sensor_p = null;
 
 /**
  * Basic int8 sensor.
@@ -8085,27 +7482,17 @@ export class OcaInt8Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt8Sensor_p)
+    {
+      OcaInt8Sensor_p = new Properties([
+          new Property("Reading", new signature(INT8), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt8Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8117,6 +7504,7 @@ export class OcaInt8Sensor extends OcaBasicSensor
 
 
 let OcaInt16Sensor_GetReading_rs = null;
+let OcaInt16Sensor_p = null;
 
 /**
  * Basic int16 sensor.
@@ -8176,27 +7564,17 @@ export class OcaInt16Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt16Sensor_p)
+    {
+      OcaInt16Sensor_p = new Properties([
+          new Property("Reading", new signature(INT16), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt16Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8208,6 +7586,7 @@ export class OcaInt16Sensor extends OcaBasicSensor
 
 
 let OcaInt32Sensor_GetReading_rs = null;
+let OcaInt32Sensor_p = null;
 
 /**
  * Basic int32 sensor.
@@ -8267,27 +7646,17 @@ export class OcaInt32Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt32Sensor_p)
+    {
+      OcaInt32Sensor_p = new Properties([
+          new Property("Reading", new signature(INT32), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt32Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8299,6 +7668,7 @@ export class OcaInt32Sensor extends OcaBasicSensor
 
 
 let OcaInt64Sensor_GetReading_rs = null;
+let OcaInt64Sensor_p = null;
 
 /**
  * Basic int64 sensor.
@@ -8358,27 +7728,17 @@ export class OcaInt64Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(INT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaInt64Sensor_p)
+    {
+      OcaInt64Sensor_p = new Properties([
+          new Property("Reading", new signature(INT64), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaInt64Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8390,6 +7750,7 @@ export class OcaInt64Sensor extends OcaBasicSensor
 
 
 let OcaUint8Sensor_GetReading_rs = null;
+let OcaUint8Sensor_p = null;
 
 /**
  * Basic uint8 sensor.
@@ -8449,27 +7810,17 @@ export class OcaUint8Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint8Sensor_p)
+    {
+      OcaUint8Sensor_p = new Properties([
+          new Property("Reading", new signature(UINT8), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint8Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8481,6 +7832,7 @@ export class OcaUint8Sensor extends OcaBasicSensor
 
 
 let OcaUint16Sensor_GetReading_rs = null;
+let OcaUint16Sensor_p = null;
 
 /**
  * Basic uint16 sensor.
@@ -8540,27 +7892,17 @@ export class OcaUint16Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint16Sensor_p)
+    {
+      OcaUint16Sensor_p = new Properties([
+          new Property("Reading", new signature(UINT16), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint16Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8572,6 +7914,7 @@ export class OcaUint16Sensor extends OcaBasicSensor
 
 
 let OcaUint32Sensor_GetReading_rs = null;
+let OcaUint32Sensor_p = null;
 
 /**
  * Basic uint32 sensor.
@@ -8631,27 +7974,17 @@ export class OcaUint32Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint32Sensor_p)
+    {
+      OcaUint32Sensor_p = new Properties([
+          new Property("Reading", new signature(UINT32), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint32Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8663,6 +7996,7 @@ export class OcaUint32Sensor extends OcaBasicSensor
 
 
 let OcaUint64Sensor_GetReading_rs = null;
+let OcaUint64Sensor_p = null;
 
 /**
  * Basic Uint64 sensor.
@@ -8722,27 +8056,17 @@ export class OcaUint64Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaUint64Sensor_p)
+    {
+      OcaUint64Sensor_p = new Properties([
+          new Property("Reading", new signature(UINT64), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaUint64Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8754,6 +8078,7 @@ export class OcaUint64Sensor extends OcaBasicSensor
 
 
 let OcaFloat32Sensor_GetReading_rs = null;
+let OcaFloat32Sensor_p = null;
 
 /**
  * Basic float32 sensor.
@@ -8813,27 +8138,17 @@ export class OcaFloat32Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaFloat32Sensor_p)
+    {
+      OcaFloat32Sensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT32), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFloat32Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8845,6 +8160,7 @@ export class OcaFloat32Sensor extends OcaBasicSensor
 
 
 let OcaFloat64Sensor_GetReading_rs = null;
+let OcaFloat64Sensor_p = null;
 
 /**
  * Basic Float64 sensor.
@@ -8904,27 +8220,17 @@ export class OcaFloat64Sensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(FLOAT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Reading";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Reading":
-      return new OcaPropertyID(5, 1);
+    if (!OcaFloat64Sensor_p)
+    {
+      OcaFloat64Sensor_p = new Properties([
+          new Property("Reading", new signature(FLOAT64), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFloat64Sensor_p;
   }
-
 
   Dispose()
   {
@@ -8938,6 +8244,7 @@ export class OcaFloat64Sensor extends OcaBasicSensor
 let OcaStringSensor_GetString_rs = null;
 let OcaStringSensor_GetMaxLen_rs = null;
 let OcaStringSensor_SetMaxLen_as = null;
+let OcaStringSensor_p = null;
 
 /**
  * Text string sensor.
@@ -9040,31 +8347,18 @@ export class OcaStringSensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 2), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "String";
-    if (id.PropertyIndex == 2)
-      return "MaxLen";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "String":
-      return new OcaPropertyID(5, 1);
-    case "MaxLen":
-      return new OcaPropertyID(5, 2);
+    if (!OcaStringSensor_p)
+    {
+      OcaStringSensor_p = new Properties([
+          new Property("String", new signature(STRING), 5, 1, false, false, null),
+          new Property("MaxLen", new signature(UINT16), 5, 2, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaStringSensor_p;
   }
-
 
   Dispose()
   {
@@ -9080,6 +8374,7 @@ let OcaBitstringSensor_GetNrBits_rs = null;
 let OcaBitstringSensor_GetBit_as = null;
 let OcaBitstringSensor_GetBit_rs = null;
 let OcaBitstringSensor_GetBitString_rs = null;
+let OcaBitstringSensor_p = null;
 
 /**
  * Bit string sensor.
@@ -9170,27 +8465,17 @@ export class OcaBitstringSensor extends OcaBasicSensor
       new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(BITSTRING));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 5) return null;
-    if (id.DefLevel < 5) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "BitString";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "BitString":
-      return new OcaPropertyID(5, 1);
+    if (!OcaBitstringSensor_p)
+    {
+      OcaBitstringSensor_p = new Properties([
+          new Property("BitString", new signature(BITSTRING), 5, 1, false, false, null),
+        ], 5, OcaBasicSensor.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBitstringSensor_p;
   }
-
 
   Dispose()
   {
@@ -9228,6 +8513,7 @@ let OcaBlock_FindObjectsByPath_as = null;
 let OcaBlock_FindObjectsByPath_rs = null;
 let OcaBlock_FindObjectsByLabelRecursive_as = null;
 let OcaBlock_FindObjectsByLabelRecursive_rs = null;
+let OcaBlock_p = null;
 
 /**
  * A block is an object with three aspects: - It can contain other
@@ -9696,47 +8982,22 @@ export class OcaBlock extends OcaWorker
       new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(MAP(UINT32, UINT32)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Type";
-    if (id.PropertyIndex == 2)
-      return "Members";
-    if (id.PropertyIndex == 3)
-      return "SignalPaths";
-    if (id.PropertyIndex == 4)
-      return "MostRecentParamSetIdentifier";
-    if (id.PropertyIndex == 5)
-      return "GlobalType";
-    if (id.PropertyIndex == 6)
-      return "ONoMap";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Type":
-      return new OcaPropertyID(3, 1);
-    case "Members":
-      return new OcaPropertyID(3, 2);
-    case "SignalPaths":
-      return new OcaPropertyID(3, 3);
-    case "MostRecentParamSetIdentifier":
-      return new OcaPropertyID(3, 4);
-    case "GlobalType":
-      return new OcaPropertyID(3, 5);
-    case "ONoMap":
-      return new OcaPropertyID(3, 6);
+    if (!OcaBlock_p)
+    {
+      OcaBlock_p = new Properties([
+          new Property("Type", new signature(UINT32), 3, 1, true, false, null),
+          new Property("Members", new signature(LIST(OcaObjectIdentification)), 3, 2, false, false, null),
+          new Property("SignalPaths", new signature(MAP(UINT16, OcaSignalPath)), 3, 3, false, false, null),
+          new Property("MostRecentParamSetIdentifier", new signature(UINT16), 3, 4, false, false, null),
+          new Property("GlobalType", new signature(OcaGlobalBlockTypeIdentifier), 3, 5, true, false, null),
+          new Property("ONoMap", new signature(MAP(UINT32, UINT32)), 3, 6, true, false, null),
+        ], 3, OcaWorker.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBlock_p;
   }
-
 
   Dispose()
   {
@@ -9768,6 +9029,7 @@ let OcaBlockFactory_UndefineProtoSignalPath_rs = null;
 let OcaBlockFactory_GetProtoSignalPaths_rs = null;
 let OcaBlockFactory_GetGlobalType_rs = null;
 let OcaBlockFactory_SetGlobalType_as = null;
+let OcaBlockFactory_p = null;
 
 /**
  * Factory to create custom block instances. Used only in reconfigurable
@@ -10078,39 +9340,20 @@ export class OcaBlockFactory extends OcaWorker
       new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaGlobalBlockTypeIdentifier));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ProtoPorts";
-    if (id.PropertyIndex == 2)
-      return "ProtoMembers";
-    if (id.PropertyIndex == 3)
-      return "ProtoSignalPaths";
-    if (id.PropertyIndex == 4)
-      return "GlobalType";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ProtoPorts":
-      return new OcaPropertyID(3, 1);
-    case "ProtoMembers":
-      return new OcaPropertyID(3, 2);
-    case "ProtoSignalPaths":
-      return new OcaPropertyID(3, 3);
-    case "GlobalType":
-      return new OcaPropertyID(3, 4);
+    if (!OcaBlockFactory_p)
+    {
+      OcaBlockFactory_p = new Properties([
+          new Property("ProtoPorts", new signature(LIST(OcaProtoPort)), 3, 1, false, false, null),
+          new Property("ProtoMembers", new signature(LIST(OcaProtoObjectIdentification)), 3, 2, false, false, null),
+          new Property("ProtoSignalPaths", new signature(MAP(UINT16, OcaProtoSignalPath)), 3, 3, false, false, null),
+          new Property("GlobalType", new signature(OcaGlobalBlockTypeIdentifier), 3, 4, false, false, null),
+        ], 3, OcaWorker.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaBlockFactory_p;
   }
-
 
   Dispose()
   {
@@ -10140,6 +9383,7 @@ let OcaMatrix_SetPortsPerRow_as = null;
 let OcaMatrix_GetPortsPerColumn_rs = null;
 let OcaMatrix_SetPortsPerColumn_as = null;
 let OcaMatrix_SetCurrentXYLock_as = null;
+let OcaMatrix_p = null;
 
 /**
  * A matrix is a rectangular array of identical objects
@@ -10592,55 +9836,24 @@ export class OcaMatrix extends OcaWorker
       new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "X";
-    if (id.PropertyIndex == 2)
-      return "Y";
-    if (id.PropertyIndex == 3)
-      return "xSize";
-    if (id.PropertyIndex == 4)
-      return "ySize";
-    if (id.PropertyIndex == 5)
-      return "Members";
-    if (id.PropertyIndex == 6)
-      return "Proxy";
-    if (id.PropertyIndex == 7)
-      return "PortsPerRow";
-    if (id.PropertyIndex == 8)
-      return "PortsPerColumn";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "X":
-      return new OcaPropertyID(3, 1);
-    case "Y":
-      return new OcaPropertyID(3, 2);
-    case "xSize":
-      return new OcaPropertyID(3, 3);
-    case "ySize":
-      return new OcaPropertyID(3, 4);
-    case "Members":
-      return new OcaPropertyID(3, 5);
-    case "Proxy":
-      return new OcaPropertyID(3, 6);
-    case "PortsPerRow":
-      return new OcaPropertyID(3, 7);
-    case "PortsPerColumn":
-      return new OcaPropertyID(3, 8);
+    if (!OcaMatrix_p)
+    {
+      OcaMatrix_p = new Properties([
+          new Property("X", new signature(UINT16), 3, 1, false, false, null),
+          new Property("Y", new signature(UINT16), 3, 2, false, false, null),
+          new Property("xSize", new signature(UINT16), 3, 3, false, false, null),
+          new Property("ySize", new signature(UINT16), 3, 4, false, false, null),
+          new Property("Members", new signature(LIST2D(UINT32)), 3, 5, false, false, null),
+          new Property("Proxy", new signature(UINT32), 3, 6, false, false, null),
+          new Property("PortsPerRow", new signature(UINT8), 3, 7, false, false, null),
+          new Property("PortsPerColumn", new signature(UINT8), 3, 8, false, false, null),
+        ], 3, OcaWorker.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaMatrix_p;
   }
-
 
   Dispose()
   {
@@ -10662,6 +9875,7 @@ let OcaAgent_GetLabel_rs = null;
 let OcaAgent_SetLabel_as = null;
 let OcaAgent_GetOwner_rs = null;
 let OcaAgent_GetPath_rs = null;
+let OcaAgent_p = null;
 
 /**
  * Abstract base class for defining agents.
@@ -10777,31 +9991,18 @@ export class OcaAgent extends OcaRoot
       new PropertyEvent(this, new OcaPropertyID(2, 2), new signature(UINT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 2) return null;
-    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Label";
-    if (id.PropertyIndex == 2)
-      return "Owner";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Label":
-      return new OcaPropertyID(2, 1);
-    case "Owner":
-      return new OcaPropertyID(2, 2);
+    if (!OcaAgent_p)
+    {
+      OcaAgent_p = new Properties([
+          new Property("Label", new signature(STRING), 2, 1, false, false, null),
+          new Property("Owner", new signature(UINT32), 2, 2, false, false, null),
+        ], 2, OcaRoot.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaAgent_p;
   }
-
 
   Dispose()
   {
@@ -10832,6 +10033,7 @@ let OcaGrouper_GetActuatorOrSensor_rs = null;
 let OcaGrouper_SetActuatorOrSensor_as = null;
 let OcaGrouper_GetMode_rs = null;
 let OcaGrouper_SetMode_as = null;
+let OcaGrouper_p = null;
 
 /**
  * <b><u>Concept</u></b> <b><u> </u></b>A <b>grouper</b> is an object
@@ -11281,43 +10483,21 @@ export class OcaGrouper extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ActuatorOrSensor";
-    if (id.PropertyIndex == 2)
-      return "Groups";
-    if (id.PropertyIndex == 3)
-      return "Citizens";
-    if (id.PropertyIndex == 4)
-      return "Enrollments";
-    if (id.PropertyIndex == 5)
-      return "Mode";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ActuatorOrSensor":
-      return new OcaPropertyID(3, 1);
-    case "Groups":
-      return new OcaPropertyID(3, 2);
-    case "Citizens":
-      return new OcaPropertyID(3, 3);
-    case "Enrollments":
-      return new OcaPropertyID(3, 4);
-    case "Mode":
-      return new OcaPropertyID(3, 5);
+    if (!OcaGrouper_p)
+    {
+      OcaGrouper_p = new Properties([
+          new Property("ActuatorOrSensor", new signature(BOOLEAN), 3, 1, false, false, null),
+          new Property("Groups", new signature(LIST(OcaGrouperGroup)), 3, 2, false, false, ["GroupList"]),
+          new Property("Citizens", new signature(LIST(OcaGrouperCitizen)), 3, 3, false, false, ["CitizenList"]),
+          new Property("Enrollments", new signature(LIST(OcaGrouperEnrollment)), 3, 4, false, false, ["EnrollmentList"]),
+          new Property("Mode", new signature(UINT8), 3, 5, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaGrouper_p;
   }
-
 
   Dispose()
   {
@@ -11347,6 +10527,7 @@ let OcaNumericObserver_GetHysteresis_rs = null;
 let OcaNumericObserver_SetHysteresis_as = null;
 let OcaNumericObserver_GetPeriod_rs = null;
 let OcaNumericObserver_SetPeriod_as = null;
+let OcaNumericObserver_p = null;
 
 /**
  * Observer of a scalar numeric or boolean property ("target property")
@@ -11730,51 +10911,23 @@ export class OcaNumericObserver extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-    if (id.PropertyIndex == 2)
-      return "ObservedProperty";
-    if (id.PropertyIndex == 3)
-      return "Threshold";
-    if (id.PropertyIndex == 4)
-      return "Operator";
-    if (id.PropertyIndex == 5)
-      return "TwoWay";
-    if (id.PropertyIndex == 6)
-      return "Hysteresis";
-    if (id.PropertyIndex == 7)
-      return "Period";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(3, 1);
-    case "ObservedProperty":
-      return new OcaPropertyID(3, 2);
-    case "Threshold":
-      return new OcaPropertyID(3, 3);
-    case "Operator":
-      return new OcaPropertyID(3, 4);
-    case "TwoWay":
-      return new OcaPropertyID(3, 5);
-    case "Hysteresis":
-      return new OcaPropertyID(3, 6);
-    case "Period":
-      return new OcaPropertyID(3, 7);
+    if (!OcaNumericObserver_p)
+    {
+      OcaNumericObserver_p = new Properties([
+          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("ObservedProperty", new signature(OcaProperty), 3, 2, false, false, null),
+          new Property("Threshold", new signature(FLOAT64), 3, 3, false, false, null),
+          new Property("Operator", new signature(UINT8), 3, 4, false, false, null),
+          new Property("TwoWay", new signature(BOOLEAN), 3, 5, false, false, null),
+          new Property("Hysteresis", new signature(FLOAT64), 3, 6, false, false, null),
+          new Property("Period", new signature(FLOAT32), 3, 7, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaNumericObserver_p;
   }
-
 
   Dispose()
   {
@@ -11801,6 +10954,7 @@ let OcaLibrary_GetVolumeCount_rs = null;
 let OcaLibrary_GetVolumes_rs = null;
 let OcaLibrary_GetAccess_rs = null;
 let OcaLibrary_SetAccess_as = null;
+let OcaLibrary_p = null;
 
 /**
  * A <b>library</b> is an agent that holds a collection of datasets. We
@@ -12014,35 +11168,19 @@ export class OcaLibrary extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(MAP(UINT32, OcaLibVol)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "DataType";
-    if (id.PropertyIndex == 2)
-      return "Access";
-    if (id.PropertyIndex == 3)
-      return "Volumes";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "DataType":
-      return new OcaPropertyID(3, 1);
-    case "Access":
-      return new OcaPropertyID(3, 2);
-    case "Volumes":
-      return new OcaPropertyID(3, 3);
+    if (!OcaLibrary_p)
+    {
+      OcaLibrary_p = new Properties([
+          new Property("DataType", new signature(UINT8), 3, 1, false, false, null),
+          new Property("Access", new signature(UINT8), 3, 2, false, false, null),
+          new Property("Volumes", new signature(MAP(UINT32, OcaLibVol)), 3, 3, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaLibrary_p;
   }
-
 
   Dispose()
   {
@@ -12063,6 +11201,7 @@ let OcaPowerSupply_GetCharging_rs = null;
 let OcaPowerSupply_GetLoadFractionAvailable_rs = null;
 let OcaPowerSupply_GetStorageFractionAvailable_rs = null;
 let OcaPowerSupply_GetLocation_rs = null;
+let OcaPowerSupply_p = null;
 
 /**
  * A power supply.
@@ -12300,51 +11439,23 @@ export class OcaPowerSupply extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Type";
-    if (id.PropertyIndex == 2)
-      return "ModelInfo";
-    if (id.PropertyIndex == 3)
-      return "State";
-    if (id.PropertyIndex == 4)
-      return "Charging";
-    if (id.PropertyIndex == 5)
-      return "LoadFractionAvailable";
-    if (id.PropertyIndex == 6)
-      return "StorageFractionAvailable";
-    if (id.PropertyIndex == 7)
-      return "Location";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Type":
-      return new OcaPropertyID(3, 1);
-    case "ModelInfo":
-      return new OcaPropertyID(3, 2);
-    case "State":
-      return new OcaPropertyID(3, 3);
-    case "Charging":
-      return new OcaPropertyID(3, 4);
-    case "LoadFractionAvailable":
-      return new OcaPropertyID(3, 5);
-    case "StorageFractionAvailable":
-      return new OcaPropertyID(3, 6);
-    case "Location":
-      return new OcaPropertyID(3, 7);
+    if (!OcaPowerSupply_p)
+    {
+      OcaPowerSupply_p = new Properties([
+          new Property("Type", new signature(UINT8), 3, 1, false, false, null),
+          new Property("ModelInfo", new signature(STRING), 3, 2, false, false, null),
+          new Property("State", new signature(UINT8), 3, 3, false, false, null),
+          new Property("Charging", new signature(BOOLEAN), 3, 4, false, false, null),
+          new Property("LoadFractionAvailable", new signature(FLOAT32), 3, 5, true, false, null),
+          new Property("StorageFractionAvailable", new signature(FLOAT32), 3, 6, true, false, null),
+          new Property("Location", new signature(UINT8), 3, 7, true, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaPowerSupply_p;
   }
-
 
   Dispose()
   {
@@ -12362,6 +11473,7 @@ export class OcaPowerSupply extends OcaAgent
 
 
 let OcaEventHandler_OnEvent_as = null;
+let OcaEventHandler_p = null;
 
 /**
  * Base class for event handler objects. Application developers can
@@ -12414,23 +11526,16 @@ export class OcaEventHandler extends OcaAgent
     return this.device.send_command(cmd);
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaEventHandler_p)
+    {
+      OcaEventHandler_p = new Properties([
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaEventHandler_p;
   }
-
 
   Dispose()
   {
@@ -12454,6 +11559,7 @@ let OcaNumericObserverList_GetHysteresis_rs = null;
 let OcaNumericObserverList_SetHysteresis_as = null;
 let OcaNumericObserverList_GetPeriod_rs = null;
 let OcaNumericObserverList_SetPeriod_as = null;
+let OcaNumericObserverList_p = null;
 
 /**
  * Observer of a scalar numeric or boolean property ("target property")
@@ -12856,51 +11962,23 @@ export class OcaNumericObserverList extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-    if (id.PropertyIndex == 2)
-      return "ObservedProperties";
-    if (id.PropertyIndex == 3)
-      return "Threshold";
-    if (id.PropertyIndex == 4)
-      return "Operator";
-    if (id.PropertyIndex == 5)
-      return "TwoWay";
-    if (id.PropertyIndex == 6)
-      return "Hysteresis";
-    if (id.PropertyIndex == 7)
-      return "Period";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(3, 1);
-    case "ObservedProperties":
-      return new OcaPropertyID(3, 2);
-    case "Threshold":
-      return new OcaPropertyID(3, 3);
-    case "Operator":
-      return new OcaPropertyID(3, 4);
-    case "TwoWay":
-      return new OcaPropertyID(3, 5);
-    case "Hysteresis":
-      return new OcaPropertyID(3, 6);
-    case "Period":
-      return new OcaPropertyID(3, 7);
+    if (!OcaNumericObserverList_p)
+    {
+      OcaNumericObserverList_p = new Properties([
+          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("ObservedProperties", new signature(LIST(OcaProperty)), 3, 2, false, false, null),
+          new Property("Threshold", new signature(FLOAT64), 3, 3, false, false, null),
+          new Property("Operator", new signature(UINT8), 3, 4, false, false, null),
+          new Property("TwoWay", new signature(BOOLEAN), 3, 5, false, false, null),
+          new Property("Hysteresis", new signature(FLOAT64), 3, 6, false, false, null),
+          new Property("Period", new signature(FLOAT32), 3, 7, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaNumericObserverList_p;
   }
-
 
   Dispose()
   {
@@ -12932,6 +12010,7 @@ let OcaTask_GetStartTime_rs = null;
 let OcaTask_SetStartTime_as = null;
 let OcaTask_GetDuration_rs = null;
 let OcaTask_SetDuration_as = null;
+let OcaTask_p = null;
 
 /**
  * <ul> <li><font color="#223274"><b>Device action that starts, executes,
@@ -13295,51 +12374,23 @@ export class OcaTask extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Status";
-    if (id.PropertyIndex == 2)
-      return "Slot";
-    if (id.PropertyIndex == 3)
-      return "TimeMode";
-    if (id.PropertyIndex == 4)
-      return "TimeUnits";
-    if (id.PropertyIndex == 5)
-      return "ClockONo";
-    if (id.PropertyIndex == 6)
-      return "StartTime";
-    if (id.PropertyIndex == 7)
-      return "Duration";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Status":
-      return new OcaPropertyID(3, 1);
-    case "Slot":
-      return new OcaPropertyID(3, 2);
-    case "TimeMode":
-      return new OcaPropertyID(3, 3);
-    case "TimeUnits":
-      return new OcaPropertyID(3, 4);
-    case "ClockONo":
-      return new OcaPropertyID(3, 5);
-    case "StartTime":
-      return new OcaPropertyID(3, 6);
-    case "Duration":
-      return new OcaPropertyID(3, 7);
+    if (!OcaTask_p)
+    {
+      OcaTask_p = new Properties([
+          new Property("Status", new signature(OcaTaskStatus), 3, 1, false, false, null),
+          new Property("Slot", new signature(UINT16), 3, 2, false, false, null),
+          new Property("TimeMode", new signature(UINT8), 3, 3, false, false, null),
+          new Property("TimeUnits", new signature(UINT8), 3, 4, false, false, null),
+          new Property("ClockONo", new signature(UINT32), 3, 5, false, false, null),
+          new Property("StartTime", new signature(UINT64), 3, 6, false, false, null),
+          new Property("Duration", new signature(FLOAT32), 3, 7, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTask_p;
   }
-
 
   Dispose()
   {
@@ -13366,6 +12417,7 @@ let OcaTaskFactory_GetStartTime_rs = null;
 let OcaTaskFactory_SetStartTime_as = null;
 let OcaTaskFactory_GetDuration_rs = null;
 let OcaTaskFactory_SetDuration_as = null;
+let OcaTaskFactory_p = null;
 
 /**
  * Base class for constructors of OcaTask objects. Used by the OcaBlock
@@ -13598,39 +12650,20 @@ export class OcaTaskFactory extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(FLOAT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Slot";
-    if (id.PropertyIndex == 2)
-      return "TimeMode";
-    if (id.PropertyIndex == 3)
-      return "StartTime";
-    if (id.PropertyIndex == 4)
-      return "Duration";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Slot":
-      return new OcaPropertyID(3, 1);
-    case "TimeMode":
-      return new OcaPropertyID(3, 2);
-    case "StartTime":
-      return new OcaPropertyID(3, 3);
-    case "Duration":
-      return new OcaPropertyID(3, 4);
+    if (!OcaTaskFactory_p)
+    {
+      OcaTaskFactory_p = new Properties([
+          new Property("Slot", new signature(UINT16), 3, 1, false, false, null),
+          new Property("TimeMode", new signature(UINT8), 3, 2, false, false, null),
+          new Property("StartTime", new signature(UINT64), 3, 3, false, false, null),
+          new Property("Duration", new signature(FLOAT32), 3, 4, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTaskFactory_p;
   }
-
 
   Dispose()
   {
@@ -13650,6 +12683,7 @@ let OcaTaskGroup_DeleteTask_as = null;
 let OcaTaskGroup_GetTasks_rs = null;
 let OcaTaskGroup_GetID_rs = null;
 let OcaTaskGroup_SetID_as = null;
+let OcaTaskGroup_p = null;
 
 /**
  * A group of tasks that may be started and stopped as a unit.
@@ -13804,31 +12838,18 @@ export class OcaTaskGroup extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(LIST(UINT32)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ID";
-    if (id.PropertyIndex == 2)
-      return "Tasks";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ID":
-      return new OcaPropertyID(3, 1);
-    case "Tasks":
-      return new OcaPropertyID(3, 2);
+    if (!OcaTaskGroup_p)
+    {
+      OcaTaskGroup_p = new Properties([
+          new Property("ID", new signature(UINT16), 3, 1, false, false, null),
+          new Property("Tasks", new signature(LIST(UINT32)), 3, 2, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTaskGroup_p;
   }
-
 
   Dispose()
   {
@@ -13846,6 +12867,7 @@ let OcaRamperTask_GetInterpolationLaw_rs = null;
 let OcaRamperTask_SetInterpolationLaw_as = null;
 let OcaRamperTask_GetGoal_rs = null;
 let OcaRamperTask_SetGoal_as = null;
+let OcaRamperTask_p = null;
 
 /**
  * Agent that gradually changes a property setting from one value to
@@ -14015,35 +13037,19 @@ export class OcaRamperTask extends OcaTask
       new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(FLOAT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 4) return null;
-    if (id.DefLevel < 4) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "RampedProperty";
-    if (id.PropertyIndex == 2)
-      return "InterpolationLaw";
-    if (id.PropertyIndex == 3)
-      return "Goal";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "RampedProperty":
-      return new OcaPropertyID(4, 1);
-    case "InterpolationLaw":
-      return new OcaPropertyID(4, 2);
-    case "Goal":
-      return new OcaPropertyID(4, 3);
+    if (!OcaRamperTask_p)
+    {
+      OcaRamperTask_p = new Properties([
+          new Property("RampedProperty", new signature(OcaProperty), 4, 1, false, false, null),
+          new Property("InterpolationLaw", new signature(UINT8), 4, 2, false, false, null),
+          new Property("Goal", new signature(FLOAT64), 4, 3, false, false, null),
+        ], 4, OcaTask.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaRamperTask_p;
   }
-
 
   Dispose()
   {
@@ -14063,6 +13069,7 @@ let OcaMediaClock3_SetCurrentRate_as = null;
 let OcaMediaClock3_GetOffset_rs = null;
 let OcaMediaClock3_SetOffset_as = null;
 let OcaMediaClock3_GetSupportedRates_rs = null;
+let OcaMediaClock3_p = null;
 
 /**
  * A media clock, internal or external. OCA Connection Management 3
@@ -14271,39 +13278,20 @@ export class OcaMediaClock3 extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaMediaClockRate));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Availability";
-    if (id.PropertyIndex == 2)
-      return "TimeSourceONo";
-    if (id.PropertyIndex == 3)
-      return "Offset";
-    if (id.PropertyIndex == 4)
-      return "CurrentRate";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Availability":
-      return new OcaPropertyID(3, 1);
-    case "TimeSourceONo":
-      return new OcaPropertyID(3, 2);
-    case "Offset":
-      return new OcaPropertyID(3, 3);
-    case "CurrentRate":
-      return new OcaPropertyID(3, 4);
+    if (!OcaMediaClock3_p)
+    {
+      OcaMediaClock3_p = new Properties([
+          new Property("Availability", new signature(UINT8), 3, 1, false, false, null),
+          new Property("TimeSourceONo", new signature(UINT32), 3, 2, false, false, null),
+          new Property("Offset", new signature(UINT64), 3, 3, false, false, null),
+          new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaMediaClock3_p;
   }
-
 
   Dispose()
   {
@@ -14327,6 +13315,7 @@ let OcaTimeSource_SetReferenceType_as = null;
 let OcaTimeSource_GetReferenceID_rs = null;
 let OcaTimeSource_SetReferenceID_as = null;
 let OcaTimeSource_GetSyncStatus_rs = null;
+let OcaTimeSource_p = null;
 
 /**
  * A time source, internal or external. See RFC 7273 for a detailed
@@ -14600,47 +13589,22 @@ export class OcaTimeSource extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Availability";
-    if (id.PropertyIndex == 2)
-      return "Protocol";
-    if (id.PropertyIndex == 3)
-      return "Parameters";
-    if (id.PropertyIndex == 4)
-      return "ReferenceType";
-    if (id.PropertyIndex == 5)
-      return "ReferenceID";
-    if (id.PropertyIndex == 6)
-      return "SyncStatus";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Availability":
-      return new OcaPropertyID(3, 1);
-    case "Protocol":
-      return new OcaPropertyID(3, 2);
-    case "Parameters":
-      return new OcaPropertyID(3, 3);
-    case "ReferenceType":
-      return new OcaPropertyID(3, 4);
-    case "ReferenceID":
-      return new OcaPropertyID(3, 5);
-    case "SyncStatus":
-      return new OcaPropertyID(3, 6);
+    if (!OcaTimeSource_p)
+    {
+      OcaTimeSource_p = new Properties([
+          new Property("Availability", new signature(UINT8), 3, 1, false, false, null),
+          new Property("Protocol", new signature(UINT8), 3, 2, false, false, null),
+          new Property("Parameters", new signature(STRING), 3, 3, false, false, null),
+          new Property("ReferenceType", new signature(UINT8), 3, 4, false, false, null),
+          new Property("ReferenceID", new signature(STRING), 3, 5, false, false, null),
+          new Property("SyncStatus", new signature(UINT8), 3, 6, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTimeSource_p;
   }
-
 
   Dispose()
   {
@@ -14660,6 +13624,7 @@ let OcaPhysicalPosition_GetPositionAndRotation_rs = null;
 let OcaPhysicalPosition_SetPositionAndRotation_as = null;
 let OcaPhysicalPosition_GetPositionAndRotationFlags_rs = null;
 let OcaPhysicalPosition_SetPositionAndRotationFlags_as = null;
+let OcaPhysicalPosition_p = null;
 
 /**
  * Physical position of device or an element of it. Three position
@@ -14779,31 +13744,18 @@ export class OcaPhysicalPosition extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "PositionAndRotation";
-    if (id.PropertyIndex == 2)
-      return "PositionAndRotationFlags";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "PositionAndRotation":
-      return new OcaPropertyID(3, 1);
-    case "PositionAndRotationFlags":
-      return new OcaPropertyID(3, 2);
+    if (!OcaPhysicalPosition_p)
+    {
+      OcaPhysicalPosition_p = new Properties([
+          new Property("PositionAndRotation", new signature(FLOAT32), 3, 1, false, false, null),
+          new Property("PositionAndRotationFlags", new signature(UINT16), 3, 2, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaPhysicalPosition_p;
   }
-
 
   Dispose()
   {
@@ -14825,6 +13777,7 @@ let OcaApplicationNetwork_GetState_rs = null;
 let OcaApplicationNetwork_GetErrorCode_rs = null;
 let OcaApplicationNetwork_Control_as = null;
 let OcaApplicationNetwork_GetPath_rs = null;
+let OcaApplicationNetwork_p = null;
 
 /**
  * Abstract base class from which the application network classes
@@ -15078,47 +14031,22 @@ export class OcaApplicationNetwork extends OcaRoot
       new PropertyEvent(this, new OcaPropertyID(2, 6), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 2) return null;
-    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Label";
-    if (id.PropertyIndex == 2)
-      return "Owner";
-    if (id.PropertyIndex == 3)
-      return "ServiceID";
-    if (id.PropertyIndex == 4)
-      return "SystemInterfaces";
-    if (id.PropertyIndex == 5)
-      return "State";
-    if (id.PropertyIndex == 6)
-      return "ErrorCode";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Label":
-      return new OcaPropertyID(2, 1);
-    case "Owner":
-      return new OcaPropertyID(2, 2);
-    case "ServiceID":
-      return new OcaPropertyID(2, 3);
-    case "SystemInterfaces":
-      return new OcaPropertyID(2, 4);
-    case "State":
-      return new OcaPropertyID(2, 5);
-    case "ErrorCode":
-      return new OcaPropertyID(2, 6);
+    if (!OcaApplicationNetwork_p)
+    {
+      OcaApplicationNetwork_p = new Properties([
+          new Property("Label", new signature(STRING), 2, 1, false, true, null),
+          new Property("Owner", new signature(UINT32), 2, 2, false, true, null),
+          new Property("ServiceID", new signature(BLOB), 2, 3, false, false, null),
+          new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceDescriptor)), 2, 4, false, false, null),
+          new Property("State", new signature(UINT8), 2, 5, false, false, null),
+          new Property("ErrorCode", new signature(UINT16), 2, 6, false, false, null),
+        ], 2, OcaRoot.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaApplicationNetwork_p;
   }
-
 
   Dispose()
   {
@@ -15135,6 +14063,7 @@ export class OcaApplicationNetwork extends OcaRoot
 
 
 let OcaControlNetwork_GetControlProtocol_rs = null;
+let OcaControlNetwork_p = null;
 
 /**
  * This was not documented in the OCA standard.
@@ -15190,27 +14119,17 @@ export class OcaControlNetwork extends OcaApplicationNetwork
       new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Protocol";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Protocol":
-      return new OcaPropertyID(3, 1);
+    if (!OcaControlNetwork_p)
+    {
+      OcaControlNetwork_p = new Properties([
+          new Property("Protocol", new signature(UINT8), 3, 1, false, false, ["ControlProtocol"]),
+        ], 3, OcaApplicationNetwork.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaControlNetwork_p;
   }
-
 
   Dispose()
   {
@@ -15251,6 +14170,7 @@ let OcaMediaTransportNetwork_SetConnectorCoding_as = null;
 let OcaMediaTransportNetwork_DeleteConnector_as = null;
 let OcaMediaTransportNetwork_GetAlignmentLevel_rs = null;
 let OcaMediaTransportNetwork_GetAlignmentGain_rs = null;
+let OcaMediaTransportNetwork_p = null;
 
 /**
  * This was not documented in the OCA standard.
@@ -15860,55 +14780,24 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
       new PropertyEvent(this, new OcaPropertyID(0, 0), new signature(LIST(OcaMediaSourceConnector)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Protocol";
-    if (id.PropertyIndex == 2)
-      return "Ports";
-    if (id.PropertyIndex == 3)
-      return "MaxSourceConnectors";
-    if (id.PropertyIndex == 4)
-      return "MaxSinkConnectors";
-    if (id.PropertyIndex == 5)
-      return "MaxPinsPerConnector";
-    if (id.PropertyIndex == 6)
-      return "MaxPortsPerPin";
-    if (id.PropertyIndex == 7)
-      return "AlignmentLevel";
-    if (id.PropertyIndex == 8)
-      return "AlignmentGain";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Protocol":
-      return new OcaPropertyID(3, 1);
-    case "Ports":
-      return new OcaPropertyID(3, 2);
-    case "MaxSourceConnectors":
-      return new OcaPropertyID(3, 3);
-    case "MaxSinkConnectors":
-      return new OcaPropertyID(3, 4);
-    case "MaxPinsPerConnector":
-      return new OcaPropertyID(3, 5);
-    case "MaxPortsPerPin":
-      return new OcaPropertyID(3, 6);
-    case "AlignmentLevel":
-      return new OcaPropertyID(3, 7);
-    case "AlignmentGain":
-      return new OcaPropertyID(3, 8);
+    if (!OcaMediaTransportNetwork_p)
+    {
+      OcaMediaTransportNetwork_p = new Properties([
+          new Property("Protocol", new signature(UINT8), 3, 1, false, false, ["MediaProtocol"]),
+          new Property("Ports", new signature(LIST(OcaPort)), 3, 2, false, false, null),
+          new Property("MaxSourceConnectors", new signature(UINT16), 3, 3, false, false, null),
+          new Property("MaxSinkConnectors", new signature(UINT16), 3, 4, false, false, null),
+          new Property("MaxPinsPerConnector", new signature(UINT16), 3, 5, false, false, null),
+          new Property("MaxPortsPerPin", new signature(UINT16), 3, 6, false, false, null),
+          new Property("AlignmentLevel", new signature(FLOAT32), 3, 7, false, false, null),
+          new Property("AlignmentGain", new signature(FLOAT32), 3, 8, false, false, null),
+        ], 3, OcaApplicationNetwork.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaMediaTransportNetwork_p;
   }
-
 
   Dispose()
   {
@@ -15931,6 +14820,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
 }
 
 
+let OcaManager_p = null;
 
 /**
  * Abstract base class for classes that represent non-audio (i.e. control
@@ -15966,23 +14856,16 @@ export class OcaManager extends OcaRoot
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 2) return null;
-    if (id.DefLevel < 2) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaManager_p)
+    {
+      OcaManager_p = new Properties([
+        ], 2, OcaRoot.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaManager_p;
   }
-
 
   Dispose()
   {
@@ -16011,6 +14894,7 @@ let OcaDeviceManager_GetMessage_rs = null;
 let OcaDeviceManager_SetMessage_as = null;
 let OcaDeviceManager_GetManagers_rs = null;
 let OcaDeviceManager_GetDeviceRevisionID_rs = null;
+let OcaDeviceManager_p = null;
 
 /**
  * Mandatory manager that contains information relevant to the whole
@@ -16529,79 +15413,30 @@ export class OcaDeviceManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 14), new signature(STRING));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ModelGUID";
-    if (id.PropertyIndex == 2)
-      return "SerialNumber";
-    if (id.PropertyIndex == 3)
-      return "ModelDescription";
-    if (id.PropertyIndex == 4)
-      return "DeviceName";
-    if (id.PropertyIndex == 5)
-      return "OcaVersion";
-    if (id.PropertyIndex == 6)
-      return "DeviceRole";
-    if (id.PropertyIndex == 7)
-      return "UserInventoryCode";
-    if (id.PropertyIndex == 8)
-      return "Enabled";
-    if (id.PropertyIndex == 9)
-      return "State";
-    if (id.PropertyIndex == 10)
-      return "Busy";
-    if (id.PropertyIndex == 11)
-      return "ResetCause";
-    if (id.PropertyIndex == 12)
-      return "Message";
-    if (id.PropertyIndex == 13)
-      return "Managers";
-    if (id.PropertyIndex == 14)
-      return "DeviceRevisionID";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ModelGUID":
-      return new OcaPropertyID(3, 1);
-    case "SerialNumber":
-      return new OcaPropertyID(3, 2);
-    case "ModelDescription":
-      return new OcaPropertyID(3, 3);
-    case "DeviceName":
-      return new OcaPropertyID(3, 4);
-    case "OcaVersion":
-      return new OcaPropertyID(3, 5);
-    case "DeviceRole":
-      return new OcaPropertyID(3, 6);
-    case "UserInventoryCode":
-      return new OcaPropertyID(3, 7);
-    case "Enabled":
-      return new OcaPropertyID(3, 8);
-    case "State":
-      return new OcaPropertyID(3, 9);
-    case "Busy":
-      return new OcaPropertyID(3, 10);
-    case "ResetCause":
-      return new OcaPropertyID(3, 11);
-    case "Message":
-      return new OcaPropertyID(3, 12);
-    case "Managers":
-      return new OcaPropertyID(3, 13);
-    case "DeviceRevisionID":
-      return new OcaPropertyID(3, 14);
+    if (!OcaDeviceManager_p)
+    {
+      OcaDeviceManager_p = new Properties([
+          new Property("ModelGUID", new signature(OcaModelGUID), 3, 1, false, false, null),
+          new Property("SerialNumber", new signature(STRING), 3, 2, false, false, null),
+          new Property("ModelDescription", new signature(OcaModelDescription), 3, 3, false, false, null),
+          new Property("DeviceName", new signature(STRING), 3, 4, false, false, null),
+          new Property("OcaVersion", new signature(UINT16), 3, 5, false, false, null),
+          new Property("DeviceRole", new signature(STRING), 3, 6, false, false, null),
+          new Property("UserInventoryCode", new signature(STRING), 3, 7, false, false, null),
+          new Property("Enabled", new signature(BOOLEAN), 3, 8, false, false, null),
+          new Property("State", new signature(UINT16), 3, 9, false, false, null),
+          new Property("Busy", new signature(BOOLEAN), 3, 10, false, false, null),
+          new Property("ResetCause", new signature(UINT8), 3, 11, false, false, null),
+          new Property("Message", new signature(STRING), 3, 12, false, false, null),
+          new Property("Managers", new signature(LIST(OcaManagerDescriptor)), 3, 13, false, false, null),
+          new Property("DeviceRevisionID", new signature(STRING), 3, 14, true, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDeviceManager_p;
   }
-
 
   Dispose()
   {
@@ -16628,6 +15463,7 @@ export class OcaDeviceManager extends OcaManager
 let OcaSecurityManager_AddPreSharedKey_as = null;
 let OcaSecurityManager_ChangePreSharedKey_as = null;
 let OcaSecurityManager_DeletePreSharedKey_as = null;
+let OcaSecurityManager_p = null;
 
 /**
  * Manager that collects and controls security settings (including
@@ -16766,27 +15602,17 @@ export class OcaSecurityManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(BOOLEAN));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "secureControlData";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "secureControlData":
-      return new OcaPropertyID(3, 1);
+    if (!OcaSecurityManager_p)
+    {
+      OcaSecurityManager_p = new Properties([
+          new Property("secureControlData", new signature(BOOLEAN), 3, 1, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSecurityManager_p;
   }
-
 
   Dispose()
   {
@@ -16802,6 +15628,7 @@ let OcaFirmwareManager_BeginActiveImageUpdate_as = null;
 let OcaFirmwareManager_AddImageData_as = null;
 let OcaFirmwareManager_VerifyImage_as = null;
 let OcaFirmwareManager_BeginPassiveComponentUpdate_as = null;
+let OcaFirmwareManager_p = null;
 
 /**
  * Optional manager that manages versions of the different firmware and
@@ -17015,27 +15842,17 @@ export class OcaFirmwareManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaVersion)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ComponentVersions";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ComponentVersions":
-      return new OcaPropertyID(3, 1);
+    if (!OcaFirmwareManager_p)
+    {
+      OcaFirmwareManager_p = new Properties([
+          new Property("ComponentVersions", new signature(LIST(OcaVersion)), 3, 1, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaFirmwareManager_p;
   }
-
 
   Dispose()
   {
@@ -17051,6 +15868,7 @@ let OcaSubscriptionManager_AddSubscription_as = null;
 let OcaSubscriptionManager_AddPropertyChangeSubscription_as = null;
 let OcaSubscriptionManager_RemovePropertyChangeSubscription_as = null;
 let OcaSubscriptionManager_GetMaximumSubscriberContextLength_rs = null;
+let OcaSubscriptionManager_p = null;
 
 /**
  * Manager that collects and controls the event subscriptions of the
@@ -17296,27 +16114,17 @@ export class OcaSubscriptionManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(3, 1);
+    if (!OcaSubscriptionManager_p)
+    {
+      OcaSubscriptionManager_p = new Properties([
+          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaSubscriptionManager_p;
   }
-
 
   Dispose()
   {
@@ -17335,6 +16143,7 @@ let OcaPowerManager_GetPowerSupplies_rs = null;
 let OcaPowerManager_GetActivePowerSupplies_rs = null;
 let OcaPowerManager_ExchangePowerSupply_as = null;
 let OcaPowerManager_GetAutoState_rs = null;
+let OcaPowerManager_p = null;
 
 /**
  * Optional manager that manages power settings and state. <ul> <li>May
@@ -17531,43 +16340,21 @@ export class OcaPowerManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-    if (id.PropertyIndex == 2)
-      return "PowerSupplies";
-    if (id.PropertyIndex == 3)
-      return "ActivePowerSupplies";
-    if (id.PropertyIndex == 4)
-      return "AutoState";
-    if (id.PropertyIndex == 5)
-      return "TargetState";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(3, 1);
-    case "PowerSupplies":
-      return new OcaPropertyID(3, 2);
-    case "ActivePowerSupplies":
-      return new OcaPropertyID(3, 3);
-    case "AutoState":
-      return new OcaPropertyID(3, 4);
-    case "TargetState":
-      return new OcaPropertyID(3, 5);
+    if (!OcaPowerManager_p)
+    {
+      OcaPowerManager_p = new Properties([
+          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("PowerSupplies", new signature(LIST(UINT32)), 3, 2, false, false, null),
+          new Property("ActivePowerSupplies", new signature(LIST(UINT32)), 3, 3, false, false, null),
+          new Property("AutoState", new signature(BOOLEAN), 3, 4, false, false, null),
+          new Property("TargetState", new signature(UINT8), 3, 5, true, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaPowerManager_p;
   }
-
 
   Dispose()
   {
@@ -17586,6 +16373,7 @@ let OcaNetworkManager_GetNetworks_rs = null;
 let OcaNetworkManager_GetStreamNetworks_rs = null;
 let OcaNetworkManager_GetControlNetworks_rs = null;
 let OcaNetworkManager_GetMediaTransportNetworks_rs = null;
+let OcaNetworkManager_p = null;
 
 /**
  * Optional manager that collects all media transport and control
@@ -17737,39 +16525,20 @@ export class OcaNetworkManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(LIST(UINT32)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Networks";
-    if (id.PropertyIndex == 2)
-      return "StreamNetworks";
-    if (id.PropertyIndex == 3)
-      return "ControlNetworks";
-    if (id.PropertyIndex == 4)
-      return "MediaTransportNetworks";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Networks":
-      return new OcaPropertyID(3, 1);
-    case "StreamNetworks":
-      return new OcaPropertyID(3, 2);
-    case "ControlNetworks":
-      return new OcaPropertyID(3, 3);
-    case "MediaTransportNetworks":
-      return new OcaPropertyID(3, 4);
+    if (!OcaNetworkManager_p)
+    {
+      OcaNetworkManager_p = new Properties([
+          new Property("Networks", new signature(LIST(UINT32)), 3, 1, false, false, null),
+          new Property("StreamNetworks", new signature(LIST(UINT32)), 3, 2, false, false, null),
+          new Property("ControlNetworks", new signature(LIST(UINT32)), 3, 3, false, false, null),
+          new Property("MediaTransportNetworks", new signature(LIST(UINT32)), 3, 4, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaNetworkManager_p;
   }
-
 
   Dispose()
   {
@@ -17786,6 +16555,7 @@ export class OcaNetworkManager extends OcaManager
 let OcaMediaClockManager_GetClocks_rs = null;
 let OcaMediaClockManager_GetMediaClockTypesSupported_rs = null;
 let OcaMediaClockManager_GetClock3s_rs = null;
+let OcaMediaClockManager_p = null;
 
 /**
  * Optional manager that collects all media clocks the device uses. <ul>
@@ -17908,35 +16678,19 @@ export class OcaMediaClockManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(LIST(UINT32)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "ClockSourceTypesSupported";
-    if (id.PropertyIndex == 2)
-      return "Clocks";
-    if (id.PropertyIndex == 3)
-      return "Clock3s";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ClockSourceTypesSupported":
-      return new OcaPropertyID(3, 1);
-    case "Clocks":
-      return new OcaPropertyID(3, 2);
-    case "Clock3s":
-      return new OcaPropertyID(3, 3);
+    if (!OcaMediaClockManager_p)
+    {
+      OcaMediaClockManager_p = new Properties([
+          new Property("ClockSourceTypesSupported", new signature(LIST(UINT8)), 3, 1, false, false, ["MediaClockTypesSupported"]),
+          new Property("Clocks", new signature(LIST(UINT32)), 3, 2, false, false, null),
+          new Property("Clock3s", new signature(LIST(UINT32)), 3, 3, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaMediaClockManager_p;
   }
-
 
   Dispose()
   {
@@ -17958,6 +16712,7 @@ let OcaLibraryManager_GetLibraryList_as = null;
 let OcaLibraryManager_GetLibraryList_rs = null;
 let OcaLibraryManager_GetCurrentPatch_rs = null;
 let OcaLibraryManager_SetCurrentPatch_as = null;
+let OcaLibraryManager_p = null;
 
 /**
  * Optional manager for handling device presets -- patch and parset
@@ -18131,35 +16886,19 @@ export class OcaLibraryManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT16));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "PatchLibraries";
-    if (id.PropertyIndex == 2)
-      return "ParsetLibraries";
-    if (id.PropertyIndex == 3)
-      return "CurrentPatch";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "PatchLibraries":
-      return new OcaPropertyID(3, 1);
-    case "ParsetLibraries":
-      return new OcaPropertyID(3, 2);
-    case "CurrentPatch":
-      return new OcaPropertyID(3, 3);
+    if (!OcaLibraryManager_p)
+    {
+      OcaLibraryManager_p = new Properties([
+          new Property("PatchLibraries", new signature(LIST(UINT32)), 3, 1, false, false, null),
+          new Property("ParsetLibraries", new signature(LIST(UINT32)), 3, 2, false, false, null),
+          new Property("CurrentPatch", new signature(UINT16), 3, 3, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaLibraryManager_p;
   }
-
 
   Dispose()
   {
@@ -18172,6 +16911,7 @@ export class OcaLibraryManager extends OcaManager
 }
 
 
+let OcaAudioProcessingManager_p = null;
 
 /**
  * Placeholder for optional manager that in future versions of the
@@ -18207,23 +16947,16 @@ export class OcaAudioProcessingManager extends OcaManager
   }
 
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaAudioProcessingManager_p)
+    {
+      OcaAudioProcessingManager_p = new Properties([
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaAudioProcessingManager_p;
   }
-
 
   Dispose()
   {
@@ -18238,6 +16971,7 @@ let OcaDeviceTimeManager_SetDeviceTime_as = null;
 let OcaDeviceTimeManager_GetTimeSources_rs = null;
 let OcaDeviceTimeManager_GetCurrentDeviceTimeSource_rs = null;
 let OcaDeviceTimeManager_SetCurrentDeviceTimeSource_as = null;
+let OcaDeviceTimeManager_p = null;
 
 /**
  * Manager that allows controlling and monitoring a device's time-of-day
@@ -18380,31 +17114,18 @@ export class OcaDeviceTimeManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT32));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "TimeSources";
-    if (id.PropertyIndex == 1)
-      return "CurrentDeviceTimeSource";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "TimeSources":
-      return new OcaPropertyID(3, 1);
-    case "CurrentDeviceTimeSource":
-      return new OcaPropertyID(3, 1);
+    if (!OcaDeviceTimeManager_p)
+    {
+      OcaDeviceTimeManager_p = new Properties([
+          new Property("TimeSources", new signature(LIST(UINT32)), 3, 1, false, false, null),
+          new Property("CurrentDeviceTimeSource", new signature(UINT32), 3, 1, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDeviceTimeManager_p;
   }
-
 
   Dispose()
   {
@@ -18423,6 +17144,7 @@ let OcaTaskManager_GetTaskGroups_rs = null;
 let OcaTaskManager_AddSlot_as = null;
 let OcaTaskManager_DeleteSlot_as = null;
 let OcaTaskManager_GetSlots_rs = null;
+let OcaTaskManager_p = null;
 
 /**
  * Optional manager that collects OcaTask and OcaTaskGroup objects. Tasks
@@ -18609,39 +17331,20 @@ export class OcaTaskManager extends OcaManager
     return this.device.send_command(cmd, rs);
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-    if (id.PropertyIndex == 2)
-      return "Tasks";
-    if (id.PropertyIndex == 3)
-      return "TaskGroups";
-    if (id.PropertyIndex == 4)
-      return "Slots";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(3, 1);
-    case "Tasks":
-      return new OcaPropertyID(3, 2);
-    case "TaskGroups":
-      return new OcaPropertyID(3, 3);
-    case "Slots":
-      return new OcaPropertyID(3, 4);
+    if (!OcaTaskManager_p)
+    {
+      OcaTaskManager_p = new Properties([
+          new Property("State", new signature(UINT8), 3, 1, true, true, null),
+          new Property("Tasks", new signature(MAP(UINT32, UINT32)), 3, 2, true, true, null),
+          new Property("TaskGroups", new signature(MAP(UINT16, UINT32)), 3, 3, true, true, null),
+          new Property("Slots", new signature(MAP(UINT16, UINT16)), 3, 4, true, true, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaTaskManager_p;
   }
-
 
   Dispose()
   {
@@ -18653,6 +17356,7 @@ export class OcaTaskManager extends OcaManager
 
 let OcaCodingManager_GetAvailableEncodingSchemes_rs = null;
 let OcaCodingManager_GetAvailableDecodingSchemes_rs = null;
+let OcaCodingManager_p = null;
 
 /**
  * Optional manager that collects all media decoders/encoders (Codecs)
@@ -18743,31 +17447,18 @@ export class OcaCodingManager extends OcaManager
       new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(MAP(UINT16, STRING)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "AvailableEncodingSchemes";
-    if (id.PropertyIndex == 2)
-      return "AvailableDecodingSchemes";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "AvailableEncodingSchemes":
-      return new OcaPropertyID(3, 1);
-    case "AvailableDecodingSchemes":
-      return new OcaPropertyID(3, 2);
+    if (!OcaCodingManager_p)
+    {
+      OcaCodingManager_p = new Properties([
+          new Property("AvailableEncodingSchemes", new signature(MAP(UINT16, STRING)), 3, 1, false, false, null),
+          new Property("AvailableDecodingSchemes", new signature(MAP(UINT16, STRING)), 3, 2, false, false, null),
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaCodingManager_p;
   }
-
 
   Dispose()
   {
@@ -18781,6 +17472,7 @@ export class OcaCodingManager extends OcaManager
 
 let OcaDiagnosticManager_GetLockStatus_as = null;
 let OcaDiagnosticManager_GetLockStatus_rs = null;
+let OcaDiagnosticManager_p = null;
 
 /**
  * Optional manager that provides application diagnostic aids. Unlike
@@ -18835,23 +17527,16 @@ export class OcaDiagnosticManager extends OcaManager
     return this.device.send_command(cmd, rs);
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
+    if (!OcaDiagnosticManager_p)
+    {
+      OcaDiagnosticManager_p = new Properties([
+        ], 3, OcaManager.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaDiagnosticManager_p;
   }
-
 
   Dispose()
   {
@@ -18872,6 +17557,7 @@ let OcaNetworkSignalChannel_RemoveFromConnector_as = null;
 let OcaNetworkSignalChannel_SetIDAdvertised_as = null;
 let OcaNetworkSignalChannel_SetNetwork_as = null;
 let OcaNetworkSignalChannel_SetRemoteChannelID_as = null;
+let OcaNetworkSignalChannel_p = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by features of the
@@ -19163,47 +17849,22 @@ export class OcaNetworkSignalChannel extends OcaWorker
       new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 3)
-      return "ConnectorPins";
-    if (id.PropertyIndex == 1)
-      return "IDAdvertised";
-    if (id.PropertyIndex == 2)
-      return "Network";
-    if (id.PropertyIndex == 4)
-      return "RemoteChannelID";
-    if (id.PropertyIndex == 5)
-      return "SourceOrSink";
-    if (id.PropertyIndex == 6)
-      return "Status";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ConnectorPins":
-      return new OcaPropertyID(3, 3);
-    case "IDAdvertised":
-      return new OcaPropertyID(3, 1);
-    case "Network":
-      return new OcaPropertyID(3, 2);
-    case "RemoteChannelID":
-      return new OcaPropertyID(3, 4);
-    case "SourceOrSink":
-      return new OcaPropertyID(3, 5);
-    case "Status":
-      return new OcaPropertyID(3, 6);
+    if (!OcaNetworkSignalChannel_p)
+    {
+      OcaNetworkSignalChannel_p = new Properties([
+          new Property("ConnectorPins", new signature(MAP(UINT32, UINT16)), 3, 3, false, false, null),
+          new Property("IDAdvertised", new signature(BLOB), 3, 1, false, false, null),
+          new Property("Network", new signature(UINT32), 3, 2, false, false, null),
+          new Property("RemoteChannelID", new signature(BLOB), 3, 4, false, false, null),
+          new Property("SourceOrSink", new signature(UINT8), 3, 5, false, false, null),
+          new Property("Status", new signature(UINT8), 3, 6, false, false, null),
+        ], 3, OcaWorker.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaNetworkSignalChannel_p;
   }
-
 
   Dispose()
   {
@@ -19229,6 +17890,7 @@ let OcaNetwork_GetStatistics_rs = null;
 let OcaNetwork_GetSystemInterfaces_rs = null;
 let OcaNetwork_SetSystemInterfaces_as = null;
 let OcaNetwork_GetMediaPorts_rs = null;
+let OcaNetwork_p = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by class
@@ -19540,55 +18202,24 @@ export class OcaNetwork extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 8), new signature(OcaNetworkStatistics));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "LinkType";
-    if (id.PropertyIndex == 2)
-      return "IDAdvertised";
-    if (id.PropertyIndex == 3)
-      return "ControlProtocol";
-    if (id.PropertyIndex == 4)
-      return "MediaProtocol";
-    if (id.PropertyIndex == 5)
-      return "Status";
-    if (id.PropertyIndex == 6)
-      return "SystemInterfaces";
-    if (id.PropertyIndex == 7)
-      return "MediaPorts";
-    if (id.PropertyIndex == 8)
-      return "Statistics";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "LinkType":
-      return new OcaPropertyID(3, 1);
-    case "IDAdvertised":
-      return new OcaPropertyID(3, 2);
-    case "ControlProtocol":
-      return new OcaPropertyID(3, 3);
-    case "MediaProtocol":
-      return new OcaPropertyID(3, 4);
-    case "Status":
-      return new OcaPropertyID(3, 5);
-    case "SystemInterfaces":
-      return new OcaPropertyID(3, 6);
-    case "MediaPorts":
-      return new OcaPropertyID(3, 7);
-    case "Statistics":
-      return new OcaPropertyID(3, 8);
+    if (!OcaNetwork_p)
+    {
+      OcaNetwork_p = new Properties([
+          new Property("LinkType", new signature(UINT8), 3, 1, true, true, null),
+          new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
+          new Property("ControlProtocol", new signature(UINT8), 3, 3, false, false, null),
+          new Property("MediaProtocol", new signature(UINT8), 3, 4, false, false, null),
+          new Property("Status", new signature(UINT8), 3, 5, false, false, null),
+          new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null),
+          new Property("MediaPorts", new signature(LIST(UINT32)), 3, 7, false, false, null),
+          new Property("Statistics", new signature(OcaNetworkStatistics), 3, 8, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaNetwork_p;
   }
-
 
   Dispose()
   {
@@ -19619,6 +18250,7 @@ let OcaRamper_GetInterpolationLaw_rs = null;
 let OcaRamper_SetInterpolationLaw_as = null;
 let OcaRamper_GetGoal_rs = null;
 let OcaRamper_SetGoal_as = null;
+let OcaRamper_p = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by </i><b><i>OcaRamperTask</i></b>
@@ -19960,51 +18592,23 @@ export class OcaRamper extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(FLOAT64));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "State";
-    if (id.PropertyIndex == 2)
-      return "RampedProperty";
-    if (id.PropertyIndex == 3)
-      return "TimeMode";
-    if (id.PropertyIndex == 4)
-      return "StartTime";
-    if (id.PropertyIndex == 5)
-      return "Duration";
-    if (id.PropertyIndex == 6)
-      return "InterpolationLaw";
-    if (id.PropertyIndex == 7)
-      return "Goal";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "State":
-      return new OcaPropertyID(3, 1);
-    case "RampedProperty":
-      return new OcaPropertyID(3, 2);
-    case "TimeMode":
-      return new OcaPropertyID(3, 3);
-    case "StartTime":
-      return new OcaPropertyID(3, 4);
-    case "Duration":
-      return new OcaPropertyID(3, 5);
-    case "InterpolationLaw":
-      return new OcaPropertyID(3, 6);
-    case "Goal":
-      return new OcaPropertyID(3, 7);
+    if (!OcaRamper_p)
+    {
+      OcaRamper_p = new Properties([
+          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("RampedProperty", new signature(OcaProperty), 3, 2, false, false, null),
+          new Property("TimeMode", new signature(UINT8), 3, 3, false, false, null),
+          new Property("StartTime", new signature(UINT64), 3, 4, false, false, null),
+          new Property("Duration", new signature(FLOAT32), 3, 5, false, false, null),
+          new Property("InterpolationLaw", new signature(UINT8), 3, 6, false, false, null),
+          new Property("Goal", new signature(FLOAT64), 3, 7, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaRamper_p;
   }
-
 
   Dispose()
   {
@@ -20029,6 +18633,7 @@ let OcaMediaClock_GetSupportedRates_rs = null;
 let OcaMediaClock_GetRate_rs = null;
 let OcaMediaClock_SetRate_as = null;
 let OcaMediaClock_GetLockState_rs = null;
+let OcaMediaClock_p = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by
@@ -20239,43 +18844,21 @@ export class OcaMediaClock extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 1)
-      return "Type";
-    if (id.PropertyIndex == 2)
-      return "DomainID";
-    if (id.PropertyIndex == 3)
-      return "RatesSupported";
-    if (id.PropertyIndex == 4)
-      return "CurrentRate";
-    if (id.PropertyIndex == 5)
-      return "LockState";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "Type":
-      return new OcaPropertyID(3, 1);
-    case "DomainID":
-      return new OcaPropertyID(3, 2);
-    case "RatesSupported":
-      return new OcaPropertyID(3, 3);
-    case "CurrentRate":
-      return new OcaPropertyID(3, 4);
-    case "LockState":
-      return new OcaPropertyID(3, 5);
+    if (!OcaMediaClock_p)
+    {
+      OcaMediaClock_p = new Properties([
+          new Property("Type", new signature(UINT8), 3, 1, false, false, null),
+          new Property("DomainID", new signature(UINT16), 3, 2, false, false, null),
+          new Property("RatesSupported", new signature(LIST(OcaMediaClockRate)), 3, 3, true, true, null),
+          new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
+          new Property("LockState", new signature(UINT8), 3, 5, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaMediaClock_p;
   }
-
 
   Dispose()
   {
@@ -20306,6 +18889,7 @@ let OcaStreamNetwork_GetSignalChannelsSource_rs = null;
 let OcaStreamNetwork_SetSignalChannelsSource_as = null;
 let OcaStreamNetwork_GetSignalChannelsSink_rs = null;
 let OcaStreamNetwork_SetSignalChannelsSink_as = null;
+let OcaStreamNetwork_p = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by class
@@ -20819,67 +19403,27 @@ export class OcaStreamNetwork extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(LIST(OcaNetworkSystemInterfaceID)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 3)
-      return "ControlProtocol";
-    if (id.PropertyIndex == 2)
-      return "IDAdvertised";
-    if (id.PropertyIndex == 1)
-      return "LinkType";
-    if (id.PropertyIndex == 4)
-      return "MediaProtocol";
-    if (id.PropertyIndex == 10)
-      return "SignalChannelsSink";
-    if (id.PropertyIndex == 9)
-      return "SignalChannelsSource";
-    if (id.PropertyIndex == 11)
-      return "Statistics";
-    if (id.PropertyIndex == 5)
-      return "Status";
-    if (id.PropertyIndex == 8)
-      return "StreamConnectorsSink";
-    if (id.PropertyIndex == 7)
-      return "StreamConnectorsSource";
-    if (id.PropertyIndex == 6)
-      return "SystemInterfaces";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "ControlProtocol":
-      return new OcaPropertyID(3, 3);
-    case "IDAdvertised":
-      return new OcaPropertyID(3, 2);
-    case "LinkType":
-      return new OcaPropertyID(3, 1);
-    case "MediaProtocol":
-      return new OcaPropertyID(3, 4);
-    case "SignalChannelsSink":
-      return new OcaPropertyID(3, 10);
-    case "SignalChannelsSource":
-      return new OcaPropertyID(3, 9);
-    case "Statistics":
-      return new OcaPropertyID(3, 11);
-    case "Status":
-      return new OcaPropertyID(3, 5);
-    case "StreamConnectorsSink":
-      return new OcaPropertyID(3, 8);
-    case "StreamConnectorsSource":
-      return new OcaPropertyID(3, 7);
-    case "SystemInterfaces":
-      return new OcaPropertyID(3, 6);
+    if (!OcaStreamNetwork_p)
+    {
+      OcaStreamNetwork_p = new Properties([
+          new Property("ControlProtocol", new signature(UINT8), 3, 3, false, false, null),
+          new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
+          new Property("LinkType", new signature(UINT8), 3, 1, true, true, null),
+          new Property("MediaProtocol", new signature(UINT8), 3, 4, false, false, null),
+          new Property("SignalChannelsSink", new signature(LIST(UINT32)), 3, 10, false, false, null),
+          new Property("SignalChannelsSource", new signature(LIST(UINT32)), 3, 9, false, false, null),
+          new Property("Statistics", new signature(OcaNetworkStatistics), 3, 11, false, false, null),
+          new Property("Status", new signature(UINT8), 3, 5, false, false, null),
+          new Property("StreamConnectorsSink", new signature(LIST(UINT32)), 3, 8, false, false, null),
+          new Property("StreamConnectorsSource", new signature(LIST(UINT32)), 3, 7, false, false, null),
+          new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaStreamNetwork_p;
   }
-
 
   Dispose()
   {
@@ -20911,6 +19455,7 @@ let OcaStreamConnector_GetStreams_rs = null;
 let OcaStreamConnector_SetIDAdvertised_as = null;
 let OcaStreamConnector_SetOwnerNetwork_as = null;
 let OcaStreamConnector_SetSourceOrSink_as = null;
+let OcaStreamConnector_p = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by the
@@ -21213,47 +19758,22 @@ export class OcaStreamConnector extends OcaAgent
       new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(MAP(UINT16, OcaStream)));
   }
 
-  GetPropertyName(id)
+  static get_properties()
   {
-    if (id.DefLevel > 3) return null;
-    if (id.DefLevel < 3) return super.GetOcaPropertyName(id);
-
-    if (id.PropertyIndex == 2)
-      return "IDAdvertised";
-    if (id.PropertyIndex == 1)
-      return "OwnerNetwork";
-    if (id.PropertyIndex == 5)
-      return "Pins";
-    if (id.PropertyIndex == 3)
-      return "SourceOrSink";
-    if (id.PropertyIndex == 6)
-      return "Status";
-    if (id.PropertyIndex == 4)
-      return "Streams";
-
-    return null;
-  }
-
-  GetPropertyID(name)
-  {
-    switch (name) {
-    case "IDAdvertised":
-      return new OcaPropertyID(3, 2);
-    case "OwnerNetwork":
-      return new OcaPropertyID(3, 1);
-    case "Pins":
-      return new OcaPropertyID(3, 5);
-    case "SourceOrSink":
-      return new OcaPropertyID(3, 3);
-    case "Status":
-      return new OcaPropertyID(3, 6);
-    case "Streams":
-      return new OcaPropertyID(3, 4);
+    if (!OcaStreamConnector_p)
+    {
+      OcaStreamConnector_p = new Properties([
+          new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
+          new Property("OwnerNetwork", new signature(UINT32), 3, 1, false, false, null),
+          new Property("Pins", new signature(MAP(UINT16, UINT32)), 3, 5, false, false, null),
+          new Property("SourceOrSink", new signature(UINT8), 3, 3, false, false, null),
+          new Property("Status", new signature(UINT8), 3, 6, false, false, null),
+          new Property("Streams", new signature(MAP(UINT16, OcaStream)), 3, 4, false, false, null),
+        ], 3, OcaAgent.get_properties());
     }
 
-    return super.GetOcaPropertyID(name);
+    return OcaStreamConnector_p;
   }
-
 
   Dispose()
   {
