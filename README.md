@@ -1,25 +1,26 @@
-# OCA.js
+# AES70.js
 
 ## Introduction
 
-OCA.js is a pure JavaScript implementation of an OCA controller library.
-Open Control Architecture (OCA) is a control protocol aimed primarily at
-audio applications. OCA is developed by the [OCA Alliance](http://ocaalliance.com/)
+AES70.js is a pure JavaScript implementation of an AES70 controller library.
+Open Control Architecture (OCA aka AES70) is a control protocol aimed primarily at
+audio applications. AES70 is developed by the [OCA Alliance](http://ocaalliance.com/)
 and standardized through the [AES](http://www.aes.org/publications/standards/search.cfm?docID=101).
 
-Fundamentally, OCA is a RPC protocol with event subscription capabilities.
+Fundamentally, AES70 is a RPC protocol with event subscription capabilities.
 An OCA client (aka. controller) can connect to an OCA server (aka device).
-An OCA device consists of a tree of objects, which the controller can call
+An OCA device is represented by a tree of objects, which the controller can call
 methods in. OCA classes define events, which a controller can subscribe to.
 
 The protocol definition contains a series of pre-defined classes, which can
 be used to represent audio devices. OCA allows the creation of custom subclasses,
 however, in order for two OCA implementations to interoperate fully, both sides
-need to know all classes involved.
+need to implement all classes involved.
 
 All classes and datatypes defined in the
 current OCA Standard are published in the form of an XMI document. This XMI
-document has been used to generate a large part of this library.
+document has been used to generate the class structure and interfaces which
+are part of this library.
 
 ## Disclaimer
 
@@ -49,10 +50,11 @@ For example type into the JavaScript console:
 
 ## Requirements
 
-This library uses some ECMAScript 6 features. It is supposed to work in modern
-versions of chrome, firefox and safari. It should work in Microsoft Edge.
-This code will not work in IE11 or old versions of other browsers.
+This library is written in JavsScript and uses ECMAScript 6 features.
+It will work natively in modern browsers which support ECMAScript 6 modules.
+This repository contains build targets to transpile this module to ECMAScript 5
+or for use with NodeJS.
 
 ## License
 
-This implementation is released under the GNU General Public License version 2.
+This software is released under the GNU General Public License version 2.

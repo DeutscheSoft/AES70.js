@@ -1,7 +1,7 @@
 {
-  "name": "oca.js",
+  "name": "aes70.js",
   "version": "0.0.2",
-  "description": "A controller library for the AES70 standard.",
+  "description": "A controller library implementing the AES70 standard.",
   "main": "lib/index.js",
   "bin": {
     "oca.js": "proxy.js"
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DeutscheSoft/OCA.js.git"
+    "url": "git+https://github.com/DeutscheSoft/AES70.js.git"
   },
   "keywords": [
     "Audio",
@@ -25,9 +25,9 @@
   "author": "Arne Goedeke",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/DeutscheSoft/OCA.js/issues"
+    "url": "https://github.com/DeutscheSoft/AES70.js/issues"
   },
-  "homepage": "https://github.com/DeutscheSoft/OCA.js#readme",
+  "homepage": "https://github.com/DeutscheSoft/AES70.js#readme",
   "dependencies": {},
   "devDependencies": {
     "babel": "^6.23.0",
