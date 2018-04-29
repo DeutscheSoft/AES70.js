@@ -1,6 +1,7 @@
 const process = require('process');
 const RemoteDevice = require('../lib/Controller').RemoteDevice;
 const TCPConnection = require('../lib/controller/TCP').TCPConnection;
+const OCC = require('../lib/controller/ControlClasses');
 
 if (process.argv.length < 4)
 {
@@ -20,13 +21,51 @@ TCPConnection.connect({
   })
   .then(printDeviceTree);
 
+function delay(n)
+{
+  return new Promise(function(resolve, reject) {
+    setTimeout(resolve, n);
+  });
+}
+
+async function microblink(objects)
+{
+  let found = false;
+
+  do
+  {
+    for (let i = 0; i < objects.length; i++)
+    {
+      const o = objects[i];
+
+      if (o instanceof OCC.OcaBitstringActuator)
+      {
+        const N = await o.GetNrBits();
+
+        const n = 0 | (Math.random() * N);
+        const v = Math.random() > 0.5;
+
+        await o.SetBit(n, v);
+        await delay(10);
+
+        found = true;
+      }
+    }
+  } while (found);
+
+  process.exit(0);
+}
+
 function printDeviceTree(device)
 {
   var print = function(objects, i) {
     var o = objects[i];
     var a = [];
 
-    if (!o) process.exit(0);
+    if (!o) {
+      microblink(objects);
+      return;
+    }
 
     a.push(o.GetRole().then((role) => console.log("Role:", role)));
     o.get_properties().forEach((p) => {
