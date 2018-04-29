@@ -23,3 +23,6 @@ dist/babel.browser.js: dist/rollup.js Makefile .babelrc
 
 dist/OCA.es5.js: dist/babel.browser.js Makefile
 	closure-compiler --js $< --js_output_file $@ --language_in ECMASCRIPT5 --language_out ECMASCRIPT5
+
+docs: $(SRC) Makefile
+	node ./node_modules/jsdoc/jsdoc.js src -r -d docs

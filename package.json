@@ -11,8 +11,9 @@
   },
   "scripts": {
     "test": "node tests/signatures.js",
-    "prepublish": "npm run build",
-    "build": "make node"
+    "prepublishOnly": "npm run build",
+    "build": "make node",
+    "docs" : "make docs"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "rollup": "^0.57.1",
-    "babel-preset-node6": "^11.0.0"
+    "babel-preset-node6": "^11.0.0",
+    "jsdoc": "^3.5.5"
   }
 }
