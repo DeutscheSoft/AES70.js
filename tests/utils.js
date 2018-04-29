@@ -8,7 +8,7 @@ function low_get_random_signature(len, basic) {
   var args = [];
 
   for (var i = 0; i < len; i++) {
-    switch (get_random_int(basic ? 10 : 14)) {
+    switch (get_random_int(basic ? 10 : 15)) {
     case 0: args[i] = SP.BOOLEAN; break;
     case 1: args[i] = SP.UINT8; break;
     case 2: args[i] = SP.UINT16; break;
@@ -24,6 +24,7 @@ function low_get_random_signature(len, basic) {
     case 11: args[i] = SP.BLOBFIXED(get_random_int(10)); break;
     case 12: args[i] = SP.LIST(low_get_random_signature(1)[0]); break;
     case 13: args[i] = SP.MAP.apply(SP, low_get_random_signature(2)); break;
+    case 14: args[i] = SP.LIST2D(low_get_random_signature(1)[0]); break;
     }
   }
 

@@ -353,7 +353,31 @@ export class signature
         num_custom++;
         break;
       case PT_LIST2D: 
-        break;
+        {
+          const X = data.getUint16(pos);
+          pos += 2;
+          const Y = data.getUint16(pos);
+          pos += 2;
+          const custom = O[num_custom];
+
+          const res = new Array(Y);
+
+          for (let i = 0; i < Y; i++)
+          {
+            const tmp = new Array(X);
+
+            for (let j = 0; j < X; j++)
+            {
+              pos = custom.do_decode(data, pos, tmp, j);
+            }
+
+            res[i] = tmp;
+          }
+
+          dst[dst_pos] = res;
+          num_custom++;
+          break;
+        }
       case PT_LISTFIXED: 
         len = C[num_custom++];
         tmp = new Array(len);
@@ -540,8 +564,31 @@ export class signature
         num_custom++;
         break;
       case PT_LIST2D: 
-        num_custom++;
-        break;
+        {
+          const val = src[src_pos];
+          const Y = val.length;
+          const X = Y > 0 ? val[0].length : 0;
+          const custom = O[num_custom];
+
+          dst.setUint16(pos, X);
+          pos += 2;
+
+          dst.setUint16(pos, Y);
+          pos += 2;
+
+          for (let i = 0; i < Y; i++)
+          {
+            const tmp = val[i];
+
+            for (let j = 0; j < X; j++)
+            {
+              pos = custom.do_encode(dst, pos, tmp, j);
+            }
+          }
+
+          num_custom++;
+          break;
+        }
       case PT_CUSTOM: 
         if (!(src[src_pos] instanceof C[num_custom]))
               throw("Type mismatch.");
@@ -670,6 +717,31 @@ export class signature
         num_custom++;
         break;
       case PT_LIST2D: 
+        {
+          const val = src[src_pos];
+          const Y = val.length;
+          const X = Y > 0 ? val[0].length : 0;
+          const custom = O[num_custom];
+          const length = custom._length;
+
+          pos += 4;
+
+          if (length) {
+            pos += X*Y*length;
+          } else {
+            for (let i = 0; i < Y; i++)
+            {
+              const tmp = val[i];
+
+              for (let j = 0; j < X; j++)
+              {
+                pos += custom.encoded_length(tmp[j]);
+              }
+            }
+          }
+          num_custom++;
+        }
+        break;
       case PT_LISTFIXED: 
         throw new Error("Unsupported");
       case PT_CUSTOM: 
