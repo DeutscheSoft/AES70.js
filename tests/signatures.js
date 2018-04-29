@@ -29,7 +29,7 @@ var TestSignature = utils.define_test(
       dec = signature.low_decode(new DataView(buf));
 
       this.check(equal(args, dec), 
-                 'Encoding test failed:', signature, "\nIN:", args, "\nOUT:", dec);
+                 'Encoding test failed:', signature, "\nIN:", args, "\nOUT:", dec, "\nENCODED", new Uint8Array(buf));
 
       signature.encoder(args).encode_to(new DataView(buf));
       dec = signature.low_decode(new DataView(buf));
