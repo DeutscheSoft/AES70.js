@@ -11,8 +11,8 @@
   },
   "scripts": {
     "test": "node tests/signatures.js",
-    "prepublish" : "npm run build",
-    "build" : "make node"
+    "prepublish": "npm run build",
+    "build": "make node"
   },
   "repository": {
     "type": "git",
@@ -25,8 +25,8 @@
     "RPC"
   ],
   "author": {
-    "name" : "Arne Goedeke",
-    "email" : "arne@deuso.de"
+    "name": "Arne Goedeke",
+    "email": "arne@deuso.de"
   },
   "license": "GPL-2.0",
   "bugs": {
@@ -35,7 +35,7 @@
   "homepage": "https://github.com/DeutscheSoft/AES70.js#readme",
   "dependencies": {},
   "devDependencies": {
-    "babel": "^6.23.0",
+    "babel-cli": "^6.23.0",
     "rollup": "^0.57.1",
     "babel-preset-node6": "^11.0.0"
   }
