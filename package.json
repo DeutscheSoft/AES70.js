@@ -1,6 +1,6 @@
 {
   "name": "aes70.js",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "A controller library implementing the AES70 standard.",
   "main": "lib/index.js",
   "bin": {
@@ -10,7 +10,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/signatures.js",
+    "prepublish" : "npm run build",
+    "build" : "make node"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,10 @@
     "Protocol",
     "RPC"
   ],
-  "author": "Arne Goedeke",
+  "author": {
+    "name" : "Arne Goedeke",
+    "email" : "arne@deuso.de"
+  },
   "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/DeutscheSoft/AES70.js/issues"
