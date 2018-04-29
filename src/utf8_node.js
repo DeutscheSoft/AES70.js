@@ -9,10 +9,9 @@ export function buffer_to_utf8(b) {
 }
 
 export function utf8_to_buffer(s) {
-  var b = Buffer.from(s, "utf8");
-  return b.buffer.slice(0, b.length);
+  return new Uint8Array(Buffer.from(s, "utf8")).buffer;
 }
 
 export function utf8_encoded_length(s) {
-  return Buffer.from(s, "utf8").length;
+  return Buffer.byteLength(s, "utf8");
 }
