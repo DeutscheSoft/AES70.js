@@ -247,8 +247,22 @@ export class signature
         pos += 4;
         break;
       case UINT64: 
-        throw("Not implemented.\n");
-        break;
+        {
+          const hi = data.getUint32(pos);
+          pos += 4;
+          const lo = data.getUint32(pos);
+          pos += 4;
+
+          if (hi > (1 << 20))
+          {
+            dst[dst_pos] = { hi: hi, lo: lo };
+          }
+          else
+          {
+            dst[dst_pos] = lo + Math.pow(2, 32) * hi;
+          }
+          break;
+        }
       case INT8: 
         dst[dst_pos] = data.getInt8(pos);
         pos += 1;
@@ -262,7 +276,24 @@ export class signature
         pos += 4;
         break;
       case INT64: 
-        throw("Not implemented.\n");
+        {
+          const tmp = data.getUint32(pos);
+          const hi = tmp & 0x7fffffff;
+          const sgn = !!(tmp & 0x80000000);
+          pos += 4;
+          const lo = data.getUint32(pos);
+          pos += 4;
+
+          if (hi > (1 << 20))
+          {
+            dst[dst_pos] = { sgn: sgn, hi: hi, log: lo };
+          }
+          else
+          {
+            dst[dst_pos] = (lo + Math.pow(2, 32) * hi) * (sgn ? -1 : 1);
+          }
+          break;
+        }
         break;
       case FLOAT32: 
         dst[dst_pos] = data.getFloat32(pos);
@@ -448,8 +479,31 @@ export class signature
         pos += 4;
         break;
       case UINT64: 
-        throw("Not implemented.\n");
-        break;
+        {
+          const val = src[src_pos];
+
+          if (typeof val === 'number')
+          {
+            if (val < 0)
+              throw new Error('Bad argument, expected positive number.');
+            const hi = val / 0xffffffff;
+
+            dst.setUint32(pos, hi);
+            pos += 4;
+            dst.setUint32(pos, val);
+            pos += 4;
+          }
+          else if (typeof val === 'object')
+          {
+            dst.setUint32(pos, val.hi);
+            pos += 4;
+            dst.setUint32(pos, val.lo);
+            pos += 4;
+          }
+          else throw new Error('Bad argument, expected number or Object.');
+
+          break;
+        }
       case INT8: 
         dst.setInt8(pos, src[src_pos]);
         pos += 1;
@@ -463,8 +517,37 @@ export class signature
         pos += 4;
         break;
       case INT64: 
-        throw("Not implemented.\n");
-        break;
+        {
+          let val = src[src_pos];
+
+          if (typeof val === 'number')
+          {
+            const sgn = val < 0;
+
+            if (sgn) val = -val;
+
+            let hi = val / 0xffffffff;
+            const lo = val - hi * 0xffffffff
+
+            if (sgn) hi |= 0x80000000;
+
+            dst.setUint32(pos, hi);
+            pos += 4;
+            dst.setUint32(pos, val);
+            pos += 4;
+          }
+          else if (typeof val === 'object')
+          {
+            const hi = val.hi | (val.sgn ? 0x80000000 : 0);
+            dst.setUint32(pos, hi);
+            pos += 4;
+            dst.setUint32(pos, val.lo);
+            pos += 4;
+          }
+          else throw new Error('Bad argument, expected number or Object.');
+
+          break;
+        }
       case FLOAT32: 
         dst.setFloat32(pos, src[src_pos]);
         pos += 4;

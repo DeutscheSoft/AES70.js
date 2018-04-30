@@ -50,6 +50,7 @@ function test_enc(signature) {
   test_rand(signature);
 }
 
+test_enc(new SP.signature(SP.INT64), -2026928210506239);
 test_rand(new SP.signature(SP.MAP(SP.FLOAT32, SP.LIST(SP.INT32)), SP.BLOBFIXED(1)));
 test_rand(new SP.signature(SP.BLOBFIXED(10), SP.BLOB, SP.BLOBFIXED(10)));
 test_rand(new SP.signature(SP.BLOBFIXED(10)));

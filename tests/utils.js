@@ -19,12 +19,14 @@ function low_get_random_signature(len, basic) {
     case 7: args[i] = SP.FLOAT32; break;
     case 8: args[i] = SP.FLOAT64; break;
     case 9: args[i] = SP.STRING; break;
+    case 10: args[i] = SP.UINT64; break;
+    case 11: args[i] = SP.INT64; break;
     /* basic types end here */
-    case 10: args[i] = SP.BLOB; break;
-    case 11: args[i] = SP.BLOBFIXED(get_random_int(10)); break;
-    case 12: args[i] = SP.LIST(low_get_random_signature(1)[0]); break;
-    case 13: args[i] = SP.MAP.apply(SP, low_get_random_signature(2)); break;
-    case 14: args[i] = SP.LIST2D(low_get_random_signature(1)[0]); break;
+    case 12: args[i] = SP.BLOB; break;
+    case 13: args[i] = SP.BLOBFIXED(get_random_int(10)); break;
+    case 14: args[i] = SP.LIST(low_get_random_signature(1)[0]); break;
+    case 15: args[i] = SP.MAP.apply(SP, low_get_random_signature(2)); break;
+    case 16: args[i] = SP.LIST2D(low_get_random_signature(1)[0]); break;
     }
   }
 
@@ -129,6 +131,12 @@ function get_random_data() {
         case PT_FLOAT64:
             ret[i] = Math.random();
             break;
+        case PT_INT64:
+            ret[i] = Math.round(( Math.random() - 1 ) * 2 * Math.pow(2, 51));
+            break;
+        case PT_UINT64:
+            ret[i] = Math.round(( Math.random() ) * Math.pow(2, 51));
+            break;
         case PT_BLOB:
             ret[i] = new ArrayBuffer(get_random_int(10)); 
             break;
@@ -179,6 +187,8 @@ function get_random_data() {
                 num_custom++;
             }
             break;
+        default:
+            throw new Error('Unsupported type for test data generator.');
         }
     }
 
