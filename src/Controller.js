@@ -132,6 +132,13 @@ export class ClientConnection extends Connection
   }
 }
 
+/**
+ * Controller class for a remote OCA device.
+ *
+ * This is the entry point for any interaction with a remote device.
+ * Can be used to query the available object tree, or interact with the manager
+ * classes.
+ */
 export class RemoteDevice
 {
   constructor(connection, ...modules)
@@ -283,6 +290,13 @@ export class RemoteDevice
     return this.allocate(this.find_best_class(id), ono);
   }
 
+  /**
+   * Discovers the complete object tree of this device starting
+   * from the root block. The root block itself will not be part
+   * of the resulting list.
+   *
+   * @returns {Promise} The object list.
+   */
   discover_all()
   {
     return this.Root.GetMembersRecursive()

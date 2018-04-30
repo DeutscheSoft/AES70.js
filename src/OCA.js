@@ -34,6 +34,9 @@ export function error(...args) {
   } catch (e) {}
 }
 
+/**
+ * Connection base class.
+ */
 export class Connection
 {
   constructor()
@@ -97,6 +100,9 @@ class PDUBase
   }
 }
 
+/**
+ * Command packet.
+ */
 export class Command extends PDUBase
 {
   constructor(target, method_level, method_index, param_count, parameters)
@@ -180,6 +186,9 @@ export class Command extends PDUBase
   }
 }
 
+/**
+ * Command packet with response required.
+ */
 export class CommandRrq extends Command
 {
   static get messageType()
@@ -188,6 +197,9 @@ export class CommandRrq extends Command
   }
 }
 
+/**
+ * Response packet.
+ */
 export class Response extends PDUBase
 {
   constructor(handle, status_code, param_count, parameters)
@@ -257,6 +269,9 @@ export class Response extends PDUBase
 
 const notification_signature = new signature(BLOB, OcaEvent);
 
+/**
+ * Notification packet.
+ */
 export class Notification extends PDUBase
 {
   constructor(target, method_level, method_index, context, event, param_count, parameters)
@@ -360,6 +375,9 @@ export class Notification extends PDUBase
   }
 }
 
+/**
+ * Keepalive packet.
+ */
 export class KeepAlive extends PDUBase
 {
   static get messageType()

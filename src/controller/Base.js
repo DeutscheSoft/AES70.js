@@ -202,6 +202,9 @@ export class Properties
   }
 }
 
+/**
+ * Base class for all client-side control classes.
+ */
 export class ObjectBase
 {
   constructor(ObjectNumber, device)
@@ -210,16 +213,25 @@ export class ObjectBase
     this.device = device;
   }
 
+  /**
+   * The ObjectNumber of this object.
+   */
   get ObjectNumber()
   {
     return this.ono;
   }
 
+  /**
+   * The ClassVersion of this object. This is a local property.
+   */
   get ClassVersion()
   {
     return this.constructor.ClassVersion;
   }
 
+  /**
+   * The ClassVersion of this object. This is a local property.
+   */
   get ClassID()
   {
     return this.constructor.ClassID;
@@ -231,12 +243,21 @@ export class ObjectBase
     return this.device.send_command(cmd, rs);
   }
 
-
+  /**
+   * Get the name of a given OcaPropertyID.
+   * @params {Types/OcaPropertyID} id
+   * @return {string} 
+   */
   GetPropertyName(id)
   {
     return this.get_properties().find_name(id);
   }
 
+  /**
+   * Get the OcaPropertyID for a given name.
+   * @params {String} name
+   * @return {OcaPropertyID} 
+   */
   GetPropertyID(name)
   {
     const p = this.get_properties().find_property(name);
@@ -264,6 +285,9 @@ export class ObjectBase
   }
 }
 
+/**
+ * Base class for all events.
+ */
 class BaseEvent
 {
   constructor(object, id, signature)
@@ -278,6 +302,10 @@ class BaseEvent
   do_subscribe() {}
   do_unsubscribe() {}
 
+  /**
+   * Subscribe to this event.
+   * @param {function} callback
+   */
   subscribe(callback)
   {
     this.handlers.add(callback);
@@ -291,6 +319,10 @@ class BaseEvent
     return Promise.resolve(true);
   }
 
+  /**
+   * Unsubscribe from this event.
+   * @param {function} callback
+   */
   unsubscribe(callback)
   {
     this.handlers.delete(callback);
@@ -301,6 +333,9 @@ class BaseEvent
     return Promise.resolve(true);
   }
 
+  /**
+   * Unsubscribe all event handlers.
+   */
   Dipose()
   {
     this.handlers.clear();
@@ -310,6 +345,9 @@ class BaseEvent
   }
 }
 
+/**
+ * Class used to represent all events specified by the OCA standard.
+ */
 export class Event extends BaseEvent
 {
   constructor(object, id, signature)
@@ -342,7 +380,14 @@ export class Event extends BaseEvent
 
 const change_type_signature = new signature(OcaPropertyChangeType);
 
-export class PropertyEvent extends BaseEvent {
+/**
+ * Class used to represent property changes.
+ * When this event fires, event handlers will be called with
+ * the new value, the {@link OcaPropertyChangeType} and
+ * the {@link OcaPropertyID} of the property.
+ */
+export class PropertyEvent extends BaseEvent
+{
   constructor(object, id, signature)
   {
     super(object, id, signature);
@@ -366,7 +411,7 @@ export class PropertyEvent extends BaseEvent {
     return this.object.OnPropertyChanged.subscribe(this.callback);
   }
 
-  unsubscribe(callback)
+  do_unsubscribe(callback)
   {
     return this.object.OnPropertyChanged.unsubscribe(this.callback);
   }

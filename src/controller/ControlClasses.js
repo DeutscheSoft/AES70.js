@@ -1,3 +1,4 @@
+
 import {
     CommandRrq,
   } from '../OCA';
@@ -172,6 +173,7 @@ let OcaRoot_p = null;
  * The abstract root class of which all OCA classes derive. It offers
  * basic OCA functionality such as locking an object and generalized data
  * access.
+ * @extends ObjectBase
  */
 export class OcaRoot extends ObjectBase
 {
@@ -307,7 +309,8 @@ export class OcaRoot extends ObjectBase
   }
 
   /**
-   * Event that is triggered when Lockable changes.
+   * Event that is triggered when the value of Lockable changes.
+   * @type {PropertyEvent}
    */
   get OnLockableChanged()
   {
@@ -320,7 +323,8 @@ export class OcaRoot extends ObjectBase
   }
 
   /**
-   * Event that is triggered when Role changes.
+   * Event that is triggered when the value of Role changes.
+   * @type {PropertyEvent}
    */
   get OnRoleChanged()
   {
@@ -348,6 +352,10 @@ export class OcaRoot extends ObjectBase
     return OcaRoot_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -379,6 +387,7 @@ let OcaWorker_p = null;
 /**
  * Abstract base class for classes that represent the device's
  * application and support functions.
+ * @extends OcaRoot
  */
 export class OcaWorker extends OcaRoot
 {
@@ -430,7 +439,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Sets the value of the Enabled property. The return value indicates
    * whether the property was successfully set.
-   * @param enabled
+   * @param enabled {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -446,9 +455,9 @@ export class OcaWorker extends OcaRoot
   /**
    * Adds an input or output port.. The return value indicates whether the
    * port was successfully added.
-   * @param Label
+   * @param Label {OcaString}
    *
-   * @param Mode
+   * @param Mode {OcaPortMode}
    *
    * @retval {Promise}
    */
@@ -466,7 +475,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Deletes an input or output port.. The return value indicates whether
    * the port was successfully deleted.
-   * @param ID
+   * @param ID {OcaPortID}
    *
    * @retval {Promise}
    */
@@ -495,7 +504,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Gets the name of the designated port. The return value indicates
    * whether the name was successfully retrieved.
-   * @param PortID
+   * @param PortID {OcaPortID}
    *
    * @retval {Promise}
    */
@@ -513,9 +522,9 @@ export class OcaWorker extends OcaRoot
   /**
    * Sets the name of the designated port. The return value indicates
    * whether the name was successfully set.
-   * @param PortID
+   * @param PortID {OcaPortID}
    *
-   * @param Name
+   * @param Name {OcaString}
    *
    * @retval {Promise}
    */
@@ -544,7 +553,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Sets the value of the Label property. The return value indicates
    * whether the property was successfully set.
-   * @param label
+   * @param label {OcaString}
    *
    * @retval {Promise}
    */
@@ -586,7 +595,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Sets the value of the Latency property. The return value indicates
    * whether the property was successfully set.
-   * @param latency
+   * @param latency {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -613,7 +622,8 @@ export class OcaWorker extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Enabled changes.
+   * Event that is triggered when the value of Enabled changes.
+   * @type {PropertyEvent}
    */
   get OnEnabledChanged()
   {
@@ -626,7 +636,8 @@ export class OcaWorker extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Ports changes.
+   * Event that is triggered when the value of Ports changes.
+   * @type {PropertyEvent}
    */
   get OnPortsChanged()
   {
@@ -639,7 +650,8 @@ export class OcaWorker extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Label changes.
+   * Event that is triggered when the value of Label changes.
+   * @type {PropertyEvent}
    */
   get OnLabelChanged()
   {
@@ -652,7 +664,8 @@ export class OcaWorker extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Owner changes.
+   * Event that is triggered when the value of Owner changes.
+   * @type {PropertyEvent}
    */
   get OnOwnerChanged()
   {
@@ -665,7 +678,8 @@ export class OcaWorker extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Latency changes.
+   * Event that is triggered when the value of Latency changes.
+   * @type {PropertyEvent}
    */
   get OnLatencyChanged()
   {
@@ -693,6 +707,10 @@ export class OcaWorker extends OcaRoot
     return OcaWorker_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -712,6 +730,7 @@ let OcaActuator_p = null;
  * Abstract base class for all actuators (i.e. devices that affect the
  * routing and/or content of the audio signal, or provide ancillary
  * functions such as power).
+ * @extends OcaWorker
  */
 export class OcaActuator extends OcaWorker
 {
@@ -748,6 +767,10 @@ export class OcaActuator extends OcaWorker
     return OcaActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -762,6 +785,7 @@ let OcaMute_p = null;
 
 /**
  * Signal mute.
+ * @extends OcaActuator
  */
 export class OcaMute extends OcaActuator
 {
@@ -808,7 +832,7 @@ export class OcaMute extends OcaActuator
   /**
    * Sets the mute state (i.e. value of the State property). The return
    * value indicates whether the state was successfully set.
-   * @param state
+   * @param state {OcaMuteState}
    *
    * @retval {Promise}
    */
@@ -822,7 +846,8 @@ export class OcaMute extends OcaActuator
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -846,6 +871,10 @@ export class OcaMute extends OcaActuator
     return OcaMute_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -861,6 +890,7 @@ let OcaPolarity_p = null;
 
 /**
  * Signal inverter
+ * @extends OcaActuator
  */
 export class OcaPolarity extends OcaActuator
 {
@@ -907,7 +937,7 @@ export class OcaPolarity extends OcaActuator
   /**
    * Sets the inversion state (i.e. value of the State property). The
    * return value indicates whether the state was successfully set.
-   * @param state
+   * @param state {OcaPolarityState}
    *
    * @retval {Promise}
    */
@@ -921,7 +951,8 @@ export class OcaPolarity extends OcaActuator
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -945,6 +976,10 @@ export class OcaPolarity extends OcaActuator
     return OcaPolarity_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -970,6 +1005,7 @@ let OcaSwitch_p = null;
 
 /**
  * (n)-position single-pole switch.
+ * @extends OcaActuator
  */
 export class OcaSwitch extends OcaActuator
 {
@@ -1019,7 +1055,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Sets the value of the Position property. The return value indicates
    * whether the property was successfully set.
-   * @param position
+   * @param position {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -1035,7 +1071,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Gets the name assigned to a given switch position. The return value
    * indicates whether the name was successfully retrieved.
-   * @param Index
+   * @param Index {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -1053,9 +1089,9 @@ export class OcaSwitch extends OcaActuator
   /**
    * Assigns a name to a given switch position. The return value indicates
    * whether the name was successfully assigned.
-   * @param Index
+   * @param Index {OcaUint16}
    *
-   * @param Name
+   * @param Name {OcaString}
    *
    * @retval {Promise}
    */
@@ -1084,7 +1120,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Assigns names to the switch's positions. The return value indicates
    * whether the names were successfully assigned.
-   * @param Names
+   * @param Names {OcaList}
    *
    * @retval {Promise}
    */
@@ -1100,7 +1136,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Gets the Enabled flag assigned to a given switch position. The return
    * value indicates whether the flag was successfully retrieved.
-   * @param Index
+   * @param Index {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -1118,9 +1154,9 @@ export class OcaSwitch extends OcaActuator
   /**
    * Sets the Enabled flag assigned to a given switch position. The return
    * value indicates whether the flag was successfully set.
-   * @param Index
+   * @param Index {OcaUint16}
    *
-   * @param enabled
+   * @param enabled {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -1149,7 +1185,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Sets list of Enabled flags for the switch's positions. The return
    * value indicates whether the flags were successfully set.
-   * @param enableds
+   * @param enableds {OcaList}
    *
    * @retval {Promise}
    */
@@ -1163,7 +1199,8 @@ export class OcaSwitch extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Position changes.
+   * Event that is triggered when the value of Position changes.
+   * @type {PropertyEvent}
    */
   get OnPositionChanged()
   {
@@ -1176,7 +1213,8 @@ export class OcaSwitch extends OcaActuator
   }
 
   /**
-   * Event that is triggered when PositionNames changes.
+   * Event that is triggered when the value of PositionNames changes.
+   * @type {PropertyEvent}
    */
   get OnPositionNamesChanged()
   {
@@ -1189,7 +1227,8 @@ export class OcaSwitch extends OcaActuator
   }
 
   /**
-   * Event that is triggered when PositionEnable changes.
+   * Event that is triggered when the value of PositionEnable changes.
+   * @type {PropertyEvent}
    */
   get OnPositionEnableChanged()
   {
@@ -1215,6 +1254,10 @@ export class OcaSwitch extends OcaActuator
     return OcaSwitch_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -1232,6 +1275,7 @@ let OcaGain_p = null;
 
 /**
  * Gain (or attenuation) element.
+ * @extends OcaActuator
  */
 export class OcaGain extends OcaActuator
 {
@@ -1278,7 +1322,7 @@ export class OcaGain extends OcaActuator
   /**
    * Sets the value of the Gain property. The return value indicates
    * whether the property was successfully set.
-   * @param Gain
+   * @param Gain {OcaDB}
    *
    * @retval {Promise}
    */
@@ -1292,7 +1336,8 @@ export class OcaGain extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Gain changes.
+   * Event that is triggered when the value of Gain changes.
+   * @type {PropertyEvent}
    */
   get OnGainChanged()
   {
@@ -1316,6 +1361,10 @@ export class OcaGain extends OcaActuator
     return OcaGain_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -1333,6 +1382,7 @@ let OcaPanBalance_p = null;
 
 /**
  * Pan or Balance control.
+ * @extends OcaActuator
  */
 export class OcaPanBalance extends OcaActuator
 {
@@ -1380,7 +1430,7 @@ export class OcaPanBalance extends OcaActuator
   /**
    * Sets the value of the Position property. The return value indicates
    * whether the property was successfully set.
-   * @param Position
+   * @param Position {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -1409,7 +1459,7 @@ export class OcaPanBalance extends OcaActuator
   /**
    * Sets the value of the MidpointGain property. The return value
    * indicates whether the property was successfully set.
-   * @param Gain
+   * @param Gain {OcaDB}
    *
    * @retval {Promise}
    */
@@ -1423,7 +1473,8 @@ export class OcaPanBalance extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Position changes.
+   * Event that is triggered when the value of Position changes.
+   * @type {PropertyEvent}
    */
   get OnPositionChanged()
   {
@@ -1436,7 +1487,8 @@ export class OcaPanBalance extends OcaActuator
   }
 
   /**
-   * Event that is triggered when MidpointGain changes.
+   * Event that is triggered when the value of MidpointGain changes.
+   * @type {PropertyEvent}
    */
   get OnMidpointGainChanged()
   {
@@ -1461,6 +1513,10 @@ export class OcaPanBalance extends OcaActuator
     return OcaPanBalance_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -1477,6 +1533,7 @@ let OcaDelay_p = null;
 
 /**
  * Signal delay - basic version.
+ * @extends OcaActuator
  */
 export class OcaDelay extends OcaActuator
 {
@@ -1523,7 +1580,7 @@ export class OcaDelay extends OcaActuator
   /**
    * Sets the value of the DelayTime property. The return value indicates
    * whether the property was successfully set.
-   * @param delayTime
+   * @param delayTime {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -1537,7 +1594,8 @@ export class OcaDelay extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DelayTime changes.
+   * Event that is triggered when the value of DelayTime changes.
+   * @type {PropertyEvent}
    */
   get OnDelayTimeChanged()
   {
@@ -1561,6 +1619,10 @@ export class OcaDelay extends OcaActuator
     return OcaDelay_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -1580,6 +1642,7 @@ let OcaDelayExtended_p = null;
  * Signal delay - extended version. Allows setting delay value in various
  * units. Note that the inherited property 04p01 DelayTime is also
  * supported by this class and reflects actual achieved delay in seconds.
+ * @extends OcaDelay
  */
 export class OcaDelayExtended extends OcaDelay
 {
@@ -1626,7 +1689,7 @@ export class OcaDelayExtended extends OcaDelay
   /**
    * Sets the value of the DelayValue property. The return value indicates
    * whether the property was successfully set.
-   * @param Value
+   * @param Value {OcaDelayValue}
    *
    * @retval {Promise}
    */
@@ -1642,7 +1705,7 @@ export class OcaDelayExtended extends OcaDelay
   /**
    * Return current delay setting, converted to given units. The return
    * value indicates whether the method has succeeded.
-   * @param UoM
+   * @param UoM {OcaDelayUnit}
    *
    * @retval {Promise}
    */
@@ -1658,7 +1721,8 @@ export class OcaDelayExtended extends OcaDelay
   }
 
   /**
-   * Event that is triggered when DelayValue changes.
+   * Event that is triggered when the value of DelayValue changes.
+   * @type {PropertyEvent}
    */
   get OnDelayValueChanged()
   {
@@ -1682,6 +1746,10 @@ export class OcaDelayExtended extends OcaDelay
     return OcaDelayExtended_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -1697,6 +1765,7 @@ let OcaFrequencyActuator_p = null;
 
 /**
  * Simple frequency actuator.
+ * @extends OcaActuator
  */
 export class OcaFrequencyActuator extends OcaActuator
 {
@@ -1743,7 +1812,7 @@ export class OcaFrequencyActuator extends OcaActuator
   /**
    * Sets the value of the Frequency property. The return value indicates
    * whether the property was successfully set.
-   * @param Frequency
+   * @param Frequency {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -1757,7 +1826,8 @@ export class OcaFrequencyActuator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Frequency changes.
+   * Event that is triggered when the value of Frequency changes.
+   * @type {PropertyEvent}
    */
   get OnFrequencyChanged()
   {
@@ -1781,6 +1851,10 @@ export class OcaFrequencyActuator extends OcaActuator
     return OcaFrequencyActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -1806,6 +1880,7 @@ let OcaFilterClassical_p = null;
  * A classical analog-style filter - highpass, lowpass, bandpass, etc.,
  * with shape characteristics such as Butterworth, Chebyshev, Bessel, and
  * Linkwitz-Riley. Frequently used in loudspeaker crossover networks.
+ * @extends OcaActuator
  */
 export class OcaFilterClassical extends OcaActuator
 {
@@ -1856,7 +1931,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Sets the value of the Frequency property. The return value indicates
    * if the property was successfully set.
-   * @param frequency
+   * @param frequency {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -1885,7 +1960,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Sets the passband specification of the filter object. The return value
    * indicates if the specification was successfully set.
-   * @param Passband
+   * @param Passband {OcaFilterPassband}
    *
    * @retval {Promise}
    */
@@ -1914,7 +1989,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Sets the Shape property of the filter. The return value indicates if
    * the property was successfully set.
-   * @param Shape
+   * @param Shape {OcaClassicalFilterShape}
    *
    * @retval {Promise}
    */
@@ -1943,7 +2018,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Sets the order of the filter. The return value indicates if the
    * property was successfully set.
-   * @param Order
+   * @param Order {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -1972,7 +2047,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Sets the filter parameter. The return value indicates if the parameter
    * was successfully set.
-   * @param Parameter
+   * @param Parameter {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -1986,7 +2061,8 @@ export class OcaFilterClassical extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Frequency changes.
+   * Event that is triggered when the value of Frequency changes.
+   * @type {PropertyEvent}
    */
   get OnFrequencyChanged()
   {
@@ -1999,7 +2075,8 @@ export class OcaFilterClassical extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Passband changes.
+   * Event that is triggered when the value of Passband changes.
+   * @type {PropertyEvent}
    */
   get OnPassbandChanged()
   {
@@ -2012,7 +2089,8 @@ export class OcaFilterClassical extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Shape changes.
+   * Event that is triggered when the value of Shape changes.
+   * @type {PropertyEvent}
    */
   get OnShapeChanged()
   {
@@ -2025,7 +2103,8 @@ export class OcaFilterClassical extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Order changes.
+   * Event that is triggered when the value of Order changes.
+   * @type {PropertyEvent}
    */
   get OnOrderChanged()
   {
@@ -2038,7 +2117,8 @@ export class OcaFilterClassical extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Parameter changes.
+   * Event that is triggered when the value of Parameter changes.
+   * @type {PropertyEvent}
    */
   get OnParameterChanged()
   {
@@ -2066,6 +2146,10 @@ export class OcaFilterClassical extends OcaActuator
     return OcaFilterClassical_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -2093,6 +2177,7 @@ let OcaFilterParametric_p = null;
 
 /**
  * A parametric equalizer section with various shape options.
+ * @extends OcaActuator
  */
 export class OcaFilterParametric extends OcaActuator
 {
@@ -2143,7 +2228,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Sets the equalizer frequency. The return value indicates whether the
    * value was successfully set.
-   * @param Frequency
+   * @param Frequency {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -2172,7 +2257,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Sets the curve shape shape of the equalizer. The return value
    * indicates whether the shape was successfully set.
-   * @param type
+   * @param type {OcaParametricEQShape}
    *
    * @retval {Promise}
    */
@@ -2201,7 +2286,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Sets the width parameter property of the equalizer. The return value
    * indicates whether the Q was successfully set.
-   * @param Width
+   * @param Width {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -2230,7 +2315,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Sets the in-band gain of the equalizer. The return value indicates
    * whether the gain was successfully set.
-   * @param gain
+   * @param gain {OcaDB}
    *
    * @retval {Promise}
    */
@@ -2259,7 +2344,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Sets the shape parameter of the equalizer. The return value indicates
    * whether the parameter was successfully set.
-   * @param shape
+   * @param shape {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -2273,7 +2358,8 @@ export class OcaFilterParametric extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Frequency changes.
+   * Event that is triggered when the value of Frequency changes.
+   * @type {PropertyEvent}
    */
   get OnFrequencyChanged()
   {
@@ -2286,7 +2372,8 @@ export class OcaFilterParametric extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Shape changes.
+   * Event that is triggered when the value of Shape changes.
+   * @type {PropertyEvent}
    */
   get OnShapeChanged()
   {
@@ -2299,7 +2386,8 @@ export class OcaFilterParametric extends OcaActuator
   }
 
   /**
-   * Event that is triggered when WidthParameter changes.
+   * Event that is triggered when the value of WidthParameter changes.
+   * @type {PropertyEvent}
    */
   get OnWidthParameterChanged()
   {
@@ -2312,7 +2400,8 @@ export class OcaFilterParametric extends OcaActuator
   }
 
   /**
-   * Event that is triggered when InBandGain changes.
+   * Event that is triggered when the value of InBandGain changes.
+   * @type {PropertyEvent}
    */
   get OnInBandGainChanged()
   {
@@ -2325,7 +2414,8 @@ export class OcaFilterParametric extends OcaActuator
   }
 
   /**
-   * Event that is triggered when ShapeParameter changes.
+   * Event that is triggered when the value of ShapeParameter changes.
+   * @type {PropertyEvent}
    */
   get OnShapeParameterChanged()
   {
@@ -2353,6 +2443,10 @@ export class OcaFilterParametric extends OcaActuator
     return OcaFilterParametric_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -2376,6 +2470,7 @@ let OcaFilterPolynomial_p = null;
 /**
  * A generic Z-domain rational polynomial filter section: <u>A(0) + A(1)z
  * + A(2)z^2 + A(3)z^3 + ...</u> B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
+ * @extends OcaActuator
  */
 export class OcaFilterPolynomial extends OcaActuator
 {
@@ -2423,9 +2518,9 @@ export class OcaFilterPolynomial extends OcaActuator
 
   /**
    * Sets the polynomial coefficients.
-   * @param A
+   * @param A {OcaList}
    *
-   * @param B
+   * @param B {OcaList}
    *
    * @retval {Promise}
    */
@@ -2452,7 +2547,7 @@ export class OcaFilterPolynomial extends OcaActuator
 
   /**
    * Sets the filter sampling rate.
-   * @param Rate
+   * @param Rate {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -2479,7 +2574,8 @@ export class OcaFilterPolynomial extends OcaActuator
   }
 
   /**
-   * Event that is triggered when A changes.
+   * Event that is triggered when the value of A changes.
+   * @type {PropertyEvent}
    */
   get OnAChanged()
   {
@@ -2492,7 +2588,8 @@ export class OcaFilterPolynomial extends OcaActuator
   }
 
   /**
-   * Event that is triggered when B changes.
+   * Event that is triggered when the value of B changes.
+   * @type {PropertyEvent}
    */
   get OnBChanged()
   {
@@ -2505,7 +2602,8 @@ export class OcaFilterPolynomial extends OcaActuator
   }
 
   /**
-   * Event that is triggered when SampleRate changes.
+   * Event that is triggered when the value of SampleRate changes.
+   * @type {PropertyEvent}
    */
   get OnSampleRateChanged()
   {
@@ -2518,7 +2616,8 @@ export class OcaFilterPolynomial extends OcaActuator
   }
 
   /**
-   * Event that is triggered when MaxOrder changes.
+   * Event that is triggered when the value of MaxOrder changes.
+   * @type {PropertyEvent}
    */
   get OnMaxOrderChanged()
   {
@@ -2545,6 +2644,10 @@ export class OcaFilterPolynomial extends OcaActuator
     return OcaFilterPolynomial_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -2566,6 +2669,7 @@ let OcaFilterFIR_p = null;
 
 /**
  * A finite impulse response (FIR) filter.
+ * @extends OcaActuator
  */
 export class OcaFilterFIR extends OcaActuator
 {
@@ -2627,7 +2731,7 @@ export class OcaFilterFIR extends OcaActuator
   /**
    * Sets the value of the properties of the FIR filter. The return value
    * indicates whether the properties were successfully set.
-   * @param Coefficients
+   * @param Coefficients {OcaList}
    *
    * @retval {Promise}
    */
@@ -2656,7 +2760,7 @@ export class OcaFilterFIR extends OcaActuator
   /**
    * Sets the sample rate of the FIR filter. The return value indicates
    * whether the rate was successfully set.
-   * @param Rate
+   * @param Rate {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -2670,7 +2774,8 @@ export class OcaFilterFIR extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Length changes.
+   * Event that is triggered when the value of Length changes.
+   * @type {PropertyEvent}
    */
   get OnLengthChanged()
   {
@@ -2683,7 +2788,8 @@ export class OcaFilterFIR extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Coefficients changes.
+   * Event that is triggered when the value of Coefficients changes.
+   * @type {PropertyEvent}
    */
   get OnCoefficientsChanged()
   {
@@ -2696,7 +2802,8 @@ export class OcaFilterFIR extends OcaActuator
   }
 
   /**
-   * Event that is triggered when SampleRate changes.
+   * Event that is triggered when the value of SampleRate changes.
+   * @type {PropertyEvent}
    */
   get OnSampleRateChanged()
   {
@@ -2722,6 +2829,10 @@ export class OcaFilterFIR extends OcaActuator
     return OcaFilterFIR_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -2744,6 +2855,7 @@ let OcaFilterArbitraryCurve_p = null;
 /**
  * An arbitrary-curve filter, with transfer function specified as
  * amplitude and phase versus frequency.
+ * @extends OcaActuator
  */
 export class OcaFilterArbitraryCurve extends OcaActuator
 {
@@ -2791,7 +2903,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
 
   /**
    * Sets the complex transfer function.
-   * @param TransferFunction
+   * @param TransferFunction {OcaTransferFunction}
    *
    * @retval {Promise}
    */
@@ -2818,7 +2930,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
 
   /**
    * Sets the filter sampling rate.
-   * @param Rate
+   * @param Rate {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -2858,7 +2970,8 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when TransferFunction changes.
+   * Event that is triggered when the value of TransferFunction changes.
+   * @type {PropertyEvent}
    */
   get OnTransferFunctionChanged()
   {
@@ -2871,7 +2984,8 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when SampleRate changes.
+   * Event that is triggered when the value of SampleRate changes.
+   * @type {PropertyEvent}
    */
   get OnSampleRateChanged()
   {
@@ -2884,7 +2998,8 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when TFMinLength changes.
+   * Event that is triggered when the value of TFMinLength changes.
+   * @type {PropertyEvent}
    */
   get OnTFMinLengthChanged()
   {
@@ -2897,7 +3012,8 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when TFMaxLength changes.
+   * Event that is triggered when the value of TFMaxLength changes.
+   * @type {PropertyEvent}
    */
   get OnTFMaxLengthChanged()
   {
@@ -2924,6 +3040,10 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     return OcaFilterArbitraryCurve_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -2971,6 +3091,7 @@ let OcaDynamics_p = null;
  * a different manner, using one or more <b>OcaDynamicsDetector</b> and
  * <b>OcaDynamicsCurve</b> objects, in conjunction with other Worker
  * objects as needed.
+ * @extends OcaActuator
  */
 export class OcaDynamics extends OcaActuator
 {
@@ -3056,7 +3177,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the Function property. The return value indicates
    * whether the property was successfully set.
-   * @param Func
+   * @param Func {OcaDynamicsFunction}
    *
    * @retval {Promise}
    */
@@ -3087,7 +3208,7 @@ export class OcaDynamics extends OcaActuator
    * Sets the value of the Ratio property. The return value indicates
    * whether the property was successfully set. SetRatio() is a DEPRECATED
    * method. Please use <b>SetSlope()</b> instead.
-   * @param Ratio
+   * @param Ratio {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -3116,7 +3237,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the Threshold property. The return value indicates
    * if the value was successfully set.
-   * @param threshold
+   * @param threshold {OcaDBr}
    *
    * @retval {Promise}
    */
@@ -3145,7 +3266,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the ThresholdPresentationUnits property. The return
    * value indicates if the value was successfully set.
-   * @param Units
+   * @param Units {OcaPresentationUnit}
    *
    * @retval {Promise}
    */
@@ -3174,7 +3295,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the DetectorLaw property. The return value indicates
    * if the value was successfully set.
-   * @param Law
+   * @param Law {OcaLevelDetectionLaw}
    *
    * @retval {Promise}
    */
@@ -3203,7 +3324,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the AttackTime property. The return value indicates
    * if the value was successfully set.
-   * @param Time
+   * @param Time {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -3232,7 +3353,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the ReleaseTime property. The return value indicates
    * if the value was successfully set.
-   * @param Time
+   * @param Time {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -3261,7 +3382,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the HoldTime property. The return value indicates if
    * the value was successfully set.
-   * @param Time
+   * @param Time {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -3290,7 +3411,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the DynamicGainFloor property. The return value
    * indicates if the value was successfully set.
-   * @param Limit
+   * @param Limit {OcaDB}
    *
    * @retval {Promise}
    */
@@ -3319,7 +3440,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the DynamicGainCeiling property. The return value
    * indicates if the value was successfully set.
-   * @param Limit
+   * @param Limit {OcaDB}
    *
    * @retval {Promise}
    */
@@ -3348,7 +3469,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the KneeParameter property. The return value
    * indicates if the value was successfully set.
-   * @param Parameter
+   * @param Parameter {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -3377,7 +3498,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the Slope property. The return value indicates
    * whether the property was successfully set.
-   * @param Slope
+   * @param Slope {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -3391,7 +3512,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Triggered changes.
+   * Event that is triggered when the value of Triggered changes.
+   * @type {PropertyEvent}
    */
   get OnTriggeredChanged()
   {
@@ -3404,7 +3526,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DynamicGain changes.
+   * Event that is triggered when the value of DynamicGain changes.
+   * @type {PropertyEvent}
    */
   get OnDynamicGainChanged()
   {
@@ -3417,7 +3540,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Function changes.
+   * Event that is triggered when the value of Function changes.
+   * @type {PropertyEvent}
    */
   get OnFunctionChanged()
   {
@@ -3430,7 +3554,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Ratio changes.
+   * Event that is triggered when the value of Ratio changes.
+   * @type {PropertyEvent}
    */
   get OnRatioChanged()
   {
@@ -3443,7 +3568,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Threshold changes.
+   * Event that is triggered when the value of Threshold changes.
+   * @type {PropertyEvent}
    */
   get OnThresholdChanged()
   {
@@ -3456,7 +3582,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when ThresholdPresentationUnits changes.
+   * Event that is triggered when the value of ThresholdPresentationUnits changes.
+   * @type {PropertyEvent}
    */
   get OnThresholdPresentationUnitsChanged()
   {
@@ -3469,7 +3596,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DetectorLaw changes.
+   * Event that is triggered when the value of DetectorLaw changes.
+   * @type {PropertyEvent}
    */
   get OnDetectorLawChanged()
   {
@@ -3482,7 +3610,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when AttackTime changes.
+   * Event that is triggered when the value of AttackTime changes.
+   * @type {PropertyEvent}
    */
   get OnAttackTimeChanged()
   {
@@ -3495,7 +3624,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when ReleaseTime changes.
+   * Event that is triggered when the value of ReleaseTime changes.
+   * @type {PropertyEvent}
    */
   get OnReleaseTimeChanged()
   {
@@ -3508,7 +3638,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when HoldTime changes.
+   * Event that is triggered when the value of HoldTime changes.
+   * @type {PropertyEvent}
    */
   get OnHoldTimeChanged()
   {
@@ -3521,7 +3652,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DynamicGainCeiling changes.
+   * Event that is triggered when the value of DynamicGainCeiling changes.
+   * @type {PropertyEvent}
    */
   get OnDynamicGainCeilingChanged()
   {
@@ -3534,7 +3666,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DynamicGainFloor changes.
+   * Event that is triggered when the value of DynamicGainFloor changes.
+   * @type {PropertyEvent}
    */
   get OnDynamicGainFloorChanged()
   {
@@ -3547,7 +3680,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when KneeParameter changes.
+   * Event that is triggered when the value of KneeParameter changes.
+   * @type {PropertyEvent}
    */
   get OnKneeParameterChanged()
   {
@@ -3560,7 +3694,8 @@ export class OcaDynamics extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Slope changes.
+   * Event that is triggered when the value of Slope changes.
+   * @type {PropertyEvent}
    */
   get OnSlopeChanged()
   {
@@ -3597,6 +3732,10 @@ export class OcaDynamics extends OcaActuator
     return OcaDynamics_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -3631,6 +3770,7 @@ let OcaDynamicsDetector_p = null;
 
 /**
  * Dynamics element : side-chain detector.
+ * @extends OcaActuator
  */
 export class OcaDynamicsDetector extends OcaActuator
 {
@@ -3680,7 +3820,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Sets the value of the Law property. Return status indicates whether
    * the value was successfully set.
-   * @param Law
+   * @param Law {OcaLevelDetectionLaw}
    *
    * @retval {Promise}
    */
@@ -3709,7 +3849,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Sets the value of the AttackTime property. The return value indicates
    * whether the property was successfully set.
-   * @param Time
+   * @param Time {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -3738,7 +3878,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Sets the value of the ReleaseTime property. The return value indicates
    * whether the property was successfully set.
-   * @param Time
+   * @param Time {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -3767,7 +3907,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Sets the value of the HoldTime property. The return value indicates
    * whether the property was successfully set.
-   * @param Time
+   * @param Time {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -3781,7 +3921,8 @@ export class OcaDynamicsDetector extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Law changes.
+   * Event that is triggered when the value of Law changes.
+   * @type {PropertyEvent}
    */
   get OnLawChanged()
   {
@@ -3794,7 +3935,8 @@ export class OcaDynamicsDetector extends OcaActuator
   }
 
   /**
-   * Event that is triggered when AttackTime changes.
+   * Event that is triggered when the value of AttackTime changes.
+   * @type {PropertyEvent}
    */
   get OnAttackTimeChanged()
   {
@@ -3807,7 +3949,8 @@ export class OcaDynamicsDetector extends OcaActuator
   }
 
   /**
-   * Event that is triggered when ReleaseTime changes.
+   * Event that is triggered when the value of ReleaseTime changes.
+   * @type {PropertyEvent}
    */
   get OnReleaseTimeChanged()
   {
@@ -3820,7 +3963,8 @@ export class OcaDynamicsDetector extends OcaActuator
   }
 
   /**
-   * Event that is triggered when HoldTime changes.
+   * Event that is triggered when the value of HoldTime changes.
+   * @type {PropertyEvent}
    */
   get OnHoldTimeChanged()
   {
@@ -3847,6 +3991,10 @@ export class OcaDynamicsDetector extends OcaActuator
     return OcaDynamicsDetector_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -3918,6 +4066,7 @@ let OcaDynamicsCurve_p = null;
  * threshold of -12dBr, and max gain boost of 4dB: <b> n = 2</b> T[1] =
  * -12 S[1] = 1 S[2] = 1.5 Floor = 0 Ceiling = 4.0 More complex dynamics
  * curves can be modeled by using more segments (<b>n &gt; 2)</b>.
+ * @extends OcaActuator
  */
 export class OcaDynamicsCurve extends OcaActuator
 {
@@ -3972,7 +4121,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * n, the data in properties <b>Threshold</b>, <b>Slope</b>, and
    * <b>KneeParameter </b>of the new segment are by default set to the
    * values of the previous segment.
-   * @param Slope
+   * @param Slope {OcaUint8}
    *
    * @retval {Promise}
    */
@@ -4001,7 +4150,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Sets the list of Threshold values. The return value indicates whether
    * the values were successfully set.
-   * @param Threshold
+   * @param Threshold {OcaList}
    *
    * @retval {Promise}
    */
@@ -4030,7 +4179,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Sets the list of Slope values. The return value indicates whether the
    * values were successfully set.
-   * @param slope
+   * @param slope {OcaList}
    *
    * @retval {Promise}
    */
@@ -4059,7 +4208,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Sets the list of KneeParameter values. The return value indicates
    * whether the values were successfully set.
-   * @param parameter
+   * @param parameter {OcaList}
    *
    * @retval {Promise}
    */
@@ -4088,7 +4237,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Sets the value of the DynamicGainCeiling property. The return value
    * indicates whether the data was successfully set.
-   * @param gain
+   * @param gain {OcaDB}
    *
    * @retval {Promise}
    */
@@ -4117,7 +4266,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Sets the value of the DynamicGainFloor property. The return value
    * indicates whether the data was successfully set.
-   * @param Gain
+   * @param Gain {OcaDB}
    *
    * @retval {Promise}
    */
@@ -4131,7 +4280,8 @@ export class OcaDynamicsCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when nSegments changes.
+   * Event that is triggered when the value of nSegments changes.
+   * @type {PropertyEvent}
    */
   get OnnSegmentsChanged()
   {
@@ -4144,7 +4294,8 @@ export class OcaDynamicsCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Threshold changes.
+   * Event that is triggered when the value of Threshold changes.
+   * @type {PropertyEvent}
    */
   get OnThresholdChanged()
   {
@@ -4157,7 +4308,8 @@ export class OcaDynamicsCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Slope changes.
+   * Event that is triggered when the value of Slope changes.
+   * @type {PropertyEvent}
    */
   get OnSlopeChanged()
   {
@@ -4170,7 +4322,8 @@ export class OcaDynamicsCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when KneeParameter changes.
+   * Event that is triggered when the value of KneeParameter changes.
+   * @type {PropertyEvent}
    */
   get OnKneeParameterChanged()
   {
@@ -4183,7 +4336,8 @@ export class OcaDynamicsCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DynamicGainFloor changes.
+   * Event that is triggered when the value of DynamicGainFloor changes.
+   * @type {PropertyEvent}
    */
   get OnDynamicGainFloorChanged()
   {
@@ -4196,7 +4350,8 @@ export class OcaDynamicsCurve extends OcaActuator
   }
 
   /**
-   * Event that is triggered when DynamicGainCeiling changes.
+   * Event that is triggered when the value of DynamicGainCeiling changes.
+   * @type {PropertyEvent}
    */
   get OnDynamicGainCeilingChanged()
   {
@@ -4225,6 +4380,10 @@ export class OcaDynamicsCurve extends OcaActuator
     return OcaDynamicsCurve_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -4258,6 +4417,7 @@ let OcaSignalGenerator_p = null;
 
 /**
  * Multiwaveform signal generator with optional sweep capability.
+ * @extends OcaActuator
  */
 export class OcaSignalGenerator extends OcaActuator
 {
@@ -4311,7 +4471,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the Frequency1 property. The return value indicates
    * whether the property was successfully set.
-   * @param frequency
+   * @param frequency {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -4340,7 +4500,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the Frequency2 property. The return value indicates
    * whether the property was successfully set.
-   * @param frequency
+   * @param frequency {OcaFrequency}
    *
    * @retval {Promise}
    */
@@ -4369,7 +4529,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the Level property. The return value indicates
    * whether the property was successfully set.
-   * @param Level
+   * @param Level {OcaDBz}
    *
    * @retval {Promise}
    */
@@ -4398,7 +4558,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the Waveform property. The return value indicates
    * whether the property was successfully set.
-   * @param waveform
+   * @param waveform {OcaWaveformType}
    *
    * @retval {Promise}
    */
@@ -4427,7 +4587,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the SweepType property. The return value indicates
    * whether the property was successfully set.
-   * @param sweepType
+   * @param sweepType {OcaSweepType}
    *
    * @retval {Promise}
    */
@@ -4456,7 +4616,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the SweepTime property. The return value indicates
    * whether the property was successfully set.
-   * @param sweepTime
+   * @param sweepTime {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -4485,7 +4645,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Sets the value of the SweepRepeat property. The return value indicates
    * whether the property was successfully set.
-   * @param sweepRepeat
+   * @param sweepRepeat {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -4534,7 +4694,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Frequency1 changes.
+   * Event that is triggered when the value of Frequency1 changes.
+   * @type {PropertyEvent}
    */
   get OnFrequency1Changed()
   {
@@ -4547,7 +4708,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Frequency2 changes.
+   * Event that is triggered when the value of Frequency2 changes.
+   * @type {PropertyEvent}
    */
   get OnFrequency2Changed()
   {
@@ -4560,7 +4722,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Level changes.
+   * Event that is triggered when the value of Level changes.
+   * @type {PropertyEvent}
    */
   get OnLevelChanged()
   {
@@ -4573,7 +4736,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Waveform changes.
+   * Event that is triggered when the value of Waveform changes.
+   * @type {PropertyEvent}
    */
   get OnWaveformChanged()
   {
@@ -4586,7 +4750,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when SweepType changes.
+   * Event that is triggered when the value of SweepType changes.
+   * @type {PropertyEvent}
    */
   get OnSweepTypeChanged()
   {
@@ -4599,7 +4764,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when SweepTime changes.
+   * Event that is triggered when the value of SweepTime changes.
+   * @type {PropertyEvent}
    */
   get OnSweepTimeChanged()
   {
@@ -4612,7 +4778,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when SweepRepeat changes.
+   * Event that is triggered when the value of SweepRepeat changes.
+   * @type {PropertyEvent}
    */
   get OnSweepRepeatChanged()
   {
@@ -4625,7 +4792,8 @@ export class OcaSignalGenerator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Generating changes.
+   * Event that is triggered when the value of Generating changes.
+   * @type {PropertyEvent}
    */
   get OnGeneratingChanged()
   {
@@ -4656,6 +4824,10 @@ export class OcaSignalGenerator extends OcaActuator
     return OcaSignalGenerator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -4680,6 +4852,7 @@ let OcaSignalInput_p = null;
  * methods - they are all inherited from <b>OcaWorker</b> and above. It
  * is defined as a separate class as an aid to enumeration and signal
  * flow definition.
+ * @extends OcaActuator
  */
 export class OcaSignalInput extends OcaActuator
 {
@@ -4720,6 +4893,10 @@ export class OcaSignalInput extends OcaActuator
     return OcaSignalInput_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -4736,6 +4913,7 @@ let OcaSignalOutput_p = null;
  * methods - they are all inherited from <b>OcaWorker</b> and above. It
  * is defined as a separate class as an aid to enumeration and signal
  * flow definition.
+ * @extends OcaActuator
  */
 export class OcaSignalOutput extends OcaActuator
 {
@@ -4776,6 +4954,10 @@ export class OcaSignalOutput extends OcaActuator
     return OcaSignalOutput_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -4790,6 +4972,7 @@ let OcaTemperatureActuator_p = null;
 
 /**
  * A temperature actuator. Works in Celsius.
+ * @extends OcaActuator
  */
 export class OcaTemperatureActuator extends OcaActuator
 {
@@ -4836,7 +5019,7 @@ export class OcaTemperatureActuator extends OcaActuator
   /**
    * Sets the value of the Temperature property. The return value indicates
    * whether the property was successfully set.
-   * @param temperature
+   * @param temperature {OcaTemperature}
    *
    * @retval {Promise}
    */
@@ -4850,7 +5033,8 @@ export class OcaTemperatureActuator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when Temperature changes.
+   * Event that is triggered when the value of Temperature changes.
+   * @type {PropertyEvent}
    */
   get OnTemperatureChanged()
   {
@@ -4874,6 +5058,10 @@ export class OcaTemperatureActuator extends OcaActuator
     return OcaTemperatureActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -4894,6 +5082,7 @@ let OcaIdentificationActuator_p = null;
  * anything, e.g. <ul> <li>LED</li> <li>Foghorn</li> <li>Smoke
  * emitter</li> <li>Little waving robot hand wearing white glove</li>
  * <li>Jack-in-the-box popout</li> <li>et cetera</li> </ul>
+ * @extends OcaActuator
  */
 export class OcaIdentificationActuator extends OcaActuator
 {
@@ -4940,7 +5129,7 @@ export class OcaIdentificationActuator extends OcaActuator
   /**
    * Sets the Active state (i.e. value of the Active property). The return
    * value indicates whether the state was successfully set.
-   * @param active
+   * @param active {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -4954,7 +5143,8 @@ export class OcaIdentificationActuator extends OcaActuator
   }
 
   /**
-   * Event that is triggered when active changes.
+   * Event that is triggered when the value of active changes.
+   * @type {PropertyEvent}
    */
   get OnactiveChanged()
   {
@@ -4978,6 +5168,10 @@ export class OcaIdentificationActuator extends OcaActuator
     return OcaIdentificationActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -4992,6 +5186,7 @@ let OcaSummingPoint_p = null;
 /**
  * Actuator with no control parameters, used as a simple node to
  * represent summations in block signal flows.
+ * @extends OcaActuator
  */
 export class OcaSummingPoint extends OcaActuator
 {
@@ -5028,6 +5223,10 @@ export class OcaSummingPoint extends OcaActuator
     return OcaSummingPoint_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5040,6 +5239,7 @@ let OcaBasicActuator_p = null;
 
 /**
  * Abstract base class for weakly typed actuators.
+ * @extends OcaActuator
  */
 export class OcaBasicActuator extends OcaActuator
 {
@@ -5080,6 +5280,10 @@ export class OcaBasicActuator extends OcaActuator
     return OcaBasicActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5094,6 +5298,7 @@ let OcaBooleanActuator_p = null;
 
 /**
  * Basic boolean actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaBooleanActuator extends OcaBasicActuator
 {
@@ -5140,7 +5345,7 @@ export class OcaBooleanActuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -5154,7 +5359,8 @@ export class OcaBooleanActuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5178,6 +5384,10 @@ export class OcaBooleanActuator extends OcaBasicActuator
     return OcaBooleanActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5193,6 +5403,7 @@ let OcaInt8Actuator_p = null;
 
 /**
  * Basic int8 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaInt8Actuator extends OcaBasicActuator
 {
@@ -5239,7 +5450,7 @@ export class OcaInt8Actuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaInt8}
    *
    * @retval {Promise}
    */
@@ -5253,7 +5464,8 @@ export class OcaInt8Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5277,6 +5489,10 @@ export class OcaInt8Actuator extends OcaBasicActuator
     return OcaInt8Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5292,6 +5508,7 @@ let OcaInt16Actuator_p = null;
 
 /**
  * Basic int16 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaInt16Actuator extends OcaBasicActuator
 {
@@ -5338,7 +5555,7 @@ export class OcaInt16Actuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaInt16}
    *
    * @retval {Promise}
    */
@@ -5352,7 +5569,8 @@ export class OcaInt16Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5376,6 +5594,10 @@ export class OcaInt16Actuator extends OcaBasicActuator
     return OcaInt16Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5391,6 +5613,7 @@ let OcaInt32Actuator_p = null;
 
 /**
  * Basic int32 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaInt32Actuator extends OcaBasicActuator
 {
@@ -5437,7 +5660,7 @@ export class OcaInt32Actuator extends OcaBasicActuator
   /**
    * Sets the<b> Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaInt32}
    *
    * @retval {Promise}
    */
@@ -5451,7 +5674,8 @@ export class OcaInt32Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5475,6 +5699,10 @@ export class OcaInt32Actuator extends OcaBasicActuator
     return OcaInt32Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5490,6 +5718,7 @@ let OcaInt64Actuator_p = null;
 
 /**
  * Basic int64 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaInt64Actuator extends OcaBasicActuator
 {
@@ -5536,7 +5765,7 @@ export class OcaInt64Actuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Value
+   * @param Value {OcaInt64}
    *
    * @retval {Promise}
    */
@@ -5550,7 +5779,8 @@ export class OcaInt64Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5574,6 +5804,10 @@ export class OcaInt64Actuator extends OcaBasicActuator
     return OcaInt64Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5589,6 +5823,7 @@ let OcaUint8Actuator_p = null;
 
 /**
  * Basic uint8 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaUint8Actuator extends OcaBasicActuator
 {
@@ -5635,7 +5870,7 @@ export class OcaUint8Actuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaUint8}
    *
    * @retval {Promise}
    */
@@ -5649,7 +5884,8 @@ export class OcaUint8Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5673,6 +5909,10 @@ export class OcaUint8Actuator extends OcaBasicActuator
     return OcaUint8Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5688,6 +5928,7 @@ let OcaUint16Actuator_p = null;
 
 /**
  * Basic uint16 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaUint16Actuator extends OcaBasicActuator
 {
@@ -5734,7 +5975,7 @@ export class OcaUint16Actuator extends OcaBasicActuator
   /**
    * Sets the value of the <b>Setting </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -5748,7 +5989,8 @@ export class OcaUint16Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5772,6 +6014,10 @@ export class OcaUint16Actuator extends OcaBasicActuator
     return OcaUint16Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5787,6 +6033,7 @@ let OcaUint32Actuator_p = null;
 
 /**
  * Basic uint32 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaUint32Actuator extends OcaBasicActuator
 {
@@ -5832,7 +6079,7 @@ export class OcaUint32Actuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaUint32}
    *
    * @retval {Promise}
    */
@@ -5846,7 +6093,8 @@ export class OcaUint32Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5870,6 +6118,10 @@ export class OcaUint32Actuator extends OcaBasicActuator
     return OcaUint32Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5885,6 +6137,7 @@ let OcaUint64Actuator_p = null;
 
 /**
  * Basic Uint64 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaUint64Actuator extends OcaBasicActuator
 {
@@ -5931,7 +6184,7 @@ export class OcaUint64Actuator extends OcaBasicActuator
   /**
    * Sets the value of the Level property. The return value indicates
    * whether the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaUint64}
    *
    * @retval {Promise}
    */
@@ -5945,7 +6198,8 @@ export class OcaUint64Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -5969,6 +6223,10 @@ export class OcaUint64Actuator extends OcaBasicActuator
     return OcaUint64Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -5984,6 +6242,7 @@ let OcaFloat32Actuator_p = null;
 
 /**
  * Basic float32 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaFloat32Actuator extends OcaBasicActuator
 {
@@ -6030,7 +6289,7 @@ export class OcaFloat32Actuator extends OcaBasicActuator
   /**
    * Sets the <b>Setting </b>property. The return value indicates whether
    * the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaFloat32}
    *
    * @retval {Promise}
    */
@@ -6044,7 +6303,8 @@ export class OcaFloat32Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -6068,6 +6328,10 @@ export class OcaFloat32Actuator extends OcaBasicActuator
     return OcaFloat32Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6083,6 +6347,7 @@ let OcaFloat64Actuator_p = null;
 
 /**
  * Basic Float64 actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaFloat64Actuator extends OcaBasicActuator
 {
@@ -6129,7 +6394,7 @@ export class OcaFloat64Actuator extends OcaBasicActuator
   /**
    * Sets the value of the Level property. The return value indicates
    * whether the property was successfully set.
-   * @param Setting
+   * @param Setting {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -6143,7 +6408,8 @@ export class OcaFloat64Actuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -6167,6 +6433,10 @@ export class OcaFloat64Actuator extends OcaBasicActuator
     return OcaFloat64Actuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6183,6 +6453,7 @@ let OcaStringActuator_p = null;
 
 /**
  * String actuator.
+ * @extends OcaBasicActuator
  */
 export class OcaStringActuator extends OcaBasicActuator
 {
@@ -6230,7 +6501,7 @@ export class OcaStringActuator extends OcaBasicActuator
   /**
    * Sets the value of the Value property. The return value indicates
    * whether the property was successfully set.
-   * @param Value
+   * @param Value {OcaString}
    *
    * @retval {Promise}
    */
@@ -6256,7 +6527,8 @@ export class OcaStringActuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Setting changes.
+   * Event that is triggered when the value of Setting changes.
+   * @type {PropertyEvent}
    */
   get OnSettingChanged()
   {
@@ -6269,7 +6541,8 @@ export class OcaStringActuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when MaxLen changes.
+   * Event that is triggered when the value of MaxLen changes.
+   * @type {PropertyEvent}
    */
   get OnMaxLenChanged()
   {
@@ -6294,6 +6567,10 @@ export class OcaStringActuator extends OcaBasicActuator
     return OcaStringActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6314,6 +6591,7 @@ let OcaBitstringActuator_p = null;
 
 /**
  * Bitstring actuator. Maximum bitstring length is 65,536 bits.
+ * @extends OcaBasicActuator
  */
 export class OcaBitstringActuator extends OcaBasicActuator
 {
@@ -6360,7 +6638,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
   /**
    * Gets the bit value of the given bit. The return value indicates
    * whether the property was successfully gathered.
-   * @param bitNr
+   * @param bitNr {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -6378,9 +6656,9 @@ export class OcaBitstringActuator extends OcaBasicActuator
   /**
    * Sets the bit value of the given bit. The return value indicates
    * whether the property was successfully set.
-   * @param bitNr
+   * @param bitNr {OcaUint16}
    *
-   * @param Value
+   * @param Value {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -6409,7 +6687,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
   /**
    * Sets the entire bitstring. The return value indicates whether the
    * property was successfully set.
-   * @param BitString
+   * @param BitString {OcaBitstring}
    *
    * @retval {Promise}
    */
@@ -6423,7 +6701,8 @@ export class OcaBitstringActuator extends OcaBasicActuator
   }
 
   /**
-   * Event that is triggered when Bitstring changes.
+   * Event that is triggered when the value of Bitstring changes.
+   * @type {PropertyEvent}
    */
   get OnBitstringChanged()
   {
@@ -6447,6 +6726,10 @@ export class OcaBitstringActuator extends OcaBasicActuator
     return OcaBitstringActuator_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6461,6 +6744,7 @@ let OcaSensor_p = null;
 
 /**
  * Abstract base class for all sensor classes.
+ * @extends OcaWorker
  */
 export class OcaSensor extends OcaWorker
 {
@@ -6506,7 +6790,8 @@ export class OcaSensor extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ReadingState changes.
+   * Event that is triggered when the value of ReadingState changes.
+   * @type {PropertyEvent}
    */
   get OnReadingStateChanged()
   {
@@ -6530,6 +6815,10 @@ export class OcaSensor extends OcaWorker
     return OcaSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6544,6 +6833,7 @@ let OcaLevelSensor_p = null;
 
 /**
  * Signal level sensor.
+ * @extends OcaSensor
  */
 export class OcaLevelSensor extends OcaSensor
 {
@@ -6588,7 +6878,8 @@ export class OcaLevelSensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -6612,6 +6903,10 @@ export class OcaLevelSensor extends OcaSensor
     return OcaLevelSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6629,6 +6924,7 @@ let OcaAudioLevelSensor_p = null;
  * Child of <b>OcaLevelSensor </b>that returns an audio meter reading in
  * dB relative to a known reference level, and whose value has been
  * calculated by the selected averaging algorithm.
+ * @extends OcaLevelSensor
  */
 export class OcaAudioLevelSensor extends OcaLevelSensor
 {
@@ -6676,7 +6972,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
    * Sets the value of the Law property. The return value indicates whether
    * the property was successfully set. Only implemented for objects whose
    * Law property is read/write.
-   * @param law
+   * @param law {OcaLevelMeterLaw}
    *
    * @retval {Promise}
    */
@@ -6690,7 +6986,8 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
   }
 
   /**
-   * Event that is triggered when Law changes.
+   * Event that is triggered when the value of Law changes.
+   * @type {PropertyEvent}
    */
   get OnLawChanged()
   {
@@ -6714,6 +7011,10 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
     return OcaAudioLevelSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6728,6 +7029,7 @@ let OcaTimeIntervalSensor_p = null;
 
 /**
  * Time interval sensor.
+ * @extends OcaSensor
  */
 export class OcaTimeIntervalSensor extends OcaSensor
 {
@@ -6772,7 +7074,8 @@ export class OcaTimeIntervalSensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -6796,6 +7099,10 @@ export class OcaTimeIntervalSensor extends OcaSensor
     return OcaTimeIntervalSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6810,6 +7117,7 @@ let OcaFrequencySensor_p = null;
 
 /**
  * Frequency sensor.
+ * @extends OcaSensor
  */
 export class OcaFrequencySensor extends OcaSensor
 {
@@ -6854,7 +7162,8 @@ export class OcaFrequencySensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -6878,6 +7187,10 @@ export class OcaFrequencySensor extends OcaSensor
     return OcaFrequencySensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6892,6 +7205,7 @@ let OcaTemperatureSensor_p = null;
 
 /**
  * Basic temperature sensor.
+ * @extends OcaSensor
  */
 export class OcaTemperatureSensor extends OcaSensor
 {
@@ -6936,7 +7250,8 @@ export class OcaTemperatureSensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -6960,6 +7275,10 @@ export class OcaTemperatureSensor extends OcaSensor
     return OcaTemperatureSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -6976,6 +7295,7 @@ let OcaIdentificationSensor_p = null;
  * is that there is some kind of control -- a pushbutton, for instance --
  * that the user depresses to send a device identification event to the
  * controller. Such mechanisms aid in the setup of networks.
+ * @extends OcaSensor
  */
 export class OcaIdentificationSensor extends OcaSensor
 {
@@ -7032,6 +7352,10 @@ export class OcaIdentificationSensor extends OcaSensor
     return OcaIdentificationSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7046,6 +7370,7 @@ let OcaVoltageSensor_p = null;
 
 /**
  * Basic voltage sensor.
+ * @extends OcaSensor
  */
 export class OcaVoltageSensor extends OcaSensor
 {
@@ -7090,7 +7415,8 @@ export class OcaVoltageSensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7114,6 +7440,10 @@ export class OcaVoltageSensor extends OcaSensor
     return OcaVoltageSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7128,6 +7458,7 @@ let OcaCurrentSensor_p = null;
 
 /**
  * Basic current sensor.
+ * @extends OcaSensor
  */
 export class OcaCurrentSensor extends OcaSensor
 {
@@ -7172,7 +7503,8 @@ export class OcaCurrentSensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7196,6 +7528,10 @@ export class OcaCurrentSensor extends OcaSensor
     return OcaCurrentSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7210,6 +7546,7 @@ let OcaImpedanceSensor_p = null;
 
 /**
  * Basic impedance sensor. Value is complex (magnitude and phase).
+ * @extends OcaSensor
  */
 export class OcaImpedanceSensor extends OcaSensor
 {
@@ -7254,7 +7591,8 @@ export class OcaImpedanceSensor extends OcaSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7278,6 +7616,10 @@ export class OcaImpedanceSensor extends OcaSensor
     return OcaImpedanceSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7291,6 +7633,7 @@ let OcaBasicSensor_p = null;
 
 /**
  * Abstract base class for weakly typed sensors.
+ * @extends OcaSensor
  */
 export class OcaBasicSensor extends OcaSensor
 {
@@ -7331,6 +7674,10 @@ export class OcaBasicSensor extends OcaSensor
     return OcaBasicSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7344,6 +7691,7 @@ let OcaBooleanSensor_p = null;
 
 /**
  * Basic boolean sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaBooleanSensor extends OcaBasicSensor
 {
@@ -7388,7 +7736,8 @@ export class OcaBooleanSensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7412,6 +7761,10 @@ export class OcaBooleanSensor extends OcaBasicSensor
     return OcaBooleanSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7426,6 +7779,7 @@ let OcaInt8Sensor_p = null;
 
 /**
  * Basic int8 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaInt8Sensor extends OcaBasicSensor
 {
@@ -7470,7 +7824,8 @@ export class OcaInt8Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7494,6 +7849,10 @@ export class OcaInt8Sensor extends OcaBasicSensor
     return OcaInt8Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7508,6 +7867,7 @@ let OcaInt16Sensor_p = null;
 
 /**
  * Basic int16 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaInt16Sensor extends OcaBasicSensor
 {
@@ -7552,7 +7912,8 @@ export class OcaInt16Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7576,6 +7937,10 @@ export class OcaInt16Sensor extends OcaBasicSensor
     return OcaInt16Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7590,6 +7955,7 @@ let OcaInt32Sensor_p = null;
 
 /**
  * Basic int32 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaInt32Sensor extends OcaBasicSensor
 {
@@ -7634,7 +8000,8 @@ export class OcaInt32Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7658,6 +8025,10 @@ export class OcaInt32Sensor extends OcaBasicSensor
     return OcaInt32Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7672,6 +8043,7 @@ let OcaInt64Sensor_p = null;
 
 /**
  * Basic int64 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaInt64Sensor extends OcaBasicSensor
 {
@@ -7716,7 +8088,8 @@ export class OcaInt64Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7740,6 +8113,10 @@ export class OcaInt64Sensor extends OcaBasicSensor
     return OcaInt64Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7754,6 +8131,7 @@ let OcaUint8Sensor_p = null;
 
 /**
  * Basic uint8 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaUint8Sensor extends OcaBasicSensor
 {
@@ -7798,7 +8176,8 @@ export class OcaUint8Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7822,6 +8201,10 @@ export class OcaUint8Sensor extends OcaBasicSensor
     return OcaUint8Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7836,6 +8219,7 @@ let OcaUint16Sensor_p = null;
 
 /**
  * Basic uint16 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaUint16Sensor extends OcaBasicSensor
 {
@@ -7880,7 +8264,8 @@ export class OcaUint16Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7904,6 +8289,10 @@ export class OcaUint16Sensor extends OcaBasicSensor
     return OcaUint16Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -7918,6 +8307,7 @@ let OcaUint32Sensor_p = null;
 
 /**
  * Basic uint32 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaUint32Sensor extends OcaBasicSensor
 {
@@ -7962,7 +8352,8 @@ export class OcaUint32Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -7986,6 +8377,10 @@ export class OcaUint32Sensor extends OcaBasicSensor
     return OcaUint32Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -8000,6 +8395,7 @@ let OcaUint64Sensor_p = null;
 
 /**
  * Basic Uint64 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaUint64Sensor extends OcaBasicSensor
 {
@@ -8044,7 +8440,8 @@ export class OcaUint64Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -8068,6 +8465,10 @@ export class OcaUint64Sensor extends OcaBasicSensor
     return OcaUint64Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -8082,6 +8483,7 @@ let OcaFloat32Sensor_p = null;
 
 /**
  * Basic float32 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaFloat32Sensor extends OcaBasicSensor
 {
@@ -8126,7 +8528,8 @@ export class OcaFloat32Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -8150,6 +8553,10 @@ export class OcaFloat32Sensor extends OcaBasicSensor
     return OcaFloat32Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -8164,6 +8571,7 @@ let OcaFloat64Sensor_p = null;
 
 /**
  * Basic Float64 sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaFloat64Sensor extends OcaBasicSensor
 {
@@ -8208,7 +8616,8 @@ export class OcaFloat64Sensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when Reading changes.
+   * Event that is triggered when the value of Reading changes.
+   * @type {PropertyEvent}
    */
   get OnReadingChanged()
   {
@@ -8232,6 +8641,10 @@ export class OcaFloat64Sensor extends OcaBasicSensor
     return OcaFloat64Sensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -8248,6 +8661,7 @@ let OcaStringSensor_p = null;
 
 /**
  * Text string sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaStringSensor extends OcaBasicSensor
 {
@@ -8308,7 +8722,7 @@ export class OcaStringSensor extends OcaBasicSensor
   /**
    * Sets the maximum number of bytes that the object may return. Returned
    * status indicates success or failure of the set.
-   * @param maxLen
+   * @param maxLen {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -8322,7 +8736,8 @@ export class OcaStringSensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when String changes.
+   * Event that is triggered when the value of String changes.
+   * @type {PropertyEvent}
    */
   get OnStringChanged()
   {
@@ -8335,7 +8750,8 @@ export class OcaStringSensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when MaxLen changes.
+   * Event that is triggered when the value of MaxLen changes.
+   * @type {PropertyEvent}
    */
   get OnMaxLenChanged()
   {
@@ -8360,6 +8776,10 @@ export class OcaStringSensor extends OcaBasicSensor
     return OcaStringSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -8378,6 +8798,7 @@ let OcaBitstringSensor_p = null;
 
 /**
  * Bit string sensor.
+ * @extends OcaBasicSensor
  */
 export class OcaBitstringSensor extends OcaBasicSensor
 {
@@ -8424,7 +8845,7 @@ export class OcaBitstringSensor extends OcaBasicSensor
   /**
    * Gets the value of the given bit. Return status indicates success or
    * failure of the retrieval.
-   * @param bitNr
+   * @param bitNr {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -8453,7 +8874,8 @@ export class OcaBitstringSensor extends OcaBasicSensor
   }
 
   /**
-   * Event that is triggered when BitString changes.
+   * Event that is triggered when the value of BitString changes.
+   * @type {PropertyEvent}
    */
   get OnBitStringChanged()
   {
@@ -8477,6 +8899,10 @@ export class OcaBitstringSensor extends OcaBasicSensor
     return OcaBitstringSensor_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -8524,6 +8950,7 @@ let OcaBlock_p = null;
  * object as the object's <b>container.</b><b><sup>1</sup></b> Normally,
  * a block contains a set of members that together function as a
  * processing unit -- for example, a crossover channel or mixer strip.
+ * @extends OcaWorker
  */
 export class OcaBlock extends OcaWorker
 {
@@ -8580,9 +9007,9 @@ export class OcaBlock extends OcaWorker
    * Constructs an object according to the given construction specification
    * and adds it to the block. The return value indicates whether the
    * member was successfully created and added.
-   * @param ClassID
+   * @param ClassID {OcaClassID}
    *
-   * @param ConstructionParameters
+   * @param ConstructionParameters {variant}
    *
    * @retval {Promise}
    */
@@ -8601,7 +9028,7 @@ export class OcaBlock extends OcaWorker
    * Invokes a factory to construct an instance of the given class, then
    * adds it to the block. The return value indicates whether the member
    * was successfully created and added.
-   * @param FactoryONo
+   * @param FactoryONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -8620,7 +9047,7 @@ export class OcaBlock extends OcaWorker
    * Removes a member from the block and destroys the object. . Deletes all
    * signal paths attached to its ports. The return value indicates whether
    * the member was successfully removed and destroyed.
-   * @param ObjectNumber
+   * @param ObjectNumber {OcaONo}
    *
    * @retval {Promise}
    */
@@ -8666,7 +9093,7 @@ export class OcaBlock extends OcaWorker
   /**
    * Adds a signal path to the block. The return value indicates whether
    * the signal path was successfully added.
-   * @param Path
+   * @param Path {OcaSignalPath}
    *
    * @retval {Promise}
    */
@@ -8684,7 +9111,7 @@ export class OcaBlock extends OcaWorker
   /**
    * Deletes a signal path from the block. The return value indicates
    * whether the signal path was successfully added.
-   * @param Index
+   * @param Index {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -8768,7 +9195,7 @@ export class OcaBlock extends OcaWorker
    * Stores a paramset library volume data block which represents the
    * current state of the block ("snapshot") in the given library.
    * <b>Replaces </b>the library volume at the specified LibVolIdentifier.
-   * @param LibVolIdentifier
+   * @param LibVolIdentifier {OcaClassVersionNumber}
    *
    * @retval {Promise}
    */
@@ -8813,13 +9240,13 @@ export class OcaBlock extends OcaWorker
    * Returns object identifications of all objects in the block that match
    * the given Role search string and Class ID. Return value indicates
    * whether the method succeeded. <b>Added in version 2 of this class.</b>
-   * @param SearchName
+   * @param SearchName {OcaString}
    *
-   * @param NameComparisonType
+   * @param NameComparisonType {OcaStringComparisonType}
    *
-   * @param SearchClassID
+   * @param SearchClassID {OcaClassID}
    *
-   * @param ResultFlags
+   * @param ResultFlags {OcaObjectSearchResultFlags}
    *
    * @retval {Promise}
    */
@@ -8838,13 +9265,13 @@ export class OcaBlock extends OcaWorker
    * Returns block member descriptors of all objects in the block and all
    * contained blocks that match the given Role search string and Class ID.
    * <b>Added in version 2 of this class.</b>
-   * @param SearchName
+   * @param SearchName {OcaString}
    *
-   * @param NameComparisonType
+   * @param NameComparisonType {OcaStringComparisonType}
    *
-   * @param SearchClassID
+   * @param SearchClassID {OcaClassID}
    *
-   * @param ResultFlags
+   * @param ResultFlags {OcaObjectSearchResultFlags}
    *
    * @retval {Promise}
    */
@@ -8862,9 +9289,9 @@ export class OcaBlock extends OcaWorker
   /**
    * Returns object identifications of all objects with the given name
    * path. <b>Added in version 2 of this class.</b>
-   * @param SearchPath
+   * @param SearchPath {OcaNamePath}
    *
-   * @param ResultFlags
+   * @param ResultFlags {OcaObjectSearchResultFlags}
    *
    * @retval {Promise}
    */
@@ -8883,13 +9310,13 @@ export class OcaBlock extends OcaWorker
    * Returns block member descriptors of all objects in the block and all
    * contained blocks that match the given Label search string and Class
    * ID. <b>Added in version 2 of this class.</b>
-   * @param SearchName
+   * @param SearchName {OcaString}
    *
-   * @param NameComparisonType
+   * @param NameComparisonType {OcaStringComparisonType}
    *
-   * @param SearchClassID
+   * @param SearchClassID {OcaClassID}
    *
-   * @param ResultFlags
+   * @param ResultFlags {OcaObjectSearchResultFlags}
    *
    * @retval {Promise}
    */
@@ -8905,7 +9332,8 @@ export class OcaBlock extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Type changes.
+   * Event that is triggered when the value of Type changes.
+   * @type {PropertyEvent}
    */
   get OnTypeChanged()
   {
@@ -8918,7 +9346,8 @@ export class OcaBlock extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Members changes.
+   * Event that is triggered when the value of Members changes.
+   * @type {PropertyEvent}
    */
   get OnMembersChanged()
   {
@@ -8931,7 +9360,8 @@ export class OcaBlock extends OcaWorker
   }
 
   /**
-   * Event that is triggered when SignalPaths changes.
+   * Event that is triggered when the value of SignalPaths changes.
+   * @type {PropertyEvent}
    */
   get OnSignalPathsChanged()
   {
@@ -8944,7 +9374,8 @@ export class OcaBlock extends OcaWorker
   }
 
   /**
-   * Event that is triggered when MostRecentParamSetIdentifier changes.
+   * Event that is triggered when the value of MostRecentParamSetIdentifier changes.
+   * @type {PropertyEvent}
    */
   get OnMostRecentParamSetIdentifierChanged()
   {
@@ -8957,7 +9388,8 @@ export class OcaBlock extends OcaWorker
   }
 
   /**
-   * Event that is triggered when GlobalType changes.
+   * Event that is triggered when the value of GlobalType changes.
+   * @type {PropertyEvent}
    */
   get OnGlobalTypeChanged()
   {
@@ -8970,7 +9402,8 @@ export class OcaBlock extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ONoMap changes.
+   * Event that is triggered when the value of ONoMap changes.
+   * @type {PropertyEvent}
    */
   get OnONoMapChanged()
   {
@@ -8999,6 +9432,10 @@ export class OcaBlock extends OcaWorker
     return OcaBlock_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -9060,6 +9497,7 @@ let OcaBlockFactory_p = null;
  * proto-ports, and proto-signal paths to a block factory, the controller
  * calls the factory's <b>DefineProtoMember(...), DefineProtoPort(...),
  * and DefineProtoSignalPath(...</b>) methods, respectively.
+ * @extends OcaWorker
  */
 export class OcaBlockFactory extends OcaWorker
 {
@@ -9095,9 +9533,9 @@ export class OcaBlockFactory extends OcaWorker
    * Defines a proto-port in the factory. If proto-port already exists, it
    * is replaced with the one from this call. The return value indicates
    * whether the proto-port was successfully added.
-   * @param name
+   * @param name {OcaString}
    *
-   * @param portmode
+   * @param portmode {OcaPortMode}
    *
    * @retval {Promise}
    */
@@ -9115,7 +9553,7 @@ export class OcaBlockFactory extends OcaWorker
   /**
    * Deletes a proto-port from the factory. The return value indicates
    * whether the proto-port was successfully deleted.
-   * @param ProtoPortID
+   * @param ProtoPortID {OcaProtoPortID}
    *
    * @retval {Promise}
    */
@@ -9145,9 +9583,9 @@ export class OcaBlockFactory extends OcaWorker
    * Defines a proto-member of the given class in the factory. The most
    * current version of the class is used. The return value indicates
    * whether the proto-member was successfully defined.
-   * @param ClassIdentification
+   * @param ClassIdentification {OcaClassID}
    *
-   * @param ConstructionParameters
+   * @param ConstructionParameters {ConstructionParameterDataType}
    *
    * @retval {Promise}
    */
@@ -9166,7 +9604,7 @@ export class OcaBlockFactory extends OcaWorker
    * Defines a proto-member which will be instantiated by a specified
    * factory when the block is built. The return value indicates whether
    * the proto-member was successfully defined.
-   * @param FactoryONo
+   * @param FactoryONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -9185,7 +9623,7 @@ export class OcaBlockFactory extends OcaWorker
    * Deletes a proto-member from the factory. Deletes all proto-signal
    * paths attached to its ports. The return value indicates whether the
    * member was successfully deleted.
-   * @param ProtoObjectNumber
+   * @param ProtoObjectNumber {OcaProtoONo}
    *
    * @retval {Promise}
    */
@@ -9215,7 +9653,7 @@ export class OcaBlockFactory extends OcaWorker
   /**
    * Defines a proto-signal path in the factory. The return value indicates
    * whether the proto-signal path was successfully defined.
-   * @param Path
+   * @param Path {OcaProtoSignalPath}
    *
    * @retval {Promise}
    */
@@ -9275,7 +9713,7 @@ export class OcaBlockFactory extends OcaWorker
    * Sets the global type identifier for blocks created by this factory.
    * The return value indicates whether the identifier was successfully
    * set. <b>Added in version 2 of this class.</b>
-   * @param GlobalType
+   * @param GlobalType {OcaGlobalBlockTypeIdentifier}
    *
    * @retval {Promise}
    */
@@ -9289,7 +9727,8 @@ export class OcaBlockFactory extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ProtoPorts changes.
+   * Event that is triggered when the value of ProtoPorts changes.
+   * @type {PropertyEvent}
    */
   get OnProtoPortsChanged()
   {
@@ -9302,7 +9741,8 @@ export class OcaBlockFactory extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ProtoMembers changes.
+   * Event that is triggered when the value of ProtoMembers changes.
+   * @type {PropertyEvent}
    */
   get OnProtoMembersChanged()
   {
@@ -9315,7 +9755,8 @@ export class OcaBlockFactory extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ProtoSignalPaths changes.
+   * Event that is triggered when the value of ProtoSignalPaths changes.
+   * @type {PropertyEvent}
    */
   get OnProtoSignalPathsChanged()
   {
@@ -9328,7 +9769,8 @@ export class OcaBlockFactory extends OcaWorker
   }
 
   /**
-   * Event that is triggered when GlobalType changes.
+   * Event that is triggered when the value of GlobalType changes.
+   * @type {PropertyEvent}
    */
   get OnGlobalTypeChanged()
   {
@@ -9355,6 +9797,10 @@ export class OcaBlockFactory extends OcaWorker
     return OcaBlockFactory_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -9446,6 +9892,7 @@ let OcaMatrix_p = null;
  * color="#00006c"><b>Set</b></font> call into a consolidated <font
  * color="#00006c"><b>OcaResult</b></font>. - unlock the <font
  * color="#00006c"><b>OcaMatrix</b></font> instance.
+ * @extends OcaWorker
  */
 export class OcaMatrix extends OcaWorker
 {
@@ -9500,9 +9947,9 @@ export class OcaMatrix extends OcaWorker
   /**
    * Sets the currently active area (cell, row, column, or whole matrix).
    * The returned status indicates whether the operation was successful.
-   * @param x
+   * @param x {OcaMatrixCoordinate}
    *
-   * @param y
+   * @param y {OcaMatrixCoordinate}
    *
    * @retval {Promise}
    */
@@ -9532,9 +9979,9 @@ export class OcaMatrix extends OcaWorker
    * Sets the matrix size. The returned status indicates whether the
    * operation was successful. This method will not be available for
    * fixed-size matrices.
-   * @param xSize
+   * @param xSize {OcaMatrixCoordinate}
    *
-   * @param ySize
+   * @param ySize {OcaMatrixCoordinate}
    *
    * @retval {Promise}
    */
@@ -9564,7 +10011,7 @@ export class OcaMatrix extends OcaWorker
    * Sets the entire 2D array of member object numbers. Row and column size
    * of the <b>members</b> parameter must be equal to the current size of
    * the matrix.
-   * @param members
+   * @param members {OcaList2D}
    *
    * @retval {Promise}
    */
@@ -9581,9 +10028,9 @@ export class OcaMatrix extends OcaWorker
    * Retrieves the object number of the member at position (x,y). If no
    * member is defined at this position, returns an object number value of
    * Zero.
-   * @param x
+   * @param x {OcaMatrixCoordinate}
    *
-   * @param y
+   * @param y {OcaMatrixCoordinate}
    *
    * @retval {Promise}
    */
@@ -9601,11 +10048,11 @@ export class OcaMatrix extends OcaWorker
   /**
    * Installs a particular object as a member at position (x,y). If another
    * object was at this position, it is removed.
-   * @param x
+   * @param x {OcaMatrixCoordinate}
    *
-   * @param y
+   * @param y {OcaMatrixCoordinate}
    *
-   * @param memberONo
+   * @param memberONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -9632,7 +10079,7 @@ export class OcaMatrix extends OcaWorker
 
   /**
    * Sets the object number of the matrix proxy.
-   * @param ONo
+   * @param ONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -9659,7 +10106,7 @@ export class OcaMatrix extends OcaWorker
 
   /**
    * Sets the number of ports per row. These must be input ports.
-   * @param Ports
+   * @param Ports {OcaUint8}
    *
    * @retval {Promise}
    */
@@ -9686,7 +10133,7 @@ export class OcaMatrix extends OcaWorker
 
   /**
    * Sets the number of ports per column. These must be output ports.
-   * @param Ports
+   * @param Ports {OcaUint8}
    *
    * @retval {Promise}
    */
@@ -9703,9 +10150,9 @@ export class OcaMatrix extends OcaWorker
    * Sets the currently active area (cell, row, column, or whole matrix)
    * and locks it. Fails if the referenced members cannot all be locked.
    * The returned status indicates whether the operation was successful.
-   * @param x
+   * @param x {OcaMatrixCoordinate}
    *
-   * @param y
+   * @param y {OcaMatrixCoordinate}
    *
    * @retval {Promise}
    */
@@ -9733,7 +10180,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when X changes.
+   * Event that is triggered when the value of X changes.
+   * @type {PropertyEvent}
    */
   get OnXChanged()
   {
@@ -9746,7 +10194,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Y changes.
+   * Event that is triggered when the value of Y changes.
+   * @type {PropertyEvent}
    */
   get OnYChanged()
   {
@@ -9759,7 +10208,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when xSize changes.
+   * Event that is triggered when the value of xSize changes.
+   * @type {PropertyEvent}
    */
   get OnxSizeChanged()
   {
@@ -9772,7 +10222,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ySize changes.
+   * Event that is triggered when the value of ySize changes.
+   * @type {PropertyEvent}
    */
   get OnySizeChanged()
   {
@@ -9785,7 +10236,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Members changes.
+   * Event that is triggered when the value of Members changes.
+   * @type {PropertyEvent}
    */
   get OnMembersChanged()
   {
@@ -9798,7 +10250,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Proxy changes.
+   * Event that is triggered when the value of Proxy changes.
+   * @type {PropertyEvent}
    */
   get OnProxyChanged()
   {
@@ -9811,7 +10264,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when PortsPerRow changes.
+   * Event that is triggered when the value of PortsPerRow changes.
+   * @type {PropertyEvent}
    */
   get OnPortsPerRowChanged()
   {
@@ -9824,7 +10278,8 @@ export class OcaMatrix extends OcaWorker
   }
 
   /**
-   * Event that is triggered when PortsPerColumn changes.
+   * Event that is triggered when the value of PortsPerColumn changes.
+   * @type {PropertyEvent}
    */
   get OnPortsPerColumnChanged()
   {
@@ -9855,6 +10310,10 @@ export class OcaMatrix extends OcaWorker
     return OcaMatrix_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -9879,6 +10338,7 @@ let OcaAgent_p = null;
 
 /**
  * Abstract base class for defining agents.
+ * @extends OcaRoot
  */
 export class OcaAgent extends OcaRoot
 {
@@ -9926,7 +10386,7 @@ export class OcaAgent extends OcaRoot
   /**
    * Sets the value of the Label property. The return value indicates
    * whether the property was successfully set.
-   * @param Label
+   * @param Label {OcaString}
    *
    * @retval {Promise}
    */
@@ -9966,7 +10426,8 @@ export class OcaAgent extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Label changes.
+   * Event that is triggered when the value of Label changes.
+   * @type {PropertyEvent}
    */
   get OnLabelChanged()
   {
@@ -9979,7 +10440,8 @@ export class OcaAgent extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Owner changes.
+   * Event that is triggered when the value of Owner changes.
+   * @type {PropertyEvent}
    */
   get OnOwnerChanged()
   {
@@ -10004,6 +10466,10 @@ export class OcaAgent extends OcaRoot
     return OcaAgent_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -10125,6 +10591,7 @@ let OcaGrouper_p = null;
  * rules</li> <li>Aggregation rules</li> <li>Error-handling mechanisms
  * (e.g. what happens when a grouper loses its connection to a citizen,
  * and what happens when it later re-attaches)</li> </ul>
+ * @extends OcaAgent
  */
 export class OcaGrouper extends OcaAgent
 {
@@ -10164,7 +10631,7 @@ export class OcaGrouper extends OcaAgent
    * Adds a group to the grouper and returns its object number. (The
    * group's network address will be the same as the grouper's). The return
    * value indicates whether the group was successfully added.
-   * @param Name
+   * @param Name {OcaString}
    *
    * @retval {Promise}
    */
@@ -10183,7 +10650,7 @@ export class OcaGrouper extends OcaAgent
    * Deletes a group from the grouper. The return value indicates whether
    * the group was successfully deleted. Note: index values of deleted
    * groups are not reused during the lifetime of the grouper instance.
-   * @param Index
+   * @param Index {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -10228,7 +10695,7 @@ export class OcaGrouper extends OcaAgent
    * target in any of the grouper's groups -- it merely makes the target
    * available for enrollment. Group membership is controlled by the
    * SetEnrollment method, q.v.
-   * @param Citizen
+   * @param Citizen {OcaGrouperCitizen}
    *
    * @retval {Promise}
    */
@@ -10248,7 +10715,7 @@ export class OcaGrouper extends OcaAgent
    * groups). The return value indicates whether the citizen was
    * successfully deleted. Note: index values of deleted citizens are not
    * reused during the lifetime of the grouper instance.
-   * @param Index
+   * @param Index {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -10290,7 +10757,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets membership status for given target in given group. The return
    * value indicates whether the status was successfully retrieved.
-   * @param Enrollment
+   * @param Enrollment {OcaGrouperEnrollment}
    *
    * @retval {Promise}
    */
@@ -10308,9 +10775,9 @@ export class OcaGrouper extends OcaAgent
   /**
    * Sets membership status for given target in given group. The return
    * value indicates whether the status was successfully set.
-   * @param Enrollment
+   * @param Enrollment {OcaGrouperEnrollment}
    *
-   * @param IsMember
+   * @param IsMember {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -10326,7 +10793,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the list of members of the given group. The return value
    * indicates whether the list was successfully retrieved.
-   * @param Index
+   * @param Index {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -10357,7 +10824,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Sets the value of the ActuatorOrSensor property. The return value
    * indicates whether the value was successfully set.
-   * @param ActuatorOrSensor
+   * @param ActuatorOrSensor {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -10386,7 +10853,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Sets the value of the Mode property. The return value indicates
    * whether the value was successfully set.
-   * @param Mode
+   * @param Mode {OcaGrouperMode}
    *
    * @retval {Promise}
    */
@@ -10419,7 +10886,8 @@ export class OcaGrouper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ActuatorOrSensor changes.
+   * Event that is triggered when the value of ActuatorOrSensor changes.
+   * @type {PropertyEvent}
    */
   get OnActuatorOrSensorChanged()
   {
@@ -10432,7 +10900,8 @@ export class OcaGrouper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Groups changes.
+   * Event that is triggered when the value of Groups changes.
+   * @type {PropertyEvent}
    */
   get OnGroupsChanged()
   {
@@ -10445,7 +10914,8 @@ export class OcaGrouper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Citizens changes.
+   * Event that is triggered when the value of Citizens changes.
+   * @type {PropertyEvent}
    */
   get OnCitizensChanged()
   {
@@ -10458,7 +10928,8 @@ export class OcaGrouper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Enrollments changes.
+   * Event that is triggered when the value of Enrollments changes.
+   * @type {PropertyEvent}
    */
   get OnEnrollmentsChanged()
   {
@@ -10471,7 +10942,8 @@ export class OcaGrouper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Mode changes.
+   * Event that is triggered when the value of Mode changes.
+   * @type {PropertyEvent}
    */
   get OnModeChanged()
   {
@@ -10499,6 +10971,10 @@ export class OcaGrouper extends OcaAgent
     return OcaGrouper_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -10563,6 +11039,7 @@ let OcaNumericObserver_p = null;
  * controllers as part of device configuration sessions. This class is
  * normally used for monitoring readings of sensor readings, but may be
  * used equally well for watching workers' parameter settings.
+ * @extends OcaAgent
  */
 export class OcaNumericObserver extends OcaAgent
 {
@@ -10647,7 +11124,7 @@ export class OcaNumericObserver extends OcaAgent
    * Sets the identification of the property that the observer observes.
    * The return value indicates whether the identification was successfully
    * set.
-   * @param property
+   * @param property {OcaProperty}
    *
    * @retval {Promise}
    */
@@ -10676,7 +11153,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Sets the value of the <b>Threshold </b>property. The return value
    * indicates whether the threshold value was successfully set.
-   * @param Threshold
+   * @param Threshold {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -10705,7 +11182,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Sets the value of the <b>Operator </b>property. The return value
    * indicates whether the operator was successfully set.
-   * @param _operator
+   * @param _operator {OcaRelationalOperator}
    *
    * @retval {Promise}
    */
@@ -10734,7 +11211,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Sets the value of the <b>TwoWay </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param twoWay
+   * @param twoWay {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -10763,7 +11240,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Sets the value of the <b>Hysteresis </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param hysteresis
+   * @param hysteresis {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -10792,7 +11269,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Sets the value of the <b>Period </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param period
+   * @param period {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -10821,7 +11298,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -10834,7 +11312,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ObservedProperty changes.
+   * Event that is triggered when the value of ObservedProperty changes.
+   * @type {PropertyEvent}
    */
   get OnObservedPropertyChanged()
   {
@@ -10847,7 +11326,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Threshold changes.
+   * Event that is triggered when the value of Threshold changes.
+   * @type {PropertyEvent}
    */
   get OnThresholdChanged()
   {
@@ -10860,7 +11340,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Operator changes.
+   * Event that is triggered when the value of Operator changes.
+   * @type {PropertyEvent}
    */
   get OnOperatorChanged()
   {
@@ -10873,7 +11354,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TwoWay changes.
+   * Event that is triggered when the value of TwoWay changes.
+   * @type {PropertyEvent}
    */
   get OnTwoWayChanged()
   {
@@ -10886,7 +11368,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Hysteresis changes.
+   * Event that is triggered when the value of Hysteresis changes.
+   * @type {PropertyEvent}
    */
   get OnHysteresisChanged()
   {
@@ -10899,7 +11382,8 @@ export class OcaNumericObserver extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Period changes.
+   * Event that is triggered when the value of Period changes.
+   * @type {PropertyEvent}
    */
   get OnPeriodChanged()
   {
@@ -10929,6 +11413,10 @@ export class OcaNumericObserver extends OcaAgent
     return OcaNumericObserver_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -10976,6 +11464,7 @@ let OcaLibrary_p = null;
  * ParamSet library. However, the reverse is not true: a device may
  * implement one or more ParamSet libraries without a Patch library.
  * <font color="#0000ff"> </font>
+ * @extends OcaAgent
  */
 export class OcaLibrary extends OcaAgent
 {
@@ -11011,7 +11500,7 @@ export class OcaLibrary extends OcaAgent
   /**
    * Adds a volume to the library and returns its volume ID. The return
    * value indicates whether the volume was successfully added.
-   * @param Volume
+   * @param Volume {OcaLibVol}
    *
    * @retval {Promise}
    */
@@ -11029,9 +11518,9 @@ export class OcaLibrary extends OcaAgent
   /**
    * Replaces a volume in the library at the given volume ID. The return
    * value indicates whether the volume was successfully replaced.
-   * @param ID
+   * @param ID {OcaLibVolID}
    *
-   * @param Volume
+   * @param Volume {OcaLibVol}
    *
    * @retval {Promise}
    */
@@ -11047,7 +11536,7 @@ export class OcaLibrary extends OcaAgent
   /**
    * Deletes a volume from the library. The return value indicates whether
    * the group was successfully deleted.
-   * @param ID
+   * @param ID {OcaLibVolID}
    *
    * @retval {Promise}
    */
@@ -11116,7 +11605,7 @@ export class OcaLibrary extends OcaAgent
    * Sets allowed access mode for this library. The return value indicates
    * whether the property was successfully set. Not implemented for static,
    * manufacturer-supplied libraries.
-   * @param Access
+   * @param Access {OcaLibAccess}
    *
    * @retval {Promise}
    */
@@ -11130,7 +11619,8 @@ export class OcaLibrary extends OcaAgent
   }
 
   /**
-   * Event that is triggered when DataType changes.
+   * Event that is triggered when the value of DataType changes.
+   * @type {PropertyEvent}
    */
   get OnDataTypeChanged()
   {
@@ -11143,7 +11633,8 @@ export class OcaLibrary extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Access changes.
+   * Event that is triggered when the value of Access changes.
+   * @type {PropertyEvent}
    */
   get OnAccessChanged()
   {
@@ -11156,7 +11647,8 @@ export class OcaLibrary extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Volumes changes.
+   * Event that is triggered when the value of Volumes changes.
+   * @type {PropertyEvent}
    */
   get OnVolumesChanged()
   {
@@ -11182,6 +11674,10 @@ export class OcaLibrary extends OcaAgent
     return OcaLibrary_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -11205,6 +11701,7 @@ let OcaPowerSupply_p = null;
 
 /**
  * A power supply.
+ * @extends OcaAgent
  */
 export class OcaPowerSupply extends OcaAgent
 {
@@ -11283,7 +11780,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Changes the power supply's state. Return value indicates whether the
    * state was successfully changed.
-   * @param state
+   * @param state {OcaPowerSupplyState}
    *
    * @retval {Promise}
    */
@@ -11349,7 +11846,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Type changes.
+   * Event that is triggered when the value of Type changes.
+   * @type {PropertyEvent}
    */
   get OnTypeChanged()
   {
@@ -11362,7 +11860,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ModelInfo changes.
+   * Event that is triggered when the value of ModelInfo changes.
+   * @type {PropertyEvent}
    */
   get OnModelInfoChanged()
   {
@@ -11375,7 +11874,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -11388,7 +11888,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Charging changes.
+   * Event that is triggered when the value of Charging changes.
+   * @type {PropertyEvent}
    */
   get OnChargingChanged()
   {
@@ -11401,7 +11902,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when LoadFractionAvailable changes.
+   * Event that is triggered when the value of LoadFractionAvailable changes.
+   * @type {PropertyEvent}
    */
   get OnLoadFractionAvailableChanged()
   {
@@ -11414,7 +11916,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when StorageFractionAvailable changes.
+   * Event that is triggered when the value of StorageFractionAvailable changes.
+   * @type {PropertyEvent}
    */
   get OnStorageFractionAvailableChanged()
   {
@@ -11427,7 +11930,8 @@ export class OcaPowerSupply extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Location changes.
+   * Event that is triggered when the value of Location changes.
+   * @type {PropertyEvent}
    */
   get OnLocationChanged()
   {
@@ -11457,6 +11961,10 @@ export class OcaPowerSupply extends OcaAgent
     return OcaPowerSupply_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -11479,6 +11987,7 @@ let OcaEventHandler_p = null;
  * Base class for event handler objects. Application developers can
  * derive from this class and add specific callback methods that perform
  * processing and/or have specific event data structures.
+ * @extends OcaAgent
  */
 export class OcaEventHandler extends OcaAgent
 {
@@ -11511,9 +12020,9 @@ export class OcaEventHandler extends OcaAgent
   /**
    * Generic empty callback method for events. Application developers can
    * override this method in a derived class to add behavior.
-   * @param Context
+   * @param Context {OcaBlob}
    *
-   * @param eventData
+   * @param eventData {OcaEventData}
    *
    * @retval {Promise}
    */
@@ -11537,6 +12046,10 @@ export class OcaEventHandler extends OcaAgent
     return OcaEventHandler_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -11598,6 +12111,7 @@ let OcaNumericObserverList_p = null;
  * controllers as part of device configuration sessions. This class is
  * normally used for monitoring readings of sensor readings, but may be
  * used equally well for watching workers' parameter settings.
+ * @extends OcaAgent
  */
 export class OcaNumericObserverList extends OcaAgent
 {
@@ -11692,7 +12206,7 @@ export class OcaNumericObserverList extends OcaAgent
    * order of values returned by GetLastObservation and the Observation
    * event. The return value indicates whether the identifications were
    * successfully set.
-   * @param property
+   * @param property {OcaList}
    *
    * @retval {Promise}
    */
@@ -11721,7 +12235,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Sets the value of the <b>Threshold </b>property. The return value
    * indicates whether the threshold value was successfully set.
-   * @param Threshold
+   * @param Threshold {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -11750,7 +12264,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Sets the value of the <b>Operator </b>property. The return value
    * indicates whether the operator was successfully set.
-   * @param _operator
+   * @param _operator {OcaRelationalOperator}
    *
    * @retval {Promise}
    */
@@ -11779,7 +12293,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Sets the value of the <b>TwoWay </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param twoWay
+   * @param twoWay {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -11808,7 +12322,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Sets the value of the <b>Hysteresis </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param hysteresis
+   * @param hysteresis {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -11837,7 +12351,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Sets the value of the <b>Period </b>property. The return value
    * indicates whether the property was successfully set.
-   * @param period
+   * @param period {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -11872,7 +12386,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -11885,7 +12400,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ObservedProperties changes.
+   * Event that is triggered when the value of ObservedProperties changes.
+   * @type {PropertyEvent}
    */
   get OnObservedPropertiesChanged()
   {
@@ -11898,7 +12414,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Threshold changes.
+   * Event that is triggered when the value of Threshold changes.
+   * @type {PropertyEvent}
    */
   get OnThresholdChanged()
   {
@@ -11911,7 +12428,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Operator changes.
+   * Event that is triggered when the value of Operator changes.
+   * @type {PropertyEvent}
    */
   get OnOperatorChanged()
   {
@@ -11924,7 +12442,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TwoWay changes.
+   * Event that is triggered when the value of TwoWay changes.
+   * @type {PropertyEvent}
    */
   get OnTwoWayChanged()
   {
@@ -11937,7 +12456,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Hysteresis changes.
+   * Event that is triggered when the value of Hysteresis changes.
+   * @type {PropertyEvent}
    */
   get OnHysteresisChanged()
   {
@@ -11950,7 +12470,8 @@ export class OcaNumericObserverList extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Period changes.
+   * Event that is triggered when the value of Period changes.
+   * @type {PropertyEvent}
    */
   get OnPeriodChanged()
   {
@@ -11980,6 +12501,10 @@ export class OcaNumericObserverList extends OcaAgent
     return OcaNumericObserverList_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -12038,6 +12563,7 @@ let OcaTask_p = null;
  * <font color="#0c0080"><b>Slots </b></font>of <font
  * color="#0c0080"><b>OcaTaskManager</b></font>.</li> <li>A task may be
  * automatically or manually assigned to a slot.</li> </ul>
+ * @extends OcaAgent
  */
 export class OcaTask extends OcaAgent
 {
@@ -12073,9 +12599,9 @@ export class OcaTask extends OcaAgent
   /**
    * Executes the given command. The return value indicates whether the
    * command was successfully executed.
-   * @param Command
+   * @param Command {OcaTaskCommand}
    *
-   * @param StateParameter
+   * @param StateParameter {OcaBlob}
    *
    * @retval {Promise}
    */
@@ -12119,7 +12645,7 @@ export class OcaTask extends OcaAgent
    * Sets task slot index. The return value indicates whether the value was
    * successfully set. If a value of zero is provided, removes task from
    * all slots. Returns NotImplemented status if device does not use slots.
-   * @param ID
+   * @param ID {OcaTaskSlotID}
    *
    * @retval {Promise}
    */
@@ -12148,7 +12674,7 @@ export class OcaTask extends OcaAgent
   /**
    * Sets task time mode (absolute or relative). The return value indicates
    * whether the time mode was successfully set.
-   * @param TimeMode
+   * @param TimeMode {OcaTimeMode}
    *
    * @retval {Promise}
    */
@@ -12177,7 +12703,7 @@ export class OcaTask extends OcaAgent
   /**
    * Sets task time units (seconds or samples). The return value indicates
    * whether the time units were successfully set.
-   * @param TimeUnits
+   * @param TimeUnits {OcaTimeUnits}
    *
    * @retval {Promise}
    */
@@ -12212,7 +12738,7 @@ export class OcaTask extends OcaAgent
    * value indicates the clock source is the device's internal time or
    * sample clock. The return value indicates whether the object number was
    * successfully set.
-   * @param ClockONo
+   * @param ClockONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -12241,7 +12767,7 @@ export class OcaTask extends OcaAgent
   /**
    * Sets task start time. The return value indicates whether the start
    * time was successfully set.
-   * @param TimeMode
+   * @param TimeMode {OcaTimeOfDay}
    *
    * @retval {Promise}
    */
@@ -12270,7 +12796,7 @@ export class OcaTask extends OcaAgent
   /**
    * Sets task duration. The return value indicates whether the duration
    * was successfully set.
-   * @param Duration
+   * @param Duration {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -12284,7 +12810,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Status changes.
+   * Event that is triggered when the value of Status changes.
+   * @type {PropertyEvent}
    */
   get OnStatusChanged()
   {
@@ -12297,7 +12824,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Slot changes.
+   * Event that is triggered when the value of Slot changes.
+   * @type {PropertyEvent}
    */
   get OnSlotChanged()
   {
@@ -12310,7 +12838,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TimeMode changes.
+   * Event that is triggered when the value of TimeMode changes.
+   * @type {PropertyEvent}
    */
   get OnTimeModeChanged()
   {
@@ -12323,7 +12852,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TimeUnits changes.
+   * Event that is triggered when the value of TimeUnits changes.
+   * @type {PropertyEvent}
    */
   get OnTimeUnitsChanged()
   {
@@ -12336,7 +12866,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ClockONo changes.
+   * Event that is triggered when the value of ClockONo changes.
+   * @type {PropertyEvent}
    */
   get OnClockONoChanged()
   {
@@ -12349,7 +12880,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when StartTime changes.
+   * Event that is triggered when the value of StartTime changes.
+   * @type {PropertyEvent}
    */
   get OnStartTimeChanged()
   {
@@ -12362,7 +12894,8 @@ export class OcaTask extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Duration changes.
+   * Event that is triggered when the value of Duration changes.
+   * @type {PropertyEvent}
    */
   get OnDurationChanged()
   {
@@ -12392,6 +12925,10 @@ export class OcaTask extends OcaAgent
     return OcaTask_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -12422,6 +12959,7 @@ let OcaTaskFactory_p = null;
 /**
  * Base class for constructors of OcaTask objects. Used by the OcaBlock
  * method ConstructMemberUsingFactory(...) to create tasks.
+ * @extends OcaAgent
  */
 export class OcaTaskFactory extends OcaAgent
 {
@@ -12454,7 +12992,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Executes the given command. The return value indicates whether the
    * command was successfully executed.
-   * @param Command
+   * @param Command {OcaTaskCommand}
    *
    * @retval {Promise}
    */
@@ -12498,7 +13036,7 @@ export class OcaTaskFactory extends OcaAgent
    * Sets task slot ID. The return value indicates whether the value was
    * successfully set. If a value of zero is provided, removes task from
    * all slots. Returns NotImplemented status if device does not use slots.
-   * @param ID
+   * @param ID {OcaTaskSlotID}
    *
    * @retval {Promise}
    */
@@ -12527,7 +13065,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Sets task time mode (absolute or relative). The return value indicates
    * whether the time mode was successfully set.
-   * @param TimeMode
+   * @param TimeMode {OcaTimeMode}
    *
    * @retval {Promise}
    */
@@ -12556,7 +13094,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Sets task start time. The return value indicates whether the start
    * time was successfully set.
-   * @param TimeMode
+   * @param TimeMode {OcaTimeOfDay}
    *
    * @retval {Promise}
    */
@@ -12585,7 +13123,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Sets task duration. The return value indicates whether the duration
    * was successfully set.
-   * @param Duration
+   * @param Duration {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -12599,7 +13137,8 @@ export class OcaTaskFactory extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Slot changes.
+   * Event that is triggered when the value of Slot changes.
+   * @type {PropertyEvent}
    */
   get OnSlotChanged()
   {
@@ -12612,7 +13151,8 @@ export class OcaTaskFactory extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TimeMode changes.
+   * Event that is triggered when the value of TimeMode changes.
+   * @type {PropertyEvent}
    */
   get OnTimeModeChanged()
   {
@@ -12625,7 +13165,8 @@ export class OcaTaskFactory extends OcaAgent
   }
 
   /**
-   * Event that is triggered when StartTime changes.
+   * Event that is triggered when the value of StartTime changes.
+   * @type {PropertyEvent}
    */
   get OnStartTimeChanged()
   {
@@ -12638,7 +13179,8 @@ export class OcaTaskFactory extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Duration changes.
+   * Event that is triggered when the value of Duration changes.
+   * @type {PropertyEvent}
    */
   get OnDurationChanged()
   {
@@ -12665,6 +13207,10 @@ export class OcaTaskFactory extends OcaAgent
     return OcaTaskFactory_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -12687,6 +13233,7 @@ let OcaTaskGroup_p = null;
 
 /**
  * A group of tasks that may be started and stopped as a unit.
+ * @extends OcaAgent
  */
 export class OcaTaskGroup extends OcaAgent
 {
@@ -12719,9 +13266,9 @@ export class OcaTaskGroup extends OcaAgent
   /**
    * Performs the requested command. The return value indicates whether the
    * operation was successful.
-   * @param Command
+   * @param Command {OcaTaskCommand}
    *
-   * @param StateParameter
+   * @param StateParameter {OcaBlob}
    *
    * @retval {Promise}
    */
@@ -12738,7 +13285,7 @@ export class OcaTaskGroup extends OcaAgent
    * Adds a task to the task group. The return value indicates whether the
    * task was successfully added. Optional method, may not be supported in
    * all implementations.
-   * @param TaskONo
+   * @param TaskONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -12755,7 +13302,7 @@ export class OcaTaskGroup extends OcaAgent
    * Deletes a task from the task group. The return value indicates whether
    * the task was successfully deleted. Optional method, may not be
    * supported in all implementations.
-   * @param TaskONo
+   * @param TaskONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -12799,7 +13346,7 @@ export class OcaTaskGroup extends OcaAgent
    * Sets the value of the <b>ID </b>property. The return value indicates
    * whether the value was successfully set. Optional method, may not be
    * supported in all implementations.
-   * @param ID
+   * @param ID {OcaTaskGroupID}
    *
    * @retval {Promise}
    */
@@ -12813,7 +13360,8 @@ export class OcaTaskGroup extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ID changes.
+   * Event that is triggered when the value of ID changes.
+   * @type {PropertyEvent}
    */
   get OnIDChanged()
   {
@@ -12826,7 +13374,8 @@ export class OcaTaskGroup extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Tasks changes.
+   * Event that is triggered when the value of Tasks changes.
+   * @type {PropertyEvent}
    */
   get OnTasksChanged()
   {
@@ -12851,6 +13400,10 @@ export class OcaTaskGroup extends OcaAgent
     return OcaTaskGroup_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -12883,6 +13436,7 @@ let OcaRamperTask_p = null;
  * values, the the ramping parameters are coerced to <b>OcaUint8.
  * </b>True is assigned the value One, False is assigned the value
  * Zero.</li> </ul>
+ * @extends OcaTask
  */
 export class OcaRamperTask extends OcaTask
 {
@@ -12927,7 +13481,7 @@ export class OcaRamperTask extends OcaTask
   /**
    * Defines property to be ramped. The return value indicates whether the
    * definition was successful.
-   * @param property
+   * @param property {OcaProperty}
    *
    * @retval {Promise}
    */
@@ -12956,7 +13510,7 @@ export class OcaRamperTask extends OcaTask
   /**
    * Sets ramp interpolation law. The return value indicates whether the
    * law was successfully set.
-   * @param law
+   * @param law {OcaRamperInterpolationLaw}
    *
    * @retval {Promise}
    */
@@ -12985,7 +13539,7 @@ export class OcaRamperTask extends OcaTask
   /**
    * Sets ramp goal value. The return value indicates whether the duration
    * was successfully set.
-   * @param goal
+   * @param goal {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -12999,7 +13553,8 @@ export class OcaRamperTask extends OcaTask
   }
 
   /**
-   * Event that is triggered when RampedProperty changes.
+   * Event that is triggered when the value of RampedProperty changes.
+   * @type {PropertyEvent}
    */
   get OnRampedPropertyChanged()
   {
@@ -13012,7 +13567,8 @@ export class OcaRamperTask extends OcaTask
   }
 
   /**
-   * Event that is triggered when InterpolationLaw changes.
+   * Event that is triggered when the value of InterpolationLaw changes.
+   * @type {PropertyEvent}
    */
   get OnInterpolationLawChanged()
   {
@@ -13025,7 +13581,8 @@ export class OcaRamperTask extends OcaTask
   }
 
   /**
-   * Event that is triggered when Goal changes.
+   * Event that is triggered when the value of Goal changes.
+   * @type {PropertyEvent}
    */
   get OnGoalChanged()
   {
@@ -13051,6 +13608,10 @@ export class OcaRamperTask extends OcaTask
     return OcaRamperTask_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -13074,6 +13635,7 @@ let OcaMediaClock3_p = null;
 /**
  * A media clock, internal or external. OCA Connection Management 3
  * (OCA-CM3) version.
+ * @extends OcaAgent
  */
 export class OcaMediaClock3 extends OcaAgent
 {
@@ -13133,7 +13695,7 @@ export class OcaMediaClock3 extends OcaAgent
    * Sets the value of the <b>Availability </b>property. The return value
    * indicates whether the value was successfully set. Optional method, may
    * not be supported in all implementations.
-   * @param Availability
+   * @param Availability {OcaMediaClockAvailability}
    *
    * @retval {Promise}
    */
@@ -13165,9 +13727,9 @@ export class OcaMediaClock3 extends OcaAgent
    * </b>object. The return value indicates whether the value was
    * successfully set. Optional method, may not be supported in all
    * implementations.
-   * @param Rate
+   * @param Rate {OcaMediaClockRate}
    *
-   * @param TimeSourceONo
+   * @param TimeSourceONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -13199,7 +13761,7 @@ export class OcaMediaClock3 extends OcaAgent
    * <b>OcaTimeSource </b>object. The return value indicates whether the
    * value was successfully set. Optional method, may not be supported in
    * all implementations.
-   * @param Offset
+   * @param Offset {OcaTimeOffset}
    *
    * @retval {Promise}
    */
@@ -13227,7 +13789,8 @@ export class OcaMediaClock3 extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Availability changes.
+   * Event that is triggered when the value of Availability changes.
+   * @type {PropertyEvent}
    */
   get OnAvailabilityChanged()
   {
@@ -13240,7 +13803,8 @@ export class OcaMediaClock3 extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TimeSourceONo changes.
+   * Event that is triggered when the value of TimeSourceONo changes.
+   * @type {PropertyEvent}
    */
   get OnTimeSourceONoChanged()
   {
@@ -13253,7 +13817,8 @@ export class OcaMediaClock3 extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Offset changes.
+   * Event that is triggered when the value of Offset changes.
+   * @type {PropertyEvent}
    */
   get OnOffsetChanged()
   {
@@ -13266,7 +13831,8 @@ export class OcaMediaClock3 extends OcaAgent
   }
 
   /**
-   * Event that is triggered when CurrentRate changes.
+   * Event that is triggered when the value of CurrentRate changes.
+   * @type {PropertyEvent}
    */
   get OnCurrentRateChanged()
   {
@@ -13293,6 +13859,10 @@ export class OcaMediaClock3 extends OcaAgent
     return OcaMediaClock3_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -13320,6 +13890,7 @@ let OcaTimeSource_p = null;
 /**
  * A time source, internal or external. See RFC 7273 for a detailed
  * discussion of time sources.
+ * @extends OcaAgent
  */
 export class OcaTimeSource extends OcaAgent
 {
@@ -13382,7 +13953,7 @@ export class OcaTimeSource extends OcaAgent
   /**
    * Sets the value of the <b>Protocol </b>property. The return value
    * indicates whether the value was successfully set.
-   * @param Protocol
+   * @param Protocol {OcaTimeProtocol}
    *
    * @retval {Promise}
    */
@@ -13412,7 +13983,7 @@ export class OcaTimeSource extends OcaAgent
    * Sets the value of the <b>Parameters </b>property. The return value
    * indicates whether the value was successfully set. Optional method, may
    * not be supported in all implementations.
-   * @param Parameters
+   * @param Parameters {OcaSDPString}
    *
    * @retval {Promise}
    */
@@ -13442,7 +14013,7 @@ export class OcaTimeSource extends OcaAgent
    * Sets the time reference type. The return value indicates whether the
    * value was successfully set. Optional method, may not be supported in
    * all implementations.
-   * @param ReferenceType
+   * @param ReferenceType {OcaTimeReferenceType}
    *
    * @retval {Promise}
    */
@@ -13473,7 +14044,7 @@ export class OcaTimeSource extends OcaAgent
    * Sets the time reference ID. The return value indicates whether the ID
    * was successfully set. Optional method, not required for all time
    * reference types.
-   * @param ID
+   * @param ID {OcaString}
    *
    * @retval {Promise}
    */
@@ -13512,7 +14083,8 @@ export class OcaTimeSource extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Availability changes.
+   * Event that is triggered when the value of Availability changes.
+   * @type {PropertyEvent}
    */
   get OnAvailabilityChanged()
   {
@@ -13525,7 +14097,8 @@ export class OcaTimeSource extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Protocol changes.
+   * Event that is triggered when the value of Protocol changes.
+   * @type {PropertyEvent}
    */
   get OnProtocolChanged()
   {
@@ -13538,7 +14111,8 @@ export class OcaTimeSource extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Parameters changes.
+   * Event that is triggered when the value of Parameters changes.
+   * @type {PropertyEvent}
    */
   get OnParametersChanged()
   {
@@ -13551,7 +14125,8 @@ export class OcaTimeSource extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ReferenceType changes.
+   * Event that is triggered when the value of ReferenceType changes.
+   * @type {PropertyEvent}
    */
   get OnReferenceTypeChanged()
   {
@@ -13564,7 +14139,8 @@ export class OcaTimeSource extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ReferenceID changes.
+   * Event that is triggered when the value of ReferenceID changes.
+   * @type {PropertyEvent}
    */
   get OnReferenceIDChanged()
   {
@@ -13577,7 +14153,8 @@ export class OcaTimeSource extends OcaAgent
   }
 
   /**
-   * Event that is triggered when SyncStatus changes.
+   * Event that is triggered when the value of SyncStatus changes.
+   * @type {PropertyEvent}
    */
   get OnSyncStatusChanged()
   {
@@ -13606,6 +14183,10 @@ export class OcaTimeSource extends OcaAgent
     return OcaTimeSource_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -13629,6 +14210,7 @@ let OcaPhysicalPosition_p = null;
 /**
  * Physical position of device or an element of it. Three position
  * coordinates, three rotation coordinates.
+ * @extends OcaAgent
  */
 export class OcaPhysicalPosition extends OcaAgent
 {
@@ -13675,7 +14257,7 @@ export class OcaPhysicalPosition extends OcaAgent
    * Sets value of property <b>PositionAndRotation</b>. Result indicates
    * whether setting was successful. This is an optional method, not
    * implemented for read-only position objects.
-   * @param PositionAndRotation
+   * @param PositionAndRotation {OcaPositionAndRotation}
    *
    * @retval {Promise}
    */
@@ -13705,7 +14287,7 @@ export class OcaPhysicalPosition extends OcaAgent
    * Sets value of property <b>PositionAndRotationFlags</b>. Result
    * indicates whether setting was successful. This is an optional method,
    * only implemented for configurable position objects.
-   * @param Flags
+   * @param Flags {OcaPositionAndRotationFlags}
    *
    * @retval {Promise}
    */
@@ -13719,7 +14301,8 @@ export class OcaPhysicalPosition extends OcaAgent
   }
 
   /**
-   * Event that is triggered when PositionAndRotation changes.
+   * Event that is triggered when the value of PositionAndRotation changes.
+   * @type {PropertyEvent}
    */
   get OnPositionAndRotationChanged()
   {
@@ -13732,7 +14315,8 @@ export class OcaPhysicalPosition extends OcaAgent
   }
 
   /**
-   * Event that is triggered when PositionAndRotationFlags changes.
+   * Event that is triggered when the value of PositionAndRotationFlags changes.
+   * @type {PropertyEvent}
    */
   get OnPositionAndRotationFlagsChanged()
   {
@@ -13757,6 +14341,10 @@ export class OcaPhysicalPosition extends OcaAgent
     return OcaPhysicalPosition_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -13782,6 +14370,7 @@ let OcaApplicationNetwork_p = null;
 /**
  * Abstract base class from which the application network classes
  * inherit.
+ * @extends OcaRoot
  */
 export class OcaApplicationNetwork extends OcaRoot
 {
@@ -13829,7 +14418,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Sets the network's user-specified label. Return status indicates
    * whether the operation was successful.
-   * @param Label
+   * @param Label {OcaString}
    *
    * @retval {Promise}
    */
@@ -13871,7 +14460,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Sets the network's IDAdvertised. Return status indicates whether the
    * operation was successful.
-   * @param Name
+   * @param Name {OcaApplicationNetworkServiceID}
    *
    * @retval {Promise}
    */
@@ -13927,7 +14516,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Control the application network. Return value indicates success of
    * command execution.
-   * @param Command
+   * @param Command {OcaApplicationNetworkCommand}
    *
    * @retval {Promise}
    */
@@ -13954,7 +14543,8 @@ export class OcaApplicationNetwork extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Label changes.
+   * Event that is triggered when the value of Label changes.
+   * @type {PropertyEvent}
    */
   get OnLabelChanged()
   {
@@ -13967,7 +14557,8 @@ export class OcaApplicationNetwork extends OcaRoot
   }
 
   /**
-   * Event that is triggered when Owner changes.
+   * Event that is triggered when the value of Owner changes.
+   * @type {PropertyEvent}
    */
   get OnOwnerChanged()
   {
@@ -13980,7 +14571,8 @@ export class OcaApplicationNetwork extends OcaRoot
   }
 
   /**
-   * Event that is triggered when ServiceID changes.
+   * Event that is triggered when the value of ServiceID changes.
+   * @type {PropertyEvent}
    */
   get OnServiceIDChanged()
   {
@@ -13993,7 +14585,8 @@ export class OcaApplicationNetwork extends OcaRoot
   }
 
   /**
-   * Event that is triggered when SystemInterfaces changes.
+   * Event that is triggered when the value of SystemInterfaces changes.
+   * @type {PropertyEvent}
    */
   get OnSystemInterfacesChanged()
   {
@@ -14006,7 +14599,8 @@ export class OcaApplicationNetwork extends OcaRoot
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -14019,7 +14613,8 @@ export class OcaApplicationNetwork extends OcaRoot
   }
 
   /**
-   * Event that is triggered when ErrorCode changes.
+   * Event that is triggered when the value of ErrorCode changes.
+   * @type {PropertyEvent}
    */
   get OnErrorCodeChanged()
   {
@@ -14048,6 +14643,10 @@ export class OcaApplicationNetwork extends OcaRoot
     return OcaApplicationNetwork_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -14107,7 +14706,8 @@ export class OcaControlNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when Protocol changes.
+   * Event that is triggered when the value of Protocol changes.
+   * @type {PropertyEvent}
    */
   get OnProtocolChanged()
   {
@@ -14131,6 +14731,10 @@ export class OcaControlNetwork extends OcaApplicationNetwork
     return OcaControlNetwork_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -14242,7 +14846,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the name of the designated port. The return value indicates
    * whether the name was successfully retrieved.
-   * @param PortID
+   * @param PortID {OcaPortID}
    *
    * @retval {Promise}
    */
@@ -14260,9 +14864,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Sets the name of the designated port. The return value indicates
    * whether the name was successfully set.
-   * @param PortID
+   * @param PortID {OcaPortID}
    *
-   * @param Name
+   * @param Name {OcaString}
    *
    * @retval {Promise}
    */
@@ -14344,7 +14948,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Retrieves the descriptor of a given source connector. Return status
    * indicates the success of the operation.
-   * @param ID
+   * @param ID {OcaMediaConnectorID}
    *
    * @retval {Promise}
    */
@@ -14375,7 +14979,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Retrieves the descriptor of a given sink connector. Return status
    * indicates the success of the operation.
-   * @param ID
+   * @param ID {OcaMediaConnectorID}
    *
    * @retval {Promise}
    */
@@ -14406,7 +15010,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the status of a single connector. Return status indicates success
    * of the operation.
-   * @param ConnectorID
+   * @param ConnectorID {OcaMediaConnectorID}
    *
    * @retval {Promise}
    */
@@ -14428,9 +15032,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * connector's AlignmentLevel property value is given as NaN, the value
    * of this network's AlignmentLevel property will be used. Return status
    * indicates the success of the operation.
-   * @param Connector
+   * @param Connector {OcaMediaSourceConnector}
    *
-   * @param InitialStatus
+   * @param InitialStatus {OcaMediaConnectorState}
    *
    * @retval {Promise}
    */
@@ -14454,9 +15058,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * AlignmentGain property value is given as NaN, the value of this
    * network's AlignmentGain property will be used. Return status indicates
    * the success of the operation.
-   * @param InitialStatus
+   * @param InitialStatus {OcaMediaConnectorStatus}
    *
-   * @param Connector
+   * @param Connector {OcaMediaSinkConnector}
    *
    * @retval {Promise}
    */
@@ -14474,9 +15078,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Change the state of a given connector. Return status indicates the
    * success of the operation.
-   * @param ConnectorID
+   * @param ConnectorID {OcaMediaConnectorID}
    *
-   * @param Command
+   * @param Command {OcaMediaConnectorCommand}
    *
    * @retval {Promise}
    */
@@ -14492,9 +15096,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Sets a source connector's channel pin map. Return status indicates the
    * success of the operation.
-   * @param ConnectorID
+   * @param ConnectorID {OcaMediaConnectorID}
    *
-   * @param ChannelPinMap
+   * @param ChannelPinMap {OcaMap}
    *
    * @retval {Promise}
    */
@@ -14510,9 +15114,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Sets a sink connector's channel pin map. Return status indicates the
    * success of the operation.
-   * @param ConnectorID
+   * @param ConnectorID {OcaMediaConnectorID}
    *
-   * @param ChannelPinMap
+   * @param ChannelPinMap {OcaMultiMap}
    *
    * @retval {Promise}
    */
@@ -14528,9 +15132,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Sets a connector's <b>Connection </b>property. Return status indicates
    * the success of the operation.
-   * @param ConnectorID
+   * @param ConnectorID {OcaMediaConnectorID}
    *
-   * @param Connection
+   * @param Connection {OcaMediaConnection}
    *
    * @retval {Promise}
    */
@@ -14546,9 +15150,9 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Sets the Coding field of the connection descriptor of the referenced
    * connector. Return status indicates the success of the operation.
-   * @param ConnectorID
+   * @param ConnectorID {OcaMediaConnectorID}
    *
-   * @param Coding
+   * @param Coding {OcaMediaCoding}
    *
    * @retval {Promise}
    */
@@ -14564,7 +15168,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Deletes a connector from this network. Return status indicates the
    * success of the operation.
-   * @param ID
+   * @param ID {OcaMediaConnectorID}
    *
    * @retval {Promise}
    */
@@ -14651,7 +15255,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when Protocol changes.
+   * Event that is triggered when the value of Protocol changes.
+   * @type {PropertyEvent}
    */
   get OnProtocolChanged()
   {
@@ -14664,7 +15269,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when Ports changes.
+   * Event that is triggered when the value of Ports changes.
+   * @type {PropertyEvent}
    */
   get OnPortsChanged()
   {
@@ -14677,7 +15283,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when MaxSourceConnectors changes.
+   * Event that is triggered when the value of MaxSourceConnectors changes.
+   * @type {PropertyEvent}
    */
   get OnMaxSourceConnectorsChanged()
   {
@@ -14690,7 +15297,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when MaxSinkConnectors changes.
+   * Event that is triggered when the value of MaxSinkConnectors changes.
+   * @type {PropertyEvent}
    */
   get OnMaxSinkConnectorsChanged()
   {
@@ -14703,7 +15311,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when MaxPinsPerConnector changes.
+   * Event that is triggered when the value of MaxPinsPerConnector changes.
+   * @type {PropertyEvent}
    */
   get OnMaxPinsPerConnectorChanged()
   {
@@ -14716,7 +15325,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when MaxPortsPerPin changes.
+   * Event that is triggered when the value of MaxPortsPerPin changes.
+   * @type {PropertyEvent}
    */
   get OnMaxPortsPerPinChanged()
   {
@@ -14729,7 +15339,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when AlignmentLevel changes.
+   * Event that is triggered when the value of AlignmentLevel changes.
+   * @type {PropertyEvent}
    */
   get OnAlignmentLevelChanged()
   {
@@ -14742,7 +15353,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when AlignmentGain changes.
+   * Event that is triggered when the value of AlignmentGain changes.
+   * @type {PropertyEvent}
    */
   get OnAlignmentGainChanged()
   {
@@ -14755,7 +15367,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when SinkConnectors changes.
+   * Event that is triggered when the value of SinkConnectors changes.
+   * @type {PropertyEvent}
    */
   get OnSinkConnectorsChanged()
   {
@@ -14768,7 +15381,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   }
 
   /**
-   * Event that is triggered when SourceConnectors changes.
+   * Event that is triggered when the value of SourceConnectors changes.
+   * @type {PropertyEvent}
    */
   get OnSourceConnectorsChanged()
   {
@@ -14799,6 +15413,10 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     return OcaMediaTransportNetwork_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -14827,6 +15445,7 @@ let OcaManager_p = null;
  * and monitoring) functions. All concrete manager objects are lockable
  * (the constructor of this class initializes the Root object with
  * property Lockable true).
+ * @extends OcaRoot
  */
 export class OcaManager extends OcaRoot
 {
@@ -14867,6 +15486,10 @@ export class OcaManager extends OcaRoot
     return OcaManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -14900,6 +15523,7 @@ let OcaDeviceManager_p = null;
  * Mandatory manager that contains information relevant to the whole
  * device. <ul> <li>Must be instantiated once in every device. </li>
  * <li>Must have object number 1.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaDeviceManager extends OcaManager
 {
@@ -14998,7 +15622,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Sets the device name. The return value indicates whether the property
    * was successfully set.
-   * @param Name
+   * @param Name {OcaString}
    *
    * @retval {Promise}
    */
@@ -15040,7 +15664,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Sets the value of the Role property. The return value indicates
    * whether the property was successfully set.
-   * @param role
+   * @param role {OcaString}
    *
    * @retval {Promise}
    */
@@ -15069,7 +15693,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Sets the value of the UserInventoryCode property. The return value
    * indicates whether the property was successfully set.
-   * @param Code
+   * @param Code {OcaString}
    *
    * @retval {Promise}
    */
@@ -15098,7 +15722,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Sets the value of the Enabled property. The return value indicates
    * whether the property was successfully set.
-   * @param enabled
+   * @param enabled {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -15130,9 +15754,9 @@ export class OcaDeviceManager extends OcaManager
    * device manager must inform the CAP gateway of this key (via the host
    * interface), since the CAP gateway will check for and handle the
    * special reset message.
-   * @param Key
+   * @param Key {OcaBlobFixedLen}
    *
-   * @param Address
+   * @param Address {OcaNetworkAddress}
    *
    * @retval {Promise}
    */
@@ -15191,7 +15815,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Set arbitrary text message into <b>Message </b>property. The return
    * value indicates whether the value was successfully set.
-   * @param Text
+   * @param Text {OcaString}
    *
    * @retval {Promise}
    */
@@ -15232,7 +15856,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ModelGUID changes.
+   * Event that is triggered when the value of ModelGUID changes.
+   * @type {PropertyEvent}
    */
   get OnModelGUIDChanged()
   {
@@ -15245,7 +15870,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when SerialNumber changes.
+   * Event that is triggered when the value of SerialNumber changes.
+   * @type {PropertyEvent}
    */
   get OnSerialNumberChanged()
   {
@@ -15258,7 +15884,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ModelDescription changes.
+   * Event that is triggered when the value of ModelDescription changes.
+   * @type {PropertyEvent}
    */
   get OnModelDescriptionChanged()
   {
@@ -15271,7 +15898,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when DeviceName changes.
+   * Event that is triggered when the value of DeviceName changes.
+   * @type {PropertyEvent}
    */
   get OnDeviceNameChanged()
   {
@@ -15284,7 +15912,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when OcaVersion changes.
+   * Event that is triggered when the value of OcaVersion changes.
+   * @type {PropertyEvent}
    */
   get OnOcaVersionChanged()
   {
@@ -15297,7 +15926,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when DeviceRole changes.
+   * Event that is triggered when the value of DeviceRole changes.
+   * @type {PropertyEvent}
    */
   get OnDeviceRoleChanged()
   {
@@ -15310,7 +15940,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when UserInventoryCode changes.
+   * Event that is triggered when the value of UserInventoryCode changes.
+   * @type {PropertyEvent}
    */
   get OnUserInventoryCodeChanged()
   {
@@ -15323,7 +15954,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Enabled changes.
+   * Event that is triggered when the value of Enabled changes.
+   * @type {PropertyEvent}
    */
   get OnEnabledChanged()
   {
@@ -15336,7 +15968,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -15349,7 +15982,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Busy changes.
+   * Event that is triggered when the value of Busy changes.
+   * @type {PropertyEvent}
    */
   get OnBusyChanged()
   {
@@ -15362,7 +15996,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ResetCause changes.
+   * Event that is triggered when the value of ResetCause changes.
+   * @type {PropertyEvent}
    */
   get OnResetCauseChanged()
   {
@@ -15375,7 +16010,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Message changes.
+   * Event that is triggered when the value of Message changes.
+   * @type {PropertyEvent}
    */
   get OnMessageChanged()
   {
@@ -15388,7 +16024,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Managers changes.
+   * Event that is triggered when the value of Managers changes.
+   * @type {PropertyEvent}
    */
   get OnManagersChanged()
   {
@@ -15401,7 +16038,8 @@ export class OcaDeviceManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when DeviceRevisionID changes.
+   * Event that is triggered when the value of DeviceRevisionID changes.
+   * @type {PropertyEvent}
    */
   get OnDeviceRevisionIDChanged()
   {
@@ -15438,6 +16076,10 @@ export class OcaDeviceManager extends OcaManager
     return OcaDeviceManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -15471,6 +16113,7 @@ let OcaSecurityManager_p = null;
  * supports secure control and monitoring; otherwise, is optional. </li>
  * <li>May be instantiated at most once in any device. </li> <li>If
  * instantiated, object number must be 2.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaSecurityManager extends OcaManager
 {
@@ -15508,9 +16151,9 @@ export class OcaSecurityManager extends OcaManager
    * only work if the controller has a secure connection to the device and
    * control security has been turned on. If this is not the case the
    * method will return DeviceError.
-   * @param identity
+   * @param identity {OcaString}
    *
-   * @param key
+   * @param key {OcaBlob}
    *
    * @retval {Promise}
    */
@@ -15528,9 +16171,9 @@ export class OcaSecurityManager extends OcaManager
    * that changing a PSK over the network will only work if the controller
    * has a secure connection to the device and control security has been
    * turned on. If this is not the case the method will return DeviceError.
-   * @param identity
+   * @param identity {OcaString}
    *
-   * @param newKey
+   * @param newKey {OcaBlob}
    *
    * @retval {Promise}
    */
@@ -15550,7 +16193,7 @@ export class OcaSecurityManager extends OcaManager
    * deleting a PSK over the network will only work if the controller has a
    * secure connection to the device and control security has been turned
    * on. If this is not the case the method will return DeviceError.
-   * @param identity
+   * @param identity {OcaString}
    *
    * @retval {Promise}
    */
@@ -15590,7 +16233,8 @@ export class OcaSecurityManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when secureControlData changes.
+   * Event that is triggered when the value of secureControlData changes.
+   * @type {PropertyEvent}
    */
   get OnsecureControlDataChanged()
   {
@@ -15614,6 +16258,10 @@ export class OcaSecurityManager extends OcaManager
     return OcaSecurityManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -15651,6 +16299,7 @@ let OcaFirmwareManager_p = null;
  * read-only failsafe ("golden") image in such cases that will allow
  * recovery of the regular image) - Non-transactional based uploads that
  * may lead to bricked devices
+ * @extends OcaManager
  */
 export class OcaFirmwareManager extends OcaManager
 {
@@ -15719,7 +16368,7 @@ export class OcaFirmwareManager extends OcaManager
    * interface consists of this method and the methods 03m03 AddImageData,
    * 03m04 VerifyImage and 03m05 EndActiveImageUpdate. The return value
    * indicates if starting the active update succeeded.
-   * @param component
+   * @param component {OcaComponent}
    *
    * @retval {Promise}
    */
@@ -15739,9 +16388,9 @@ export class OcaFirmwareManager extends OcaManager
    * written to Flash later, or directly to Flash, dependent on the chosen
    * architecture and requirements. The return value indicates whether the
    * data is correctly received and the data is not out of order.
-   * @param id
+   * @param id {OcaUint32}
    *
-   * @param imageData
+   * @param imageData {OcaBlob}
    *
    * @retval {Promise}
    */
@@ -15757,7 +16406,7 @@ export class OcaFirmwareManager extends OcaManager
   /**
    * Verifies the entire host processor image using the passed verification
    * data.
-   * @param verifyData
+   * @param verifyData {OcaBlob}
    *
    * @retval {Promise}
    */
@@ -15796,11 +16445,11 @@ export class OcaFirmwareManager extends OcaManager
    * image (e.g. TFTP) and the underlying update technique (e.g. netflash)
    * depend on the implementation and may differ between components. Just
    * the interface is standardized.
-   * @param component
+   * @param component {OcaComponent}
    *
-   * @param serverAddress
+   * @param serverAddress {OcaNetworkAddress}
    *
-   * @param updateFileName
+   * @param updateFileName {OcaString}
    *
    * @retval {Promise}
    */
@@ -15830,7 +16479,8 @@ export class OcaFirmwareManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ComponentVersions changes.
+   * Event that is triggered when the value of ComponentVersions changes.
+   * @type {PropertyEvent}
    */
   get OnComponentVersionsChanged()
   {
@@ -15854,6 +16504,10 @@ export class OcaFirmwareManager extends OcaManager
     return OcaFirmwareManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -15877,6 +16531,7 @@ let OcaSubscriptionManager_p = null;
  * any device. </li> <li>If instantiated, must have object number 4.</li>
  * </ul> Absence of an <b>OcaSubscriptionManager </b>object signifies
  * that the device does not support event subscriptions.
+ * @extends OcaManager
  */
 export class OcaSubscriptionManager extends OcaManager
 {
@@ -15913,9 +16568,9 @@ export class OcaSubscriptionManager extends OcaManager
    * Removes all subscriptions to the given event with the given
    * <b>OcaMethod</b>. The return value indicates whether the
    * subscription(s) was (were) successfully removed.
-   * @param Event
+   * @param Event {OcaEvent}
    *
-   * @param Subscriber
+   * @param Subscriber {OcaMethod}
    *
    * @retval {Promise}
    */
@@ -15936,15 +16591,15 @@ export class OcaSubscriptionManager extends OcaManager
    * NotificationDeliveryMode</b>, and <b>DestinationInformation
    * </b>parameters are all identical. The return value indicates whether
    * the subscription succeeded.
-   * @param Event
+   * @param Event {OcaEvent}
    *
-   * @param Subscriber
+   * @param Subscriber {OcaMethod}
    *
-   * @param SubscriberContext
+   * @param SubscriberContext {OcaBlob}
    *
-   * @param NotificationDeliveryMode
+   * @param NotificationDeliveryMode {OcaNotificationDeliveryMode}
    *
-   * @param DestinationInformation
+   * @param DestinationInformation {OcaNetworkAddress}
    *
    * @retval {Promise}
    */
@@ -16006,17 +16661,17 @@ export class OcaSubscriptionManager extends OcaManager
    * SubsciberContext, NotificationDeliveryMode, and DestinationInformation
    * parameters are all identical. The return value indicates whether the
    * subscription succeeded. Added in v2 of this class, in AES70-2017.
-   * @param Emitter
+   * @param Emitter {OcaONo}
    *
-   * @param Property
+   * @param Property {OcaPropertyID}
    *
-   * @param Subscriber
+   * @param Subscriber {OcaMethod}
    *
-   * @param SubscriberContext
+   * @param SubscriberContext {OcaBlob}
    *
-   * @param NotificationDeliveryMode
+   * @param NotificationDeliveryMode {OcaNotificationDeliveryMode}
    *
-   * @param DestinationInformation
+   * @param DestinationInformation {OcaNetworkAddress}
    *
    * @retval {Promise}
    */
@@ -16035,11 +16690,11 @@ export class OcaSubscriptionManager extends OcaManager
    * NotificationDeliveryMode, and DestinationInformation. The return value
    * indicates whether the subscription(s) was (were) successfully removed.
    * Added in v2 of this class, in AES70-2017.
-   * @param Emitter
+   * @param Emitter {OcaONo}
    *
-   * @param Property
+   * @param Property {OcaPropertyID}
    *
-   * @param Subscriber
+   * @param Subscriber {OcaMethod}
    *
    * @retval {Promise}
    */
@@ -16102,7 +16757,8 @@ export class OcaSubscriptionManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -16126,6 +16782,10 @@ export class OcaSubscriptionManager extends OcaManager
     return OcaSubscriptionManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -16149,6 +16809,7 @@ let OcaPowerManager_p = null;
  * Optional manager that manages power settings and state. <ul> <li>May
  * be instantiated once in any device. </li> <li>If instantiated, object
  * number must be 5.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaPowerManager extends OcaManager
 {
@@ -16200,7 +16861,7 @@ export class OcaPowerManager extends OcaManager
   /**
    * Change the device power state. The return value indicates whether the
    * requested change has been successfully made.
-   * @param State
+   * @param State {OcaPowerState}
    *
    * @retval {Promise}
    */
@@ -16245,11 +16906,11 @@ export class OcaPowerManager extends OcaManager
    * off. If it is not turned off, it will be placed in the
    * <b>Unavailable</b> state. The return value indicates whether the
    * requested exchange has been successfully made.
-   * @param oldPsu
+   * @param oldPsu {OcaONo}
    *
-   * @param newPsu
+   * @param newPsu {OcaONo}
    *
-   * @param powerOffOld
+   * @param powerOffOld {OcaBoolean}
    *
    * @retval {Promise}
    */
@@ -16276,7 +16937,8 @@ export class OcaPowerManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -16289,7 +16951,8 @@ export class OcaPowerManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when PowerSupplies changes.
+   * Event that is triggered when the value of PowerSupplies changes.
+   * @type {PropertyEvent}
    */
   get OnPowerSuppliesChanged()
   {
@@ -16302,7 +16965,8 @@ export class OcaPowerManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ActivePowerSupplies changes.
+   * Event that is triggered when the value of ActivePowerSupplies changes.
+   * @type {PropertyEvent}
    */
   get OnActivePowerSuppliesChanged()
   {
@@ -16315,7 +16979,8 @@ export class OcaPowerManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when AutoState changes.
+   * Event that is triggered when the value of AutoState changes.
+   * @type {PropertyEvent}
    */
   get OnAutoStateChanged()
   {
@@ -16328,7 +16993,8 @@ export class OcaPowerManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when TargetState changes.
+   * Event that is triggered when the value of TargetState changes.
+   * @type {PropertyEvent}
    */
   get OnTargetStateChanged()
   {
@@ -16356,6 +17022,10 @@ export class OcaPowerManager extends OcaManager
     return OcaPowerManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -16383,6 +17053,7 @@ let OcaNetworkManager_p = null;
  * <b>OcaStreamNetwork</b>, <b>OcaApplicationNetwork</b>, or any subclass
  * of these classes.</li> </ul> <ul> <li>If instantiated, must have
  * object number 6.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaNetworkManager extends OcaManager
 {
@@ -16474,7 +17145,8 @@ export class OcaNetworkManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Networks changes.
+   * Event that is triggered when the value of Networks changes.
+   * @type {PropertyEvent}
    */
   get OnNetworksChanged()
   {
@@ -16487,7 +17159,8 @@ export class OcaNetworkManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when StreamNetworks changes.
+   * Event that is triggered when the value of StreamNetworks changes.
+   * @type {PropertyEvent}
    */
   get OnStreamNetworksChanged()
   {
@@ -16500,7 +17173,8 @@ export class OcaNetworkManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ControlNetworks changes.
+   * Event that is triggered when the value of ControlNetworks changes.
+   * @type {PropertyEvent}
    */
   get OnControlNetworksChanged()
   {
@@ -16513,7 +17187,8 @@ export class OcaNetworkManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when MediaTransportNetworks changes.
+   * Event that is triggered when the value of MediaTransportNetworks changes.
+   * @type {PropertyEvent}
    */
   get OnMediaTransportNetworksChanged()
   {
@@ -16540,6 +17215,10 @@ export class OcaNetworkManager extends OcaManager
     return OcaNetworkManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -16564,6 +17243,7 @@ let OcaMediaClockManager_p = null;
  * of <b>OcaMediaClock</b>, <b>OcaMediaClock3</b>, or any subclass of
  * these classes. </li> </ul> <ul> <li>If instantiated, object number
  * must be 7.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaMediaClockManager extends OcaManager
 {
@@ -16640,7 +17320,8 @@ export class OcaMediaClockManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ClockSourceTypesSupported changes.
+   * Event that is triggered when the value of ClockSourceTypesSupported changes.
+   * @type {PropertyEvent}
    */
   get OnClockSourceTypesSupportedChanged()
   {
@@ -16653,7 +17334,8 @@ export class OcaMediaClockManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Clocks changes.
+   * Event that is triggered when the value of Clocks changes.
+   * @type {PropertyEvent}
    */
   get OnClocksChanged()
   {
@@ -16666,7 +17348,8 @@ export class OcaMediaClockManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when Clock3s changes.
+   * Event that is triggered when the value of Clock3s changes.
+   * @type {PropertyEvent}
    */
   get OnClock3sChanged()
   {
@@ -16692,6 +17375,10 @@ export class OcaMediaClockManager extends OcaManager
     return OcaMediaClockManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -16718,6 +17405,7 @@ let OcaLibraryManager_p = null;
  * Optional manager for handling device presets -- patch and parset
  * libraries. <ul> <li>May be instantiated once in any device. </li>
  * </ul> <ul> <li>If instantiated, object number must be 8.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaLibraryManager extends OcaManager
 {
@@ -16753,7 +17441,7 @@ export class OcaLibraryManager extends OcaManager
   /**
    * Adds a library to the device. Return value indicates whether the
    * library was successfully added.
-   * @param Type
+   * @param Type {OcaLibVolType}
    *
    * @retval {Promise}
    */
@@ -16770,7 +17458,7 @@ export class OcaLibraryManager extends OcaManager
 
   /**
    * Deletes a library from the device.
-   * @param ID
+   * @param ID {OcaONo}
    *
    * @retval {Promise}
    */
@@ -16786,7 +17474,7 @@ export class OcaLibraryManager extends OcaManager
   /**
    * Returns the number of libraries of the given type that are
    * instantiated in the device..
-   * @param Type
+   * @param Type {OcaLibVolType}
    *
    * @retval {Promise}
    */
@@ -16804,7 +17492,7 @@ export class OcaLibraryManager extends OcaManager
   /**
    * Returns the list of object numbers of libraries of libraries of the
    * given type that are instantiated in the device.
-   * @param Type
+   * @param Type {OcaLibVolType}
    *
    * @retval {Promise}
    */
@@ -16834,7 +17522,7 @@ export class OcaLibraryManager extends OcaManager
 
   /**
    * Apply a patch to the device.
-   * @param ID
+   * @param ID {OcaClassVersionNumber}
    *
    * @retval {Promise}
    */
@@ -16848,7 +17536,8 @@ export class OcaLibraryManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when PatchLibraries changes.
+   * Event that is triggered when the value of PatchLibraries changes.
+   * @type {PropertyEvent}
    */
   get OnPatchLibrariesChanged()
   {
@@ -16861,7 +17550,8 @@ export class OcaLibraryManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when ParsetLibraries changes.
+   * Event that is triggered when the value of ParsetLibraries changes.
+   * @type {PropertyEvent}
    */
   get OnParsetLibrariesChanged()
   {
@@ -16874,7 +17564,8 @@ export class OcaLibraryManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when CurrentPatch changes.
+   * Event that is triggered when the value of CurrentPatch changes.
+   * @type {PropertyEvent}
    */
   get OnCurrentPatchChanged()
   {
@@ -16900,6 +17591,10 @@ export class OcaLibraryManager extends OcaManager
     return OcaLibraryManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -16918,6 +17613,7 @@ let OcaAudioProcessingManager_p = null;
  * standard will hold various global audio processing parameters. <ul>
  * <li>May be instantiated once in any device. </li> </ul> <ul> <li>If
  * instantiated, object number must be 9.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaAudioProcessingManager extends OcaManager
 {
@@ -16958,6 +17654,10 @@ export class OcaAudioProcessingManager extends OcaManager
     return OcaAudioProcessingManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -16984,6 +17684,7 @@ let OcaDeviceTimeManager_p = null;
  * defined as a public property because its value is volatile and should
  * not cause property-change events. The property <b>TimeSources </b>was
  * added in version 2 of this class.
+ * @extends OcaManager
  */
 export class OcaDeviceTimeManager extends OcaManager
 {
@@ -17032,7 +17733,7 @@ export class OcaDeviceTimeManager extends OcaManager
    * Set device time-of-day clock. Return value indicates whether value was
    * successfully set. Not available if a time source is identified in
    * property CurrentDeviceTimeSource.
-   * @param DeviceTime
+   * @param DeviceTime {OcaTimeOfDay}
    *
    * @retval {Promise}
    */
@@ -17075,7 +17776,7 @@ export class OcaDeviceTimeManager extends OcaManager
   /**
    * Sets ONo of current time source object, or zero if none. Return value
    * indicates whether value was successfully retrieved.
-   * @param TimeSourceONo
+   * @param TimeSourceONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -17089,7 +17790,8 @@ export class OcaDeviceTimeManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when TimeSources changes.
+   * Event that is triggered when the value of TimeSources changes.
+   * @type {PropertyEvent}
    */
   get OnTimeSourcesChanged()
   {
@@ -17102,7 +17804,8 @@ export class OcaDeviceTimeManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when CurrentDeviceTimeSource changes.
+   * Event that is triggered when the value of CurrentDeviceTimeSource changes.
+   * @type {PropertyEvent}
    */
   get OnCurrentDeviceTimeSourceChanged()
   {
@@ -17127,6 +17830,10 @@ export class OcaDeviceTimeManager extends OcaManager
     return OcaDeviceTimeManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -17167,6 +17874,7 @@ let OcaTaskManager_p = null;
  * commands from controllers other than the one that owns the lock, and
  * prevents automatic activation of prescheduled tasks. Locking does not
  * affect execution of running tasks.
+ * @extends OcaManager
  */
 export class OcaTaskManager extends OcaManager
 {
@@ -17233,7 +17941,7 @@ export class OcaTaskManager extends OcaManager
   /**
    * Controls all tasks in device. Return value indicates whether tasks
    * were successfully controlled.
-   * @param Command
+   * @param Command {OcaTaskCommand}
    *
    * @retval {Promise}
    */
@@ -17288,7 +17996,7 @@ export class OcaTaskManager extends OcaManager
   /**
    * Adds task slot to device. Return value indicates whether slot was
    * successfully added. Not implemented if device does not use slots.
-   * @param SlotID
+   * @param SlotID {OcaTaskSlotID}
    *
    * @retval {Promise}
    */
@@ -17304,7 +18012,7 @@ export class OcaTaskManager extends OcaManager
   /**
    * Deletes task slot from device. Return value indicates whether slot was
    * successfully deleted. Not implemented if device does not use slots.
-   * @param SlotID
+   * @param SlotID {OcaTaskSlotID}
    *
    * @retval {Promise}
    */
@@ -17346,6 +18054,10 @@ export class OcaTaskManager extends OcaManager
     return OcaTaskManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -17364,6 +18076,7 @@ let OcaCodingManager_p = null;
  * that implements more than one media encoding scheme and/or more than
  * one media decoding scheme. </li> </ul> <ul> <li>If instantiated,
  * object number must be 12.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaCodingManager extends OcaManager
 {
@@ -17422,7 +18135,8 @@ export class OcaCodingManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when AvailableEncodingSchemes changes.
+   * Event that is triggered when the value of AvailableEncodingSchemes changes.
+   * @type {PropertyEvent}
    */
   get OnAvailableEncodingSchemesChanged()
   {
@@ -17435,7 +18149,8 @@ export class OcaCodingManager extends OcaManager
   }
 
   /**
-   * Event that is triggered when AvailableDecodingSchemes changes.
+   * Event that is triggered when the value of AvailableDecodingSchemes changes.
+   * @type {PropertyEvent}
    */
   get OnAvailableDecodingSchemesChanged()
   {
@@ -17460,6 +18175,10 @@ export class OcaCodingManager extends OcaManager
     return OcaCodingManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -17480,6 +18199,7 @@ let OcaDiagnosticManager_p = null;
  * provide proprietary application diagnostic enhancements. <ul> <li>May
  * be instantiated once in any device. </li> <li>If instantiated, object
  * number must be 13.</li> </ul>
+ * @extends OcaManager
  */
 export class OcaDiagnosticManager extends OcaManager
 {
@@ -17512,7 +18232,7 @@ export class OcaDiagnosticManager extends OcaManager
   /**
    * Retrieves a text description of the given object's lock status. Return
    * value indicates success of the retrieval.
-   * @param ONo
+   * @param ONo {OcaONo}
    *
    * @retval {Promise}
    */
@@ -17538,6 +18258,10 @@ export class OcaDiagnosticManager extends OcaManager
     return OcaDiagnosticManager_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -17571,6 +18295,7 @@ let OcaNetworkSignalChannel_p = null;
  * channel-oriented media connection management, such as the Dante
  * name-based routing mechanism, this worker will be linked only to the
  * <b>OcaStreamNetwork </b>object.</li> </ul>
+ * @extends OcaWorker
  */
 export class OcaNetworkSignalChannel extends OcaWorker
 {
@@ -17607,9 +18332,9 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * media port belongs, and specifies on what index of the stream
    * connector this channel can be found. Return status indicates success
    * of operation.
-   * @param Connector
+   * @param Connector {OcaONo}
    *
-   * @param Index
+   * @param Index {OcaStreamConnectorPinIndex}
    *
    * @retval {Promise}
    */
@@ -17706,7 +18431,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   /**
    * Removes this channel from the passed stream connector. Return status
    * indicates success of operation.
-   * @param Connector
+   * @param Connector {OcaONo}
    *
    * @retval {Promise}
    */
@@ -17722,7 +18447,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   /**
    * Sets the value of the IDAdvertised property. Return status indicates
    * success of operation.
-   * @param IDAdvertised
+   * @param IDAdvertised {OcaNetworkSignalChannelID}
    *
    * @retval {Promise}
    */
@@ -17739,7 +18464,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * Sets the object number of the stream network object to which this
    * media port belongs. Return status indicates success of operation. Only
    * implemented for reconfigurable devices.
-   * @param Network
+   * @param Network {OcaONo}
    *
    * @retval {Promise}
    */
@@ -17758,7 +18483,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * stream-oriented connection management this method is not used.
    * Clearing the remote channel ID (i.e. tearing down the connection) can
    * be done by passing an empty remote channel ID as parameter.
-   * @param RemoteChannelID
+   * @param RemoteChannelID {OcaNetworkSignalChannelID}
    *
    * @retval {Promise}
    */
@@ -17772,7 +18497,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
   }
 
   /**
-   * Event that is triggered when ConnectorPins changes.
+   * Event that is triggered when the value of ConnectorPins changes.
+   * @type {PropertyEvent}
    */
   get OnConnectorPinsChanged()
   {
@@ -17785,7 +18511,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
   }
 
   /**
-   * Event that is triggered when IDAdvertised changes.
+   * Event that is triggered when the value of IDAdvertised changes.
+   * @type {PropertyEvent}
    */
   get OnIDAdvertisedChanged()
   {
@@ -17798,7 +18525,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Network changes.
+   * Event that is triggered when the value of Network changes.
+   * @type {PropertyEvent}
    */
   get OnNetworkChanged()
   {
@@ -17811,7 +18539,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
   }
 
   /**
-   * Event that is triggered when RemoteChannelID changes.
+   * Event that is triggered when the value of RemoteChannelID changes.
+   * @type {PropertyEvent}
    */
   get OnRemoteChannelIDChanged()
   {
@@ -17824,7 +18553,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
   }
 
   /**
-   * Event that is triggered when SourceOrSink changes.
+   * Event that is triggered when the value of SourceOrSink changes.
+   * @type {PropertyEvent}
    */
   get OnSourceOrSinkChanged()
   {
@@ -17837,7 +18567,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
   }
 
   /**
-   * Event that is triggered when Status changes.
+   * Event that is triggered when the value of Status changes.
+   * @type {PropertyEvent}
    */
   get OnStatusChanged()
   {
@@ -17866,6 +18597,10 @@ export class OcaNetworkSignalChannel extends OcaWorker
     return OcaNetworkSignalChannel_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -17900,6 +18635,7 @@ let OcaNetwork_p = null;
  * monitoring networks only. For media transport networks, and for
  * networks that combine media transport and control, the
  * <b>OcaStreamNetwork</b> class should be used instead.
+ * @extends OcaAgent
  */
 export class OcaNetwork extends OcaAgent
 {
@@ -17972,7 +18708,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Sets the network's IDAdvertised. Return status indicates whether the
    * operation was successful.
-   * @param Name
+   * @param Name {OcaApplicationNetworkServiceID}
    *
    * @retval {Promise}
    */
@@ -18065,7 +18801,7 @@ export class OcaNetwork extends OcaAgent
    * Sets the list of system interface IDs that this network will use.
    * Return status indicates success of the operation. This method is not
    * implemented by all network implementations.
-   * @param Interfaces
+   * @param Interfaces {OcaList}
    *
    * @retval {Promise}
    */
@@ -18112,7 +18848,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when IDAdvertised changes.
+   * Event that is triggered when the value of IDAdvertised changes.
+   * @type {PropertyEvent}
    */
   get OnIDAdvertisedChanged()
   {
@@ -18125,7 +18862,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ControlProtocol changes.
+   * Event that is triggered when the value of ControlProtocol changes.
+   * @type {PropertyEvent}
    */
   get OnControlProtocolChanged()
   {
@@ -18138,7 +18876,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when MediaProtocol changes.
+   * Event that is triggered when the value of MediaProtocol changes.
+   * @type {PropertyEvent}
    */
   get OnMediaProtocolChanged()
   {
@@ -18151,7 +18890,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Status changes.
+   * Event that is triggered when the value of Status changes.
+   * @type {PropertyEvent}
    */
   get OnStatusChanged()
   {
@@ -18164,7 +18904,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when SystemInterfaces changes.
+   * Event that is triggered when the value of SystemInterfaces changes.
+   * @type {PropertyEvent}
    */
   get OnSystemInterfacesChanged()
   {
@@ -18177,7 +18918,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when MediaPorts changes.
+   * Event that is triggered when the value of MediaPorts changes.
+   * @type {PropertyEvent}
    */
   get OnMediaPortsChanged()
   {
@@ -18190,7 +18932,8 @@ export class OcaNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Statistics changes.
+   * Event that is triggered when the value of Statistics changes.
+   * @type {PropertyEvent}
    */
   get OnStatisticsChanged()
   {
@@ -18221,6 +18964,10 @@ export class OcaNetwork extends OcaAgent
     return OcaNetwork_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -18266,6 +19013,7 @@ let OcaRamper_p = null;
  * <b>OcaInt64 </b>before comparing. </li> <li>For boolean values, the
  * the ramping parameters are coerced to <b>OcaUint8. </b>True is
  * assigned the value One, False is assigned the value Zero.</li> </ul>
+ * @extends OcaAgent
  */
 export class OcaRamper extends OcaAgent
 {
@@ -18301,7 +19049,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Executes the given ramper command. The return value indicates whether
    * the command was successfully executed.
-   * @param Command
+   * @param Command {OcaRamperCommand}
    *
    * @retval {Promise}
    */
@@ -18343,7 +19091,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Defines property to be ramped. The return value indicates whether the
    * definition was successful.
-   * @param property
+   * @param property {OcaProperty}
    *
    * @retval {Promise}
    */
@@ -18372,7 +19120,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Sets ramper time mode (absolute or relative). The return value
    * indicates whether the time mode was successfully set.
-   * @param TimeMode
+   * @param TimeMode {OcaTimeMode}
    *
    * @retval {Promise}
    */
@@ -18401,7 +19149,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Sets ramper start time. The return value indicates whether the start
    * time was successfully set.
-   * @param TimeMode
+   * @param TimeMode {OcaTimeOfDay}
    *
    * @retval {Promise}
    */
@@ -18430,7 +19178,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Sets ramp duration. The return value indicates whether the duration
    * was successfully set.
-   * @param Duration
+   * @param Duration {OcaTimeInterval}
    *
    * @retval {Promise}
    */
@@ -18459,7 +19207,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Sets ramp interpolation law. The return value indicates whether the
    * law was successfully set.
-   * @param law
+   * @param law {OcaRamperInterpolationLaw}
    *
    * @retval {Promise}
    */
@@ -18488,7 +19236,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Sets ramp goal value. The return value indicates whether the duration
    * was successfully set.
-   * @param goal
+   * @param goal {OcaFloat64}
    *
    * @retval {Promise}
    */
@@ -18502,7 +19250,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when State changes.
+   * Event that is triggered when the value of State changes.
+   * @type {PropertyEvent}
    */
   get OnStateChanged()
   {
@@ -18515,7 +19264,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when RampedProperty changes.
+   * Event that is triggered when the value of RampedProperty changes.
+   * @type {PropertyEvent}
    */
   get OnRampedPropertyChanged()
   {
@@ -18528,7 +19278,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when TimeMode changes.
+   * Event that is triggered when the value of TimeMode changes.
+   * @type {PropertyEvent}
    */
   get OnTimeModeChanged()
   {
@@ -18541,7 +19292,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when StartTime changes.
+   * Event that is triggered when the value of StartTime changes.
+   * @type {PropertyEvent}
    */
   get OnStartTimeChanged()
   {
@@ -18554,7 +19306,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Duration changes.
+   * Event that is triggered when the value of Duration changes.
+   * @type {PropertyEvent}
    */
   get OnDurationChanged()
   {
@@ -18567,7 +19320,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when InterpolationLaw changes.
+   * Event that is triggered when the value of InterpolationLaw changes.
+   * @type {PropertyEvent}
    */
   get OnInterpolationLawChanged()
   {
@@ -18580,7 +19334,8 @@ export class OcaRamper extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Goal changes.
+   * Event that is triggered when the value of Goal changes.
+   * @type {PropertyEvent}
    */
   get OnGoalChanged()
   {
@@ -18610,6 +19365,10 @@ export class OcaRamper extends OcaAgent
     return OcaRamper_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -18638,6 +19397,7 @@ let OcaMediaClock_p = null;
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by
  * </i><b><i>OcaMediaClock3</i></b> A media clock, internal or external.
+ * @extends OcaAgent
  */
 export class OcaMediaClock extends OcaAgent
 {
@@ -18694,7 +19454,7 @@ export class OcaMediaClock extends OcaAgent
    * Sets the value of the <b>Type </b>property. The return value indicates
    * whether the value was successfully set. Optional method, may not be
    * supported in all implementations.
-   * @param Type
+   * @param Type {OcaMediaClockType}
    *
    * @retval {Promise}
    */
@@ -18724,7 +19484,7 @@ export class OcaMediaClock extends OcaAgent
    * Sets the value of the <b>DomainID </b>property. The return value
    * indicates whether the value was successfully set. Optional method, may
    * not be supported in all implementations.
-   * @param ID
+   * @param ID {OcaUint16}
    *
    * @retval {Promise}
    */
@@ -18766,7 +19526,7 @@ export class OcaMediaClock extends OcaAgent
   /**
    * Sets the sampling rate. The return value indicates whether the rate
    * was successfully set.
-   * @param rate
+   * @param rate {OcaMediaClockRate}
    *
    * @retval {Promise}
    */
@@ -18793,7 +19553,8 @@ export class OcaMediaClock extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Type changes.
+   * Event that is triggered when the value of Type changes.
+   * @type {PropertyEvent}
    */
   get OnTypeChanged()
   {
@@ -18806,7 +19567,8 @@ export class OcaMediaClock extends OcaAgent
   }
 
   /**
-   * Event that is triggered when DomainID changes.
+   * Event that is triggered when the value of DomainID changes.
+   * @type {PropertyEvent}
    */
   get OnDomainIDChanged()
   {
@@ -18819,7 +19581,8 @@ export class OcaMediaClock extends OcaAgent
   }
 
   /**
-   * Event that is triggered when CurrentRate changes.
+   * Event that is triggered when the value of CurrentRate changes.
+   * @type {PropertyEvent}
    */
   get OnCurrentRateChanged()
   {
@@ -18832,7 +19595,8 @@ export class OcaMediaClock extends OcaAgent
   }
 
   /**
-   * Event that is triggered when LockState changes.
+   * Event that is triggered when the value of LockState changes.
+   * @type {PropertyEvent}
    */
   get OnLockStateChanged()
   {
@@ -18860,6 +19624,10 @@ export class OcaMediaClock extends OcaAgent
     return OcaMediaClock_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -18900,6 +19668,7 @@ let OcaStreamNetwork_p = null;
  * both. There shall be one OcaStreamNetwork instance for each network to
  * which the device belongs. This class may be subclassed to support
  * networks of various types.
+ * @extends OcaAgent
  */
 export class OcaStreamNetwork extends OcaAgent
 {
@@ -18975,7 +19744,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Sets the network's IDAdvertised. Return status indicates whether the
    * operation was successful.
-   * @param Name
+   * @param Name {OcaNetworkNodeID}
    *
    * @retval {Promise}
    */
@@ -19068,7 +19837,7 @@ export class OcaStreamNetwork extends OcaAgent
    * Sets the list of system interface IDs that this network will use.
    * Return status indicates success of the operation. This method is not
    * implemented by all network implementations.
-   * @param Interfaces
+   * @param Interfaces {OcaList}
    *
    * @retval {Promise}
    */
@@ -19111,7 +19880,7 @@ export class OcaStreamNetwork extends OcaAgent
    * <b>OcaStreamConnector</b> objects are deleted. For reconfigurable
    * devices, such changes may be initiated by controllers during device
    * operation.
-   * @param StreamConnectors
+   * @param StreamConnectors {OcaList}
    *
    * @retval {Promise}
    */
@@ -19154,7 +19923,7 @@ export class OcaStreamNetwork extends OcaAgent
    * <b>OcaStreamConnector</b> objects are deleted. For reconfigurable
    * devices, such changes may be initiated by controllers during device
    * operation.
-   * @param StreamConnectors
+   * @param StreamConnectors {OcaList}
    *
    * @retval {Promise}
    */
@@ -19197,7 +19966,7 @@ export class OcaStreamNetwork extends OcaAgent
    * updated, or when <b>OcaNetworkSignalChannel</b> objects are deleted.
    * For reconfigurable devices, such changes may be initiated by
    * controllers during device operation.
-   * @param SignalChannels
+   * @param SignalChannels {OcaList}
    *
    * @retval {Promise}
    */
@@ -19240,7 +20009,7 @@ export class OcaStreamNetwork extends OcaAgent
    * updated, or when <b>OcaNetworkSignalChannel</b> objects are deleted.
    * For reconfigurable devices, such changes may be initiated by
    * controllers during device operation.
-   * @param SignalChannels
+   * @param SignalChannels {OcaList}
    *
    * @retval {Promise}
    */
@@ -19274,7 +20043,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when ControlProtocol changes.
+   * Event that is triggered when the value of ControlProtocol changes.
+   * @type {PropertyEvent}
    */
   get OnControlProtocolChanged()
   {
@@ -19287,7 +20057,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when IDAdvertised changes.
+   * Event that is triggered when the value of IDAdvertised changes.
+   * @type {PropertyEvent}
    */
   get OnIDAdvertisedChanged()
   {
@@ -19300,7 +20071,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when MediaProtocol changes.
+   * Event that is triggered when the value of MediaProtocol changes.
+   * @type {PropertyEvent}
    */
   get OnMediaProtocolChanged()
   {
@@ -19313,7 +20085,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when SignalChannelsSink changes.
+   * Event that is triggered when the value of SignalChannelsSink changes.
+   * @type {PropertyEvent}
    */
   get OnSignalChannelsSinkChanged()
   {
@@ -19326,7 +20099,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when SignalChannelsSource changes.
+   * Event that is triggered when the value of SignalChannelsSource changes.
+   * @type {PropertyEvent}
    */
   get OnSignalChannelsSourceChanged()
   {
@@ -19339,7 +20113,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Statistics changes.
+   * Event that is triggered when the value of Statistics changes.
+   * @type {PropertyEvent}
    */
   get OnStatisticsChanged()
   {
@@ -19352,7 +20127,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Status changes.
+   * Event that is triggered when the value of Status changes.
+   * @type {PropertyEvent}
    */
   get OnStatusChanged()
   {
@@ -19365,7 +20141,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when StreamConnectorsSink changes.
+   * Event that is triggered when the value of StreamConnectorsSink changes.
+   * @type {PropertyEvent}
    */
   get OnStreamConnectorsSinkChanged()
   {
@@ -19378,7 +20155,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when StreamConnectorsSource changes.
+   * Event that is triggered when the value of StreamConnectorsSource changes.
+   * @type {PropertyEvent}
    */
   get OnStreamConnectorsSourceChanged()
   {
@@ -19391,7 +20169,8 @@ export class OcaStreamNetwork extends OcaAgent
   }
 
   /**
-   * Event that is triggered when SystemInterfaces changes.
+   * Event that is triggered when the value of SystemInterfaces changes.
+   * @type {PropertyEvent}
    */
   get OnSystemInterfacesChanged()
   {
@@ -19425,6 +20204,10 @@ export class OcaStreamNetwork extends OcaAgent
     return OcaStreamNetwork_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -19485,6 +20268,7 @@ let OcaStreamConnector_p = null;
  * must register itself with the given stream network object via some
  * internal means.</li> </ul> This class may be subclassed to support
  * various network types. <b> </b>
+ * @extends OcaAgent
  */
 export class OcaStreamConnector extends OcaAgent
 {
@@ -19519,7 +20303,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Connects a stream to this connector. Return status indicates success
    * of operation.
-   * @param Stream
+   * @param Stream {OcaStream}
    *
    * @retval {Promise}
    */
@@ -19537,7 +20321,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Disconnects a stream from this connector. Return status indicates
    * success of operation.
-   * @param StreamID
+   * @param StreamID {OcaStreamIndex}
    *
    * @retval {Promise}
    */
@@ -19632,7 +20416,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Sets the value of the IDAdvertised property. Return status indicates
    * success of operation.
-   * @param IDAdvertised
+   * @param IDAdvertised {OcaStreamConnectorID}
    *
    * @retval {Promise}
    */
@@ -19649,7 +20433,7 @@ export class OcaStreamConnector extends OcaAgent
    * Sets the object number of the <b>OcaStreamNetwork </b>object to which
    * this connector belongs. Return status indicates success of operation.
    * Only implemented for reconfigurable devices.
-   * @param Network
+   * @param Network {OcaONo}
    *
    * @retval {Promise}
    */
@@ -19667,7 +20451,7 @@ export class OcaStreamConnector extends OcaAgent
    * success of operation. Only implemented for reconfigurable devices.
    * Note that this method can only be called when the SignalChannels
    * property is empty, i.e. does not contain any actual channels.
-   * @param SourceOrSink
+   * @param SourceOrSink {OcaNetworkMediaSourceOrSink}
    *
    * @retval {Promise}
    */
@@ -19681,7 +20465,8 @@ export class OcaStreamConnector extends OcaAgent
   }
 
   /**
-   * Event that is triggered when IDAdvertised changes.
+   * Event that is triggered when the value of IDAdvertised changes.
+   * @type {PropertyEvent}
    */
   get OnIDAdvertisedChanged()
   {
@@ -19694,7 +20479,8 @@ export class OcaStreamConnector extends OcaAgent
   }
 
   /**
-   * Event that is triggered when OwnerNetwork changes.
+   * Event that is triggered when the value of OwnerNetwork changes.
+   * @type {PropertyEvent}
    */
   get OnOwnerNetworkChanged()
   {
@@ -19707,7 +20493,8 @@ export class OcaStreamConnector extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Pins changes.
+   * Event that is triggered when the value of Pins changes.
+   * @type {PropertyEvent}
    */
   get OnPinsChanged()
   {
@@ -19720,7 +20507,8 @@ export class OcaStreamConnector extends OcaAgent
   }
 
   /**
-   * Event that is triggered when SourceOrSink changes.
+   * Event that is triggered when the value of SourceOrSink changes.
+   * @type {PropertyEvent}
    */
   get OnSourceOrSinkChanged()
   {
@@ -19733,7 +20521,8 @@ export class OcaStreamConnector extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Status changes.
+   * Event that is triggered when the value of Status changes.
+   * @type {PropertyEvent}
    */
   get OnStatusChanged()
   {
@@ -19746,7 +20535,8 @@ export class OcaStreamConnector extends OcaAgent
   }
 
   /**
-   * Event that is triggered when Streams changes.
+   * Event that is triggered when the value of Streams changes.
+   * @type {PropertyEvent}
    */
   get OnStreamsChanged()
   {
@@ -19775,6 +20565,10 @@ export class OcaStreamConnector extends OcaAgent
     return OcaStreamConnector_p;
   }
 
+  /**
+   * Call this method when the object is no longer needed. It will
+   * automatically unsubscribe all event handlers.
+   */
   Dispose()
   {
     super.Dispose();
@@ -19788,6 +20582,9 @@ export class OcaStreamConnector extends OcaAgent
   }
 }
 
+/**
+ * All classes defined in this module by their ClassID.
+ */
 export const Classes = {
   "\u0001" : OcaRoot,
   "\u0001\u0001" : OcaWorker,
@@ -19894,6 +20691,9 @@ export const Classes = {
   "\u0001\u0002\u000b" : OcaStreamConnector,
 };
 
+/**
+ * A factory function for classes in this module.
+ */
 export function CreateObject(ClassID, device, ono)
 {
   if (Classes.hasOwnProperty(ClassID))
