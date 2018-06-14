@@ -372,7 +372,7 @@ export class Event extends BaseEvent
     return this.object.device.add_subscription(this.id, this.callback);
   }
 
-  unsubscribe(callback)
+  do_unsubscribe(callback)
   {
     return this.object.device.remove_subscription(this.id, this.callback);
   }
