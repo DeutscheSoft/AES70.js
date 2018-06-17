@@ -178,13 +178,14 @@ let _signature_OcaVersion = null;
  * Representation of a version number of a (hardware/software) component
  * of a device in the form of Major.Minor.Build (e.g. 1.0.123).
  */
-export class OcaVersion {
+export class OcaVersion extends Base {
 
   static get TypeName() {
     return "OcaVersion";
   }
 
   constructor(Major, Minor, Build, Component) {
+    super();
     this.Major = Major;
     this.Minor = Minor;
     this.Build = Build;
@@ -202,7 +203,7 @@ export class OcaVersion {
 
   static get signature() {
     if (_signature_OcaVersion === null) {
-      _signature_OcaVersion = new signature(UINT32, UINT32, UINT32, UINT16);
+      _signature_OcaVersion = new signature(UINT32, UINT32, UINT32, OcaComponent);
     }
 
     return _signature_OcaVersion;
@@ -214,13 +215,14 @@ let _signature_OcaClassIdentification = null;
 /**
  * This was not documented in the OCA standard.
  */
-export class OcaClassIdentification {
+export class OcaClassIdentification extends Base {
 
   static get TypeName() {
     return "OcaClassIdentification";
   }
 
   constructor(ClassID, ClassVersion) {
+    super();
     this.ClassID = ClassID;
     this.ClassVersion = ClassVersion;
   }
@@ -247,13 +249,14 @@ let _signature_OcaOPath = null;
  * Object address. Composite of network address in which object resides,
  * and object number.
  */
-export class OcaOPath {
+export class OcaOPath extends Base {
 
   static get TypeName() {
     return "OcaOPath";
   }
 
   constructor(HostID, ONo) {
+    super();
     this.HostID = HostID;
     this.ONo = ONo;
   }
@@ -280,13 +283,14 @@ let _signature_OcaObjectIdentification = null;
  * Object identification. Composite of object number and object's class.
  * Used mainly in discovery processes.
  */
-export class OcaObjectIdentification {
+export class OcaObjectIdentification extends Base {
 
   static get TypeName() {
     return "OcaObjectIdentification";
   }
 
   constructor(ONo, ClassIdentification) {
+    super();
     this.ONo = ONo;
     this.ClassIdentification = ClassIdentification;
   }
@@ -314,13 +318,14 @@ let _signature_OcaMethodID = null;
  * methods of its own. Additional methods may be inherited, so the total
  * number may exceed 255.
  */
-export class OcaMethodID {
+export class OcaMethodID extends Base {
 
   static get TypeName() {
     return "OcaMethodID";
   }
 
   constructor(DefLevel, MethodIndex) {
+    super();
     this.DefLevel = DefLevel;
     this.MethodIndex = MethodIndex;
   }
@@ -348,13 +353,14 @@ let _signature_OcaPropertyID = null;
  * properties of its own. Additional properties may be inherited, so the
  * total number may exceed 255.
  */
-export class OcaPropertyID {
+export class OcaPropertyID extends Base {
 
   static get TypeName() {
     return "OcaPropertyID";
   }
 
   constructor(DefLevel, PropertyIndex) {
+    super();
     this.DefLevel = DefLevel;
     this.PropertyIndex = PropertyIndex;
   }
@@ -382,13 +388,14 @@ let _signature_OcaEventID = null;
  * events of its own. Additional events may be inherited, so the total
  * number may exceed 255.
  */
-export class OcaEventID {
+export class OcaEventID extends Base {
 
   static get TypeName() {
     return "OcaEventID";
   }
 
   constructor(DefLevel, EventIndex) {
+    super();
     this.DefLevel = DefLevel;
     this.EventIndex = EventIndex;
   }
@@ -415,13 +422,14 @@ let _signature_OcaPropertyDescriptor = null;
  * Description of an OCA property, including property ID, Get and Set
  * method IDs, and datatype.
  */
-export class OcaPropertyDescriptor {
+export class OcaPropertyDescriptor extends Base {
 
   static get TypeName() {
     return "OcaPropertyDescriptor";
   }
 
   constructor(PropertyID, BaseDataType, GetterMethodID, SetterMethodID) {
+    super();
     this.PropertyID = PropertyID;
     this.BaseDataType = BaseDataType;
     this.GetterMethodID = GetterMethodID;
@@ -439,7 +447,7 @@ export class OcaPropertyDescriptor {
 
   static get signature() {
     if (_signature_OcaPropertyDescriptor === null) {
-      _signature_OcaPropertyDescriptor = new signature(OcaPropertyID, UINT8, OcaMethodID, OcaMethodID);
+      _signature_OcaPropertyDescriptor = new signature(OcaPropertyID, OcaBaseDataType, OcaMethodID, OcaMethodID);
     }
 
     return _signature_OcaPropertyDescriptor;
@@ -453,13 +461,14 @@ let _signature_OcaProperty = null;
  * including object number, property ID, Get and Set method IDs, and
  * datatype.
  */
-export class OcaProperty {
+export class OcaProperty extends Base {
 
   static get TypeName() {
     return "OcaProperty";
   }
 
   constructor(ONo, Descriptor) {
+    super();
     this.ONo = ONo;
     this.Descriptor = Descriptor;
   }
@@ -647,13 +656,14 @@ let _signature_OcaManagerDescriptor = null;
 /**
  * Structure that describes a manager instance.
  */
-export class OcaManagerDescriptor {
+export class OcaManagerDescriptor extends Base {
 
   static get TypeName() {
     return "OcaManagerDescriptor";
   }
 
   constructor(ObjectNumber, Name, ClassID, ClassVersion) {
+    super();
     this.ObjectNumber = ObjectNumber;
     this.Name = Name;
     this.ClassID = ClassID;
@@ -753,13 +763,14 @@ let _signature_OcaModelGUID = null;
 /**
  * 64 bit device type GUID.
  */
-export class OcaModelGUID {
+export class OcaModelGUID extends Base {
 
   static get TypeName() {
     return "OcaModelGUID";
   }
 
   constructor(Reserved, MfrCode, ModelCode) {
+    super();
     this.Reserved = Reserved;
     this.MfrCode = MfrCode;
     this.ModelCode = ModelCode;
@@ -787,13 +798,14 @@ let _signature_OcaModelDescription = null;
 /**
  * Friendly description of this particular product model.
  */
-export class OcaModelDescription {
+export class OcaModelDescription extends Base {
 
   static get TypeName() {
     return "OcaModelDescription";
   }
 
   constructor(Manufacturer, Name, Version) {
+    super();
     this.Manufacturer = Manufacturer;
     this.Name = Name;
     this.Version = Version;
@@ -908,13 +920,14 @@ let _signature_OcaEvent = null;
  * Representation of an OCA event, i.e. the unique combination of emitter
  * ONo and the EventID.
  */
-export class OcaEvent {
+export class OcaEvent extends Base {
 
   static get TypeName() {
     return "OcaEvent";
   }
 
   constructor(EmitterONo, EventID) {
+    super();
     this.EmitterONo = EmitterONo;
     this.EventID = EventID;
   }
@@ -941,13 +954,14 @@ let _signature_OcaMethod = null;
  * Representation of an OCA method, i.e. the unique combination of an ONo
  * and a MethodID.
  */
-export class OcaMethod {
+export class OcaMethod extends Base {
 
   static get TypeName() {
     return "OcaMethod";
   }
 
   constructor(ONo, MethodID) {
+    super();
     this.ONo = ONo;
     this.MethodID = MethodID;
   }
@@ -1123,13 +1137,14 @@ let _signature_OcaMediaConnectorStatus = null;
 /**
  * Represents the current status of a media (source or sink) connector.
  */
-export class OcaMediaConnectorStatus {
+export class OcaMediaConnectorStatus extends Base {
 
   static get TypeName() {
     return "OcaMediaConnectorStatus";
   }
 
   constructor(ConnectorID, State, ErrorCode) {
+    super();
     this.ConnectorID = ConnectorID;
     this.State = State;
     this.ErrorCode = ErrorCode;
@@ -1145,7 +1160,7 @@ export class OcaMediaConnectorStatus {
 
   static get signature() {
     if (_signature_OcaMediaConnectorStatus === null) {
-      _signature_OcaMediaConnectorStatus = new signature(UINT16, UINT8, UINT16);
+      _signature_OcaMediaConnectorStatus = new signature(UINT16, OcaMediaConnectorState, UINT16);
     }
 
     return _signature_OcaMediaConnectorStatus;
@@ -1157,13 +1172,14 @@ let _signature_OcaMediaConnectorStatusChangedEventData = null;
 /**
  * This was not documented in the OCA standard.
  */
-export class OcaMediaConnectorStatusChangedEventData {
+export class OcaMediaConnectorStatusChangedEventData extends Base {
 
   static get TypeName() {
     return "OcaMediaConnectorStatusChangedEventData";
   }
 
   constructor(Event, ConnectorStatus) {
+    super();
     this.Event = Event;
     this.ConnectorStatus = ConnectorStatus;
   }
@@ -1220,13 +1236,14 @@ let _signature_OcaPortID = null;
  * block class. Port numbers are ordinals starting at 1, and there are
  * separate numbering spaces for input and output ports.
  */
-export class OcaPortID {
+export class OcaPortID extends Base {
 
   static get TypeName() {
     return "OcaPortID";
   }
 
   constructor(Mode, Index) {
+    super();
     this.Mode = Mode;
     this.Index = Index;
   }
@@ -1240,7 +1257,7 @@ export class OcaPortID {
 
   static get signature() {
     if (_signature_OcaPortID === null) {
-      _signature_OcaPortID = new signature(UINT8, UINT16);
+      _signature_OcaPortID = new signature(OcaPortMode, UINT16);
     }
 
     return _signature_OcaPortID;
@@ -1301,13 +1318,14 @@ let _signature_OcaMediaConnection = null;
  * connection. In non-OCA documents, connections are sometimes referred
  * to as <i>streams</i> or <i>flows.</i>
  */
-export class OcaMediaConnection {
+export class OcaMediaConnection extends Base {
 
   static get TypeName() {
     return "OcaMediaConnection";
   }
 
   constructor(Secure, StreamParameters, StreamCastMode) {
+    super();
     this.Secure = Secure;
     this.StreamParameters = StreamParameters;
     this.StreamCastMode = StreamCastMode;
@@ -1323,7 +1341,7 @@ export class OcaMediaConnection {
 
   static get signature() {
     if (_signature_OcaMediaConnection === null) {
-      _signature_OcaMediaConnection = new signature(BOOLEAN, BLOB, UINT8);
+      _signature_OcaMediaConnection = new signature(BOOLEAN, BLOB, OcaMediaStreamCastMode);
     }
 
     return _signature_OcaMediaConnection;
@@ -1335,13 +1353,14 @@ let _signature_OcaMediaCoding = null;
 /**
  * Codec ID + Coding parameters
  */
-export class OcaMediaCoding {
+export class OcaMediaCoding extends Base {
 
   static get TypeName() {
     return "OcaMediaCoding";
   }
 
   constructor(CodingSchemeID, CodecParameters, ClockONo) {
+    super();
     this.CodingSchemeID = CodingSchemeID;
     this.CodecParameters = CodecParameters;
     this.ClockONo = ClockONo;
@@ -1370,13 +1389,14 @@ let _signature_OcaMediaSourceConnector = null;
  * Media source (i.e. output) connector. Connects to an outbound stream.
  * Collected by <b>OcaMediaTransportNetwork</b>.
  */
-export class OcaMediaSourceConnector {
+export class OcaMediaSourceConnector extends Base {
 
   static get TypeName() {
     return "OcaMediaSourceConnector";
   }
 
   constructor(IDInternal, IDExternal, Connection, Coding, PinCount, ChannelPinMap, AlignmentLevel) {
+    super();
     this.IDInternal = IDInternal;
     this.IDExternal = IDExternal;
     this.Connection = Connection;
@@ -1412,13 +1432,14 @@ let _signature_OcaMediaSourceConnectorChangedEventData = null;
 /**
  * This was not documented in the OCA standard.
  */
-export class OcaMediaSourceConnectorChangedEventData {
+export class OcaMediaSourceConnectorChangedEventData extends Base {
 
   static get TypeName() {
     return "OcaMediaSourceConnectorChangedEventData";
   }
 
   constructor(Event, SourceConnector, ChangeType, ChangedElement) {
+    super();
     this.Event = Event;
     this.SourceConnector = SourceConnector;
     this.ChangeType = ChangeType;
@@ -1436,7 +1457,7 @@ export class OcaMediaSourceConnectorChangedEventData {
 
   static get signature() {
     if (_signature_OcaMediaSourceConnectorChangedEventData === null) {
-      _signature_OcaMediaSourceConnectorChangedEventData = new signature(OcaEvent, OcaMediaSourceConnector, UINT8, UINT16);
+      _signature_OcaMediaSourceConnectorChangedEventData = new signature(OcaEvent, OcaMediaSourceConnector, OcaPropertyChangeType, OcaMediaConnectorElement);
     }
 
     return _signature_OcaMediaSourceConnectorChangedEventData;
@@ -1449,13 +1470,14 @@ let _signature_OcaMediaSinkConnector = null;
  * Media sink (i.e. input) connector. Connects to an inbound stream.
  * Collected by <b>OcaMediaTransportNetwork</b>.
  */
-export class OcaMediaSinkConnector {
+export class OcaMediaSinkConnector extends Base {
 
   static get TypeName() {
     return "OcaMediaSinkConnector";
   }
 
   constructor(IDInternal, IDExternal, Connection, Coding, PinCount, ChannelPinMap, AlignmentLevel, AlignmentGain) {
+    super();
     this.IDInternal = IDInternal;
     this.IDExternal = IDExternal;
     this.Connection = Connection;
@@ -1493,13 +1515,14 @@ let _signature_OcaMediaSinkConnectorChangedEventData = null;
 /**
  * This was not documented in the OCA standard.
  */
-export class OcaMediaSinkConnectorChangedEventData {
+export class OcaMediaSinkConnectorChangedEventData extends Base {
 
   static get TypeName() {
     return "OcaMediaSinkConnectorChangedEventData";
   }
 
   constructor(Event, SinkConnector, ChangeType, ChangedElement) {
+    super();
     this.Event = Event;
     this.SinkConnector = SinkConnector;
     this.ChangeType = ChangeType;
@@ -1517,7 +1540,7 @@ export class OcaMediaSinkConnectorChangedEventData {
 
   static get signature() {
     if (_signature_OcaMediaSinkConnectorChangedEventData === null) {
-      _signature_OcaMediaSinkConnectorChangedEventData = new signature(OcaEvent, OcaMediaSinkConnector, UINT8, UINT16);
+      _signature_OcaMediaSinkConnectorChangedEventData = new signature(OcaEvent, OcaMediaSinkConnector, OcaPropertyChangeType, OcaMediaConnectorElement);
     }
 
     return _signature_OcaMediaSinkConnectorChangedEventData;
@@ -1531,13 +1554,14 @@ let _signature_OcaObjectListEventData = null;
  * <b>SynchronizeState</b> event defined in
  * <b>OcaSubscriptionManager.</b>
  */
-export class OcaObjectListEventData {
+export class OcaObjectListEventData extends Base {
 
   static get TypeName() {
     return "OcaObjectListEventData";
   }
 
   constructor(Event, objectList) {
+    super();
     this.Event = Event;
     this.objectList = objectList;
   }
@@ -1563,13 +1587,14 @@ let _signature_OcaObservationEventData = null;
 /**
  * Event data for event OcaNumericObserver.Observation
  */
-export class OcaObservationEventData {
+export class OcaObservationEventData extends Base {
 
   static get TypeName() {
     return "OcaObservationEventData";
   }
 
   constructor(Event, Reading) {
+    super();
     this.Event = Event;
     this.Reading = Reading;
   }
@@ -1595,13 +1620,14 @@ let _signature_OcaObservationListEventData = null;
 /**
  * Event data for event OcaNumericObserver.Observation
  */
-export class OcaObservationListEventData {
+export class OcaObservationListEventData extends Base {
 
   static get TypeName() {
     return "OcaObservationListEventData";
   }
 
   constructor(Event, Reading) {
+    super();
     this.Event = Event;
     this.Reading = Reading;
   }
@@ -1692,13 +1718,14 @@ let _signature_OcaGrouperStatusChangeEventData = null;
  * Class that defines the event data parameter for the <b>StatusChange
  * </b>event defined in <b>OcaGrouper</b>.
  */
-export class OcaGrouperStatusChangeEventData {
+export class OcaGrouperStatusChangeEventData extends Base {
 
   static get TypeName() {
     return "OcaGrouperStatusChangeEventData";
   }
 
   constructor(Event, groupIndex, citizenIndex, changeType) {
+    super();
     this.Event = Event;
     this.groupIndex = groupIndex;
     this.citizenIndex = citizenIndex;
@@ -1716,7 +1743,7 @@ export class OcaGrouperStatusChangeEventData {
 
   static get signature() {
     if (_signature_OcaGrouperStatusChangeEventData === null) {
-      _signature_OcaGrouperStatusChangeEventData = new signature(OcaEvent, UINT16, UINT16, UINT8);
+      _signature_OcaGrouperStatusChangeEventData = new signature(OcaEvent, UINT16, UINT16, OcaGrouperStatusChangeType);
     }
 
     return _signature_OcaGrouperStatusChangeEventData;
@@ -1788,13 +1815,14 @@ let _signature_OcaImpedance = null;
 /**
  * Complex impedance. Expressed as a magnitude and phase.
  */
-export class OcaImpedance {
+export class OcaImpedance extends Base {
 
   static get TypeName() {
     return "OcaImpedance";
   }
 
   constructor(Magnitude, Phase) {
+    super();
     this.Magnitude = Magnitude;
     this.Phase = Phase;
   }
@@ -1943,13 +1971,14 @@ let _signature_OcaDelayValue = null;
 /**
  * Multifield descriptor that defines a delay value element.
  */
-export class OcaDelayValue {
+export class OcaDelayValue extends Base {
 
   static get TypeName() {
     return "OcaDelayValue";
   }
 
   constructor(DelayValue, DelayUnit) {
+    super();
     this.DelayValue = DelayValue;
     this.DelayUnit = DelayUnit;
   }
@@ -1963,7 +1992,7 @@ export class OcaDelayValue {
 
   static get signature() {
     if (_signature_OcaDelayValue === null) {
-      _signature_OcaDelayValue = new signature(FLOAT32, UINT8);
+      _signature_OcaDelayValue = new signature(FLOAT32, OcaDelayUnit);
     }
 
     return _signature_OcaDelayValue;
@@ -1975,13 +2004,14 @@ let _signature_OcaTransferFunction = null;
 /**
  * A complex (i.e. magnitude + phase) transfer function.
  */
-export class OcaTransferFunction {
+export class OcaTransferFunction extends Base {
 
   static get TypeName() {
     return "OcaTransferFunction";
   }
 
   constructor(Frequency, Amplitude, Phase) {
+    super();
     this.Frequency = Frequency;
     this.Amplitude = Amplitude;
     this.Phase = Phase;
@@ -2243,13 +2273,14 @@ let _signature_OcaPilotToneDetectorSpec = null;
 /**
  * Multifield descriptor for a pilot tone detector element.
  */
-export class OcaPilotToneDetectorSpec {
+export class OcaPilotToneDetectorSpec extends Base {
 
   static get TypeName() {
     return "OcaPilotToneDetectorSpec";
   }
 
   constructor(Threshold, Frequency, PollInterval) {
+    super();
     this.Threshold = Threshold;
     this.Frequency = Frequency;
     this.PollInterval = PollInterval;
@@ -2629,13 +2660,14 @@ let _signature_OcaBlockMember = null;
 /**
  * Describes an object that is a member of a block.
  */
-export class OcaBlockMember {
+export class OcaBlockMember extends Base {
 
   static get TypeName() {
     return "OcaBlockMember";
   }
 
   constructor(MemberObjectIdentification, ContainerObjectNumber) {
+    super();
     this.MemberObjectIdentification = MemberObjectIdentification;
     this.ContainerObjectNumber = ContainerObjectNumber;
   }
@@ -2661,13 +2693,14 @@ let _signature_OcaGlobalBlockTypeIdentifier = null;
 /**
  * Unique identifier of type of reusable block.
  */
-export class OcaGlobalBlockTypeIdentifier {
+export class OcaGlobalBlockTypeIdentifier extends Base {
 
   static get TypeName() {
     return "OcaGlobalBlockTypeIdentifier";
   }
 
   constructor(Authority, ID) {
+    super();
     this.Authority = Authority;
     this.ID = ID;
   }
@@ -2694,13 +2727,14 @@ let _signature_OcaPort = null;
  * Representation of an OCA (input or output) port that is used in the
  * signal path representation of an OCA device.
  */
-export class OcaPort {
+export class OcaPort extends Base {
 
   static get TypeName() {
     return "OcaPort";
   }
 
   constructor(Owner, ID, Name) {
+    super();
     this.Owner = Owner;
     this.ID = ID;
     this.Name = Name;
@@ -2728,13 +2762,14 @@ let _signature_OcaSignalPath = null;
 /**
  * Signal path between two object ports in the same device.
  */
-export class OcaSignalPath {
+export class OcaSignalPath extends Base {
 
   static get TypeName() {
     return "OcaSignalPath";
   }
 
   constructor(SourcePort, SinkPort) {
+    super();
     this.SourcePort = SourcePort;
     this.SinkPort = SinkPort;
   }
@@ -2762,13 +2797,14 @@ let _signature_OcaProtoObjectIdentification = null;
  * and prototype object's class identification. Used in
  * <b>OcaBlockFactory</b>.
  */
-export class OcaProtoObjectIdentification {
+export class OcaProtoObjectIdentification extends Base {
 
   static get TypeName() {
     return "OcaProtoObjectIdentification";
   }
 
   constructor(POno, ClassIdentification) {
+    super();
     this.POno = POno;
     this.ClassIdentification = ClassIdentification;
   }
@@ -2796,13 +2832,14 @@ let _signature_OcaProtoPortID = null;
  * factory. Prototype port numbers are ordinals starting at 1, and there
  * are separate numbering spaces for input and output ports.
  */
-export class OcaProtoPortID {
+export class OcaProtoPortID extends Base {
 
   static get TypeName() {
     return "OcaProtoPortID";
   }
 
   constructor(Mode, Index) {
+    super();
     this.Mode = Mode;
     this.Index = Index;
   }
@@ -2816,7 +2853,7 @@ export class OcaProtoPortID {
 
   static get signature() {
     if (_signature_OcaProtoPortID === null) {
-      _signature_OcaProtoPortID = new signature(UINT8, UINT16);
+      _signature_OcaProtoPortID = new signature(OcaPortMode, UINT16);
     }
 
     return _signature_OcaProtoPortID;
@@ -2829,13 +2866,14 @@ let _signature_OcaProtoPort = null;
  * Representation of an OCA (input or output) proto-port that is used in
  * the proto-signal path representation of an OCA device.
  */
-export class OcaProtoPort {
+export class OcaProtoPort extends Base {
 
   static get TypeName() {
     return "OcaProtoPort";
   }
 
   constructor(Owner, ProtoID, Name) {
+    super();
     this.Owner = Owner;
     this.ProtoID = ProtoID;
     this.Name = Name;
@@ -2863,13 +2901,14 @@ let _signature_OcaProtoSignalPath = null;
 /**
  * Proto-signal path between two proto-member ports in a factory.
  */
-export class OcaProtoSignalPath {
+export class OcaProtoSignalPath extends Base {
 
   static get TypeName() {
     return "OcaProtoSignalPath";
   }
 
   constructor(SourceProtoPort, SinkProtoPort) {
+    super();
     this.SourceProtoPort = SourceProtoPort;
     this.SinkProtoPort = SinkProtoPort;
   }
@@ -2898,13 +2937,14 @@ let _signature_OcaObjectSearchResult = null;
  * FieldMap parameter of the Find...() methods specifies which optional
  * fields should be returned as nonnull.
  */
-export class OcaObjectSearchResult {
+export class OcaObjectSearchResult extends Base {
 
   static get TypeName() {
     return "OcaObjectSearchResult";
   }
 
   constructor(ONo, ClassIdentification, ContainerPath, Role, Label) {
+    super();
     this.ONo = ONo;
     this.ClassIdentification = ClassIdentification;
     this.ContainerPath = ContainerPath;
@@ -2983,13 +3023,14 @@ let _signature_OcaGrouperGroup = null;
 /**
  * Describes a group in a grouper.
  */
-export class OcaGrouperGroup {
+export class OcaGrouperGroup extends Base {
 
   static get TypeName() {
     return "OcaGrouperGroup";
   }
 
   constructor(Index, Name, ProxyONo) {
+    super();
     this.Index = Index;
     this.Name = Name;
     this.ProxyONo = ProxyONo;
@@ -3018,13 +3059,14 @@ let _signature_OcaGrouperCitizen = null;
  * Describes a citizen of a grouper. Refers to a specific worker object
  * somewhere in the media network.
  */
-export class OcaGrouperCitizen {
+export class OcaGrouperCitizen extends Base {
 
   static get TypeName() {
     return "OcaGrouperCitizen";
   }
 
   constructor(Index, ObjectPath, Online) {
+    super();
     this.Index = Index;
     this.ObjectPath = ObjectPath;
     this.Online = Online;
@@ -3052,13 +3094,14 @@ let _signature_OcaGrouperEnrollment = null;
 /**
  * Describes the enrollment of a citizen into a group.
  */
-export class OcaGrouperEnrollment {
+export class OcaGrouperEnrollment extends Base {
 
   static get TypeName() {
     return "OcaGrouperEnrollment";
   }
 
   constructor(GroupIndex, CitizenIndex) {
+    super();
     this.GroupIndex = GroupIndex;
     this.CitizenIndex = CitizenIndex;
   }
@@ -3458,13 +3501,14 @@ let _signature_OcaTaskStatus = null;
  * reached; or failure due to an error), Parameter is not changed.</li>
  * </ul>
  */
-export class OcaTaskStatus {
+export class OcaTaskStatus extends Base {
 
   static get TypeName() {
     return "OcaTaskStatus";
   }
 
   constructor(State, Parameter) {
+    super();
     this.State = State;
     this.Parameter = Parameter;
   }
@@ -3478,7 +3522,7 @@ export class OcaTaskStatus {
 
   static get signature() {
     if (_signature_OcaTaskStatus === null) {
-      _signature_OcaTaskStatus = new signature(UINT8, BLOB);
+      _signature_OcaTaskStatus = new signature(OcaTaskState, BLOB);
     }
 
     return _signature_OcaTaskStatus;
@@ -3688,13 +3732,14 @@ let _signature_OcaLibVolIdentifier = null;
 /**
  * Unique identifier of a library volume within the device.
  */
-export class OcaLibVolIdentifier {
+export class OcaLibVolIdentifier extends Base {
 
   static get TypeName() {
     return "OcaLibVolIdentifier";
   }
 
   constructor(Library, ID) {
+    super();
     this.Library = Library;
     this.ID = ID;
   }
@@ -3762,13 +3807,14 @@ let _signature_OcaLibVolMetadata = null;
  * Descriptor of a library volume. See <b>03 OcaLibrary</b> for
  * explanation.
  */
-export class OcaLibVolMetadata {
+export class OcaLibVolMetadata extends Base {
 
   static get TypeName() {
     return "OcaLibVolMetadata";
   }
 
   constructor(Name, Type, Access, Version, Creator, UpDate) {
+    super();
     this.Name = Name;
     this.Type = Type;
     this.Access = Access;
@@ -3790,7 +3836,7 @@ export class OcaLibVolMetadata {
 
   static get signature() {
     if (_signature_OcaLibVolMetadata === null) {
-      _signature_OcaLibVolMetadata = new signature(STRING, UINT8, UINT8, UINT32, STRING, UINT64);
+      _signature_OcaLibVolMetadata = new signature(STRING, OcaLibVolType, OcaLibAccess, UINT32, STRING, UINT64);
     }
 
     return _signature_OcaLibVolMetadata;
@@ -3803,13 +3849,14 @@ let _signature_OcaLibVol = null;
  * Library volume. template. Template parameter is datatype of the
  * volume. See <b>03 OcaLibrary</b> for explanation.
  */
-export class OcaLibVol {
+export class OcaLibVol extends Base {
 
   static get TypeName() {
     return "OcaLibVol";
   }
 
   constructor(Metadata, Data) {
+    super();
     this.Metadata = Metadata;
     this.Data = Data;
   }
@@ -3841,13 +3888,14 @@ let _signature_OcaLibVolData_ParamSet = null;
  * is a the object number of its factory or, for factory-defined blocks,
  * a unique identifier set at time of manufacture.
  */
-export class OcaLibVolData_ParamSet {
+export class OcaLibVolData_ParamSet extends Base {
 
   static get TypeName() {
     return "OcaLibVolData_ParamSet";
   }
 
   constructor(TargetBlockType, ParData) {
+    super();
     this.TargetBlockType = TargetBlockType;
     this.ParData = ParData;
   }
@@ -3874,13 +3922,14 @@ let _signature_OcaLibParamSetAssignment = null;
  * A ParamSet assigment is the description of a binding of a ParamSet to
  * a block instance.
  */
-export class OcaLibParamSetAssignment {
+export class OcaLibParamSetAssignment extends Base {
 
   static get TypeName() {
     return "OcaLibParamSetAssignment";
   }
 
   constructor(ParamSetIdentifier, TargetBlockONo) {
+    super();
     this.ParamSetIdentifier = ParamSetIdentifier;
     this.TargetBlockONo = TargetBlockONo;
   }
@@ -3954,13 +4003,14 @@ let _signature_OcaNetworkSystemInterfaceDescriptor = null;
  * Descriptor of a system interface used by a network. Format is data
  * network type dependent.
  */
-export class OcaNetworkSystemInterfaceDescriptor {
+export class OcaNetworkSystemInterfaceDescriptor extends Base {
 
   static get TypeName() {
     return "OcaNetworkSystemInterfaceDescriptor";
   }
 
   constructor(SystemInterfaceParameters, MyNetworkAddress) {
+    super();
     this.SystemInterfaceParameters = SystemInterfaceParameters;
     this.MyNetworkAddress = MyNetworkAddress;
   }
@@ -4306,13 +4356,14 @@ let _signature_OcaMediaClockRate = null;
 /**
  * Media clock nominal rate and associated parameters.
  */
-export class OcaMediaClockRate {
+export class OcaMediaClockRate extends Base {
 
   static get TypeName() {
     return "OcaMediaClockRate";
   }
 
   constructor(NominalRate, PullRange, Accuracy, JitterMax) {
+    super();
     this.NominalRate = NominalRate;
     this.PullRange = PullRange;
     this.Accuracy = Accuracy;
@@ -4601,13 +4652,14 @@ let _signature_OcaNetworkSystemInterfaceID = null;
  * ID of a system interface used by a network. Format is data network
  * type dependent.
  */
-export class OcaNetworkSystemInterfaceID {
+export class OcaNetworkSystemInterfaceID extends Base {
 
   static get TypeName() {
     return "OcaNetworkSystemInterfaceID";
   }
 
   constructor(SystemInterfaceHandle, MyNetworkAddress) {
+    super();
     this.SystemInterfaceHandle = SystemInterfaceHandle;
     this.MyNetworkAddress = MyNetworkAddress;
   }
@@ -4633,13 +4685,14 @@ let _signature_OcaNetworkStatistics = null;
 /**
  * Historical statistics of the network.
  */
-export class OcaNetworkStatistics {
+export class OcaNetworkStatistics extends Base {
 
   static get TypeName() {
     return "OcaNetworkStatistics";
   }
 
   constructor(rxPacketErrors, txPacketErrors) {
+    super();
     this.rxPacketErrors = rxPacketErrors;
     this.txPacketErrors = txPacketErrors;
   }
@@ -4680,13 +4733,14 @@ let _signature_OcaStreamConnectorIdentification = null;
  * case does <u>not </u>link to any specific remote connector object.
  * </li> </ol>
  */
-export class OcaStreamConnectorIdentification {
+export class OcaStreamConnectorIdentification extends Base {
 
   static get TypeName() {
     return "OcaStreamConnectorIdentification";
   }
 
   constructor(HostID, NetworkAddress, NodeID, StreamConnectorID) {
+    super();
     this.HostID = HostID;
     this.NetworkAddress = NetworkAddress;
     this.NodeID = NodeID;
@@ -4798,13 +4852,14 @@ let _signature_OcaStream = null;
  * multicast stream. Any given <b>OcaStreamConnector </b>object may
  * support multiple outbound flows, but not multiple inbound flows.
  */
-export class OcaStream {
+export class OcaStream extends Base {
 
   static get TypeName() {
     return "OcaStream";
   }
 
   constructor(ErrorNumber, IDAdvertised, Index, Label, LocalConnectorONo, Priority, RemoteConnectorIdentification, Secure, Status, StreamParameters, StreamType) {
+    super();
     this.ErrorNumber = ErrorNumber;
     this.IDAdvertised = IDAdvertised;
     this.Index = Index;
@@ -4836,7 +4891,7 @@ export class OcaStream {
 
   static get signature() {
     if (_signature_OcaStream === null) {
-      _signature_OcaStream = new signature(UINT16, BLOB, UINT16, STRING, UINT32, UINT16, OcaStreamConnectorIdentification, BOOLEAN, UINT8, BLOB, UINT8);
+      _signature_OcaStream = new signature(UINT16, BLOB, UINT16, STRING, UINT32, UINT16, OcaStreamConnectorIdentification, BOOLEAN, OcaStreamStatus, BLOB, OcaStreamType);
     }
 
     return _signature_OcaStream;
