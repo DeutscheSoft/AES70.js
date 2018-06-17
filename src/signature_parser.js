@@ -149,7 +149,7 @@ export class signature
       case "number":
         if ((args[i]|0) !== args[i] ||
             args[i] < BOOLEAN || args[i] > PT_CUSTOM)
-              throw("Bad argument.");
+              throw("Bad argument. Expected signature type.");
         break;
       case "function":
         num_custom++;
@@ -675,7 +675,7 @@ export class signature
       case PT_CUSTOM: 
         if (!(src[src_pos] instanceof C[num_custom]))
               throw("Type mismatch.");
-        pos = O[num_custom].do_encode(dst, pos, src[src_pos]._values(), 0);
+        pos = O[num_custom].do_encode(dst, pos, src[src_pos].values, 0);
         num_custom++;
         break;
       }
@@ -829,9 +829,9 @@ export class signature
         throw new Error("Unsupported");
       case PT_CUSTOM: 
         if (!(src[src_pos] instanceof C[num_custom])) {
-          throw("Bad argumment.");
+          throw new Error("Bad argument. Expected " + C[num_custom].TypeName + " but got " + src[src_pos]);
         }
-        pos += O[num_custom].low_encoded_length(src[src_pos]._values(), 0);
+        pos += O[num_custom].low_encoded_length(src[src_pos].values, 0);
         num_custom++;
         break;
       }
