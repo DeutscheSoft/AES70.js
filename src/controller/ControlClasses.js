@@ -464,7 +464,7 @@ export class OcaWorker extends OcaRoot
   AddPort(Label, Mode)
   {
     let as = OcaWorker_AddPort_as;
-    if (!as) as = OcaWorker_AddPort_as = new signature(STRING, UINT8);
+    if (!as) as = OcaWorker_AddPort_as = new signature(STRING, OcaPortMode);
     let rs = OcaWorker_AddPort_rs;
     if (!rs) rs = OcaWorker_AddPort_rs = new signature(OcaPortID);
     const cmd = new CommandRrq(this.ono, 2, 3, 2,
@@ -824,7 +824,7 @@ export class OcaMute extends OcaActuator
   GetState()
   {
     let rs = OcaMute_GetState_rs;
-    if (!rs) rs = OcaMute_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaMute_GetState_rs = new signature(OcaMuteState);
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -839,7 +839,7 @@ export class OcaMute extends OcaActuator
   SetState(state)
   {
     let as = OcaMute_SetState_as;
-    if (!as) as = OcaMute_SetState_as = new signature(UINT8);
+    if (!as) as = OcaMute_SetState_as = new signature(OcaMuteState);
     const cmd = new CommandRrq(this.ono, 4, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -856,7 +856,7 @@ export class OcaMute extends OcaActuator
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaMuteState));
   }
 
   static get_properties()
@@ -864,7 +864,7 @@ export class OcaMute extends OcaActuator
     if (!OcaMute_p)
     {
       OcaMute_p = new Properties([
-          new Property("State", new signature(UINT8), 4, 1, false, false, null),
+          new Property("State", new signature(OcaMuteState), 4, 1, false, false, null),
         ], 4, OcaActuator.get_properties());
     }
 
@@ -929,7 +929,7 @@ export class OcaPolarity extends OcaActuator
   GetState()
   {
     let rs = OcaPolarity_GetState_rs;
-    if (!rs) rs = OcaPolarity_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaPolarity_GetState_rs = new signature(OcaPolarityState);
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -944,7 +944,7 @@ export class OcaPolarity extends OcaActuator
   SetState(state)
   {
     let as = OcaPolarity_SetState_as;
-    if (!as) as = OcaPolarity_SetState_as = new signature(UINT8);
+    if (!as) as = OcaPolarity_SetState_as = new signature(OcaPolarityState);
     const cmd = new CommandRrq(this.ono, 4, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -961,7 +961,7 @@ export class OcaPolarity extends OcaActuator
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaPolarityState));
   }
 
   static get_properties()
@@ -969,7 +969,7 @@ export class OcaPolarity extends OcaActuator
     if (!OcaPolarity_p)
     {
       OcaPolarity_p = new Properties([
-          new Property("State", new signature(UINT8), 4, 1, false, false, null),
+          new Property("State", new signature(OcaPolarityState), 4, 1, false, false, null),
         ], 4, OcaActuator.get_properties());
     }
 
@@ -1712,7 +1712,7 @@ export class OcaDelayExtended extends OcaDelay
   GetDelayValueConverted(UoM)
   {
     let as = OcaDelayExtended_GetDelayValueConverted_as;
-    if (!as) as = OcaDelayExtended_GetDelayValueConverted_as = new signature(UINT8);
+    if (!as) as = OcaDelayExtended_GetDelayValueConverted_as = new signature(OcaDelayUnit);
     let rs = OcaDelayExtended_GetDelayValueConverted_rs;
     if (!rs) rs = OcaDelayExtended_GetDelayValueConverted_rs = new signature(OcaDelayValue);
     const cmd = new CommandRrq(this.ono, 5, 3, 1,
@@ -1952,7 +1952,7 @@ export class OcaFilterClassical extends OcaActuator
   GetPassband()
   {
     let rs = OcaFilterClassical_GetPassband_rs;
-    if (!rs) rs = OcaFilterClassical_GetPassband_rs = new signature(UINT8);
+    if (!rs) rs = OcaFilterClassical_GetPassband_rs = new signature(OcaFilterPassband);
     const cmd = new CommandRrq(this.ono, 4, 3, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -1967,7 +1967,7 @@ export class OcaFilterClassical extends OcaActuator
   SetPassband(Passband)
   {
     let as = OcaFilterClassical_SetPassband_as;
-    if (!as) as = OcaFilterClassical_SetPassband_as = new signature(UINT8);
+    if (!as) as = OcaFilterClassical_SetPassband_as = new signature(OcaFilterPassband);
     const cmd = new CommandRrq(this.ono, 4, 4, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -1981,7 +1981,7 @@ export class OcaFilterClassical extends OcaActuator
   GetShape()
   {
     let rs = OcaFilterClassical_GetShape_rs;
-    if (!rs) rs = OcaFilterClassical_GetShape_rs = new signature(UINT8);
+    if (!rs) rs = OcaFilterClassical_GetShape_rs = new signature(OcaClassicalFilterShape);
     const cmd = new CommandRrq(this.ono, 4, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -1996,7 +1996,7 @@ export class OcaFilterClassical extends OcaActuator
   SetShape(Shape)
   {
     let as = OcaFilterClassical_SetShape_as;
-    if (!as) as = OcaFilterClassical_SetShape_as = new signature(UINT8);
+    if (!as) as = OcaFilterClassical_SetShape_as = new signature(OcaClassicalFilterShape);
     const cmd = new CommandRrq(this.ono, 4, 6, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -2085,7 +2085,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._PassbandChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(OcaFilterPassband));
   }
 
   /**
@@ -2099,7 +2099,7 @@ export class OcaFilterClassical extends OcaActuator
     if (event) return event;
 
     return this._ShapeChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(OcaClassicalFilterShape));
   }
 
   /**
@@ -2136,8 +2136,8 @@ export class OcaFilterClassical extends OcaActuator
     {
       OcaFilterClassical_p = new Properties([
           new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
-          new Property("Passband", new signature(UINT8), 4, 2, false, false, null),
-          new Property("Shape", new signature(UINT8), 4, 3, false, false, null),
+          new Property("Passband", new signature(OcaFilterPassband), 4, 2, false, false, null),
+          new Property("Shape", new signature(OcaClassicalFilterShape), 4, 3, false, false, null),
           new Property("Order", new signature(UINT16), 4, 4, false, false, null),
           new Property("Parameter", new signature(FLOAT32), 4, 5, false, false, null),
         ], 4, OcaActuator.get_properties());
@@ -2249,7 +2249,7 @@ export class OcaFilterParametric extends OcaActuator
   GetShape()
   {
     let rs = OcaFilterParametric_GetShape_rs;
-    if (!rs) rs = OcaFilterParametric_GetShape_rs = new signature(UINT8);
+    if (!rs) rs = OcaFilterParametric_GetShape_rs = new signature(OcaParametricEQShape);
     const cmd = new CommandRrq(this.ono, 4, 3, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -2264,7 +2264,7 @@ export class OcaFilterParametric extends OcaActuator
   SetShape(type)
   {
     let as = OcaFilterParametric_SetShape_as;
-    if (!as) as = OcaFilterParametric_SetShape_as = new signature(UINT8);
+    if (!as) as = OcaFilterParametric_SetShape_as = new signature(OcaParametricEQShape);
     const cmd = new CommandRrq(this.ono, 4, 4, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -2382,7 +2382,7 @@ export class OcaFilterParametric extends OcaActuator
     if (event) return event;
 
     return this._ShapeChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(OcaParametricEQShape));
   }
 
   /**
@@ -2433,7 +2433,7 @@ export class OcaFilterParametric extends OcaActuator
     {
       OcaFilterParametric_p = new Properties([
           new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
-          new Property("Shape", new signature(UINT8), 4, 2, false, false, null),
+          new Property("Shape", new signature(OcaParametricEQShape), 4, 2, false, false, null),
           new Property("WidthParameter", new signature(FLOAT32), 4, 3, false, false, ["Q"]),
           new Property("InBandGain", new signature(FLOAT32), 4, 4, false, false, null),
           new Property("ShapeParameter", new signature(FLOAT32), 4, 5, false, false, null),
@@ -3169,7 +3169,7 @@ export class OcaDynamics extends OcaActuator
   GetFunction()
   {
     let rs = OcaDynamics_GetFunction_rs;
-    if (!rs) rs = OcaDynamics_GetFunction_rs = new signature(UINT8);
+    if (!rs) rs = OcaDynamics_GetFunction_rs = new signature(OcaDynamicsFunction);
     const cmd = new CommandRrq(this.ono, 4, 3, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -3184,7 +3184,7 @@ export class OcaDynamics extends OcaActuator
   SetFunction(Func)
   {
     let as = OcaDynamics_SetFunction_as;
-    if (!as) as = OcaDynamics_SetFunction_as = new signature(UINT8);
+    if (!as) as = OcaDynamics_SetFunction_as = new signature(OcaDynamicsFunction);
     const cmd = new CommandRrq(this.ono, 4, 4, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -3258,7 +3258,7 @@ export class OcaDynamics extends OcaActuator
   GetThresholdPresentationUnits()
   {
     let rs = OcaDynamics_GetThresholdPresentationUnits_rs;
-    if (!rs) rs = OcaDynamics_GetThresholdPresentationUnits_rs = new signature(UINT8);
+    if (!rs) rs = OcaDynamics_GetThresholdPresentationUnits_rs = new signature(OcaPresentationUnit);
     const cmd = new CommandRrq(this.ono, 4, 9, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -3273,7 +3273,7 @@ export class OcaDynamics extends OcaActuator
   SetThresholdPresentationUnits(Units)
   {
     let as = OcaDynamics_SetThresholdPresentationUnits_as;
-    if (!as) as = OcaDynamics_SetThresholdPresentationUnits_as = new signature(UINT8);
+    if (!as) as = OcaDynamics_SetThresholdPresentationUnits_as = new signature(OcaPresentationUnit);
     const cmd = new CommandRrq(this.ono, 4, 10, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -3287,7 +3287,7 @@ export class OcaDynamics extends OcaActuator
   GetDetectorLaw()
   {
     let rs = OcaDynamics_GetDetectorLaw_rs;
-    if (!rs) rs = OcaDynamics_GetDetectorLaw_rs = new signature(UINT8);
+    if (!rs) rs = OcaDynamics_GetDetectorLaw_rs = new signature(OcaLevelDetectionLaw);
     const cmd = new CommandRrq(this.ono, 4, 11, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -3302,7 +3302,7 @@ export class OcaDynamics extends OcaActuator
   SetDetectorLaw(Law)
   {
     let as = OcaDynamics_SetDetectorLaw_as;
-    if (!as) as = OcaDynamics_SetDetectorLaw_as = new signature(UINT8);
+    if (!as) as = OcaDynamics_SetDetectorLaw_as = new signature(OcaLevelDetectionLaw);
     const cmd = new CommandRrq(this.ono, 4, 12, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -3550,7 +3550,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._FunctionChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 3), new signature(OcaDynamicsFunction));
   }
 
   /**
@@ -3592,7 +3592,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._ThresholdPresentationUnitsChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 6), new signature(OcaPresentationUnit));
   }
 
   /**
@@ -3606,7 +3606,7 @@ export class OcaDynamics extends OcaActuator
     if (event) return event;
 
     return this._DetectorLawChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 7), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 7), new signature(OcaLevelDetectionLaw));
   }
 
   /**
@@ -3714,11 +3714,11 @@ export class OcaDynamics extends OcaActuator
       OcaDynamics_p = new Properties([
           new Property("Triggered", new signature(BOOLEAN), 4, 1, false, false, null),
           new Property("DynamicGain", new signature(FLOAT32), 4, 2, false, false, null),
-          new Property("Function", new signature(UINT8), 4, 3, false, false, null),
+          new Property("Function", new signature(OcaDynamicsFunction), 4, 3, false, false, null),
           new Property("Ratio", new signature(FLOAT32), 4, 4, false, false, null),
           new Property("Threshold", new signature(FLOAT32), 4, 5, false, false, null),
-          new Property("ThresholdPresentationUnits", new signature(UINT8), 4, 6, false, false, null),
-          new Property("DetectorLaw", new signature(UINT8), 4, 7, false, false, null),
+          new Property("ThresholdPresentationUnits", new signature(OcaPresentationUnit), 4, 6, false, false, null),
+          new Property("DetectorLaw", new signature(OcaLevelDetectionLaw), 4, 7, false, false, null),
           new Property("AttackTime", new signature(FLOAT32), 4, 8, false, false, null),
           new Property("ReleaseTime", new signature(FLOAT32), 4, 9, false, false, null),
           new Property("HoldTime", new signature(FLOAT32), 4, 10, false, false, null),
@@ -3812,7 +3812,7 @@ export class OcaDynamicsDetector extends OcaActuator
   GetLaw()
   {
     let rs = OcaDynamicsDetector_GetLaw_rs;
-    if (!rs) rs = OcaDynamicsDetector_GetLaw_rs = new signature(UINT8);
+    if (!rs) rs = OcaDynamicsDetector_GetLaw_rs = new signature(OcaLevelDetectionLaw);
     const cmd = new CommandRrq(this.ono, 4, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -3827,7 +3827,7 @@ export class OcaDynamicsDetector extends OcaActuator
   SetLaw(Law)
   {
     let as = OcaDynamicsDetector_SetLaw_as;
-    if (!as) as = OcaDynamicsDetector_SetLaw_as = new signature(UINT8);
+    if (!as) as = OcaDynamicsDetector_SetLaw_as = new signature(OcaLevelDetectionLaw);
     const cmd = new CommandRrq(this.ono, 4, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -3931,7 +3931,7 @@ export class OcaDynamicsDetector extends OcaActuator
     if (event) return event;
 
     return this._LawChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 1), new signature(OcaLevelDetectionLaw));
   }
 
   /**
@@ -3981,7 +3981,7 @@ export class OcaDynamicsDetector extends OcaActuator
     if (!OcaDynamicsDetector_p)
     {
       OcaDynamicsDetector_p = new Properties([
-          new Property("Law", new signature(UINT8), 4, 1, false, false, null),
+          new Property("Law", new signature(OcaLevelDetectionLaw), 4, 1, false, false, null),
           new Property("AttackTime", new signature(FLOAT32), 4, 2, false, false, null),
           new Property("ReleaseTime", new signature(FLOAT32), 4, 3, false, false, null),
           new Property("HoldTime", new signature(FLOAT32), 4, 4, false, false, null),
@@ -4550,7 +4550,7 @@ export class OcaSignalGenerator extends OcaActuator
   GetWaveform()
   {
     let rs = OcaSignalGenerator_GetWaveform_rs;
-    if (!rs) rs = OcaSignalGenerator_GetWaveform_rs = new signature(UINT8);
+    if (!rs) rs = OcaSignalGenerator_GetWaveform_rs = new signature(OcaWaveformType);
     const cmd = new CommandRrq(this.ono, 4, 7, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -4565,7 +4565,7 @@ export class OcaSignalGenerator extends OcaActuator
   SetWaveform(waveform)
   {
     let as = OcaSignalGenerator_SetWaveform_as;
-    if (!as) as = OcaSignalGenerator_SetWaveform_as = new signature(UINT8);
+    if (!as) as = OcaSignalGenerator_SetWaveform_as = new signature(OcaWaveformType);
     const cmd = new CommandRrq(this.ono, 4, 8, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -4579,7 +4579,7 @@ export class OcaSignalGenerator extends OcaActuator
   GetSweepType()
   {
     let rs = OcaSignalGenerator_GetSweepType_rs;
-    if (!rs) rs = OcaSignalGenerator_GetSweepType_rs = new signature(UINT8);
+    if (!rs) rs = OcaSignalGenerator_GetSweepType_rs = new signature(OcaSweepType);
     const cmd = new CommandRrq(this.ono, 4, 9, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -4594,7 +4594,7 @@ export class OcaSignalGenerator extends OcaActuator
   SetSweepType(sweepType)
   {
     let as = OcaSignalGenerator_SetSweepType_as;
-    if (!as) as = OcaSignalGenerator_SetSweepType_as = new signature(UINT8);
+    if (!as) as = OcaSignalGenerator_SetSweepType_as = new signature(OcaSweepType);
     const cmd = new CommandRrq(this.ono, 4, 10, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -4746,7 +4746,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._WaveformChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 4), new signature(OcaWaveformType));
   }
 
   /**
@@ -4760,7 +4760,7 @@ export class OcaSignalGenerator extends OcaActuator
     if (event) return event;
 
     return this._SweepTypeChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 5), new signature(OcaSweepType));
   }
 
   /**
@@ -4813,8 +4813,8 @@ export class OcaSignalGenerator extends OcaActuator
           new Property("Frequency1", new signature(FLOAT32), 4, 1, false, false, null),
           new Property("Frequency2", new signature(FLOAT32), 4, 2, false, false, null),
           new Property("Level", new signature(FLOAT32), 4, 3, false, false, null),
-          new Property("Waveform", new signature(UINT8), 4, 4, false, false, null),
-          new Property("SweepType", new signature(UINT8), 4, 5, false, false, null),
+          new Property("Waveform", new signature(OcaWaveformType), 4, 4, false, false, null),
+          new Property("SweepType", new signature(OcaSweepType), 4, 5, false, false, null),
           new Property("SweepTime", new signature(FLOAT32), 4, 6, false, false, null),
           new Property("SweepRepeat", new signature(BOOLEAN), 4, 7, false, false, null),
           new Property("Generating", new signature(BOOLEAN), 4, 8, false, false, null),
@@ -6784,7 +6784,7 @@ export class OcaSensor extends OcaWorker
   GetReadingState()
   {
     let rs = OcaSensor_GetReadingState_rs;
-    if (!rs) rs = OcaSensor_GetReadingState_rs = new signature(UINT8);
+    if (!rs) rs = OcaSensor_GetReadingState_rs = new signature(OcaSensorReadingState);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -6800,7 +6800,7 @@ export class OcaSensor extends OcaWorker
     if (event) return event;
 
     return this._ReadingStateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaSensorReadingState));
   }
 
   static get_properties()
@@ -6808,7 +6808,7 @@ export class OcaSensor extends OcaWorker
     if (!OcaSensor_p)
     {
       OcaSensor_p = new Properties([
-          new Property("ReadingState", new signature(UINT8), 3, 1, false, true, null),
+          new Property("ReadingState", new signature(OcaSensorReadingState), 3, 1, false, true, null),
         ], 3, OcaWorker.get_properties());
     }
 
@@ -6963,7 +6963,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
   GetLaw()
   {
     let rs = OcaAudioLevelSensor_GetLaw_rs;
-    if (!rs) rs = OcaAudioLevelSensor_GetLaw_rs = new signature(UINT8);
+    if (!rs) rs = OcaAudioLevelSensor_GetLaw_rs = new signature(OcaLevelMeterLaw);
     const cmd = new CommandRrq(this.ono, 5, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -6979,7 +6979,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
   SetLaw(law)
   {
     let as = OcaAudioLevelSensor_SetLaw_as;
-    if (!as) as = OcaAudioLevelSensor_SetLaw_as = new signature(UINT8);
+    if (!as) as = OcaAudioLevelSensor_SetLaw_as = new signature(OcaLevelMeterLaw);
     const cmd = new CommandRrq(this.ono, 5, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -6996,7 +6996,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
     if (event) return event;
 
     return this._LawChanged =
-      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(5, 1), new signature(OcaLevelMeterLaw));
   }
 
   static get_properties()
@@ -7004,7 +7004,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
     if (!OcaAudioLevelSensor_p)
     {
       OcaAudioLevelSensor_p = new Properties([
-          new Property("Law", new signature(UINT8), 5, 1, false, false, null),
+          new Property("Law", new signature(OcaLevelMeterLaw), 5, 1, false, false, null),
         ], 5, OcaLevelSensor.get_properties());
     }
 
@@ -9253,7 +9253,7 @@ export class OcaBlock extends OcaWorker
   FindObjectsByRole(SearchName, NameComparisonType, SearchClassID, ResultFlags)
   {
     let as = OcaBlock_FindObjectsByRole_as;
-    if (!as) as = OcaBlock_FindObjectsByRole_as = new signature(STRING, UINT8, BLOB16, UINT16);
+    if (!as) as = OcaBlock_FindObjectsByRole_as = new signature(STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags);
     let rs = OcaBlock_FindObjectsByRole_rs;
     if (!rs) rs = OcaBlock_FindObjectsByRole_rs = new signature(LIST(OcaObjectSearchResult));
     const cmd = new CommandRrq(this.ono, 3, 17, 4,
@@ -9278,7 +9278,7 @@ export class OcaBlock extends OcaWorker
   FindObjectsByRoleRecursive(SearchName, NameComparisonType, SearchClassID, ResultFlags)
   {
     let as = OcaBlock_FindObjectsByRoleRecursive_as;
-    if (!as) as = OcaBlock_FindObjectsByRoleRecursive_as = new signature(STRING, UINT8, BLOB16, UINT16);
+    if (!as) as = OcaBlock_FindObjectsByRoleRecursive_as = new signature(STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags);
     let rs = OcaBlock_FindObjectsByRoleRecursive_rs;
     if (!rs) rs = OcaBlock_FindObjectsByRoleRecursive_rs = new signature(LIST(OcaObjectSearchResult));
     const cmd = new CommandRrq(this.ono, 3, 18, 4,
@@ -9298,7 +9298,7 @@ export class OcaBlock extends OcaWorker
   FindObjectsByPath(SearchPath, ResultFlags)
   {
     let as = OcaBlock_FindObjectsByPath_as;
-    if (!as) as = OcaBlock_FindObjectsByPath_as = new signature(LIST(STRING), UINT16);
+    if (!as) as = OcaBlock_FindObjectsByPath_as = new signature(LIST(STRING), OcaObjectSearchResultFlags);
     let rs = OcaBlock_FindObjectsByPath_rs;
     if (!rs) rs = OcaBlock_FindObjectsByPath_rs = new signature(LIST(OcaObjectSearchResult));
     const cmd = new CommandRrq(this.ono, 3, 20, 2,
@@ -9323,7 +9323,7 @@ export class OcaBlock extends OcaWorker
   FindObjectsByLabelRecursive(SearchName, NameComparisonType, SearchClassID, ResultFlags)
   {
     let as = OcaBlock_FindObjectsByLabelRecursive_as;
-    if (!as) as = OcaBlock_FindObjectsByLabelRecursive_as = new signature(STRING, UINT8, BLOB16, UINT16);
+    if (!as) as = OcaBlock_FindObjectsByLabelRecursive_as = new signature(STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags);
     let rs = OcaBlock_FindObjectsByLabelRecursive_rs;
     if (!rs) rs = OcaBlock_FindObjectsByLabelRecursive_rs = new signature(LIST(OcaObjectSearchResult));
     const cmd = new CommandRrq(this.ono, 3, 19, 4,
@@ -9542,7 +9542,7 @@ export class OcaBlockFactory extends OcaWorker
   DefineProtoPort(name, portmode)
   {
     let as = OcaBlockFactory_DefineProtoPort_as;
-    if (!as) as = OcaBlockFactory_DefineProtoPort_as = new signature(STRING, UINT8);
+    if (!as) as = OcaBlockFactory_DefineProtoPort_as = new signature(STRING, OcaPortMode);
     let rs = OcaBlockFactory_DefineProtoPort_rs;
     if (!rs) rs = OcaBlockFactory_DefineProtoPort_rs = new signature(OcaProtoPortID);
     const cmd = new CommandRrq(this.ono, 3, 1, 2,
@@ -10845,7 +10845,7 @@ export class OcaGrouper extends OcaAgent
   GetMode()
   {
     let rs = OcaGrouper_GetMode_rs;
-    if (!rs) rs = OcaGrouper_GetMode_rs = new signature(UINT8);
+    if (!rs) rs = OcaGrouper_GetMode_rs = new signature(OcaGrouperMode);
     const cmd = new CommandRrq(this.ono, 3, 14, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -10860,7 +10860,7 @@ export class OcaGrouper extends OcaAgent
   SetMode(Mode)
   {
     let as = OcaGrouper_SetMode_as;
-    if (!as) as = OcaGrouper_SetMode_as = new signature(UINT8);
+    if (!as) as = OcaGrouper_SetMode_as = new signature(OcaGrouperMode);
     const cmd = new CommandRrq(this.ono, 3, 15, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -10880,7 +10880,7 @@ export class OcaGrouper extends OcaAgent
 
     if (event) return event;
 
-    const s = new signature(UINT16, UINT16, UINT8);
+    const s = new signature(UINT16, UINT16, OcaGrouperStatusChangeType);
 
     return this._StatusChange = new Event(this, new OcaEventID(3, 1), s);
   }
@@ -10952,7 +10952,7 @@ export class OcaGrouper extends OcaAgent
     if (event) return event;
 
     return this._ModeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaGrouperMode));
   }
 
   static get_properties()
@@ -10964,7 +10964,7 @@ export class OcaGrouper extends OcaAgent
           new Property("Groups", new signature(LIST(OcaGrouperGroup)), 3, 2, false, false, ["GroupList"]),
           new Property("Citizens", new signature(LIST(OcaGrouperCitizen)), 3, 3, false, false, ["CitizenList"]),
           new Property("Enrollments", new signature(LIST(OcaGrouperEnrollment)), 3, 4, false, false, ["EnrollmentList"]),
-          new Property("Mode", new signature(UINT8), 3, 5, false, false, null),
+          new Property("Mode", new signature(OcaGrouperMode), 3, 5, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
 
@@ -11101,7 +11101,7 @@ export class OcaNumericObserver extends OcaAgent
   GetState()
   {
     let rs = OcaNumericObserver_GetState_rs;
-    if (!rs) rs = OcaNumericObserver_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaNumericObserver_GetState_rs = new signature(OcaObserverState);
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -11174,7 +11174,7 @@ export class OcaNumericObserver extends OcaAgent
   GetOperator()
   {
     let rs = OcaNumericObserver_GetOperator_rs;
-    if (!rs) rs = OcaNumericObserver_GetOperator_rs = new signature(UINT8);
+    if (!rs) rs = OcaNumericObserver_GetOperator_rs = new signature(OcaRelationalOperator);
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -11189,7 +11189,7 @@ export class OcaNumericObserver extends OcaAgent
   SetOperator(_operator)
   {
     let as = OcaNumericObserver_SetOperator_as;
-    if (!as) as = OcaNumericObserver_SetOperator_as = new signature(UINT8);
+    if (!as) as = OcaNumericObserver_SetOperator_as = new signature(OcaRelationalOperator);
     const cmd = new CommandRrq(this.ono, 3, 8, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -11308,7 +11308,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaObserverState));
   }
 
   /**
@@ -11350,7 +11350,7 @@ export class OcaNumericObserver extends OcaAgent
     if (event) return event;
 
     return this._OperatorChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaRelationalOperator));
   }
 
   /**
@@ -11400,10 +11400,10 @@ export class OcaNumericObserver extends OcaAgent
     if (!OcaNumericObserver_p)
     {
       OcaNumericObserver_p = new Properties([
-          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("State", new signature(OcaObserverState), 3, 1, false, false, null),
           new Property("ObservedProperty", new signature(OcaProperty), 3, 2, false, false, null),
           new Property("Threshold", new signature(FLOAT64), 3, 3, false, false, null),
-          new Property("Operator", new signature(UINT8), 3, 4, false, false, null),
+          new Property("Operator", new signature(OcaRelationalOperator), 3, 4, false, false, null),
           new Property("TwoWay", new signature(BOOLEAN), 3, 5, false, false, null),
           new Property("Hysteresis", new signature(FLOAT64), 3, 6, false, false, null),
           new Property("Period", new signature(FLOAT32), 3, 7, false, false, null),
@@ -11596,7 +11596,7 @@ export class OcaLibrary extends OcaAgent
   GetAccess()
   {
     let rs = OcaLibrary_GetAccess_rs;
-    if (!rs) rs = OcaLibrary_GetAccess_rs = new signature(UINT8);
+    if (!rs) rs = OcaLibrary_GetAccess_rs = new signature(OcaLibAccess);
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -11612,7 +11612,7 @@ export class OcaLibrary extends OcaAgent
   SetAccess(Access)
   {
     let as = OcaLibrary_SetAccess_as;
-    if (!as) as = OcaLibrary_SetAccess_as = new signature(UINT8);
+    if (!as) as = OcaLibrary_SetAccess_as = new signature(OcaLibAccess);
     const cmd = new CommandRrq(this.ono, 3, 8, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -11629,7 +11629,7 @@ export class OcaLibrary extends OcaAgent
     if (event) return event;
 
     return this._DataTypeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaLibVolType));
   }
 
   /**
@@ -11643,7 +11643,7 @@ export class OcaLibrary extends OcaAgent
     if (event) return event;
 
     return this._AccessChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(OcaLibAccess));
   }
 
   /**
@@ -11665,8 +11665,8 @@ export class OcaLibrary extends OcaAgent
     if (!OcaLibrary_p)
     {
       OcaLibrary_p = new Properties([
-          new Property("DataType", new signature(UINT8), 3, 1, false, false, null),
-          new Property("Access", new signature(UINT8), 3, 2, false, false, null),
+          new Property("DataType", new signature(OcaLibVolType), 3, 1, false, false, null),
+          new Property("Access", new signature(OcaLibAccess), 3, 2, false, false, null),
           new Property("Volumes", new signature(MAP(UINT32, OcaLibVol)), 3, 3, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
@@ -11746,7 +11746,7 @@ export class OcaPowerSupply extends OcaAgent
   GetType()
   {
     let rs = OcaPowerSupply_GetType_rs;
-    if (!rs) rs = OcaPowerSupply_GetType_rs = new signature(UINT8);
+    if (!rs) rs = OcaPowerSupply_GetType_rs = new signature(OcaPowerSupplyType);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -11772,7 +11772,7 @@ export class OcaPowerSupply extends OcaAgent
   GetState()
   {
     let rs = OcaPowerSupply_GetState_rs;
-    if (!rs) rs = OcaPowerSupply_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaPowerSupply_GetState_rs = new signature(OcaPowerSupplyState);
     const cmd = new CommandRrq(this.ono, 3, 3, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -11787,7 +11787,7 @@ export class OcaPowerSupply extends OcaAgent
   SetState(state)
   {
     let as = OcaPowerSupply_SetState_as;
-    if (!as) as = OcaPowerSupply_SetState_as = new signature(UINT8);
+    if (!as) as = OcaPowerSupply_SetState_as = new signature(OcaPowerSupplyState);
     const cmd = new CommandRrq(this.ono, 3, 4, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -11840,7 +11840,7 @@ export class OcaPowerSupply extends OcaAgent
   GetLocation()
   {
     let rs = OcaPowerSupply_GetLocation_rs;
-    if (!rs) rs = OcaPowerSupply_GetLocation_rs = new signature(UINT8);
+    if (!rs) rs = OcaPowerSupply_GetLocation_rs = new signature(OcaPowerSupplyLocation);
     const cmd = new CommandRrq(this.ono, 3, 8, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -11856,7 +11856,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._TypeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaPowerSupplyType));
   }
 
   /**
@@ -11884,7 +11884,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaPowerSupplyState));
   }
 
   /**
@@ -11940,7 +11940,7 @@ export class OcaPowerSupply extends OcaAgent
     if (event) return event;
 
     return this._LocationChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 7), new signature(OcaPowerSupplyLocation));
   }
 
   static get_properties()
@@ -11948,13 +11948,13 @@ export class OcaPowerSupply extends OcaAgent
     if (!OcaPowerSupply_p)
     {
       OcaPowerSupply_p = new Properties([
-          new Property("Type", new signature(UINT8), 3, 1, false, false, null),
+          new Property("Type", new signature(OcaPowerSupplyType), 3, 1, false, false, null),
           new Property("ModelInfo", new signature(STRING), 3, 2, false, false, null),
-          new Property("State", new signature(UINT8), 3, 3, false, false, null),
+          new Property("State", new signature(OcaPowerSupplyState), 3, 3, false, false, null),
           new Property("Charging", new signature(BOOLEAN), 3, 4, false, false, null),
           new Property("LoadFractionAvailable", new signature(FLOAT32), 3, 5, true, false, null),
           new Property("StorageFractionAvailable", new signature(FLOAT32), 3, 6, true, false, null),
-          new Property("Location", new signature(UINT8), 3, 7, true, false, null),
+          new Property("Location", new signature(OcaPowerSupplyLocation), 3, 7, true, false, null),
         ], 3, OcaAgent.get_properties());
     }
 
@@ -12177,7 +12177,7 @@ export class OcaNumericObserverList extends OcaAgent
   GetState()
   {
     let rs = OcaNumericObserverList_GetState_rs;
-    if (!rs) rs = OcaNumericObserverList_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaNumericObserverList_GetState_rs = new signature(OcaObserverState);
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -12256,7 +12256,7 @@ export class OcaNumericObserverList extends OcaAgent
   GetOperator()
   {
     let rs = OcaNumericObserverList_GetOperator_rs;
-    if (!rs) rs = OcaNumericObserverList_GetOperator_rs = new signature(UINT8);
+    if (!rs) rs = OcaNumericObserverList_GetOperator_rs = new signature(OcaRelationalOperator);
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -12271,7 +12271,7 @@ export class OcaNumericObserverList extends OcaAgent
   SetOperator(_operator)
   {
     let as = OcaNumericObserverList_SetOperator_as;
-    if (!as) as = OcaNumericObserverList_SetOperator_as = new signature(UINT8);
+    if (!as) as = OcaNumericObserverList_SetOperator_as = new signature(OcaRelationalOperator);
     const cmd = new CommandRrq(this.ono, 3, 8, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -12396,7 +12396,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaObserverState));
   }
 
   /**
@@ -12438,7 +12438,7 @@ export class OcaNumericObserverList extends OcaAgent
     if (event) return event;
 
     return this._OperatorChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaRelationalOperator));
   }
 
   /**
@@ -12488,10 +12488,10 @@ export class OcaNumericObserverList extends OcaAgent
     if (!OcaNumericObserverList_p)
     {
       OcaNumericObserverList_p = new Properties([
-          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("State", new signature(OcaObserverState), 3, 1, false, false, null),
           new Property("ObservedProperties", new signature(LIST(OcaProperty)), 3, 2, false, false, null),
           new Property("Threshold", new signature(FLOAT64), 3, 3, false, false, null),
-          new Property("Operator", new signature(UINT8), 3, 4, false, false, null),
+          new Property("Operator", new signature(OcaRelationalOperator), 3, 4, false, false, null),
           new Property("TwoWay", new signature(BOOLEAN), 3, 5, false, false, null),
           new Property("Hysteresis", new signature(FLOAT64), 3, 6, false, false, null),
           new Property("Period", new signature(FLOAT32), 3, 7, false, false, null),
@@ -12608,7 +12608,7 @@ export class OcaTask extends OcaAgent
   Control(Command, StateParameter)
   {
     let as = OcaTask_Control_as;
-    if (!as) as = OcaTask_Control_as = new signature(UINT8, BLOB);
+    if (!as) as = OcaTask_Control_as = new signature(OcaTaskCommand, BLOB);
     const cmd = new CommandRrq(this.ono, 3, 1, 2,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -12666,7 +12666,7 @@ export class OcaTask extends OcaAgent
   GetTimeMode()
   {
     let rs = OcaTask_GetTimeMode_rs;
-    if (!rs) rs = OcaTask_GetTimeMode_rs = new signature(UINT8);
+    if (!rs) rs = OcaTask_GetTimeMode_rs = new signature(OcaTimeMode);
     const cmd = new CommandRrq(this.ono, 3, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -12681,7 +12681,7 @@ export class OcaTask extends OcaAgent
   SetTimeMode(TimeMode)
   {
     let as = OcaTask_SetTimeMode_as;
-    if (!as) as = OcaTask_SetTimeMode_as = new signature(UINT8);
+    if (!as) as = OcaTask_SetTimeMode_as = new signature(OcaTimeMode);
     const cmd = new CommandRrq(this.ono, 3, 6, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -12695,7 +12695,7 @@ export class OcaTask extends OcaAgent
   GetTimeUnits()
   {
     let rs = OcaTask_GetTimeUnits_rs;
-    if (!rs) rs = OcaTask_GetTimeUnits_rs = new signature(UINT8);
+    if (!rs) rs = OcaTask_GetTimeUnits_rs = new signature(OcaTimeUnits);
     const cmd = new CommandRrq(this.ono, 3, 7, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -12710,7 +12710,7 @@ export class OcaTask extends OcaAgent
   SetTimeUnits(TimeUnits)
   {
     let as = OcaTask_SetTimeUnits_as;
-    if (!as) as = OcaTask_SetTimeUnits_as = new signature(UINT8);
+    if (!as) as = OcaTask_SetTimeUnits_as = new signature(OcaTimeUnits);
     const cmd = new CommandRrq(this.ono, 3, 8, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -12848,7 +12848,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._TimeModeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaTimeMode));
   }
 
   /**
@@ -12862,7 +12862,7 @@ export class OcaTask extends OcaAgent
     if (event) return event;
 
     return this._TimeUnitsChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaTimeUnits));
   }
 
   /**
@@ -12914,8 +12914,8 @@ export class OcaTask extends OcaAgent
       OcaTask_p = new Properties([
           new Property("Status", new signature(OcaTaskStatus), 3, 1, false, false, null),
           new Property("Slot", new signature(UINT16), 3, 2, false, false, null),
-          new Property("TimeMode", new signature(UINT8), 3, 3, false, false, null),
-          new Property("TimeUnits", new signature(UINT8), 3, 4, false, false, null),
+          new Property("TimeMode", new signature(OcaTimeMode), 3, 3, false, false, null),
+          new Property("TimeUnits", new signature(OcaTimeUnits), 3, 4, false, false, null),
           new Property("ClockONo", new signature(UINT32), 3, 5, false, false, null),
           new Property("StartTime", new signature(UINT64), 3, 6, false, false, null),
           new Property("Duration", new signature(FLOAT32), 3, 7, false, false, null),
@@ -12999,7 +12999,7 @@ export class OcaTaskFactory extends OcaAgent
   Control(Command)
   {
     let as = OcaTaskFactory_Control_as;
-    if (!as) as = OcaTaskFactory_Control_as = new signature(UINT8);
+    if (!as) as = OcaTaskFactory_Control_as = new signature(OcaTaskCommand);
     const cmd = new CommandRrq(this.ono, 3, 1, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -13013,7 +13013,7 @@ export class OcaTaskFactory extends OcaAgent
   GetState()
   {
     let rs = OcaTaskFactory_GetState_rs;
-    if (!rs) rs = OcaTaskFactory_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaTaskFactory_GetState_rs = new signature(OcaTaskState);
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -13057,7 +13057,7 @@ export class OcaTaskFactory extends OcaAgent
   GetTimeMode()
   {
     let rs = OcaTaskFactory_GetTimeMode_rs;
-    if (!rs) rs = OcaTaskFactory_GetTimeMode_rs = new signature(UINT8);
+    if (!rs) rs = OcaTaskFactory_GetTimeMode_rs = new signature(OcaTimeMode);
     const cmd = new CommandRrq(this.ono, 3, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -13072,7 +13072,7 @@ export class OcaTaskFactory extends OcaAgent
   SetTimeMode(TimeMode)
   {
     let as = OcaTaskFactory_SetTimeMode_as;
-    if (!as) as = OcaTaskFactory_SetTimeMode_as = new signature(UINT8);
+    if (!as) as = OcaTaskFactory_SetTimeMode_as = new signature(OcaTimeMode);
     const cmd = new CommandRrq(this.ono, 3, 6, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -13161,7 +13161,7 @@ export class OcaTaskFactory extends OcaAgent
     if (event) return event;
 
     return this._TimeModeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(OcaTimeMode));
   }
 
   /**
@@ -13198,7 +13198,7 @@ export class OcaTaskFactory extends OcaAgent
     {
       OcaTaskFactory_p = new Properties([
           new Property("Slot", new signature(UINT16), 3, 1, false, false, null),
-          new Property("TimeMode", new signature(UINT8), 3, 2, false, false, null),
+          new Property("TimeMode", new signature(OcaTimeMode), 3, 2, false, false, null),
           new Property("StartTime", new signature(UINT64), 3, 3, false, false, null),
           new Property("Duration", new signature(FLOAT32), 3, 4, false, false, null),
         ], 3, OcaAgent.get_properties());
@@ -13275,7 +13275,7 @@ export class OcaTaskGroup extends OcaAgent
   Control(Command, StateParameter)
   {
     let as = OcaTaskGroup_Control_as;
-    if (!as) as = OcaTaskGroup_Control_as = new signature(UINT8, BLOB);
+    if (!as) as = OcaTaskGroup_Control_as = new signature(OcaTaskCommand, BLOB);
     const cmd = new CommandRrq(this.ono, 3, 1, 2,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -13502,7 +13502,7 @@ export class OcaRamperTask extends OcaTask
   GetInterpolationLaw()
   {
     let rs = OcaRamperTask_GetInterpolationLaw_rs;
-    if (!rs) rs = OcaRamperTask_GetInterpolationLaw_rs = new signature(UINT8);
+    if (!rs) rs = OcaRamperTask_GetInterpolationLaw_rs = new signature(OcaRamperInterpolationLaw);
     const cmd = new CommandRrq(this.ono, 4, 3, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -13517,7 +13517,7 @@ export class OcaRamperTask extends OcaTask
   SetInterpolationLaw(law)
   {
     let as = OcaRamperTask_SetInterpolationLaw_as;
-    if (!as) as = OcaRamperTask_SetInterpolationLaw_as = new signature(UINT8);
+    if (!as) as = OcaRamperTask_SetInterpolationLaw_as = new signature(OcaRamperInterpolationLaw);
     const cmd = new CommandRrq(this.ono, 4, 4, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -13577,7 +13577,7 @@ export class OcaRamperTask extends OcaTask
     if (event) return event;
 
     return this._InterpolationLawChanged =
-      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(4, 2), new signature(OcaRamperInterpolationLaw));
   }
 
   /**
@@ -13600,7 +13600,7 @@ export class OcaRamperTask extends OcaTask
     {
       OcaRamperTask_p = new Properties([
           new Property("RampedProperty", new signature(OcaProperty), 4, 1, false, false, null),
-          new Property("InterpolationLaw", new signature(UINT8), 4, 2, false, false, null),
+          new Property("InterpolationLaw", new signature(OcaRamperInterpolationLaw), 4, 2, false, false, null),
           new Property("Goal", new signature(FLOAT64), 4, 3, false, false, null),
         ], 4, OcaTask.get_properties());
     }
@@ -13686,7 +13686,7 @@ export class OcaMediaClock3 extends OcaAgent
   GetAvailability()
   {
     let rs = OcaMediaClock3_GetAvailability_rs;
-    if (!rs) rs = OcaMediaClock3_GetAvailability_rs = new signature(UINT8);
+    if (!rs) rs = OcaMediaClock3_GetAvailability_rs = new signature(OcaMediaClockAvailability);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -13702,7 +13702,7 @@ export class OcaMediaClock3 extends OcaAgent
   SetAvailability(Availability)
   {
     let as = OcaMediaClock3_SetAvailability_as;
-    if (!as) as = OcaMediaClock3_SetAvailability_as = new signature(UINT8);
+    if (!as) as = OcaMediaClock3_SetAvailability_as = new signature(OcaMediaClockAvailability);
     const cmd = new CommandRrq(this.ono, 3, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -13799,7 +13799,7 @@ export class OcaMediaClock3 extends OcaAgent
     if (event) return event;
 
     return this._AvailabilityChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaMediaClockAvailability));
   }
 
   /**
@@ -13849,7 +13849,7 @@ export class OcaMediaClock3 extends OcaAgent
     if (!OcaMediaClock3_p)
     {
       OcaMediaClock3_p = new Properties([
-          new Property("Availability", new signature(UINT8), 3, 1, false, false, null),
+          new Property("Availability", new signature(OcaMediaClockAvailability), 3, 1, false, false, null),
           new Property("TimeSourceONo", new signature(UINT32), 3, 2, false, false, null),
           new Property("Offset", new signature(UINT64), 3, 3, false, false, null),
           new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
@@ -13932,7 +13932,7 @@ export class OcaTimeSource extends OcaAgent
   GetAvailability()
   {
     let rs = OcaTimeSource_GetAvailability_rs;
-    if (!rs) rs = OcaTimeSource_GetAvailability_rs = new signature(UINT8);
+    if (!rs) rs = OcaTimeSource_GetAvailability_rs = new signature(OcaTimeSourceAvailability);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -13945,7 +13945,7 @@ export class OcaTimeSource extends OcaAgent
   GetProtocol()
   {
     let rs = OcaTimeSource_GetProtocol_rs;
-    if (!rs) rs = OcaTimeSource_GetProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaTimeSource_GetProtocol_rs = new signature(OcaTimeProtocol);
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -13960,7 +13960,7 @@ export class OcaTimeSource extends OcaAgent
   SetProtocol(Protocol)
   {
     let as = OcaTimeSource_SetProtocol_as;
-    if (!as) as = OcaTimeSource_SetProtocol_as = new signature(UINT8);
+    if (!as) as = OcaTimeSource_SetProtocol_as = new signature(OcaTimeProtocol);
     const cmd = new CommandRrq(this.ono, 3, 3, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -14004,7 +14004,7 @@ export class OcaTimeSource extends OcaAgent
   GetReferenceType()
   {
     let rs = OcaTimeSource_GetReferenceType_rs;
-    if (!rs) rs = OcaTimeSource_GetReferenceType_rs = new signature(UINT8);
+    if (!rs) rs = OcaTimeSource_GetReferenceType_rs = new signature(OcaTimeReferenceType);
     const cmd = new CommandRrq(this.ono, 3, 6, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -14020,7 +14020,7 @@ export class OcaTimeSource extends OcaAgent
   SetReferenceType(ReferenceType)
   {
     let as = OcaTimeSource_SetReferenceType_as;
-    if (!as) as = OcaTimeSource_SetReferenceType_as = new signature(UINT8);
+    if (!as) as = OcaTimeSource_SetReferenceType_as = new signature(OcaTimeReferenceType);
     const cmd = new CommandRrq(this.ono, 3, 7, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -14065,7 +14065,7 @@ export class OcaTimeSource extends OcaAgent
   GetSyncStatus()
   {
     let rs = OcaTimeSource_GetSyncStatus_rs;
-    if (!rs) rs = OcaTimeSource_GetSyncStatus_rs = new signature(UINT8);
+    if (!rs) rs = OcaTimeSource_GetSyncStatus_rs = new signature(OcaTimeSourceSyncStatus);
     const cmd = new CommandRrq(this.ono, 3, 10, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -14093,7 +14093,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._AvailabilityChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaTimeSourceAvailability));
   }
 
   /**
@@ -14107,7 +14107,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._ProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(OcaTimeProtocol));
   }
 
   /**
@@ -14135,7 +14135,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._ReferenceTypeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaTimeReferenceType));
   }
 
   /**
@@ -14163,7 +14163,7 @@ export class OcaTimeSource extends OcaAgent
     if (event) return event;
 
     return this._SyncStatusChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(OcaTimeSourceSyncStatus));
   }
 
   static get_properties()
@@ -14171,12 +14171,12 @@ export class OcaTimeSource extends OcaAgent
     if (!OcaTimeSource_p)
     {
       OcaTimeSource_p = new Properties([
-          new Property("Availability", new signature(UINT8), 3, 1, false, false, null),
-          new Property("Protocol", new signature(UINT8), 3, 2, false, false, null),
+          new Property("Availability", new signature(OcaTimeSourceAvailability), 3, 1, false, false, null),
+          new Property("Protocol", new signature(OcaTimeProtocol), 3, 2, false, false, null),
           new Property("Parameters", new signature(STRING), 3, 3, false, false, null),
-          new Property("ReferenceType", new signature(UINT8), 3, 4, false, false, null),
+          new Property("ReferenceType", new signature(OcaTimeReferenceType), 3, 4, false, false, null),
           new Property("ReferenceID", new signature(STRING), 3, 5, false, false, null),
-          new Property("SyncStatus", new signature(UINT8), 3, 6, false, false, null),
+          new Property("SyncStatus", new signature(OcaTimeSourceSyncStatus), 3, 6, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
 
@@ -14278,7 +14278,7 @@ export class OcaPhysicalPosition extends OcaAgent
   GetPositionAndRotationFlags()
   {
     let rs = OcaPhysicalPosition_GetPositionAndRotationFlags_rs;
-    if (!rs) rs = OcaPhysicalPosition_GetPositionAndRotationFlags_rs = new signature(UINT16);
+    if (!rs) rs = OcaPhysicalPosition_GetPositionAndRotationFlags_rs = new signature(OcaPositionAndRotationFlags);
     const cmd = new CommandRrq(this.ono, 3, 3, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -14294,7 +14294,7 @@ export class OcaPhysicalPosition extends OcaAgent
   SetPositionAndRotationFlags(Flags)
   {
     let as = OcaPhysicalPosition_SetPositionAndRotationFlags_as;
-    if (!as) as = OcaPhysicalPosition_SetPositionAndRotationFlags_as = new signature(UINT16);
+    if (!as) as = OcaPhysicalPosition_SetPositionAndRotationFlags_as = new signature(OcaPositionAndRotationFlags);
     const cmd = new CommandRrq(this.ono, 3, 4, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -14325,7 +14325,7 @@ export class OcaPhysicalPosition extends OcaAgent
     if (event) return event;
 
     return this._PositionAndRotationFlagsChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 2), new signature(OcaPositionAndRotationFlags));
   }
 
   static get_properties()
@@ -14334,7 +14334,7 @@ export class OcaPhysicalPosition extends OcaAgent
     {
       OcaPhysicalPosition_p = new Properties([
           new Property("PositionAndRotation", new signature(FLOAT32), 3, 1, false, false, null),
-          new Property("PositionAndRotationFlags", new signature(UINT16), 3, 2, false, false, null),
+          new Property("PositionAndRotationFlags", new signature(OcaPositionAndRotationFlags), 3, 2, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
 
@@ -14494,7 +14494,7 @@ export class OcaApplicationNetwork extends OcaRoot
   GetState()
   {
     let rs = OcaApplicationNetwork_GetState_rs;
-    if (!rs) rs = OcaApplicationNetwork_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaApplicationNetwork_GetState_rs = new signature(OcaApplicationNetworkState);
     const cmd = new CommandRrq(this.ono, 2, 7, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -14523,7 +14523,7 @@ export class OcaApplicationNetwork extends OcaRoot
   Control(Command)
   {
     let as = OcaApplicationNetwork_Control_as;
-    if (!as) as = OcaApplicationNetwork_Control_as = new signature(UINT8);
+    if (!as) as = OcaApplicationNetwork_Control_as = new signature(OcaApplicationNetworkCommand);
     const cmd = new CommandRrq(this.ono, 2, 9, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -14609,7 +14609,7 @@ export class OcaApplicationNetwork extends OcaRoot
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(2, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(2, 5), new signature(OcaApplicationNetworkState));
   }
 
   /**
@@ -14635,7 +14635,7 @@ export class OcaApplicationNetwork extends OcaRoot
           new Property("Owner", new signature(UINT32), 2, 2, false, true, null),
           new Property("ServiceID", new signature(BLOB), 2, 3, false, false, null),
           new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceDescriptor)), 2, 4, false, false, null),
-          new Property("State", new signature(UINT8), 2, 5, false, false, null),
+          new Property("State", new signature(OcaApplicationNetworkState), 2, 5, false, false, null),
           new Property("ErrorCode", new signature(UINT16), 2, 6, false, false, null),
         ], 2, OcaRoot.get_properties());
     }
@@ -14700,7 +14700,7 @@ export class OcaControlNetwork extends OcaApplicationNetwork
   GetControlProtocol()
   {
     let rs = OcaControlNetwork_GetControlProtocol_rs;
-    if (!rs) rs = OcaControlNetwork_GetControlProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaControlNetwork_GetControlProtocol_rs = new signature(OcaNetworkControlProtocol);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -14716,7 +14716,7 @@ export class OcaControlNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._ProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaNetworkControlProtocol));
   }
 
   static get_properties()
@@ -14724,7 +14724,7 @@ export class OcaControlNetwork extends OcaApplicationNetwork
     if (!OcaControlNetwork_p)
     {
       OcaControlNetwork_p = new Properties([
-          new Property("Protocol", new signature(UINT8), 3, 1, false, false, ["ControlProtocol"]),
+          new Property("Protocol", new signature(OcaNetworkControlProtocol), 3, 1, false, false, ["ControlProtocol"]),
         ], 3, OcaApplicationNetwork.get_properties());
     }
 
@@ -14824,7 +14824,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   GetMediaProtocol()
   {
     let rs = OcaMediaTransportNetwork_GetMediaProtocol_rs;
-    if (!rs) rs = OcaMediaTransportNetwork_GetMediaProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaMediaTransportNetwork_GetMediaProtocol_rs = new signature(OcaNetworkMediaProtocol);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -15041,7 +15041,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   AddSourceConnector(Connector, InitialStatus)
   {
     let as = OcaMediaTransportNetwork_AddSourceConnector_as;
-    if (!as) as = OcaMediaTransportNetwork_AddSourceConnector_as = new signature(OcaMediaSourceConnector, UINT8);
+    if (!as) as = OcaMediaTransportNetwork_AddSourceConnector_as = new signature(OcaMediaSourceConnector, OcaMediaConnectorState);
     let rs = OcaMediaTransportNetwork_AddSourceConnector_rs;
     if (!rs) rs = OcaMediaTransportNetwork_AddSourceConnector_rs = new signature(OcaMediaSourceConnector);
     const cmd = new CommandRrq(this.ono, 3, 15, 2,
@@ -15087,7 +15087,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   ControlConnector(ConnectorID, Command)
   {
     let as = OcaMediaTransportNetwork_ControlConnector_as;
-    if (!as) as = OcaMediaTransportNetwork_ControlConnector_as = new signature(UINT16, UINT8);
+    if (!as) as = OcaMediaTransportNetwork_ControlConnector_as = new signature(UINT16, OcaMediaConnectorCommand);
     const cmd = new CommandRrq(this.ono, 3, 17, 2,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -15219,7 +15219,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
 
     if (event) return event;
 
-    const s = new signature(OcaMediaSourceConnector, UINT8, UINT16);
+    const s = new signature(OcaMediaSourceConnector, OcaPropertyChangeType, OcaMediaConnectorElement);
 
     return this._SourceConnectorChanged = new Event(this, new OcaEventID(3, 1), s);
   }
@@ -15234,7 +15234,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
 
     if (event) return event;
 
-    const s = new signature(OcaMediaSinkConnector, UINT8, UINT16);
+    const s = new signature(OcaMediaSinkConnector, OcaPropertyChangeType, OcaMediaConnectorElement);
 
     return this._SinkConnectorChanged = new Event(this, new OcaEventID(3, 2), s);
   }
@@ -15265,7 +15265,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (event) return event;
 
     return this._ProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaNetworkMediaProtocol));
   }
 
   /**
@@ -15399,7 +15399,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     if (!OcaMediaTransportNetwork_p)
     {
       OcaMediaTransportNetwork_p = new Properties([
-          new Property("Protocol", new signature(UINT8), 3, 1, false, false, ["MediaProtocol"]),
+          new Property("Protocol", new signature(OcaNetworkMediaProtocol), 3, 1, false, false, ["MediaProtocol"]),
           new Property("Ports", new signature(LIST(OcaPort)), 3, 2, false, false, null),
           new Property("MaxSourceConnectors", new signature(UINT16), 3, 3, false, false, null),
           new Property("MaxSinkConnectors", new signature(UINT16), 3, 4, false, false, null),
@@ -15743,7 +15743,7 @@ export class OcaDeviceManager extends OcaManager
   GetState()
   {
     let rs = OcaDeviceManager_GetState_rs;
-    if (!rs) rs = OcaDeviceManager_GetState_rs = new signature(UINT16);
+    if (!rs) rs = OcaDeviceManager_GetState_rs = new signature(OcaDeviceState);
     const cmd = new CommandRrq(this.ono, 3, 13, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -15777,7 +15777,7 @@ export class OcaDeviceManager extends OcaManager
   GetResetCause()
   {
     let rs = OcaDeviceManager_GetResetCause_rs;
-    if (!rs) rs = OcaDeviceManager_GetResetCause_rs = new signature(UINT8);
+    if (!rs) rs = OcaDeviceManager_GetResetCause_rs = new signature(OcaResetCause);
     const cmd = new CommandRrq(this.ono, 3, 15, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -15978,7 +15978,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 9), new signature(UINT16));
+      new PropertyEvent(this, new OcaPropertyID(3, 9), new signature(OcaDeviceState));
   }
 
   /**
@@ -16006,7 +16006,7 @@ export class OcaDeviceManager extends OcaManager
     if (event) return event;
 
     return this._ResetCauseChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 11), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 11), new signature(OcaResetCause));
   }
 
   /**
@@ -16064,9 +16064,9 @@ export class OcaDeviceManager extends OcaManager
           new Property("DeviceRole", new signature(STRING), 3, 6, false, false, null),
           new Property("UserInventoryCode", new signature(STRING), 3, 7, false, false, null),
           new Property("Enabled", new signature(BOOLEAN), 3, 8, false, false, null),
-          new Property("State", new signature(UINT16), 3, 9, false, false, null),
+          new Property("State", new signature(OcaDeviceState), 3, 9, false, false, null),
           new Property("Busy", new signature(BOOLEAN), 3, 10, false, false, null),
-          new Property("ResetCause", new signature(UINT8), 3, 11, false, false, null),
+          new Property("ResetCause", new signature(OcaResetCause), 3, 11, false, false, null),
           new Property("Message", new signature(STRING), 3, 12, false, false, null),
           new Property("Managers", new signature(LIST(OcaManagerDescriptor)), 3, 13, false, false, null),
           new Property("DeviceRevisionID", new signature(STRING), 3, 14, true, false, null),
@@ -16375,7 +16375,7 @@ export class OcaFirmwareManager extends OcaManager
   BeginActiveImageUpdate(component)
   {
     let as = OcaFirmwareManager_BeginActiveImageUpdate_as;
-    if (!as) as = OcaFirmwareManager_BeginActiveImageUpdate_as = new signature(UINT16);
+    if (!as) as = OcaFirmwareManager_BeginActiveImageUpdate_as = new signature(OcaComponent);
     const cmd = new CommandRrq(this.ono, 3, 3, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -16456,7 +16456,7 @@ export class OcaFirmwareManager extends OcaManager
   BeginPassiveComponentUpdate(component, serverAddress, updateFileName)
   {
     let as = OcaFirmwareManager_BeginPassiveComponentUpdate_as;
-    if (!as) as = OcaFirmwareManager_BeginPassiveComponentUpdate_as = new signature(UINT16, BLOB, STRING);
+    if (!as) as = OcaFirmwareManager_BeginPassiveComponentUpdate_as = new signature(OcaComponent, BLOB, STRING);
     const cmd = new CommandRrq(this.ono, 3, 7, 3,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -16606,7 +16606,7 @@ export class OcaSubscriptionManager extends OcaManager
   AddSubscription(Event, Subscriber, SubscriberContext, NotificationDeliveryMode, DestinationInformation)
   {
     let as = OcaSubscriptionManager_AddSubscription_as;
-    if (!as) as = OcaSubscriptionManager_AddSubscription_as = new signature(OcaEvent, OcaMethod, BLOB, UINT8, BLOB);
+    if (!as) as = OcaSubscriptionManager_AddSubscription_as = new signature(OcaEvent, OcaMethod, BLOB, OcaNotificationDeliveryMode, BLOB);
     const cmd = new CommandRrq(this.ono, 3, 1, 5,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -16678,7 +16678,7 @@ export class OcaSubscriptionManager extends OcaManager
   AddPropertyChangeSubscription(Emitter, Property, Subscriber, SubscriberContext, NotificationDeliveryMode, DestinationInformation)
   {
     let as = OcaSubscriptionManager_AddPropertyChangeSubscription_as;
-    if (!as) as = OcaSubscriptionManager_AddPropertyChangeSubscription_as = new signature(UINT32, OcaPropertyID, OcaMethod, BLOB, UINT8, BLOB);
+    if (!as) as = OcaSubscriptionManager_AddPropertyChangeSubscription_as = new signature(UINT32, OcaPropertyID, OcaMethod, BLOB, OcaNotificationDeliveryMode, BLOB);
     const cmd = new CommandRrq(this.ono, 3, 5, 6,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -16767,7 +16767,7 @@ export class OcaSubscriptionManager extends OcaManager
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaSubscriptionManagerState));
   }
 
   static get_properties()
@@ -16775,7 +16775,7 @@ export class OcaSubscriptionManager extends OcaManager
     if (!OcaSubscriptionManager_p)
     {
       OcaSubscriptionManager_p = new Properties([
-          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("State", new signature(OcaSubscriptionManagerState), 3, 1, false, false, null),
         ], 3, OcaManager.get_properties());
     }
 
@@ -16853,7 +16853,7 @@ export class OcaPowerManager extends OcaManager
   GetState()
   {
     let rs = OcaPowerManager_GetState_rs;
-    if (!rs) rs = OcaPowerManager_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaPowerManager_GetState_rs = new signature(OcaPowerState);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -16868,7 +16868,7 @@ export class OcaPowerManager extends OcaManager
   SetState(State)
   {
     let as = OcaPowerManager_SetState_as;
-    if (!as) as = OcaPowerManager_SetState_as = new signature(UINT8);
+    if (!as) as = OcaPowerManager_SetState_as = new signature(OcaPowerState);
     const cmd = new CommandRrq(this.ono, 3, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -16947,7 +16947,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaPowerState));
   }
 
   /**
@@ -17003,7 +17003,7 @@ export class OcaPowerManager extends OcaManager
     if (event) return event;
 
     return this._TargetStateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaPowerState));
   }
 
   static get_properties()
@@ -17011,11 +17011,11 @@ export class OcaPowerManager extends OcaManager
     if (!OcaPowerManager_p)
     {
       OcaPowerManager_p = new Properties([
-          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("State", new signature(OcaPowerState), 3, 1, false, false, null),
           new Property("PowerSupplies", new signature(LIST(UINT32)), 3, 2, false, false, null),
           new Property("ActivePowerSupplies", new signature(LIST(UINT32)), 3, 3, false, false, null),
           new Property("AutoState", new signature(BOOLEAN), 3, 4, false, false, null),
-          new Property("TargetState", new signature(UINT8), 3, 5, true, false, null),
+          new Property("TargetState", new signature(OcaPowerState), 3, 5, true, false, null),
         ], 3, OcaManager.get_properties());
     }
 
@@ -17300,7 +17300,7 @@ export class OcaMediaClockManager extends OcaManager
   GetMediaClockTypesSupported()
   {
     let rs = OcaMediaClockManager_GetMediaClockTypesSupported_rs;
-    if (!rs) rs = OcaMediaClockManager_GetMediaClockTypesSupported_rs = new signature(LIST(UINT8));
+    if (!rs) rs = OcaMediaClockManager_GetMediaClockTypesSupported_rs = new signature(LIST(OcaMediaClockType));
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -17330,7 +17330,7 @@ export class OcaMediaClockManager extends OcaManager
     if (event) return event;
 
     return this._ClockSourceTypesSupportedChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(UINT8)));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(LIST(OcaMediaClockType)));
   }
 
   /**
@@ -17366,7 +17366,7 @@ export class OcaMediaClockManager extends OcaManager
     if (!OcaMediaClockManager_p)
     {
       OcaMediaClockManager_p = new Properties([
-          new Property("ClockSourceTypesSupported", new signature(LIST(UINT8)), 3, 1, false, false, ["MediaClockTypesSupported"]),
+          new Property("ClockSourceTypesSupported", new signature(LIST(OcaMediaClockType)), 3, 1, false, false, ["MediaClockTypesSupported"]),
           new Property("Clocks", new signature(LIST(UINT32)), 3, 2, false, false, null),
           new Property("Clock3s", new signature(LIST(UINT32)), 3, 3, false, false, null),
         ], 3, OcaManager.get_properties());
@@ -17448,7 +17448,7 @@ export class OcaLibraryManager extends OcaManager
   AddLibrary(Type)
   {
     let as = OcaLibraryManager_AddLibrary_as;
-    if (!as) as = OcaLibraryManager_AddLibrary_as = new signature(UINT8);
+    if (!as) as = OcaLibraryManager_AddLibrary_as = new signature(OcaLibVolType);
     let rs = OcaLibraryManager_AddLibrary_rs;
     if (!rs) rs = OcaLibraryManager_AddLibrary_rs = new signature(UINT32);
     const cmd = new CommandRrq(this.ono, 3, 1, 1,
@@ -17481,7 +17481,7 @@ export class OcaLibraryManager extends OcaManager
   GetLibraryCount(Type)
   {
     let as = OcaLibraryManager_GetLibraryCount_as;
-    if (!as) as = OcaLibraryManager_GetLibraryCount_as = new signature(UINT8);
+    if (!as) as = OcaLibraryManager_GetLibraryCount_as = new signature(OcaLibVolType);
     let rs = OcaLibraryManager_GetLibraryCount_rs;
     if (!rs) rs = OcaLibraryManager_GetLibraryCount_rs = new signature(UINT16);
     const cmd = new CommandRrq(this.ono, 3, 3, 1,
@@ -17499,7 +17499,7 @@ export class OcaLibraryManager extends OcaManager
   GetLibraryList(Type)
   {
     let as = OcaLibraryManager_GetLibraryList_as;
-    if (!as) as = OcaLibraryManager_GetLibraryList_as = new signature(UINT8);
+    if (!as) as = OcaLibraryManager_GetLibraryList_as = new signature(OcaLibVolType);
     let rs = OcaLibraryManager_GetLibraryList_rs;
     if (!rs) rs = OcaLibraryManager_GetLibraryList_rs = new signature(LIST(UINT32));
     const cmd = new CommandRrq(this.ono, 3, 4, 1,
@@ -17948,7 +17948,7 @@ export class OcaTaskManager extends OcaManager
   Control(Command)
   {
     let as = OcaTaskManager_Control_as;
-    if (!as) as = OcaTaskManager_Control_as = new signature(UINT8);
+    if (!as) as = OcaTaskManager_Control_as = new signature(OcaTaskCommand);
     const cmd = new CommandRrq(this.ono, 3, 1, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -17962,7 +17962,7 @@ export class OcaTaskManager extends OcaManager
   GetState()
   {
     let rs = OcaTaskManager_GetState_rs;
-    if (!rs) rs = OcaTaskManager_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaTaskManager_GetState_rs = new signature(OcaTaskManagerState);
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18044,7 +18044,7 @@ export class OcaTaskManager extends OcaManager
     if (!OcaTaskManager_p)
     {
       OcaTaskManager_p = new Properties([
-          new Property("State", new signature(UINT8), 3, 1, true, true, null),
+          new Property("State", new signature(OcaTaskManagerState), 3, 1, true, true, null),
           new Property("Tasks", new signature(MAP(UINT32, UINT32)), 3, 2, true, true, null),
           new Property("TaskGroups", new signature(MAP(UINT16, UINT32)), 3, 3, true, true, null),
           new Property("Slots", new signature(MAP(UINT16, UINT16)), 3, 4, true, true, null),
@@ -18410,7 +18410,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   GetSourceOrSink()
   {
     let rs = OcaNetworkSignalChannel_GetSourceOrSink_rs;
-    if (!rs) rs = OcaNetworkSignalChannel_GetSourceOrSink_rs = new signature(UINT8);
+    if (!rs) rs = OcaNetworkSignalChannel_GetSourceOrSink_rs = new signature(OcaNetworkMediaSourceOrSink);
     const cmd = new CommandRrq(this.ono, 3, 10, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18423,7 +18423,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   GetStatus()
   {
     let rs = OcaNetworkSignalChannel_GetStatus_rs;
-    if (!rs) rs = OcaNetworkSignalChannel_GetStatus_rs = new signature(UINT8);
+    if (!rs) rs = OcaNetworkSignalChannel_GetStatus_rs = new signature(OcaNetworkSignalChannelStatus);
     const cmd = new CommandRrq(this.ono, 3, 11, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18563,7 +18563,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._SourceOrSinkChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaNetworkMediaSourceOrSink));
   }
 
   /**
@@ -18577,7 +18577,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(OcaNetworkSignalChannelStatus));
   }
 
   static get_properties()
@@ -18589,8 +18589,8 @@ export class OcaNetworkSignalChannel extends OcaWorker
           new Property("IDAdvertised", new signature(BLOB), 3, 1, false, false, null),
           new Property("Network", new signature(UINT32), 3, 2, false, false, null),
           new Property("RemoteChannelID", new signature(BLOB), 3, 4, false, false, null),
-          new Property("SourceOrSink", new signature(UINT8), 3, 5, false, false, null),
-          new Property("Status", new signature(UINT8), 3, 6, false, false, null),
+          new Property("SourceOrSink", new signature(OcaNetworkMediaSourceOrSink), 3, 5, false, false, null),
+          new Property("Status", new signature(OcaNetworkSignalChannelStatus), 3, 6, false, false, null),
         ], 3, OcaWorker.get_properties());
     }
 
@@ -18687,7 +18687,7 @@ export class OcaNetwork extends OcaAgent
   GetLinkType()
   {
     let rs = OcaNetwork_GetLinkType_rs;
-    if (!rs) rs = OcaNetwork_GetLinkType_rs = new signature(UINT8);
+    if (!rs) rs = OcaNetwork_GetLinkType_rs = new signature(OcaNetworkLinkType);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18729,7 +18729,7 @@ export class OcaNetwork extends OcaAgent
   GetControlProtocol()
   {
     let rs = OcaNetwork_GetControlProtocol_rs;
-    if (!rs) rs = OcaNetwork_GetControlProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaNetwork_GetControlProtocol_rs = new signature(OcaNetworkControlProtocol);
     const cmd = new CommandRrq(this.ono, 3, 4, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18742,7 +18742,7 @@ export class OcaNetwork extends OcaAgent
   GetMediaProtocol()
   {
     let rs = OcaNetwork_GetMediaProtocol_rs;
-    if (!rs) rs = OcaNetwork_GetMediaProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaNetwork_GetMediaProtocol_rs = new signature(OcaNetworkMediaProtocol);
     const cmd = new CommandRrq(this.ono, 3, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18755,7 +18755,7 @@ export class OcaNetwork extends OcaAgent
   GetStatus()
   {
     let rs = OcaNetwork_GetStatus_rs;
-    if (!rs) rs = OcaNetwork_GetStatus_rs = new signature(UINT8);
+    if (!rs) rs = OcaNetwork_GetStatus_rs = new signature(OcaNetworkStatus);
     const cmd = new CommandRrq(this.ono, 3, 6, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -18872,7 +18872,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._ControlProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaNetworkControlProtocol));
   }
 
   /**
@@ -18886,7 +18886,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._MediaProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaNetworkMediaProtocol));
   }
 
   /**
@@ -18900,7 +18900,7 @@ export class OcaNetwork extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaNetworkStatus));
   }
 
   /**
@@ -18950,11 +18950,11 @@ export class OcaNetwork extends OcaAgent
     if (!OcaNetwork_p)
     {
       OcaNetwork_p = new Properties([
-          new Property("LinkType", new signature(UINT8), 3, 1, true, true, null),
+          new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, true, null),
           new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
-          new Property("ControlProtocol", new signature(UINT8), 3, 3, false, false, null),
-          new Property("MediaProtocol", new signature(UINT8), 3, 4, false, false, null),
-          new Property("Status", new signature(UINT8), 3, 5, false, false, null),
+          new Property("ControlProtocol", new signature(OcaNetworkControlProtocol), 3, 3, false, false, null),
+          new Property("MediaProtocol", new signature(OcaNetworkMediaProtocol), 3, 4, false, false, null),
+          new Property("Status", new signature(OcaNetworkStatus), 3, 5, false, false, null),
           new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null),
           new Property("MediaPorts", new signature(LIST(UINT32)), 3, 7, false, false, null),
           new Property("Statistics", new signature(OcaNetworkStatistics), 3, 8, false, false, null),
@@ -19056,7 +19056,7 @@ export class OcaRamper extends OcaAgent
   Control(Command)
   {
     let as = OcaRamper_Control_as;
-    if (!as) as = OcaRamper_Control_as = new signature(UINT8);
+    if (!as) as = OcaRamper_Control_as = new signature(OcaRamperCommand);
     const cmd = new CommandRrq(this.ono, 3, 1, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -19070,7 +19070,7 @@ export class OcaRamper extends OcaAgent
   GetState()
   {
     let rs = OcaRamper_GetState_rs;
-    if (!rs) rs = OcaRamper_GetState_rs = new signature(UINT8);
+    if (!rs) rs = OcaRamper_GetState_rs = new signature(OcaRamperState);
     const cmd = new CommandRrq(this.ono, 3, 2, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19112,7 +19112,7 @@ export class OcaRamper extends OcaAgent
   GetTimeMode()
   {
     let rs = OcaRamper_GetTimeMode_rs;
-    if (!rs) rs = OcaRamper_GetTimeMode_rs = new signature(UINT8);
+    if (!rs) rs = OcaRamper_GetTimeMode_rs = new signature(OcaTimeMode);
     const cmd = new CommandRrq(this.ono, 3, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19127,7 +19127,7 @@ export class OcaRamper extends OcaAgent
   SetTimeMode(TimeMode)
   {
     let as = OcaRamper_SetTimeMode_as;
-    if (!as) as = OcaRamper_SetTimeMode_as = new signature(UINT8);
+    if (!as) as = OcaRamper_SetTimeMode_as = new signature(OcaTimeMode);
     const cmd = new CommandRrq(this.ono, 3, 6, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -19199,7 +19199,7 @@ export class OcaRamper extends OcaAgent
   GetInterpolationLaw()
   {
     let rs = OcaRamper_GetInterpolationLaw_rs;
-    if (!rs) rs = OcaRamper_GetInterpolationLaw_rs = new signature(UINT8);
+    if (!rs) rs = OcaRamper_GetInterpolationLaw_rs = new signature(OcaRamperInterpolationLaw);
     const cmd = new CommandRrq(this.ono, 3, 11, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19214,7 +19214,7 @@ export class OcaRamper extends OcaAgent
   SetInterpolationLaw(law)
   {
     let as = OcaRamper_SetInterpolationLaw_as;
-    if (!as) as = OcaRamper_SetInterpolationLaw_as = new signature(UINT8);
+    if (!as) as = OcaRamper_SetInterpolationLaw_as = new signature(OcaRamperInterpolationLaw);
     const cmd = new CommandRrq(this.ono, 3, 12, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -19260,7 +19260,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._StateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaRamperState));
   }
 
   /**
@@ -19288,7 +19288,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._TimeModeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaTimeMode));
   }
 
   /**
@@ -19330,7 +19330,7 @@ export class OcaRamper extends OcaAgent
     if (event) return event;
 
     return this._InterpolationLawChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(OcaRamperInterpolationLaw));
   }
 
   /**
@@ -19352,12 +19352,12 @@ export class OcaRamper extends OcaAgent
     if (!OcaRamper_p)
     {
       OcaRamper_p = new Properties([
-          new Property("State", new signature(UINT8), 3, 1, false, false, null),
+          new Property("State", new signature(OcaRamperState), 3, 1, false, false, null),
           new Property("RampedProperty", new signature(OcaProperty), 3, 2, false, false, null),
-          new Property("TimeMode", new signature(UINT8), 3, 3, false, false, null),
+          new Property("TimeMode", new signature(OcaTimeMode), 3, 3, false, false, null),
           new Property("StartTime", new signature(UINT64), 3, 4, false, false, null),
           new Property("Duration", new signature(FLOAT32), 3, 5, false, false, null),
-          new Property("InterpolationLaw", new signature(UINT8), 3, 6, false, false, null),
+          new Property("InterpolationLaw", new signature(OcaRamperInterpolationLaw), 3, 6, false, false, null),
           new Property("Goal", new signature(FLOAT64), 3, 7, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
@@ -19445,7 +19445,7 @@ export class OcaMediaClock extends OcaAgent
   GetType()
   {
     let rs = OcaMediaClock_GetType_rs;
-    if (!rs) rs = OcaMediaClock_GetType_rs = new signature(UINT8);
+    if (!rs) rs = OcaMediaClock_GetType_rs = new signature(OcaMediaClockType);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19461,7 +19461,7 @@ export class OcaMediaClock extends OcaAgent
   SetType(Type)
   {
     let as = OcaMediaClock_SetType_as;
-    if (!as) as = OcaMediaClock_SetType_as = new signature(UINT8);
+    if (!as) as = OcaMediaClock_SetType_as = new signature(OcaMediaClockType);
     const cmd = new CommandRrq(this.ono, 3, 2, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -19547,7 +19547,7 @@ export class OcaMediaClock extends OcaAgent
   GetLockState()
   {
     let rs = OcaMediaClock_GetLockState_rs;
-    if (!rs) rs = OcaMediaClock_GetLockState_rs = new signature(UINT8);
+    if (!rs) rs = OcaMediaClock_GetLockState_rs = new signature(OcaMediaClockLockState);
     const cmd = new CommandRrq(this.ono, 3, 8, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19563,7 +19563,7 @@ export class OcaMediaClock extends OcaAgent
     if (event) return event;
 
     return this._TypeChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 1), new signature(OcaMediaClockType));
   }
 
   /**
@@ -19605,7 +19605,7 @@ export class OcaMediaClock extends OcaAgent
     if (event) return event;
 
     return this._LockStateChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaMediaClockLockState));
   }
 
   static get_properties()
@@ -19613,11 +19613,11 @@ export class OcaMediaClock extends OcaAgent
     if (!OcaMediaClock_p)
     {
       OcaMediaClock_p = new Properties([
-          new Property("Type", new signature(UINT8), 3, 1, false, false, null),
+          new Property("Type", new signature(OcaMediaClockType), 3, 1, false, false, null),
           new Property("DomainID", new signature(UINT16), 3, 2, false, false, null),
           new Property("RatesSupported", new signature(LIST(OcaMediaClockRate)), 3, 3, true, true, null),
           new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
-          new Property("LockState", new signature(UINT8), 3, 5, false, false, null),
+          new Property("LockState", new signature(OcaMediaClockLockState), 3, 5, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
 
@@ -19723,7 +19723,7 @@ export class OcaStreamNetwork extends OcaAgent
   GetLinkType()
   {
     let rs = OcaStreamNetwork_GetLinkType_rs;
-    if (!rs) rs = OcaStreamNetwork_GetLinkType_rs = new signature(UINT8);
+    if (!rs) rs = OcaStreamNetwork_GetLinkType_rs = new signature(OcaNetworkLinkType);
     const cmd = new CommandRrq(this.ono, 3, 1, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19765,7 +19765,7 @@ export class OcaStreamNetwork extends OcaAgent
   GetControlProtocol()
   {
     let rs = OcaStreamNetwork_GetControlProtocol_rs;
-    if (!rs) rs = OcaStreamNetwork_GetControlProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaStreamNetwork_GetControlProtocol_rs = new signature(OcaNetworkControlProtocol);
     const cmd = new CommandRrq(this.ono, 3, 4, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19778,7 +19778,7 @@ export class OcaStreamNetwork extends OcaAgent
   GetMediaProtocol()
   {
     let rs = OcaStreamNetwork_GetMediaProtocol_rs;
-    if (!rs) rs = OcaStreamNetwork_GetMediaProtocol_rs = new signature(UINT8);
+    if (!rs) rs = OcaStreamNetwork_GetMediaProtocol_rs = new signature(OcaNetworkMediaProtocol);
     const cmd = new CommandRrq(this.ono, 3, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -19791,7 +19791,7 @@ export class OcaStreamNetwork extends OcaAgent
   GetStatus()
   {
     let rs = OcaStreamNetwork_GetStatus_rs;
-    if (!rs) rs = OcaStreamNetwork_GetStatus_rs = new signature(UINT8);
+    if (!rs) rs = OcaStreamNetwork_GetStatus_rs = new signature(OcaNetworkStatus);
     const cmd = new CommandRrq(this.ono, 3, 6, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -20053,7 +20053,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._ControlProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaNetworkControlProtocol));
   }
 
   /**
@@ -20081,7 +20081,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._MediaProtocolChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 4), new signature(OcaNetworkMediaProtocol));
   }
 
   /**
@@ -20137,7 +20137,7 @@ export class OcaStreamNetwork extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 5), new signature(OcaNetworkStatus));
   }
 
   /**
@@ -20187,14 +20187,14 @@ export class OcaStreamNetwork extends OcaAgent
     if (!OcaStreamNetwork_p)
     {
       OcaStreamNetwork_p = new Properties([
-          new Property("ControlProtocol", new signature(UINT8), 3, 3, false, false, null),
+          new Property("ControlProtocol", new signature(OcaNetworkControlProtocol), 3, 3, false, false, null),
           new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
-          new Property("LinkType", new signature(UINT8), 3, 1, true, true, null),
-          new Property("MediaProtocol", new signature(UINT8), 3, 4, false, false, null),
+          new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, true, null),
+          new Property("MediaProtocol", new signature(OcaNetworkMediaProtocol), 3, 4, false, false, null),
           new Property("SignalChannelsSink", new signature(LIST(UINT32)), 3, 10, false, false, null),
           new Property("SignalChannelsSource", new signature(LIST(UINT32)), 3, 9, false, false, null),
           new Property("Statistics", new signature(OcaNetworkStatistics), 3, 11, false, false, null),
-          new Property("Status", new signature(UINT8), 3, 5, false, false, null),
+          new Property("Status", new signature(OcaNetworkStatus), 3, 5, false, false, null),
           new Property("StreamConnectorsSink", new signature(LIST(UINT32)), 3, 8, false, false, null),
           new Property("StreamConnectorsSource", new signature(LIST(UINT32)), 3, 7, false, false, null),
           new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null),
@@ -20382,7 +20382,7 @@ export class OcaStreamConnector extends OcaAgent
   GetSourceOrSink()
   {
     let rs = OcaStreamConnector_GetSourceOrSink_rs;
-    if (!rs) rs = OcaStreamConnector_GetSourceOrSink_rs = new signature(UINT8);
+    if (!rs) rs = OcaStreamConnector_GetSourceOrSink_rs = new signature(OcaNetworkMediaSourceOrSink);
     const cmd = new CommandRrq(this.ono, 3, 5, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -20395,7 +20395,7 @@ export class OcaStreamConnector extends OcaAgent
   GetStatus()
   {
     let rs = OcaStreamConnector_GetStatus_rs;
-    if (!rs) rs = OcaStreamConnector_GetStatus_rs = new signature(UINT8);
+    if (!rs) rs = OcaStreamConnector_GetStatus_rs = new signature(OcaStreamConnectorStatus);
     const cmd = new CommandRrq(this.ono, 3, 11, 0);
     return this.device.send_command(cmd, rs);
   }
@@ -20458,7 +20458,7 @@ export class OcaStreamConnector extends OcaAgent
   SetSourceOrSink(SourceOrSink)
   {
     let as = OcaStreamConnector_SetSourceOrSink_as;
-    if (!as) as = OcaStreamConnector_SetSourceOrSink_as = new signature(UINT8);
+    if (!as) as = OcaStreamConnector_SetSourceOrSink_as = new signature(OcaNetworkMediaSourceOrSink);
     const cmd = new CommandRrq(this.ono, 3, 6, 1,
                             as.encoder(Array.from(arguments)));
     return this.device.send_command(cmd);
@@ -20517,7 +20517,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._SourceOrSinkChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 3), new signature(OcaNetworkMediaSourceOrSink));
   }
 
   /**
@@ -20531,7 +20531,7 @@ export class OcaStreamConnector extends OcaAgent
     if (event) return event;
 
     return this._StatusChanged =
-      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(UINT8));
+      new PropertyEvent(this, new OcaPropertyID(3, 6), new signature(OcaStreamConnectorStatus));
   }
 
   /**
@@ -20556,8 +20556,8 @@ export class OcaStreamConnector extends OcaAgent
           new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
           new Property("OwnerNetwork", new signature(UINT32), 3, 1, false, false, null),
           new Property("Pins", new signature(MAP(UINT16, UINT32)), 3, 5, false, false, null),
-          new Property("SourceOrSink", new signature(UINT8), 3, 3, false, false, null),
-          new Property("Status", new signature(UINT8), 3, 6, false, false, null),
+          new Property("SourceOrSink", new signature(OcaNetworkMediaSourceOrSink), 3, 3, false, false, null),
+          new Property("Status", new signature(OcaStreamConnectorStatus), 3, 6, false, false, null),
           new Property("Streams", new signature(MAP(UINT16, OcaStream)), 3, 4, false, false, null),
         ], 3, OcaAgent.get_properties());
     }
