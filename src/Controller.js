@@ -37,6 +37,7 @@ import {
     OcaMethod,
     OcaObjectIdentification,
     OcaBlockMember,
+    OcaNotificationDeliveryMode,
   } from './Types';
 
 import {
@@ -285,9 +286,34 @@ export class RemoteDevice
     } else if (oid instanceof OcaBlockMember) {
       id = oid.MemberObjectIdentification.ClassIdentification;
       ono = oid.MemberObjectIdentification.ONo;
-    } else throw new Error("Bad Argument");
+    } else throw new Error("Bad Argument: ", oid);
 
     return this.allocate(this.find_best_class(id), ono);
+  }
+
+  GetDeviceTree()
+  {
+    const get_members = (block) => {
+      return block.GetMembers().then((a) => {
+        var ret = [];
+
+        a = a.map(this.resolve_object, this);
+
+        for (let i = 0; i < a.length; i++)
+        {
+          ret.push(Promise.resolve(a[i]));
+
+          if (a[i] instanceof OcaBlock)
+          {
+            ret.push(get_members(a[i]));
+          }
+        }
+
+        return Promise.all(ret);
+      });
+    };
+
+    return get_members(this.Root);
   }
 
   /**
@@ -300,6 +326,7 @@ export class RemoteDevice
   discover_all()
   {
     return this.Root.GetMembersRecursive()
-      .then((res) => res.map(this.resolve_object, this));
+      .then((res) => res.map(this.resolve_object, this))
+      .catch(() => this.discover_all_fallback());
   }
 }

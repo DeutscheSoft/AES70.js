@@ -3,9 +3,10 @@ import { error } from "../OCA.js";
 import {
     OcaPropertyChangeType,
     OcaPropertyID,
+    OcaEvent,
   } from '../Types';
 
-import { signature } from '../signature_parser';
+import { signature, Arguments } from '../signature_parser';
 
 export class Property
 {
@@ -30,7 +31,7 @@ export class Property
     return this.name;
   }
 
-  getter(o)
+  getter(o, no_bind)
   {
     let name = this.name,
         i = 0,
@@ -44,14 +45,16 @@ export class Property
 
         if (v !== void(0))
         {
-          return Promise.resolve.bind(Promise, v);
+          return function() {
+            return Promise.resolve(v);
+          };
         }
       }
       else
       {
         const fun = o['Get'+name];
 
-        if (fun) return fun.bind(o);
+        if (fun) return no_bind ? fun : fun.bind(o);
       }
 
       if (aliases && i < aliases.length) {
@@ -63,7 +66,7 @@ export class Property
     return null;
   }
 
-  setter(o)
+  setter(o, no_bind)
   {
     if (this.readonly || this.static) return null;
 
@@ -74,7 +77,7 @@ export class Property
     do {
       const fun = o['Set'+name];
 
-      if (fun) return fun.bind(o);
+      if (fun) return no_bind ? fun : fun.bind(o);
 
       if (aliases && i < aliases.length) {
         name = aliases[i++];
@@ -202,6 +205,122 @@ export class Properties
   }
 }
 
+export class PropertySync
+{
+  init(o)
+  {
+    this.o = o;
+    this.values = [];
+    this.synchronized = false;
+  }
+
+  sync()
+  {
+    if (this.synchronized) return Promise.resolve();
+
+    let index = 0;
+    let tasks = [];
+
+    this.o.get_properties().forEach((prop) => {
+      const getter = prop.getter(this.o);
+
+      if (!getter) return;
+
+      const event = prop.event(this.o);
+
+      const change_handler = function(index, value, change_type) {
+        if (change_type !== OcaPropertyChangeType.CurrentChanged) 
+          return;
+
+        this.values[index] = value;
+      };
+
+      const get_handler = function(index, value) {
+        if (value instanceof Arguments)
+          value = value.item(0);
+        this.values[index] = value;
+      };
+
+      if (event)
+      {
+        tasks.push(
+          event.subscribe(change_handler.bind(this, index)).catch(function(){})
+        );
+      }
+
+      tasks.push(
+        getter().then(get_handler.bind(this, index), function() {})
+      );
+      
+      index ++;
+    });
+
+    return Promise.all(tasks);
+  }
+
+  forEach(cb, ctx)
+  {
+    let index = 0;
+
+    if (!ctx) ctx = this;
+
+    this.o.get_properties().forEach((prop) => {
+      const getter = prop.getter(this.o);
+
+      if (!getter) return;
+
+      cb.call(ctx, this.values[index], prop.name);
+
+      index++;
+    });
+  }
+
+  Dispose()
+  {
+    this.o = null;
+  }
+}
+
+export function createPropertySync(control_class)
+{
+  const o = Object.create(PropertySync.prototype);
+  const blue_print = Object.create(control_class.prototype);
+
+  let index = 0;
+
+  control_class.get_properties().forEach((prop) => {
+    const has_setter = !!prop.setter(blue_print, true);
+    const has_getter = !!prop.getter(blue_print, true);
+
+    const make_getter = function(i) {
+      return function() { return this.values[i]; };
+    };
+
+    const make_setter = function(setter) {
+      return function(val) { setter.call(this.o, val); return val; }
+    };
+
+    if (!has_getter) return;
+
+    const descriptor = {
+      enumerable: true,
+      get: make_getter(index),
+    };
+
+    if (has_setter)
+      descriptor.set = make_setter(prop.setter(blue_print, true));
+
+    Object.defineProperty(o, prop.name, descriptor);
+    index ++;
+  });
+
+  const constructor = function(o) {
+    this.init(o);
+  };
+  constructor.prototype = o;
+  return constructor;
+}
+
 /**
  * Base class for all client-side control classes.
  */
@@ -280,6 +399,13 @@ export class ObjectBase
     return this.get_properties();
   }
 
+  GetPropertySync()
+  {
+    const p = this.constructor.GetPropertySync();
+
+    return new p(this);
+  }
+
   Dispose()
   {
   }
@@ -297,6 +423,11 @@ class BaseEvent
     this.handlers = new Set();
     this.result = null;
     this.signature = signature;
+  }
+
+  GetOcaEvent()
+  {
+    return new OcaEvent(this.object.ObjectNumber, this.id);
   }
 
   do_subscribe() {}
@@ -354,8 +485,8 @@ export class Event extends BaseEvent
   {
     super(object, id, signature);
     this.callback = (notification) => {
-      if (this.handlers.size) return;
-      const args = signature && notification.param_count ? signature.decode(notification.parameters) : [];
+      if (!this.handlers.size) return;
+      const args = signature && notification.param_count ? signature.low_decode(new DataView(notification.parameters)) : [];
       const object = this.object;
       this.handlers.forEach(function(callback) {
           try {
@@ -369,12 +500,12 @@ export class Event extends BaseEvent
 
   do_subscribe()
   {
-    return this.object.device.add_subscription(this.id, this.callback);
+    return this.object.device.add_subscription(this.GetOcaEvent(), this.callback);
   }
 
   do_unsubscribe(callback)
   {
-    return this.object.device.remove_subscription(this.id, this.callback);
+    return this.object.device.remove_subscription(this.GetOcaEvent(), this.callback);
   }
 }
 

@@ -359,15 +359,14 @@ export class Notification extends PDUBase
     } else {
       this.context = null
     }
+
     this.event = new OcaEvent(data.getUint32(pos),
                               new OcaEventID(data.getUint16(pos+4), data.getUint16(pos+6)));
+
     pos += 8;
     len -= 23 + context_length;
     if (len < 0) throw new Error("Bad Notification Length.");
     if (len > 0) {
-      if (this.param_count <= 1)
-            warn("Decoding Notification with parameterCount=%o but %o bytes of parameters",
-                     this.param_count, len);
       this.parameters = data.buffer.slice(data.byteOffset+pos, data.byteOffset+pos+len);
       pos += len;
     }

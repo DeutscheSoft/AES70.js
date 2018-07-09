@@ -33,7 +33,7 @@ export class Base {
     return this.constructor.fromArray(this.values());
   }
 
-  values()
+  get values()
   {
     return [];
   }
@@ -42,8 +42,8 @@ export class Base {
   {
     if (typeof to !== 'object') return false;
     if (to.constructor !== this.constructor) return false;
-    const v1 = this.values();
-    const v2 = to.values();
+    const v1 = this.values;
+    const v2 = to.values;
 
     for (let i = 0; i < v1.length; i++) {
       if (v1[i] !== v2[i]) return false;
@@ -65,7 +65,7 @@ export class Enum extends Base {
 
   static value_to_name(value)
   {
-    const values = this.constructor.values();
+    const values = this.values();
     
     for (let key in values)
     {
@@ -78,7 +78,7 @@ export class Enum extends Base {
 
   static name_to_value(name)
   {
-    return this.constructor.values()[name];
+    return this.values()[name];
   }
 
   toString()

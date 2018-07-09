@@ -8,7 +8,8 @@ import {
     Event,
     PropertyEvent,
     Property,
-    Properties
+    Properties,
+    createPropertySync,
   } from './Base.js';
 
 import {
@@ -168,6 +169,8 @@ let OcaRoot_GetClassIdentification_rs = null;
 let OcaRoot_GetLockable_rs = null;
 let OcaRoot_GetRole_rs = null;
 let OcaRoot_p = null;
+
+let OcaRoot_sync = null;
 
 /**
  * The abstract root class of which all OCA classes derive. It offers
@@ -352,6 +355,16 @@ export class OcaRoot extends ObjectBase
     return OcaRoot_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaRoot_sync;
+    if (!sync)
+    {
+      OcaRoot_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -383,6 +396,8 @@ let OcaWorker_GetLatency_rs = null;
 let OcaWorker_SetLatency_as = null;
 let OcaWorker_GetPath_rs = null;
 let OcaWorker_p = null;
+
+let OcaWorker_sync = null;
 
 /**
  * Abstract base class for classes that represent the device's
@@ -707,6 +722,16 @@ export class OcaWorker extends OcaRoot
     return OcaWorker_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaWorker_sync;
+    if (!sync)
+    {
+      OcaWorker_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -725,6 +750,8 @@ export class OcaWorker extends OcaRoot
 
 
 let OcaActuator_p = null;
+
+let OcaActuator_sync = null;
 
 /**
  * Abstract base class for all actuators (i.e. devices that affect the
@@ -767,6 +794,16 @@ export class OcaActuator extends OcaWorker
     return OcaActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaActuator_sync;
+    if (!sync)
+    {
+      OcaActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -782,6 +819,8 @@ export class OcaActuator extends OcaWorker
 let OcaMute_GetState_rs = null;
 let OcaMute_SetState_as = null;
 let OcaMute_p = null;
+
+let OcaMute_sync = null;
 
 /**
  * Signal mute.
@@ -871,6 +910,16 @@ export class OcaMute extends OcaActuator
     return OcaMute_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaMute_sync;
+    if (!sync)
+    {
+      OcaMute_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -887,6 +936,8 @@ export class OcaMute extends OcaActuator
 let OcaPolarity_GetState_rs = null;
 let OcaPolarity_SetState_as = null;
 let OcaPolarity_p = null;
+
+let OcaPolarity_sync = null;
 
 /**
  * Signal inverter
@@ -976,6 +1027,16 @@ export class OcaPolarity extends OcaActuator
     return OcaPolarity_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaPolarity_sync;
+    if (!sync)
+    {
+      OcaPolarity_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1002,6 +1063,8 @@ let OcaSwitch_SetPositionEnabled_as = null;
 let OcaSwitch_GetPositionEnableds_rs = null;
 let OcaSwitch_SetPositionEnableds_as = null;
 let OcaSwitch_p = null;
+
+let OcaSwitch_sync = null;
 
 /**
  * (n)-position single-pole switch.
@@ -1254,6 +1317,16 @@ export class OcaSwitch extends OcaActuator
     return OcaSwitch_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSwitch_sync;
+    if (!sync)
+    {
+      OcaSwitch_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1272,6 +1345,8 @@ export class OcaSwitch extends OcaActuator
 let OcaGain_GetGain_rs = null;
 let OcaGain_SetGain_as = null;
 let OcaGain_p = null;
+
+let OcaGain_sync = null;
 
 /**
  * Gain (or attenuation) element.
@@ -1361,6 +1436,16 @@ export class OcaGain extends OcaActuator
     return OcaGain_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaGain_sync;
+    if (!sync)
+    {
+      OcaGain_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1379,6 +1464,8 @@ let OcaPanBalance_SetPosition_as = null;
 let OcaPanBalance_GetMidpointGain_rs = null;
 let OcaPanBalance_SetMidpointGain_as = null;
 let OcaPanBalance_p = null;
+
+let OcaPanBalance_sync = null;
 
 /**
  * Pan or Balance control.
@@ -1513,6 +1600,16 @@ export class OcaPanBalance extends OcaActuator
     return OcaPanBalance_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaPanBalance_sync;
+    if (!sync)
+    {
+      OcaPanBalance_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1530,6 +1627,8 @@ export class OcaPanBalance extends OcaActuator
 let OcaDelay_GetDelayTime_rs = null;
 let OcaDelay_SetDelayTime_as = null;
 let OcaDelay_p = null;
+
+let OcaDelay_sync = null;
 
 /**
  * Signal delay - basic version.
@@ -1619,6 +1718,16 @@ export class OcaDelay extends OcaActuator
     return OcaDelay_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDelay_sync;
+    if (!sync)
+    {
+      OcaDelay_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1637,6 +1746,8 @@ let OcaDelayExtended_SetDelayValue_as = null;
 let OcaDelayExtended_GetDelayValueConverted_as = null;
 let OcaDelayExtended_GetDelayValueConverted_rs = null;
 let OcaDelayExtended_p = null;
+
+let OcaDelayExtended_sync = null;
 
 /**
  * Signal delay - extended version. Allows setting delay value in various
@@ -1746,6 +1857,16 @@ export class OcaDelayExtended extends OcaDelay
     return OcaDelayExtended_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDelayExtended_sync;
+    if (!sync)
+    {
+      OcaDelayExtended_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1762,6 +1883,8 @@ export class OcaDelayExtended extends OcaDelay
 let OcaFrequencyActuator_GetFrequency_rs = null;
 let OcaFrequencyActuator_SetFrequency_as = null;
 let OcaFrequencyActuator_p = null;
+
+let OcaFrequencyActuator_sync = null;
 
 /**
  * Simple frequency actuator.
@@ -1851,6 +1974,16 @@ export class OcaFrequencyActuator extends OcaActuator
     return OcaFrequencyActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFrequencyActuator_sync;
+    if (!sync)
+    {
+      OcaFrequencyActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -1875,6 +2008,8 @@ let OcaFilterClassical_SetOrder_as = null;
 let OcaFilterClassical_GetParameter_rs = null;
 let OcaFilterClassical_SetParameter_as = null;
 let OcaFilterClassical_p = null;
+
+let OcaFilterClassical_sync = null;
 
 /**
  * A classical analog-style filter - highpass, lowpass, bandpass, etc.,
@@ -2146,6 +2281,16 @@ export class OcaFilterClassical extends OcaActuator
     return OcaFilterClassical_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFilterClassical_sync;
+    if (!sync)
+    {
+      OcaFilterClassical_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -2174,6 +2319,8 @@ let OcaFilterParametric_SetInbandgain_as = null;
 let OcaFilterParametric_GetShapeParameter_rs = null;
 let OcaFilterParametric_SetShapeParameter_as = null;
 let OcaFilterParametric_p = null;
+
+let OcaFilterParametric_sync = null;
 
 /**
  * A parametric equalizer section with various shape options.
@@ -2443,6 +2590,16 @@ export class OcaFilterParametric extends OcaActuator
     return OcaFilterParametric_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFilterParametric_sync;
+    if (!sync)
+    {
+      OcaFilterParametric_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -2466,6 +2623,8 @@ let OcaFilterPolynomial_GetSampleRate_rs = null;
 let OcaFilterPolynomial_SetSampleRate_as = null;
 let OcaFilterPolynomial_GetMaxOrder_rs = null;
 let OcaFilterPolynomial_p = null;
+
+let OcaFilterPolynomial_sync = null;
 
 /**
  * A generic Z-domain rational polynomial filter section: <u>A(0) + A(1)z
@@ -2644,6 +2803,16 @@ export class OcaFilterPolynomial extends OcaActuator
     return OcaFilterPolynomial_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFilterPolynomial_sync;
+    if (!sync)
+    {
+      OcaFilterPolynomial_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -2666,6 +2835,8 @@ let OcaFilterFIR_SetCoefficients_as = null;
 let OcaFilterFIR_GetSampleRate_rs = null;
 let OcaFilterFIR_SetSampleRate_as = null;
 let OcaFilterFIR_p = null;
+
+let OcaFilterFIR_sync = null;
 
 /**
  * A finite impulse response (FIR) filter.
@@ -2829,6 +3000,16 @@ export class OcaFilterFIR extends OcaActuator
     return OcaFilterFIR_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFilterFIR_sync;
+    if (!sync)
+    {
+      OcaFilterFIR_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -2851,6 +3032,8 @@ let OcaFilterArbitraryCurve_SetSampleRate_as = null;
 let OcaFilterArbitraryCurve_GetTFMaxLength_rs = null;
 let OcaFilterArbitraryCurve_GetTFMinLength_rs = null;
 let OcaFilterArbitraryCurve_p = null;
+
+let OcaFilterArbitraryCurve_sync = null;
 
 /**
  * An arbitrary-curve filter, with transfer function specified as
@@ -3040,6 +3223,16 @@ export class OcaFilterArbitraryCurve extends OcaActuator
     return OcaFilterArbitraryCurve_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFilterArbitraryCurve_sync;
+    if (!sync)
+    {
+      OcaFilterArbitraryCurve_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -3083,6 +3276,8 @@ let OcaDynamics_SetKneeParameter_as = null;
 let OcaDynamics_GetSlope_rs = null;
 let OcaDynamics_SetSlope_as = null;
 let OcaDynamics_p = null;
+
+let OcaDynamics_sync = null;
 
 /**
  * A multipurpose dynamics processor. Can be configured as compressor,
@@ -3732,6 +3927,16 @@ export class OcaDynamics extends OcaActuator
     return OcaDynamics_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDynamics_sync;
+    if (!sync)
+    {
+      OcaDynamics_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -3767,6 +3972,8 @@ let OcaDynamicsDetector_SetReleaseTime_as = null;
 let OcaDynamicsDetector_GetHoldTime_rs = null;
 let OcaDynamicsDetector_SetHoldTime_as = null;
 let OcaDynamicsDetector_p = null;
+
+let OcaDynamicsDetector_sync = null;
 
 /**
  * Dynamics element : side-chain detector.
@@ -3991,6 +4198,16 @@ export class OcaDynamicsDetector extends OcaActuator
     return OcaDynamicsDetector_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDynamicsDetector_sync;
+    if (!sync)
+    {
+      OcaDynamicsDetector_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -4020,6 +4237,8 @@ let OcaDynamicsCurve_SetDynamicGainCeiling_as = null;
 let OcaDynamicsCurve_GetDynamicGainFloor_rs = null;
 let OcaDynamicsCurve_SetDynamicGainFloor_as = null;
 let OcaDynamicsCurve_p = null;
+
+let OcaDynamicsCurve_sync = null;
 
 /**
  * Dynamic compression / expansion curve. <b>Curve</b> means a function
@@ -4380,6 +4599,16 @@ export class OcaDynamicsCurve extends OcaActuator
     return OcaDynamicsCurve_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDynamicsCurve_sync;
+    if (!sync)
+    {
+      OcaDynamicsCurve_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -4414,6 +4643,8 @@ let OcaSignalGenerator_GetSweepRepeat_rs = null;
 let OcaSignalGenerator_SetSweepRepeat_as = null;
 let OcaSignalGenerator_GetGenerating_rs = null;
 let OcaSignalGenerator_p = null;
+
+let OcaSignalGenerator_sync = null;
 
 /**
  * Multiwaveform signal generator with optional sweep capability.
@@ -4824,6 +5055,16 @@ export class OcaSignalGenerator extends OcaActuator
     return OcaSignalGenerator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSignalGenerator_sync;
+    if (!sync)
+    {
+      OcaSignalGenerator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -4845,6 +5086,8 @@ export class OcaSignalGenerator extends OcaActuator
 
 
 let OcaSignalInput_p = null;
+
+let OcaSignalInput_sync = null;
 
 /**
  * A set of one or more non-network signal inputs. Number of channels is
@@ -4893,6 +5136,16 @@ export class OcaSignalInput extends OcaActuator
     return OcaSignalInput_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSignalInput_sync;
+    if (!sync)
+    {
+      OcaSignalInput_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -4906,6 +5159,8 @@ export class OcaSignalInput extends OcaActuator
 
 
 let OcaSignalOutput_p = null;
+
+let OcaSignalOutput_sync = null;
 
 /**
  * A set of one or more non-network signal outputs. Number of channels is
@@ -4954,6 +5209,16 @@ export class OcaSignalOutput extends OcaActuator
     return OcaSignalOutput_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSignalOutput_sync;
+    if (!sync)
+    {
+      OcaSignalOutput_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -4969,6 +5234,8 @@ export class OcaSignalOutput extends OcaActuator
 let OcaTemperatureActuator_GetTemperature_rs = null;
 let OcaTemperatureActuator_SetTemperature_as = null;
 let OcaTemperatureActuator_p = null;
+
+let OcaTemperatureActuator_sync = null;
 
 /**
  * A temperature actuator. Works in Celsius.
@@ -5058,6 +5325,16 @@ export class OcaTemperatureActuator extends OcaActuator
     return OcaTemperatureActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTemperatureActuator_sync;
+    if (!sync)
+    {
+      OcaTemperatureActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5074,6 +5351,8 @@ export class OcaTemperatureActuator extends OcaActuator
 let OcaIdentificationActuator_GetActive_rs = null;
 let OcaIdentificationActuator_SetActive_as = null;
 let OcaIdentificationActuator_p = null;
+
+let OcaIdentificationActuator_sync = null;
 
 /**
  * Represents a function that turns on some kind of human-detectable
@@ -5168,6 +5447,16 @@ export class OcaIdentificationActuator extends OcaActuator
     return OcaIdentificationActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaIdentificationActuator_sync;
+    if (!sync)
+    {
+      OcaIdentificationActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5182,6 +5471,8 @@ export class OcaIdentificationActuator extends OcaActuator
 
 
 let OcaSummingPoint_p = null;
+
+let OcaSummingPoint_sync = null;
 
 /**
  * Actuator with no control parameters, used as a simple node to
@@ -5223,6 +5514,16 @@ export class OcaSummingPoint extends OcaActuator
     return OcaSummingPoint_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSummingPoint_sync;
+    if (!sync)
+    {
+      OcaSummingPoint_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5236,6 +5537,8 @@ export class OcaSummingPoint extends OcaActuator
 
 
 let OcaBasicActuator_p = null;
+
+let OcaBasicActuator_sync = null;
 
 /**
  * Abstract base class for weakly typed actuators.
@@ -5280,6 +5583,16 @@ export class OcaBasicActuator extends OcaActuator
     return OcaBasicActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBasicActuator_sync;
+    if (!sync)
+    {
+      OcaBasicActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5295,6 +5608,8 @@ export class OcaBasicActuator extends OcaActuator
 let OcaBooleanActuator_GetSetting_rs = null;
 let OcaBooleanActuator_SetSetting_as = null;
 let OcaBooleanActuator_p = null;
+
+let OcaBooleanActuator_sync = null;
 
 /**
  * Basic boolean actuator.
@@ -5384,6 +5699,16 @@ export class OcaBooleanActuator extends OcaBasicActuator
     return OcaBooleanActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBooleanActuator_sync;
+    if (!sync)
+    {
+      OcaBooleanActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5400,6 +5725,8 @@ export class OcaBooleanActuator extends OcaBasicActuator
 let OcaInt8Actuator_GetSetting_rs = null;
 let OcaInt8Actuator_SetSetting_as = null;
 let OcaInt8Actuator_p = null;
+
+let OcaInt8Actuator_sync = null;
 
 /**
  * Basic int8 actuator.
@@ -5489,6 +5816,16 @@ export class OcaInt8Actuator extends OcaBasicActuator
     return OcaInt8Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt8Actuator_sync;
+    if (!sync)
+    {
+      OcaInt8Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5505,6 +5842,8 @@ export class OcaInt8Actuator extends OcaBasicActuator
 let OcaInt16Actuator_GetSetting_rs = null;
 let OcaInt16Actuator_SetSetting_as = null;
 let OcaInt16Actuator_p = null;
+
+let OcaInt16Actuator_sync = null;
 
 /**
  * Basic int16 actuator.
@@ -5594,6 +5933,16 @@ export class OcaInt16Actuator extends OcaBasicActuator
     return OcaInt16Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt16Actuator_sync;
+    if (!sync)
+    {
+      OcaInt16Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5610,6 +5959,8 @@ export class OcaInt16Actuator extends OcaBasicActuator
 let OcaInt32Actuator_GetSetting_rs = null;
 let OcaInt32Actuator_SetSetting_as = null;
 let OcaInt32Actuator_p = null;
+
+let OcaInt32Actuator_sync = null;
 
 /**
  * Basic int32 actuator.
@@ -5699,6 +6050,16 @@ export class OcaInt32Actuator extends OcaBasicActuator
     return OcaInt32Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt32Actuator_sync;
+    if (!sync)
+    {
+      OcaInt32Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5715,6 +6076,8 @@ export class OcaInt32Actuator extends OcaBasicActuator
 let OcaInt64Actuator_GetSetting_rs = null;
 let OcaInt64Actuator_SetSetting_as = null;
 let OcaInt64Actuator_p = null;
+
+let OcaInt64Actuator_sync = null;
 
 /**
  * Basic int64 actuator.
@@ -5804,6 +6167,16 @@ export class OcaInt64Actuator extends OcaBasicActuator
     return OcaInt64Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt64Actuator_sync;
+    if (!sync)
+    {
+      OcaInt64Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5820,6 +6193,8 @@ export class OcaInt64Actuator extends OcaBasicActuator
 let OcaUint8Actuator_GetSetting_rs = null;
 let OcaUint8Actuator_SetSetting_as = null;
 let OcaUint8Actuator_p = null;
+
+let OcaUint8Actuator_sync = null;
 
 /**
  * Basic uint8 actuator.
@@ -5909,6 +6284,16 @@ export class OcaUint8Actuator extends OcaBasicActuator
     return OcaUint8Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint8Actuator_sync;
+    if (!sync)
+    {
+      OcaUint8Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -5925,6 +6310,8 @@ export class OcaUint8Actuator extends OcaBasicActuator
 let OcaUint16Actuator_GetSetting_rs = null;
 let OcaUint16Actuator_SetSetting_as = null;
 let OcaUint16Actuator_p = null;
+
+let OcaUint16Actuator_sync = null;
 
 /**
  * Basic uint16 actuator.
@@ -6014,6 +6401,16 @@ export class OcaUint16Actuator extends OcaBasicActuator
     return OcaUint16Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint16Actuator_sync;
+    if (!sync)
+    {
+      OcaUint16Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6030,6 +6427,8 @@ export class OcaUint16Actuator extends OcaBasicActuator
 let OcaUint32Actuator_GetSetting_rs = null;
 let OcaUint32Actuator_SetSetting_as = null;
 let OcaUint32Actuator_p = null;
+
+let OcaUint32Actuator_sync = null;
 
 /**
  * Basic uint32 actuator.
@@ -6118,6 +6517,16 @@ export class OcaUint32Actuator extends OcaBasicActuator
     return OcaUint32Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint32Actuator_sync;
+    if (!sync)
+    {
+      OcaUint32Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6134,6 +6543,8 @@ export class OcaUint32Actuator extends OcaBasicActuator
 let OcaUint64Actuator_GetSetting_rs = null;
 let OcaUint64Actuator_SetSetting_as = null;
 let OcaUint64Actuator_p = null;
+
+let OcaUint64Actuator_sync = null;
 
 /**
  * Basic Uint64 actuator.
@@ -6223,6 +6634,16 @@ export class OcaUint64Actuator extends OcaBasicActuator
     return OcaUint64Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint64Actuator_sync;
+    if (!sync)
+    {
+      OcaUint64Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6239,6 +6660,8 @@ export class OcaUint64Actuator extends OcaBasicActuator
 let OcaFloat32Actuator_GetSetting_rs = null;
 let OcaFloat32Actuator_SetSetting_as = null;
 let OcaFloat32Actuator_p = null;
+
+let OcaFloat32Actuator_sync = null;
 
 /**
  * Basic float32 actuator.
@@ -6328,6 +6751,16 @@ export class OcaFloat32Actuator extends OcaBasicActuator
     return OcaFloat32Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFloat32Actuator_sync;
+    if (!sync)
+    {
+      OcaFloat32Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6344,6 +6777,8 @@ export class OcaFloat32Actuator extends OcaBasicActuator
 let OcaFloat64Actuator_GetSetting_rs = null;
 let OcaFloat64Actuator_SetSetting_as = null;
 let OcaFloat64Actuator_p = null;
+
+let OcaFloat64Actuator_sync = null;
 
 /**
  * Basic Float64 actuator.
@@ -6433,6 +6868,16 @@ export class OcaFloat64Actuator extends OcaBasicActuator
     return OcaFloat64Actuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFloat64Actuator_sync;
+    if (!sync)
+    {
+      OcaFloat64Actuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6450,6 +6895,8 @@ let OcaStringActuator_GetValue_rs = null;
 let OcaStringActuator_SetValue_as = null;
 let OcaStringActuator_GetMaxLen_rs = null;
 let OcaStringActuator_p = null;
+
+let OcaStringActuator_sync = null;
 
 /**
  * String actuator.
@@ -6567,6 +7014,16 @@ export class OcaStringActuator extends OcaBasicActuator
     return OcaStringActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaStringActuator_sync;
+    if (!sync)
+    {
+      OcaStringActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6588,6 +7045,8 @@ let OcaBitstringActuator_SetBit_as = null;
 let OcaBitstringActuator_GetBitstring_rs = null;
 let OcaBitstringActuator_SetBitstring_as = null;
 let OcaBitstringActuator_p = null;
+
+let OcaBitstringActuator_sync = null;
 
 /**
  * Bitstring actuator. Maximum bitstring length is 65,536 bits.
@@ -6726,6 +7185,16 @@ export class OcaBitstringActuator extends OcaBasicActuator
     return OcaBitstringActuator_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBitstringActuator_sync;
+    if (!sync)
+    {
+      OcaBitstringActuator_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6741,6 +7210,8 @@ export class OcaBitstringActuator extends OcaBasicActuator
 
 let OcaSensor_GetReadingState_rs = null;
 let OcaSensor_p = null;
+
+let OcaSensor_sync = null;
 
 /**
  * Abstract base class for all sensor classes.
@@ -6815,6 +7286,16 @@ export class OcaSensor extends OcaWorker
     return OcaSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSensor_sync;
+    if (!sync)
+    {
+      OcaSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6830,6 +7311,8 @@ export class OcaSensor extends OcaWorker
 
 let OcaLevelSensor_GetReading_rs = null;
 let OcaLevelSensor_p = null;
+
+let OcaLevelSensor_sync = null;
 
 /**
  * Signal level sensor.
@@ -6903,6 +7386,16 @@ export class OcaLevelSensor extends OcaSensor
     return OcaLevelSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaLevelSensor_sync;
+    if (!sync)
+    {
+      OcaLevelSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -6919,6 +7412,8 @@ export class OcaLevelSensor extends OcaSensor
 let OcaAudioLevelSensor_GetLaw_rs = null;
 let OcaAudioLevelSensor_SetLaw_as = null;
 let OcaAudioLevelSensor_p = null;
+
+let OcaAudioLevelSensor_sync = null;
 
 /**
  * Child of <b>OcaLevelSensor </b>that returns an audio meter reading in
@@ -7011,6 +7506,16 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
     return OcaAudioLevelSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaAudioLevelSensor_sync;
+    if (!sync)
+    {
+      OcaAudioLevelSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7026,6 +7531,8 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
 
 let OcaTimeIntervalSensor_GetReading_rs = null;
 let OcaTimeIntervalSensor_p = null;
+
+let OcaTimeIntervalSensor_sync = null;
 
 /**
  * Time interval sensor.
@@ -7099,6 +7606,16 @@ export class OcaTimeIntervalSensor extends OcaSensor
     return OcaTimeIntervalSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTimeIntervalSensor_sync;
+    if (!sync)
+    {
+      OcaTimeIntervalSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7114,6 +7631,8 @@ export class OcaTimeIntervalSensor extends OcaSensor
 
 let OcaFrequencySensor_GetReading_rs = null;
 let OcaFrequencySensor_p = null;
+
+let OcaFrequencySensor_sync = null;
 
 /**
  * Frequency sensor.
@@ -7187,6 +7706,16 @@ export class OcaFrequencySensor extends OcaSensor
     return OcaFrequencySensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFrequencySensor_sync;
+    if (!sync)
+    {
+      OcaFrequencySensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7202,6 +7731,8 @@ export class OcaFrequencySensor extends OcaSensor
 
 let OcaTemperatureSensor_GetReading_rs = null;
 let OcaTemperatureSensor_p = null;
+
+let OcaTemperatureSensor_sync = null;
 
 /**
  * Basic temperature sensor.
@@ -7275,6 +7806,16 @@ export class OcaTemperatureSensor extends OcaSensor
     return OcaTemperatureSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTemperatureSensor_sync;
+    if (!sync)
+    {
+      OcaTemperatureSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7289,6 +7830,8 @@ export class OcaTemperatureSensor extends OcaSensor
 
 
 let OcaIdentificationSensor_p = null;
+
+let OcaIdentificationSensor_sync = null;
 
 /**
  * Sensor for device identification mechanism. The idea of this mechanism
@@ -7352,6 +7895,16 @@ export class OcaIdentificationSensor extends OcaSensor
     return OcaIdentificationSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaIdentificationSensor_sync;
+    if (!sync)
+    {
+      OcaIdentificationSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7367,6 +7920,8 @@ export class OcaIdentificationSensor extends OcaSensor
 
 let OcaVoltageSensor_GetReading_rs = null;
 let OcaVoltageSensor_p = null;
+
+let OcaVoltageSensor_sync = null;
 
 /**
  * Basic voltage sensor.
@@ -7440,6 +7995,16 @@ export class OcaVoltageSensor extends OcaSensor
     return OcaVoltageSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaVoltageSensor_sync;
+    if (!sync)
+    {
+      OcaVoltageSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7455,6 +8020,8 @@ export class OcaVoltageSensor extends OcaSensor
 
 let OcaCurrentSensor_GetReading_rs = null;
 let OcaCurrentSensor_p = null;
+
+let OcaCurrentSensor_sync = null;
 
 /**
  * Basic current sensor.
@@ -7528,6 +8095,16 @@ export class OcaCurrentSensor extends OcaSensor
     return OcaCurrentSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaCurrentSensor_sync;
+    if (!sync)
+    {
+      OcaCurrentSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7543,6 +8120,8 @@ export class OcaCurrentSensor extends OcaSensor
 
 let OcaImpedanceSensor_GetReading_rs = null;
 let OcaImpedanceSensor_p = null;
+
+let OcaImpedanceSensor_sync = null;
 
 /**
  * Basic impedance sensor. Value is complex (magnitude and phase).
@@ -7616,6 +8195,16 @@ export class OcaImpedanceSensor extends OcaSensor
     return OcaImpedanceSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaImpedanceSensor_sync;
+    if (!sync)
+    {
+      OcaImpedanceSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7630,6 +8219,8 @@ export class OcaImpedanceSensor extends OcaSensor
 
 
 let OcaBasicSensor_p = null;
+
+let OcaBasicSensor_sync = null;
 
 /**
  * Abstract base class for weakly typed sensors.
@@ -7674,6 +8265,16 @@ export class OcaBasicSensor extends OcaSensor
     return OcaBasicSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBasicSensor_sync;
+    if (!sync)
+    {
+      OcaBasicSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7688,6 +8289,8 @@ export class OcaBasicSensor extends OcaSensor
 
 let OcaBooleanSensor_GetReading_rs = null;
 let OcaBooleanSensor_p = null;
+
+let OcaBooleanSensor_sync = null;
 
 /**
  * Basic boolean sensor.
@@ -7761,6 +8364,16 @@ export class OcaBooleanSensor extends OcaBasicSensor
     return OcaBooleanSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBooleanSensor_sync;
+    if (!sync)
+    {
+      OcaBooleanSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7776,6 +8389,8 @@ export class OcaBooleanSensor extends OcaBasicSensor
 
 let OcaInt8Sensor_GetReading_rs = null;
 let OcaInt8Sensor_p = null;
+
+let OcaInt8Sensor_sync = null;
 
 /**
  * Basic int8 sensor.
@@ -7849,6 +8464,16 @@ export class OcaInt8Sensor extends OcaBasicSensor
     return OcaInt8Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt8Sensor_sync;
+    if (!sync)
+    {
+      OcaInt8Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7864,6 +8489,8 @@ export class OcaInt8Sensor extends OcaBasicSensor
 
 let OcaInt16Sensor_GetReading_rs = null;
 let OcaInt16Sensor_p = null;
+
+let OcaInt16Sensor_sync = null;
 
 /**
  * Basic int16 sensor.
@@ -7937,6 +8564,16 @@ export class OcaInt16Sensor extends OcaBasicSensor
     return OcaInt16Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt16Sensor_sync;
+    if (!sync)
+    {
+      OcaInt16Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -7952,6 +8589,8 @@ export class OcaInt16Sensor extends OcaBasicSensor
 
 let OcaInt32Sensor_GetReading_rs = null;
 let OcaInt32Sensor_p = null;
+
+let OcaInt32Sensor_sync = null;
 
 /**
  * Basic int32 sensor.
@@ -8025,6 +8664,16 @@ export class OcaInt32Sensor extends OcaBasicSensor
     return OcaInt32Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt32Sensor_sync;
+    if (!sync)
+    {
+      OcaInt32Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8040,6 +8689,8 @@ export class OcaInt32Sensor extends OcaBasicSensor
 
 let OcaInt64Sensor_GetReading_rs = null;
 let OcaInt64Sensor_p = null;
+
+let OcaInt64Sensor_sync = null;
 
 /**
  * Basic int64 sensor.
@@ -8113,6 +8764,16 @@ export class OcaInt64Sensor extends OcaBasicSensor
     return OcaInt64Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaInt64Sensor_sync;
+    if (!sync)
+    {
+      OcaInt64Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8128,6 +8789,8 @@ export class OcaInt64Sensor extends OcaBasicSensor
 
 let OcaUint8Sensor_GetReading_rs = null;
 let OcaUint8Sensor_p = null;
+
+let OcaUint8Sensor_sync = null;
 
 /**
  * Basic uint8 sensor.
@@ -8201,6 +8864,16 @@ export class OcaUint8Sensor extends OcaBasicSensor
     return OcaUint8Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint8Sensor_sync;
+    if (!sync)
+    {
+      OcaUint8Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8216,6 +8889,8 @@ export class OcaUint8Sensor extends OcaBasicSensor
 
 let OcaUint16Sensor_GetReading_rs = null;
 let OcaUint16Sensor_p = null;
+
+let OcaUint16Sensor_sync = null;
 
 /**
  * Basic uint16 sensor.
@@ -8289,6 +8964,16 @@ export class OcaUint16Sensor extends OcaBasicSensor
     return OcaUint16Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint16Sensor_sync;
+    if (!sync)
+    {
+      OcaUint16Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8304,6 +8989,8 @@ export class OcaUint16Sensor extends OcaBasicSensor
 
 let OcaUint32Sensor_GetReading_rs = null;
 let OcaUint32Sensor_p = null;
+
+let OcaUint32Sensor_sync = null;
 
 /**
  * Basic uint32 sensor.
@@ -8377,6 +9064,16 @@ export class OcaUint32Sensor extends OcaBasicSensor
     return OcaUint32Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint32Sensor_sync;
+    if (!sync)
+    {
+      OcaUint32Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8392,6 +9089,8 @@ export class OcaUint32Sensor extends OcaBasicSensor
 
 let OcaUint64Sensor_GetReading_rs = null;
 let OcaUint64Sensor_p = null;
+
+let OcaUint64Sensor_sync = null;
 
 /**
  * Basic Uint64 sensor.
@@ -8465,6 +9164,16 @@ export class OcaUint64Sensor extends OcaBasicSensor
     return OcaUint64Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaUint64Sensor_sync;
+    if (!sync)
+    {
+      OcaUint64Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8480,6 +9189,8 @@ export class OcaUint64Sensor extends OcaBasicSensor
 
 let OcaFloat32Sensor_GetReading_rs = null;
 let OcaFloat32Sensor_p = null;
+
+let OcaFloat32Sensor_sync = null;
 
 /**
  * Basic float32 sensor.
@@ -8553,6 +9264,16 @@ export class OcaFloat32Sensor extends OcaBasicSensor
     return OcaFloat32Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFloat32Sensor_sync;
+    if (!sync)
+    {
+      OcaFloat32Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8568,6 +9289,8 @@ export class OcaFloat32Sensor extends OcaBasicSensor
 
 let OcaFloat64Sensor_GetReading_rs = null;
 let OcaFloat64Sensor_p = null;
+
+let OcaFloat64Sensor_sync = null;
 
 /**
  * Basic Float64 sensor.
@@ -8641,6 +9364,16 @@ export class OcaFloat64Sensor extends OcaBasicSensor
     return OcaFloat64Sensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFloat64Sensor_sync;
+    if (!sync)
+    {
+      OcaFloat64Sensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8658,6 +9391,8 @@ let OcaStringSensor_GetString_rs = null;
 let OcaStringSensor_GetMaxLen_rs = null;
 let OcaStringSensor_SetMaxLen_as = null;
 let OcaStringSensor_p = null;
+
+let OcaStringSensor_sync = null;
 
 /**
  * Text string sensor.
@@ -8776,6 +9511,16 @@ export class OcaStringSensor extends OcaBasicSensor
     return OcaStringSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaStringSensor_sync;
+    if (!sync)
+    {
+      OcaStringSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8795,6 +9540,8 @@ let OcaBitstringSensor_GetBit_as = null;
 let OcaBitstringSensor_GetBit_rs = null;
 let OcaBitstringSensor_GetBitString_rs = null;
 let OcaBitstringSensor_p = null;
+
+let OcaBitstringSensor_sync = null;
 
 /**
  * Bit string sensor.
@@ -8899,6 +9646,16 @@ export class OcaBitstringSensor extends OcaBasicSensor
     return OcaBitstringSensor_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBitstringSensor_sync;
+    if (!sync)
+    {
+      OcaBitstringSensor_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -8940,6 +9697,8 @@ let OcaBlock_FindObjectsByPath_rs = null;
 let OcaBlock_FindObjectsByLabelRecursive_as = null;
 let OcaBlock_FindObjectsByLabelRecursive_rs = null;
 let OcaBlock_p = null;
+
+let OcaBlock_sync = null;
 
 /**
  * A block is an object with three aspects: - It can contain other
@@ -9432,6 +10191,16 @@ export class OcaBlock extends OcaWorker
     return OcaBlock_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBlock_sync;
+    if (!sync)
+    {
+      OcaBlock_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -9467,6 +10236,8 @@ let OcaBlockFactory_GetProtoSignalPaths_rs = null;
 let OcaBlockFactory_GetGlobalType_rs = null;
 let OcaBlockFactory_SetGlobalType_as = null;
 let OcaBlockFactory_p = null;
+
+let OcaBlockFactory_sync = null;
 
 /**
  * Factory to create custom block instances. Used only in reconfigurable
@@ -9797,6 +10568,16 @@ export class OcaBlockFactory extends OcaWorker
     return OcaBlockFactory_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaBlockFactory_sync;
+    if (!sync)
+    {
+      OcaBlockFactory_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -9830,6 +10611,8 @@ let OcaMatrix_GetPortsPerColumn_rs = null;
 let OcaMatrix_SetPortsPerColumn_as = null;
 let OcaMatrix_SetCurrentXYLock_as = null;
 let OcaMatrix_p = null;
+
+let OcaMatrix_sync = null;
 
 /**
  * A matrix is a rectangular array of identical objects
@@ -10310,6 +11093,16 @@ export class OcaMatrix extends OcaWorker
     return OcaMatrix_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaMatrix_sync;
+    if (!sync)
+    {
+      OcaMatrix_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -10335,6 +11128,8 @@ let OcaAgent_SetLabel_as = null;
 let OcaAgent_GetOwner_rs = null;
 let OcaAgent_GetPath_rs = null;
 let OcaAgent_p = null;
+
+let OcaAgent_sync = null;
 
 /**
  * Abstract base class for defining agents.
@@ -10466,6 +11261,16 @@ export class OcaAgent extends OcaRoot
     return OcaAgent_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaAgent_sync;
+    if (!sync)
+    {
+      OcaAgent_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -10500,6 +11305,8 @@ let OcaGrouper_SetActuatorOrSensor_as = null;
 let OcaGrouper_GetMode_rs = null;
 let OcaGrouper_SetMode_as = null;
 let OcaGrouper_p = null;
+
+let OcaGrouper_sync = null;
 
 /**
  * <b><u>Concept</u></b> <b><u> </u></b>A <b>grouper</b> is an object
@@ -10971,6 +11778,16 @@ export class OcaGrouper extends OcaAgent
     return OcaGrouper_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaGrouper_sync;
+    if (!sync)
+    {
+      OcaGrouper_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -11004,6 +11821,8 @@ let OcaNumericObserver_SetHysteresis_as = null;
 let OcaNumericObserver_GetPeriod_rs = null;
 let OcaNumericObserver_SetPeriod_as = null;
 let OcaNumericObserver_p = null;
+
+let OcaNumericObserver_sync = null;
 
 /**
  * Observer of a scalar numeric or boolean property ("target property")
@@ -11413,6 +12232,16 @@ export class OcaNumericObserver extends OcaAgent
     return OcaNumericObserver_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaNumericObserver_sync;
+    if (!sync)
+    {
+      OcaNumericObserver_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -11443,6 +12272,8 @@ let OcaLibrary_GetVolumes_rs = null;
 let OcaLibrary_GetAccess_rs = null;
 let OcaLibrary_SetAccess_as = null;
 let OcaLibrary_p = null;
+
+let OcaLibrary_sync = null;
 
 /**
  * A <b>library</b> is an agent that holds a collection of datasets. We
@@ -11674,6 +12505,16 @@ export class OcaLibrary extends OcaAgent
     return OcaLibrary_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaLibrary_sync;
+    if (!sync)
+    {
+      OcaLibrary_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -11698,6 +12539,8 @@ let OcaPowerSupply_GetLoadFractionAvailable_rs = null;
 let OcaPowerSupply_GetStorageFractionAvailable_rs = null;
 let OcaPowerSupply_GetLocation_rs = null;
 let OcaPowerSupply_p = null;
+
+let OcaPowerSupply_sync = null;
 
 /**
  * A power supply.
@@ -11961,6 +12804,16 @@ export class OcaPowerSupply extends OcaAgent
     return OcaPowerSupply_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaPowerSupply_sync;
+    if (!sync)
+    {
+      OcaPowerSupply_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -11982,6 +12835,8 @@ export class OcaPowerSupply extends OcaAgent
 
 let OcaEventHandler_OnEvent_as = null;
 let OcaEventHandler_p = null;
+
+let OcaEventHandler_sync = null;
 
 /**
  * Base class for event handler objects. Application developers can
@@ -12046,6 +12901,16 @@ export class OcaEventHandler extends OcaAgent
     return OcaEventHandler_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaEventHandler_sync;
+    if (!sync)
+    {
+      OcaEventHandler_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -12073,6 +12938,8 @@ let OcaNumericObserverList_SetHysteresis_as = null;
 let OcaNumericObserverList_GetPeriod_rs = null;
 let OcaNumericObserverList_SetPeriod_as = null;
 let OcaNumericObserverList_p = null;
+
+let OcaNumericObserverList_sync = null;
 
 /**
  * Observer of a scalar numeric or boolean property ("target property")
@@ -12501,6 +13368,16 @@ export class OcaNumericObserverList extends OcaAgent
     return OcaNumericObserverList_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaNumericObserverList_sync;
+    if (!sync)
+    {
+      OcaNumericObserverList_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -12536,6 +13413,8 @@ let OcaTask_SetStartTime_as = null;
 let OcaTask_GetDuration_rs = null;
 let OcaTask_SetDuration_as = null;
 let OcaTask_p = null;
+
+let OcaTask_sync = null;
 
 /**
  * <ul> <li><font color="#223274"><b>Device action that starts, executes,
@@ -12925,6 +13804,16 @@ export class OcaTask extends OcaAgent
     return OcaTask_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTask_sync;
+    if (!sync)
+    {
+      OcaTask_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -12955,6 +13844,8 @@ let OcaTaskFactory_SetStartTime_as = null;
 let OcaTaskFactory_GetDuration_rs = null;
 let OcaTaskFactory_SetDuration_as = null;
 let OcaTaskFactory_p = null;
+
+let OcaTaskFactory_sync = null;
 
 /**
  * Base class for constructors of OcaTask objects. Used by the OcaBlock
@@ -13207,6 +14098,16 @@ export class OcaTaskFactory extends OcaAgent
     return OcaTaskFactory_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTaskFactory_sync;
+    if (!sync)
+    {
+      OcaTaskFactory_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -13230,6 +14131,8 @@ let OcaTaskGroup_GetTasks_rs = null;
 let OcaTaskGroup_GetID_rs = null;
 let OcaTaskGroup_SetID_as = null;
 let OcaTaskGroup_p = null;
+
+let OcaTaskGroup_sync = null;
 
 /**
  * A group of tasks that may be started and stopped as a unit.
@@ -13400,6 +14303,16 @@ export class OcaTaskGroup extends OcaAgent
     return OcaTaskGroup_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTaskGroup_sync;
+    if (!sync)
+    {
+      OcaTaskGroup_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -13421,6 +14334,8 @@ let OcaRamperTask_SetInterpolationLaw_as = null;
 let OcaRamperTask_GetGoal_rs = null;
 let OcaRamperTask_SetGoal_as = null;
 let OcaRamperTask_p = null;
+
+let OcaRamperTask_sync = null;
 
 /**
  * Agent that gradually changes a property setting from one value to
@@ -13608,6 +14523,16 @@ export class OcaRamperTask extends OcaTask
     return OcaRamperTask_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaRamperTask_sync;
+    if (!sync)
+    {
+      OcaRamperTask_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -13631,6 +14556,8 @@ let OcaMediaClock3_GetOffset_rs = null;
 let OcaMediaClock3_SetOffset_as = null;
 let OcaMediaClock3_GetSupportedRates_rs = null;
 let OcaMediaClock3_p = null;
+
+let OcaMediaClock3_sync = null;
 
 /**
  * A media clock, internal or external. OCA Connection Management 3
@@ -13859,6 +14786,16 @@ export class OcaMediaClock3 extends OcaAgent
     return OcaMediaClock3_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaMediaClock3_sync;
+    if (!sync)
+    {
+      OcaMediaClock3_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -13886,6 +14823,8 @@ let OcaTimeSource_GetReferenceID_rs = null;
 let OcaTimeSource_SetReferenceID_as = null;
 let OcaTimeSource_GetSyncStatus_rs = null;
 let OcaTimeSource_p = null;
+
+let OcaTimeSource_sync = null;
 
 /**
  * A time source, internal or external. See RFC 7273 for a detailed
@@ -14183,6 +15122,16 @@ export class OcaTimeSource extends OcaAgent
     return OcaTimeSource_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTimeSource_sync;
+    if (!sync)
+    {
+      OcaTimeSource_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -14206,6 +15155,8 @@ let OcaPhysicalPosition_SetPositionAndRotation_as = null;
 let OcaPhysicalPosition_GetPositionAndRotationFlags_rs = null;
 let OcaPhysicalPosition_SetPositionAndRotationFlags_as = null;
 let OcaPhysicalPosition_p = null;
+
+let OcaPhysicalPosition_sync = null;
 
 /**
  * Physical position of device or an element of it. Three position
@@ -14341,6 +15292,16 @@ export class OcaPhysicalPosition extends OcaAgent
     return OcaPhysicalPosition_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaPhysicalPosition_sync;
+    if (!sync)
+    {
+      OcaPhysicalPosition_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -14366,6 +15327,8 @@ let OcaApplicationNetwork_GetErrorCode_rs = null;
 let OcaApplicationNetwork_Control_as = null;
 let OcaApplicationNetwork_GetPath_rs = null;
 let OcaApplicationNetwork_p = null;
+
+let OcaApplicationNetwork_sync = null;
 
 /**
  * Abstract base class from which the application network classes
@@ -14643,6 +15606,16 @@ export class OcaApplicationNetwork extends OcaRoot
     return OcaApplicationNetwork_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaApplicationNetwork_sync;
+    if (!sync)
+    {
+      OcaApplicationNetwork_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -14663,6 +15636,8 @@ export class OcaApplicationNetwork extends OcaRoot
 
 let OcaControlNetwork_GetControlProtocol_rs = null;
 let OcaControlNetwork_p = null;
+
+let OcaControlNetwork_sync = null;
 
 /**
  * This was not documented in the OCA standard.
@@ -14731,6 +15706,16 @@ export class OcaControlNetwork extends OcaApplicationNetwork
     return OcaControlNetwork_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaControlNetwork_sync;
+    if (!sync)
+    {
+      OcaControlNetwork_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -14775,6 +15760,8 @@ let OcaMediaTransportNetwork_DeleteConnector_as = null;
 let OcaMediaTransportNetwork_GetAlignmentLevel_rs = null;
 let OcaMediaTransportNetwork_GetAlignmentGain_rs = null;
 let OcaMediaTransportNetwork_p = null;
+
+let OcaMediaTransportNetwork_sync = null;
 
 /**
  * This was not documented in the OCA standard.
@@ -15413,6 +16400,16 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
     return OcaMediaTransportNetwork_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaMediaTransportNetwork_sync;
+    if (!sync)
+    {
+      OcaMediaTransportNetwork_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -15439,6 +16436,8 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
 
 
 let OcaManager_p = null;
+
+let OcaManager_sync = null;
 
 /**
  * Abstract base class for classes that represent non-audio (i.e. control
@@ -15486,6 +16485,16 @@ export class OcaManager extends OcaRoot
     return OcaManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaManager_sync;
+    if (!sync)
+    {
+      OcaManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -15518,6 +16527,8 @@ let OcaDeviceManager_SetMessage_as = null;
 let OcaDeviceManager_GetManagers_rs = null;
 let OcaDeviceManager_GetDeviceRevisionID_rs = null;
 let OcaDeviceManager_p = null;
+
+let OcaDeviceManager_sync = null;
 
 /**
  * Mandatory manager that contains information relevant to the whole
@@ -16076,6 +17087,16 @@ export class OcaDeviceManager extends OcaManager
     return OcaDeviceManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDeviceManager_sync;
+    if (!sync)
+    {
+      OcaDeviceManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -16106,6 +17127,8 @@ let OcaSecurityManager_AddPreSharedKey_as = null;
 let OcaSecurityManager_ChangePreSharedKey_as = null;
 let OcaSecurityManager_DeletePreSharedKey_as = null;
 let OcaSecurityManager_p = null;
+
+let OcaSecurityManager_sync = null;
 
 /**
  * Manager that collects and controls security settings (including
@@ -16258,6 +17281,16 @@ export class OcaSecurityManager extends OcaManager
     return OcaSecurityManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSecurityManager_sync;
+    if (!sync)
+    {
+      OcaSecurityManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -16277,6 +17310,8 @@ let OcaFirmwareManager_AddImageData_as = null;
 let OcaFirmwareManager_VerifyImage_as = null;
 let OcaFirmwareManager_BeginPassiveComponentUpdate_as = null;
 let OcaFirmwareManager_p = null;
+
+let OcaFirmwareManager_sync = null;
 
 /**
  * Optional manager that manages versions of the different firmware and
@@ -16504,6 +17539,16 @@ export class OcaFirmwareManager extends OcaManager
     return OcaFirmwareManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaFirmwareManager_sync;
+    if (!sync)
+    {
+      OcaFirmwareManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -16523,6 +17568,8 @@ let OcaSubscriptionManager_AddPropertyChangeSubscription_as = null;
 let OcaSubscriptionManager_RemovePropertyChangeSubscription_as = null;
 let OcaSubscriptionManager_GetMaximumSubscriberContextLength_rs = null;
 let OcaSubscriptionManager_p = null;
+
+let OcaSubscriptionManager_sync = null;
 
 /**
  * Manager that collects and controls the event subscriptions of the
@@ -16782,6 +17829,16 @@ export class OcaSubscriptionManager extends OcaManager
     return OcaSubscriptionManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaSubscriptionManager_sync;
+    if (!sync)
+    {
+      OcaSubscriptionManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -16804,6 +17861,8 @@ let OcaPowerManager_GetActivePowerSupplies_rs = null;
 let OcaPowerManager_ExchangePowerSupply_as = null;
 let OcaPowerManager_GetAutoState_rs = null;
 let OcaPowerManager_p = null;
+
+let OcaPowerManager_sync = null;
 
 /**
  * Optional manager that manages power settings and state. <ul> <li>May
@@ -17022,6 +18081,16 @@ export class OcaPowerManager extends OcaManager
     return OcaPowerManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaPowerManager_sync;
+    if (!sync)
+    {
+      OcaPowerManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -17044,6 +18113,8 @@ let OcaNetworkManager_GetStreamNetworks_rs = null;
 let OcaNetworkManager_GetControlNetworks_rs = null;
 let OcaNetworkManager_GetMediaTransportNetworks_rs = null;
 let OcaNetworkManager_p = null;
+
+let OcaNetworkManager_sync = null;
 
 /**
  * Optional manager that collects all media transport and control
@@ -17215,6 +18286,16 @@ export class OcaNetworkManager extends OcaManager
     return OcaNetworkManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaNetworkManager_sync;
+    if (!sync)
+    {
+      OcaNetworkManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -17235,6 +18316,8 @@ let OcaMediaClockManager_GetClocks_rs = null;
 let OcaMediaClockManager_GetMediaClockTypesSupported_rs = null;
 let OcaMediaClockManager_GetClock3s_rs = null;
 let OcaMediaClockManager_p = null;
+
+let OcaMediaClockManager_sync = null;
 
 /**
  * Optional manager that collects all media clocks the device uses. <ul>
@@ -17375,6 +18458,16 @@ export class OcaMediaClockManager extends OcaManager
     return OcaMediaClockManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaMediaClockManager_sync;
+    if (!sync)
+    {
+      OcaMediaClockManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -17400,6 +18493,8 @@ let OcaLibraryManager_GetLibraryList_rs = null;
 let OcaLibraryManager_GetCurrentPatch_rs = null;
 let OcaLibraryManager_SetCurrentPatch_as = null;
 let OcaLibraryManager_p = null;
+
+let OcaLibraryManager_sync = null;
 
 /**
  * Optional manager for handling device presets -- patch and parset
@@ -17591,6 +18686,16 @@ export class OcaLibraryManager extends OcaManager
     return OcaLibraryManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaLibraryManager_sync;
+    if (!sync)
+    {
+      OcaLibraryManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -17607,6 +18712,8 @@ export class OcaLibraryManager extends OcaManager
 
 
 let OcaAudioProcessingManager_p = null;
+
+let OcaAudioProcessingManager_sync = null;
 
 /**
  * Placeholder for optional manager that in future versions of the
@@ -17654,6 +18761,16 @@ export class OcaAudioProcessingManager extends OcaManager
     return OcaAudioProcessingManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaAudioProcessingManager_sync;
+    if (!sync)
+    {
+      OcaAudioProcessingManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -17672,6 +18789,8 @@ let OcaDeviceTimeManager_GetTimeSources_rs = null;
 let OcaDeviceTimeManager_GetCurrentDeviceTimeSource_rs = null;
 let OcaDeviceTimeManager_SetCurrentDeviceTimeSource_as = null;
 let OcaDeviceTimeManager_p = null;
+
+let OcaDeviceTimeManager_sync = null;
 
 /**
  * Manager that allows controlling and monitoring a device's time-of-day
@@ -17830,6 +18949,16 @@ export class OcaDeviceTimeManager extends OcaManager
     return OcaDeviceTimeManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDeviceTimeManager_sync;
+    if (!sync)
+    {
+      OcaDeviceTimeManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -17852,6 +18981,8 @@ let OcaTaskManager_AddSlot_as = null;
 let OcaTaskManager_DeleteSlot_as = null;
 let OcaTaskManager_GetSlots_rs = null;
 let OcaTaskManager_p = null;
+
+let OcaTaskManager_sync = null;
 
 /**
  * Optional manager that collects OcaTask and OcaTaskGroup objects. Tasks
@@ -18054,6 +19185,16 @@ export class OcaTaskManager extends OcaManager
     return OcaTaskManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaTaskManager_sync;
+    if (!sync)
+    {
+      OcaTaskManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -18069,6 +19210,8 @@ export class OcaTaskManager extends OcaManager
 let OcaCodingManager_GetAvailableEncodingSchemes_rs = null;
 let OcaCodingManager_GetAvailableDecodingSchemes_rs = null;
 let OcaCodingManager_p = null;
+
+let OcaCodingManager_sync = null;
 
 /**
  * Optional manager that collects all media decoders/encoders (Codecs)
@@ -18175,6 +19318,16 @@ export class OcaCodingManager extends OcaManager
     return OcaCodingManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaCodingManager_sync;
+    if (!sync)
+    {
+      OcaCodingManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -18192,6 +19345,8 @@ export class OcaCodingManager extends OcaManager
 let OcaDiagnosticManager_GetLockStatus_as = null;
 let OcaDiagnosticManager_GetLockStatus_rs = null;
 let OcaDiagnosticManager_p = null;
+
+let OcaDiagnosticManager_sync = null;
 
 /**
  * Optional manager that provides application diagnostic aids. Unlike
@@ -18258,6 +19413,16 @@ export class OcaDiagnosticManager extends OcaManager
     return OcaDiagnosticManager_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaDiagnosticManager_sync;
+    if (!sync)
+    {
+      OcaDiagnosticManager_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -18282,6 +19447,8 @@ let OcaNetworkSignalChannel_SetIDAdvertised_as = null;
 let OcaNetworkSignalChannel_SetNetwork_as = null;
 let OcaNetworkSignalChannel_SetRemoteChannelID_as = null;
 let OcaNetworkSignalChannel_p = null;
+
+let OcaNetworkSignalChannel_sync = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by features of the
@@ -18597,6 +19764,16 @@ export class OcaNetworkSignalChannel extends OcaWorker
     return OcaNetworkSignalChannel_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaNetworkSignalChannel_sync;
+    if (!sync)
+    {
+      OcaNetworkSignalChannel_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -18626,6 +19803,8 @@ let OcaNetwork_GetSystemInterfaces_rs = null;
 let OcaNetwork_SetSystemInterfaces_as = null;
 let OcaNetwork_GetMediaPorts_rs = null;
 let OcaNetwork_p = null;
+
+let OcaNetwork_sync = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by class
@@ -18964,6 +20143,16 @@ export class OcaNetwork extends OcaAgent
     return OcaNetwork_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaNetwork_sync;
+    if (!sync)
+    {
+      OcaNetwork_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -18998,6 +20187,8 @@ let OcaRamper_SetInterpolationLaw_as = null;
 let OcaRamper_GetGoal_rs = null;
 let OcaRamper_SetGoal_as = null;
 let OcaRamper_p = null;
+
+let OcaRamper_sync = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by </i><b><i>OcaRamperTask</i></b>
@@ -19365,6 +20556,16 @@ export class OcaRamper extends OcaAgent
     return OcaRamper_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaRamper_sync;
+    if (!sync)
+    {
+      OcaRamper_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -19393,6 +20594,8 @@ let OcaMediaClock_GetRate_rs = null;
 let OcaMediaClock_SetRate_as = null;
 let OcaMediaClock_GetLockState_rs = null;
 let OcaMediaClock_p = null;
+
+let OcaMediaClock_sync = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by
@@ -19624,6 +20827,16 @@ export class OcaMediaClock extends OcaAgent
     return OcaMediaClock_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaMediaClock_sync;
+    if (!sync)
+    {
+      OcaMediaClock_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -19658,6 +20871,8 @@ let OcaStreamNetwork_SetSignalChannelsSource_as = null;
 let OcaStreamNetwork_GetSignalChannelsSink_rs = null;
 let OcaStreamNetwork_SetSignalChannelsSink_as = null;
 let OcaStreamNetwork_p = null;
+
+let OcaStreamNetwork_sync = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by class
@@ -20204,6 +21419,16 @@ export class OcaStreamNetwork extends OcaAgent
     return OcaStreamNetwork_p;
   }
 
+  static GetPropertySync()
+  {
+    let sync = OcaStreamNetwork_sync;
+    if (!sync)
+    {
+      OcaStreamNetwork_sync = sync = createPropertySync(this);
+    }
+    return sync;
+  }
+
   /**
    * Call this method when the object is no longer needed. It will
    * automatically unsubscribe all event handlers.
@@ -20239,6 +21464,8 @@ let OcaStreamConnector_SetIDAdvertised_as = null;
 let OcaStreamConnector_SetOwnerNetwork_as = null;
 let OcaStreamConnector_SetSourceOrSink_as = null;
 let OcaStreamConnector_p = null;
+
+let OcaStreamConnector_sync = null;
 
 /**
  * <b>DEPRECATED CLASS</b> <i>Replaced by the
@@ -20563,6 +21790,16 @@ export class OcaStreamConnector extends OcaAgent
     }
 
     return OcaStreamConnector_p;
+  }
+
+  static GetPropertySync()
+  {
+    let sync = OcaStreamConnector_sync;
+    if (!sync)
+    {
+      OcaStreamConnector_sync = sync = createPropertySync(this);
+    }
+    return sync;
   }
 
   /**
