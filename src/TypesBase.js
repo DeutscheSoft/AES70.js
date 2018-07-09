@@ -49,7 +49,7 @@ export class Base {
       if (v1[i] !== v2[i]) return false;
     }
 
-    return false;
+    return true;
   }
 }
 

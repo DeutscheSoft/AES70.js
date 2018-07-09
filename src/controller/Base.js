@@ -229,7 +229,7 @@ export class PropertySync
       const event = prop.event(this.o);
 
       const change_handler = function(index, value, change_type) {
-        if (change_type !== OcaPropertyChangeType.CurrentChanged) 
+        if (!change_type.isEqual(OcaPropertyChangeType.CurrentChanged))
           return;
 
         this.values[index] = value;
