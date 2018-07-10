@@ -1,4 +1,4 @@
-import { ClientConnection } from './Controller';
+import { ClientConnection } from '../Controller';
 
 export class WebSocketConnection extends ClientConnection
 {
