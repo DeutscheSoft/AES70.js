@@ -43,4 +43,35 @@ class CheckTree extends Test {
   }
 }
 
-module.exports = [ CheckTree ];
+class CheckPath extends Test {
+  async run()
+  {
+    const tree = await this.device.GetDeviceTree();
+
+    const check_children = async (parent, children) => {
+      const roles = new Map();
+      for (let i = 0; i < children.length; i++)
+      {
+        const o = children[i];
+        if (Array.isArray(o))
+        {
+          await check_children(children[i-1], o);
+        }
+        else
+        {
+          const role = await o.GetRole();
+
+          this.check(role.length, "Role name is empty.");
+
+          this.check(!roles.has(role), "Role name collision with object %d (role: %o)", o.ono, role);
+
+          roles.set(role, o);
+        }
+      }
+    };
+
+    await check_children(this.device.Root, tree);
+  }
+}
+
+module.exports = [ CheckTree, CheckPath ];
