@@ -52,19 +52,20 @@ class ObjectTest extends Test
   async run()
   {
     const tree = await this.device.GetDeviceTree();
+    const tasks = [];
 
-    const check_children = async (parent, children) => {
+    const check_children = (parent, children) => {
       for (let i = 0; i < children.length; i++)
       {
         const o = children[i];
         if (Array.isArray(o))
         {
-          await check_children(children[i-1], o);
+          check_children(children[i-1], o);
         }
         else
         {
           try {
-            await this.check_object(o);
+            tasks.push(this.check_object(o));
           } catch (e) {
             this.fail('check_object failed: %o.', e);
           }
@@ -72,7 +73,9 @@ class ObjectTest extends Test
       }
     };
 
-    await check_children(this.device.Root, tree);
+    check_children(this.device.Root, tree);
+
+    await Promise.all(tasks);
   }
 
   check_object(o)
@@ -126,12 +129,15 @@ class TestRunner
     for (let i = 0; i < this.tests.length; i++)
     {
       const test = this.tests[i];
+      let t1, t2;
 
-      this.log(pad(test.describe(), 30) + "\t");
+      this.log("  " + pad(test.describe(), 30) + "\t");
 
       try {
         await test.prepare();
+        t1 = Date.now();
         await test.run();
+        t2 = Date.now();
         await test.cleanup(); 
       } catch (e) {
         this.log("failed\n");
@@ -143,7 +149,7 @@ class TestRunner
         }
         continue;
       }
-      process.stdout.write("OK\n");
+      this.log("OK (%d ms)\n", t2 - t1);
     }
   }
 }

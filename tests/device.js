@@ -45,12 +45,14 @@ async function run(targets)
       continue;
     }
 
-    console.log("Testing device at %o", remote);
+    console.log("Testing device at %o:", remote);
 
     const device = new RemoteDevice(connection);
     const test_runner = get_runner(device);
 
     await test_runner.run();
+
+    console.log("");
   }
 }
 
