@@ -47,6 +47,39 @@ class Test {
   }
 }
 
+class ObjectTest extends Test
+{
+  async run()
+  {
+    const tree = await this.device.GetDeviceTree();
+
+    const check_children = async (parent, children) => {
+      for (let i = 0; i < children.length; i++)
+      {
+        const o = children[i];
+        if (Array.isArray(o))
+        {
+          await check_children(children[i-1], o);
+        }
+        else
+        {
+          try {
+            await this.check_object(o);
+          } catch (e) {
+            this.fail('check_object failed: %o.', e);
+          }
+        }
+      }
+    };
+
+    await check_children(this.device.Root, tree);
+  }
+
+  check_object(o)
+  {
+  }
+}
+
 function pad(str, n)
 {
   // this is slow
@@ -118,4 +151,5 @@ class TestRunner
 module.exports = {
   Test: Test,
   TestRunner: TestRunner,
+  ObjectTest: ObjectTest,
 };

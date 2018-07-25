@@ -16,6 +16,7 @@ function get_runner(device)
   
   test_runner.add(test.Test);
   test_runner.add(require('./device/check_tree'));
+  test_runner.add(require('./device/property_changes'));
 
   return test_runner;
 }
