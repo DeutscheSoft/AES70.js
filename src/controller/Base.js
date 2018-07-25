@@ -192,6 +192,8 @@ export class Properties
 
   forEach(cb, ctx)
   {
+    const ret = [];
+
     if (this.parent) this.parent.forEach(cb, ctx);
 
     const P = this.properties;
@@ -200,8 +202,10 @@ export class Properties
     {
       const p = P[i];
       if (p !== void(0))
-        cb.call(ctx, P[i]);
+        ret.push(cb.call(ctx, P[i]));
     }
+
+    return ret;
   }
 }
 
