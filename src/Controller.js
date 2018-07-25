@@ -38,6 +38,7 @@ import {
     OcaObjectIdentification,
     OcaBlockMember,
     OcaNotificationDeliveryMode,
+    OcaStatus,
   } from './Types';
 
 import {
@@ -45,6 +46,19 @@ import {
   } from './signature_parser';
   
 const event_signature = new signature(OcaEvent);
+
+export class RemoteError
+{
+  constructor(status)
+  {
+    this.status = new OcaStatus(status);
+  }
+
+  static check_status(error, status)
+  {
+    return error instanceof this && error.status.isEqual(status);
+  }
+}
 
 export class ClientConnection extends Connection
 {
@@ -109,7 +123,7 @@ export class ClientConnection extends Connection
         }
         handles.delete(o.handle);
         if (o.status_code !== 0) {
-          h[2](o);
+          h[2](new RemoteError(o.status_code));
         } else if (!h[0]) {
           h[1](o);
         } else {
