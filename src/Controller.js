@@ -330,6 +330,32 @@ export class RemoteDevice
     return get_members(this.Root);
   }
 
+  discover_all_fallback()
+  {
+    return this.GetDeviceTree()
+      .then((tree) => {
+        const ret = [];
+        const it = function(a)
+        {
+          for (let i = 0; i < a.length; i++)
+          {
+            if (Array.isArray(a[i]))
+            {
+              it(a[i]);
+            }
+            else
+            {
+              ret.push(a[i]);
+            }
+          }
+        };
+
+        it(tree);
+
+        return ret;
+      });
+  }
+
   /**
    * Discovers the complete object tree of this device starting
    * from the root block. The root block itself will not be part

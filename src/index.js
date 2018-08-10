@@ -37,4 +37,5 @@ export {
   encodeMessage,
   decodeMessage,
   WebSocketConnection,
+  RemoteDevice,
 };
