@@ -1,6 +1,7 @@
 const process = require('process');
 const RemoteDevice = require('../lib/Controller').RemoteDevice;
 const TCPConnection = require('../lib/controller/TCP').TCPConnection;
+const UDPConnection = require('../lib/controller/UDP').UDPConnection;
 const WebSocketConnection = require('../lib/controller/WebSocket').WebSocketConnection;
 const test = require('./device/test');
 
@@ -35,9 +36,22 @@ async function run(targets)
       }
       else
       {
-        const host = remote.split(":")[0];
-        const port = parseInt(remote.split(":")[1]);
-        connection = await TCPConnection.connect({ host: host, port: port });
+        const tmp = remote.split(":");
+
+        if (tmp.length == 2)
+          tmp.unshift("tcp");
+
+        switch (tmp[0])
+        {
+        case "tcp":
+          connection = await TCPConnection.connect({ host: tmp[1], port: tmp[2] });
+          break;
+        case "udp":
+          connection = await UDPConnection.connect({ host: tmp[1], port: tmp[2] });
+          break;
+        default:
+          throw new Error("Unsupported connection type: "+remote);
+        }
       }
     } catch (e) {
       console.log("Failed to connect to %o", remote);
