@@ -1,10 +1,10 @@
-TEST_FILES=src/tests/utils.js src/tests/signatures.js src/tests/OCA.test.js
+TEST_FILES=src/tests/utils.js src/tests/signatures.js src/tests/AES70.test.js
 
 SRC = $(filter-out src/utf8_node.js, $(wildcard src/*.js))
 SRC += $(wildcard src/controller/*.js)
 LIB = $(SRC:src/%.js=lib/%.js)
 
-all: dist/OCA.es5.js $(LIB)
+all: dist/AES70.es5.js $(LIB)
 
 node: $(LIB)
 
@@ -21,7 +21,7 @@ lib/utf8.js: src/utf8_node.js Makefile .babelrc
 dist/babel.browser.js: dist/rollup.js Makefile .babelrc
 	BABEL_ENV=browser babel $< -o $@
 
-dist/OCA.es5.js: dist/babel.browser.js Makefile
+dist/AES70.es5.js: dist/babel.browser.js Makefile
 	closure-compiler --js $< --js_output_file $@ --language_in ECMASCRIPT5 --language_out ECMASCRIPT5
 
 docs: $(SRC) Makefile
