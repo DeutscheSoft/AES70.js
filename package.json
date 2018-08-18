@@ -34,7 +34,9 @@
     "url": "https://github.com/DeutscheSoft/AES70.js/issues"
   },
   "homepage": "https://github.com/DeutscheSoft/AES70.js#readme",
-  "dependencies": {},
+  "dependencies": {
+    "babel-preset-env": "^1.7.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-preset-node6": "^11.0.0",
