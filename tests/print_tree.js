@@ -77,4 +77,5 @@ async function printDevice(device)
     device.CodingManager,
     device.DiagnosticManager
   ]);
+  process.exit(0);
 }
