@@ -28,6 +28,7 @@ export {
   error,
   Connection,
   ClientConnection,
+  RemoteDevice,
   Command,
   CommandRrq,
   Response,
