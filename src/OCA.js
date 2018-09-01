@@ -46,26 +46,25 @@ export class Connection
   }
 
   read(buf) {
-    var tmp, len;
-
     if (this.inbuf) {
-      len = this.inbuf.byteLength - this.inpos;
-      tmp = new ArrayBuffer(len + buf.byteLength);
-      tmp = new Uint8Array(tmp, 0, len);
-      memcpy(tmp, new Uint8Array(this.inbuf, this.inpos), len);
-      tmp = new Uint8Array(tmp.buffer, len);
-      memcpy(tmp, new Uint8Array(buf), buf.byteLength);
+      const len = this.inbuf.byteLength - this.inpos;
+      const tmp = new Uint8Array(new ArrayBuffer(len + buf.byteLength));
+
+      tmp.set(new Uint8Array(this.inbuf, this.inpos));
+      tmp.set(new Uint8Array(buf), len);
+
       this.inbuf = null;
       this.inpos = 0;
+
       buf = tmp.buffer;
     }
 
-    var ret;
-    var pos;
+    let pos = 0;
+    const view = new DataView(buf);
 
     do {
-      ret = [];
-      len = decodeMessage(new DataView(buf), pos, ret);
+      const ret = [];
+      const len = decodeMessage(view, pos, ret);
       if (len == -1) {
         this.inbuf = buf;
         this.inpos = pos;
@@ -82,13 +81,6 @@ export class Connection
 
   write(buf)
   {
-  }
-}
-
-function memcpy(dst, src, len) {
-  var i;
-  for (i = 0; i < len; i++) {
-    dst[i] = src[i];
   }
 }
 
@@ -123,7 +115,6 @@ export class Command extends PDUBase
 
   encode_to(dst, pos)
   {
-    var len;
     pos = pos|0;
     dst.setUint32(pos, this.encoded_length());
     pos += 4;
@@ -141,10 +132,8 @@ export class Command extends PDUBase
       if (this.parameters instanceof encoder) {
         pos = this.parameters.encode_to(dst, pos);
       } else {
-        len = this.parameters.byteLength;
-        memcpy(new Uint8Array(dst.buffer, dst.byteOffset+pos, len),
-               new Uint8Array(this.parameters, 0, len), len);
-        pos += len;
+        new Uint8Array(dst.buffer).set(new Uint8Array(this.parameters), dst.byteOffset+pos);
+        pos += this.parameters.byteLength;
       }
     }
     return pos;
@@ -244,7 +233,6 @@ export class Response extends PDUBase
 
   encode_to(dst, pos)
   {
-    var len;
     dst.setUint32(pos, this.encoded_length());
     pos += 4;
     dst.setUint32(pos, this.handle);
@@ -257,10 +245,8 @@ export class Response extends PDUBase
       if (this.parameters instanceof encoder) {
         pos = this.parameters.encode_to(dst, pos);
       } else {
-        len = this.parameters.byteLength;
-        memcpy(new Uint8Array(dst.buffer, dst.byteOffset+pos, len),
-               new Uint8Array(this.parameters, 0, len), len);
-        pos += len;
+        new Uint8Array(dst.buffer).set(new Uint8Array(this.parameters), dst.byteOffset+pos);
+        pos += this.parameters.byteLength;
       }
     }
     return pos;
@@ -307,8 +293,7 @@ export class Notification extends PDUBase
     if (this.context && (len = this.context.byteLength)) {
       dst.setUint16(len);
       pos += 2;
-      memcpy(new Uint8Array(dst.buffer, dst.byteOffset+pos, len),
-             new Uint8Array(this.context, 0, len), len);
+      new Uint8Array(dst.buffer).set(new Uint8Array(this.context), dst.byteOffset+pos);
       pos += len;
     } else {
       dst.setUint16(pos, 0);
@@ -324,10 +309,8 @@ export class Notification extends PDUBase
       if (this.parameters instanceof encoder) {
         pos = this.parameters.encode_to(dst, pos);
       } else {
-        len = this.parameters.byteLength;
-        memcpy(new Uint8Array(dst.buffer, dst.byteOffset+pos, len),
-               new Uint8Array(this.parameters, 0, len), len);
-        pos += len;
+        new Uint8Array(dst.buffer).set(new Uint8Array(this.parameters), dst.byteOffset+pos);
+        pos += this.parameters.byteLength;
       }
     }
     return pos;
