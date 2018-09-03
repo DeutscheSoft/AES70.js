@@ -1,5 +1,6 @@
 import {
     Connection,
+    Events,
     Command,
     CommandRrq,
     Response,
@@ -67,6 +68,20 @@ export class ClientConnection extends Connection
     super();
     this.command_handles = new Map();
     this.subscribers = new Map();
+
+    const cleanup = (e) => {
+      if (!e) e = new Error('closed');
+      this.command_handles.forEach((a, id) => {
+        try {
+          a[2](e);
+        } catch (e) {
+          // TODO: do something
+        }
+      });
+    };
+
+    this.on('error', cleanup);
+    this.on('close', cleanup);
   }
 
   get_command_handle()
@@ -154,12 +169,22 @@ export class ClientConnection extends Connection
  * Can be used to query the available object tree, or interact with the manager
  * classes.
  */
-export class RemoteDevice
+export class RemoteDevice extends Events
 {
   constructor(connection, ...modules)
   {
+    super();
     this.objects = new Map();
     this.connection = connection;
+
+    connection.on('error', (e) => {
+      this.emit('error', e);
+    });
+
+    connection.on('close', (e) => {
+      this.emit('close', e);
+    });
+
     if (!modules.length) {
       modules = [ Classes ];
     }
@@ -181,6 +206,11 @@ export class RemoteDevice
     this.Root = new OcaBlock(100, this);
 
     this.subscriptions = new Map();
+  }
+
+  close()
+  {
+    this.connection.close();
   }
 
   send_command(cmd, return_signature)

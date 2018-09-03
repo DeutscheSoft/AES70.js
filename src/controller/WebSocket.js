@@ -5,11 +5,17 @@ export class WebSocketConnection extends ClientConnection
   constructor(ws)
   {
     super();
+    this.ws = ws;
     ws.binaryType = "arraybuffer";
     ws.addEventListener('message', (ev) => {
       this.read(ev.data);
     });
-    this.ws = ws;
+    ws.addEventListener('close', () => {
+      this.emit('close');
+    });
+    ws.addEventListener('error', () => {
+      this.emit('error');
+    });
   }
 
   write(buf)
@@ -41,5 +47,10 @@ export class WebSocketConnection extends ClientConnection
       });
       ws.addEventListener('error', on_error);
     });
+  }
+
+  close()
+  {
+    this.ws.close();
   }
 }

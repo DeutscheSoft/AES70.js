@@ -15,6 +15,12 @@ export class TCPConnection extends ClientConnection
     socket.on('data', (data) => {
       this.read(data.buffer);
     });
+    socket.on('error', (e) => {
+      this.emit('error', e);
+    });
+    socket.on('close', () => {
+      this.emit('close');
+    });
   }
 
   static connect(options)
@@ -38,5 +44,11 @@ export class TCPConnection extends ClientConnection
   write(buf)
   {
     this.socket.write(Buffer.from(buf), 'binary');
+  }
+
+  close()
+  {
+    super.close();
+    this.socket.end();
   }
 }

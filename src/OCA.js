@@ -34,13 +34,66 @@ export function error(...args) {
   } catch (e) {}
 }
 
+export class Events
+{
+  constructor() {
+    this.event_handlers = new Map();
+  }
+
+  emit(name)
+  {
+    const handlers = this.event_handlers.get(name);
+    const args = Array.prototype.slice.call(arguments, 1);
+
+    if (!handlers) return;
+
+    handlers.forEach((cb) => {
+      try {
+        cb.apply(this, args);
+      } catch (e) {
+        warn("ERROR when calling %o: %o", cb, e);
+      }
+    });
+  }
+
+  on(name, cb)
+  {
+    let handlers = this.event_handlers.get(name);
+
+    if (!handlers)
+    {
+      this.event_handlers.set(name, handlers = new Set());
+    }
+
+    handlers.add(cb);
+  }
+
+  addEventListener(name, cb) {
+    this.on(name, cb);
+  }
+
+  removeEventListener(name, cb)
+  {
+    let handlers = this.event_handlers.get(name);
+
+    if (!handlers || !handlers.contains(cb))
+    {
+      warn("removeEventListeners(): %o not installed.", cb);
+      return;
+    }
+
+    handlers.delete(cb);
+  }
+}
+
 /**
  * Connection base class.
  */
-export class Connection
+export class Connection extends Events
 {
   constructor()
   {
+    super();
     this.inbuf = null;
     this.inpos = 0;
   }
@@ -80,6 +133,10 @@ export class Connection
   }
 
   write(buf)
+  {
+  }
+
+  close()
   {
   }
 }
