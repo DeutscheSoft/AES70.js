@@ -50,9 +50,10 @@ const event_signature = new signature(OcaEvent);
 
 export class RemoteError
 {
-  constructor(status)
+  constructor(status, cmd)
   {
     this.status = new OcaStatus(status);
+    this.cmd = cmd;
   }
 
   static check_status(error, status)
@@ -118,7 +119,7 @@ export class ClientConnection extends Connection
     const buf = encodeMessage(cmd); 
 
     return new Promise((resolve, reject) => {
-      this.command_handles.set(id, [ return_signature, resolve, reject ]);
+      this.command_handles.set(id, [ return_signature, resolve, reject, cmd ]);
       this.write(buf);
     });
   }
@@ -138,7 +139,7 @@ export class ClientConnection extends Connection
         }
         handles.delete(o.handle);
         if (o.status_code !== 0) {
-          h[2](new RemoteError(o.status_code));
+          h[2](new RemoteError(o.status_code, h[3]));
         } else if (!h[0]) {
           h[1](o);
         } else {
