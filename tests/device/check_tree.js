@@ -25,6 +25,8 @@ class CheckTree extends Test {
             this.fail('GetOwner is not implemented in object %o.', o.ObjectNumber);
           }
 
+          this.check(o.ObjectNumber >= 4096, "object has reserved ObjectNumber ( below 4096 )");
+
           try {
             const id = await o.GetClassIdentification();
             const class_version = o.ClassVersion;
