@@ -5,6 +5,7 @@ const TCPConnection = require('../lib/controller/TCP').TCPConnection;
 const UDPConnection = require('../lib/controller/UDP').UDPConnection;
 const WebSocketConnection = require('../lib/controller/WebSocket').WebSocketConnection;
 const test = require('./device/test');
+const url = require('url');
 
 if (process.argv.length < 3)
 {
@@ -130,6 +131,10 @@ class FragmentationProxy {
     return this.server.address();
   }
 
+  get_websocket_url() {
+    return 'ws://localhost:' + this.address().port;
+  }
+
   close() {
     this.server.close();
   }
@@ -175,6 +180,21 @@ async function run(targets)
       if (remote.startsWith("ws://"))
       {
         await run_tests(WebSocketConnection, { url: remote });
+
+        console.log("");
+        console.log("Testing device at %o (with packet fragmentation):", remote);
+
+        const target = url.parse(remote);
+
+        const fragmentation = new FragmentationProxy({
+          host: target.hostname,
+          port: parseInt(target.port),
+        });
+
+        await fragmentation.ready();
+
+        await run_tests(WebSocketConnection, { url: fragmentation.get_websocket_url() });
+        fragmentation.close();
       }
       else
       {
@@ -198,6 +218,7 @@ async function run(targets)
             await fragmentation.ready();
 
             await run_tests(TCPConnection, fragmentation.address());
+            fragmentation.close();
           }
           break;
         case "udp":
