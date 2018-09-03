@@ -476,7 +476,7 @@ export function decodeMessage(data, pos, ret)
 {
   var message_offset;
 
-  if (data.byteLength < data.byteOffset + pos + 9) return -1;
+  if (data.byteLength < data.byteOffset + pos + 10) return -1;
 
   pos = pos|0;
   if (data.getUint8(pos) != 0x3b) throw new Error("Bad sync value.");
