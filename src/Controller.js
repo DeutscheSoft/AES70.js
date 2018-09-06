@@ -136,6 +136,8 @@ export class ClientConnection extends Connection
         const h = handles.get(o.handle);
         if (!h) {
           error("Unknown handle in response %o", o);
+          close();
+          return;
         }
         handles.delete(o.handle);
         if (o.status_code !== 0) {
@@ -152,12 +154,13 @@ export class ClientConnection extends Connection
       } else if (o instanceof Notification) {
         const subscribers = this.subscribers;
         if (!subscribers.has(o.target)) {
-          error("Bad target for notification", o);
+          // NOTE: this is legal
           continue;
         }
         subscribers.get(o.target)(o);
       } else {
         warn("Unhandled OCA packet: %o", o);
+        continue;
       }
     }
   }
