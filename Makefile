@@ -26,7 +26,7 @@ dist/babel.browser.js: dist/rollup.js Makefile .babelrc
 	BABEL_ENV=browser $(BABEL) $< -o $@
 
 dist/AES70.es5.js: dist/babel.browser.js Makefile
-	closure-compiler --js $< --js_output_file $@ --language_in ECMASCRIPT5 --language_out ECMASCRIPT5
+	closure-compiler --js $< --js_output_file $@ --language_in ECMASCRIPT5 --language_out ECMASCRIPT5 || cp $< $@
 
 docs: $(SRC) Makefile
 	node ./node_modules/jsdoc/jsdoc.js src -r -d docs
