@@ -8,6 +8,10 @@ import {
 
 import { signature, Arguments } from '../signature_parser';
 
+/**
+ * Describes an AES70 property. Simplifies getting or setting properties
+ * and listening to property changes.
+ */
 export class Property
 {
   constructor(name, signature, level, index, readonly, is_static, aliases)
@@ -21,16 +25,30 @@ export class Property
     this.aliases = aliases;
   }
 
+  /**
+   * Returns the OcaPropertyID of this property.
+   */
   GetPropertyID()
   {
     return new OcaPropertyID(this.level, this.index);
   }
 
+  /**
+   * Returns the name of this property.
+   */
   GetName()
   {
     return this.name;
   }
 
+  /**
+   * Returns the getter for this property in o.
+   *
+   * @param {Object} o - The remote object.
+   * @param {boolean} [no_bind=false] - If true, the returned function is not
+   *                                    bound to the object o.
+   * @returns {Function} The getter. If none could be found, null is returned.
+   */
   getter(o, no_bind)
   {
     let name = this.name,
@@ -66,6 +84,14 @@ export class Property
     return null;
   }
 
+  /**
+   * Returns the setter for this property in o.
+   *
+   * @param {Object} o - The remote object.
+   * @param {boolean} [no_bind=false] - If true, the returned function is not
+   *                                    bound to the object o.
+   * @returns {Function} The setter. If none could be found, null is returned.
+   */
   setter(o, no_bind)
   {
     if (this.readonly || this.static) return null;
@@ -88,6 +114,11 @@ export class Property
     return null;
   }
 
+  /**
+   * Returns the event for this property in o.
+   *
+   * @returns {PropertyEvent} The event.
+   */
   event(o)
   {
     let name = this.name,
@@ -108,6 +139,14 @@ export class Property
     return null;
   }
 
+  /**
+   * Subscribe to changes of this property in o. If successful, the callback will be called at least
+   * once with the initial value.
+   *
+   * @param {Object} o - The remote object.
+   * @param {Function} cb - The callback.
+   * @returns {boolean} Returns true if the property could be subscribed.
+   */
   subscribe(o, cb)
   {
     const event = this.event(o);
@@ -124,6 +163,11 @@ export class Property
   }
 }
 
+/**
+ * Class representing the collection of all properties in a remote object.
+ * Returned by the static `get_properties` method inside of all remote control
+ * classes.
+ */
 export class Properties
 {
   constructor(properties, level, parent)
@@ -152,6 +196,12 @@ export class Properties
     }
   }
 
+  /**
+   * Find a property.
+   *
+   * @param {String|OcaPropertyID} id - The property identifier. Either a name
+   *                                    or a {@link OcaPropertyID}.
+   */
   find_property(id)
   {
     if (id instanceof OcaPropertyID)
@@ -190,6 +240,13 @@ export class Properties
     if (p) return p.signature;
   }
 
+  /**
+   * Iterate all properties.
+   *
+   * @param {Function} callback - Function to be called with each {@link Property} 
+   *                              as only argument.
+   * @param {Object} [ctx] - Optional context to call function in.
+   */
   forEach(cb, ctx)
   {
     const ret = [];

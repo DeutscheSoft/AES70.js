@@ -215,6 +215,22 @@ export class ClientConnection extends Connection
  * This is the entry point for any interaction with a remote device.
  * Can be used to query the available object tree, or interact with the manager
  * classes.
+ *
+ * @property {OcaDeviceManager} DeviceManager - The device manager object.
+ * @property {OcaSecurityManager} SecurityManager - The Security manager object.
+ * @property {OcaFirmwareManager} FirmwareManager - The Firmware manager object.
+ * @property {OcaSubscriptionManager} SubscriptionManager - The Subscription manager object.
+ * @property {OcaPowerManager} PowerManager - The Power manager object.
+ * @property {OcaNetworkManager} NetworkManager - The Network manager object.
+ * @property {OcaMediaClockManager} MediaClockManager - The MediaClock manager object.
+ * @property {OcaLibraryManager} LibraryManager - The Library manager object.
+ * @property {OcaAudioProcessingManager} AudioProcessingManager - The AudioProcessing manager object.
+ * @property {OcaDeviceTimeManager} DeviceTimeManager - The DeviceTime manager object.
+ * @property {OcaTaskManager} TaskManager - The Task manager object.
+ * @property {OcaCodingManager} CodingManager - The Coding manager object.
+ * @property {OcaDiagnosticManager} DiagnosticManager - The Diagnostic manager object.
+ * @property {OcaBlock} Root - The Root object.
+ *
  */
 export class RemoteDevice extends Events
 {
@@ -407,6 +423,18 @@ export class RemoteDevice extends Events
     return get_members(this.Root);
   }
 
+  /**
+   * Discovers the device object tree. This are all objects starting at the Root
+   * block.
+   *
+   * @returns {Promise} The object tree. A recursive tree structure consisting of arrays of objects.
+   *                    Each block is followed by an array of it's children.
+   */
+  get_device_tree()
+  {
+    return this.GetDeviceTree();
+  }
+
   discover_all_fallback()
   {
     return this.GetDeviceTree()
@@ -438,6 +466,7 @@ export class RemoteDevice extends Events
    * from the root block. The root block itself will not be part
    * of the resulting list.
    *
+   * @deprecated Use {@link get_device_tree} instead.
    * @returns {Promise} The object list.
    */
   discover_all()
@@ -447,6 +476,10 @@ export class RemoteDevice extends Events
       .catch(() => this.discover_all_fallback());
   }
 
+  /**
+   * Set the keepalive interval.
+   * @param {number} seconds - Keepalive interval in seconds.
+   */
   set_keepalive_interval(seconds)
   {
     this.connection.set_keepalive_interval(seconds);
