@@ -34,12 +34,21 @@ export function error(...args) {
   } catch (e) {}
 }
 
+/**
+ * Basic event handling class.
+ */
 export class Events
 {
   constructor() {
     this.event_handlers = new Map();
   }
 
+  /**
+   * Emit an event.
+   *
+   * @param {String} name - Name of the event.
+   * @param {...*} args - Extra arguments.
+   */
   emit(name)
   {
     const handlers = this.event_handlers.get(name);
@@ -56,6 +65,12 @@ export class Events
     });
   }
 
+  /**
+   * Register for an event.
+   *
+   * @param {String} name - Name of the event.
+   * @param {Function} cb - Callback function.
+   */
   on(name, cb)
   {
     let handlers = this.event_handlers.get(name);
@@ -72,6 +87,12 @@ export class Events
     this.on(name, cb);
   }
 
+  /**
+   * Removes an event handler.
+   *
+   * @param {String} name - Name of the event.
+   * @param {Function} cb - Callback function.
+   */
   removeEventListener(name, cb)
   {
     let handlers = this.event_handlers.get(name);
