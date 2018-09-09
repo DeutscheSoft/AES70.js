@@ -86,4 +86,9 @@ export class UDPConnection extends ClientConnection
   {
     this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
   }
+
+  close()
+  {
+    this.socket.close();
+  }
 }
