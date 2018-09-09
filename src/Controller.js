@@ -69,8 +69,14 @@ export class ClientConnection extends Connection
     super();
     this.command_handles = new Map();
     this.subscribers = new Map();
+    this.keepalive_interval = null;
 
     const cleanup = (e) => {
+      if (this.keepalive_interval !== null)
+      {
+        clearInterval(this.keepalive_interval);
+        this.keepalive_interval = null;
+      }
       this.subscribers = null;
 
       const handles = this.command_handles;
@@ -174,6 +180,32 @@ export class ClientConnection extends Connection
         throw new Error("Unexpected PDU");
       }
     }
+  }
+
+  set_keepalive_interval(seconds)
+  {
+    if (this.keepalive_interval)
+      clearInterval(this.keepalive_interval);
+
+    const t = seconds * 1000;
+
+    // send first keepalive message
+    this.write(encodeMessage(new KeepAlive(t)));
+
+    const send = () => {
+      if (this.check_keepalive(seconds * 3))
+      {
+        this.write(encodeMessage(new KeepAlive(t)));
+      }
+      else
+      {
+        error("Connection timed out.");
+        this.emit('timeout');
+        this.close();
+      }
+    };
+
+    this.keepalive_interval = setInterval(send, t);
   }
 }
 
@@ -413,5 +445,10 @@ export class RemoteDevice extends Events
     return this.Root.GetMembersRecursive()
       .then((res) => res.map(this.resolve_object, this))
       .catch(() => this.discover_all_fallback());
+  }
+
+  set_keepalive_interval(seconds)
+  {
+    this.connection.set_keepalive_interval(seconds);
   }
 }

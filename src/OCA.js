@@ -86,6 +86,14 @@ export class Events
   }
 }
 
+function now() {
+  try {
+    return performance.now();
+  } catch (e) {}
+
+  return Date.now();
+}
+
 /**
  * Connection base class.
  */
@@ -96,9 +104,17 @@ export class Connection extends Events
     super();
     this.inbuf = null;
     this.inpos = 0;
+    this.last_data_time = now();
+  }
+
+  check_keepalive(seconds)
+  {
+    return now() - this.last_data_time < seconds * 1000;
   }
 
   read(buf) {
+    this.last_data_time = now();
+
     if (this.inbuf) {
       const len = this.inbuf.byteLength - this.inpos;
       const tmp = new Uint8Array(new ArrayBuffer(len + buf.byteLength));
@@ -433,7 +449,7 @@ export class KeepAlive extends PDUBase
   constructor(time)
   {
     super();
-    this.time = time;
+    this.time = time || 0;
   }
 
   decode_from(data, pos, len)
