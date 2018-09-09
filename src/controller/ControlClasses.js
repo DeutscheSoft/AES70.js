@@ -216,7 +216,7 @@ export class OcaRoot extends ObjectBase
    * Gets the class identification, a structure that contains the ClassID
    * and ClassVersion. The return value indicates whether the property was
    * successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaClassIdentification>}
    */
   GetClassIdentification()
   {
@@ -229,7 +229,7 @@ export class OcaRoot extends ObjectBase
   /**
    * Gets the value of the Lockable property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetLockable()
   {
@@ -246,7 +246,7 @@ export class OcaRoot extends ObjectBase
    * lockholder, the lock state is upgraded to total. If the call is from a
    * session other than the lockholder's, the call fails. The return value
    * indicates whether the operation succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Lock()
   {
@@ -258,7 +258,7 @@ export class OcaRoot extends ObjectBase
    * Unlocks the object so that it can be freely accessed again. This
    * method can only succeed if it is called by the lockholder. The return
    * value indicates whether the operation succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Unlock()
   {
@@ -269,7 +269,7 @@ export class OcaRoot extends ObjectBase
   /**
    * Returns value of Role property. The return value indicates whether the
    * operation succeeded.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetRole()
   {
@@ -287,7 +287,7 @@ export class OcaRoot extends ObjectBase
    * to read-only. If the call is from a session other than the
    * lockholder's, the call fails. The return value indicates whether the
    * operation succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   LockReadonly()
   {
@@ -441,7 +441,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Gets the value of the Enabled property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetEnabled()
   {
@@ -456,7 +456,7 @@ export class OcaWorker extends OcaRoot
    * whether the property was successfully set.
    * @param enabled {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetEnabled(enabled)
   {
@@ -474,7 +474,7 @@ export class OcaWorker extends OcaRoot
    *
    * @param Mode {OcaPortMode}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaPortID>}
    */
   AddPort(Label, Mode)
   {
@@ -492,7 +492,7 @@ export class OcaWorker extends OcaRoot
    * the port was successfully deleted.
    * @param ID {OcaPortID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeletePort(ID)
   {
@@ -506,7 +506,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Gets the list of ports owned by the Worker object. The return value
    * indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetPorts()
   {
@@ -521,7 +521,7 @@ export class OcaWorker extends OcaRoot
    * whether the name was successfully retrieved.
    * @param PortID {OcaPortID}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetPortName(PortID)
   {
@@ -541,7 +541,7 @@ export class OcaWorker extends OcaRoot
    *
    * @param Name {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPortName(PortID, Name)
   {
@@ -555,7 +555,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Gets the value of the Label property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetLabel()
   {
@@ -570,7 +570,7 @@ export class OcaWorker extends OcaRoot
    * whether the property was successfully set.
    * @param label {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLabel(label)
   {
@@ -584,7 +584,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Gets the value of the Owner property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetOwner()
   {
@@ -597,7 +597,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Gets the value of the Latency property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeInterval>}
    */
   GetLatency()
   {
@@ -612,7 +612,7 @@ export class OcaWorker extends OcaRoot
    * whether the property was successfully set.
    * @param latency {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLatency(latency)
   {
@@ -626,7 +626,7 @@ export class OcaWorker extends OcaRoot
   /**
    * Returns path from the given object down to root. The return value
    * indicates whether the operation succeeded. Added in version 2.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaNamePath,OcaONoPath>>}
    */
   GetPath()
   {
@@ -858,7 +858,7 @@ export class OcaMute extends OcaActuator
   /**
    * Gets the current mute state. The return value indicates whether the
    * state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMuteState>}
    */
   GetState()
   {
@@ -873,7 +873,7 @@ export class OcaMute extends OcaActuator
    * value indicates whether the state was successfully set.
    * @param state {OcaMuteState}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetState(state)
   {
@@ -975,7 +975,7 @@ export class OcaPolarity extends OcaActuator
   /**
    * Gets the current inverter state. The return value indicates whether
    * the state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaPolarityState>}
    */
   GetState()
   {
@@ -990,7 +990,7 @@ export class OcaPolarity extends OcaActuator
    * return value indicates whether the state was successfully set.
    * @param state {OcaPolarityState}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetState(state)
   {
@@ -1105,7 +1105,7 @@ export class OcaSwitch extends OcaActuator
    * Gets the value of the Position property and, optionally, its
    * implementation min and max. The return value indicates whether the
    * data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint16,OcaUint16,OcaUint16>>}
    */
   GetPosition()
   {
@@ -1120,7 +1120,7 @@ export class OcaSwitch extends OcaActuator
    * whether the property was successfully set.
    * @param position {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPosition(position)
   {
@@ -1136,7 +1136,7 @@ export class OcaSwitch extends OcaActuator
    * indicates whether the name was successfully retrieved.
    * @param Index {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetPositionName(Index)
   {
@@ -1156,7 +1156,7 @@ export class OcaSwitch extends OcaActuator
    *
    * @param Name {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPositionName(Index, Name)
   {
@@ -1170,7 +1170,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Gets list of names assigned to the switch's positions. The return
    * value indicates whether the names were successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetPositionNames()
   {
@@ -1185,7 +1185,7 @@ export class OcaSwitch extends OcaActuator
    * whether the names were successfully assigned.
    * @param Names {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPositionNames(Names)
   {
@@ -1201,7 +1201,7 @@ export class OcaSwitch extends OcaActuator
    * value indicates whether the flag was successfully retrieved.
    * @param Index {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetPositionEnabled(Index)
   {
@@ -1221,7 +1221,7 @@ export class OcaSwitch extends OcaActuator
    *
    * @param enabled {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPositionEnabled(Index, enabled)
   {
@@ -1235,7 +1235,7 @@ export class OcaSwitch extends OcaActuator
   /**
    * Gets list of Enabled flags assigned to the switch's positions. The
    * return value indicates whether the flags were successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetPositionEnableds()
   {
@@ -1250,7 +1250,7 @@ export class OcaSwitch extends OcaActuator
    * value indicates whether the flags were successfully set.
    * @param enableds {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPositionEnableds(enableds)
   {
@@ -1384,7 +1384,7 @@ export class OcaGain extends OcaActuator
   /**
    * Gets the value and limits of the Gain property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetGain()
   {
@@ -1399,7 +1399,7 @@ export class OcaGain extends OcaActuator
    * whether the property was successfully set.
    * @param Gain {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetGain(Gain)
   {
@@ -1504,7 +1504,7 @@ export class OcaPanBalance extends OcaActuator
   /**
    * Gets the value and limits of the Position property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetPosition()
   {
@@ -1519,7 +1519,7 @@ export class OcaPanBalance extends OcaActuator
    * whether the property was successfully set.
    * @param Position {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPosition(Position)
   {
@@ -1533,7 +1533,7 @@ export class OcaPanBalance extends OcaActuator
   /**
    * Gets the value and limits of the MidpointGain property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetMidpointGain()
   {
@@ -1548,7 +1548,7 @@ export class OcaPanBalance extends OcaActuator
    * indicates whether the property was successfully set.
    * @param Gain {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetMidpointGain(Gain)
   {
@@ -1666,7 +1666,7 @@ export class OcaDelay extends OcaActuator
   /**
    * Gets the value of the DelayTime property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetDelayTime()
   {
@@ -1681,7 +1681,7 @@ export class OcaDelay extends OcaActuator
    * whether the property was successfully set.
    * @param delayTime {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDelayTime(delayTime)
   {
@@ -1787,7 +1787,7 @@ export class OcaDelayExtended extends OcaDelay
   /**
    * Gets the value of the DelayValue property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDelayValue,OcaDelayValue,OcaDelayValue>>}
    */
   GetDelayValue()
   {
@@ -1802,7 +1802,7 @@ export class OcaDelayExtended extends OcaDelay
    * whether the property was successfully set.
    * @param Value {OcaDelayValue}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDelayValue(Value)
   {
@@ -1818,7 +1818,7 @@ export class OcaDelayExtended extends OcaDelay
    * value indicates whether the method has succeeded.
    * @param UoM {OcaDelayUnit}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaDelayValue>}
    */
   GetDelayValueConverted(UoM)
   {
@@ -1922,7 +1922,7 @@ export class OcaFrequencyActuator extends OcaActuator
   /**
    * Gets the value of the Frequency property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetFrequency()
   {
@@ -1937,7 +1937,7 @@ export class OcaFrequencyActuator extends OcaActuator
    * whether the property was successfully set.
    * @param Frequency {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetFrequency(Frequency)
   {
@@ -2053,7 +2053,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Gets the value of the Frequency property. The return value indicates
    * if the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetFrequency()
   {
@@ -2068,7 +2068,7 @@ export class OcaFilterClassical extends OcaActuator
    * if the property was successfully set.
    * @param frequency {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetFrequency(frequency)
   {
@@ -2082,7 +2082,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Returns the passband specification of the filter object. The return
    * value indicates if the specification was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFilterPassband>}
    */
   GetPassband()
   {
@@ -2097,7 +2097,7 @@ export class OcaFilterClassical extends OcaActuator
    * indicates if the specification was successfully set.
    * @param Passband {OcaFilterPassband}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPassband(Passband)
   {
@@ -2111,7 +2111,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Returns the Shape property of the filter. The return value indicates
    * if the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaClassicalFilterShape>}
    */
   GetShape()
   {
@@ -2126,7 +2126,7 @@ export class OcaFilterClassical extends OcaActuator
    * the property was successfully set.
    * @param Shape {OcaClassicalFilterShape}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetShape(Shape)
   {
@@ -2140,7 +2140,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Returns the order of the filter. The return value indicates if the
    * property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint16,OcaUint16,OcaUint16>>}
    */
   GetOrder()
   {
@@ -2155,7 +2155,7 @@ export class OcaFilterClassical extends OcaActuator
    * property was successfully set.
    * @param Order {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetOrder(Order)
   {
@@ -2169,7 +2169,7 @@ export class OcaFilterClassical extends OcaActuator
   /**
    * Returns the filter parameter. The return value indicates if the
    * property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetParameter()
   {
@@ -2184,7 +2184,7 @@ export class OcaFilterClassical extends OcaActuator
    * was successfully set.
    * @param Parameter {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetParameter(Parameter)
   {
@@ -2362,7 +2362,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Gets the equalizer frequency setpoint. The return value indicates
    * whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetFrequency()
   {
@@ -2377,7 +2377,7 @@ export class OcaFilterParametric extends OcaActuator
    * value was successfully set.
    * @param Frequency {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetFrequency(Frequency)
   {
@@ -2391,7 +2391,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Gets the curve shape of the equalizer. The return value indicates
    * whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaParametricEQShape>}
    */
   GetShape()
   {
@@ -2406,7 +2406,7 @@ export class OcaFilterParametric extends OcaActuator
    * indicates whether the shape was successfully set.
    * @param type {OcaParametricEQShape}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetShape(type)
   {
@@ -2420,7 +2420,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Gets the width parameter property of the equalizer. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetWidthParameter()
   {
@@ -2435,7 +2435,7 @@ export class OcaFilterParametric extends OcaActuator
    * indicates whether the Q was successfully set.
    * @param Width {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetWidthParameter(Width)
   {
@@ -2449,7 +2449,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Returns the in-band gain of the equalizer. The return value indicates
    * whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetInbandGain()
   {
@@ -2464,7 +2464,7 @@ export class OcaFilterParametric extends OcaActuator
    * whether the gain was successfully set.
    * @param gain {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetInbandgain(gain)
   {
@@ -2478,7 +2478,7 @@ export class OcaFilterParametric extends OcaActuator
   /**
    * Returns the shape parameter of the equalizer. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetShapeParameter()
   {
@@ -2493,7 +2493,7 @@ export class OcaFilterParametric extends OcaActuator
    * whether the parameter was successfully set.
    * @param shape {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetShapeParameter(shape)
   {
@@ -2665,7 +2665,7 @@ export class OcaFilterPolynomial extends OcaActuator
 
   /**
    * Returns the polynomial coefficients used.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaList,OcaList>>}
    */
   GetCoefficients()
   {
@@ -2681,7 +2681,7 @@ export class OcaFilterPolynomial extends OcaActuator
    *
    * @param B {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCoefficients(A, B)
   {
@@ -2694,7 +2694,7 @@ export class OcaFilterPolynomial extends OcaActuator
 
   /**
    * Gets the filter sampling rate.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetSampleRate()
   {
@@ -2708,7 +2708,7 @@ export class OcaFilterPolynomial extends OcaActuator
    * Sets the filter sampling rate.
    * @param Rate {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSampleRate(Rate)
   {
@@ -2722,7 +2722,7 @@ export class OcaFilterPolynomial extends OcaActuator
   /**
    * Gets the maximum allowable order (= max number of array elements in
    * numerator and for denominator arrays)
-   * @retval {Promise}
+   * @returns {Promise<OcaUint8>}
    */
   GetMaxOrder()
   {
@@ -2876,7 +2876,7 @@ export class OcaFilterFIR extends OcaActuator
   /**
    * Gets the length of the FIR filter. The return value indicates whether
    * the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint32,OcaUint32,OcaUint32>>}
    */
   GetLength()
   {
@@ -2889,7 +2889,7 @@ export class OcaFilterFIR extends OcaActuator
   /**
    * Gets the coefficients of the FIR filter. The return value indicates
    * whether the coefficients were successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetCoefficients()
   {
@@ -2904,7 +2904,7 @@ export class OcaFilterFIR extends OcaActuator
    * indicates whether the properties were successfully set.
    * @param Coefficients {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCoefficients(Coefficients)
   {
@@ -2918,7 +2918,7 @@ export class OcaFilterFIR extends OcaActuator
   /**
    * Gets the sample rate of the FIR filter. The return value indicates
    * whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetSampleRate()
   {
@@ -2933,7 +2933,7 @@ export class OcaFilterFIR extends OcaActuator
    * whether the rate was successfully set.
    * @param Rate {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSampleRate(Rate)
   {
@@ -3074,7 +3074,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
 
   /**
    * Returns the complex transfer function.
-   * @retval {Promise}
+   * @returns {Promise<OcaTransferFunction>}
    */
   GetTransferFunction()
   {
@@ -3088,7 +3088,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
    * Sets the complex transfer function.
    * @param TransferFunction {OcaTransferFunction}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTransferFunction(TransferFunction)
   {
@@ -3101,7 +3101,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
 
   /**
    * Gets the filter sampling rate.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetSampleRate()
   {
@@ -3115,7 +3115,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
    * Sets the filter sampling rate.
    * @param Rate {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSampleRate(Rate)
   {
@@ -3129,7 +3129,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   /**
    * Returns the minimum number of required points in the specified
    * transfer function.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint32>}
    */
   GetTFMaxLength()
   {
@@ -3142,7 +3142,7 @@ export class OcaFilterArbitraryCurve extends OcaActuator
   /**
    * Returns the maximum number of allowed points in the specified transfer
    * function.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint32>}
    */
   GetTFMinLength()
   {
@@ -3333,7 +3333,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the Triggered property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetTriggered()
   {
@@ -3346,7 +3346,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the DynamicGain property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaDB>}
    */
   GetDynamicGain()
   {
@@ -3359,7 +3359,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the Function property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaDynamicsFunction>}
    */
   GetFunction()
   {
@@ -3374,7 +3374,7 @@ export class OcaDynamics extends OcaActuator
    * whether the property was successfully set.
    * @param Func {OcaDynamicsFunction}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetFunction(Func)
   {
@@ -3389,7 +3389,7 @@ export class OcaDynamics extends OcaActuator
    * Gets the value of the Ratio property. The return value indicates
    * whether the property was successfully retrieved. GetRatio() is a
    * DEPRECATED method. Please use <b>GetSlope()</b> instead.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetRatio()
   {
@@ -3405,7 +3405,7 @@ export class OcaDynamics extends OcaActuator
    * method. Please use <b>SetSlope()</b> instead.
    * @param Ratio {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetRatio(Ratio)
   {
@@ -3419,7 +3419,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the Threshold property. The return value indicates
    * if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDBr,OcaDBz,OcaDBz>>}
    */
   GetThreshold()
   {
@@ -3434,7 +3434,7 @@ export class OcaDynamics extends OcaActuator
    * if the value was successfully set.
    * @param threshold {OcaDBr}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetThreshold(threshold)
   {
@@ -3448,7 +3448,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the ThresholdPresentationUnits property. The return
    * value indicates if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaPresentationUnit>}
    */
   GetThresholdPresentationUnits()
   {
@@ -3463,7 +3463,7 @@ export class OcaDynamics extends OcaActuator
    * value indicates if the value was successfully set.
    * @param Units {OcaPresentationUnit}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetThresholdPresentationUnits(Units)
   {
@@ -3477,7 +3477,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Sets the value of the DetectorLaw property. The return value indicates
    * if the value was successfully set.
-   * @retval {Promise}
+   * @returns {Promise<OcaLevelDetectionLaw>}
    */
   GetDetectorLaw()
   {
@@ -3492,7 +3492,7 @@ export class OcaDynamics extends OcaActuator
    * if the value was successfully set.
    * @param Law {OcaLevelDetectionLaw}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDetectorLaw(Law)
   {
@@ -3506,7 +3506,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the AttackTime property. The return value indicates
    * if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetAttackTime()
   {
@@ -3521,7 +3521,7 @@ export class OcaDynamics extends OcaActuator
    * if the value was successfully set.
    * @param Time {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetAttackTime(Time)
   {
@@ -3535,7 +3535,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the ReleaseTime property. The return value indicates
    * if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetReleaseTime()
   {
@@ -3550,7 +3550,7 @@ export class OcaDynamics extends OcaActuator
    * if the value was successfully set.
    * @param Time {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetReleaseTime(Time)
   {
@@ -3564,7 +3564,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the HoldTime property. The return value indicates if
    * the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetHoldTime()
   {
@@ -3579,7 +3579,7 @@ export class OcaDynamics extends OcaActuator
    * the value was successfully set.
    * @param Time {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetHoldTime(Time)
   {
@@ -3593,7 +3593,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the DynamicGainFLoor property. The return value
    * indicates if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetDynamicGainFloor()
   {
@@ -3608,7 +3608,7 @@ export class OcaDynamics extends OcaActuator
    * indicates if the value was successfully set.
    * @param Limit {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDynamicGainFloor(Limit)
   {
@@ -3622,7 +3622,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the DynamicGainCeiling property. The return value
    * indicates if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetDynamicGainCeiling()
   {
@@ -3637,7 +3637,7 @@ export class OcaDynamics extends OcaActuator
    * indicates if the value was successfully set.
    * @param Limit {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDynamicGainCeiling(Limit)
   {
@@ -3651,7 +3651,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the KneeParameter property. The return value
    * indicates if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetKneeParameter()
   {
@@ -3666,7 +3666,7 @@ export class OcaDynamics extends OcaActuator
    * indicates if the value was successfully set.
    * @param Parameter {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetKneeParameter(Parameter)
   {
@@ -3680,7 +3680,7 @@ export class OcaDynamics extends OcaActuator
   /**
    * Gets the value of the Slope property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetSlope()
   {
@@ -3695,7 +3695,7 @@ export class OcaDynamics extends OcaActuator
    * whether the property was successfully set.
    * @param Slope {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSlope(Slope)
   {
@@ -4014,7 +4014,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Gets the value of the Law property. Return status indicates whether
    * the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaLevelDetectionLaw>}
    */
   GetLaw()
   {
@@ -4029,7 +4029,7 @@ export class OcaDynamicsDetector extends OcaActuator
    * the value was successfully set.
    * @param Law {OcaLevelDetectionLaw}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLaw(Law)
   {
@@ -4043,7 +4043,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Gets the value of the AttackTime property. The return value indicates
    * if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetAttackTime()
   {
@@ -4058,7 +4058,7 @@ export class OcaDynamicsDetector extends OcaActuator
    * whether the property was successfully set.
    * @param Time {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetAttackTime(Time)
   {
@@ -4072,7 +4072,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Gets the value of the ReleaseTime property. The return value indicates
    * if the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetReleaseTime()
   {
@@ -4087,7 +4087,7 @@ export class OcaDynamicsDetector extends OcaActuator
    * whether the property was successfully set.
    * @param Time {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetReleaseTime(Time)
   {
@@ -4101,7 +4101,7 @@ export class OcaDynamicsDetector extends OcaActuator
   /**
    * Gets the value of the HoldTime property. The return value indicates if
    * the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetHoldTime()
   {
@@ -4116,7 +4116,7 @@ export class OcaDynamicsDetector extends OcaActuator
    * whether the property was successfully set.
    * @param Time {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetHoldTime(Time)
   {
@@ -4324,7 +4324,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Gets the number of curve segments. The return value indicates whether
    * the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint8,OcaUint8,OcaUint8>>}
    */
   GetNSegments()
   {
@@ -4342,7 +4342,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * values of the previous segment.
    * @param Slope {OcaUint8}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetNSegments(Slope)
   {
@@ -4356,7 +4356,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Gets the list of Threshold values. The return value indicates whether
    * the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaList,OcaDBz,OcaDBz>>}
    */
   GetThreshold()
   {
@@ -4371,7 +4371,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * the values were successfully set.
    * @param Threshold {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetThreshold(Threshold)
   {
@@ -4385,7 +4385,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Gets the list of Slope values. The return value indicates whether the
    * list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaList,OcaList,OcaList>>}
    */
   GetSlope()
   {
@@ -4400,7 +4400,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * values were successfully set.
    * @param slope {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSlope(slope)
   {
@@ -4414,7 +4414,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Gets the list of KneeParameter valuess. The return value indicates
    * whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaList,OcaList,OcaList>>}
    */
   GetKneeParameter()
   {
@@ -4429,7 +4429,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * whether the values were successfully set.
    * @param parameter {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetKneeParameter(parameter)
   {
@@ -4443,7 +4443,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Gets the value of the DynamicGainCeiling property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetDynamicGainCeiling()
   {
@@ -4458,7 +4458,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * indicates whether the data was successfully set.
    * @param gain {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDynamicGainCeiling(gain)
   {
@@ -4472,7 +4472,7 @@ export class OcaDynamicsCurve extends OcaActuator
   /**
    * Gets the value of the DynamicGainFloor property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetDynamicGainFloor()
   {
@@ -4487,7 +4487,7 @@ export class OcaDynamicsCurve extends OcaActuator
    * indicates whether the data was successfully set.
    * @param Gain {OcaDB}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDynamicGainFloor(Gain)
   {
@@ -4689,7 +4689,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the Frequency1 property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetFrequency1()
   {
@@ -4704,7 +4704,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param frequency {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetFrequency1(frequency)
   {
@@ -4718,7 +4718,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the Frequency2 property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetFrequency2()
   {
@@ -4733,7 +4733,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param frequency {OcaFrequency}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetFrequency2(frequency)
   {
@@ -4747,7 +4747,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the Level property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDBz,OcaDBz,OcaDBz>>}
    */
   GetLevel()
   {
@@ -4762,7 +4762,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param Level {OcaDBz}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLevel(Level)
   {
@@ -4776,7 +4776,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the Waveform property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaWaveformType>}
    */
   GetWaveform()
   {
@@ -4791,7 +4791,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param waveform {OcaWaveformType}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetWaveform(waveform)
   {
@@ -4805,7 +4805,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the SweepType property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaSweepType>}
    */
   GetSweepType()
   {
@@ -4820,7 +4820,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param sweepType {OcaSweepType}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSweepType(sweepType)
   {
@@ -4834,7 +4834,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the SweepTime property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetSweepTime()
   {
@@ -4849,7 +4849,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param sweepTime {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSweepTime(sweepTime)
   {
@@ -4863,7 +4863,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the SweepRepeat property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetSweepRepeat()
   {
@@ -4878,7 +4878,7 @@ export class OcaSignalGenerator extends OcaActuator
    * whether the property was successfully set.
    * @param sweepRepeat {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSweepRepeat(sweepRepeat)
   {
@@ -4892,7 +4892,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Gets the value of the Generating property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetGenerating()
   {
@@ -4905,7 +4905,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Starts the signal generator. The return value indicates whether the
    * signal generator was successfully started.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Start()
   {
@@ -4916,7 +4916,7 @@ export class OcaSignalGenerator extends OcaActuator
   /**
    * Stops the signal generator. The return value indicates whether the
    * signal generator was successfully stopped.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Stop()
   {
@@ -5273,7 +5273,7 @@ export class OcaTemperatureActuator extends OcaActuator
   /**
    * Gets the value of the Temperature property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTemperature,OcaTemperature,OcaTemperature>>}
    */
   GetTemperature()
   {
@@ -5288,7 +5288,7 @@ export class OcaTemperatureActuator extends OcaActuator
    * whether the property was successfully set.
    * @param temperature {OcaTemperature}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTemperature(temperature)
   {
@@ -5395,7 +5395,7 @@ export class OcaIdentificationActuator extends OcaActuator
   /**
    * Gets the current identification indicator activity state. The return
    * value indicates whether the state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetActive()
   {
@@ -5410,7 +5410,7 @@ export class OcaIdentificationActuator extends OcaActuator
    * value indicates whether the state was successfully set.
    * @param active {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetActive(active)
   {
@@ -5647,7 +5647,7 @@ export class OcaBooleanActuator extends OcaBasicActuator
   /**
    * Gets the <b>Setting </b>property. The return value indicates whether
    * the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetSetting()
   {
@@ -5662,7 +5662,7 @@ export class OcaBooleanActuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -5764,7 +5764,7 @@ export class OcaInt8Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt8,OcaInt8,OcaInt8>>}
    */
   GetSetting()
   {
@@ -5779,7 +5779,7 @@ export class OcaInt8Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaInt8}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -5881,7 +5881,7 @@ export class OcaInt16Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt16,OcaInt16,OcaInt16>>}
    */
   GetSetting()
   {
@@ -5896,7 +5896,7 @@ export class OcaInt16Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaInt16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -5998,7 +5998,7 @@ export class OcaInt32Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt32,OcaInt32,OcaInt32>>}
    */
   GetSetting()
   {
@@ -6013,7 +6013,7 @@ export class OcaInt32Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaInt32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6115,7 +6115,7 @@ export class OcaInt64Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt64,OcaInt64,OcaInt64>>}
    */
   GetSetting()
   {
@@ -6130,7 +6130,7 @@ export class OcaInt64Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Value {OcaInt64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Value)
   {
@@ -6232,7 +6232,7 @@ export class OcaUint8Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint8,OcaUint8,OcaUint8>>}
    */
   GetSetting()
   {
@@ -6247,7 +6247,7 @@ export class OcaUint8Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaUint8}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6349,7 +6349,7 @@ export class OcaUint16Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the Setting property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint16,OcaUint16,OcaUint16>>}
    */
   GetSetting()
   {
@@ -6364,7 +6364,7 @@ export class OcaUint16Actuator extends OcaBasicActuator
    * indicates whether the property was successfully set.
    * @param Setting {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6465,7 +6465,7 @@ export class OcaUint32Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint32,OcaUint32,OcaUint32>>}
    */
   GetSetting()
   {
@@ -6480,7 +6480,7 @@ export class OcaUint32Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaUint32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6582,7 +6582,7 @@ export class OcaUint64Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the Gain property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint64,OcaUint64,OcaUint64>>}
    */
   GetSetting()
   {
@@ -6597,7 +6597,7 @@ export class OcaUint64Actuator extends OcaBasicActuator
    * whether the property was successfully set.
    * @param Setting {OcaUint64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6699,7 +6699,7 @@ export class OcaFloat32Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetSetting()
   {
@@ -6714,7 +6714,7 @@ export class OcaFloat32Actuator extends OcaBasicActuator
    * the property was successfully set.
    * @param Setting {OcaFloat32}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6816,7 +6816,7 @@ export class OcaFloat64Actuator extends OcaBasicActuator
   /**
    * Gets the value and limits of the <b>Setting </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat64,OcaFloat64,OcaFloat64>>}
    */
   GetSetting()
   {
@@ -6831,7 +6831,7 @@ export class OcaFloat64Actuator extends OcaBasicActuator
    * whether the property was successfully set.
    * @param Setting {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSetting(Setting)
   {
@@ -6935,7 +6935,7 @@ export class OcaStringActuator extends OcaBasicActuator
   /**
    * Gets the value and max length of the Value property. The return value
    * indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetValue()
   {
@@ -6950,7 +6950,7 @@ export class OcaStringActuator extends OcaBasicActuator
    * whether the property was successfully set.
    * @param Value {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetValue(Value)
   {
@@ -6963,7 +6963,7 @@ export class OcaStringActuator extends OcaBasicActuator
 
   /**
    * Gets the maximum string length that this object can handle.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaxLen()
   {
@@ -7084,7 +7084,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
   /**
    * Gets the number of bits in the string. The return value indicates
    * whether the property was successfully gathered.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetNrBits()
   {
@@ -7099,7 +7099,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
    * whether the property was successfully gathered.
    * @param bitNr {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetBit(bitNr)
   {
@@ -7119,7 +7119,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
    *
    * @param Value {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetBit(bitNr, Value)
   {
@@ -7133,7 +7133,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
   /**
    * Gets the entire bitstring.The return value indicates whether the
    * property was successfully gathered.
-   * @retval {Promise}
+   * @returns {Promise<OcaBitstring>}
    */
   GetBitstring()
   {
@@ -7148,7 +7148,7 @@ export class OcaBitstringActuator extends OcaBasicActuator
    * property was successfully set.
    * @param BitString {OcaBitstring}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetBitstring(BitString)
   {
@@ -7250,7 +7250,7 @@ export class OcaSensor extends OcaWorker
   /**
    * Gets the current reading state of the sensor. The return value
    * indicates whether the state was successfully retrived.
-   * @retval {Promise}
+   * @returns {Promise<OcaSensorReadingState>}
    */
   GetReadingState()
   {
@@ -7350,7 +7350,7 @@ export class OcaLevelSensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetReading()
   {
@@ -7453,7 +7453,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
   /**
    * Gets the value of the Law property. The return value indicates whether
    * the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaLevelMeterLaw>}
    */
   GetLaw()
   {
@@ -7469,7 +7469,7 @@ export class OcaAudioLevelSensor extends OcaLevelSensor
    * Law property is read/write.
    * @param law {OcaLevelMeterLaw}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLaw(law)
   {
@@ -7570,7 +7570,7 @@ export class OcaTimeIntervalSensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetReading()
   {
@@ -7670,7 +7670,7 @@ export class OcaFrequencySensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
    */
   GetReading()
   {
@@ -7770,7 +7770,7 @@ export class OcaTemperatureSensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTemperature,OcaTemperature,OcaTemperature>>}
    */
   GetReading()
   {
@@ -7959,7 +7959,7 @@ export class OcaVoltageSensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaVoltage,OcaVoltage,OcaVoltage>>}
    */
   GetReading()
   {
@@ -8059,7 +8059,7 @@ export class OcaCurrentSensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaCurrent,OcaCurrent,OcaCurrent>>}
    */
   GetReading()
   {
@@ -8159,7 +8159,7 @@ export class OcaImpedanceSensor extends OcaSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaImpedance,OcaImpedance,OcaImpedance>>}
    */
   GetReading()
   {
@@ -8328,7 +8328,7 @@ export class OcaBooleanSensor extends OcaBasicSensor
   /**
    * Gets the <b>Reading </b>property. The return value indicates whether
    * the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetReading()
   {
@@ -8428,7 +8428,7 @@ export class OcaInt8Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt8,OcaInt8,OcaInt8>>}
    */
   GetReading()
   {
@@ -8528,7 +8528,7 @@ export class OcaInt16Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt16,OcaInt16,OcaInt16>>}
    */
   GetReading()
   {
@@ -8628,7 +8628,7 @@ export class OcaInt32Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt32,OcaInt32,OcaInt32>>}
    */
   GetReading()
   {
@@ -8728,7 +8728,7 @@ export class OcaInt64Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaInt64,OcaInt64,OcaInt64>>}
    */
   GetReading()
   {
@@ -8828,7 +8828,7 @@ export class OcaUint8Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint8,OcaUint8,OcaUint8>>}
    */
   GetReading()
   {
@@ -8928,7 +8928,7 @@ export class OcaUint16Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint16,OcaUint16,OcaUint16>>}
    */
   GetReading()
   {
@@ -9028,7 +9028,7 @@ export class OcaUint32Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint32,OcaUint32,OcaUint32>>}
    */
   GetReading()
   {
@@ -9128,7 +9128,7 @@ export class OcaUint64Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint64,OcaUint64,OcaUint64>>}
    */
   GetReading()
   {
@@ -9228,7 +9228,7 @@ export class OcaFloat32Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
    */
   GetReading()
   {
@@ -9328,7 +9328,7 @@ export class OcaFloat64Sensor extends OcaBasicSensor
   /**
    * Gets the value and limits of the <b>Reading </b>property. The return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaFloat64,OcaFloat64,OcaFloat64>>}
    */
   GetReading()
   {
@@ -9431,7 +9431,7 @@ export class OcaStringSensor extends OcaBasicSensor
   /**
    * Gets the entire string. Return status indicates success or failure of
    * the retrieval.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetString()
   {
@@ -9444,7 +9444,7 @@ export class OcaStringSensor extends OcaBasicSensor
   /**
    * Gets the maximum number of bytes that may be returned. Returned status
    * indicates success or failure of the retrieval.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaxLen()
   {
@@ -9459,7 +9459,7 @@ export class OcaStringSensor extends OcaBasicSensor
    * status indicates success or failure of the set.
    * @param maxLen {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetMaxLen(maxLen)
   {
@@ -9579,7 +9579,7 @@ export class OcaBitstringSensor extends OcaBasicSensor
   /**
    * Gets the number of bits of the bitmask data. Returned status indicates
    * success or failure of the retrieval.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetNrBits()
   {
@@ -9594,7 +9594,7 @@ export class OcaBitstringSensor extends OcaBasicSensor
    * failure of the retrieval.
    * @param bitNr {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaUint8>}
    */
   GetBit(bitNr)
   {
@@ -9610,7 +9610,7 @@ export class OcaBitstringSensor extends OcaBasicSensor
   /**
    * Gets the entire bitstring. Return status indicates success or failure
    * of the retrieval.
-   * @retval {Promise}
+   * @returns {Promise<OcaBitstring>}
    */
   GetBitString()
   {
@@ -9752,7 +9752,7 @@ export class OcaBlock extends OcaWorker
    * this block. For dynamically-defined blocks, the block type is the
    * object number of the block's factory. For the root block, the value of
    * this property is 1.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetType()
   {
@@ -9770,7 +9770,7 @@ export class OcaBlock extends OcaWorker
    *
    * @param ConstructionParameters {variant}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   ConstructMember(ClassID, ConstructionParameters)
   {
@@ -9789,7 +9789,7 @@ export class OcaBlock extends OcaWorker
    * was successfully created and added.
    * @param FactoryONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   ConstructMemberUsingFactory(FactoryONo)
   {
@@ -9808,7 +9808,7 @@ export class OcaBlock extends OcaWorker
    * the member was successfully removed and destroyed.
    * @param ObjectNumber {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteMember(ObjectNumber)
   {
@@ -9824,7 +9824,7 @@ export class OcaBlock extends OcaWorker
    * inner block is included in the returned list as a single object -- its
    * contents are not enumerated. The return value indicates whether the
    * list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetMembers()
   {
@@ -9839,7 +9839,7 @@ export class OcaBlock extends OcaWorker
    * block is included in the returned list as a single object, amd its
    * contents are enumerated. The return value indicates whether the list
    * was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetMembersRecursive()
   {
@@ -9854,7 +9854,7 @@ export class OcaBlock extends OcaWorker
    * the signal path was successfully added.
    * @param Path {OcaSignalPath}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   AddSignalPath(Path)
   {
@@ -9872,7 +9872,7 @@ export class OcaBlock extends OcaWorker
    * whether the signal path was successfully added.
    * @param Index {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteSignalPath(Index)
   {
@@ -9887,7 +9887,7 @@ export class OcaBlock extends OcaWorker
    * Gets the map of signal paths in the block. Does not recurse inner
    * blocks. The return value indicates whether the list was successfully
    * retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetSignalPaths()
   {
@@ -9900,7 +9900,7 @@ export class OcaBlock extends OcaWorker
   /**
    * Gets the mapof signal paths in the block. Recurses inner blocks. The
    * return value indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetSignalPathsRecursive()
   {
@@ -9913,7 +9913,7 @@ export class OcaBlock extends OcaWorker
   /**
    * Gets the identifier of the paramset most recently applied to this
    * block.
-   * @retval {Promise}
+   * @returns {Promise<OcaClassVersionNumber>}
    */
   GetMostRecentParamSetIdentifier()
   {
@@ -9927,7 +9927,7 @@ export class OcaBlock extends OcaWorker
    * Applies the referenced paramset to this block, and sets the
    * MostRecentParamSet property. The return value indicates whether the
    * paramset was successfully applied.
-   * @retval {Promise}
+   * @returns {Promise<OcaClassVersionNumber>}
    */
   ApplyParamSet()
   {
@@ -9940,7 +9940,7 @@ export class OcaBlock extends OcaWorker
   /**
    * Returns a paramset library volume data block which represents the
    * current state of the block -- i.e. a "snapshot".
-   * @retval {Promise}
+   * @returns {Promise<OcaLibVolData_ParamSet>}
    */
   GetCurrentParamSetData()
   {
@@ -9956,7 +9956,7 @@ export class OcaBlock extends OcaWorker
    * <b>Replaces </b>the library volume at the specified LibVolIdentifier.
    * @param LibVolIdentifier {OcaClassVersionNumber}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   StoreCurrentParamSetData(LibVolIdentifier)
   {
@@ -9972,7 +9972,7 @@ export class OcaBlock extends OcaWorker
    * was successfully retrieved. If this block has no global blocktype, the
    * <b>Authority</b> field of the returned <b>GlobalType</b> parameter
    * will be zero. <b>Added in version 2 of this class.</b>
-   * @retval {Promise}
+   * @returns {Promise<OcaGlobalBlockTypeIdentifier>}
    */
   GetGlobalType()
   {
@@ -9985,7 +9985,7 @@ export class OcaBlock extends OcaWorker
   /**
    * Gets the block's ONo map. The return value indicates whether the map
    * was successfully retrieved. <b>Added in version 2 of this class.</b>
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetONoMap()
   {
@@ -10007,7 +10007,7 @@ export class OcaBlock extends OcaWorker
    *
    * @param ResultFlags {OcaObjectSearchResultFlags}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   FindObjectsByRole(SearchName, NameComparisonType, SearchClassID, ResultFlags)
   {
@@ -10032,7 +10032,7 @@ export class OcaBlock extends OcaWorker
    *
    * @param ResultFlags {OcaObjectSearchResultFlags}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   FindObjectsByRoleRecursive(SearchName, NameComparisonType, SearchClassID, ResultFlags)
   {
@@ -10052,7 +10052,7 @@ export class OcaBlock extends OcaWorker
    *
    * @param ResultFlags {OcaObjectSearchResultFlags}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   FindObjectsByPath(SearchPath, ResultFlags)
   {
@@ -10077,7 +10077,7 @@ export class OcaBlock extends OcaWorker
    *
    * @param ResultFlags {OcaObjectSearchResultFlags}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   FindObjectsByLabelRecursive(SearchName, NameComparisonType, SearchClassID, ResultFlags)
   {
@@ -10308,7 +10308,7 @@ export class OcaBlockFactory extends OcaWorker
    *
    * @param portmode {OcaPortMode}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaProtoPortID>}
    */
   DefineProtoPort(name, portmode)
   {
@@ -10326,7 +10326,7 @@ export class OcaBlockFactory extends OcaWorker
    * whether the proto-port was successfully deleted.
    * @param ProtoPortID {OcaProtoPortID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   UndefineProtoPort(ProtoPortID)
   {
@@ -10340,7 +10340,7 @@ export class OcaBlockFactory extends OcaWorker
   /**
    * Gets the factory's list of proto-ports. The return value indicates
    * whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetProtoPorts()
   {
@@ -10358,7 +10358,7 @@ export class OcaBlockFactory extends OcaWorker
    *
    * @param ConstructionParameters {ConstructionParameterDataType}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaProtoONo>}
    */
   DefineProtoMember(ClassIdentification, ConstructionParameters)
   {
@@ -10377,7 +10377,7 @@ export class OcaBlockFactory extends OcaWorker
    * the proto-member was successfully defined.
    * @param FactoryONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaProtoONo>}
    */
   DefineProtoMemberUsingFactory(FactoryONo)
   {
@@ -10396,7 +10396,7 @@ export class OcaBlockFactory extends OcaWorker
    * member was successfully deleted.
    * @param ProtoObjectNumber {OcaProtoONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   UndefineProtoMember(ProtoObjectNumber)
   {
@@ -10411,7 +10411,7 @@ export class OcaBlockFactory extends OcaWorker
    * Gets the factory's list of proto-members. Does not recurse inner
    * proto-blocks. The return value indicates whether the list was
    * successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetProtoMembers()
   {
@@ -10426,7 +10426,7 @@ export class OcaBlockFactory extends OcaWorker
    * whether the proto-signal path was successfully defined.
    * @param Path {OcaProtoSignalPath}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   DefineProtoSignalPath(Path)
   {
@@ -10442,7 +10442,7 @@ export class OcaBlockFactory extends OcaWorker
   /**
    * Deletes a proto-signal path from the factory. The return value
    * indicates whether the signal path was successfully added.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   UndefineProtoSignalPath()
   {
@@ -10456,7 +10456,7 @@ export class OcaBlockFactory extends OcaWorker
    * Gets the factory's list of proto-signal paths. Map key is proto-signal
    * path ID. Does not recurse inner proto-blocks. The return value
    * indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetProtoSignalPaths()
   {
@@ -10470,7 +10470,7 @@ export class OcaBlockFactory extends OcaWorker
    * Gets the global type identifier for blocks created by this factory.
    * The return value indicates whether the identifier was successfully
    * retrieved. <b>Added in version 2 of this class.</b>
-   * @retval {Promise}
+   * @returns {Promise<OcaGlobalBlockTypeIdentifier>}
    */
   GetGlobalType()
   {
@@ -10486,7 +10486,7 @@ export class OcaBlockFactory extends OcaWorker
    * set. <b>Added in version 2 of this class.</b>
    * @param GlobalType {OcaGlobalBlockTypeIdentifier}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetGlobalType(GlobalType)
   {
@@ -10717,7 +10717,7 @@ export class OcaMatrix extends OcaWorker
    * Gets coordinates of the currently active area (cell, row, column, or
    * whole matrix). The returned status indicates whether the operation was
    * successful.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaMatrixCoordinate,OcaMatrixCoordinate>>}
    */
   GetCurrentXY()
   {
@@ -10734,7 +10734,7 @@ export class OcaMatrix extends OcaWorker
    *
    * @param y {OcaMatrixCoordinate}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCurrentXY(x, y)
   {
@@ -10748,7 +10748,7 @@ export class OcaMatrix extends OcaWorker
   /**
    * Gets the matrix size. The returned status indicates whether the
    * operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaMatrixCoordinate,OcaMatrixCoordinate,OcaMatrixCoordinate,OcaMatrixCoordinate,OcaMatrixCoordinate,OcaMatrixCoordinate>>}
    */
   GetSize()
   {
@@ -10766,7 +10766,7 @@ export class OcaMatrix extends OcaWorker
    *
    * @param ySize {OcaMatrixCoordinate}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSize(xSize, ySize)
   {
@@ -10780,7 +10780,7 @@ export class OcaMatrix extends OcaWorker
   /**
    * Retrieves the 2D array of member object numbers. Cells for which no
    * member has been defined will return Zero as the object number.
-   * @retval {Promise}
+   * @returns {Promise<OcaList2D>}
    */
   GetMembers()
   {
@@ -10796,7 +10796,7 @@ export class OcaMatrix extends OcaWorker
    * the matrix.
    * @param members {OcaList2D}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetMembers(members)
   {
@@ -10815,7 +10815,7 @@ export class OcaMatrix extends OcaWorker
    *
    * @param y {OcaMatrixCoordinate}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetMember(x, y)
   {
@@ -10837,7 +10837,7 @@ export class OcaMatrix extends OcaWorker
    *
    * @param memberONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetMember(x, y, memberONo)
   {
@@ -10850,7 +10850,7 @@ export class OcaMatrix extends OcaWorker
 
   /**
    * Gets the object number of the matrix proxy.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetProxy()
   {
@@ -10864,7 +10864,7 @@ export class OcaMatrix extends OcaWorker
    * Sets the object number of the matrix proxy.
    * @param ONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetProxy(ONo)
   {
@@ -10877,7 +10877,7 @@ export class OcaMatrix extends OcaWorker
 
   /**
    * Gets the number of ports per row. These are input ports.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint8>}
    */
   GetPortsPerRow()
   {
@@ -10891,7 +10891,7 @@ export class OcaMatrix extends OcaWorker
    * Sets the number of ports per row. These must be input ports.
    * @param Ports {OcaUint8}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPortsPerRow(Ports)
   {
@@ -10904,7 +10904,7 @@ export class OcaMatrix extends OcaWorker
 
   /**
    * Gets the number of ports per output channel. These are output ports.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint8>}
    */
   GetPortsPerColumn()
   {
@@ -10918,7 +10918,7 @@ export class OcaMatrix extends OcaWorker
    * Sets the number of ports per column. These must be output ports.
    * @param Ports {OcaUint8}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPortsPerColumn(Ports)
   {
@@ -10937,7 +10937,7 @@ export class OcaMatrix extends OcaWorker
    *
    * @param y {OcaMatrixCoordinate}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCurrentXYLock(x, y)
   {
@@ -10954,7 +10954,7 @@ export class OcaMatrix extends OcaWorker
    * <u>not </u>triggered if one or more members of the currently active
    * area are already unlocked at the time Unlock() is called. The returned
    * status indicates whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   UnlockCurrent()
   {
@@ -11168,7 +11168,7 @@ export class OcaAgent extends OcaRoot
   /**
    * Gets the value of the Label property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetLabel()
   {
@@ -11183,7 +11183,7 @@ export class OcaAgent extends OcaRoot
    * whether the property was successfully set.
    * @param Label {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLabel(Label)
   {
@@ -11197,7 +11197,7 @@ export class OcaAgent extends OcaRoot
   /**
    * Gets the value of the Owner property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetOwner()
   {
@@ -11210,7 +11210,7 @@ export class OcaAgent extends OcaRoot
   /**
    * Returns path from the given object down to root. The return value
    * indicates whether the operation succeeded. Added in version 2.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaNamePath,OcaONoPath>>}
    */
   GetPath()
   {
@@ -11440,7 +11440,7 @@ export class OcaGrouper extends OcaAgent
    * value indicates whether the group was successfully added.
    * @param Name {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaUint16,OcaONo>>}
    */
   AddGroup(Name)
   {
@@ -11459,7 +11459,7 @@ export class OcaGrouper extends OcaAgent
    * groups are not reused during the lifetime of the grouper instance.
    * @param Index {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteGroup(Index)
   {
@@ -11473,7 +11473,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the count of groups owned by this grouper. The return value
    * indicates whether the count was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetGroupCount()
   {
@@ -11486,7 +11486,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the list of groups owned by this grouper. The return value
    * indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetGroupList()
   {
@@ -11504,7 +11504,7 @@ export class OcaGrouper extends OcaAgent
    * SetEnrollment method, q.v.
    * @param Citizen {OcaGrouperCitizen}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   AddCitizen(Citizen)
   {
@@ -11524,7 +11524,7 @@ export class OcaGrouper extends OcaAgent
    * reused during the lifetime of the grouper instance.
    * @param Index {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteCitizen(Index)
   {
@@ -11538,7 +11538,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the count of citizens registered in this grouper. The return
    * value indicates whether the count was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetCitizenCount()
   {
@@ -11551,7 +11551,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the list of citizens registered in this grouper. The return value
    * indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetCitizenList()
   {
@@ -11566,7 +11566,7 @@ export class OcaGrouper extends OcaAgent
    * value indicates whether the status was successfully retrieved.
    * @param Enrollment {OcaGrouperEnrollment}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetEnrollment(Enrollment)
   {
@@ -11586,7 +11586,7 @@ export class OcaGrouper extends OcaAgent
    *
    * @param IsMember {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetEnrollment(Enrollment, IsMember)
   {
@@ -11602,7 +11602,7 @@ export class OcaGrouper extends OcaAgent
    * indicates whether the list was successfully retrieved.
    * @param Index {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetGroupMemberList(Index)
   {
@@ -11618,7 +11618,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the value of the ActuatorOrSensor property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetActuatorOrSensor()
   {
@@ -11633,7 +11633,7 @@ export class OcaGrouper extends OcaAgent
    * indicates whether the value was successfully set.
    * @param ActuatorOrSensor {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetActuatorOrSensor(ActuatorOrSensor)
   {
@@ -11647,7 +11647,7 @@ export class OcaGrouper extends OcaAgent
   /**
    * Gets the value of the Mode property. The return value indicates
    * whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaGrouperMode>}
    */
   GetMode()
   {
@@ -11662,7 +11662,7 @@ export class OcaGrouper extends OcaAgent
    * whether the value was successfully set.
    * @param Mode {OcaGrouperMode}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetMode(Mode)
   {
@@ -11902,7 +11902,7 @@ export class OcaNumericObserver extends OcaAgent
    * emitted an Observation event, returns the IEEE not-a-number value. The
    * return status indicates whether the value has been successfully
    * returned.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetLastObservation()
   {
@@ -11915,7 +11915,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Gets the observer's state. The return value indicates whether the
    * state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaObserverState>}
    */
   GetState()
   {
@@ -11929,7 +11929,7 @@ export class OcaNumericObserver extends OcaAgent
    * Gets the identification of the property that the observer observes.
    * The return value indicates whether the identification was successfully
    * retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaProperty>}
    */
   GetObservedProperty()
   {
@@ -11945,7 +11945,7 @@ export class OcaNumericObserver extends OcaAgent
    * set.
    * @param property {OcaProperty}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetObservedProperty(property)
   {
@@ -11959,7 +11959,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Gets the value of the <b>Threshold </b>property. The return value
    * indicates whether the threshold value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetThreshold()
   {
@@ -11974,7 +11974,7 @@ export class OcaNumericObserver extends OcaAgent
    * indicates whether the threshold value was successfully set.
    * @param Threshold {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetThreshold(Threshold)
   {
@@ -11988,7 +11988,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Gets the value of the <b>Operator </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaRelationalOperator>}
    */
   GetOperator()
   {
@@ -12003,7 +12003,7 @@ export class OcaNumericObserver extends OcaAgent
    * indicates whether the operator was successfully set.
    * @param _operator {OcaRelationalOperator}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetOperator(_operator)
   {
@@ -12017,7 +12017,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Gets the value of the <b>TwoWay </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetTwoWay()
   {
@@ -12032,7 +12032,7 @@ export class OcaNumericObserver extends OcaAgent
    * indicates whether the property was successfully set.
    * @param twoWay {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTwoWay(twoWay)
   {
@@ -12046,7 +12046,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Gets the value of the <b>Hysteresis </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetHysteresis()
   {
@@ -12061,7 +12061,7 @@ export class OcaNumericObserver extends OcaAgent
    * indicates whether the property was successfully set.
    * @param hysteresis {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetHysteresis(hysteresis)
   {
@@ -12075,7 +12075,7 @@ export class OcaNumericObserver extends OcaAgent
   /**
    * Gets the value of the <b>Period </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeInterval>}
    */
   GetPeriod()
   {
@@ -12090,7 +12090,7 @@ export class OcaNumericObserver extends OcaAgent
    * indicates whether the property was successfully set.
    * @param period {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPeriod(period)
   {
@@ -12333,7 +12333,7 @@ export class OcaLibrary extends OcaAgent
    * value indicates whether the volume was successfully added.
    * @param Volume {OcaLibVol}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaLibVolID>}
    */
   AddVolume(Volume)
   {
@@ -12353,7 +12353,7 @@ export class OcaLibrary extends OcaAgent
    *
    * @param Volume {OcaLibVol}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ReplaceVolume(ID, Volume)
   {
@@ -12369,7 +12369,7 @@ export class OcaLibrary extends OcaAgent
    * the group was successfully deleted.
    * @param ID {OcaLibVolID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteVolume(ID)
   {
@@ -12383,7 +12383,7 @@ export class OcaLibrary extends OcaAgent
   /**
    * Retrieves a library volume. The return value indicates whether the
    * volume was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaLibVol>}
    */
   GetVolume()
   {
@@ -12396,7 +12396,7 @@ export class OcaLibrary extends OcaAgent
   /**
    * Gets the count of volumes in this library. The return value indicates
    * whether the count was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetVolumeCount()
   {
@@ -12409,7 +12409,7 @@ export class OcaLibrary extends OcaAgent
   /**
    * Gets the list of volumes held in this library. The return value
    * indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetVolumes()
   {
@@ -12422,7 +12422,7 @@ export class OcaLibrary extends OcaAgent
   /**
    * Gets allowed access mode for this library. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaLibAccess>}
    */
   GetAccess()
   {
@@ -12438,7 +12438,7 @@ export class OcaLibrary extends OcaAgent
    * manufacturer-supplied libraries.
    * @param Access {OcaLibAccess}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetAccess(Access)
   {
@@ -12584,7 +12584,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the type of the power supply. Return value indicates whether the
    * data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaPowerSupplyType>}
    */
   GetType()
   {
@@ -12597,7 +12597,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the power supply's model information text. Return value indicates
    * whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetModelInfo()
   {
@@ -12610,7 +12610,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the state of the power supply. Return value indicates whether the
    * data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaPowerSupplyState>}
    */
   GetState()
   {
@@ -12625,7 +12625,7 @@ export class OcaPowerSupply extends OcaAgent
    * state was successfully changed.
    * @param state {OcaPowerSupplyState}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetState(state)
   {
@@ -12639,7 +12639,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the value of property <b>Charging</b>. Return value indicates
    * whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetCharging()
   {
@@ -12652,7 +12652,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the available load fraction. Return value indicates whether the
    * data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat32>}
    */
   GetLoadFractionAvailable()
   {
@@ -12665,7 +12665,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the available storage fraction. Return value indicates whether
    * the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat32>}
    */
   GetStorageFractionAvailable()
   {
@@ -12678,7 +12678,7 @@ export class OcaPowerSupply extends OcaAgent
   /**
    * Gets the power supply physical location. Return value indicates
    * whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaPowerSupplyLocation>}
    */
   GetLocation()
   {
@@ -12879,7 +12879,7 @@ export class OcaEventHandler extends OcaAgent
    *
    * @param eventData {OcaEventData}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   OnEvent(Context, eventData)
   {
@@ -13026,7 +13026,7 @@ export class OcaNumericObserverList extends OcaAgent
    * the same as the order of object identifications returned by
    * GetObservedProperties. The return status indicates whether the value
    * has been successfully returned.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetLastObservation()
   {
@@ -13039,7 +13039,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Gets the observer's state. The return value indicates whether the
    * state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaObserverState>}
    */
   GetState()
   {
@@ -13056,7 +13056,7 @@ export class OcaNumericObserverList extends OcaAgent
    * SetObservedProperties, and is the same as the order of values returned
    * by GetLastObservation and the Observation event. The return value
    * indicates whether the identifications were successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetObservedProperties()
   {
@@ -13075,7 +13075,7 @@ export class OcaNumericObserverList extends OcaAgent
    * successfully set.
    * @param property {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetObservedProperties(property)
   {
@@ -13089,7 +13089,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Gets the value of the <b>Threshold </b>property. The return value
    * indicates whether the threshold value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetThreshold()
   {
@@ -13104,7 +13104,7 @@ export class OcaNumericObserverList extends OcaAgent
    * indicates whether the threshold value was successfully set.
    * @param Threshold {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetThreshold(Threshold)
   {
@@ -13118,7 +13118,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Gets the value of the <b>Operator </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaRelationalOperator>}
    */
   GetOperator()
   {
@@ -13133,7 +13133,7 @@ export class OcaNumericObserverList extends OcaAgent
    * indicates whether the operator was successfully set.
    * @param _operator {OcaRelationalOperator}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetOperator(_operator)
   {
@@ -13147,7 +13147,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Gets the value of the <b>TwoWay </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetTwoWay()
   {
@@ -13162,7 +13162,7 @@ export class OcaNumericObserverList extends OcaAgent
    * indicates whether the property was successfully set.
    * @param twoWay {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTwoWay(twoWay)
   {
@@ -13176,7 +13176,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Gets the value of the <b>Hysteresis </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetHysteresis()
   {
@@ -13191,7 +13191,7 @@ export class OcaNumericObserverList extends OcaAgent
    * indicates whether the property was successfully set.
    * @param hysteresis {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetHysteresis(hysteresis)
   {
@@ -13205,7 +13205,7 @@ export class OcaNumericObserverList extends OcaAgent
   /**
    * Gets the value of the <b>Period </b>property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeInterval>}
    */
   GetPeriod()
   {
@@ -13220,7 +13220,7 @@ export class OcaNumericObserverList extends OcaAgent
    * indicates whether the property was successfully set.
    * @param period {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPeriod(period)
   {
@@ -13482,7 +13482,7 @@ export class OcaTask extends OcaAgent
    *
    * @param StateParameter {OcaBlob}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Control(Command, StateParameter)
   {
@@ -13496,7 +13496,7 @@ export class OcaTask extends OcaAgent
   /**
    * Gets current status of ramper. The return value indicates whether the
    * status was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTaskStatus>}
    */
   GetStatus()
   {
@@ -13510,7 +13510,7 @@ export class OcaTask extends OcaAgent
    * Gets task slot index. The return value indicates whether the value was
    * successfully retrieved. Returns zero if task is not assigned to a
    * slot. Returns NotImplemented status if device does not use slots.
-   * @retval {Promise}
+   * @returns {Promise<OcaTaskSlotID>}
    */
   GetSlot()
   {
@@ -13526,7 +13526,7 @@ export class OcaTask extends OcaAgent
    * all slots. Returns NotImplemented status if device does not use slots.
    * @param ID {OcaTaskSlotID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSlot(ID)
   {
@@ -13540,7 +13540,7 @@ export class OcaTask extends OcaAgent
   /**
    * Gets task time mode (absolute or relative). The return value indicates
    * whether the time mode was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeMode>}
    */
   GetTimeMode()
   {
@@ -13555,7 +13555,7 @@ export class OcaTask extends OcaAgent
    * whether the time mode was successfully set.
    * @param TimeMode {OcaTimeMode}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTimeMode(TimeMode)
   {
@@ -13569,7 +13569,7 @@ export class OcaTask extends OcaAgent
   /**
    * Gets task time units (seconds or samples). The return value indicates
    * whether the time mode was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeUnits>}
    */
   GetTimeUnits()
   {
@@ -13584,7 +13584,7 @@ export class OcaTask extends OcaAgent
    * whether the time units were successfully set.
    * @param TimeUnits {OcaTimeUnits}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTimeUnits(TimeUnits)
   {
@@ -13601,7 +13601,7 @@ export class OcaTask extends OcaAgent
    * value indicates the clock source is the device's internal time or
    * sample clock. The return value indicates whether the object number was
    * successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetClockONo()
   {
@@ -13619,7 +13619,7 @@ export class OcaTask extends OcaAgent
    * successfully set.
    * @param ClockONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetClockONo(ClockONo)
   {
@@ -13633,7 +13633,7 @@ export class OcaTask extends OcaAgent
   /**
    * Gets task start time. The return value indicates whether the start
    * time was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeOfDay>}
    */
   GetStartTime()
   {
@@ -13648,7 +13648,7 @@ export class OcaTask extends OcaAgent
    * time was successfully set.
    * @param TimeMode {OcaTimeOfDay}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetStartTime(TimeMode)
   {
@@ -13662,7 +13662,7 @@ export class OcaTask extends OcaAgent
   /**
    * Gets task duration. The return value indicates whether the duration
    * was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetDuration()
   {
@@ -13677,7 +13677,7 @@ export class OcaTask extends OcaAgent
    * was successfully set.
    * @param Duration {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDuration(Duration)
   {
@@ -13885,7 +13885,7 @@ export class OcaTaskFactory extends OcaAgent
    * command was successfully executed.
    * @param Command {OcaTaskCommand}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Control(Command)
   {
@@ -13899,7 +13899,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Gets current state of ramper. The return value indicates whether the
    * state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTaskState>}
    */
   GetState()
   {
@@ -13913,7 +13913,7 @@ export class OcaTaskFactory extends OcaAgent
    * Gets task slot ID. The return value indicates whether the value was
    * successfully retrieved. Returns zero if task is not assigned to a
    * slot. Returns NotImplemented status if device does not use slots.
-   * @retval {Promise}
+   * @returns {Promise<OcaTaskSlotID>}
    */
   GetSlot()
   {
@@ -13929,7 +13929,7 @@ export class OcaTaskFactory extends OcaAgent
    * all slots. Returns NotImplemented status if device does not use slots.
    * @param ID {OcaTaskSlotID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSlot(ID)
   {
@@ -13943,7 +13943,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Gets task time mode (absolute or relative). The return value indicates
    * whether the time mode was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeMode>}
    */
   GetTimeMode()
   {
@@ -13958,7 +13958,7 @@ export class OcaTaskFactory extends OcaAgent
    * whether the time mode was successfully set.
    * @param TimeMode {OcaTimeMode}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTimeMode(TimeMode)
   {
@@ -13972,7 +13972,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Gets task start time. The return value indicates whether the start
    * time was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeOfDay>}
    */
   GetStartTime()
   {
@@ -13987,7 +13987,7 @@ export class OcaTaskFactory extends OcaAgent
    * time was successfully set.
    * @param TimeMode {OcaTimeOfDay}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetStartTime(TimeMode)
   {
@@ -14001,7 +14001,7 @@ export class OcaTaskFactory extends OcaAgent
   /**
    * Gets task duration. The return value indicates whether the duration
    * was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetDuration()
   {
@@ -14016,7 +14016,7 @@ export class OcaTaskFactory extends OcaAgent
    * was successfully set.
    * @param Duration {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDuration(Duration)
   {
@@ -14173,7 +14173,7 @@ export class OcaTaskGroup extends OcaAgent
    *
    * @param StateParameter {OcaBlob}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Control(Command, StateParameter)
   {
@@ -14190,7 +14190,7 @@ export class OcaTaskGroup extends OcaAgent
    * all implementations.
    * @param TaskONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddTask(TaskONo)
   {
@@ -14207,7 +14207,7 @@ export class OcaTaskGroup extends OcaAgent
    * supported in all implementations.
    * @param TaskONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteTask(TaskONo)
   {
@@ -14222,7 +14222,7 @@ export class OcaTaskGroup extends OcaAgent
    * Retrieves the list of ONos of the tasks in the task group. The return
    * value indicates whether the list was successfully retrieved. Optional
    * method, may not be supported in all implementations.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetTasks()
   {
@@ -14235,7 +14235,7 @@ export class OcaTaskGroup extends OcaAgent
   /**
    * Gets the value of the <b>ID </b>property. The return value indicates
    * whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTaskGroupID>}
    */
   GetID()
   {
@@ -14251,7 +14251,7 @@ export class OcaTaskGroup extends OcaAgent
    * supported in all implementations.
    * @param ID {OcaTaskGroupID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetID(ID)
   {
@@ -14383,7 +14383,7 @@ export class OcaRamperTask extends OcaTask
   /**
    * Gets definition of ramped property. The return value indicates whether
    * the object number was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaProperty>}
    */
   GetRampedProperty()
   {
@@ -14398,7 +14398,7 @@ export class OcaRamperTask extends OcaTask
    * definition was successful.
    * @param property {OcaProperty}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetRampedProperty(property)
   {
@@ -14412,7 +14412,7 @@ export class OcaRamperTask extends OcaTask
   /**
    * Retrieves interpolation law setting. The return value indicates
    * whether the setting was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaRamperInterpolationLaw>}
    */
   GetInterpolationLaw()
   {
@@ -14427,7 +14427,7 @@ export class OcaRamperTask extends OcaTask
    * law was successfully set.
    * @param law {OcaRamperInterpolationLaw}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetInterpolationLaw(law)
   {
@@ -14441,7 +14441,7 @@ export class OcaRamperTask extends OcaTask
   /**
    * Retrieves ramp goal value. The return value indicates whether the
    * duration was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetGoal()
   {
@@ -14456,7 +14456,7 @@ export class OcaRamperTask extends OcaTask
    * was successfully set.
    * @param goal {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetGoal(goal)
   {
@@ -14608,7 +14608,7 @@ export class OcaMediaClock3 extends OcaAgent
   /**
    * Gets the value of the <b>Availability </b>property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaClockAvailability>}
    */
   GetAvailability()
   {
@@ -14624,7 +14624,7 @@ export class OcaMediaClock3 extends OcaAgent
    * not be supported in all implementations.
    * @param Availability {OcaMediaClockAvailability}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetAvailability(Availability)
   {
@@ -14639,7 +14639,7 @@ export class OcaMediaClock3 extends OcaAgent
    * Gets the current clock rate and the ONo of the associated
    * <b>OcaTimeSource </b>object. The return value indicates whether the
    * value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaMediaClockRate,OcaONo>>}
    */
   GetCurrentRate()
   {
@@ -14658,7 +14658,7 @@ export class OcaMediaClock3 extends OcaAgent
    *
    * @param TimeSourceONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCurrentRate(Rate, TimeSourceONo)
   {
@@ -14673,7 +14673,7 @@ export class OcaMediaClock3 extends OcaAgent
    * Gets the offset of this media clock's time from that of the associated
    * <b>OcaTimeSource </b>object. The return value indicates whether the
    * value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeOffset>}
    */
   GetOffset()
   {
@@ -14690,7 +14690,7 @@ export class OcaMediaClock3 extends OcaAgent
    * all implementations.
    * @param Offset {OcaTimeOffset}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetOffset(Offset)
   {
@@ -14705,7 +14705,7 @@ export class OcaMediaClock3 extends OcaAgent
    * Gets the list of supported media clock rates for the given time
    * source. The return value indicates whether the list was successfully
    * retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetSupportedRates()
   {
@@ -14866,7 +14866,7 @@ export class OcaTimeSource extends OcaAgent
   /**
    * Gets the value of the <b>Availability </b>property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeSourceAvailability>}
    */
   GetAvailability()
   {
@@ -14879,7 +14879,7 @@ export class OcaTimeSource extends OcaAgent
   /**
    * Gets the value of the <b>Protocol </b>property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeProtocol>}
    */
   GetProtocol()
   {
@@ -14894,7 +14894,7 @@ export class OcaTimeSource extends OcaAgent
    * indicates whether the value was successfully set.
    * @param Protocol {OcaTimeProtocol}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetProtocol(Protocol)
   {
@@ -14908,7 +14908,7 @@ export class OcaTimeSource extends OcaAgent
   /**
    * Gets the value of the <b>Parameters </b>property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaSDPString>}
    */
   GetParameters()
   {
@@ -14924,7 +14924,7 @@ export class OcaTimeSource extends OcaAgent
    * not be supported in all implementations.
    * @param Parameters {OcaSDPString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetParameters(Parameters)
   {
@@ -14938,7 +14938,7 @@ export class OcaTimeSource extends OcaAgent
   /**
    * Gets the time reference type. The return value indicates whether the
    * value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeReferenceType>}
    */
   GetReferenceType()
   {
@@ -14954,7 +14954,7 @@ export class OcaTimeSource extends OcaAgent
    * all implementations.
    * @param ReferenceType {OcaTimeReferenceType}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetReferenceType(ReferenceType)
   {
@@ -14969,7 +14969,7 @@ export class OcaTimeSource extends OcaAgent
    * Gets the timing source ID. The return value indicates whether the
    * value was successfully retrieved. Optional method, not required for
    * all time reference types.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetReferenceID()
   {
@@ -14985,7 +14985,7 @@ export class OcaTimeSource extends OcaAgent
    * reference types.
    * @param ID {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetReferenceID(ID)
   {
@@ -14999,7 +14999,7 @@ export class OcaTimeSource extends OcaAgent
   /**
    * Gets the synchronization status of this time source. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeSourceSyncStatus>}
    */
   GetSyncStatus()
   {
@@ -15013,7 +15013,7 @@ export class OcaTimeSource extends OcaAgent
    * Resets this time source. Changes Availability to Unavailable, then
    * initiates a new synchronization sequence. The return value indicates
    * whether the reset was successful.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Reset()
   {
@@ -15194,7 +15194,7 @@ export class OcaPhysicalPosition extends OcaAgent
   /**
    * Retrieves value of property <b>PositionAndRotation</b>. Result
    * indicates whether retrieval was successful.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaPositionAndRotation,OcaPositionAndRotation,OcaPositionAndRotation>>}
    */
   GetPositionAndRotation()
   {
@@ -15210,7 +15210,7 @@ export class OcaPhysicalPosition extends OcaAgent
    * implemented for read-only position objects.
    * @param PositionAndRotation {OcaPositionAndRotation}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPositionAndRotation(PositionAndRotation)
   {
@@ -15224,7 +15224,7 @@ export class OcaPhysicalPosition extends OcaAgent
   /**
    * Retrieves value of property <b>PositionAndRotationFlags</b>. Result
    * indicates whether retrieval was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaPositionAndRotationFlags>}
    */
   GetPositionAndRotationFlags()
   {
@@ -15240,7 +15240,7 @@ export class OcaPhysicalPosition extends OcaAgent
    * only implemented for configurable position objects.
    * @param Flags {OcaPositionAndRotationFlags}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPositionAndRotationFlags(Flags)
   {
@@ -15368,7 +15368,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Gets the network's user-specified label. Return status indicates
    * whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetLabel()
   {
@@ -15383,7 +15383,7 @@ export class OcaApplicationNetwork extends OcaRoot
    * whether the operation was successful.
    * @param Label {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetLabel(Label)
   {
@@ -15397,7 +15397,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Gets the ONo of this network's containing block. Return status
    * indicates whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetOwner()
   {
@@ -15410,7 +15410,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Gets the network's IDAdvertised. Return status indicates whether the
    * operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaApplicationNetworkServiceID>}
    */
   GetServiceID()
   {
@@ -15425,7 +15425,7 @@ export class OcaApplicationNetwork extends OcaRoot
    * operation was successful.
    * @param Name {OcaApplicationNetworkServiceID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetServiceID(Name)
   {
@@ -15439,7 +15439,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Retrieves the list of this network's system interface descriptor.
    * Return status indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSystemInterfaces()
   {
@@ -15452,7 +15452,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Retrieves the network's state. Return status indicates whether the
    * status was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaApplicationNetworkState>}
    */
   GetState()
   {
@@ -15466,7 +15466,7 @@ export class OcaApplicationNetwork extends OcaRoot
    * Retrieves the most recent error code. Return status indicates whether
    * the operation was successful. Note that a second parameter 'Reset'
    * isremoved in v02 of this class.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetErrorCode()
   {
@@ -15481,7 +15481,7 @@ export class OcaApplicationNetwork extends OcaRoot
    * command execution.
    * @param Command {OcaApplicationNetworkCommand}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Control(Command)
   {
@@ -15495,7 +15495,7 @@ export class OcaApplicationNetwork extends OcaRoot
   /**
    * Returns path from given object down to root. The return value
    * indicates whether the operation succeeded.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaNamePath,OcaONoPath>>}
    */
   GetPath()
   {
@@ -15670,7 +15670,7 @@ export class OcaControlNetwork extends OcaApplicationNetwork
   /**
    * Gets the network's Protocol property. Return status indicates whether
    * the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkControlProtocol>}
    */
   GetControlProtocol()
   {
@@ -15806,7 +15806,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the network's Protocol property. Return status indicates whether
    * the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkMediaProtocol>}
    */
   GetMediaProtocol()
   {
@@ -15820,7 +15820,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * Gets the list of ports owned by the MediaTransportNetwork object
    * (representing the source and sink network channels). The return value
    * indicates whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetPorts()
   {
@@ -15835,7 +15835,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * whether the name was successfully retrieved.
    * @param PortID {OcaPortID}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetPortName(PortID)
   {
@@ -15855,7 +15855,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param Name {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetPortName(PortID, Name)
   {
@@ -15869,7 +15869,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the maximum number of source connectors this media transport
    * network supports.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaxSourceConnectors()
   {
@@ -15882,7 +15882,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the maximum number of source connectors this media transport
    * network supports.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaxSinkConnectors()
   {
@@ -15895,7 +15895,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the maximum number of ports per pin this media transport network
    * supports.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaxPinsPerConnector()
   {
@@ -15908,7 +15908,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the maximum number of pins (channels) per connector this media
    * transport network supports.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaxPortsPerPin()
   {
@@ -15922,7 +15922,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * Gets the descriptors of all the source (output) connectors collected
    * by this network object. Return status indicates success of the
    * operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSourceConnectors()
   {
@@ -15937,7 +15937,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * indicates the success of the operation.
    * @param ID {OcaMediaConnectorID}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaSourceConnector>}
    */
   GetSourceConnector(ID)
   {
@@ -15953,7 +15953,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the descriptors of all the sink (output) connectors collected by
    * this network object. Return status indicates success of the operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSinkConnectors()
   {
@@ -15968,7 +15968,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * indicates the success of the operation.
    * @param ID {OcaMediaConnectorID}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaSinkConnector>}
    */
   GetSinkConnector(ID)
   {
@@ -15984,7 +15984,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
   /**
    * Gets the status of all the source and sink connectors collected by
    * this network object. Return status indicates success of the operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetConnectorsStatuses()
   {
@@ -15999,7 +15999,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * of the operation.
    * @param ConnectorID {OcaMediaConnectorID}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaConnectorStatus>}
    */
   GetConnectorStatus(ConnectorID)
   {
@@ -16023,7 +16023,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param InitialStatus {OcaMediaConnectorState}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaSourceConnector>}
    */
   AddSourceConnector(Connector, InitialStatus)
   {
@@ -16049,7 +16049,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param Connector {OcaMediaSinkConnector}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaSinkConnector>}
    */
   AddSinkConnector(InitialStatus, Connector)
   {
@@ -16069,7 +16069,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param Command {OcaMediaConnectorCommand}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ControlConnector(ConnectorID, Command)
   {
@@ -16087,7 +16087,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param ChannelPinMap {OcaMap}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSourceConnectorPinMap(ConnectorID, ChannelPinMap)
   {
@@ -16105,7 +16105,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param ChannelPinMap {OcaMultiMap}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSinkConnectorPinMap(ConnectorID, ChannelPinMap)
   {
@@ -16123,7 +16123,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param Connection {OcaMediaConnection}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetConnectorConnection(ConnectorID, Connection)
   {
@@ -16141,7 +16141,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    *
    * @param Coding {OcaMediaCoding}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetConnectorCoding(ConnectorID, Coding)
   {
@@ -16157,7 +16157,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * success of the operation.
    * @param ID {OcaMediaConnectorID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteConnector(ID)
   {
@@ -16172,7 +16172,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * Gets the default, min, and max alignment levels for
    * OcaMedia{Source|Sink}Connectors attached to this network. Return
    * status indicates success of the operation.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDBFS,OcaDBFS,OcaDBFS>>}
    */
   GetAlignmentLevel()
   {
@@ -16186,7 +16186,7 @@ export class OcaMediaTransportNetwork extends OcaApplicationNetwork
    * Gets the default, min, and max alignment gains for
    * OcaMediaSinkConnectors attached to this network. Return status
    * indicates success of the operation.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
    */
   GetAlignmentGain()
   {
@@ -16581,7 +16581,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the OcaVersion property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetOcaVersion()
   {
@@ -16594,7 +16594,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the model GUID. The return value indicates whether the GUID was
    * successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaModelGUID>}
    */
   GetModelGUID()
   {
@@ -16607,7 +16607,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the SerialNumber property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetSerialNumber()
   {
@@ -16620,7 +16620,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the device name. The return value indicates whether the property
    * was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetDeviceName()
   {
@@ -16635,7 +16635,7 @@ export class OcaDeviceManager extends OcaManager
    * was successfully set.
    * @param Name {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDeviceName(Name)
   {
@@ -16649,7 +16649,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the model description. The return value indicates whether the
    * description was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaModelDescription>}
    */
   GetModelDescription()
   {
@@ -16662,7 +16662,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the Role property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetDeviceRole()
   {
@@ -16677,7 +16677,7 @@ export class OcaDeviceManager extends OcaManager
    * whether the property was successfully set.
    * @param role {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetRole(role)
   {
@@ -16691,7 +16691,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the UserInventoryCode property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetUserInventoryCode()
   {
@@ -16706,7 +16706,7 @@ export class OcaDeviceManager extends OcaManager
    * indicates whether the property was successfully set.
    * @param Code {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetUserInventoryCode(Code)
   {
@@ -16720,7 +16720,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the Enabled property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetEnabled()
   {
@@ -16735,7 +16735,7 @@ export class OcaDeviceManager extends OcaManager
    * whether the property was successfully set.
    * @param enabled {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetEnabled(enabled)
   {
@@ -16749,7 +16749,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the State property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaDeviceState>}
    */
   GetState()
   {
@@ -16769,7 +16769,7 @@ export class OcaDeviceManager extends OcaManager
    *
    * @param Address {OcaNetworkAddress}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetResetKey(Key, Address)
   {
@@ -16783,7 +16783,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of the ResetCause property. The return value indicates
    * whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaResetCause>}
    */
   GetResetCause()
   {
@@ -16802,7 +16802,7 @@ export class OcaDeviceManager extends OcaManager
    * read out) to accomodate systems that have multiple controllers. The
    * return value indicates whether the property was successfully
    * retrieved.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ClearResetCause()
   {
@@ -16813,7 +16813,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of property <b>Message</b>. Return value indicates
    * whether value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetMessage()
   {
@@ -16828,7 +16828,7 @@ export class OcaDeviceManager extends OcaManager
    * value indicates whether the value was successfully set.
    * @param Text {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetMessage(Text)
   {
@@ -16843,7 +16843,7 @@ export class OcaDeviceManager extends OcaManager
    * Retrive the list of descriptors of managers instantiated in this
    * device. The return value indicates whether the retrieval was
    * successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetManagers()
   {
@@ -16856,7 +16856,7 @@ export class OcaDeviceManager extends OcaManager
   /**
    * Gets the value of property <b>DeviceRevisionID</b>. Return value
    * indicates whether value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetDeviceRevisionID()
   {
@@ -17178,7 +17178,7 @@ export class OcaSecurityManager extends OcaManager
    *
    * @param key {OcaBlob}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddPreSharedKey(identity, key)
   {
@@ -17198,7 +17198,7 @@ export class OcaSecurityManager extends OcaManager
    *
    * @param newKey {OcaBlob}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ChangePreSharedKey(identity, newKey)
   {
@@ -17218,7 +17218,7 @@ export class OcaSecurityManager extends OcaManager
    * on. If this is not the case the method will return DeviceError.
    * @param identity {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeletePreSharedKey(identity)
   {
@@ -17234,7 +17234,7 @@ export class OcaSecurityManager extends OcaManager
    * method all OCA messages can be sent and received both on insecure and
    * secure connections. The return value indicates whether the operation
    * succeeded. If the operation fails security is not disabled.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DisableControlSecurity()
   {
@@ -17247,7 +17247,7 @@ export class OcaSecurityManager extends OcaManager
    * method all OCA messages are sent and received using a secure
    * connection. The return value indicates whether the operation
    * succeeded. If the operation fails security is not enabled.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   EnableControlSecurity()
   {
@@ -17368,7 +17368,7 @@ export class OcaFirmwareManager extends OcaManager
   /**
    * Gets the value of the ComponentVersions property. The return value
    * indicates whether the property was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetComponentVersions()
   {
@@ -17385,7 +17385,7 @@ export class OcaFirmwareManager extends OcaManager
    * then follow, after which the update process is ended by calling the
    * '03m08 EndUpdateProcess' method. The return value indicates if
    * starting the update process succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   StartUpdateProcess()
   {
@@ -17405,7 +17405,7 @@ export class OcaFirmwareManager extends OcaManager
    * indicates if starting the active update succeeded.
    * @param component {OcaComponent}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   BeginActiveImageUpdate(component)
   {
@@ -17427,7 +17427,7 @@ export class OcaFirmwareManager extends OcaManager
    *
    * @param imageData {OcaBlob}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddImageData(id, imageData)
   {
@@ -17443,7 +17443,7 @@ export class OcaFirmwareManager extends OcaManager
    * data.
    * @param verifyData {OcaBlob}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   VerifyImage(verifyData)
   {
@@ -17460,7 +17460,7 @@ export class OcaFirmwareManager extends OcaManager
    * therefore a new active or passive update can be started (or the upload
    * process can be ended by invoking the '03m08 EndUpdateProcess' method).
    * The return value indicates if ending the active update succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   EndActiveImageUpdate()
   {
@@ -17486,7 +17486,7 @@ export class OcaFirmwareManager extends OcaManager
    *
    * @param updateFileName {OcaString}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   BeginPassiveComponentUpdate(component, serverAddress, updateFileName)
   {
@@ -17505,7 +17505,7 @@ export class OcaFirmwareManager extends OcaManager
    * however depends on the implementation of the upgrade process). As it
    * will usually trigger a reset of the device in some cases no response
    * parameter is used for this method.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   EndUpdateProcess()
   {
@@ -17619,7 +17619,7 @@ export class OcaSubscriptionManager extends OcaManager
    *
    * @param Subscriber {OcaMethod}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   RemoveSubscription(Event, Subscriber)
   {
@@ -17648,7 +17648,7 @@ export class OcaSubscriptionManager extends OcaManager
    *
    * @param DestinationInformation {OcaNetworkAddress}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddSubscription(Event, Subscriber, SubscriberContext, NotificationDeliveryMode, DestinationInformation)
   {
@@ -17672,7 +17672,7 @@ export class OcaSubscriptionManager extends OcaManager
    * the object numbers of the objects that raise events, so that it can
    * pass a list of changed objects once the events are re-enabled. The
    * return value indicates if disabling events succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DisableNotifications()
   {
@@ -17690,7 +17690,7 @@ export class OcaSubscriptionManager extends OcaManager
    * automatically to prevent the situation in which the raising of events
    * would never be re-enabled. The return value indicates if re-enabling
    * the event-based events succeeded.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ReEnableNotifications()
   {
@@ -17720,7 +17720,7 @@ export class OcaSubscriptionManager extends OcaManager
    *
    * @param DestinationInformation {OcaNetworkAddress}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddPropertyChangeSubscription(Emitter, Property, Subscriber, SubscriberContext, NotificationDeliveryMode, DestinationInformation)
   {
@@ -17743,7 +17743,7 @@ export class OcaSubscriptionManager extends OcaManager
    *
    * @param Subscriber {OcaMethod}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   RemovePropertyChangeSubscription(Emitter, Property, Subscriber)
   {
@@ -17761,7 +17761,7 @@ export class OcaSubscriptionManager extends OcaManager
    * other values shall be allowed, and the returned value shall not change
    * once the device has initialized. NOTE: In AES70-2015, arbitrary
    * subscriber context lengths were allowed; this is no longer true.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetMaximumSubscriberContextLength()
   {
@@ -17907,7 +17907,7 @@ export class OcaPowerManager extends OcaManager
    * Retrieve the value of property <b>03p01 State</b>, the current power
    * state of the device. Return value indicates whether the value was
    * successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaPowerState>}
    */
   GetState()
   {
@@ -17922,7 +17922,7 @@ export class OcaPowerManager extends OcaManager
    * requested change has been successfully made.
    * @param State {OcaPowerState}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetState(State)
   {
@@ -17936,7 +17936,7 @@ export class OcaPowerManager extends OcaManager
   /**
    * Retrieves list of object number(s) of all power supply(ies). Return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetPowerSupplies()
   {
@@ -17949,7 +17949,7 @@ export class OcaPowerManager extends OcaManager
   /**
    * Retrieves list of object number(s) of active power supply(ies). Return
    * value indicates whether the data was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetActivePowerSupplies()
   {
@@ -17971,7 +17971,7 @@ export class OcaPowerManager extends OcaManager
    *
    * @param powerOffOld {OcaBoolean}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ExchangePowerSupply(oldPsu, newPsu, powerOffOld)
   {
@@ -17985,7 +17985,7 @@ export class OcaPowerManager extends OcaManager
   /**
    * Gets the value of the <b>AutoState</b> property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaBoolean>}
    */
   GetAutoState()
   {
@@ -18163,7 +18163,7 @@ export class OcaNetworkManager extends OcaManager
    * Gets the list of object numbers of <b>OcaNetwork </b>instances in this
    * device. Return value indicates whether the list was successfully
    * retrieved. <b><u>Deprecated as of OCA 1.2</u></b>
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetNetworks()
   {
@@ -18177,7 +18177,7 @@ export class OcaNetworkManager extends OcaManager
    * Gets the list of object numbers of <b>OcaStreamNetwork </b>instances
    * in this device. Return value indicates whether list was successfully
    * retrieved. <b><u>Deprecated as of OCA 1.4.</u></b>
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetStreamNetworks()
   {
@@ -18191,7 +18191,7 @@ export class OcaNetworkManager extends OcaManager
    * Gets the list of object numbers of <b>OcaControlNetwork </b>instances
    * in this device. Return value indicates whether list was successfully
    * retrieved. Introduced in version 1.4.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetControlNetworks()
   {
@@ -18205,7 +18205,7 @@ export class OcaNetworkManager extends OcaManager
    * Gets the list of object numbers of <b>OcaMediaTransportNetwork
    * </b>instances in this device. Return value indicates whether list was
    * successfully retrieved. Introduced in version 1.4.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetMediaTransportNetworks()
   {
@@ -18363,7 +18363,7 @@ export class OcaMediaClockManager extends OcaManager
    * Gets the list of object numbers of <b>OcaMediaClock </b>instances in
    * this device. Return value indicates whether list was successfully
    * retrieved. Note: In AES70-2017, this method is deprecated.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetClocks()
   {
@@ -18378,7 +18378,7 @@ export class OcaMediaClockManager extends OcaManager
    * </b>objects in the device. Return value indicates whether the list was
    * successfully retrieved. Note : In AES70-2017, this method is
    * deprecated.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetMediaClockTypesSupported()
   {
@@ -18392,7 +18392,7 @@ export class OcaMediaClockManager extends OcaManager
    * Gets the list of object numbers of <b>OcaMediaClock3 </b>instances in
    * this device. Return value indicates whether list was successfully
    * retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetClock3s()
   {
@@ -18538,7 +18538,7 @@ export class OcaLibraryManager extends OcaManager
    * library was successfully added.
    * @param Type {OcaLibVolType}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   AddLibrary(Type)
   {
@@ -18555,7 +18555,7 @@ export class OcaLibraryManager extends OcaManager
    * Deletes a library from the device.
    * @param ID {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteLibrary(ID)
   {
@@ -18571,7 +18571,7 @@ export class OcaLibraryManager extends OcaManager
    * instantiated in the device..
    * @param Type {OcaLibVolType}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetLibraryCount(Type)
   {
@@ -18589,7 +18589,7 @@ export class OcaLibraryManager extends OcaManager
    * given type that are instantiated in the device.
    * @param Type {OcaLibVolType}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetLibraryList(Type)
   {
@@ -18605,7 +18605,7 @@ export class OcaLibraryManager extends OcaManager
   /**
    * Return the identifier of the most recently applied patch. The return
    * value indicates whether the method succeeded.
-   * @retval {Promise}
+   * @returns {Promise<OcaClassVersionNumber>}
    */
   GetCurrentPatch()
   {
@@ -18619,7 +18619,7 @@ export class OcaLibraryManager extends OcaManager
    * Apply a patch to the device.
    * @param ID {OcaClassVersionNumber}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCurrentPatch(ID)
   {
@@ -18838,7 +18838,7 @@ export class OcaDeviceTimeManager extends OcaManager
   /**
    * Get current value of device time-of-day clock. Return value indicates
    * whether value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeOfDay>}
    */
   GetDeviceTime()
   {
@@ -18854,7 +18854,7 @@ export class OcaDeviceTimeManager extends OcaManager
    * property CurrentDeviceTimeSource.
    * @param DeviceTime {OcaTimeOfDay}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDeviceTime(DeviceTime)
   {
@@ -18869,7 +18869,7 @@ export class OcaDeviceTimeManager extends OcaManager
    * Returns list of object numbers of OcaTimeSource instances in this
    * device. Return value indicates whether list was successfully
    * retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetTimeSources()
   {
@@ -18882,7 +18882,7 @@ export class OcaDeviceTimeManager extends OcaManager
   /**
    * Retrieves ONo of current time source object, or zero if none. Return
    * value indicates whether value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetCurrentDeviceTimeSource()
   {
@@ -18897,7 +18897,7 @@ export class OcaDeviceTimeManager extends OcaManager
    * indicates whether value was successfully retrieved.
    * @param TimeSourceONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetCurrentDeviceTimeSource(TimeSourceONo)
   {
@@ -19074,7 +19074,7 @@ export class OcaTaskManager extends OcaManager
    * were successfully controlled.
    * @param Command {OcaTaskCommand}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Control(Command)
   {
@@ -19088,7 +19088,7 @@ export class OcaTaskManager extends OcaManager
   /**
    * Gets value of property <b>State</b>. Return value indicates whether
    * value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTaskManagerState>}
    */
   GetState()
   {
@@ -19101,7 +19101,7 @@ export class OcaTaskManager extends OcaManager
   /**
    * Gets list of ONos of tasks in device. Return value indicates whether
    * list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetTasks()
   {
@@ -19114,7 +19114,7 @@ export class OcaTaskManager extends OcaManager
   /**
    * Gets list of ONos of tasks in device. Return value indicates whether
    * list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetTaskGroups()
   {
@@ -19129,7 +19129,7 @@ export class OcaTaskManager extends OcaManager
    * successfully added. Not implemented if device does not use slots.
    * @param SlotID {OcaTaskSlotID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddSlot(SlotID)
   {
@@ -19145,7 +19145,7 @@ export class OcaTaskManager extends OcaManager
    * successfully deleted. Not implemented if device does not use slots.
    * @param SlotID {OcaTaskSlotID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DeleteSlot(SlotID)
   {
@@ -19160,7 +19160,7 @@ export class OcaTaskManager extends OcaManager
    * Gets value of property <b>Slots</b>. Return value indicates whether
    * the value was successfully retrieved. Not implemented if device does
    * not use slots.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetSlots()
   {
@@ -19254,7 +19254,7 @@ export class OcaCodingManager extends OcaManager
   /**
    * Retrieves the map of available encoding schemes, indexed by scheme ID.
    * Return value indicates success of the retrieval.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetAvailableEncodingSchemes()
   {
@@ -19267,7 +19267,7 @@ export class OcaCodingManager extends OcaManager
   /**
    * Retrieves the map of available decoding schemes, indexed by scheme ID.
    * Return value indicates success of the retrieval.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetAvailableDecodingSchemes()
   {
@@ -19389,7 +19389,7 @@ export class OcaDiagnosticManager extends OcaManager
    * value indicates success of the retrieval.
    * @param ONo {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaString>}
    */
   GetLockStatus(ONo)
   {
@@ -19503,7 +19503,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    *
    * @param Index {OcaStreamConnectorPinIndex}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   AddToConnector(Connector, Index)
   {
@@ -19518,7 +19518,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * Gets the object number of the stream connector object to which this
    * media port belongs, if any. If port does not belong to a stream
    * connector, returns zero. Return status indicates success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetConnectorPins()
   {
@@ -19531,7 +19531,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   /**
    * Gets the value of the IDAdvertised property. Return status indicates
    * success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkSignalChannelID>}
    */
   GetIDAdvertised()
   {
@@ -19544,7 +19544,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   /**
    * Gets the object number of the stream network object to which this
    * media port belongs. Return status indicates success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetNetwork()
   {
@@ -19559,7 +19559,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * if the channel is not connected (at least not directly to another
    * channel). For stream-oriented connection management this functionality
    * is not used (i.e. the remote channel ID will always be empty).
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkSignalChannelID>}
    */
   GetRemoteChannelID()
   {
@@ -19572,7 +19572,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   /**
    * Gets the value of the SourceOrSink property. Return status indicates
    * success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkMediaSourceOrSink>}
    */
   GetSourceOrSink()
   {
@@ -19585,7 +19585,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
   /**
    * Gets the value of the Status property. Return status indicates success
    * of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkSignalChannelStatus>}
    */
   GetStatus()
   {
@@ -19600,7 +19600,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * indicates success of operation.
    * @param Connector {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   RemoveFromConnector(Connector)
   {
@@ -19616,7 +19616,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * success of operation.
    * @param IDAdvertised {OcaNetworkSignalChannelID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetIDAdvertised(IDAdvertised)
   {
@@ -19633,7 +19633,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * implemented for reconfigurable devices.
    * @param Network {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetNetwork(Network)
   {
@@ -19652,7 +19652,7 @@ export class OcaNetworkSignalChannel extends OcaWorker
    * be done by passing an empty remote channel ID as parameter.
    * @param RemoteChannelID {OcaNetworkSignalChannelID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetRemoteChannelID(RemoteChannelID)
   {
@@ -19861,7 +19861,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Gets the network's link type (wired Ethernet, USB, etc.). Return
    * status indicates whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkLinkType>}
    */
   GetLinkType()
   {
@@ -19874,7 +19874,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Gets the network's IDAdvertised. Return status indicates whether the
    * operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaApplicationNetworkServiceID>}
    */
   GetIDAdvertised()
   {
@@ -19889,7 +19889,7 @@ export class OcaNetwork extends OcaAgent
    * operation was successful.
    * @param Name {OcaApplicationNetworkServiceID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetIDAdvertised(Name)
   {
@@ -19903,7 +19903,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Gets the network's ControlProtocol property. Return status indicates
    * whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkControlProtocol>}
    */
   GetControlProtocol()
   {
@@ -19916,7 +19916,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Gets the network's MediaProtocol property. This is a deprecated method
    * that always returns the value NONE.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkMediaProtocol>}
    */
   GetMediaProtocol()
   {
@@ -19929,7 +19929,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Retrieves the network's status. Return status indicates whether the
    * status was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkStatus>}
    */
   GetStatus()
   {
@@ -19942,7 +19942,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Retrieves network error statistics counter values. Return status
    * indicates whether the values were successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkStatistics>}
    */
   GetStatistics()
   {
@@ -19955,7 +19955,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Resets network error statistics counters. Return status indicates
    * whether the counters were successfully reset.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ResetStatistics()
   {
@@ -19966,7 +19966,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Gets the list of system interface IDs that this network is using.
    * Return status indicates success of the operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSystemInterfaces()
   {
@@ -19982,7 +19982,7 @@ export class OcaNetwork extends OcaAgent
    * implemented by all network implementations.
    * @param Interfaces {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSystemInterfaces(Interfaces)
   {
@@ -19996,7 +19996,7 @@ export class OcaNetwork extends OcaAgent
   /**
    * Deprecated method. Always returns status INVALID_REQUEST. Media
    * transport is now managed by the class <b>OcaStreamNetwork.</b>
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetMediaPorts()
   {
@@ -20008,7 +20008,7 @@ export class OcaNetwork extends OcaAgent
 
   /**
    * Start up this network.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Startup()
   {
@@ -20018,7 +20018,7 @@ export class OcaNetwork extends OcaAgent
 
   /**
    * Shut down this network.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Shutdown()
   {
@@ -20242,7 +20242,7 @@ export class OcaRamper extends OcaAgent
    * the command was successfully executed.
    * @param Command {OcaRamperCommand}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Control(Command)
   {
@@ -20256,7 +20256,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Gets current state of ramper. The return value indicates whether the
    * state was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaRamperState>}
    */
   GetState()
   {
@@ -20269,7 +20269,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Gets definition of ramped property. The return value indicates whether
    * the object number was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaProperty>}
    */
   GetRampedProperty()
   {
@@ -20284,7 +20284,7 @@ export class OcaRamper extends OcaAgent
    * definition was successful.
    * @param property {OcaProperty}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetRampedProperty(property)
   {
@@ -20298,7 +20298,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Gets ramper time mode (absolute or relative). The return value
    * indicates whether the time mode was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeMode>}
    */
   GetTimeMode()
   {
@@ -20313,7 +20313,7 @@ export class OcaRamper extends OcaAgent
    * indicates whether the time mode was successfully set.
    * @param TimeMode {OcaTimeMode}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetTimeMode(TimeMode)
   {
@@ -20327,7 +20327,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Gets ramp start time. The return value indicates whether the start
    * time was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaTimeOfDay>}
    */
   GetStartTime()
   {
@@ -20342,7 +20342,7 @@ export class OcaRamper extends OcaAgent
    * time was successfully set.
    * @param TimeMode {OcaTimeOfDay}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetStartTime(TimeMode)
   {
@@ -20356,7 +20356,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Gets ramp duration. The return value indicates whether the duration
    * was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
    */
   GetDuration()
   {
@@ -20371,7 +20371,7 @@ export class OcaRamper extends OcaAgent
    * was successfully set.
    * @param Duration {OcaTimeInterval}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDuration(Duration)
   {
@@ -20385,7 +20385,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Retrieves interpolation law setting. The return value indicates
    * whether the setting was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaRamperInterpolationLaw>}
    */
   GetInterpolationLaw()
   {
@@ -20400,7 +20400,7 @@ export class OcaRamper extends OcaAgent
    * law was successfully set.
    * @param law {OcaRamperInterpolationLaw}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetInterpolationLaw(law)
   {
@@ -20414,7 +20414,7 @@ export class OcaRamper extends OcaAgent
   /**
    * Retrieves ramp goal value. The return value indicates whether the
    * duration was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaFloat64>}
    */
   GetGoal()
   {
@@ -20429,7 +20429,7 @@ export class OcaRamper extends OcaAgent
    * was successfully set.
    * @param goal {OcaFloat64}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetGoal(goal)
   {
@@ -20643,7 +20643,7 @@ export class OcaMediaClock extends OcaAgent
   /**
    * Gets the value of the <b>Type </b>property. The return value indicates
    * whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaClockType>}
    */
   GetType()
   {
@@ -20659,7 +20659,7 @@ export class OcaMediaClock extends OcaAgent
    * supported in all implementations.
    * @param Type {OcaMediaClockType}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetType(Type)
   {
@@ -20673,7 +20673,7 @@ export class OcaMediaClock extends OcaAgent
   /**
    * Gets the value of the <b>DomainID </b>property. The return value
    * indicates whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaUint16>}
    */
   GetDomainID()
   {
@@ -20689,7 +20689,7 @@ export class OcaMediaClock extends OcaAgent
    * not be supported in all implementations.
    * @param ID {OcaUint16}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetDomainID(ID)
   {
@@ -20703,7 +20703,7 @@ export class OcaMediaClock extends OcaAgent
   /**
    * Gets the list of supported sampling rates. The return value indicates
    * whether the list was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSupportedRates()
   {
@@ -20716,7 +20716,7 @@ export class OcaMediaClock extends OcaAgent
   /**
    * Gets the current sampling rate. The return value indicates whether the
    * value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaClockRate>}
    */
   GetRate()
   {
@@ -20731,7 +20731,7 @@ export class OcaMediaClock extends OcaAgent
    * was successfully set.
    * @param rate {OcaMediaClockRate}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetRate(rate)
   {
@@ -20745,7 +20745,7 @@ export class OcaMediaClock extends OcaAgent
   /**
    * Gets the current media clock lock state. The return value indicates
    * whether the value was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaMediaClockLockState>}
    */
   GetLockState()
   {
@@ -20933,7 +20933,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Gets the network's link type (wired Ethernet, USB, etc.). Return
    * status indicates whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkLinkType>}
    */
   GetLinkType()
   {
@@ -20946,7 +20946,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Gets the network's IDAdvertised. Return status indicates whether the
    * operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkNodeID>}
    */
   GetIDAdvertised()
   {
@@ -20961,7 +20961,7 @@ export class OcaStreamNetwork extends OcaAgent
    * operation was successful.
    * @param Name {OcaNetworkNodeID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetIDAdvertised(Name)
   {
@@ -20975,7 +20975,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Gets the network's ControlProtocol property. Return status indicates
    * whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkControlProtocol>}
    */
   GetControlProtocol()
   {
@@ -20988,7 +20988,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Gets the network's MediaProtocol property. Return status indicates
    * whether the operation was successful.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkMediaProtocol>}
    */
   GetMediaProtocol()
   {
@@ -21001,7 +21001,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Retrieves the network's status. Return status indicates whether the
    * status was successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkStatus>}
    */
   GetStatus()
   {
@@ -21014,7 +21014,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Retrieves network error statistics counter values. Return status
    * indicates whether the values were successfully retrieved.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkStatistics>}
    */
   GetStatistics()
   {
@@ -21027,7 +21027,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Resets network error statistics counters. Return status indicates
    * whether the counters were successfully reset.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   ResetStatistics()
   {
@@ -21038,7 +21038,7 @@ export class OcaStreamNetwork extends OcaAgent
   /**
    * Gets the list of system interface IDs that this network is using.
    * Return status indicates success of the operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSystemInterfaces()
   {
@@ -21054,7 +21054,7 @@ export class OcaStreamNetwork extends OcaAgent
    * implemented by all network implementations.
    * @param Interfaces {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSystemInterfaces(Interfaces)
   {
@@ -21075,7 +21075,7 @@ export class OcaStreamNetwork extends OcaAgent
    * <b>OcaStreamConnector</b> objects are deleted. For reconfigurable
    * devices, such changes may be initiated by controllers during device
    * operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetStreamConnectorsSource()
   {
@@ -21097,7 +21097,7 @@ export class OcaStreamNetwork extends OcaAgent
    * operation.
    * @param StreamConnectors {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetStreamConnectorsSource(StreamConnectors)
   {
@@ -21118,7 +21118,7 @@ export class OcaStreamNetwork extends OcaAgent
    * <b>OcaStreamConnector </b>objects are deleted. For reconfigurable
    * devices, such changes may be initiated by controllers during device
    * operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetStreamConnectorsSink()
   {
@@ -21140,7 +21140,7 @@ export class OcaStreamNetwork extends OcaAgent
    * operation.
    * @param StreamConnectors {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetStreamConnectorsSink(StreamConnectors)
   {
@@ -21161,7 +21161,7 @@ export class OcaStreamNetwork extends OcaAgent
    * updated, or when <b>OcaNetworkSignalChannel</b> objects are deleted.
    * For reconfigurable devices, such changes may be initiated by
    * controllers during device operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSignalChannelsSource()
   {
@@ -21183,7 +21183,7 @@ export class OcaStreamNetwork extends OcaAgent
    * controllers during device operation.
    * @param SignalChannels {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSignalChannelsSource(SignalChannels)
   {
@@ -21204,7 +21204,7 @@ export class OcaStreamNetwork extends OcaAgent
    * updated, or when <b>OcaNetworkSignalChannel</b> objects are deleted.
    * For reconfigurable devices, such changes may be initiated by
    * controllers during device operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaList>}
    */
   GetSignalChannelsSink()
   {
@@ -21226,7 +21226,7 @@ export class OcaStreamNetwork extends OcaAgent
    * controllers during device operation.
    * @param SignalChannels {OcaList}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSignalChannelsSink(SignalChannels)
   {
@@ -21239,7 +21239,7 @@ export class OcaStreamNetwork extends OcaAgent
 
   /**
    * Start up this network.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Startup()
   {
@@ -21249,7 +21249,7 @@ export class OcaStreamNetwork extends OcaAgent
 
   /**
    * Shut down this network.
-   * @retval {Promise}
+   * @returns {Promise}
    */
   Shutdown()
   {
@@ -21532,7 +21532,7 @@ export class OcaStreamConnector extends OcaAgent
    * of operation.
    * @param Stream {OcaStream}
    *
-   * @retval {Promise}
+   * @returns {Promise<OcaStreamIndex>}
    */
   ConnectStream(Stream)
   {
@@ -21550,7 +21550,7 @@ export class OcaStreamConnector extends OcaAgent
    * success of operation.
    * @param StreamID {OcaStreamIndex}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   DisconnectStream(StreamID)
   {
@@ -21564,7 +21564,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Gets the value of the IDAdvertised property. Return status indicates
    * success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaStreamConnectorID>}
    */
   GetIDAdvertised()
   {
@@ -21577,7 +21577,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Gets the object number of the <b>OcaStreamNetwork </b>object to which
    * this connector belongs. Return status indicates success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaONo>}
    */
   GetOwnerNetwork()
   {
@@ -21591,7 +21591,7 @@ export class OcaStreamConnector extends OcaAgent
    * Gets the list of object numbers of <b>OcaNetworkSignalChannel
    * </b>objects connected to this connector. Return status indicates
    * success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetPins()
   {
@@ -21604,7 +21604,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Gets the value of the SourceOrSink property. Return status indicates
    * success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaNetworkMediaSourceOrSink>}
    */
   GetSourceOrSink()
   {
@@ -21617,7 +21617,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Gets the value of the Status property. Return status indicates success
    * of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaStreamConnectorStatus>}
    */
   GetStatus()
   {
@@ -21630,7 +21630,7 @@ export class OcaStreamConnector extends OcaAgent
   /**
    * Gets the map of OcaStream items connected to this connector. Return
    * status indicates success of operation.
-   * @retval {Promise}
+   * @returns {Promise<OcaMap>}
    */
   GetStreams()
   {
@@ -21645,7 +21645,7 @@ export class OcaStreamConnector extends OcaAgent
    * success of operation.
    * @param IDAdvertised {OcaStreamConnectorID}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetIDAdvertised(IDAdvertised)
   {
@@ -21662,7 +21662,7 @@ export class OcaStreamConnector extends OcaAgent
    * Only implemented for reconfigurable devices.
    * @param Network {OcaONo}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetOwnerNetwork(Network)
   {
@@ -21680,7 +21680,7 @@ export class OcaStreamConnector extends OcaAgent
    * property is empty, i.e. does not contain any actual channels.
    * @param SourceOrSink {OcaNetworkMediaSourceOrSink}
    *
-   * @retval {Promise}
+   * @returns {Promise}
    */
   SetSourceOrSink(SourceOrSink)
   {

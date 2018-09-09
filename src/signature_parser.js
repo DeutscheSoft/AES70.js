@@ -30,6 +30,9 @@ const PT_BITSTRINGFIXED = 17,
       PT_LISTFIXED = 21,
       PT_CUSTOM = 22;
 
+/**
+ * Class used to represent multiple return values.
+ */
 export class Arguments
 {
  constructor(values)
