@@ -155,6 +155,9 @@ async function run_tests(type, target)
 {
   const connection = await type.connect(target);
   const device = new RemoteDevice(connection);
+
+  device.set_keepalive_interval(1);
+
   const test_runner = get_runner(device);
 
   try {
