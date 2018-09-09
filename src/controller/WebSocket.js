@@ -1,5 +1,9 @@
 import { ClientConnection } from '../Controller';
 
+/**
+ * {@link ClientConnection} subclass which implements OCP.1 with WebSocket
+ * transport.
+ */
 export class WebSocketConnection extends ClientConnection
 {
   constructor(ws)
@@ -23,6 +27,12 @@ export class WebSocketConnection extends ClientConnection
     this.ws.send(buf);
   }
 
+  /**
+   * Connect to the given endpoint.
+   *
+   * @param {String} options.url - Endpoint WebSocket url.
+   * @returns {Promise<WebSocketConnection>} - The connection.
+   */
   static connect(options)
   {
     return new Promise((resolve, reject) => {
@@ -49,6 +59,9 @@ export class WebSocketConnection extends ClientConnection
     });
   }
 
+  /**
+   * Close the WebSocket.
+   */
   close()
   {
     this.ws.close();

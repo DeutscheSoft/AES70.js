@@ -45,6 +45,10 @@ function lookup_address(options)
   );
 }
 
+/**
+ * {@link ClientConnection} subclass which implements OCP.1 with UDP
+ * transport.
+ */
 export class UDPConnection extends ClientConnection
 {
   constructor(socket, options)
@@ -60,6 +64,13 @@ export class UDPConnection extends ClientConnection
     });
   }
 
+  /**
+   * Connect to the given endpoint.
+   *
+   * @param {String} options.host - hostname or ip
+   * @param {number} options.port - port
+   * @returns {Promise<UDPConnection>} - The connection.
+   */
   static connect(options)
   {
     return lookup_address(options)
@@ -87,6 +98,9 @@ export class UDPConnection extends ClientConnection
     this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
   }
 
+  /**
+   * Closes the udp port.
+   */
   close()
   {
     this.socket.close();

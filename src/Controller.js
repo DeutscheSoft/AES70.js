@@ -48,6 +48,12 @@ import {
   
 const event_signature = new signature(OcaEvent);
 
+/**
+ * Error class raised by remote function calls.
+ *
+ * @property {Command} cmd - The command object.
+ * @property {OcaStatus} status - The error code.
+ */
 export class RemoteError
 {
   constructor(status, cmd)
@@ -62,6 +68,9 @@ export class RemoteError
   }
 }
 
+/**
+ * Connection base class for clients (aka controllers).
+ */
 export class ClientConnection extends Connection
 {
   constructor()
@@ -182,6 +191,10 @@ export class ClientConnection extends Connection
     }
   }
 
+  /**
+   * Set the keepalive interval.
+   * @param {number} seconds - Keepalive interval in seconds.
+   */
   set_keepalive_interval(seconds)
   {
     if (this.keepalive_interval)

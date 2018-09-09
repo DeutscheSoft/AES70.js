@@ -6,6 +6,10 @@ import {
     ClientConnection
   } from '../Controller';
 
+/**
+ * {@link ClientConnection} subclass which implements OCP.1 with TCP
+ * transport.
+ */
 export class TCPConnection extends ClientConnection
 {
   constructor(socket)
@@ -23,6 +27,13 @@ export class TCPConnection extends ClientConnection
     });
   }
 
+  /**
+   * Connect to the given endpoint.
+   *
+   * @param {String} options.host - hostname or ip
+   * @param {number} options.port - port
+   * @returns {Promise<TCPConnection>} - The connection.
+   */
   static connect(options)
   {
     return new Promise((resolve, reject) => {
@@ -46,6 +57,9 @@ export class TCPConnection extends ClientConnection
     this.socket.write(Buffer.from(buf), 'binary');
   }
 
+  /**
+   * Close the TCP connection.
+   */
   close()
   {
     super.close();

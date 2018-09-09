@@ -158,6 +158,9 @@ export class Connection extends Events
   {
   }
 
+  /**
+   * Closes the connection. Overloaded by connection subclasses.
+   */
   close()
   {
   }
