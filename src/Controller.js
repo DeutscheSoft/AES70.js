@@ -71,8 +71,11 @@ export class ClientConnection extends Connection
     this.subscribers = new Map();
 
     const cleanup = (e) => {
+      this.subscribers = null;
+
+      const handles = this.command_handles;
       if (!e) e = new Error('closed');
-      this.command_handles.forEach((a, id) => {
+      handles.forEach((a, id) => {
         try {
           a[2](e);
         } catch (e) {
@@ -87,8 +90,13 @@ export class ClientConnection extends Connection
 
   get_command_handle()
   {
-    var id;
-    var handles = this.command_handles;
+    let id;
+    const handles = this.command_handles;
+
+    if (handles === null)
+    {
+      throw new Error("Connection not open.");
+    }
 
     do {
       id = (Math.random()*(1+handles.size)*2)|0;
@@ -135,8 +143,7 @@ export class ClientConnection extends Connection
         const handles = this.command_handles;
         const h = handles.get(o.handle);
         if (!h) {
-          error("Unknown handle in response %o", o);
-          close();
+          throw new Error("Unknown handle in response: " + o.handle);
           return;
         }
         handles.delete(o.handle);
@@ -158,9 +165,13 @@ export class ClientConnection extends Connection
           continue;
         }
         subscribers.get(o.target)(o);
+      } else if (o instanceof KeepAlive) {
+        if (!(o.time > 0)) {
+          throw new Error("Bad keepalive timeout.");
+        }
       } else {
-        warn("Unhandled OCA packet: %o", o);
-        continue;
+        warn("Unexpected PDU: %o", o);
+        throw new Error("Unexpected PDU");
       }
     }
   }

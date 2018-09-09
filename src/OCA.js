@@ -115,17 +115,23 @@ export class Connection extends Events
     let pos = 0;
     const view = new DataView(buf);
 
-    do {
-      const ret = [];
-      const len = decodeMessage(view, pos, ret);
-      if (len == -1) {
-        this.inbuf = buf;
-        this.inpos = pos;
-        break;
-      }
-      pos = len;
-      this.incoming(ret);
-    } while (pos < buf.byteLength);
+    try {
+      do {
+        const ret = [];
+        const len = decodeMessage(view, pos, ret);
+        if (len == -1) {
+          this.inbuf = buf;
+          this.inpos = pos;
+          break;
+        }
+        pos = len;
+        this.incoming(ret);
+      } while (pos < buf.byteLength);
+    } catch (e) {
+      error(e);
+      error("Error when handling incoming data. Closing connection.");
+      this.close();
+    }
   }
 
   incoming(a)
