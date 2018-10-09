@@ -25,6 +25,13 @@ export class TCPConnection extends ClientConnection
     socket.on('close', () => {
       this.emit('close');
     });
+
+    const cleanup = e => {
+      this.socket.destroy();
+    };
+
+    this.on('close', cleanup);
+    this.on('error', cleanup);
   }
 
   /**
@@ -63,6 +70,7 @@ export class TCPConnection extends ClientConnection
   close()
   {
     super.close();
-    this.socket.end();
+    this.socket.destroy();
+    this.emit('close');
   }
 }

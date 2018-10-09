@@ -214,6 +214,7 @@ export class ClientConnection extends Connection
       {
         error("Connection timed out.");
         this.emit('timeout');
+        this.emit('close');
         this.close();
       }
     };
