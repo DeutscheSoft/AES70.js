@@ -21,6 +21,17 @@ import * as SP from './signature_parser.js';
 import * as Types from './Types.js';
 import * as RemoteControlClasses from './controller/ControlClasses.js';
 import { WebSocketConnection } from './controller/WebSocket.js';
+import { TCPConnection } from './controller/TCP.js';
+import { UDPConnection } from './controller/UDP.js';
+
+const controller = {
+  Connection: ClientConnection,
+  WebSocket: WebSocketConnection,
+  TCP: TCPConnection,
+  UDP: UDPConnection,
+  Device: RemoteDevice,
+  ControlClasses: RemoteControlClasses,
+};
 
 export {
   warn,
@@ -40,4 +51,5 @@ export {
   WebSocketConnection,
   RemoteDevice,
   SP,
+  controller,
 };
