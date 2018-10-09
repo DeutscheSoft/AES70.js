@@ -97,7 +97,7 @@ export class Events
   {
     let handlers = this.event_handlers.get(name);
 
-    if (!handlers || !handlers.contains(cb))
+    if (!handlers || !handlers.has(cb))
     {
       warn("removeEventListeners(): %o not installed.", cb);
       return;
