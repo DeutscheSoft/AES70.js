@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "A controller library implementing the AES70 standard.",
   "main": "lib/index.js",
-  "bin": {
-    "oca.js": "proxy.js"
-  },
+  "bin": { },
   "directories": {
     "lib": "lib"
   },
