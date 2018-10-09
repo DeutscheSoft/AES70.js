@@ -10,6 +10,7 @@
   "scripts": {
     "test": "node tests/signatures.js",
     "prepublishOnly": "npm run build",
+    "preinstall" : "npm run build",
     "build": "make node",
     "docs": "make docs"
   },
@@ -33,9 +34,9 @@
   },
   "homepage": "https://github.com/DeutscheSoft/AES70.js#readme",
   "dependencies": {
-    "babel-preset-env": "^1.7.0"
   },
   "devDependencies": {
+    "babel-preset-env": "^1.7.0",
     "babel-cli": "^6.23.0",
     "babel-preset-node6": "^11.0.0",
     "dnssd": "^0.3.3",
