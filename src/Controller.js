@@ -66,6 +66,11 @@ export class RemoteError
   {
     return error instanceof this && error.status.isEqual(status);
   }
+
+  toString()
+  {
+    return "RemoteError(" + this.status + ")";
+  }
 }
 
 /**
