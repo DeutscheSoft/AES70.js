@@ -56,12 +56,14 @@ export class UDPConnection extends ClientConnection
     super();
     this.options = options;
     this.socket = socket;
+    this.q = [];
     socket.on('message', (data, rinfo) => {
       if (rinfo.port !== this.options.port || rinfo.address !== this.options.address) return;
       this.read(data.buffer);
       if (this.inbuf !== null)
         this.close();
     });
+    this.set_keepalive_interval(1);
   }
 
   /**
@@ -93,9 +95,19 @@ export class UDPConnection extends ClientConnection
       });
   }
 
+  try_write()
+  {
+    const buf = this.q.shift();
+    this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
+    if (this.q.length)
+      setTimeout(this.try_write.bind(this), 25);
+  }
+
   write(buf)
   {
-    this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
+    if (!this.q.length)
+      setImmediate(this.try_write.bind(this));
+    this.q.push(buf);
   }
 
   /**
