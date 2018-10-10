@@ -12,7 +12,7 @@ import {
 
 function is_ip(host)
 {
-  const tmp = host.split(".");
+  let tmp = host.split(".");
 
   if (tmp.length !== 4) return false;
 
