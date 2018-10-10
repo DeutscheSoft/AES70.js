@@ -48,6 +48,22 @@ import {
   
 const event_signature = new signature(OcaEvent);
 
+function timeout(p, time)
+{
+  return new Promise(function(resolve, reject) {
+    const id = setTimeout(function() { reject(new Error("timeout")); }, time);
+    p.then(
+      function(result) {
+        clearTimeout(id);
+        resolve(result);
+      },
+      function(err) {
+        clearTimeout(id);
+        reject(err);
+      });
+  });
+}
+
 /**
  * Error class raised by remote function calls.
  *
@@ -162,6 +178,7 @@ export class ClientConnection extends Connection
       if (o instanceof Response) {
         const handles = this.command_handles;
         const h = handles.get(o.handle);
+
         if (!h) {
           throw new Error("Unknown handle in response: " + o.handle);
           return;
@@ -420,7 +437,7 @@ export class RemoteDevice extends Events
   GetDeviceTree()
   {
     const get_members = (block) => {
-      return block.GetMembers().then((a) => {
+      return timeout(block.GetMembers(), 5000).catch(function(){return [];}).then((a) => {
         var ret = [];
 
         a = a.map(this.resolve_object, this);
