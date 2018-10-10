@@ -203,7 +203,7 @@ export class Command extends PDUBase
   constructor(target, method_level, method_index, param_count, parameters)
   {
     super();
-    this.target = target|0;
+    this.target = +target;
     this.method_level = method_level|0;
     this.method_index = method_index|0;
     this.param_count = param_count|0;
@@ -297,7 +297,7 @@ export class Response extends PDUBase
   constructor(handle, status_code, param_count, parameters)
   {
     super();
-    this.handle = handle|0;
+    this.handle = handle;
     this.status_code = status_code|0;
     this.param_count = param_count|0;
     this.parameters = parameters||null;
@@ -366,7 +366,7 @@ export class Notification extends PDUBase
   constructor(target, method_level, method_index, context, event, param_count, parameters)
   {
     super();
-    this.target = target|0;
+    this.target = target;
     this.method_level = method_level|0;
     this.method_index = method_index|0;
     this.context = context;
