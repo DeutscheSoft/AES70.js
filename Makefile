@@ -13,7 +13,7 @@ all: dist/AES70.es5.js $(LIB)
 node: $(LIB)
 
 dist/rollup.js: $(SRC) Makefile rollup.conf.js
-	$(ROLLUP) --o $@ --f iife -c rollup.conf.js src/index.js -m dist/rollup.js.map
+	$(ROLLUP) --o $@ --f iife -c rollup.conf.js src/index.browser.js -m dist/rollup.js.map
 
 lib/%.js: src/%.js Makefile .babelrc
 	mkdir -p `dirname $@`
