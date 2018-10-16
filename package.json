@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "description": "A controller library implementing the AES70 standard.",
   "main": "lib/index.js",
-  "bin": { },
+  "bin": {},
   "directories": {
     "lib": "lib"
   },
   "scripts": {
     "test": "node tests/signatures.js",
     "prepublishOnly": "npm run build",
-    "preinstall" : "npm run build",
+    "install": "npm run build",
     "build": "make node",
     "docs": "make docs"
   },
@@ -33,8 +33,7 @@
     "url": "https://github.com/DeutscheSoft/AES70.js/issues"
   },
   "homepage": "https://github.com/DeutscheSoft/AES70.js#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-cli": "^6.23.0",
