@@ -97,6 +97,11 @@ export class Enum extends Base {
   {
     return [ this.value ];
   }
+
+  valueOf()
+  {
+    return this.value;
+  }
 }
 
 const enum8_signature = new signature(UINT8);
@@ -115,4 +120,69 @@ export class Enum16 extends Enum {
   {
     return enum16_signature;
   }
+}
+
+export function make_enum(base, name, values)
+{
+  const ret = class extends base
+  {
+    static get TypeName()
+    {
+      return name;
+    }
+
+    static values()
+    {
+      return values;
+    }
+  };
+
+  for (let prop in values)
+  {
+    ret[prop] = new ret(values[prop]);
+  }
+
+  return ret;
+}
+
+export function make_struct(name, properties, signatures)
+{
+  let sig = null;
+
+  return class extends Base
+  {
+    static get TypeName()
+    {
+      return name;
+    }
+
+    constructor(...args)
+    {
+      super();
+      for (let i = 0; i < properties.length; i++)
+      {
+        this[properties[i]] = args[i];
+      }
+    }
+
+    get values()
+    {
+      const ret = new Array(properties.length);
+
+      for (let i = 0; i < properties.length; i++)
+      {
+        ret[i] = this[properties[i]];
+      }
+
+      return ret;
+    }
+
+    static get signature()
+    {
+      if (sig === null)
+        sig = new signature(...signatures);
+
+      return sig;
+    }
+  };
 }
