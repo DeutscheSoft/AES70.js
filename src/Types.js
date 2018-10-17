@@ -29,9 +29,12 @@ import {
     LIST2D,
     LISTFIXED,
     MAP,
+    MULTIMAP,
     BLOBFIXED,
     BITSTRINGFIXED,
   } from './signature_parser.js';
+
+const OcaMultiMap = MULTIMAP;
 
 
 const _values_OcaBaseDataType = {

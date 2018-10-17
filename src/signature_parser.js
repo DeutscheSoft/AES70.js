@@ -28,7 +28,8 @@ const PT_BITSTRINGFIXED = 17,
       PT_LIST = 19,
       PT_LIST2D = 20,
       PT_LISTFIXED = 21,
-      PT_CUSTOM = 22;
+      PT_CUSTOM = 22,
+      PT_MULTIMAP = 23;
 
 /**
  * Class used to represent multiple return values.
@@ -193,6 +194,7 @@ export class signature
             case PT_LIST2D:
               O[num_custom] = make_signature(a[1]);
               break;
+            case PT_MULTIMAP:
             case PT_MAP:
               O[num_custom] = new signature(a[1], a[2]);
               break;
@@ -376,6 +378,29 @@ export class signature
           dst[dst_pos].set(tmp[0], tmp[1]);
         }
         num_custom++;
+        break;
+      case PT_MULTIMAP: 
+        {
+          const m = new Map();
+          const tmp = new Array(2);
+          const len = data.getUint16(pos);
+          const sig = O[num_custom];
+          pos += 2;
+
+          for (let j = 0; j < len; j++) {
+            pos = sig.do_decode(data, pos, tmp, 0);
+            let s = m.get(tmp[0]);
+
+            if (!s)
+            {
+              m.set(tmp[0], s = new Set());
+            }
+            s.add(tmp[1]);
+          }
+
+          num_custom++;
+          dst[dst_pos] = m;
+        }
         break;
       case PT_LIST: 
         len = data.getUint16(pos);
@@ -632,6 +657,27 @@ export class signature
         }
         num_custom++;
         break;
+      case PT_MULTIMAP: 
+        {
+          let len = 0;
+          const lpos = pos;
+          const sig = O[num_custom++];
+          pos += 2;
+          src[src_pos].forEach(
+            function(s, key)
+            {
+              s.forEach(
+                function(v)
+                {
+                  pos = sig.do_encode(dst, pos, [ key, v ], 0);
+                }
+              );
+            }
+          );
+
+          dst.setUint16(lpos, len);
+        }
+        break;
       case PT_LIST: 
         len = src[src_pos].length;
         dst.setUint16(pos, len);
@@ -790,6 +836,24 @@ export class signature
         }
         num_custom++;
         break;
+      case PT_MULTIMAP: 
+        pos += 2;
+
+        const sig = O[num_custom++];
+
+        src[src_pos].forEach(
+          function(s, key)
+          {
+            s.forEach(
+              function(v)
+              {
+                pos = sig.low_encoded_length([ key, v ], 0);
+              }
+            );
+          }
+        );
+
+        break;
       case PT_LIST:
         len = src[src_pos].length;
         pos += 2;
@@ -867,6 +931,9 @@ export function LISTFIXED(length, type) {
 }
 export function MAP(key, value) {
   return [ PT_MAP, key, value ];
+}
+export function MULTIMAP(key, value) {
+  return [ PT_MULTIMAP, key, value ];
 }
 export function BLOBFIXED(length) {
   return [ PT_BLOBFIXED, length ];
