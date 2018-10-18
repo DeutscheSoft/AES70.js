@@ -207,7 +207,7 @@ export class signature
               C[num_custom] = a[1];
               break;
             default:
-              throw("Unsupported complex type.");
+              throw new Error("Unsupported complex type:" + a[0]);
               break;
             }
             S[i] = a[0];

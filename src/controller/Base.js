@@ -1,9 +1,13 @@
-import { error } from "../OCA.js";
+import {
+    error,
+    CommandRrq,
+  } from "../OCA.js";
 
 import {
     OcaPropertyChangeType,
     OcaPropertyID,
     OcaEvent,
+    OcaEventID,
   } from '../Types';
 
 import { signature, Arguments } from '../signature_parser';
@@ -607,4 +611,162 @@ export class PropertyEvent extends BaseEvent
   {
     return this.object.OnPropertyChanged.unsubscribe(this.callback);
   }
+}
+
+// method = [ name, level, index, argument_signatures, return_value_signatures ] 
+function implement_method(cls, method)
+{
+  if (!method || !method.length) return;
+
+  const name = method[0],
+        level = method[1],
+        index = method[2];
+  let as = method[3],
+      rs = method[4];
+
+  if (as && as.length)
+    as = new signature(...as);
+  else
+    as = null;
+
+  if (rs && rs.length)
+    rs = new signature(...rs);
+  else
+    rs = null;
+
+  cls.prototype[name] = function()
+  {
+    const cmd = new CommandRrq(this.ono, level, index,
+                               as ? as.length : 0,
+                               as ? as.encoder(Array.from(arguments)) : null)
+    return this.device.send_command(cmd, rs);
+  }
+}
+
+// event = [ name, level, index, argument_signatures ] 
+function implement_event(cls, event)
+{
+  const name = event[0],
+        level = event[1],
+        index = event[2],
+        as = new signature(...event[3]);
+
+  Object.defineProperty(cls.prototype, "On" + name, {
+    get: function()
+    {
+      const ev_name = "_On" + name;
+      const event = this[ev_name];
+
+      if (event) return event;
+
+      return this[ev_name] = new Event(this, new OcaEventID(level, index), as);
+    }
+  });
+}
+
+function implement_property_event(cls, property)
+{
+  if (property.static) return;
+  if (property.name === "ObjectNumber") return;
+
+  Object.defineProperty(cls.prototype, "On" + property.name + "Changed", {
+    get: function()
+    {
+      const ev_name = "_On" + property.name + "Changed";
+      const event = this[ev_name];
+
+      if (event) return event;
+
+      return this[ev_name] = new PropertyEvent(this, new OcaPropertyID(property.level, property.index),
+                                               property.signature);
+    }
+  });
+}
+
+export function make_control_class(name, level, class_id, class_version, base, methods, properties, events)
+{
+  let property_sync = null;
+  let _properties = null;
+
+  const cls = class extends base
+  {
+    static get ClassID()
+    {
+      return class_id;
+    }
+
+    static get ClassVersion()
+    {
+      return class_id;
+    }
+
+    static get ClassName()
+    {
+      return name;
+    }
+
+    static get_properties()
+    {
+      if (_properties === null)
+        _properties = new Properties(properties, level, base.get_properties());
+
+      return _properties;
+    }
+
+    static GetPropertySync()
+    {
+      if (property_sync === null)
+        property_sync = createPropertySync(this);
+
+      return property_sync;
+    }
+
+    constructor(device, ono)
+    {
+      super(device, ono);
+
+      for (let i = 0; i < properties.length; i++)
+      {
+        const prop = properties[i];
+        this["_On"+prop.name+"Changed"] = null;
+      }
+
+      for (let i = 0; i < events.length; i++)
+      {
+        const ev = events[i];
+        this["_On"+ev[0]] = null;
+      }
+    }
+
+    Dispose()
+    {
+      super.Dispose();
+
+      for (let i = 0; i < properties.length; i++)
+      {
+        const prop = properties[i];
+        const event = this["_On"+prop.name+"Changed"];
+        if (event) event.Dispose();
+      }
+
+      for (let i = 0; i < events.length; i++)
+      {
+        const ev = events[i];
+        const event = this["_On"+ev[0]];
+
+        if (event) event.Dispose();
+      }
+    }
+  };
+
+  for (let i = 0; i < methods.length; i++)
+    implement_method(cls, methods[i]);
+
+  for (let i = 0; i < properties.length; i++)
+    implement_property_event(cls, properties[i]);
+
+  for (let i = 0; i < events.length; i++)
+    implement_event(cls, events[i]);
+
+  return cls;
 }
