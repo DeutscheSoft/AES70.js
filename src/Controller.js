@@ -222,26 +222,27 @@ export class ClientConnection extends Connection
     if (this.keepalive_interval)
       clearInterval(this.keepalive_interval);
 
+    // we check twice as often to make sure we stay within the timers
     const t = seconds * 1000;
 
     // send first keepalive message
     this.write(encodeMessage(new KeepAlive(t)));
 
     const send = () => {
-      if (this.check_keepalive(seconds * 3))
-      {
-        this.write(encodeMessage(new KeepAlive(t)));
-      }
-      else
+      if (this.rx_idle_time() > t * 3)
       {
         error("Connection timed out.");
         this.emit('timeout');
         this.emit('close');
         this.close();
       }
+      else if (this.tx_idle_time() > t)
+      {
+        this.write(encodeMessage(new KeepAlive(t)));
+      }
     };
 
-    this.keepalive_interval = setInterval(send, t);
+    this.keepalive_interval = setInterval(send, t / 2);
   }
 }
 

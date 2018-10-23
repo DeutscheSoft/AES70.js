@@ -125,16 +125,22 @@ export class Connection extends Events
     super();
     this.inbuf = null;
     this.inpos = 0;
-    this.last_data_time = now();
+    this.last_rx_time = now();
+    this.last_tx_time = now();
   }
 
-  check_keepalive(seconds)
+  tx_idle_time()
   {
-    return now() - this.last_data_time < seconds * 1000;
+    return now() - this.last_tx_time;
+  }
+
+  rx_idle_time()
+  {
+    return now() - this.last_tx_time;
   }
 
   read(buf) {
-    this.last_data_time = now();
+    this.last_rx_time = now();
 
     if (this.inbuf) {
       const len = this.inbuf.byteLength - this.inpos;
@@ -177,6 +183,7 @@ export class Connection extends Events
 
   write(buf)
   {
+    this.last_tx_time = now();
   }
 
   /**

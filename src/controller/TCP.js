@@ -62,6 +62,7 @@ export class TCPConnection extends ClientConnection
   write(buf)
   {
     this.socket.write(Buffer.from(buf), 'binary');
+    super.write(buf);
   }
 
   /**

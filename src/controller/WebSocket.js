@@ -25,6 +25,7 @@ export class WebSocketConnection extends ClientConnection
   write(buf)
   {
     this.ws.send(buf);
+    super.write(buf);
   }
 
   /**

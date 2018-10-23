@@ -101,6 +101,7 @@ export class UDPConnection extends ClientConnection
     this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
     if (this.q.length)
       setTimeout(this.try_write.bind(this), 25);
+    super.write(buf);
   }
 
   write(buf)
