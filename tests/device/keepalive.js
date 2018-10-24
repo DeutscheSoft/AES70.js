@@ -22,9 +22,15 @@ class IdleTime extends Test {
   }
 }
 
+const UDPConnection = require('../../lib/controller/UDP').UDPConnection;
+
 class RemoteClose extends Test {
   run()
   {
+    // we cannot detect this properly
+    if (this.device.connection instanceof UDPConnection)
+      return Promise.resolve(true);
+
     return new Promise((resolve, reject) => {
       this.device.set_keepalive_interval(1);
       const connection = this.device.connection;
