@@ -97,6 +97,7 @@ export class UDPConnection extends ClientConnection
 
   try_write()
   {
+    if (!this.socket) return;
     const buf = this.q.shift();
     this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
     if (this.q.length)
@@ -116,6 +117,10 @@ export class UDPConnection extends ClientConnection
    */
   close()
   {
-    this.socket.close();
+    if (this.socket)
+    {
+      this.socket.close();
+      this.socket = null;
+    }
   }
 }
