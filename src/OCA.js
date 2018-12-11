@@ -127,6 +127,52 @@ export class Connection extends Events
     this.inpos = 0;
     this.last_rx_time = now();
     this.last_tx_time = now();
+    this.outbuf = [];
+    this.write_cb = () => {
+      const out = this.outbuf;
+
+      if (!out.length) return;
+      if (out.length == 1)
+      {
+        this.write(out[0]);
+      }
+      else
+      {
+        let len = 0;
+        for (let i = 0; i < out.length; i++)
+        {
+          len += out[i].byteLength;
+        }
+        const buf = new ArrayBuffer(len);
+        const tmp = new Uint8Array(buf);
+        len = 0;
+        for (let i = 0; i < out.length; i++)
+        {
+          tmp.set(new Uint8Array(out[i]), len);
+          len += out[i].byteLength;
+        }
+        this.write(buf);
+      }
+
+      out.length = 0;
+    };
+  }
+
+  send(buf)
+  {
+    if (!this.outbuf.length)
+      setTimeout(this.write_cb, 0);
+
+    this.outbuf.push(buf);
+  }
+
+  allocate(len)
+  {
+    const buf = new ArrayBuffer(len);
+
+    this.send(buf);
+
+    return buf;
   }
 
   tx_idle_time()
@@ -191,6 +237,7 @@ export class Connection extends Events
    */
   close()
   {
+    this.outbuf.length = 0;
   }
 }
 

@@ -164,7 +164,7 @@ export class ClientConnection extends Connection
 
     return new Promise((resolve, reject) => {
       this.command_handles.set(id, [ return_signature, resolve, reject, cmd ]);
-      this.write(buf);
+      this.send(buf);
     });
   }
 
@@ -226,7 +226,7 @@ export class ClientConnection extends Connection
     const t = seconds * 1000;
 
     // send first keepalive message
-    this.write(encodeMessage(new KeepAlive(t)));
+    this.send(encodeMessage(new KeepAlive(t)));
 
     const send = () => {
       if (this.rx_idle_time() > t * 3)
@@ -238,7 +238,7 @@ export class ClientConnection extends Connection
       }
       else if (this.tx_idle_time() > t)
       {
-        this.write(encodeMessage(new KeepAlive(t)));
+        this.send(encodeMessage(new KeepAlive(t)));
       }
     };
 
