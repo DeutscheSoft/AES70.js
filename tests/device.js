@@ -144,7 +144,7 @@ function get_runner(device)
 {
   const test_runner = new test.TestRunner(device);
 
-  test_runner.add(test.Test);
+  //test_runner.add(test.Test);
   test_runner.add(require('./device/check_tree'));
   test_runner.add(require('./device/property_changes'));
   test_runner.add(require('./device/keepalive'));
