@@ -179,10 +179,8 @@ export class ClientConnection extends Connection
         const handles = this.command_handles;
         const h = handles.get(o.handle);
 
-        if (!h) {
+        if (!h)
           throw new Error("Unknown handle in response: " + o.handle);
-          return;
-        }
         handles.delete(o.handle);
         if (o.status_code !== 0) {
           h[2](new RemoteError(o.status_code, h[3]));
