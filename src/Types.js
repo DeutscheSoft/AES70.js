@@ -6,9 +6,10 @@
  * Copyright 2017-2018 DeusO GmbH
  */
 
-import { Base, Enum8, Enum16, make_enum, make_struct } from './TypesBase.js';
+import { Base, Enum8, Enum16, make_enum, make_struct, make_bitset } from './TypesBase.js';
 import {
     signature,
+    dynamic_signature,
     BOOLEAN,
     UINT8,
     UINT16,
@@ -54,12 +55,23 @@ const _values_OcaBaseDataType = {
   OcaBitstring: 13,
   OcaBlob: 14,
   OcaBlobFixedLen: 15,
+  OcaBit: 16,
 };
 
 /**
  * Enum that describes all available base datatypes.
  */
 export const OcaBaseDataType = make_enum(Enum8, "OcaBaseDataType", _values_OcaBaseDataType);
+
+/**
+ * Class authority identifier. Identifies the authority for a class's
+ * definition.
+ */
+export const OcaClassAuthorityID = make_struct(
+  "OcaClassAuthorityID",
+  [ "Sentinel", "Reserved", "OrganizationID" ],
+  [ UINT16, UINT8, BLOBFIXED(3) ]
+);
 
 const _values_OcaComponent = {
   BootLoader: 0,
@@ -81,6 +93,16 @@ export const OcaVersion = make_struct(
   [ "Major", "Minor", "Build", "Component" ],
   [ UINT32, UINT32, UINT32, OcaComponent ]
 );
+
+
+/**
+ * An array of 16 1-bit boolean flags. Used to signify (m) of (n)
+ * selections, where m &lt;= n. Element order shall be in accordance with
+ * AES70 array marshaling rules (see AES70-3). Thus, element 1 of the
+ * array shall be the first one transmitted.
+ */
+export const OcaBitSet16 = make_bitset(16, "OcaBitSet16", [
+"Value" ]);
 
 /**
  * This was not documented in the OCA standard.
@@ -188,6 +210,16 @@ const _values_OcaStatus = {
  */
 export const OcaStatus = make_enum(Enum8, "OcaStatus", _values_OcaStatus);
 
+/**
+ * Globally unique identifier of something that belongs to an
+ * organization.
+ */
+export const OcaGlobalTypeIdentifier = make_struct(
+  "OcaGlobalTypeIdentifier",
+  [ "Authority", "ID" ],
+  [ BLOBFIXED(3), UINT32 ]
+);
+
 const _values_OcaStringComparisonType = {
   Exact: 0,
   Substring: 1,
@@ -201,6 +233,45 @@ const _values_OcaStringComparisonType = {
  * Type of string comparison.
  */
 export const OcaStringComparisonType = make_enum(Enum8, "OcaStringComparisonType", _values_OcaStringComparisonType);
+
+const _values_OcaPositionCoordinateSystem = {
+  Robotic: 1,
+  ItuAudioObjectBasedPolar: 2,
+  ItuAudioObjectBasedCartesian: 3,
+  ItuAudioSceneBasedPolar: 4,
+  ItuAudioSceneBasedCartesian: 5,
+  NAV: 6,
+  ProprietaryBase: 128,
+};
+
+/**
+ * Enumeration that designates the type of position coordinate system
+ * used. For details, see the AES70-1 description of the
+ * <b>OcaPhysicalPosition </b>class.
+ */
+export const OcaPositionCoordinateSystem = make_enum(Enum8, "OcaPositionCoordinateSystem", _values_OcaPositionCoordinateSystem);
+
+/**
+ * A six-axis c1,c2,c3,c4,c5,c6) coordinate. For mechanical systems,
+ * these axes shall be interpreted as follows: <ul> <li>c1 = X; axial
+ * (fore-and-aft) position</li> <li>c2 = Y; lateral (side-to-side)
+ * position</li> <li>c3 = Z; vertical position</li> <li>c4 = rX; rotation
+ * around the X-axis, also known as <i>Roll</i></li> <li>c5 = rY;
+ * rotation around the Y-axis, also known as <i>Pitch</i></li> <li>c6 =
+ * rZ; rotation around the Z-axis. also known as <i>Yaw</i></li> </ul>
+ * Rotation angles are measured according to the <i>right-hand rule: </i>
+ * if the right hand "holds" an axis with the thumb pointing in the
+ * direction of ascending coordinate values, then the fingers point in
+ * the direction of ascending angle values. For GPS systems, these axes
+ * shall be interpreted as follows: <ul> <li>c1 = longitude</li> <li>c2 =
+ * latitude</li> <li>c3 = altitude</li> <li>c4 : not used</li> <li>c5 :
+ * not used</li> <li>c6 : not used</li> </ul>
+ */
+export const OcaPositionDescriptor = make_struct(
+  "OcaPositionDescriptor",
+  [ "CoordinateSystem", "FieldFlags", "Values" ],
+  [ OcaPositionCoordinateSystem, UINT16, FLOAT32 ]
+);
 
 /**
  * Structure that describes a manager instance.
@@ -226,13 +297,6 @@ export const OcaManagerDefaultObjectNumbers = {
   DiagnosticManager: 13,
 };
 
-const _values_OcaDeviceState = {
-  Operational: 0x0001,
-  Disabled: 0x0002,
-  Error: 0x0004,
-  Initializing: 0x0008,
-  Updating: 0x0010,
-};
 
 /**
  * Bitset defining bit flags that indicate the device states CAP devices
@@ -241,7 +305,8 @@ const _values_OcaDeviceState = {
  * specified otherwise for the specific flag. The value 0x0000 indicates
  * the device is fully operational.
  */
-export const OcaDeviceState = make_enum(Enum16, "OcaDeviceState", _values_OcaDeviceState);
+export const OcaDeviceState = make_bitset(16, "OcaDeviceState", [
+"Operational", "Disabled", "Error", "Initializing", "Updating", "unused" ]);
 
 /**
  * 64 bit device type GUID.
@@ -298,7 +363,9 @@ export const OcaEvent = make_struct(
 
 /**
  * Representation of an OCA method, i.e. the unique combination of an ONo
- * and a MethodID.
+ * and a MethodID. To denote the absence of a method, all field values
+ * shall be zero. Such a value is called the <i>Null Method
+ * Identifier</i>.
  */
 export const OcaMethod = make_struct(
   "OcaMethod",
@@ -320,18 +387,22 @@ const _values_OcaPropertyChangeType = {
  */
 export const OcaPropertyChangeType = make_enum(Enum8, "OcaPropertyChangeType", _values_OcaPropertyChangeType);
 
-const _values_OcaMediaConnectorElement = {
-  PinMap: 0x0001,
-  Connection: 0x0002,
-  Coding: 0x0004,
-  AlignmentLevel: 0x0008,
-  AlignmentGain: 0x0010,
-};
+/**
+ * Event data for the <b>OcaLibVolChanged </b>event, which signals a
+ * change in an <b>OcaLibrary.Volumes</b> property.
+ */
+export const OcaLibVolChangedEventData = make_struct(
+  "OcaLibVolChangedEventData",
+  [ "Event", "VolumeID", "ChangeType" ],
+  [ OcaEvent, UINT32, OcaPropertyChangeType ]
+);
+
 
 /**
  * Bitset describing which elements of a media connector have changed.
  */
-export const OcaMediaConnectorElement = make_enum(Enum16, "OcaMediaConnectorElement", _values_OcaMediaConnectorElement);
+export const OcaMediaConnectorElement = make_bitset(5, "OcaMediaConnectorElement", [
+"PinMap", "Connection", "Coding", "AlignmentLevel", "AlignmentGain" ]);
 
 const _values_OcaMediaConnectorState = {
   Stopped: 0,
@@ -362,6 +433,58 @@ export const OcaMediaConnectorStatusChangedEventData = make_struct(
   "OcaMediaConnectorStatusChangedEventData",
   [ "Event", "ConnectorStatus" ],
   [ OcaEvent, OcaMediaConnectorStatus ]
+);
+
+const _values_OcaTaskState = {
+  None: 0,
+  NotPrepared: 1,
+  Disabled: 2,
+  Enabled: 3,
+  Running: 4,
+  Completed: 5,
+  Failed: 6,
+  Stopped: 7,
+  Aborted: 8,
+};
+
+/**
+ * States of OcaTask object. State values change as a result of the
+ * object's having received a comment or encountering processing events
+ * (e.g. completion).
+ */
+export const OcaTaskState = make_enum(Enum8, "OcaTaskState", _values_OcaTaskState);
+
+/**
+ * Status of an OcaTask: task state plus a nonspecific blob named
+ * Parameter which the application can use, or not. <ul> <li>The initial
+ * value of Parameter is null. </li> <li>The controller sets the value of
+ * Parameter via the Control() method. </li> <li>If the task's state
+ * changes due to an internal event (examples: task duration value
+ * reached; or failure due to an error), Parameter is not changed.</li>
+ * </ul>
+ */
+export const OcaTaskStatus = make_struct(
+  "OcaTaskStatus",
+  [ "ID", "State", "ErrorCode" ],
+  [ UINT32, OcaTaskState, UINT16 ]
+);
+
+/**
+ * Unique identifier of a library volume within the device.
+ */
+export const OcaLibVolIdentifier = make_struct(
+  "OcaLibVolIdentifier",
+  [ "Library", "ID" ],
+  [ UINT32, UINT32 ]
+);
+
+/**
+ * This was not documented in the OCA standard.
+ */
+export const OcaTaskStateChangedEventData = make_struct(
+  "OcaTaskStateChangedEventData",
+  [ "TaskID", "ProgramID", "Status" ],
+  [ UINT32, OcaLibVolIdentifier, OcaTaskStatus ]
 );
 
 const _values_OcaPortMode = {
@@ -415,8 +538,8 @@ export const OcaMediaStreamCastMode = make_enum(Enum8, "OcaMediaStreamCastMode",
  */
 export const OcaMediaConnection = make_struct(
   "OcaMediaConnection",
-  [ "Secure", "StreamParameters", "StreamCastMode" ],
-  [ BOOLEAN, BLOB, OcaMediaStreamCastMode ]
+  [ "Secure", "StreamParameters", "StreamCastMode", "StreamChannelCount" ],
+  [ BOOLEAN, BLOB, OcaMediaStreamCastMode, UINT16 ]
 );
 
 /**
@@ -434,8 +557,8 @@ export const OcaMediaCoding = make_struct(
  */
 export const OcaMediaSourceConnector = make_struct(
   "OcaMediaSourceConnector",
-  [ "IDInternal", "IDExternal", "Connection", "Coding", "PinCount", "ChannelPinMap", "AlignmentLevel" ],
-  [ UINT16, STRING, OcaMediaConnection, OcaMediaCoding, UINT16, MAP(UINT16, OcaPortID), FLOAT32 ]
+  [ "IDInternal", "IDExternal", "Connection", "AvailableCodings", "PinCount", "ChannelPinMap", "AlignmentLevel", "CurrentCoding" ],
+  [ UINT16, STRING, OcaMediaConnection, LIST(OcaMediaCoding), UINT16, MAP(UINT16, OcaPortID), FLOAT32, OcaMediaCoding ]
 );
 
 /**
@@ -453,8 +576,8 @@ export const OcaMediaSourceConnectorChangedEventData = make_struct(
  */
 export const OcaMediaSinkConnector = make_struct(
   "OcaMediaSinkConnector",
-  [ "IDInternal", "IDExternal", "Connection", "Coding", "PinCount", "ChannelPinMap", "AlignmentLevel", "AlignmentGain" ],
-  [ UINT16, STRING, OcaMediaConnection, OcaMediaCoding, UINT16, OcaMultiMap(UINT16, OcaPortID), FLOAT32, FLOAT32 ]
+  [ "IDInternal", "IDExternal", "Connection", "AvailableCodings", "PinCount", "ChannelPinMap", "AlignmentLevel", "AlignmentGain", "CurrentCoding" ],
+  [ UINT16, STRING, OcaMediaConnection, LIST(OcaMediaCoding), UINT16, OcaMultiMap(UINT16, OcaPortID), FLOAT32, FLOAT32, OcaMediaCoding ]
 );
 
 /**
@@ -478,7 +601,13 @@ export const OcaObjectListEventData = make_struct(
 );
 
 /**
- * Event data for event OcaNumericObserver.Observation
+ * Event data for event <b>OcaNumericObserver.Observation</b>. Note: due
+ * to an error in AES70-2015, this class was not made a subclass of
+ * <b>OcaEventData</b>. Therefore, this class explicitly defines the
+ * <b>Event</b> property explicitly, rather than inheriting it from
+ * <b>OcaEventData, </b>as other event data classes do. However, the
+ * effect is the same as for all event data classes: the first property
+ * in the data structure is an <b>OcaEvent </b>value.
  */
 export const OcaObservationEventData = make_struct(
   "OcaObservationEventData",
@@ -487,7 +616,13 @@ export const OcaObservationEventData = make_struct(
 );
 
 /**
- * Event data for event OcaNumericObserver.Observation
+ * Event data for event <b>OcaNumericObserverList.Observation</b>. Note:
+ * due to an error in AES70-2015, this class was not made a subclass of
+ * <b>OcaEventData</b>. Therefore, this class explicitly defines the
+ * <b>Event</b> property explicitly, rather than inheriting it from
+ * <b>OcaEventData, </b>as other event data classes do. However, the
+ * effect is the same as for all event data classes: the first property
+ * in the data structure is an <b>OcaEvent </b>value.
  */
 export const OcaObservationListEventData = make_struct(
   "OcaObservationListEventData",
@@ -792,15 +927,6 @@ export const OcaBlockMember = make_struct(
 );
 
 /**
- * Unique identifier of type of reusable block.
- */
-export const OcaGlobalBlockTypeIdentifier = make_struct(
-  "OcaGlobalBlockTypeIdentifier",
-  [ "Authority", "ID" ],
-  [ BLOBFIXED(3), UINT32 ]
-);
-
-/**
  * Representation of an OCA (input or output) port that is used in the
  * signal path representation of an OCA device.
  */
@@ -872,18 +998,12 @@ export const OcaObjectSearchResult = make_struct(
   [ UINT32, OcaClassIdentification, LIST(UINT32), STRING, STRING ]
 );
 
-const _values_OcaObjectSearchResultFlags = {
-  ONo: 0x0001,
-  ClassIdentification: 0x0002,
-  ContainerPath: 0x0004,
-  Role: 0x0008,
-  Label: 0x0010,
-};
 
 /**
  * Bitset that describes the contents of an <b>OcaSearchResult</b>
  */
-export const OcaObjectSearchResultFlags = make_enum(Enum16, "OcaObjectSearchResultFlags", _values_OcaObjectSearchResultFlags);
+export const OcaObjectSearchResultFlags = make_bitset(16, "OcaObjectSearchResultFlags", [
+"ONo", "ClassIdentification", "ContainerPath", "Role", "Label", "unused" ]);
 
 /**
  * Describes a group in a grouper.
@@ -912,22 +1032,6 @@ export const OcaGrouperEnrollment = make_struct(
   [ "GroupIndex", "CitizenIndex" ],
   [ UINT16, UINT16 ]
 );
-
-const _values_OcaPositionAndRotationFlags = {
-  c1: 1,
-  c2: 2,
-  c3: 4,
-  c4: 8,
-  c5: 16,
-  c6: 32,
-};
-
-/**
- * BItset that specifies which fields in <b>OcaPositionAndOrientation</b>
- * are used. A "1" value signifies that the corresponding
- * <b>OcaPositionAndOrientation </b>field is used.
- */
-export const OcaPositionAndRotationFlags = make_enum(Enum16, "OcaPositionAndRotationFlags", _values_OcaPositionAndRotationFlags);
 
 const _values_OcaGrouperMode = {
   MasterSlave: 1,
@@ -1000,38 +1104,124 @@ const _values_OcaPowerSupplyState = {
  */
 export const OcaPowerSupplyState = make_enum(Enum8, "OcaPowerSupplyState", _values_OcaPowerSupplyState);
 
-const _values_OcaTaskState = {
-  None: 0,
-  NotPrepared: 1,
-  Disabled: 2,
-  Enabled: 3,
-  Running: 4,
-  Completed: 5,
-  Failed: 6,
-  Stopped: 7,
-  Aborted: 8,
+const _values_OcaRamperCommand = {
+  Enable: 1,
+  Start: 2,
+  Halt: 3,
 };
 
 /**
- * States of OcaTask object. State values change as a result of the
- * object's having received a comment or encountering processing events
- * (e.g. completion).
+ * Command repertoire of OcaRamper's <b>Control </b>method.
  */
-export const OcaTaskState = make_enum(Enum8, "OcaTaskState", _values_OcaTaskState);
+export const OcaRamperCommand = make_enum(Enum8, "OcaRamperCommand", _values_OcaRamperCommand);
+
+const _values_OcaRamperState = {
+  NotInitialized: 1,
+  Iniitialized: 2,
+  Scheduled: 3,
+  Enabled: 4,
+  Ramping: 5,
+};
 
 /**
- * Status of an OcaTask: task state plus a nonspecific blob named
- * Parameter which the application can use, or not. <ul> <li>The initial
- * value of Parameter is null. </li> <li>The controller sets the value of
- * Parameter via the Control() method. </li> <li>If the task's state
- * changes due to an internal event (examples: task duration value
- * reached; or failure due to an error), Parameter is not changed.</li>
- * </ul>
+ * States of the ramper. Here are the rules for ramper state change: <ul>
+ * <li>A freshly-constructed ramper's state is <b>NotInitialized</b>.
+ * </li> </ul> <ul> <li>A ramper becomes <b>Initialized</b> when : The
+ * ramper is <b>NotInitialized</b>; AND <b> TargetProperty</b> has been
+ * set to a valid value; AND <b> Goal</b> has been set; AND <b>
+ * Duration</b> has been set. </li> </ul> <ul> <li>A ramper becomes
+ * <b>Scheduled</b> when It is <b>Initialized</b>; AND
+ * <b>T</b><b><sub>start</sub></b> and <b>TimeMode</b> have been set; AND
+ * (T<sub>start</sub> + <b>Duration</b>) is in the future. </li> </ul>
+ * <ul> <li>A ramper becomes <b>Enabled</b> when it is <b>Scheduled</b>
+ * AND receives an <i>Enable </i>command. </li> </ul> <ul> <li>A ramper
+ * becomes <b>Ramping</b> when: It is <b>Enabled</b> and the ramp start
+ * time is reached; OR It is <b>Initialized</b>, <b>Scheduled</b>, or
+ * <b>Enabled</b> and a <i>Start</i> command is received. </li> </ul>
+ * <ul> <li>Completion of a ramp or Receipt of a <i>Halt</i> command
+ * causes the state to become: <b>Scheduled</b>, if T<sub>start</sub>,
+ * Time Mode have been set; AND (T<sub>start</sub> + Duration) is in the
+ * future. Otherwise, <b>Initialized.</b></li> </ul>
  */
-export const OcaTaskStatus = make_struct(
-  "OcaTaskStatus",
-  [ "State", "Parameter" ],
-  [ OcaTaskState, BLOB ]
+export const OcaRamperState = make_enum(Enum8, "OcaRamperState", _values_OcaRamperState);
+
+const _values_OcaTimeMode = {
+  Absolute: 1,
+  Relative: 2,
+};
+
+/**
+ * Time mode of <b>OcaTask </b>agent.
+ */
+export const OcaTimeMode = make_enum(Enum8, "OcaTimeMode", _values_OcaTimeMode);
+
+const _values_OcaTimeUnits = {
+  Seconds: 1,
+  Samples: 2,
+};
+
+/**
+ * Time units of <b>OcaTask </b>agent.
+ */
+export const OcaTimeUnits = make_enum(Enum8, "OcaTimeUnits", _values_OcaTimeUnits);
+
+/**
+ * An absolute or relative PTP time. Format is standard PTP format: - 48
+ * bit integer seconds - 32 bit integer nanoseconds PLUS a boolean sign
+ * (positive=TRUE) field. Absolute times are always positive. Relative
+ * times may be positive or negative.
+ */
+export const OcaTimePTP = make_struct(
+  "OcaTimePTP",
+  [ "Negative", "Seconds", "Nanoseconds" ],
+  [ BOOLEAN, UINT64, UINT32 ]
+);
+const OcaTask_signature_header = new signature(UINT32, STRING, OcaLibVolIdentifier, UINT16,
+                                               OcaTimeMode, OcaTimeUnits);
+
+function OcaTask_test_encode(src, pos)
+{
+  const units = src[pos + 5];
+
+  if (units == OcaTimeUnits.Seconds)
+  {
+    return 0;
+  }
+  else if (units == OcaTimeUnits.Samples)
+  {
+    return 1;
+  }
+  else throw new Error("Unsupported time units: " + units);
+}
+
+function OcaTask_test_decode(data, pos)
+{
+  const tmp = new Array(6);
+
+  OcaTask_signature_header.do_decode(data, pos, tmp, 0);
+
+  return test_encode(tmp, 0);
+}
+
+const OcaTask_signature = new dynamic_signature(
+  OcaTask_test_decode, OcaTask_test_encode,
+  [
+    new signature(UINT32, STRING, OcaLibVolIdentifier, UINT16, OcaTimeMode,
+                  OcaTimeUnits, UINT32, OcaTimePTP, FLOAT32, BLOB),
+    new signature(UINT32, STRING, OcaLibVolIdentifier, UINT16, OcaTimeMode,
+                  OcaTimeUnits, UINT32, UINT64, FLOAT32, BLOB)
+  ]
+);
+
+/**
+ * <font color="#223274">An execution thread that runs an AES70 Program.
+ * Programs are OcaLibrary volumes that contain application-specific
+ * execution instructions.</font>
+ */
+export const OcaTask = make_struct(
+  "OcaTask",
+  [ "ID", "Label", "ProgramID", "GroupID", "TimeMode", "TimeUnits", "ClockONo", "StartTime", "Duration", "ApplicationSpecificParameters" ],
+  OcaTask_signature
 );
 
 const _values_OcaTaskCommand = {
@@ -1085,24 +1275,35 @@ const _values_OcaRamperInterpolationLaw = {
  */
 export const OcaRamperInterpolationLaw = make_enum(Enum8, "OcaRamperInterpolationLaw", _values_OcaRamperInterpolationLaw);
 
-const _values_OcaLibVolType = {
+const _values_OcaLibVolStandardTypeID = {
   None: 0,
   ParamSet: 1,
   Patch: 2,
+  Program: 3,
 };
 
 /**
- * Enum that describes type of data in a library volume.
+ * Enum that describes type of data in a standard library volume.
  */
-export const OcaLibVolType = make_enum(Enum8, "OcaLibVolType", _values_OcaLibVolType);
+export const OcaLibVolStandardTypeID = make_enum(Enum8, "OcaLibVolStandardTypeID", _values_OcaLibVolStandardTypeID);
 
 /**
- * Unique identifier of a library volume within the device.
+ * Globally unique identifier of a library type.
  */
-export const OcaLibVolIdentifier = make_struct(
-  "OcaLibVolIdentifier",
-  [ "Library", "ID" ],
-  [ UINT32, UINT32 ]
+export const OcaLibVolType = make_struct(
+  "OcaLibVolType",
+  [ "Authority", "ID" ],
+  [ BLOBFIXED(3), UINT32 ]
+);
+
+/**
+ * Full identifier (type + object number) of Library (i.e. of an
+ * <b>OcaLibrary </b>instance)
+ */
+export const OcaLibraryIdentifier = make_struct(
+  "OcaLibraryIdentifier",
+  [ "Type", "ONo" ],
+  [ OcaLibVolType, UINT32 ]
 );
 
 const _values_OcaLibAccess = {
@@ -1123,8 +1324,8 @@ export const OcaLibAccess = make_enum(Enum8, "OcaLibAccess", _values_OcaLibAcces
  */
 export const OcaLibVolMetadata = make_struct(
   "OcaLibVolMetadata",
-  [ "Name", "Type", "Access", "Version", "Creator", "UpDate" ],
-  [ STRING, OcaLibVolType, OcaLibAccess, UINT32, STRING, UINT64 ]
+  [ "Name", "VolType", "Access", "Version", "Creator", "UpDate" ],
+  [ STRING, OcaLibVolType, OcaLibAccess, UINT32, STRING, OcaTimePTP ]
 );
 
 /**
@@ -1159,7 +1360,7 @@ export const OcaLibVolData_ParamSet = make_struct(
 export const OcaLibParamSetAssignment = make_struct(
   "OcaLibParamSetAssignment",
   [ "ParamSetIdentifier", "TargetBlockONo" ],
-  [ UINT16, UINT32 ]
+  [ OcaLibVolIdentifier, UINT32 ]
 );
 
 const _values_OcaNetworkLinkType = {
@@ -1317,26 +1518,6 @@ const _values_OcaTimeSourceAvailability = {
  */
 export const OcaTimeSourceAvailability = make_enum(Enum8, "OcaTimeSourceAvailability", _values_OcaTimeSourceAvailability);
 
-const _values_OcaTimeMode = {
-  Absolute: 1,
-  Relative: 2,
-};
-
-/**
- * Time mode of <b>OcaTask </b>agent.
- */
-export const OcaTimeMode = make_enum(Enum8, "OcaTimeMode", _values_OcaTimeMode);
-
-const _values_OcaTimeUnits = {
-  Seconds: 1,
-  Samples: 2,
-};
-
-/**
- * Time units of <b>OcaTask </b>agent.
- */
-export const OcaTimeUnits = make_enum(Enum8, "OcaTimeUnits", _values_OcaTimeUnits);
-
 const _values_OcaTimeSourceSyncStatus = {
   Undefined: 0,
   Unsynchronized: 1,
@@ -1459,47 +1640,6 @@ const _values_OcaMediaClockType = {
  * Types of media clocks.
  */
 export const OcaMediaClockType = make_enum(Enum8, "OcaMediaClockType", _values_OcaMediaClockType);
-
-const _values_OcaRamperCommand = {
-  Enable: 1,
-  Start: 2,
-  Halt: 3,
-};
-
-/**
- * Command repertoire of OcaRamper's <b>Control </b>method.
- */
-export const OcaRamperCommand = make_enum(Enum8, "OcaRamperCommand", _values_OcaRamperCommand);
-
-const _values_OcaRamperState = {
-  NotInitialized: 1,
-  Iniitialized: 2,
-  Scheduled: 3,
-  Enabled: 4,
-  Ramping: 5,
-};
-
-/**
- * States of the ramper. Here are the rules for ramper state change: <ul>
- * <li>A freshly-constructed ramper's state is <b>NotInitialized</b>.
- * </li> </ul> <ul> <li>A ramper becomes <b>Initialized</b> when : The
- * ramper is <b>NotInitialized</b>; AND <b> TargetProperty</b> has been
- * set to a valid value; AND <b> Goal</b> has been set; AND <b>
- * Duration</b> has been set. </li> </ul> <ul> <li>A ramper becomes
- * <b>Scheduled</b> when It is <b>Initialized</b>; AND
- * <b>T</b><b><sub>start</sub></b> and <b>TimeMode</b> have been set; AND
- * (T<sub>start</sub> + <b>Duration</b>) is in the future. </li> </ul>
- * <ul> <li>A ramper becomes <b>Enabled</b> when it is <b>Scheduled</b>
- * AND receives an <i>Enable </i>command. </li> </ul> <ul> <li>A ramper
- * becomes <b>Ramping</b> when: It is <b>Enabled</b> and the ramp start
- * time is reached; OR It is <b>Initialized</b>, <b>Scheduled</b>, or
- * <b>Enabled</b> and a <i>Start</i> command is received. </li> </ul>
- * <ul> <li>Completion of a ramp or Receipt of a <i>Halt</i> command
- * causes the state to become: <b>Scheduled</b>, if T<sub>start</sub>,
- * Time Mode have been set; AND (T<sub>start</sub> + Duration) is in the
- * future. Otherwise, <b>Initialized.</b></li> </ul>
- */
-export const OcaRamperState = make_enum(Enum8, "OcaRamperState", _values_OcaRamperState);
 
 const _values_OcaNetworkStatus = {
   Unknown: 0,

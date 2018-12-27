@@ -17,6 +17,7 @@ import {
     OcaBaseDataType,
     OcaPortMode,
     OcaPortID,
+    OcaClassAuthorityID,
     OcaComponent,
     OcaVersion,
     OcaClassIdentification,
@@ -28,7 +29,10 @@ import {
     OcaPropertyDescriptor,
     OcaProperty,
     OcaStatus,
+    OcaGlobalTypeIdentifier,
     OcaStringComparisonType,
+    OcaPositionCoordinateSystem,
+    OcaPositionDescriptor,
     OcaManagerDescriptor,
     OcaManagerDefaultObjectNumbers,
     OcaDeviceState,
@@ -39,10 +43,15 @@ import {
     OcaEvent,
     OcaMethod,
     OcaPropertyChangeType,
+    OcaLibVolChangedEventData,
     OcaMediaConnectorElement,
     OcaMediaConnectorState,
     OcaMediaConnectorStatus,
     OcaMediaConnectorStatusChangedEventData,
+    OcaTaskState,
+    OcaTaskStatus,
+    OcaLibVolIdentifier,
+    OcaTaskStateChangedEventData,
     OcaMediaStreamCastMode,
     OcaMediaConnection,
     OcaMediaCoding,
@@ -76,7 +85,6 @@ import {
     OcaSensorReadingState,
     OcaLevelMeterLaw,
     OcaBlockMember,
-    OcaGlobalBlockTypeIdentifier,
     OcaPort,
     OcaSignalPath,
     OcaProtoObjectIdentification,
@@ -88,20 +96,24 @@ import {
     OcaGrouperGroup,
     OcaGrouperCitizen,
     OcaGrouperEnrollment,
-    OcaPositionAndRotationFlags,
     OcaGrouperMode,
     OcaObserverState,
     OcaRelationalOperator,
     OcaPowerSupplyType,
     OcaPowerSupplyLocation,
     OcaPowerSupplyState,
-    OcaTaskState,
-    OcaTaskStatus,
+    OcaRamperCommand,
+    OcaRamperState,
+    OcaTimeMode,
+    OcaTimeUnits,
+    OcaTimePTP,
+    OcaTask,
     OcaTaskCommand,
     OcaTaskManagerState,
     OcaRamperInterpolationLaw,
+    OcaLibVolStandardTypeID,
     OcaLibVolType,
-    OcaLibVolIdentifier,
+    OcaLibraryIdentifier,
     OcaLibAccess,
     OcaLibVolMetadata,
     OcaLibVol,
@@ -119,8 +131,6 @@ import {
     OcaTimeReferenceType,
     OcaTimeProtocol,
     OcaTimeSourceAvailability,
-    OcaTimeMode,
-    OcaTimeUnits,
     OcaTimeSourceSyncStatus,
     OcaNetworkSystemInterfaceID,
     OcaNetworkStatistics,
@@ -130,8 +140,6 @@ import {
     OcaStream,
     OcaMediaClockLockState,
     OcaMediaClockType,
-    OcaRamperCommand,
-    OcaRamperState,
     OcaNetworkStatus,
     OcaStreamConnectorStatus,
     OcaNetworkSignalChannelStatus,
@@ -183,7 +191,7 @@ export const OcaRoot = make_control_class(
     [
       [ "GetClassIdentification", 1, 1, [  ], [ OcaClassIdentification ] ],
       [ "GetLockable", 1, 2, [  ], [ BOOLEAN ] ],
-      [ "Lock", 1, 3, [  ], [  ] ],
+      [ "LockTotal", 1, 3, [  ], [  ] ],
       [ "Unlock", 1, 4, [  ], [  ] ],
       [ "GetRole", 1, 5, [  ], [ STRING ] ],
       [ "LockReadonly", 1, 6, [  ], [  ] ]
@@ -474,7 +482,8 @@ export const OcaFilterClassical = make_control_class(
       [ "GetOrder", 4, 7, [  ], [ UINT16, UINT16, UINT16 ] ],
       [ "SetOrder", 4, 8, [ UINT16 ], [  ] ],
       [ "GetParameter", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetParameter", 4, 10, [ FLOAT32 ], [  ] ]
+      [ "SetParameter", 4, 10, [ FLOAT32 ], [  ] ],
+      [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaFilterPassband, OcaClassicalFilterShape, UINT16, FLOAT32 ], [  ] ]
     ],
     [
       new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
@@ -508,7 +517,8 @@ export const OcaFilterParametric = make_control_class(
       [ "GetInbandGain", 4, 7, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetInbandgain", 4, 8, [ FLOAT32 ], [  ] ],
       [ "GetShapeParameter", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetShapeParameter", 4, 10, [ FLOAT32 ], [  ] ]
+      [ "SetShapeParameter", 4, 10, [ FLOAT32 ], [  ] ],
+      [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaParametricEQShape, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
       new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
@@ -594,14 +604,14 @@ export const OcaFilterArbitraryCurve = make_control_class(
       [ "SetTransferFunction", 4, 2, [ OcaTransferFunction ], [  ] ],
       [ "GetSampleRate", 4, 3, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetSampleRate", 4, 4, [ FLOAT32 ], [  ] ],
-      [ "GetTFMaxLength", 4, 5, [  ], [ UINT32 ] ],
-      [ "GetTFMinLength", 4, 6, [  ], [ UINT32 ] ]
+      [ "GetTFMinLength", 4, 5, [  ], [ UINT16 ] ],
+      [ "GetTFMaxLength", 4, 6, [  ], [ UINT16 ] ]
     ],
     [
       new Property("TransferFunction", new signature(OcaTransferFunction), 4, 1, false, false, null),
       new Property("SampleRate", new signature(FLOAT32), 4, 2, false, false, null),
-      new Property("TFMinLength", new signature(UINT32), 4, 3, false, false, null),
-      new Property("TFMaxLength", new signature(UINT32), 4, 4, false, false, null)
+      new Property("TFMinLength", new signature(UINT16), 4, 3, false, false, null),
+      new Property("TFMaxLength", new signature(UINT16), 4, 4, false, false, null)
     ],
     [
     ]
@@ -649,7 +659,8 @@ export const OcaDynamics = make_control_class(
       [ "GetKneeParameter", 4, 23, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetKneeParameter", 4, 24, [ FLOAT32 ], [  ] ],
       [ "GetSlope", 4, 25, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSlope", 4, 26, [ FLOAT32 ], [  ] ]
+      [ "SetSlope", 4, 26, [ FLOAT32 ], [  ] ],
+      [ "SetMultiple", 4, 27, [ UINT16, OcaDynamicsFunction, FLOAT32, OcaPresentationUnit, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
       new Property("Triggered", new signature(BOOLEAN), 4, 1, false, false, null),
@@ -690,7 +701,8 @@ export const OcaDynamicsDetector = make_control_class(
       [ "GetReleaseTime", 4, 5, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetReleaseTime", 4, 6, [ FLOAT32 ], [  ] ],
       [ "GetHoldTime", 4, 7, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetHoldTime", 4, 8, [ FLOAT32 ], [  ] ]
+      [ "SetHoldTime", 4, 8, [ FLOAT32 ], [  ] ],
+      [ "SetMultiple", 4, 9, [ UINT16, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
       new Property("Law", new signature(OcaLevelDetectionLaw), 4, 1, false, false, null),
@@ -768,7 +780,8 @@ export const OcaDynamicsCurve = make_control_class(
       [ "GetDynamicGainCeiling", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetDynamicGainCeiling", 4, 10, [ FLOAT32 ], [  ] ],
       [ "GetDynamicGainFloor", 4, 11, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDynamicGainFloor", 4, 12, [ FLOAT32 ], [  ] ]
+      [ "SetDynamicGainFloor", 4, 12, [ FLOAT32 ], [  ] ],
+      [ "SetMultiple", 4, 13, [ UINT16, UINT8, LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32), FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
       new Property("nSegments", new signature(UINT8), 4, 1, false, false, null),
@@ -810,7 +823,8 @@ export const OcaSignalGenerator = make_control_class(
       [ "SetSweepRepeat", 4, 14, [ BOOLEAN ], [  ] ],
       [ "GetGenerating", 4, 15, [  ], [ BOOLEAN ] ],
       [ "Start", 4, 16, [  ], [  ] ],
-      [ "Stop", 4, 17, [  ], [  ] ]
+      [ "Stop", 4, 17, [  ], [  ] ],
+      [ "SetMultiple", 4, 18, [ UINT16, FLOAT32, FLOAT32, FLOAT32, OcaWaveformType, OcaSweepType, FLOAT32, BOOLEAN ], [  ] ]
     ],
     [
       new Property("Frequency1", new signature(FLOAT32), 4, 1, false, false, null),
@@ -1453,7 +1467,7 @@ export const OcaCurrentSensor = make_control_class(
 export const OcaImpedanceSensor = make_control_class(
     "OcaImpedanceSensor",
     4,
-    "\u0001\u0001\u0002\n",
+    "\u0001\u0001\u0002\t",
     1,
     OcaSensor,
     [
@@ -1461,6 +1475,28 @@ export const OcaImpedanceSensor = make_control_class(
     ],
     [
       new Property("Reading", new signature(OcaImpedance), 4, 1, false, false, null)
+    ],
+    [
+    ]
+);
+
+
+/**
+ * Senses a gain value. Typically used to indicate instantaneous gain
+ * value of a dynamics element.
+ * @extends OcaSensor
+ */
+export const OcaGainSensor = make_control_class(
+    "OcaGainSensor",
+    4,
+    "\u0001\u0001\u0002\n",
+    1,
+    OcaSensor,
+    [
+      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
+    ],
+    [
+      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
     ],
     [
     ]
@@ -1655,27 +1691,6 @@ export const OcaUint32Sensor = make_control_class(
 
 
 /**
- * Basic Uint64 sensor.
- * @extends OcaBasicSensor
- */
-export const OcaUint64Sensor = make_control_class(
-    "OcaUint64Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\t",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ UINT64, UINT64, UINT64 ] ]
-    ],
-    [
-      new Property("Reading", new signature(UINT64), 5, 1, false, false, null)
-    ],
-    [
-    ]
-);
-
-
-/**
  * Basic float32 sensor.
  * @extends OcaBasicSensor
  */
@@ -1782,7 +1797,7 @@ export const OcaBlock = make_control_class(
     2,
     OcaWorker,
     [
-      [ "GetType", 3, 1, [  ], [ UINT32 ] ], null,
+      [ "GetType", 3, 1, [  ], [ UINT32 ] ], ,
       [ "ConstructMemberUsingFactory", 3, 3, [ UINT32 ], [ UINT32 ] ],
       [ "DeleteMember", 3, 4, [ UINT32 ], [  ] ],
       [ "GetMembers", 3, 5, [  ], [ LIST(OcaObjectIdentification) ] ],
@@ -1791,11 +1806,11 @@ export const OcaBlock = make_control_class(
       [ "DeleteSignalPath", 3, 8, [ UINT16 ], [  ] ],
       [ "GetSignalPaths", 3, 9, [  ], [ MAP(UINT16, OcaSignalPath) ] ],
       [ "GetSignalPathsRecursive", 3, 10, [  ], [ MAP(UINT16, OcaSignalPath) ] ],
-      [ "GetMostRecentParamSetIdentifier", 3, 11, [  ], [ UINT16 ] ],
-      [ "ApplyParamSet", 3, 12, [  ], [ UINT16 ] ],
+      [ "GetMostRecentParamSetIdentifier", 3, 11, [  ], [ OcaLibVolIdentifier ] ],
+      [ "ApplyParamSet", 3, 12, [  ], [ OcaLibVolIdentifier ] ],
       [ "GetCurrentParamSetData", 3, 13, [  ], [ OcaLibVolData_ParamSet ] ],
-      [ "StoreCurrentParamSetData", 3, 14, [ UINT16 ], [  ] ],
-      [ "GetGlobalType", 3, 15, [  ], [ OcaGlobalBlockTypeIdentifier ] ],
+      [ "StoreCurrentParamSetData", 3, 14, [ OcaLibVolIdentifier ], [  ] ],
+      [ "GetGlobalType", 3, 15, [  ], [ OcaGlobalTypeIdentifier ] ],
       [ "GetONoMap", 3, 16, [  ], [ MAP(UINT32, UINT32) ] ],
       [ "FindObjectsByRole", 3, 17, [ STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ],
       [ "FindObjectsByRoleRecursive", 3, 18, [ STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ],
@@ -1806,8 +1821,8 @@ export const OcaBlock = make_control_class(
       new Property("Type", new signature(UINT32), 3, 1, true, false, null),
       new Property("Members", new signature(LIST(OcaObjectIdentification)), 3, 2, false, false, null),
       new Property("SignalPaths", new signature(MAP(UINT16, OcaSignalPath)), 3, 3, false, false, null),
-      new Property("MostRecentParamSetIdentifier", new signature(UINT16), 3, 4, false, false, null),
-      new Property("GlobalType", new signature(OcaGlobalBlockTypeIdentifier), 3, 5, true, false, null),
+      new Property("MostRecentParamSetIdentifier", new signature(OcaLibVolIdentifier), 3, 4, false, false, null),
+      new Property("GlobalType", new signature(OcaGlobalTypeIdentifier), 3, 5, true, false, null),
       new Property("ONoMap", new signature(MAP(UINT32, UINT32)), 3, 6, true, false, null)
     ],
     [
@@ -1855,21 +1870,21 @@ export const OcaBlockFactory = make_control_class(
     [
       [ "DefineProtoPort", 3, 1, [ STRING, OcaPortMode ], [ OcaProtoPortID ] ],
       [ "UndefineProtoPort", 3, 2, [ OcaProtoPortID ], [  ] ],
-      [ "GetProtoPorts", 3, 3, [  ], [ LIST(OcaProtoPort) ] ], null,
+      [ "GetProtoPorts", 3, 3, [  ], [ LIST(OcaProtoPort) ] ], ,
       [ "DefineProtoMemberUsingFactory", 3, 5, [ UINT32 ], [ UINT32 ] ],
       [ "UndefineProtoMember", 3, 6, [ UINT32 ], [  ] ],
       [ "GetProtoMembers", 3, 7, [  ], [ LIST(OcaProtoObjectIdentification) ] ],
       [ "DefineProtoSignalPath", 3, 8, [ OcaProtoSignalPath ], [ UINT16 ] ],
       [ "UndefineProtoSignalPath", 3, 9, [  ], [ UINT16 ] ],
       [ "GetProtoSignalPaths", 3, 10, [  ], [ MAP(UINT16, OcaProtoSignalPath) ] ],
-      [ "GetGlobalType", 3, 11, [  ], [ OcaGlobalBlockTypeIdentifier ] ],
-      [ "SetGlobalType", 3, 12, [ OcaGlobalBlockTypeIdentifier ], [  ] ]
+      [ "GetGlobalType", 3, 11, [  ], [ OcaGlobalTypeIdentifier ] ],
+      [ "SetGlobalType", 3, 12, [ OcaGlobalTypeIdentifier ], [  ] ]
     ],
     [
       new Property("ProtoPorts", new signature(LIST(OcaProtoPort)), 3, 1, false, false, null),
       new Property("ProtoMembers", new signature(LIST(OcaProtoObjectIdentification)), 3, 2, false, false, null),
       new Property("ProtoSignalPaths", new signature(MAP(UINT16, OcaProtoSignalPath)), 3, 3, false, false, null),
-      new Property("GlobalType", new signature(OcaGlobalBlockTypeIdentifier), 3, 4, false, false, null)
+      new Property("GlobalType", new signature(OcaGlobalTypeIdentifier), 3, 4, false, false, null)
     ],
     [
     ]
@@ -2132,6 +2147,57 @@ export const OcaGrouper = make_control_class(
 
 
 /**
+ * Agent that gradually changes a property setting from one value to
+ * another. Works on a scalar numeric or boolean property of a specified
+ * object. Does not work for array, list, map, struct, or string
+ * properties. Contains timer features to allow ramps to start
+ * immediately or at any time in the future. This is a weakly typed
+ * class. All ramping parameters are specified as a <b>OcaFloat64
+ * </b>numbers. <ul> <li>For unsigned integer targets, the ramping
+ * parameters are coerced to <b>OcaUint64 </b>before comparing. </li>
+ * <li>For signed integer targets, the ramping parameters are coerced to
+ * <b>OcaInt64 </b>before comparing. </li> <li>For boolean values, the
+ * the ramping parameters are coerced to <b>OcaUint8. </b>True is
+ * assigned the value One, False is assigned the value Zero.</li> </ul>
+ * @extends OcaAgent
+ */
+export const OcaRamper = make_control_class(
+    "OcaRamper",
+    3,
+    "\u0001\u0002\u0003",
+    2,
+    OcaAgent,
+    [
+      [ "Control", 3, 1, [ OcaRamperCommand ], [  ] ],
+      [ "GetState", 3, 2, [  ], [ OcaRamperState ] ],
+      [ "GetRampedProperty", 3, 3, [  ], [ OcaProperty ] ],
+      [ "SetRampedProperty", 3, 4, [ OcaProperty ], [  ] ],
+      [ "GetTimeMode", 3, 5, [  ], [ OcaTimeMode ] ],
+      [ "SetTimeMode", 3, 6, [ OcaTimeMode ], [  ] ],
+      [ "GetStartTime", 3, 7, [  ], [ UINT64 ] ],
+      [ "SetStartTime", 3, 8, [ UINT64 ], [  ] ],
+      [ "GetDuration", 3, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
+      [ "SetDuration", 3, 10, [ FLOAT32 ], [  ] ],
+      [ "GetInterpolationLaw", 3, 11, [  ], [ OcaRamperInterpolationLaw ] ],
+      [ "SetInterpolationLaw", 3, 12, [ OcaRamperInterpolationLaw ], [  ] ],
+      [ "GetGoal", 3, 13, [  ], [ FLOAT64 ] ],
+      [ "SetGoal", 3, 14, [ FLOAT64 ], [  ] ]
+    ],
+    [
+      new Property("State", new signature(OcaRamperState), 3, 1, false, false, null),
+      new Property("RampedProperty", new signature(OcaProperty), 3, 2, false, false, null),
+      new Property("TimeMode", new signature(OcaTimeMode), 3, 3, false, false, null),
+      new Property("StartTime", new signature(UINT64), 3, 4, false, false, null),
+      new Property("Duration", new signature(FLOAT32), 3, 5, false, false, null),
+      new Property("InterpolationLaw", new signature(OcaRamperInterpolationLaw), 3, 6, false, false, null),
+      new Property("Goal", new signature(FLOAT64), 3, 7, false, false, null)
+    ],
+    [
+    ]
+);
+
+
+/**
  * Observer of a scalar numeric or boolean property ("target property")
  * of a specified object. Does not work for array, list, map, struct, or
  * string properties. <b>OcaNumericObserver</b> emits an <b>Observation
@@ -2211,16 +2277,16 @@ export const OcaNumericObserver = make_control_class(
  * of operating parameter settings that can be applied to a block. Each
  * ParamSet is associated with a specific block type, but not with a
  * specific instance of that type. A ParamSet may be applied to any block
- * instance of the associated type. A block's type is a the object number
+ * instance of the associated type. A block's type is the object number
  * of its factory or, for factory-defined blocks, a unique identifier set
- * at time of manufacture. <b>Patch</b>. A Patch a collection of ParamSet
- * assignments. A ParamSet assigment is the description of a binding of a
- * ParamSet to a block instance. To "apply" a Patch is to apply all of
- * its assignments. To apply an assignment is to set all of its
- * ParamSet's parameter values into its block. A given library instance
- * can only hold one class of volume. A device that supports libraries
- * can have any number of Patch and ParamSet libraries. If a device
- * implements a Patch library, it must also implement at least one
+ * at time of manufacture. <b>Patch</b>. A Patch is a collection of
+ * ParamSet assignments. A ParamSet assigment is the description of a
+ * binding of a ParamSet to a block instance. To "apply" a Patch is to
+ * apply all of its assignments. To apply an assignment is to set all of
+ * its ParamSet's parameter values into its block. A given library
+ * instance can only hold one class of volume. A device that supports
+ * libraries can have any number of Patch and ParamSet libraries. If a
+ * device implements a Patch library, it must also implement at least one
  * ParamSet library. However, the reverse is not true: a device may
  * implement one or more ParamSet libraries without a Patch library.
  * <font color="#0000ff"> </font>
@@ -2243,11 +2309,12 @@ export const OcaLibrary = make_control_class(
       [ "SetAccess", 3, 8, [ OcaLibAccess ], [  ] ]
     ],
     [
-      new Property("DataType", new signature(OcaLibVolType), 3, 1, false, false, null),
+      new Property("VolumeType", new signature(OcaLibVolType), 3, 1, false, false, null),
       new Property("Access", new signature(OcaLibAccess), 3, 2, false, false, null),
       new Property("Volumes", new signature(MAP(UINT32, OcaLibVol)), 3, 3, false, false, null)
     ],
     [
+      [ "OcaLibVolChanged", 3, 1, [ UINT32, OcaPropertyChangeType ] ]
     ]
 );
 
@@ -2287,9 +2354,11 @@ export const OcaPowerSupply = make_control_class(
 
 
 /**
- * Base class for event handler objects. Application developers can
- * derive from this class and add specific callback methods that perform
- * processing and/or have specific event data structures.
+ * Base class for event handler objects. This class applies to
+ * controllers that subscribe to events and receive notifications for
+ * them. Controller developers can derive from this class and add
+ * specific callback methods that perform processing and/or have specific
+ * event data structures.
  * @extends OcaAgent
  */
 export const OcaEventHandler = make_control_class(
@@ -2385,171 +2454,6 @@ export const OcaNumericObserverList = make_control_class(
 
 
 /**
- * <ul> <li><font color="#223274"><b>Device action that starts, executes,
- * and (normally) stops</b></font></li> <li><font color="#223274"><b>Use
- * cases</b></font></li> </ul> <ul> <li>Ramper</li> <li>Show control
- * cues</li> <li>MIDI notes</li> <li>Paging system calls</li>
- * <li>Cue-oriented mixer actions (maybe only rampers, maybe not)</li>
- * </ul> <ul> <li><font color="#223274"><b>Simple tasks</b></font></li>
- * </ul> <ul> <li>Simple tasks are relatively featureless actions that
- * start/run/stop.</li> <li>OcaTask would be the root class with no
- * features other than run parameters, status, etc.</li> <li>Subclasses
- * would be defined to have specific attributes (e.g. OcaRamper has Goal
- * value)</li> </ul> <ul> <li><font color="#223274"><b>Complex
- * tasks</b></font></li> </ul> <ul> <li>Complex tasks are tasks with
- * multiple control parameters of various types.</li> <li>For example, a
- * MIDI note task would need pitch, volume, and other parameters.</li>
- * <li>Complex tasks should not be implemented by subclassing OcaTask,
- * because the resulting subclasses would be too complex and too
- * numerous. </li> <li>Instead, we propose to define a kind of task
- * (OcaBlockTask) that links to a block. The block can then contain the
- * complex features in the usual way.</li> </ul> <ul> <li><font
- * color="#223274"><b>Slots</b></font></li> </ul> <ul> <li>Some (although
- * not all) devices preallocate resources for task execution.</li> <li>We
- * call these resources "slots". Slots are recorded in the collection
- * <font color="#0c0080"><b>Slots </b></font>of <font
- * color="#0c0080"><b>OcaTaskManager</b></font>.</li> <li>A task may be
- * automatically or manually assigned to a slot.</li> </ul>
- * @extends OcaAgent
- */
-export const OcaTask = make_control_class(
-    "OcaTask",
-    3,
-    "\u0001\u0002\f",
-    1,
-    OcaAgent,
-    [
-      [ "Control", 3, 1, [ OcaTaskCommand, BLOB ], [  ] ],
-      [ "GetStatus", 3, 2, [  ], [ OcaTaskStatus ] ],
-      [ "GetSlot", 3, 3, [  ], [ UINT16 ] ],
-      [ "SetSlot", 3, 4, [ UINT16 ], [  ] ],
-      [ "GetTimeMode", 3, 5, [  ], [ OcaTimeMode ] ],
-      [ "SetTimeMode", 3, 6, [ OcaTimeMode ], [  ] ],
-      [ "GetTimeUnits", 3, 7, [  ], [ OcaTimeUnits ] ],
-      [ "SetTimeUnits", 3, 8, [ OcaTimeUnits ], [  ] ],
-      [ "GetClockONo", 3, 9, [  ], [ UINT32 ] ],
-      [ "SetClockONo", 3, 10, [ UINT32 ], [  ] ],
-      [ "GetStartTime", 3, 11, [  ], [ UINT64 ] ],
-      [ "SetStartTime", 3, 12, [ UINT64 ], [  ] ],
-      [ "GetDuration", 3, 13, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDuration", 3, 14, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      new Property("Status", new signature(OcaTaskStatus), 3, 1, false, false, null),
-      new Property("Slot", new signature(UINT16), 3, 2, false, false, null),
-      new Property("TimeMode", new signature(OcaTimeMode), 3, 3, false, false, null),
-      new Property("TimeUnits", new signature(OcaTimeUnits), 3, 4, false, false, null),
-      new Property("ClockONo", new signature(UINT32), 3, 5, false, false, null),
-      new Property("StartTime", new signature(UINT64), 3, 6, false, false, null),
-      new Property("Duration", new signature(FLOAT32), 3, 7, false, false, null)
-    ],
-    [
-    ]
-);
-
-
-/**
- * Base class for constructors of OcaTask objects. Used by the OcaBlock
- * method ConstructMemberUsingFactory(...) to create tasks.
- * @extends OcaAgent
- */
-export const OcaTaskFactory = make_control_class(
-    "OcaTaskFactory",
-    3,
-    "\u0001\u0002\r",
-    1,
-    OcaAgent,
-    [
-      [ "Control", 3, 1, [ OcaTaskCommand ], [  ] ],
-      [ "GetState", 3, 2, [  ], [ OcaTaskState ] ],
-      [ "GetSlot", 3, 3, [  ], [ UINT16 ] ],
-      [ "SetSlot", 3, 4, [ UINT16 ], [  ] ],
-      [ "GetTimeMode", 3, 5, [  ], [ OcaTimeMode ] ],
-      [ "SetTimeMode", 3, 6, [ OcaTimeMode ], [  ] ],
-      [ "GetStartTime", 3, 7, [  ], [ UINT64 ] ],
-      [ "SetStartTime", 3, 8, [ UINT64 ], [  ] ],
-      [ "GetDuration", 3, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDuration", 3, 10, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      new Property("Slot", new signature(UINT16), 3, 1, false, false, null),
-      new Property("TimeMode", new signature(OcaTimeMode), 3, 2, false, false, null),
-      new Property("StartTime", new signature(UINT64), 3, 3, false, false, null),
-      new Property("Duration", new signature(FLOAT32), 3, 4, false, false, null)
-    ],
-    [
-    ]
-);
-
-
-/**
- * A group of tasks that may be started and stopped as a unit.
- * @extends OcaAgent
- */
-export const OcaTaskGroup = make_control_class(
-    "OcaTaskGroup",
-    3,
-    "\u0001\u0002\u000e",
-    1,
-    OcaAgent,
-    [
-      [ "Control", 3, 1, [ OcaTaskCommand, BLOB ], [  ] ],
-      [ "AddTask", 3, 2, [ UINT32 ], [  ] ],
-      [ "DeleteTask", 3, 3, [ UINT32 ], [  ] ],
-      [ "GetTasks", 3, 4, [  ], [ LIST(UINT32) ] ],
-      [ "GetID", 3, 5, [  ], [ UINT16 ] ],
-      [ "SetID", 3, 6, [ UINT16 ], [  ] ]
-    ],
-    [
-      new Property("ID", new signature(UINT16), 3, 1, false, false, null),
-      new Property("Tasks", new signature(LIST(UINT32)), 3, 2, false, false, null)
-    ],
-    [
-    ]
-);
-
-
-/**
- * Agent that gradually changes a property setting from one value to
- * another. Works on a scalar numeric or boolean property of a specified
- * object. Does not work for array, list, map, struct, or string
- * properties. Subclass of <b>OcaTask</b>, q.v. Contains timer features
- * to allow ramps to start immediately or at any time in the future. This
- * is a weakly typed class. All ramping parameters are specified as a
- * <b>OcaFloat64 </b>numbers. <ul> <li>For unsigned integer targets, the
- * ramping parameters are coerced to <b>OcaUint64 </b>before comparing.
- * </li> <li>For signed integer targets, the ramping parameters are
- * coerced to <b>OcaInt64 </b>before comparing. </li> <li>For boolean
- * values, the the ramping parameters are coerced to <b>OcaUint8.
- * </b>True is assigned the value One, False is assigned the value
- * Zero.</li> </ul>
- * @extends OcaTask
- */
-export const OcaRamperTask = make_control_class(
-    "OcaRamperTask",
-    4,
-    "\u0001\u0002\f\u0001",
-    1,
-    OcaTask,
-    [
-      [ "GetRampedProperty", 4, 1, [  ], [ OcaProperty ] ],
-      [ "SetRampedProperty", 4, 2, [ OcaProperty ], [  ] ],
-      [ "GetInterpolationLaw", 4, 3, [  ], [ OcaRamperInterpolationLaw ] ],
-      [ "SetInterpolationLaw", 4, 4, [ OcaRamperInterpolationLaw ], [  ] ],
-      [ "GetGoal", 4, 5, [  ], [ FLOAT64 ] ],
-      [ "SetGoal", 4, 6, [ FLOAT64 ], [  ] ]
-    ],
-    [
-      new Property("RampedProperty", new signature(OcaProperty), 4, 1, false, false, null),
-      new Property("InterpolationLaw", new signature(OcaRamperInterpolationLaw), 4, 2, false, false, null),
-      new Property("Goal", new signature(FLOAT64), 4, 3, false, false, null)
-    ],
-    [
-    ]
-);
-
-
-/**
  * A media clock, internal or external. OCA Connection Management 3
  * (OCA-CM3) version.
  * @extends OcaAgent
@@ -2565,15 +2469,16 @@ export const OcaMediaClock3 = make_control_class(
       [ "SetAvailability", 3, 2, [ OcaMediaClockAvailability ], [  ] ],
       [ "GetCurrentRate", 3, 3, [  ], [ OcaMediaClockRate, UINT32 ] ],
       [ "SetCurrentRate", 3, 4, [ OcaMediaClockRate, UINT32 ], [  ] ],
-      [ "GetOffset", 3, 5, [  ], [ UINT64 ] ],
-      [ "SetOffset", 3, 6, [ UINT64 ], [  ] ],
+      [ "GetOffset", 3, 5, [  ], [ OcaTimePTP ] ],
+      [ "SetOffset", 3, 6, [ OcaTimePTP ], [  ] ],
       [ "GetSupportedRates", 3, 7, [  ], [ MAP(UINT32, LIST(OcaMediaClockRate)) ] ]
     ],
     [
       new Property("Availability", new signature(OcaMediaClockAvailability), 3, 1, false, false, null),
       new Property("TimeSourceONo", new signature(UINT32), 3, 2, false, false, null),
-      new Property("Offset", new signature(UINT64), 3, 3, false, false, null),
-      new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null)
+      new Property("Offset", new signature(OcaTimePTP), 3, 3, false, false, null),
+      new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
+      new Property("SupportedRates", new signature(MAP(UINT32, LIST(OcaMediaClockRate))), 3, 5, false, false, null)
     ],
     [
     ]
@@ -2618,8 +2523,9 @@ export const OcaTimeSource = make_control_class(
 
 
 /**
- * Physical position of device or an element of it. Three position
- * coordinates, three rotation coordinates.
+ * Physical position of device or an element of it. AES70 supports a
+ * variety of positional coordinate systems. For details, see AES70-1,
+ * section 5.5.9.
  * @extends OcaAgent
  */
 export const OcaPhysicalPosition = make_control_class(
@@ -2629,14 +2535,15 @@ export const OcaPhysicalPosition = make_control_class(
     1,
     OcaAgent,
     [
-      [ "GetPositionAndRotation", 3, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetPositionAndRotation", 3, 2, [ FLOAT32 ], [  ] ],
-      [ "GetPositionAndRotationFlags", 3, 3, [  ], [ OcaPositionAndRotationFlags ] ],
-      [ "SetPositionAndRotationFlags", 3, 4, [ OcaPositionAndRotationFlags ], [  ] ]
+      [ "GetCoordinateSystem", 3, 1, [  ], [ OcaPositionCoordinateSystem ] ],
+      [ "GetPositionDescriptorFieldFlags", 3, 2, [  ], [ UINT16 ] ],
+      [ "GetPositionDescriptor", 3, 3, [  ], [ OcaPositionDescriptor, OcaPositionDescriptor, OcaPositionDescriptor ] ],
+      [ "SetPositionDescriptor", 3, 4, [ OcaPositionDescriptor ], [  ] ]
     ],
     [
-      new Property("PositionAndRotation", new signature(FLOAT32), 3, 1, false, false, null),
-      new Property("PositionAndRotationFlags", new signature(OcaPositionAndRotationFlags), 3, 2, false, false, null)
+      new Property("CoordinateSystem", new signature(OcaPositionCoordinateSystem), 3, 1, true, false, null),
+      new Property("PositionDescriptorFieldFlags", new signature(UINT16), 3, 2, true, false, null),
+      new Property("PositionDescriptor", new signature(OcaPositionDescriptor), 3, 3, false, false, null)
     ],
     [
     ]
@@ -2661,10 +2568,11 @@ export const OcaApplicationNetwork = make_control_class(
       [ "GetServiceID", 2, 4, [  ], [ BLOB ] ],
       [ "SetServiceID", 2, 5, [ BLOB ], [  ] ],
       [ "GetSystemInterfaces", 2, 6, [  ], [ LIST(OcaNetworkSystemInterfaceDescriptor) ] ],
-      [ "GetState", 2, 7, [  ], [ OcaApplicationNetworkState ] ],
-      [ "GetErrorCode", 2, 8, [  ], [ UINT16 ] ],
-      [ "Control", 2, 9, [ OcaApplicationNetworkCommand ], [  ] ],
-      [ "GetPath", 2, 10, [  ], [ LIST(STRING), LIST(UINT32) ] ]
+      [ "SetSystemInterfaces", 2, 7, [ LIST(OcaNetworkSystemInterfaceDescriptor) ], [  ] ],
+      [ "GetState", 2, 8, [  ], [ OcaApplicationNetworkState ] ],
+      [ "GetErrorCode", 2, 9, [  ], [ UINT16 ] ],
+      [ "Control", 2, 10, [ OcaApplicationNetworkCommand ], [  ] ],
+      [ "GetPath", 2, 11, [  ], [ LIST(STRING), LIST(UINT32) ] ]
     ],
     [
       new Property("Label", new signature(STRING), 2, 1, false, true, null),
@@ -2730,9 +2638,11 @@ export const OcaMediaTransportNetwork = make_control_class(
       [ "SetSinkConnectorPinMap", 3, 19, [ UINT16, OcaMultiMap(UINT16, OcaPortID) ], [  ] ],
       [ "SetConnectorConnection", 3, 20, [ UINT16, OcaMediaConnection ], [  ] ],
       [ "SetConnectorCoding", 3, 21, [ UINT16, OcaMediaCoding ], [  ] ],
-      [ "DeleteConnector", 3, 22, [ UINT16 ], [  ] ],
-      [ "GetAlignmentLevel", 3, 23, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "GetAlignmentGain", 3, 24, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
+      [ "SetConnectorAlignmentLevel", 3, 22, [ UINT16, FLOAT32 ], [  ] ],
+      [ "SetConnectorAlignmentGain", 3, 23, [ UINT16, FLOAT32 ], [  ] ],
+      [ "DeleteConnector", 3, 24, [ UINT16 ], [  ] ],
+      [ "GetAlignmentLevel", 3, 25, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
+      [ "GetAlignmentGain", 3, 26, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
       new Property("Protocol", new signature(OcaNetworkMediaProtocol), 3, 1, false, false, ["MediaProtocol"]),
@@ -3035,7 +2945,7 @@ export const OcaMediaClockManager = make_control_class(
 
 
 /**
- * Optional manager for handling device presets -- patch and parset
+ * Optional manager for handling device presets -- Patch and ParamSet
  * libraries. <ul> <li>May be instantiated once in any device. </li>
  * </ul> <ul> <li>If instantiated, object number must be 8.</li> </ul>
  * @extends OcaManager
@@ -3047,17 +2957,16 @@ export const OcaLibraryManager = make_control_class(
     2,
     OcaManager,
     [
-      [ "AddLibrary", 3, 1, [ OcaLibVolType ], [ UINT32 ] ],
+      [ "AddLibrary", 3, 1, [ OcaLibVolType ], [ OcaLibraryIdentifier ] ],
       [ "DeleteLibrary", 3, 2, [ UINT32 ], [  ] ],
       [ "GetLibraryCount", 3, 3, [ OcaLibVolType ], [ UINT16 ] ],
-      [ "GetLibraryList", 3, 4, [ OcaLibVolType ], [ LIST(UINT32) ] ],
-      [ "GetCurrentPatch", 3, 5, [  ], [ UINT16 ] ],
-      [ "SetCurrentPatch", 3, 6, [ UINT16 ], [  ] ]
+      [ "GetLibraryList", 3, 4, [ OcaLibVolType ], [ LIST(OcaLibraryIdentifier) ] ],
+      [ "GetCurrentPatch", 3, 5, [  ], [ OcaLibVolIdentifier ] ],
+      [ "ApplyPatch", 3, 6, [ OcaLibVolIdentifier ], [  ] ]
     ],
     [
-      new Property("PatchLibraries", new signature(LIST(UINT32)), 3, 1, false, false, null),
-      new Property("ParsetLibraries", new signature(LIST(UINT32)), 3, 2, false, false, null),
-      new Property("CurrentPatch", new signature(UINT16), 3, 3, false, false, null)
+      new Property("Libraries", new signature(LIST(OcaLibraryIdentifier)), 3, 1, false, false, null),
+      new Property("CurrentPatch", new signature(OcaLibVolIdentifier), 3, 2, false, false, null)
     ],
     [
     ]
@@ -3106,15 +3015,17 @@ export const OcaDeviceTimeManager = make_control_class(
     2,
     OcaManager,
     [
-      [ "GetDeviceTime", 3, 1, [  ], [ UINT64 ] ],
-      [ "SetDeviceTime", 3, 2, [ UINT64 ], [  ] ],
+      [ "GetDeviceTimeNTP", 3, 1, [  ], [ UINT64 ] ],
+      [ "SetDeviceTimeNTP", 3, 2, [ UINT64 ], [  ] ],
       [ "GetTimeSources", 3, 3, [  ], [ LIST(UINT32) ] ],
       [ "GetCurrentDeviceTimeSource", 3, 4, [  ], [ UINT32 ] ],
-      [ "SetCurrentDeviceTimeSource", 3, 5, [ UINT32 ], [  ] ]
+      [ "SetCurrentDeviceTimeSource", 3, 5, [ UINT32 ], [  ] ],
+      [ "GetDeviceTimePTP", 3, 6, [  ], [ OcaTimePTP ] ],
+      [ "SetDeviceTimePTP", 3, 7, [ OcaTimePTP ], [  ] ]
     ],
     [
       new Property("TimeSources", new signature(LIST(UINT32)), 3, 1, false, false, null),
-      new Property("CurrentDeviceTimeSource", new signature(UINT32), 3, 1, false, false, null)
+      new Property("CurrentDeviceTimeSource", new signature(UINT32), 3, 2, false, false, null)
     ],
     [
     ]
@@ -3122,26 +3033,20 @@ export const OcaDeviceTimeManager = make_control_class(
 
 
 /**
- * Optional manager that collects OcaTask and OcaTaskGroup objects. Tasks
- * are device actions that start, execute, and (normally) stop. <ul>
+ * Optional manager that collects OcaTask and OcaProgram objects. <ul>
  * <li>May be instantiated once in any device. </li> </ul> <ul> <li>If
- * instantiated, object number must be 11.</li> </ul> <b>OcaTaskManager
- * </b>offers global control over tasks in the device. <ul> <li>Device
- * task processing state is <b>Enabled </b>by default. In <b>Enabled
- * </b>state, tasks may be running.</li> </ul> <ul> <li>Device task
- * processing state may be <b>Disabled </b>by the <b>OcaTaskManager
+ * instantiated, object number must be 11.</li> </ul> Tasks shall be
+ * device execution threads that start, execute, and (normally) stop. The
+ * action of an <b>OcaTask </b>is defined by an <b>OcaProgram</b>. The
+ * idea is that <b>OcaTasks </b>shall execute <b>OcaPrograms</b>.
+ * <b>OcaTaskManager </b>offers global control over tasks in the device.
+ * <ul> <li>Device task processing state is <b>Enabled </b>by default. In
+ * <b>Enabled </b>state, tasks may be running.</li> </ul> <ul> <li>Device
+ * task processing state may be <b>Disabled </b>by the <b>OcaTaskManager
  * Disable </b>command. </li> <li>The <b>Disable </b>command will succeed
  * only if no tasks are running. </li> </ul> Tasks may be stopped by:
- * <ul> <li>passing the <b>OcaTaskManager </b>a <b>Stop </b>or <b>Abort
- * </b>command, which will stop all tasks in the device; or</li>
- * <li>passing a <b>Stop </b>or <b>Abort </b>command to each
- * <b>OcaTaskGroup </b>agent, which will stop all the tasks in the given
- * task groups; or </li> <li>passing a <b>Stop </b>or <b>Abort
- * </b>command to each task individually.</li> </ul> Locking the
- * <b>OcaTaskManager </b>object blocks all task starting and stopping
- * commands from controllers other than the one that owns the lock, and
- * prevents automatic activation of prescheduled tasks. Locking does not
- * affect execution of running tasks.
+ * passing the <b>OcaTaskManager </b>a <b>Stop </b>or <b>Abort
+ * </b>command, which will stop designated tasks in the device;.
  * @extends OcaManager
  */
 export const OcaTaskManager = make_control_class(
@@ -3151,21 +3056,25 @@ export const OcaTaskManager = make_control_class(
     1,
     OcaManager,
     [
-      [ "Control", 3, 1, [ OcaTaskCommand ], [  ] ],
-      [ "GetState", 3, 2, [  ], [ OcaTaskManagerState ] ],
-      [ "GetTasks", 3, 3, [  ], [ MAP(UINT32, UINT32) ] ],
-      [ "GetTaskGroups", 3, 4, [  ], [ MAP(UINT16, UINT32) ] ],
-      [ "AddSlot", 3, 5, [ UINT16 ], [  ] ],
-      [ "DeleteSlot", 3, 6, [ UINT16 ], [  ] ],
-      [ "GetSlots", 3, 7, [  ], [ MAP(UINT16, UINT16) ] ]
+      [ "Enable", 3, 2, [ BOOLEAN ], [  ] ],
+      [ "ControlAllTasks", 3, 3, [ OcaTaskCommand, BLOB ], [  ] ],
+      [ "ControlTaskGroup", 3, 4, [ UINT16, OcaTaskCommand, BLOB ], [  ] ],
+      [ "ControlTask", 3, 5, [ UINT32, OcaTaskCommand, BLOB ], [  ] ],
+      [ "GetState", 3, 6, [  ], [ OcaTaskManagerState ] ],
+      [ "GetTaskStatuses", 3, 7, [  ], [ OcaTaskStatus ] ],
+      [ "GetTaskStatus", 3, 8, [ UINT32 ], [ OcaTaskStatus ] ],
+      [ "AddTask", 3, 9, [ OcaTask ], [ OcaTask ] ],
+      [ "GetTasks", 3, 10, [  ], [ MAP(UINT32, OcaTask) ] ],
+      [ "GetTask", 3, 11, [ UINT32 ], [ OcaTask ] ],
+      [ "SetTask", 3, 12, [ UINT32, OcaTask ], [  ] ],
+      [ "DeleteTask", 3, 13, [ UINT32 ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaTaskManagerState), 3, 1, true, true, null),
-      new Property("Tasks", new signature(MAP(UINT32, UINT32)), 3, 2, true, true, null),
-      new Property("TaskGroups", new signature(MAP(UINT16, UINT32)), 3, 3, true, true, null),
-      new Property("Slots", new signature(MAP(UINT16, UINT16)), 3, 4, true, true, null)
+      new Property("State", new signature(OcaTaskManagerState), 3, 1, false, false, null),
+      new Property("Tasks", new signature(MAP(UINT32, OcaTask)), 3, 2, false, false, null)
     ],
     [
+      [ "TaskStateChanged", 3, 1, [ UINT32, OcaLibVolIdentifier, OcaTaskStatus ] ]
     ]
 );
 
@@ -3299,7 +3208,7 @@ export const OcaNetwork = make_control_class(
       [ "Shutdown", 3, 13, [  ], [  ] ]
     ],
     [
-      new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, true, null),
+      new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, false, null),
       new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
       new Property("ControlProtocol", new signature(OcaNetworkControlProtocol), 3, 3, false, false, null),
       new Property("MediaProtocol", new signature(OcaNetworkMediaProtocol), 3, 4, false, false, null),
@@ -3307,58 +3216,6 @@ export const OcaNetwork = make_control_class(
       new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null),
       new Property("MediaPorts", new signature(LIST(UINT32)), 3, 7, false, false, null),
       new Property("Statistics", new signature(OcaNetworkStatistics), 3, 8, false, false, null)
-    ],
-    [
-    ]
-);
-
-
-/**
- * <b>DEPRECATED CLASS</b> <i>Replaced by </i><b><i>OcaRamperTask</i></b>
- * Agent that gradually changes a property setting from one value to
- * another. Works on a scalar numeric or boolean property of a specified
- * object. Does not work for array, list, map, struct, or string
- * properties. Contains timer features to allow ramps to start
- * immediately or at any time in the future. This is a weakly typed
- * class. All ramping parameters are specified as a <b>OcaFloat64
- * </b>numbers. <ul> <li>For unsigned integer targets, the ramping
- * parameters are coerced to <b>OcaUint64 </b>before comparing. </li>
- * <li>For signed integer targets, the ramping parameters are coerced to
- * <b>OcaInt64 </b>before comparing. </li> <li>For boolean values, the
- * the ramping parameters are coerced to <b>OcaUint8. </b>True is
- * assigned the value One, False is assigned the value Zero.</li> </ul>
- * @extends OcaAgent
- */
-export const OcaRamper = make_control_class(
-    "OcaRamper",
-    3,
-    "\u0001\u0002\u0003",
-    2,
-    OcaAgent,
-    [
-      [ "Control", 3, 1, [ OcaRamperCommand ], [  ] ],
-      [ "GetState", 3, 2, [  ], [ OcaRamperState ] ],
-      [ "GetRampedProperty", 3, 3, [  ], [ OcaProperty ] ],
-      [ "SetRampedProperty", 3, 4, [ OcaProperty ], [  ] ],
-      [ "GetTimeMode", 3, 5, [  ], [ OcaTimeMode ] ],
-      [ "SetTimeMode", 3, 6, [ OcaTimeMode ], [  ] ],
-      [ "GetStartTime", 3, 7, [  ], [ UINT64 ] ],
-      [ "SetStartTime", 3, 8, [ UINT64 ], [  ] ],
-      [ "GetDuration", 3, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDuration", 3, 10, [ FLOAT32 ], [  ] ],
-      [ "GetInterpolationLaw", 3, 11, [  ], [ OcaRamperInterpolationLaw ] ],
-      [ "SetInterpolationLaw", 3, 12, [ OcaRamperInterpolationLaw ], [  ] ],
-      [ "GetGoal", 3, 13, [  ], [ FLOAT64 ] ],
-      [ "SetGoal", 3, 14, [ FLOAT64 ], [  ] ]
-    ],
-    [
-      new Property("State", new signature(OcaRamperState), 3, 1, false, false, null),
-      new Property("RampedProperty", new signature(OcaProperty), 3, 2, false, false, null),
-      new Property("TimeMode", new signature(OcaTimeMode), 3, 3, false, false, null),
-      new Property("StartTime", new signature(UINT64), 3, 4, false, false, null),
-      new Property("Duration", new signature(FLOAT32), 3, 5, false, false, null),
-      new Property("InterpolationLaw", new signature(OcaRamperInterpolationLaw), 3, 6, false, false, null),
-      new Property("Goal", new signature(FLOAT64), 3, 7, false, false, null)
     ],
     [
     ]
@@ -3389,7 +3246,7 @@ export const OcaMediaClock = make_control_class(
     [
       new Property("Type", new signature(OcaMediaClockType), 3, 1, false, false, null),
       new Property("DomainID", new signature(UINT16), 3, 2, false, false, null),
-      new Property("RatesSupported", new signature(LIST(OcaMediaClockRate)), 3, 3, true, true, null),
+      new Property("RatesSupported", new signature(LIST(OcaMediaClockRate)), 3, 3, false, false, null),
       new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
       new Property("LockState", new signature(OcaMediaClockLockState), 3, 5, false, false, null)
     ],
@@ -3440,7 +3297,7 @@ export const OcaStreamNetwork = make_control_class(
     [
       new Property("ControlProtocol", new signature(OcaNetworkControlProtocol), 3, 3, false, false, null),
       new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
-      new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, true, null),
+      new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, false, null),
       new Property("MediaProtocol", new signature(OcaNetworkMediaProtocol), 3, 4, false, false, null),
       new Property("SignalChannelsSink", new signature(LIST(UINT32)), 3, 10, false, false, null),
       new Property("SignalChannelsSource", new signature(LIST(UINT32)), 3, 9, false, false, null),
@@ -3569,7 +3426,8 @@ export const Classes = {
   "\u0001\u0001\u0002\u0006" : OcaIdentificationSensor,
   "\u0001\u0001\u0002\u0007" : OcaVoltageSensor,
   "\u0001\u0001\u0002\b" : OcaCurrentSensor,
-  "\u0001\u0001\u0002\n" : OcaImpedanceSensor,
+  "\u0001\u0001\u0002\t" : OcaImpedanceSensor,
+  "\u0001\u0001\u0002\n" : OcaGainSensor,
   "\u0001\u0001\u0002\u0001" : OcaBasicSensor,
   "\u0001\u0001\u0002\u0001\u0001" : OcaBooleanSensor,
   "\u0001\u0001\u0002\u0001\u0002" : OcaInt8Sensor,
@@ -3579,7 +3437,6 @@ export const Classes = {
   "\u0001\u0001\u0002\u0001\u0006" : OcaUint8Sensor,
   "\u0001\u0001\u0002\u0001\u0007" : OcaUint16Sensor,
   "\u0001\u0001\u0002\u0001\b" : OcaUint32Sensor,
-  "\u0001\u0001\u0002\u0001\t" : OcaUint64Sensor,
   "\u0001\u0001\u0002\u0001\n" : OcaFloat32Sensor,
   "\u0001\u0001\u0002\u0001\u000b" : OcaFloat64Sensor,
   "\u0001\u0001\u0002\u0001\f" : OcaStringSensor,
@@ -3589,15 +3446,12 @@ export const Classes = {
   "\u0001\u0001\u0005" : OcaMatrix,
   "\u0001\u0002" : OcaAgent,
   "\u0001\u0002\u0002" : OcaGrouper,
+  "\u0001\u0002\u0003" : OcaRamper,
   "\u0001\u0002\u0004" : OcaNumericObserver,
   "\u0001\u0002\u0005" : OcaLibrary,
   "\u0001\u0002\u0007" : OcaPowerSupply,
   "\u0001\u0002\b" : OcaEventHandler,
   "\u0001\u0002\t" : OcaNumericObserverList,
-  "\u0001\u0002\f" : OcaTask,
-  "\u0001\u0002\r" : OcaTaskFactory,
-  "\u0001\u0002\u000e" : OcaTaskGroup,
-  "\u0001\u0002\f\u0001" : OcaRamperTask,
   "\u0001\u0002\u000f" : OcaMediaClock3,
   "\u0001\u0002\u0010" : OcaTimeSource,
   "\u0001\u0002\u0011" : OcaPhysicalPosition,
@@ -3620,7 +3474,6 @@ export const Classes = {
   "\u0001\u0003\r" : OcaDiagnosticManager,
   "\u0001\u0001\u0006" : OcaNetworkSignalChannel,
   "\u0001\u0002\u0001" : OcaNetwork,
-  "\u0001\u0002\u0003" : OcaRamper,
   "\u0001\u0002\u0006" : OcaMediaClock,
   "\u0001\u0002\n" : OcaStreamNetwork,
   "\u0001\u0002\u000b" : OcaStreamConnector,
