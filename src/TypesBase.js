@@ -145,9 +145,22 @@ export function make_enum(base, name, values)
   return ret;
 }
 
+// TODO: this is not the most useful representation
+// but it works for the moment.
+export function make_bitset(width, name, names)
+{
+  const values = {};
+  for (let i = 0; i < names.length; i++)
+    values[names[i]] = 1 << i;
+  return make_enum(Enum16, name, values);
+}
+
 export function make_struct(name, properties, signatures)
 {
   let sig = null;
+
+  if (!Array.isArray(signatures))
+    sig = signatures;
 
   return class extends Base
   {

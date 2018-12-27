@@ -139,10 +139,74 @@ function low_encode_bitstring(dst, pos, from) {
   return pos;
 }
 
-export class signature
+class signature_base
+{
+  constructor()
+  {
+    this._length = 0;
+  }
+
+  encode(...args)
+  {
+    var src = Array.prototype.slice.call(args);
+    var dst = new ArrayBuffer(this.low_encoded_length(src));
+    this.do_encode(new DataView(dst), 0, src, 0);
+    return dst;
+  }
+
+  encode_to(dst, ...src)
+  {
+    this.do_encode(dst, 0, src, 0);
+  }
+
+  low_encode_to(dst, src)
+  {
+    this.do_encode(dst, 0, src, 0);
+  }
+
+  low_encoded_length(src)
+  {
+    if (this._length) return this._length;
+
+    return this.do_encoded_length(src, 0);
+  }
+ 
+  encoded_length(...args)
+  {
+    return this.low_encoded_length(args);
+  }
+
+  decode(data)
+  {
+    var ret = new Array(this.length);
+
+    this.do_decode(data, 0, ret, 0);
+
+    if (this.length === 1) return ret[0];
+
+    return new Arguments(ret);
+  }
+
+  low_decode(data)
+  {
+    var ret = new Array(this.length);
+
+    this.do_decode(data, 0, ret, 0);
+
+    return ret;
+  }
+
+  encoder(src)
+  {
+    return new encoder(this, src);
+  }
+}
+
+export class signature extends signature_base
 {
   constructor(...args)
   {
+    super();
     var num_basic = 0,
         num_custom = 0;
 
@@ -456,31 +520,6 @@ export class signature
     return pos;
   }
 
-  decode(data)
-  {
-    var ret = new Array(this.length);
-
-    this.do_decode(data, 0, ret, 0);
-
-    if (this.length === 1) return ret[0];
-
-    return new Arguments(ret);
-  }
-
-  low_decode(data)
-  {
-    var ret = new Array(this.length);
-
-    this.do_decode(data, 0, ret, 0);
-
-    return ret;
-  }
-
-  encoder(src)
-  {
-    return new encoder(this, src);
-  }
-
   do_encode(dst, pos, src, src_pos) {
     var S = this.signature;
     var C = this.custom;
@@ -733,24 +772,6 @@ export class signature
     return pos;
   }
 
-  encode(...args)
-  {
-    var src = Array.prototype.slice.call(args);
-    var dst = new ArrayBuffer(this.low_encoded_length(src));
-    this.do_encode(new DataView(dst), 0, src, 0);
-    return dst;
-  }
-
-  low_encode_to(dst, src)
-  {
-    this.do_encode(dst, 0, src, 0);
-  }
-
-  encode_to(dst, ...src)
-  {
-    this.do_encode(dst, 0, src, 0);
-  }
-
   do_encoded_length(src, src_pos) {
     if (this._length) return this._length;
     var S = this.signature;
@@ -906,18 +927,6 @@ export class signature
 
     return pos;
   }
-
-  low_encoded_length(src)
-  {
-    if (this._length) return this._length;
-
-    return this.do_encoded_length(src, 0);
-  }
- 
-  encoded_length(...args)
-  {
-    return this.low_encoded_length(args);
-  }
 }
 
 export function LIST(type) {
@@ -940,4 +949,36 @@ export function BLOBFIXED(length) {
 }
 export function BITSTRINGFIXED(length) {
   return [ PT_BITSTRINGFIXED, length ];
+}
+
+export class dynamic_signature extends signature_base
+{
+  constructor(test_decode, test_encode, signatures)
+  {
+    super();
+    this.test_decode = test_decode;
+    this.test_encode = test_encode;
+    this.signatures = signatures;
+  }
+
+  do_encoded_length(src, src_pos)
+  {
+    const index = this.test_encode(src, src_pos);
+
+    return this.signatures[index].do_encoded_length(src, src_pos);
+  }
+
+  do_decode(data, pos, dst, dst_pos)
+  {
+    const index = this.test_decode(data, pos);
+
+    return this.signature[index].do_decode(data, pos, dst, dst_pos);
+  }
+
+  do_encode(dst, pos, src, src_pos)
+  {
+    const index = this.test_encode(src, src_pos);
+
+    return this.signature[index].do_encode(dst, pos, src, src_pos);
+  }
 }
