@@ -202,6 +202,9 @@ class signature_base
   }
 }
 
+const max_uint32 = 4294967296;
+const max_int32 = 0x7fffffff;
+
 export class signature extends signature_base
 {
   constructor(...args)
@@ -322,14 +325,10 @@ export class signature extends signature_base
           const lo = data.getUint32(pos);
           pos += 4;
 
-          if (hi > (1 << 20))
-          {
-            dst[dst_pos] = { hi: hi, lo: lo };
-          }
-          else
-          {
-            dst[dst_pos] = lo + Math.pow(2, 32) * hi;
-          }
+          const val = lo + hi * max_uint32;
+
+          dst[dst_pos] = Number.isSafeInteger(val) ? val : { hi: hi, lo: lo };
+
           break;
         }
       case INT8: 
@@ -346,21 +345,19 @@ export class signature extends signature_base
         break;
       case INT64: 
         {
-          const tmp = data.getUint32(pos);
-          const hi = tmp & 0x7fffffff;
-          const sgn = !!(tmp & 0x80000000);
+          let val;
+
+          let hi = data.getUint32(pos);
           pos += 4;
-          const lo = data.getUint32(pos);
+          let lo = data.getUint32(pos);
           pos += 4;
 
-          if (hi > (1 << 20))
-          {
-            dst[dst_pos] = { sgn: sgn, hi: hi, log: lo };
-          }
-          else
-          {
-            dst[dst_pos] = (lo + Math.pow(2, 32) * hi) * (sgn ? -1 : 1);
-          }
+          if (hi > max_int32)
+            hi = - (max_uint32 - hi);
+
+          val = lo + max_uint32 * hi;
+
+          dst[dst_pos] = Number.isSafeInteger(val) ? val : { hi: hi, lo: lo };
           break;
         }
         break;
@@ -553,7 +550,7 @@ export class signature extends signature_base
           {
             if (val < 0)
               throw new Error('Bad argument, expected positive number.');
-            const hi = val / 0xffffffff;
+            const hi = val / max_uint32;
 
             dst.setUint32(pos, hi);
             pos += 4;
@@ -589,24 +586,34 @@ export class signature extends signature_base
 
           if (typeof val === 'number')
           {
-            const sgn = val < 0;
+            if (val < 0)
+            {
+              val = Math.abs(val);
 
-            if (sgn) val = -val;
+              let hi = Math.ceil(val / max_uint32);
+              let lo = val - (hi * max_uint32);
 
-            let hi = val / 0xffffffff;
-            const lo = val - hi * 0xffffffff
+              hi = max_uint32 - hi;
+              lo = max_uint32 - lo;
 
-            if (sgn) hi |= 0x80000000;
+              dst.setUint32(pos, hi);
+              pos += 4;
+              dst.setUint32(pos, lo);
+              pos += 4;
+            }
+            else
+            {
+              const hi = val / max_uint32;
 
-            dst.setUint32(pos, hi);
-            pos += 4;
-            dst.setUint32(pos, val);
-            pos += 4;
+              dst.setUint32(pos, hi);
+              pos += 4;
+              dst.setUint32(pos, val);
+              pos += 4;
+            }
           }
           else if (typeof val === 'object')
           {
-            const hi = val.hi | (val.sgn ? 0x80000000 : 0);
-            dst.setUint32(pos, hi);
+            dst.setInt32(pos, val.hi);
             pos += 4;
             dst.setUint32(pos, val.lo);
             pos += 4;

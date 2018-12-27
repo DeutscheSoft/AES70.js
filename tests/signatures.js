@@ -5,16 +5,23 @@ const utils = require('./utils');
 const memcmp = utils.memcmp;
 const equal = utils.equal;
 
-var TestSignature = utils.define_test(
-  function(signature, args) {
+const TestSignature = utils.define_test(
+  function(signature, args, encoded) {
     this.signature = signature;
     this.args = args;
+    this.encoded = encoded;
   },
   {
     test: function() {
       var signature = this.signature;
       var args = this.args;
       var buf = signature.encode.apply(signature, args);
+
+      if (this.encoded)
+        this.check(memcmp(buf, this.encoded), 
+                   'Encoding test failed for %o.encode(%o)\n%o vs. %o\n',
+                   signature, args, new Uint8Array(buf), new Uint8Array(this.encoded));
+
       var dec = signature.low_decode(new DataView(buf));
 
       this.check(equal(args, dec), 
@@ -50,7 +57,17 @@ function test_enc(signature) {
   test_rand(signature);
 }
 
+new TestSignature(new SP.signature(SP.UINT64), [ 2026928210506239 ],
+                  Uint8Array.from([ 0, 7, 51, 122, 255, 248, 241, 255 ]).buffer);
+new TestSignature(new SP.signature(SP.INT64), [ 2026928210506239 ],
+                  Uint8Array.from([ 0, 7, 51, 122, 255, 248, 241, 255 ]).buffer);
+new TestSignature(new SP.signature(SP.INT64), [ -2026928210506239 ],
+                  Uint8Array.from([ 255, 248, 204, 133, 0, 7, 14, 1 ]).buffer);
+
+test_enc(new SP.signature(SP.UINT64), 2026928210506239);
 test_enc(new SP.signature(SP.INT64), -2026928210506239);
+test_enc(new SP.signature(SP.INT64), { hi: -Math.pow(2, 28), lo: 2345678 });
+test_enc(new SP.signature(SP.UINT64), { hi: Math.pow(2, 28), lo: 2345678 });
 test_rand(new SP.signature(SP.MAP(SP.FLOAT32, SP.LIST(SP.INT32)), SP.BLOBFIXED(1)));
 test_rand(new SP.signature(SP.BLOBFIXED(10), SP.BLOB, SP.BLOBFIXED(10)));
 test_rand(new SP.signature(SP.BLOBFIXED(10)));

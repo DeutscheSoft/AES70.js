@@ -239,7 +239,9 @@ function equal(a, b) {
         return equal(ka, kb) && equal(va, vb);
     } else if (a instanceof ArrayBuffer) {
         return memcmp(a, b);
-    } else throw Error("unsupported type");
+    } else if ('hi' in a && 'lo' in a && 'hi' in b && 'lo' in b) {
+      return a.hi === b.hi && a.lo === b.lo;
+    } else throw new Error("Unsupported type.");
 
 }
 
