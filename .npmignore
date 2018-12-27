@@ -1,3 +1,7 @@
 src
+docs
+examples
+test
 index.html
 dist
+.babelrc
