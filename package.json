@@ -10,7 +10,6 @@
   "scripts": {
     "test": "node tests/signatures.js",
     "prepublishOnly": "npm run build",
-    "install": "npm run build",
     "build": "make node",
     "docs": "make docs"
   },
