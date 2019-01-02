@@ -8,7 +8,7 @@ SRC = $(filter-out src/utf8_node.js, $(wildcard src/*.js))
 SRC += $(wildcard src/controller/*.js)
 LIB = $(SRC:src/%.js=lib/%.js)
 
-all: dist/AES70.es5.js $(LIB)
+all: dist/AES70.es5.js node
 
 node: $(LIB)
 
