@@ -1,7 +1,11 @@
 src
 docs
 examples
-test
+config
 index.html
-dist
 .babelrc
+dist/*
+bin
+lib/.gitignore
+Makefile
+!dist/AES70.es5.js
