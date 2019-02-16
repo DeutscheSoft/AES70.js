@@ -697,7 +697,7 @@ export function make_control_class(name, level, class_id, class_version, base, m
 
     static get ClassVersion()
     {
-      return class_id;
+      return class_version;
     }
 
     static get ClassName()
