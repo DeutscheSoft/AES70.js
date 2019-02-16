@@ -277,6 +277,7 @@ export class PropertySync
     this.o = o;
     this.values = [];
     this.synchronized = false;
+    this.subscriptions = [];
   }
 
   sync()
@@ -308,9 +309,12 @@ export class PropertySync
 
       if (event)
       {
-        tasks.push(
-          event.subscribe(change_handler.bind(this, index)).catch(function(){})
-        );
+        const cb = change_handler.bind(this, index);
+        // NOTE: we do not want to wait for the promise to resolve
+        // before storing this unsubscription handler because that
+        // would have a potential race condition.
+        this.subscriptions.push(event.unsubscribe.bind(event, cb));
+        tasks.push(event.subscribe(cb).catch(function(){}));
       }
 
       tasks.push(
@@ -343,6 +347,7 @@ export class PropertySync
   Dispose()
   {
     this.o = null;
+    this.subscriptions.forEach((cb) => cb());
   }
 }
 
