@@ -426,6 +426,14 @@ export class ObjectBase
     return this.constructor.ClassID;
   }
 
+  /**
+   * The name of the class of this object. This is a local property.
+   */
+  get ClassName()
+  {
+    return this.constructor.ClassName;
+  }
+
   sendCommandRrq(method_level, method_index, param_count, parameters, rs)
   {
     const cmd = new CommandRrq(this.ono, method_level, method_index, param_count, parameters);
