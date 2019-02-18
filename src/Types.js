@@ -60,12 +60,18 @@ const _values_OcaBaseDataType = {
 
 /**
  * Enum that describes all available base datatypes.
+ * @category Types
+ * @class OcaBaseDataType
+ * @extends Enum8
  */
 export const OcaBaseDataType = make_enum(Enum8, "OcaBaseDataType", _values_OcaBaseDataType);
 
 /**
  * Class authority identifier. Identifies the authority for a class's
  * definition.
+ * @category Types
+ * @class OcaClassAuthorityID
+ * @extends Base
  */
 export const OcaClassAuthorityID = make_struct(
   "OcaClassAuthorityID",
@@ -81,12 +87,18 @@ const _values_OcaComponent = {
  * Enumeration (16-bit) for of software &amp; firmware components in the
  * device. Except for the boot loader, all other values of this enum are
  * device-specific and will be specified by subclassing this class.
+ * @category Types
+ * @class OcaComponent
+ * @extends Enum16
  */
 export const OcaComponent = make_enum(Enum16, "OcaComponent", _values_OcaComponent);
 
 /**
  * Representation of a version number of a (hardware/software) component
  * of a device in the form of Major.Minor.Build (e.g. 1.0.123).
+ * @category Types
+ * @class OcaVersion
+ * @extends Base
  */
 export const OcaVersion = make_struct(
   "OcaVersion",
@@ -100,12 +112,18 @@ export const OcaVersion = make_struct(
  * selections, where m &lt;= n. Element order shall be in accordance with
  * AES70 array marshaling rules (see AES70-3). Thus, element 1 of the
  * array shall be the first one transmitted.
+ * @category Types
+ * @class OcaBitSet16
+ * @extends Base
  */
 export const OcaBitSet16 = make_bitset(16, "OcaBitSet16", [
 "Value" ]);
 
 /**
  * This was not documented in the OCA standard.
+ * @category Types
+ * @class OcaClassIdentification
+ * @extends Base
  */
 export const OcaClassIdentification = make_struct(
   "OcaClassIdentification",
@@ -116,6 +134,9 @@ export const OcaClassIdentification = make_struct(
 /**
  * Object address. Composite of network address in which object resides,
  * and object number.
+ * @category Types
+ * @class OcaOPath
+ * @extends Base
  */
 export const OcaOPath = make_struct(
   "OcaOPath",
@@ -126,6 +147,9 @@ export const OcaOPath = make_struct(
 /**
  * Object identification. Composite of object number and object's class.
  * Used mainly in discovery processes.
+ * @category Types
+ * @class OcaObjectIdentification
+ * @extends Base
  */
 export const OcaObjectIdentification = make_struct(
   "OcaObjectIdentification",
@@ -137,6 +161,9 @@ export const OcaObjectIdentification = make_struct(
  * Representation of an OCA method ID. A class may define at most 255
  * methods of its own. Additional methods may be inherited, so the total
  * number may exceed 255.
+ * @category Types
+ * @class OcaMethodID
+ * @extends Base
  */
 export const OcaMethodID = make_struct(
   "OcaMethodID",
@@ -148,6 +175,9 @@ export const OcaMethodID = make_struct(
  * Representation of an OCA property ID. A class may define at most 255
  * properties of its own. Additional properties may be inherited, so the
  * total number may exceed 255.
+ * @category Types
+ * @class OcaPropertyID
+ * @extends Base
  */
 export const OcaPropertyID = make_struct(
   "OcaPropertyID",
@@ -159,6 +189,9 @@ export const OcaPropertyID = make_struct(
  * Representation of an OCA event ID. A class may define at most 255
  * events of its own. Additional events may be inherited, so the total
  * number may exceed 255.
+ * @category Types
+ * @class OcaEventID
+ * @extends Base
  */
 export const OcaEventID = make_struct(
   "OcaEventID",
@@ -169,6 +202,9 @@ export const OcaEventID = make_struct(
 /**
  * Description of an OCA property, including property ID, Get and Set
  * method IDs, and datatype.
+ * @category Types
+ * @class OcaPropertyDescriptor
+ * @extends Base
  */
 export const OcaPropertyDescriptor = make_struct(
   "OcaPropertyDescriptor",
@@ -180,6 +216,9 @@ export const OcaPropertyDescriptor = make_struct(
  * Template for complete identification of an OCA property instance,
  * including object number, property ID, Get and Set method IDs, and
  * datatype.
+ * @category Types
+ * @class OcaProperty
+ * @extends Base
  */
 export const OcaProperty = make_struct(
   "OcaProperty",
@@ -207,12 +246,18 @@ const _values_OcaStatus = {
 
 /**
  * Standard status codes returned from method calls.
+ * @category Types
+ * @class OcaStatus
+ * @extends Enum8
  */
 export const OcaStatus = make_enum(Enum8, "OcaStatus", _values_OcaStatus);
 
 /**
  * Globally unique identifier of something that belongs to an
  * organization.
+ * @category Types
+ * @class OcaGlobalTypeIdentifier
+ * @extends Base
  */
 export const OcaGlobalTypeIdentifier = make_struct(
   "OcaGlobalTypeIdentifier",
@@ -231,6 +276,9 @@ const _values_OcaStringComparisonType = {
 
 /**
  * Type of string comparison.
+ * @category Types
+ * @class OcaStringComparisonType
+ * @extends Enum8
  */
 export const OcaStringComparisonType = make_enum(Enum8, "OcaStringComparisonType", _values_OcaStringComparisonType);
 
@@ -248,6 +296,9 @@ const _values_OcaPositionCoordinateSystem = {
  * Enumeration that designates the type of position coordinate system
  * used. For details, see the AES70-1 description of the
  * <b>OcaPhysicalPosition </b>class.
+ * @category Types
+ * @class OcaPositionCoordinateSystem
+ * @extends Enum8
  */
 export const OcaPositionCoordinateSystem = make_enum(Enum8, "OcaPositionCoordinateSystem", _values_OcaPositionCoordinateSystem);
 
@@ -266,6 +317,9 @@ export const OcaPositionCoordinateSystem = make_enum(Enum8, "OcaPositionCoordina
  * shall be interpreted as follows: <ul> <li>c1 = longitude</li> <li>c2 =
  * latitude</li> <li>c3 = altitude</li> <li>c4 : not used</li> <li>c5 :
  * not used</li> <li>c6 : not used</li> </ul>
+ * @category Types
+ * @class OcaPositionDescriptor
+ * @extends Base
  */
 export const OcaPositionDescriptor = make_struct(
   "OcaPositionDescriptor",
@@ -275,6 +329,9 @@ export const OcaPositionDescriptor = make_struct(
 
 /**
  * Structure that describes a manager instance.
+ * @category Types
+ * @class OcaManagerDescriptor
+ * @extends Base
  */
 export const OcaManagerDescriptor = make_struct(
   "OcaManagerDescriptor",
@@ -304,12 +361,18 @@ export const OcaManagerDefaultObjectNumbers = {
  * request. Any combination of the flags may be returned, unless
  * specified otherwise for the specific flag. The value 0x0000 indicates
  * the device is fully operational.
+ * @category Types
+ * @class OcaDeviceState
+ * @extends Base
  */
 export const OcaDeviceState = make_bitset(16, "OcaDeviceState", [
 "Operational", "Disabled", "Error", "Initializing", "Updating", "unused" ]);
 
 /**
  * 64 bit device type GUID.
+ * @category Types
+ * @class OcaModelGUID
+ * @extends Base
  */
 export const OcaModelGUID = make_struct(
   "OcaModelGUID",
@@ -319,6 +382,9 @@ export const OcaModelGUID = make_struct(
 
 /**
  * Friendly description of this particular product model.
+ * @category Types
+ * @class OcaModelDescription
+ * @extends Base
  */
 export const OcaModelDescription = make_struct(
   "OcaModelDescription",
@@ -335,6 +401,9 @@ const _values_OcaResetCause = {
 
 /**
  * Enumeration of reasons for device reset.
+ * @category Types
+ * @class OcaResetCause
+ * @extends Enum8
  */
 export const OcaResetCause = make_enum(Enum8, "OcaResetCause", _values_OcaResetCause);
 
@@ -348,12 +417,18 @@ const _values_OcaPowerState = {
 /**
  * Enumeration defining the power states that OCA devices can be in. The
  * state is returned by the device's Power Manager on request.
+ * @category Types
+ * @class OcaPowerState
+ * @extends Enum8
  */
 export const OcaPowerState = make_enum(Enum8, "OcaPowerState", _values_OcaPowerState);
 
 /**
  * Representation of an OCA event, i.e. the unique combination of emitter
  * ONo and the EventID.
+ * @category Types
+ * @class OcaEvent
+ * @extends Base
  */
 export const OcaEvent = make_struct(
   "OcaEvent",
@@ -366,6 +441,9 @@ export const OcaEvent = make_struct(
  * and a MethodID. To denote the absence of a method, all field values
  * shall be zero. Such a value is called the <i>Null Method
  * Identifier</i>.
+ * @category Types
+ * @class OcaMethod
+ * @extends Base
  */
 export const OcaMethod = make_struct(
   "OcaMethod",
@@ -384,12 +462,18 @@ const _values_OcaPropertyChangeType = {
 
 /**
  * Enum describing property change type.
+ * @category Types
+ * @class OcaPropertyChangeType
+ * @extends Enum8
  */
 export const OcaPropertyChangeType = make_enum(Enum8, "OcaPropertyChangeType", _values_OcaPropertyChangeType);
 
 /**
  * Event data for the <b>OcaLibVolChanged </b>event, which signals a
  * change in an <b>OcaLibrary.Volumes</b> property.
+ * @category Types
+ * @class OcaLibVolChangedEventData
+ * @extends Base
  */
 export const OcaLibVolChangedEventData = make_struct(
   "OcaLibVolChangedEventData",
@@ -400,6 +484,9 @@ export const OcaLibVolChangedEventData = make_struct(
 
 /**
  * Bitset describing which elements of a media connector have changed.
+ * @category Types
+ * @class OcaMediaConnectorElement
+ * @extends Base
  */
 export const OcaMediaConnectorElement = make_bitset(5, "OcaMediaConnectorElement", [
 "PinMap", "Connection", "Coding", "AlignmentLevel", "AlignmentGain" ]);
@@ -414,11 +501,17 @@ const _values_OcaMediaConnectorState = {
 
 /**
  * Status options for a stream connector.
+ * @category Types
+ * @class OcaMediaConnectorState
+ * @extends Enum8
  */
 export const OcaMediaConnectorState = make_enum(Enum8, "OcaMediaConnectorState", _values_OcaMediaConnectorState);
 
 /**
  * Represents the current status of a media (source or sink) connector.
+ * @category Types
+ * @class OcaMediaConnectorStatus
+ * @extends Base
  */
 export const OcaMediaConnectorStatus = make_struct(
   "OcaMediaConnectorStatus",
@@ -428,6 +521,9 @@ export const OcaMediaConnectorStatus = make_struct(
 
 /**
  * This was not documented in the OCA standard.
+ * @category Types
+ * @class OcaMediaConnectorStatusChangedEventData
+ * @extends Base
  */
 export const OcaMediaConnectorStatusChangedEventData = make_struct(
   "OcaMediaConnectorStatusChangedEventData",
@@ -451,6 +547,9 @@ const _values_OcaTaskState = {
  * States of OcaTask object. State values change as a result of the
  * object's having received a comment or encountering processing events
  * (e.g. completion).
+ * @category Types
+ * @class OcaTaskState
+ * @extends Enum8
  */
 export const OcaTaskState = make_enum(Enum8, "OcaTaskState", _values_OcaTaskState);
 
@@ -462,6 +561,9 @@ export const OcaTaskState = make_enum(Enum8, "OcaTaskState", _values_OcaTaskStat
  * changes due to an internal event (examples: task duration value
  * reached; or failure due to an error), Parameter is not changed.</li>
  * </ul>
+ * @category Types
+ * @class OcaTaskStatus
+ * @extends Base
  */
 export const OcaTaskStatus = make_struct(
   "OcaTaskStatus",
@@ -471,6 +573,9 @@ export const OcaTaskStatus = make_struct(
 
 /**
  * Unique identifier of a library volume within the device.
+ * @category Types
+ * @class OcaLibVolIdentifier
+ * @extends Base
  */
 export const OcaLibVolIdentifier = make_struct(
   "OcaLibVolIdentifier",
@@ -480,6 +585,9 @@ export const OcaLibVolIdentifier = make_struct(
 
 /**
  * This was not documented in the OCA standard.
+ * @category Types
+ * @class OcaTaskStateChangedEventData
+ * @extends Base
  */
 export const OcaTaskStateChangedEventData = make_struct(
   "OcaTaskStateChangedEventData",
@@ -494,6 +602,9 @@ const _values_OcaPortMode = {
 
 /**
  * Enum that describes whether a port is for input or output.
+ * @category Types
+ * @class OcaPortMode
+ * @extends Enum8
  */
 export const OcaPortMode = make_enum(Enum8, "OcaPortMode", _values_OcaPortMode);
 
@@ -501,6 +612,9 @@ export const OcaPortMode = make_enum(Enum8, "OcaPortMode", _values_OcaPortMode);
  * Unique identifier of input or output port within a given worker or
  * block class. Port numbers are ordinals starting at 1, and there are
  * separate numbering spaces for input and output ports.
+ * @category Types
+ * @class OcaPortID
+ * @extends Base
  */
 export const OcaPortID = make_struct(
   "OcaPortID",
@@ -516,6 +630,9 @@ const _values_OcaMediaStreamCastMode = {
 
 /**
  * Type of media endpoint: unicast or multicast.
+ * @category Types
+ * @class OcaMediaStreamCastMode
+ * @extends Enum8
  */
 export const OcaMediaStreamCastMode = make_enum(Enum8, "OcaMediaStreamCastMode", _values_OcaMediaStreamCastMode);
 
@@ -535,6 +652,9 @@ export const OcaMediaStreamCastMode = make_enum(Enum8, "OcaMediaStreamCastMode",
  * <b>OcaMedia(Source/Sink)Connector </b>object will only have one media
  * connection. In non-OCA documents, connections are sometimes referred
  * to as <i>streams</i> or <i>flows.</i>
+ * @category Types
+ * @class OcaMediaConnection
+ * @extends Base
  */
 export const OcaMediaConnection = make_struct(
   "OcaMediaConnection",
@@ -544,6 +664,9 @@ export const OcaMediaConnection = make_struct(
 
 /**
  * Codec ID + Coding parameters
+ * @category Types
+ * @class OcaMediaCoding
+ * @extends Base
  */
 export const OcaMediaCoding = make_struct(
   "OcaMediaCoding",
@@ -554,6 +677,9 @@ export const OcaMediaCoding = make_struct(
 /**
  * Media source (i.e. output) connector. Connects to an outbound stream.
  * Collected by <b>OcaMediaTransportNetwork</b>.
+ * @category Types
+ * @class OcaMediaSourceConnector
+ * @extends Base
  */
 export const OcaMediaSourceConnector = make_struct(
   "OcaMediaSourceConnector",
@@ -563,6 +689,9 @@ export const OcaMediaSourceConnector = make_struct(
 
 /**
  * This was not documented in the OCA standard.
+ * @category Types
+ * @class OcaMediaSourceConnectorChangedEventData
+ * @extends Base
  */
 export const OcaMediaSourceConnectorChangedEventData = make_struct(
   "OcaMediaSourceConnectorChangedEventData",
@@ -573,6 +702,9 @@ export const OcaMediaSourceConnectorChangedEventData = make_struct(
 /**
  * Media sink (i.e. input) connector. Connects to an inbound stream.
  * Collected by <b>OcaMediaTransportNetwork</b>.
+ * @category Types
+ * @class OcaMediaSinkConnector
+ * @extends Base
  */
 export const OcaMediaSinkConnector = make_struct(
   "OcaMediaSinkConnector",
@@ -582,6 +714,9 @@ export const OcaMediaSinkConnector = make_struct(
 
 /**
  * This was not documented in the OCA standard.
+ * @category Types
+ * @class OcaMediaSinkConnectorChangedEventData
+ * @extends Base
  */
 export const OcaMediaSinkConnectorChangedEventData = make_struct(
   "OcaMediaSinkConnectorChangedEventData",
@@ -593,6 +728,9 @@ export const OcaMediaSinkConnectorChangedEventData = make_struct(
  * Event data for events returning object lists, for example the
  * <b>SynchronizeState</b> event defined in
  * <b>OcaSubscriptionManager.</b>
+ * @category Types
+ * @class OcaObjectListEventData
+ * @extends Base
  */
 export const OcaObjectListEventData = make_struct(
   "OcaObjectListEventData",
@@ -608,6 +746,9 @@ export const OcaObjectListEventData = make_struct(
  * <b>OcaEventData, </b>as other event data classes do. However, the
  * effect is the same as for all event data classes: the first property
  * in the data structure is an <b>OcaEvent </b>value.
+ * @category Types
+ * @class OcaObservationEventData
+ * @extends Base
  */
 export const OcaObservationEventData = make_struct(
   "OcaObservationEventData",
@@ -623,6 +764,9 @@ export const OcaObservationEventData = make_struct(
  * <b>OcaEventData, </b>as other event data classes do. However, the
  * effect is the same as for all event data classes: the first property
  * in the data structure is an <b>OcaEvent </b>value.
+ * @category Types
+ * @class OcaObservationListEventData
+ * @extends Base
  */
 export const OcaObservationListEventData = make_struct(
   "OcaObservationListEventData",
@@ -643,12 +787,18 @@ const _values_OcaGrouperStatusChangeType = {
 /**
  * Enum describing status change types, as used in <b>OcaGrouper's
  * StatusChange </b>event.
+ * @category Types
+ * @class OcaGrouperStatusChangeType
+ * @extends Enum8
  */
 export const OcaGrouperStatusChangeType = make_enum(Enum8, "OcaGrouperStatusChangeType", _values_OcaGrouperStatusChangeType);
 
 /**
  * Class that defines the event data parameter for the <b>StatusChange
  * </b>event defined in <b>OcaGrouper</b>.
+ * @category Types
+ * @class OcaGrouperStatusChangeEventData
+ * @extends Base
  */
 export const OcaGrouperStatusChangeEventData = make_struct(
   "OcaGrouperStatusChangeEventData",
@@ -665,6 +815,9 @@ const _values_OcaNotificationDeliveryMode = {
  * Enum for subscriptions that specifies whether its notification
  * messages are to be delivered by reliable means (e.g. TCP) or fast
  * means (e.g. UDP).
+ * @category Types
+ * @class OcaNotificationDeliveryMode
+ * @extends Enum8
  */
 export const OcaNotificationDeliveryMode = make_enum(Enum8, "OcaNotificationDeliveryMode", _values_OcaNotificationDeliveryMode);
 
@@ -675,11 +828,17 @@ const _values_OcaSubscriptionManagerState = {
 
 /**
  * Enum describing <b>OcaSubscriptionManager</b> states.
+ * @category Types
+ * @class OcaSubscriptionManagerState
+ * @extends Enum8
  */
 export const OcaSubscriptionManagerState = make_enum(Enum8, "OcaSubscriptionManagerState", _values_OcaSubscriptionManagerState);
 
 /**
  * Complex impedance. Expressed as a magnitude and phase.
+ * @category Types
+ * @class OcaImpedance
+ * @extends Base
  */
 export const OcaImpedance = make_struct(
   "OcaImpedance",
@@ -694,6 +853,9 @@ const _values_OcaMuteState = {
 
 /**
  * Mute states
+ * @category Types
+ * @class OcaMuteState
+ * @extends Enum8
  */
 export const OcaMuteState = make_enum(Enum8, "OcaMuteState", _values_OcaMuteState);
 
@@ -704,6 +866,9 @@ const _values_OcaPolarityState = {
 
 /**
  * Polarity states
+ * @category Types
+ * @class OcaPolarityState
+ * @extends Enum8
  */
 export const OcaPolarityState = make_enum(Enum8, "OcaPolarityState", _values_OcaPolarityState);
 
@@ -720,11 +885,17 @@ const _values_OcaDelayUnit = {
 
 /**
  * Enumeration of types of delay units that are available in OCA.
+ * @category Types
+ * @class OcaDelayUnit
+ * @extends Enum8
  */
 export const OcaDelayUnit = make_enum(Enum8, "OcaDelayUnit", _values_OcaDelayUnit);
 
 /**
  * Multifield descriptor that defines a delay value element.
+ * @category Types
+ * @class OcaDelayValue
+ * @extends Base
  */
 export const OcaDelayValue = make_struct(
   "OcaDelayValue",
@@ -734,6 +905,9 @@ export const OcaDelayValue = make_struct(
 
 /**
  * A complex (i.e. magnitude + phase) transfer function.
+ * @category Types
+ * @class OcaTransferFunction
+ * @extends Base
  */
 export const OcaTransferFunction = make_struct(
   "OcaTransferFunction",
@@ -751,6 +925,9 @@ const _values_OcaClassicalFilterShape = {
 /**
  * Enumeration of classicalr filter types that can be used by OCA
  * objects.
+ * @category Types
+ * @class OcaClassicalFilterShape
+ * @extends Enum8
  */
 export const OcaClassicalFilterShape = make_enum(Enum8, "OcaClassicalFilterShape", _values_OcaClassicalFilterShape);
 
@@ -764,6 +941,9 @@ const _values_OcaFilterPassband = {
 
 /**
  * Enumeration of passband types that can be used by OCA objects.
+ * @category Types
+ * @class OcaFilterPassband
+ * @extends Enum8
  */
 export const OcaFilterPassband = make_enum(Enum8, "OcaFilterPassband", _values_OcaFilterPassband);
 
@@ -785,6 +965,9 @@ const _values_OcaParametricEQShape = {
 
 /**
  * Enumeration of curve shapes used by OcaFilterParametric.
+ * @category Types
+ * @class OcaParametricEQShape
+ * @extends Enum8
  */
 export const OcaParametricEQShape = make_enum(Enum8, "OcaParametricEQShape", _values_OcaParametricEQShape);
 
@@ -799,11 +982,17 @@ const _values_OcaDynamicsFunction = {
 /**
  * Enumeration of the types of dynamics functions available from class
  * OcaDynamics.
+ * @category Types
+ * @class OcaDynamicsFunction
+ * @extends Enum8
  */
 export const OcaDynamicsFunction = make_enum(Enum8, "OcaDynamicsFunction", _values_OcaDynamicsFunction);
 
 /**
  * Multifield descriptor for a pilot tone detector element.
+ * @category Types
+ * @class OcaPilotToneDetectorSpec
+ * @extends Base
  */
 export const OcaPilotToneDetectorSpec = make_struct(
   "OcaPilotToneDetectorSpec",
@@ -824,6 +1013,9 @@ const _values_OcaWaveformType = {
 
 /**
  * Enumeration of waveform types that can be used by OCA objects.
+ * @category Types
+ * @class OcaWaveformType
+ * @extends Enum8
  */
 export const OcaWaveformType = make_enum(Enum8, "OcaWaveformType", _values_OcaWaveformType);
 
@@ -835,6 +1027,9 @@ const _values_OcaSweepType = {
 
 /**
  * Enumeration of waveform types that can be used by OCA objects.
+ * @category Types
+ * @class OcaSweepType
+ * @extends Enum8
  */
 export const OcaSweepType = make_enum(Enum8, "OcaSweepType", _values_OcaSweepType);
 
@@ -853,6 +1048,9 @@ const _values_OcaUnitOfMeasure = {
  * calculations will not need to convert. If conversion is needed it
  * should only be done in user interfaces. The datatype of a reading
  * expressed in one of these units of measure is FLOAT.
+ * @category Types
+ * @class OcaUnitOfMeasure
+ * @extends Enum8
  */
 export const OcaUnitOfMeasure = make_enum(Enum8, "OcaUnitOfMeasure", _values_OcaUnitOfMeasure);
 
@@ -872,6 +1070,9 @@ const _values_OcaPresentationUnit = {
  * to keep the user presentation uniform. Note that the presentation unit
  * may be equal to the unit of the property (in which case of course no
  * conversion is needed).
+ * @category Types
+ * @class OcaPresentationUnit
+ * @extends Enum8
  */
 export const OcaPresentationUnit = make_enum(Enum8, "OcaPresentationUnit", _values_OcaPresentationUnit);
 
@@ -884,6 +1085,9 @@ const _values_OcaLevelDetectionLaw = {
 /**
  * Enumeration of the types of level detector characteristics. Used in
  * dynamics classes and for sensors.
+ * @category Types
+ * @class OcaLevelDetectionLaw
+ * @extends Enum8
  */
 export const OcaLevelDetectionLaw = make_enum(Enum8, "OcaLevelDetectionLaw", _values_OcaLevelDetectionLaw);
 
@@ -898,6 +1102,9 @@ const _values_OcaSensorReadingState = {
 /**
  * Enum that describes whether an <b>OcaSensor</b>'s current reading
  * value can be trusted, and if not, why not.
+ * @category Types
+ * @class OcaSensorReadingState
+ * @extends Enum8
  */
 export const OcaSensorReadingState = make_enum(Enum8, "OcaSensorReadingState", _values_OcaSensorReadingState);
 
@@ -914,11 +1121,17 @@ const _values_OcaLevelMeterLaw = {
 
 /**
  * Enumeration of level meter laws.
+ * @category Types
+ * @class OcaLevelMeterLaw
+ * @extends Enum8
  */
 export const OcaLevelMeterLaw = make_enum(Enum8, "OcaLevelMeterLaw", _values_OcaLevelMeterLaw);
 
 /**
  * Describes an object that is a member of a block.
+ * @category Types
+ * @class OcaBlockMember
+ * @extends Base
  */
 export const OcaBlockMember = make_struct(
   "OcaBlockMember",
@@ -929,6 +1142,9 @@ export const OcaBlockMember = make_struct(
 /**
  * Representation of an OCA (input or output) port that is used in the
  * signal path representation of an OCA device.
+ * @category Types
+ * @class OcaPort
+ * @extends Base
  */
 export const OcaPort = make_struct(
   "OcaPort",
@@ -938,6 +1154,9 @@ export const OcaPort = make_struct(
 
 /**
  * Signal path between two object ports in the same device.
+ * @category Types
+ * @class OcaSignalPath
+ * @extends Base
  */
 export const OcaSignalPath = make_struct(
   "OcaSignalPath",
@@ -949,6 +1168,9 @@ export const OcaSignalPath = make_struct(
  * Prototype object identification. Composite of prototype object number
  * and prototype object's class identification. Used in
  * <b>OcaBlockFactory</b>.
+ * @category Types
+ * @class OcaProtoObjectIdentification
+ * @extends Base
  */
 export const OcaProtoObjectIdentification = make_struct(
   "OcaProtoObjectIdentification",
@@ -960,6 +1182,9 @@ export const OcaProtoObjectIdentification = make_struct(
  * Unique identifier of prototype input or output port within a block
  * factory. Prototype port numbers are ordinals starting at 1, and there
  * are separate numbering spaces for input and output ports.
+ * @category Types
+ * @class OcaProtoPortID
+ * @extends Base
  */
 export const OcaProtoPortID = make_struct(
   "OcaProtoPortID",
@@ -970,6 +1195,9 @@ export const OcaProtoPortID = make_struct(
 /**
  * Representation of an OCA (input or output) proto-port that is used in
  * the proto-signal path representation of an OCA device.
+ * @category Types
+ * @class OcaProtoPort
+ * @extends Base
  */
 export const OcaProtoPort = make_struct(
   "OcaProtoPort",
@@ -979,6 +1207,9 @@ export const OcaProtoPort = make_struct(
 
 /**
  * Proto-signal path between two proto-member ports in a factory.
+ * @category Types
+ * @class OcaProtoSignalPath
+ * @extends Base
  */
 export const OcaProtoSignalPath = make_struct(
   "OcaProtoSignalPath",
@@ -991,6 +1222,9 @@ export const OcaProtoSignalPath = make_struct(
  * Dynamic format, form used depends on type of search and options. The
  * FieldMap parameter of the Find...() methods specifies which optional
  * fields should be returned as nonnull.
+ * @category Types
+ * @class OcaObjectSearchResult
+ * @extends Base
  */
 export const OcaObjectSearchResult = make_struct(
   "OcaObjectSearchResult",
@@ -1001,12 +1235,18 @@ export const OcaObjectSearchResult = make_struct(
 
 /**
  * Bitset that describes the contents of an <b>OcaSearchResult</b>
+ * @category Types
+ * @class OcaObjectSearchResultFlags
+ * @extends Base
  */
 export const OcaObjectSearchResultFlags = make_bitset(16, "OcaObjectSearchResultFlags", [
 "ONo", "ClassIdentification", "ContainerPath", "Role", "Label", "unused" ]);
 
 /**
  * Describes a group in a grouper.
+ * @category Types
+ * @class OcaGrouperGroup
+ * @extends Base
  */
 export const OcaGrouperGroup = make_struct(
   "OcaGrouperGroup",
@@ -1017,6 +1257,9 @@ export const OcaGrouperGroup = make_struct(
 /**
  * Describes a citizen of a grouper. Refers to a specific worker object
  * somewhere in the media network.
+ * @category Types
+ * @class OcaGrouperCitizen
+ * @extends Base
  */
 export const OcaGrouperCitizen = make_struct(
   "OcaGrouperCitizen",
@@ -1026,6 +1269,9 @@ export const OcaGrouperCitizen = make_struct(
 
 /**
  * Describes the enrollment of a citizen into a group.
+ * @category Types
+ * @class OcaGrouperEnrollment
+ * @extends Base
  */
 export const OcaGrouperEnrollment = make_struct(
   "OcaGrouperEnrollment",
@@ -1040,6 +1286,9 @@ const _values_OcaGrouperMode = {
 
 /**
  * Select mode of <b>OcaGrouper</b>: master-slave or peer-to-peer
+ * @category Types
+ * @class OcaGrouperMode
+ * @extends Enum8
  */
 export const OcaGrouperMode = make_enum(Enum8, "OcaGrouperMode", _values_OcaGrouperMode);
 
@@ -1050,6 +1299,9 @@ const _values_OcaObserverState = {
 
 /**
  * Interpolation law for ramper to use.
+ * @category Types
+ * @class OcaObserverState
+ * @extends Enum8
  */
 export const OcaObserverState = make_enum(Enum8, "OcaObserverState", _values_OcaObserverState);
 
@@ -1065,6 +1317,9 @@ const _values_OcaRelationalOperator = {
 
 /**
  * Enumeration of relational operators that can be used in OCA classes.
+ * @category Types
+ * @class OcaRelationalOperator
+ * @extends Enum8
  */
 export const OcaRelationalOperator = make_enum(Enum8, "OcaRelationalOperator", _values_OcaRelationalOperator);
 
@@ -1078,6 +1333,9 @@ const _values_OcaPowerSupplyType = {
 
 /**
  * Type of power supply.
+ * @category Types
+ * @class OcaPowerSupplyType
+ * @extends Enum8
  */
 export const OcaPowerSupplyType = make_enum(Enum8, "OcaPowerSupplyType", _values_OcaPowerSupplyType);
 
@@ -1089,6 +1347,9 @@ const _values_OcaPowerSupplyLocation = {
 
 /**
  * Physical location of a device power supply.
+ * @category Types
+ * @class OcaPowerSupplyLocation
+ * @extends Enum8
  */
 export const OcaPowerSupplyLocation = make_enum(Enum8, "OcaPowerSupplyLocation", _values_OcaPowerSupplyLocation);
 
@@ -1101,6 +1362,9 @@ const _values_OcaPowerSupplyState = {
 
 /**
  * Status of a device power supply.
+ * @category Types
+ * @class OcaPowerSupplyState
+ * @extends Enum8
  */
 export const OcaPowerSupplyState = make_enum(Enum8, "OcaPowerSupplyState", _values_OcaPowerSupplyState);
 
@@ -1112,6 +1376,9 @@ const _values_OcaRamperCommand = {
 
 /**
  * Command repertoire of OcaRamper's <b>Control </b>method.
+ * @category Types
+ * @class OcaRamperCommand
+ * @extends Enum8
  */
 export const OcaRamperCommand = make_enum(Enum8, "OcaRamperCommand", _values_OcaRamperCommand);
 
@@ -1142,6 +1409,9 @@ const _values_OcaRamperState = {
  * causes the state to become: <b>Scheduled</b>, if T<sub>start</sub>,
  * Time Mode have been set; AND (T<sub>start</sub> + Duration) is in the
  * future. Otherwise, <b>Initialized.</b></li> </ul>
+ * @category Types
+ * @class OcaRamperState
+ * @extends Enum8
  */
 export const OcaRamperState = make_enum(Enum8, "OcaRamperState", _values_OcaRamperState);
 
@@ -1152,6 +1422,9 @@ const _values_OcaTimeMode = {
 
 /**
  * Time mode of <b>OcaTask </b>agent.
+ * @category Types
+ * @class OcaTimeMode
+ * @extends Enum8
  */
 export const OcaTimeMode = make_enum(Enum8, "OcaTimeMode", _values_OcaTimeMode);
 
@@ -1162,6 +1435,9 @@ const _values_OcaTimeUnits = {
 
 /**
  * Time units of <b>OcaTask </b>agent.
+ * @category Types
+ * @class OcaTimeUnits
+ * @extends Enum8
  */
 export const OcaTimeUnits = make_enum(Enum8, "OcaTimeUnits", _values_OcaTimeUnits);
 
@@ -1170,6 +1446,9 @@ export const OcaTimeUnits = make_enum(Enum8, "OcaTimeUnits", _values_OcaTimeUnit
  * bit integer seconds - 32 bit integer nanoseconds PLUS a boolean sign
  * (positive=TRUE) field. Absolute times are always positive. Relative
  * times may be positive or negative.
+ * @category Types
+ * @class OcaTimePTP
+ * @extends Base
  */
 export const OcaTimePTP = make_struct(
   "OcaTimePTP",
@@ -1217,6 +1496,9 @@ const OcaTask_signature = new dynamic_signature(
  * <font color="#223274">An execution thread that runs an AES70 Program.
  * Programs are OcaLibrary volumes that contain application-specific
  * execution instructions.</font>
+ * @category Types
+ * @class OcaTask
+ * @extends Base
  */
 export const OcaTask = make_struct(
   "OcaTask",
@@ -1237,6 +1519,9 @@ const _values_OcaTaskCommand = {
 
 /**
  * Commands controllers can send to OcaTasks to change their states
+ * @category Types
+ * @class OcaTaskCommand
+ * @extends Enum8
  */
 export const OcaTaskCommand = make_enum(Enum8, "OcaTaskCommand", _values_OcaTaskCommand);
 
@@ -1260,6 +1545,9 @@ const _values_OcaTaskManagerState = {
  * <b>OcaTaskGroup </b>agent, which will stop all the tasks in the given
  * task groups; or </li> <li>passing a <b>Stop </b>or <b>Abort
  * </b>command to each task individually.</li> </ul>
+ * @category Types
+ * @class OcaTaskManagerState
+ * @extends Enum8
  */
 export const OcaTaskManagerState = make_enum(Enum8, "OcaTaskManagerState", _values_OcaTaskManagerState);
 
@@ -1272,6 +1560,9 @@ const _values_OcaRamperInterpolationLaw = {
 
 /**
  * Interpolation law for ramper to use.
+ * @category Types
+ * @class OcaRamperInterpolationLaw
+ * @extends Enum8
  */
 export const OcaRamperInterpolationLaw = make_enum(Enum8, "OcaRamperInterpolationLaw", _values_OcaRamperInterpolationLaw);
 
@@ -1284,11 +1575,17 @@ const _values_OcaLibVolStandardTypeID = {
 
 /**
  * Enum that describes type of data in a standard library volume.
+ * @category Types
+ * @class OcaLibVolStandardTypeID
+ * @extends Enum8
  */
 export const OcaLibVolStandardTypeID = make_enum(Enum8, "OcaLibVolStandardTypeID", _values_OcaLibVolStandardTypeID);
 
 /**
  * Globally unique identifier of a library type.
+ * @category Types
+ * @class OcaLibVolType
+ * @extends Base
  */
 export const OcaLibVolType = make_struct(
   "OcaLibVolType",
@@ -1299,6 +1596,9 @@ export const OcaLibVolType = make_struct(
 /**
  * Full identifier (type + object number) of Library (i.e. of an
  * <b>OcaLibrary </b>instance)
+ * @category Types
+ * @class OcaLibraryIdentifier
+ * @extends Base
  */
 export const OcaLibraryIdentifier = make_struct(
   "OcaLibraryIdentifier",
@@ -1315,12 +1615,18 @@ const _values_OcaLibAccess = {
 
 /**
  * Library volume access modes
+ * @category Types
+ * @class OcaLibAccess
+ * @extends Enum8
  */
 export const OcaLibAccess = make_enum(Enum8, "OcaLibAccess", _values_OcaLibAccess);
 
 /**
  * Descriptor of a library volume. See <b>03 OcaLibrary</b> for
  * explanation.
+ * @category Types
+ * @class OcaLibVolMetadata
+ * @extends Base
  */
 export const OcaLibVolMetadata = make_struct(
   "OcaLibVolMetadata",
@@ -1331,6 +1637,9 @@ export const OcaLibVolMetadata = make_struct(
 /**
  * Library volume. template. Template parameter is datatype of the
  * volume. See <b>03 OcaLibrary</b> for explanation.
+ * @category Types
+ * @class OcaLibVol
+ * @extends Base
  */
 export const OcaLibVol = make_struct(
   "OcaLibVol",
@@ -1346,6 +1655,9 @@ export const OcaLibVol = make_struct(
  * applied to any block instance of the associated type. A block's type
  * is a the object number of its factory or, for factory-defined blocks,
  * a unique identifier set at time of manufacture.
+ * @category Types
+ * @class OcaLibVolData_ParamSet
+ * @extends Base
  */
 export const OcaLibVolData_ParamSet = make_struct(
   "OcaLibVolData_ParamSet",
@@ -1356,6 +1668,9 @@ export const OcaLibVolData_ParamSet = make_struct(
 /**
  * A ParamSet assigment is the description of a binding of a ParamSet to
  * a block instance.
+ * @category Types
+ * @class OcaLibParamSetAssignment
+ * @extends Base
  */
 export const OcaLibParamSetAssignment = make_struct(
   "OcaLibParamSetAssignment",
@@ -1373,12 +1688,18 @@ const _values_OcaNetworkLinkType = {
 
 /**
  * Types of layer 2 networks.
+ * @category Types
+ * @class OcaNetworkLinkType
+ * @extends Enum8
  */
 export const OcaNetworkLinkType = make_enum(Enum8, "OcaNetworkLinkType", _values_OcaNetworkLinkType);
 
 /**
  * Descriptor of a system interface used by a network. Format is data
  * network type dependent.
+ * @category Types
+ * @class OcaNetworkSystemInterfaceDescriptor
+ * @extends Base
  */
 export const OcaNetworkSystemInterfaceDescriptor = make_struct(
   "OcaNetworkSystemInterfaceDescriptor",
@@ -1400,6 +1721,9 @@ const _values_OcaApplicationNetworkState = {
 
 /**
  * Network states.
+ * @category Types
+ * @class OcaApplicationNetworkState
+ * @extends Enum8
  */
 export const OcaApplicationNetworkState = make_enum(Enum8, "OcaApplicationNetworkState", _values_OcaApplicationNetworkState);
 
@@ -1414,6 +1738,9 @@ const _values_OcaApplicationNetworkCommand = {
 
 /**
  * Command values for OcaMediaNetwork.Control().
+ * @category Types
+ * @class OcaApplicationNetworkCommand
+ * @extends Enum8
  */
 export const OcaApplicationNetworkCommand = make_enum(Enum8, "OcaApplicationNetworkCommand", _values_OcaApplicationNetworkCommand);
 
@@ -1431,6 +1758,9 @@ const _values_OcaNetworkMediaProtocol = {
 
 /**
  * Media transport protocols available.
+ * @category Types
+ * @class OcaNetworkMediaProtocol
+ * @extends Enum8
  */
 export const OcaNetworkMediaProtocol = make_enum(Enum8, "OcaNetworkMediaProtocol", _values_OcaNetworkMediaProtocol);
 
@@ -1443,6 +1773,9 @@ const _values_OcaNetworkControlProtocol = {
 
 /**
  * Network control protocols available.
+ * @category Types
+ * @class OcaNetworkControlProtocol
+ * @extends Enum8
  */
 export const OcaNetworkControlProtocol = make_enum(Enum8, "OcaNetworkControlProtocol", _values_OcaNetworkControlProtocol);
 
@@ -1454,6 +1787,9 @@ const _values_OcaMediaConnectorCommand = {
 
 /**
  * Command values for OcaMediaNetwork.ControlConnector(...)
+ * @category Types
+ * @class OcaMediaConnectorCommand
+ * @extends Enum8
  */
 export const OcaMediaConnectorCommand = make_enum(Enum8, "OcaMediaConnectorCommand", _values_OcaMediaConnectorCommand);
 
@@ -1464,11 +1800,17 @@ const _values_OcaMediaClockAvailability = {
 
 /**
  * Lock states of media clocks.
+ * @category Types
+ * @class OcaMediaClockAvailability
+ * @extends Enum8
  */
 export const OcaMediaClockAvailability = make_enum(Enum8, "OcaMediaClockAvailability", _values_OcaMediaClockAvailability);
 
 /**
  * Media clock nominal rate and associated parameters.
+ * @category Types
+ * @class OcaMediaClockRate
+ * @extends Base
  */
 export const OcaMediaClockRate = make_struct(
   "OcaMediaClockRate",
@@ -1487,6 +1829,9 @@ const _values_OcaTimeReferenceType = {
 
 /**
  * Types of time references.
+ * @category Types
+ * @class OcaTimeReferenceType
+ * @extends Enum8
  */
 export const OcaTimeReferenceType = make_enum(Enum8, "OcaTimeReferenceType", _values_OcaTimeReferenceType);
 
@@ -1505,6 +1850,9 @@ const _values_OcaTimeProtocol = {
 
 /**
  * Types of time sources. See RFC7273 particularly sections 4.4-4.8 .
+ * @category Types
+ * @class OcaTimeProtocol
+ * @extends Enum8
  */
 export const OcaTimeProtocol = make_enum(Enum8, "OcaTimeProtocol", _values_OcaTimeProtocol);
 
@@ -1515,6 +1863,9 @@ const _values_OcaTimeSourceAvailability = {
 
 /**
  * States of time sources
+ * @category Types
+ * @class OcaTimeSourceAvailability
+ * @extends Enum8
  */
 export const OcaTimeSourceAvailability = make_enum(Enum8, "OcaTimeSourceAvailability", _values_OcaTimeSourceAvailability);
 
@@ -1527,12 +1878,18 @@ const _values_OcaTimeSourceSyncStatus = {
 
 /**
  * Synchronization statuses.
+ * @category Types
+ * @class OcaTimeSourceSyncStatus
+ * @extends Enum8
  */
 export const OcaTimeSourceSyncStatus = make_enum(Enum8, "OcaTimeSourceSyncStatus", _values_OcaTimeSourceSyncStatus);
 
 /**
  * ID of a system interface used by a network. Format is data network
  * type dependent.
+ * @category Types
+ * @class OcaNetworkSystemInterfaceID
+ * @extends Base
  */
 export const OcaNetworkSystemInterfaceID = make_struct(
   "OcaNetworkSystemInterfaceID",
@@ -1542,6 +1899,9 @@ export const OcaNetworkSystemInterfaceID = make_struct(
 
 /**
  * Historical statistics of the network.
+ * @category Types
+ * @class OcaNetworkStatistics
+ * @extends Base
  */
 export const OcaNetworkStatistics = make_struct(
   "OcaNetworkStatistics",
@@ -1566,6 +1926,9 @@ export const OcaNetworkStatistics = make_struct(
  * an <b>OcaStreamConnector </b>object in the local device, but in this
  * case does <u>not </u>link to any specific remote connector object.
  * </li> </ol>
+ * @category Types
+ * @class OcaStreamConnectorIdentification
+ * @extends Base
  */
 export const OcaStreamConnectorIdentification = make_struct(
   "OcaStreamConnectorIdentification",
@@ -1581,6 +1944,9 @@ const _values_OcaStreamType = {
 
 /**
  * Type of media endpoint: unicast or multicast.
+ * @category Types
+ * @class OcaStreamType
+ * @extends Enum8
  */
 export const OcaStreamType = make_enum(Enum8, "OcaStreamType", _values_OcaStreamType);
 
@@ -1592,6 +1958,9 @@ const _values_OcaStreamStatus = {
 
 /**
  * Status options for a stream.
+ * @category Types
+ * @class OcaStreamStatus
+ * @extends Enum8
  */
 export const OcaStreamStatus = make_enum(Enum8, "OcaStreamStatus", _values_OcaStreamStatus);
 
@@ -1609,6 +1978,9 @@ export const OcaStreamStatus = make_enum(Enum8, "OcaStreamStatus", _values_OcaSt
  * </ul> An <b>OcaStream </b>object may represent either a unicast or a
  * multicast stream. Any given <b>OcaStreamConnector </b>object may
  * support multiple outbound flows, but not multiple inbound flows.
+ * @category Types
+ * @class OcaStream
+ * @extends Base
  */
 export const OcaStream = make_struct(
   "OcaStream",
@@ -1626,6 +1998,9 @@ const _values_OcaMediaClockLockState = {
 
 /**
  * Lock states of media clocks.
+ * @category Types
+ * @class OcaMediaClockLockState
+ * @extends Enum8
  */
 export const OcaMediaClockLockState = make_enum(Enum8, "OcaMediaClockLockState", _values_OcaMediaClockLockState);
 
@@ -1638,6 +2013,9 @@ const _values_OcaMediaClockType = {
 
 /**
  * Types of media clocks.
+ * @category Types
+ * @class OcaMediaClockType
+ * @extends Enum8
  */
 export const OcaMediaClockType = make_enum(Enum8, "OcaMediaClockType", _values_OcaMediaClockType);
 
@@ -1650,6 +2028,9 @@ const _values_OcaNetworkStatus = {
 
 /**
  * Network status enum.
+ * @category Types
+ * @class OcaNetworkStatus
+ * @extends Enum8
  */
 export const OcaNetworkStatus = make_enum(Enum8, "OcaNetworkStatus", _values_OcaNetworkStatus);
 
@@ -1662,6 +2043,9 @@ const _values_OcaStreamConnectorStatus = {
 
 /**
  * Status options for a stream connector.
+ * @category Types
+ * @class OcaStreamConnectorStatus
+ * @extends Enum8
  */
 export const OcaStreamConnectorStatus = make_enum(Enum8, "OcaStreamConnectorStatus", _values_OcaStreamConnectorStatus);
 
@@ -1673,6 +2057,9 @@ const _values_OcaNetworkSignalChannelStatus = {
 
 /**
  * Status options for a stream.
+ * @category Types
+ * @class OcaNetworkSignalChannelStatus
+ * @extends Enum8
  */
 export const OcaNetworkSignalChannelStatus = make_enum(Enum8, "OcaNetworkSignalChannelStatus", _values_OcaNetworkSignalChannelStatus);
 
@@ -1686,5 +2073,8 @@ const _values_OcaNetworkMediaSourceOrSink = {
  * enum that describes whether a port is a source (= sends program into
  * the network; "talker") or sink (=receives program from the network;
  * "listener")
+ * @category Types
+ * @class OcaNetworkMediaSourceOrSink
+ * @extends Enum8
  */
 export const OcaNetworkMediaSourceOrSink = make_enum(Enum8, "OcaNetworkMediaSourceOrSink", _values_OcaNetworkMediaSourceOrSink);

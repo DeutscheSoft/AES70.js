@@ -41,9 +41,21 @@ export class Arguments
    this.values = values;
  }
 
+ /**
+  * Returns an item.
+  * @param {integer} n - Index of the item.
+  */
  item(n)
  {
    return this.values[n];
+ }
+
+ /**
+  * The number of elements.
+  */
+ get length()
+ {
+   return this.values.length;
  }
 }
 

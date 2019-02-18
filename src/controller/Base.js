@@ -169,7 +169,7 @@ export class Property
 
 /**
  * Class representing the collection of all properties in a remote object.
- * Returned by the static `get_properties` method inside of all remote control
+ * Returned by the {@link ObjectBase#get_properties} method inside of all remote control
  * classes.
  */
 export class Properties
@@ -270,6 +270,18 @@ export class Properties
   }
 }
 
+/**
+ * Objects of this class can be used to keep a synchronized object containing
+ * all properties of a remote OCA object. Instances of this class are usually
+ * created by calling {@link ObjectBase#GetPropertySync()}.
+ *
+ * After {@link PropertySync#sync} has completed, all properties will be kept
+ * synchronized. Setting properties in this object will try to set them to the
+ * same value in the remote object.
+ *
+ * Remember to call {@link PropertySync#Dispose} when this object is no longer
+ * needed. This will unsubscribe all event listeners.
+ */
 export class PropertySync
 {
   init(o)
@@ -280,6 +292,12 @@ export class PropertySync
     this.subscriptions = [];
   }
 
+  /**
+   * Starts synchronizing the properties in this object with the corresponding
+   * ones in the remote instance.
+   *
+   * @returns {Promise<void>}
+   */
   sync()
   {
     if (this.synchronized) return Promise.resolve();
@@ -327,6 +345,14 @@ export class PropertySync
     return Promise.all(tasks);
   }
 
+  /**
+   * Iterate over all properties.
+   *
+   * @param {Function} cb - Callback functions, Will be called with value and
+   *                        property name as arguments.
+   * @param {Object} ctx - The context to call the callback in. Defaults to
+   *                       this.
+   */
   forEach(cb, ctx)
   {
     let index = 0;
@@ -344,6 +370,9 @@ export class PropertySync
     });
   }
 
+  /**
+   * Dispose of this object. Will unsubscribe all event handlers.
+   */
   Dispose()
   {
     this.o = null;
@@ -442,7 +471,7 @@ export class ObjectBase
 
   /**
    * Get the name of a given OcaPropertyID.
-   * @params {Types/OcaPropertyID} id
+   * @param {Types/OcaPropertyID} id
    * @return {string} 
    */
   GetPropertyName(id)
@@ -452,7 +481,7 @@ export class ObjectBase
 
   /**
    * Get the OcaPropertyID for a given name.
-   * @params {String} name
+   * @param {String} name
    * @return {OcaPropertyID} 
    */
   GetPropertyID(name)
@@ -467,6 +496,9 @@ export class ObjectBase
     return null;
   }
 
+  /**
+   * Returns an instance of {@link Properties} for this remote object.
+   */
   get_properties()
   {
     return this.constructor.get_properties();
@@ -477,6 +509,9 @@ export class ObjectBase
     return this.get_properties();
   }
 
+  /**
+   * Returns an instance of {@link PropertySync} for this remote object.
+   */
   GetPropertySync()
   {
     const p = this.constructor.GetPropertySync();
@@ -556,6 +591,8 @@ class BaseEvent
 
 /**
  * Class used to represent all events specified by the OCA standard.
+ *
+ * @extends BaseEvent
  */
 export class Event extends BaseEvent
 {
@@ -594,6 +631,8 @@ const change_type_signature = new signature(OcaPropertyChangeType);
  * When this event fires, event handlers will be called with
  * the new value, the {@link OcaPropertyChangeType} and
  * the {@link OcaPropertyID} of the property.
+ *
+ * @extends BaseEvent
  */
 export class PropertyEvent extends BaseEvent
 {

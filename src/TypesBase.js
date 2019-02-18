@@ -8,36 +8,63 @@ import {
  * Base class for all non-trivial OCA datatypes.
  */
 export class Base {
+
+  /**
+   * The type name.
+   */
   get TypeName()
   {
     return this.constructor.TypeName;
   }
 
+  /**
+   * The corresponding parser object.
+   */
   get signature()
   {
     return this.constructor.signature;
   }
 
+  /**
+   * Returns a string describing this type for debugging.
+   */
   toString()
   {
     return this.TypeName + "(" + this.values().join(", ") + ")";
   }
 
+  /**
+   * Constructs this type from an array of members.
+   *
+   * @param {Array} a - The array of members.
+   */
   static fromArray(a)
   {
     return new this(...a);
   }
 
+  /**
+   * Create a shallow copy of this object.
+   */
   clone()
   {
     return this.constructor.fromArray(this.values());
   }
 
+  /**
+   * Returns all members of this object in the order they are defined
+   * in the standard.
+   */
   get values()
   {
     return [];
   }
 
+  /**
+   * Deep comparison.
+   *
+   * @param to - The object to compare to. Must be of same type.
+   */
   isEqual(to)
   {
     if (typeof to !== 'object') return false;
@@ -55,6 +82,7 @@ export class Base {
 
 /**
  * Base class for all OCA enum types
+ * @extends Base
  */
 export class Enum extends Base {
   constructor(value)
@@ -63,6 +91,12 @@ export class Enum extends Base {
     this.value = value;
   }
 
+  /**
+   * Translates am enum value (the integer) to the corresponding name.
+   *
+   * @param {Integer} value - The enum value.
+   * @returns {String}
+   */
   static value_to_name(value)
   {
     const values = this.values();
@@ -76,11 +110,20 @@ export class Enum extends Base {
     }
   }
 
+  /**
+   * Translates a name to the corresponding enum value.
+   *
+   * @param {String} name - The enum name.
+   * @returns {Integer}
+   */
   static name_to_value(name)
   {
     return this.values()[name];
   }
 
+  /**
+   * Returns a string describing this enum value. Useful for debugging.
+   */
   toString()
   {
     const values = this.constructor.values();
@@ -106,6 +149,10 @@ export class Enum extends Base {
 
 const enum8_signature = new signature(UINT8);
 
+/**
+ * Baseclass for 8bit wide enums.
+ * @extends Enum
+ */
 export class Enum8 extends Enum {
   static get signature()
   {
@@ -115,6 +162,10 @@ export class Enum8 extends Enum {
 
 const enum16_signature = new signature(UINT16);
 
+/**
+ * Baseclass for 16bit wide enums.
+ * @extends Enum
+ */
 export class Enum16 extends Enum {
   static get signature()
   {
