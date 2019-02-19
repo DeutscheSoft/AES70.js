@@ -36,6 +36,7 @@
     "babel-cli": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-node6": "^11.0.0",
+    "better-docs": "^1.1.4",
     "dnssd": "^0.3.3",
     "jsdoc": "^3.5.5",
     "rollup": "^0.57.1",

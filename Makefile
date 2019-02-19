@@ -31,4 +31,4 @@ dist/AES70.es5.js: dist/babel.browser.js Makefile
 	cp $< $@
 
 docs: $(SRC) Makefile
-	node ./node_modules/jsdoc/jsdoc.js --readme README.md src -r -d docs
+	node ./node_modules/jsdoc/jsdoc.js -c jsdoc.json --readme README.md src -r -d docs
