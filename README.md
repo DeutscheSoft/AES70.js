@@ -159,6 +159,9 @@ documentation using jsdoc.
 
         make docs
 
+This generated documentation is also online at
+[http://docs.deuso.de/AES70.js](http://docs.deuso.de/AES70.js).
+
 # License
 
 This software is released here under the GNU General Public License version 2.
