@@ -92,8 +92,6 @@ The first step when using AES70.js to control a device is to decide how to
 connect. For web-based controllers the only solution is using WebSockets, for
 NodeJS both TCP and UDP are available in addition to that.
 
-        const OCA = require('aes70');
-        
         const connection = await OCA.controller.TCP.connect({
             host: 'example.org',
             port: 65000,
@@ -102,51 +100,66 @@ NodeJS both TCP and UDP are available in addition to that.
 In a web browser using a WebSocket this looks similar.
 
         const connection = await OCA.controller.WebSocket.connect({
-            url: 'ws://example.org',
+          url: 'ws://example.org',
         });
-        
-The next step is to discover what kind of objects the device has.
 
-        const device = new OCA.RemoteDevice(connection);
-        device.set_keepalive_interval(1);
+The next step is to discover what kind of objects the device has. This can be
+done using the method `RemoteDevice.get_device_tree()` method.
 
-        console.log("Device name:", await device.DeviceManager.GetModelDescription());
+A full working example:
 
-        console.log("Object inside this device:");
+        const OCA = require('aes70');
 
-        const tree = await device.get_device_tree();
+        async function run()
+        {
+          const connection = await OCA.controller.TCP.connect({
+              host: 'example.org',
+              port: 65000,
+          });
+          const device = new OCA.RemoteDevice(connection);
 
-        const rec = async (a) => {
-          for (let i = 0; i < a.length; i++)
-          {
-            const obj = a[i];
+          device.set_keepalive_interval(1);
 
-            if (Array.isArray(obj))
+          console.log("Device name:", await device.DeviceManager.GetModelDescription());
+
+          console.log("Object inside this device:");
+
+          const tree = await device.get_device_tree();
+
+          const rec = async (a) => {
+            for (let i = 0; i < a.length; i++)
             {
-              // children
-              await rec(obj);
+              const obj = a[i];
+
+              if (Array.isArray(obj))
+              {
+                // children
+                await rec(obj);
+              }
+              else
+              {
+                console.log("Type: %s", obj.constructor.ClassName);
+                console.log("Properties:");
+                const properties = obj.GetPropertySync();
+
+                // fetch the values of all properties from the device.
+                await properties.sync();
+
+                properties.forEach((value, name) => {
+                  if (value !== undefined)
+                    console.log("  %s: %o", name, value);
+                });
+
+                // unsubscribe all event handlers
+                properties.Dispose();
+              }
             }
-            else
-            {
-              console.log("Type: %s", obj.constructor.ClassName);
-              console.log("Properties:");
-              const properties = obj.GetPropertySync();
+          };
 
-              // fetch the values of all properties from the device.
-              await properties.sync();
+          await rec(tree);
+        }
 
-              properties.forEach((value, name) => {
-                if (value !== undefined)
-                  console.log("  %s: %o", name, value);
-              });
-
-              // unsubscribe all event handlers
-              properties.Dispose();
-            }
-          }
-        };
-
-        await rec(tree);
+        run().then(() => console.log("Done."));
 
 The tree returned by `RemoteDevice.get_device_tree` returns all objects of the
 device below the root block. They represent all objects defined inside of the
