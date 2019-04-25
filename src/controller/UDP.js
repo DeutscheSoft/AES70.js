@@ -56,6 +56,9 @@ export class UDPConnection extends ClientConnection
     super();
     this.options = options;
     this.socket = socket;
+    this.delay = options.delay >= 0 ? options.delay : 10;
+    this.retry_interval = options.retry_interval >= 0 ? options.retry_interval : 250;
+    this.retry_count = options.retry_count >= 0 ? options.retry_count : 3;
     this.q = [];
     socket.on('message', (data, rinfo) => {
       if (rinfo.port !== this.options.port || rinfo.address !== this.options.address) return;
@@ -70,7 +73,16 @@ export class UDPConnection extends ClientConnection
    * Connect to the given endpoint.
    *
    * @param {String} options.host - hostname or ip
-   * @param {number} options.port - port
+   * @param {number} options.port - port number
+   * @param {number} [options.delay=10] - Delay in ms between individual packets.
+   *    This can be a useful strategy when communicating with devices which
+   *    cannot handle high packet rates.
+   * @param {number} [options.retry_interval=250] - Delay in ms after which a
+   *    command should be automatically re-sent if no response has been
+   *    received, yet.
+   * @param {number} [options.retry_count=3] - Number of times to retry sending
+   *    commands. If no response has been received after all retries, the
+   *    command will fail with an error.
    * @returns {Promise<UDPConnection>} - The connection.
    */
   static connect(options)
@@ -95,13 +107,78 @@ export class UDPConnection extends ClientConnection
       });
   }
 
+  add_command_handle(id, return_signature, resolve, reject, cmd, buf)
+  {
+    const h = [ return_signature, resolve, reject, cmd, buf ];
+
+    this.command_handles.set(id, h);
+
+    if (this.retry_interval > 0)
+    {
+      let tid;
+      let retry_count = this.retry_count;
+
+      tid = setInterval(() => {
+        if (h[4] === 0)
+        {
+          // response has been received.
+          // mark it for removal but leave a tombstone
+          // for another interval to reduce possible
+          // race-conditions
+          h[4] = 1;
+          return;
+        }
+        else if (h[4] === 1)
+        {
+          // remove tombstone
+          clearInterval(tid);
+          this.command_handles.delete(id);
+          return;
+        }
+        else
+        {
+          if (--retry_count < 0)
+          {
+            this.remove_command_handle(id)[2](new Error("Timeout"));
+            return;
+          }
+
+          // resending same message
+          this.send(h[4]);
+        }
+      }, this.retry_interval);
+    }
+
+    return h;
+  }
+
+  remove_command_handle(id)
+  {
+    const handles = this.command_handles;
+    const h = handles.get(id);
+
+    if (!h)
+      throw new Error("Unknown handle in response: " + id);
+
+    if (this.options.retry_interval > 0)
+    {
+      handles.delete(id);
+    }
+    else
+    {
+      h[4] = 0;
+    }
+
+    return h;
+  }
+
   try_write()
   {
     if (!this.socket) return;
     const buf = this.q.shift();
     this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
     if (this.q.length)
-      setTimeout(this.try_write.bind(this), 25);
+      setTimeout(this.try_write.bind(this), this.delay);
     super.write(buf);
   }
 

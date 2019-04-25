@@ -143,6 +143,13 @@ export class ClientConnection extends Connection
     return id;
   }
 
+  add_command_handle(id, return_signature, resolve, reject, cmd)
+  {
+    const h = [ return_signature, resolve, reject, cmd ];
+    this.command_handles.set(id, h);
+    return h;
+  }
+
   get_new_subscriber(callback)
   {
     var id;
@@ -163,9 +170,22 @@ export class ClientConnection extends Connection
     const buf = encodeMessage(cmd); 
 
     return new Promise((resolve, reject) => {
-      this.command_handles.set(id, [ return_signature, resolve, reject, cmd ]);
+      this.add_command_handle(id, return_signature, resolve, reject, cmd, buf);
       this.send(buf);
     });
+  }
+
+  remove_command_handle(id)
+  {
+    const handles = this.command_handles;
+    const h = handles.get(id);
+
+    if (!h)
+      throw new Error("Unknown handle in response: " + id);
+
+    handles.delete(id);
+
+    return h;
   }
 
   incoming(a)
@@ -176,12 +196,8 @@ export class ClientConnection extends Connection
       o = a[i];
       //log("INCOMING", o);
       if (o instanceof Response) {
-        const handles = this.command_handles;
-        const h = handles.get(o.handle);
+        const h = this.remove_command_handle(o.handle);
 
-        if (!h)
-          throw new Error("Unknown handle in response: " + o.handle);
-        handles.delete(o.handle);
         if (o.status_code !== 0) {
           h[2](new RemoteError(o.status_code, h[3]));
         } else if (!h[0]) {
