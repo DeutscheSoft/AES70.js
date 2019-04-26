@@ -157,7 +157,9 @@ export class ClientConnection extends Connection
 
   remove_subscriber(method)
   {
-    this.subscribers.delete(method.ONo);
+    const S = this.subscribers;
+    if (S == null) return;
+    S.delete(method.ONo);
   }
 
   send_command(cmd, return_signature)
