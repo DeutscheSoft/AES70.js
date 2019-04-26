@@ -253,9 +253,9 @@ export class Properties
    */
   forEach(cb, ctx)
   {
-    const ret = [];
-
-    if (this.parent) this.parent.forEach(cb, ctx);
+    const ret = (this.parent)
+        ? this.parent.forEach(cb, ctx)
+        : [];
 
     const P = this.properties;
 
@@ -377,6 +377,7 @@ export class PropertySync
   {
     this.o = null;
     this.subscriptions.forEach((cb) => cb());
+    this.subscriptions = null;
   }
 }
 
