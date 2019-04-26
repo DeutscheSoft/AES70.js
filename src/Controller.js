@@ -451,7 +451,7 @@ export class RemoteDevice extends Events
   GetDeviceTree()
   {
     const get_members = (block) => {
-      return timeout(block.GetMembers(), 10000).catch(function(){return [];}).then((a) => {
+      return block.GetMembers().then((a) => {
         var ret = [];
 
         a = a.map(this.resolve_object, this);
