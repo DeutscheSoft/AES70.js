@@ -100,28 +100,25 @@ export class ClientConnection extends Connection
     this.command_handles = new Map();
     this.subscribers = new Map();
     this.keepalive_interval = null;
+  }
 
-    const cleanup = (e) => {
-      if (this.keepalive_interval !== null)
-      {
-        clearInterval(this.keepalive_interval);
-        this.keepalive_interval = null;
-      }
-      this.subscribers = null;
+  cleanup() {
+    super.cleanup();
 
-      const handles = this.command_handles;
-      if (!e) e = new Error('closed');
-      handles.forEach((a, id) => {
-        try {
-          a[2](e);
-        } catch (e) {
-          // TODO: do something
-        }
-      });
-    };
+    if (this.keepalive_interval !== null)
+    {
+      clearInterval(this.keepalive_interval);
+      this.keepalive_interval = null;
+    }
 
-    this.on('error', cleanup);
-    this.on('close', cleanup);
+    this.subscribers = null;
+
+    const handles = this.command_handles;
+    this.command_handles = null;
+    const e = new Error('closed');
+    handles.forEach((a, id) => {
+      try { a[2](e); } catch (e) { }
+    });
   }
 
   get_command_handle()

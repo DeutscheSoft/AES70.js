@@ -128,7 +128,15 @@ export class Connection extends Events
     this.last_rx_time = now();
     this.last_tx_time = now();
     this.outbuf = [];
+    const cleanup = () => {
+      this.removeEventListener('close', cleanup);
+      this.removeEventListener('error', cleanup);
+      this.cleanup();
+    };
+    this.on('close', cleanup);
+    this.on('error', cleanup);
     this.write_cb = () => {
+      if (this.is_closed()) return;
       const out = this.outbuf;
 
       if (!out.length) return;
@@ -160,6 +168,7 @@ export class Connection extends Events
 
   send(buf)
   {
+    if (this.is_closed()) throw new Error("Connection is closed.");
     if (!this.outbuf.length)
       setTimeout(this.write_cb, 0);
 
@@ -232,12 +241,24 @@ export class Connection extends Events
     this.last_tx_time = now();
   }
 
+  is_closed()
+  {
+    return this.write_cb === null;
+  }
+
   /**
    * Closes the connection. Overloaded by connection subclasses.
    */
   close()
   {
     this.outbuf.length = 0;
+    this.emit('close');
+  }
+
+  cleanup()
+  {
+    if (this.is_closed()) throw new Error("cleanup() called twice.");
+    this.write_cb = null;
   }
 }
 

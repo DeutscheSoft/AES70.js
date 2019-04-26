@@ -25,14 +25,12 @@ export class TCPConnection extends ClientConnection
     socket.on('close', () => {
       this.emit('close');
     });
-
-    const cleanup = e => {
-      this.socket.destroy();
-    };
-
-    this.on('close', cleanup);
-    this.on('error', cleanup);
   }
+
+  cleanup() {
+    super.cleanup();
+    try { this.socket.destroy(); } catch (e) {}
+  };
 
   /**
    * Connect to the given endpoint.
