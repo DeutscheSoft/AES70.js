@@ -573,7 +573,7 @@ class BaseEvent
     this.handlers.delete(callback);
 
     if (!this.handlers.size)
-      this.do_unsubscribe().catch(error);
+      this.do_unsubscribe().catch(function(){});
 
     return Promise.resolve(true);
   }
@@ -586,7 +586,7 @@ class BaseEvent
     this.handlers.clear();
 
     if (this.handlers.size)
-      this.do_unsubscribe().catch(error);
+      this.do_unsubscribe().catch(function(){});
   }
 }
 
