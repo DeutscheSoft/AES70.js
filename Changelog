@@ -1,0 +1,22 @@
+# Changelog
+
+All notable changes and version updates will be documented in this file.
+
+## [1.0.1] - 2019-04-27
+
+### Added
+- More documentation
+- A new intake from the updated specification
+- Added more options to make UDP connections
+  reliable in situations of packet loss
+
+### Fixed
+- updated npm dependencies
+- better handling of promise rejections
+- (more) complete cleanup code when calling
+  Dispose on e.g. events
+
+## [1.0.0] - 2019-01-03
+
+### Added
+- Initial release based on AES70-2018
