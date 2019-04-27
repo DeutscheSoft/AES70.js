@@ -263,7 +263,7 @@ export class Properties
     {
       const p = P[i];
       if (p !== void(0))
-        ret.push(cb.call(ctx, P[i]));
+        ret.push(cb.call(ctx, p));
     }
 
     return ret;
