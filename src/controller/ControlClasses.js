@@ -112,7 +112,6 @@ import {
     OcaRamperCommand,
     OcaRamperState,
     OcaTimeMode,
-    OcaTimeUnits,
     OcaTimePTP,
     OcaTask,
     OcaTaskCommand,
@@ -8036,7 +8035,10 @@ export const OcaAudioProcessingManager = make_control_class(
  * <li>If instantiated, object number must be 10.</li> </ul> Note: The
  * clock value is accessible via Get and Set methods, but has not been
  * defined as a public property because its value is volatile and should
- * not cause property-change events. The property <b>TimeSources </b>was
+ * not cause property-change events. The current value of the
+ * <b>OcaTimeSource </b>object designated by the
+ * <b>CurrentDeviceTimeSource </b>property of this Manager is known as
+ * the <b><i>Device Time</i></b>. The property <b>TimeSources </b>was
  * added in version 2 of this class.
  * @extends RemoteControlClasses.OcaManager
  * @class OcaDeviceTimeManager
@@ -8156,18 +8158,18 @@ export const OcaTaskManager = make_control_class(
     1,
     OcaManager,
     [
-      [ "Enable", 3, 2, [ BOOLEAN ], [  ] ],
-      [ "ControlAllTasks", 3, 3, [ OcaTaskCommand, BLOB ], [  ] ],
-      [ "ControlTaskGroup", 3, 4, [ UINT16, OcaTaskCommand, BLOB ], [  ] ],
-      [ "ControlTask", 3, 5, [ UINT32, OcaTaskCommand, BLOB ], [  ] ],
-      [ "GetState", 3, 6, [  ], [ OcaTaskManagerState ] ],
-      [ "GetTaskStatuses", 3, 7, [  ], [ OcaTaskStatus ] ],
-      [ "GetTaskStatus", 3, 8, [ UINT32 ], [ OcaTaskStatus ] ],
-      [ "AddTask", 3, 9, [ OcaTask ], [ OcaTask ] ],
-      [ "GetTasks", 3, 10, [  ], [ MAP(UINT32, OcaTask) ] ],
-      [ "GetTask", 3, 11, [ UINT32 ], [ OcaTask ] ],
-      [ "SetTask", 3, 12, [ UINT32, OcaTask ], [  ] ],
-      [ "DeleteTask", 3, 13, [ UINT32 ], [  ] ]
+      [ "Enable", 3, 1, [ BOOLEAN ], [  ] ],
+      [ "ControlAllTasks", 3, 2, [ OcaTaskCommand, BLOB ], [  ] ],
+      [ "ControlTaskGroup", 3, 3, [ UINT16, OcaTaskCommand, BLOB ], [  ] ],
+      [ "ControlTask", 3, 4, [ UINT32, OcaTaskCommand, BLOB ], [  ] ],
+      [ "GetState", 3, 5, [  ], [ OcaTaskManagerState ] ],
+      [ "GetTaskStatuses", 3, 6, [  ], [ OcaTaskStatus ] ],
+      [ "GetTaskStatus", 3, 7, [ UINT32 ], [ OcaTaskStatus ] ],
+      [ "AddTask", 3, 8, [ OcaTask ], [ OcaTask ] ],
+      [ "GetTasks", 3, 9, [  ], [ MAP(UINT32, OcaTask) ] ],
+      [ "GetTask", 3, 10, [ UINT32 ], [ OcaTask ] ],
+      [ "SetTask", 3, 11, [ UINT32, OcaTask ], [  ] ],
+      [ "DeleteTask", 3, 12, [ UINT32 ], [  ] ]
     ],
     [
       new Property("State", new signature(OcaTaskManagerState), 3, 1, false, false, null),

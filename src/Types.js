@@ -108,10 +108,9 @@ export const OcaVersion = make_struct(
 
 
 /**
- * An array of 16 1-bit boolean flags. Used to signify (m) of (n)
- * selections, where m &lt;= n. Element order shall be in accordance with
- * AES70 array marshaling rules (see AES70-3). Thus, element 1 of the
- * array shall be the first one transmitted.
+ * A set of 16 1-bit boolean flags. Used to signify (m) of (n)
+ * selections, where m &lt;= n. See AES70-Part 3 for rules for
+ * marshalling bit sets.
  * @category Types
  * @class OcaBitSet16
  * @extends Base
@@ -1428,19 +1427,6 @@ const _values_OcaTimeMode = {
  */
 export const OcaTimeMode = make_enum(Enum8, "OcaTimeMode", _values_OcaTimeMode);
 
-const _values_OcaTimeUnits = {
-  Seconds: 1,
-  Samples: 2,
-};
-
-/**
- * Time units of <b>OcaTask </b>agent.
- * @category Types
- * @class OcaTimeUnits
- * @extends Enum8
- */
-export const OcaTimeUnits = make_enum(Enum8, "OcaTimeUnits", _values_OcaTimeUnits);
-
 /**
  * An absolute or relative PTP time. Format is standard PTP format: - 48
  * bit integer seconds - 32 bit integer nanoseconds PLUS a boolean sign
@@ -1455,42 +1441,6 @@ export const OcaTimePTP = make_struct(
   [ "Negative", "Seconds", "Nanoseconds" ],
   [ BOOLEAN, UINT64, UINT32 ]
 );
-const OcaTask_signature_header = new signature(UINT32, STRING, OcaLibVolIdentifier, UINT16,
-                                               OcaTimeMode, OcaTimeUnits);
-
-function OcaTask_test_encode(src, pos)
-{
-  const units = src[pos + 5];
-
-  if (units == OcaTimeUnits.Seconds)
-  {
-    return 0;
-  }
-  else if (units == OcaTimeUnits.Samples)
-  {
-    return 1;
-  }
-  else throw new Error("Unsupported time units: " + units);
-}
-
-function OcaTask_test_decode(data, pos)
-{
-  const tmp = new Array(6);
-
-  OcaTask_signature_header.do_decode(data, pos, tmp, 0);
-
-  return test_encode(tmp, 0);
-}
-
-const OcaTask_signature = new dynamic_signature(
-  OcaTask_test_decode, OcaTask_test_encode,
-  [
-    new signature(UINT32, STRING, OcaLibVolIdentifier, UINT16, OcaTimeMode,
-                  OcaTimeUnits, UINT32, OcaTimePTP, FLOAT32, BLOB),
-    new signature(UINT32, STRING, OcaLibVolIdentifier, UINT16, OcaTimeMode,
-                  OcaTimeUnits, UINT32, UINT64, FLOAT32, BLOB)
-  ]
-);
 
 /**
  * <font color="#223274">An execution thread that runs an AES70 Program.
@@ -1502,8 +1452,8 @@ const OcaTask_signature = new dynamic_signature(
  */
 export const OcaTask = make_struct(
   "OcaTask",
-  [ "ID", "Label", "ProgramID", "GroupID", "TimeMode", "TimeUnits", "ClockONo", "StartTime", "Duration", "ApplicationSpecificParameters" ],
-  OcaTask_signature
+  [ "ID", "Label", "ProgramID", "GroupID", "TimeMode", "TimeSourceONo", "StartTime", "Duration", "ApplicationSpecificParameters" ],
+  [ UINT32, STRING, OcaLibVolIdentifier, UINT16, OcaTimeMode, UINT32, OcaTimePTP, OcaTimePTP, BLOB ]
 );
 
 const _values_OcaTaskCommand = {
