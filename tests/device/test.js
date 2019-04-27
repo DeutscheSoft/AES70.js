@@ -1,9 +1,10 @@
 const util = require('util');
 
 class Test {
-  constructor(device)
+  constructor(get_device)
   {
-    this.device = device;
+    this.get_device = get_device;
+    this.device = null;
   }
 
   describe()
@@ -11,8 +12,9 @@ class Test {
     return this.constructor.name;
   }
 
-  prepare()
+  async prepare()
   {
+    this.device = await this.get_device();
   }
 
   check(cond, fmt, ...args)
@@ -44,6 +46,16 @@ class Test {
 
   cleanup()
   {
+    if (this.device !== null)
+    {
+      this.device.close();
+      this.device = null;
+    }
+  }
+
+  static focus()
+  {
+    return false;
   }
 }
 
@@ -65,7 +77,7 @@ class ObjectTest extends Test
         else
         {
           try {
-            tasks.push(this.check_object(o));
+            tasks.push(this.check_object(o, parent, i));
           } catch (e) {
             this.fail('check_object failed: %o.', e);
           }
@@ -96,21 +108,21 @@ function pad(str, n)
 
 class TestRunner
 {
-  constructor(device)
+  constructor(get_device)
   {
     this.tests = [];
-    this.device = device;
+    this.get_device = get_device;
   }
 
   add(...tests)
   {
+    const focused = tests.filter((t) => t.focus());
+
+    if (focused.length) tests = focused;
+
     for (let i = 0; i < tests.length; i++)
     {
-      if (Array.isArray(tests[i]))
-      {
-        this.add(...tests[i]);
-      }
-      else this.tests.push(new tests[i](this.device));
+      this.tests.push(new tests[i](this.get_device));
     }
   }
 

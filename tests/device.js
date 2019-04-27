@@ -140,32 +140,35 @@ class FragmentationProxy {
   }
 }
 
-function get_runner(device)
+function get_runner(get_device)
 {
-  const test_runner = new test.TestRunner(device);
+  const test_runner = new test.TestRunner(get_device);
 
   //test_runner.add(test.Test);
-  test_runner.add(require('./device/check_tree'));
-  test_runner.add(require('./device/property_changes'));
-  test_runner.add(require('./device/keepalive'));
+  const tests = require('./device/check_tree').concat(
+    require('./device/property_changes'),
+    require('./device/keepalive'));
+  test_runner.add(...tests);
 
   return test_runner;
 }
 
 async function run_tests(type, target)
 {
-  const connection = await type.connect(target);
-  const device = new RemoteDevice(connection);
+  const get_device = async () => {
+    const connection = await type.connect(target);
+    const device = new RemoteDevice(connection);
 
-  device.set_keepalive_interval(1);
+    device.set_keepalive_interval(1);
 
-  const test_runner = get_runner(device);
+    return device;
+  };
+
+  const test_runner = get_runner(get_device);
 
   try {
     await test_runner.run();
-    device.close();
   } catch (e) {
-    device.close();
     throw e;
   }
 }

@@ -1,78 +1,67 @@
-const Test = require('./test').Test;
+const ObjectTest = require('./test').ObjectTest;
 
-class CheckTree extends Test {
-  async run()
-  {
-    const tree = await this.device.GetDeviceTree();
+class CheckTree extends ObjectTest {
+  async check_object(o, parent, i) {
+    if (Array.isArray(o))
+    {
+      this.check(i > 0, "Children follow their parent object.");
+      await check_children(children[i-1], o);
+    }
+    else
+    {
+      try {
+        const ono = await o.GetOwner();
 
-    const check_children = async (parent, children) => {
-      for (let i = 0; i < children.length; i++)
-      {
-        const o = children[i];
-        if (Array.isArray(o))
-        {
-          this.check(i > 0, "Children follow their parent object.");
-          await check_children(children[i-1], o);
-        }
-        else
-        {
-          try {
-            const ono = await o.GetOwner();
-
-            this.check(ono === parent.ObjectNumber, "object %O has owner property %o (should be %o)",
-                       o.ObjectNumber, ono, parent.ObjectNumber);
-          } catch (e) {
-            this.fail('GetOwner is not implemented in object %o.', o.ObjectNumber);
-          }
-
-          this.check(o.ObjectNumber >= 4096, "object has reserved ObjectNumber ( below 4096 )");
-
-          try {
-            const id = await o.GetClassIdentification();
-            const class_version = o.ClassVersion;
-            const class_id = o.ClassID;
-
-            this.check(id.ClassID.startsWith(o.ClassID), "ClassID does not match in object %o (%o vs. %o)",
-                       o.ObjectNumber, id.ClassID, o.ClassID);
-          } catch (e) {
-            this.fail('GetOwner is not implemented in object %o.', o.ObjectNumber);
-          }
-        }
+        this.check(ono === parent.ObjectNumber, "object %O has owner property %o (should be %o)",
+                   o.ObjectNumber, ono, parent.ObjectNumber);
+      } catch (e) {
+        this.fail('GetOwner is not implemented in object %o.', o.ObjectNumber);
       }
-    };
 
-    await check_children(this.device.Root, tree);
+      this.check(o.ObjectNumber >= 4096, "object has reserved ObjectNumber ( below 4096 )");
+
+      try {
+        const id = await o.GetClassIdentification();
+        const class_version = o.ClassVersion;
+        const class_id = o.ClassID;
+
+        this.check(id.ClassID.startsWith(o.ClassID), "ClassID does not match in object %o (%o vs. %o)",
+                   o.ObjectNumber, id.ClassID, o.ClassID);
+      } catch (e) {
+        this.fail('GetOwner is not implemented in object %o.', o.ObjectNumber);
+      }
+    }
   }
 }
 
-class CheckPath extends Test {
-  async run()
+class CheckPath extends ObjectTest {
+  constructor(device)
   {
-    const tree = await this.device.GetDeviceTree();
+    super(device);
+    this.roles = new Map();
+  }
 
-    const check_children = async (parent, children) => {
-      const roles = new Map();
-      for (let i = 0; i < children.length; i++)
-      {
-        const o = children[i];
-        if (Array.isArray(o))
-        {
-          await check_children(children[i-1], o);
-        }
-        else
-        {
-          const role = await o.GetRole();
+  get_roles_for(o)
+  {
+    if (!this.roles.has(o))
+    {
+      this.roles.set(o, new Set());
+    }
 
-          this.check(role.length, "Role name is empty.");
+    return this.roles.get(o);
+  }
 
-          this.check(!roles.has(role), "Role name collision with object %d (role: %o)", o.ono, role);
+  async check_object(o, parent, i)
+  {
+    let roles = this.get_roles_for(parent);
 
-          roles.set(role, o);
-        }
-      }
-    };
+    const role = await o.GetRole();
 
-    await check_children(this.device.Root, tree);
+    this.check(role.length, "Role name is empty.");
+
+    this.check(!roles.has(role), "Role name collision with object %d (role: %o)", o.ono, role);
+
+    roles.add(role);
   }
 }
 
