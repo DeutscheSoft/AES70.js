@@ -147,6 +147,7 @@ function get_runner(get_device)
   //test_runner.add(test.Test);
   const tests = require('./device/check_tree').concat(
     require('./device/property_changes'),
+    require('./device/locking'),
     require('./device/keepalive'));
   test_runner.add(...tests);
 
