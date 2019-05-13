@@ -123,6 +123,7 @@ export class Connection extends Events
   constructor()
   {
     super();
+    this.batch = 64000;
     this.inbuf = null;
     this.inpos = 0;
     this.last_rx_time = now();
@@ -146,20 +147,27 @@ export class Connection extends Events
       }
       else
       {
-        let len = 0;
-        for (let i = 0; i < out.length; i++)
+        for (let start = 0; start < out.length;)
         {
-          len += out[i].byteLength;
+          let i;
+          let len;
+
+          for (i = start, len = 0; i < out.length && (!len || len + out[i].byteLength < this.batch); i++)
+              len += out[i].byteLength;
+
+          let buf = new ArrayBuffer(len);
+          let tmp = new Uint8Array(buf);
+
+          for (let j = start, len = 0; j < i; j++)
+          {
+            tmp.set(new Uint8Array(out[j]), len);
+            len += out[j].byteLength;
+          }
+
+          this.write(buf);
+
+          start = i;
         }
-        const buf = new ArrayBuffer(len);
-        const tmp = new Uint8Array(buf);
-        len = 0;
-        for (let i = 0; i < out.length; i++)
-        {
-          tmp.set(new Uint8Array(out[i]), len);
-          len += out[i].byteLength;
-        }
-        this.write(buf);
       }
 
       out.length = 0;

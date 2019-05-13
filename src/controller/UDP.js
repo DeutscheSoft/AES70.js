@@ -54,10 +54,14 @@ export class UDPConnection extends ClientConnection
   constructor(socket, options)
   {
     super();
+    // allow us to batch 128 bytes max
+    // Set this to a higher value, e.g. close to MTU
+    // if you are sure that the device can handle it.
+    this.batch = options.batch >= 0 ? options.batch : 128;
     this.options = options;
     this.socket = socket;
-    this.delay = options.delay >= 0 ? options.delay : 10;
-    this.retry_interval = options.retry_interval >= 0 ? options.retry_interval : 250;
+    this.delay = options.delay >= 0 ? options.delay : 5;
+    this.retry_interval = options.retry_interval >= 0 ? options.retry_interval : 500;
     this.retry_count = options.retry_count >= 0 ? options.retry_count : 3;
     this.q = [];
     socket.on('message', (data, rinfo) => {
@@ -83,6 +87,10 @@ export class UDPConnection extends ClientConnection
    * @param {number} [options.retry_count=3] - Number of times to retry sending
    *    commands. If no response has been received after all retries, the
    *    command will fail with an error.
+   * @param {number} [options.batch=128] - Maximum number of bytes to send
+   *    in an individual UDP packet. Note that AES70 messages which are larger
+   *    than this limit are sent anyway. This only limits how many seperate
+   *    messages are batched into a single packet.
    * @returns {Promise<UDPConnection>} - The connection.
    */
   static connect(options)
