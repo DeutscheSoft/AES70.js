@@ -1,6 +1,6 @@
 {
   "name": "aes70",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A controller library for the AES70 protocol.",
   "main": "lib/index.js",
   "bin": {},
@@ -38,7 +38,7 @@
     "babel-preset-node6": "^11.0.0",
     "better-docs": "^1.1.4",
     "dnssd": "^0.3.3",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "^3.6.2",
     "rollup": "^0.57.1",
     "ws": "^5.2.2"
   }
