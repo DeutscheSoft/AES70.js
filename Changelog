@@ -2,6 +2,13 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.1.0] - 2019-05-14
+
+### Added
+
+- Added an API for defining custom classes. This can be used to implement
+  proprietary classes which are not part of the AES70 standard.
+
 ## [1.0.1] - 2019-04-27
 
 ### Added
