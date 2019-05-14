@@ -777,7 +777,8 @@ function make_property(o)
 }
 
 /**
- * Creates a control class.
+ * Creates a control class. This is an internal API, use define_custom_class
+ * for a simpler API to be used when defining custom classes.
  *
  * @param {String} name - The name of this control class.
  * @param {number} level - The level in the class hierachy.

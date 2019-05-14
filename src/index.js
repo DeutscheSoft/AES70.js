@@ -15,11 +15,8 @@ import {
 import {
     ClientConnection,
     RemoteDevice,
+    define_custom_class
   } from './Controller';
-
-import {
-    make_control_class
-  } from './controller/Base.js';
 
 import * as SP from './signature_parser.js';
 import * as Types from './Types.js';
@@ -35,7 +32,7 @@ const controller = {
   UDP: UDPConnection,
   Device: RemoteDevice,
   ControlClasses: RemoteControlClasses,
-  make_control_class: make_control_class,
+  define_custom_class: define_custom_class,
 };
 
 export {

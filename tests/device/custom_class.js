@@ -1,15 +1,15 @@
 const RemoteControlClasses = require('../../lib').RemoteControlClasses;
 const Types = require('../../lib').Types;
-const make_control_class = require('../../lib').controller.make_control_class;
+const define_custom_class = require('../../lib').controller.define_custom_class;
 const Test = require('./test').Test;
 
 
-const SimpleBlock = make_control_class(
-    "OcaBlock",
+const SimpleBlock = define_custom_class(
+    "SimpleBlock",
     3,
-    "\u0001\u0001\u0003",
+    "1.1.3",
     2,
-    RemoteControlClasses.OcaWorker,
+    "OcaWorker",
     [
       [ "GetMembers", 3, 5, [  ], [ [ 'LIST', Types.OcaObjectIdentification ] ] ],
       [ "GetMembersRecursive", 3, 6, [  ], [ [ 'LIST', Types.OcaBlockMember ] ] ],
