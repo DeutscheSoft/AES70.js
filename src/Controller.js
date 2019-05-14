@@ -69,7 +69,7 @@ const event_signature = new signature(OcaEvent);
  */
 export function define_custom_class(name, level, class_id, class_version, base, methods, properties, events)
 {
-  class_id = String.fromCharCode.apply(String, class_id.split('.').map((v) => parseInt));
+  class_id = String.fromCharCode.apply(String, class_id.split('.').map((v) => parseInt(v)));
 
   if (!base)
   {

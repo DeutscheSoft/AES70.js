@@ -9,3 +9,4 @@ bin
 lib/.gitignore
 Makefile
 !dist/AES70.es5.js
+jsdoc.json

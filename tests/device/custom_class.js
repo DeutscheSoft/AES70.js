@@ -30,6 +30,8 @@ class CustomBlock extends Test
 
   async run()
   {
+    this.check(SimpleBlock.ClassID === "\u0001\u0001\u0003",
+               'SimpleBlock class id is wrong: %o', SimpleBlock.ClassID);
     const rolemap1 = await this.device.get_role_map();
     const rolemap2 = await this.device2.get_role_map();
 
@@ -37,6 +39,12 @@ class CustomBlock extends Test
     this.check(
                JSON.stringify(Array.from(rolemap1.keys())) ===
                JSON.stringify(Array.from(rolemap2.keys())), "Same role map.");
+
+    rolemap2.forEach((o) => {
+      if (o.ClassID === SimpleBlock.ClassID)
+        this.check(o instanceof SimpleBlock,
+                   "Custom class was not used.");
+    });
   }
 
   cleanup()
