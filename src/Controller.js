@@ -10,7 +10,8 @@ import {
     encodeMessage,
     log,
     warn,
-    error
+    error,
+    tree_to_rolemap
   } from './OCA';
 
 import {
@@ -513,6 +514,24 @@ export class RemoteDevice extends Events
   get_device_tree()
   {
     return this.GetDeviceTree();
+  }
+
+  /**
+   * Returns a map of role paths to objects. This is a convenience function
+   * which internally calls get_device_tree and then tree_to_rolemap.
+   * If more than one object has the same role name on the same tree level,
+   * their role names will be appended with numbers starting at 1.
+   *
+   * @param {String} [separator='/'] Optional argument used as a separator
+   *                                 for levels in the tree.
+   * @returns {Promise<Map<string, Object>> The map of role paths to control
+   *                                        objects.
+   */
+  get_role_map(separator)
+  {
+    return this.get_device_tree().then(function (tree) {
+      return tree_to_rolemap(tree, separator);
+    });
   }
 
   discover_all_fallback()

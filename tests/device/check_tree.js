@@ -65,4 +65,37 @@ class CheckPath extends ObjectTest {
   }
 }
 
-module.exports = [ CheckTree, CheckPath ];
+class CheckRoleMap extends ObjectTest {
+  constructor(get_device)
+  {
+    super(get_device);
+    this.rolemap = null;
+  }
+
+  async prepare()
+  {
+    await super.prepare();
+    this.rolemap = await this.device.get_role_map();
+  }
+
+  async check_object(o, parent, i)
+  {
+    let found = false;
+
+    const role = await o.GetRole();
+
+    this.rolemap.forEach((tmp, path) => {
+      if (o === tmp)
+      {
+        this.check(!found, "Found object %o in role map twice.", o.ono);
+        this.check(path.split("/").pop().startsWith(role), "Role names do not match.");
+
+        found = true;
+      }
+    });
+
+    this.check(found, "Could not find object %o in role map.", o.ono);
+  }
+}
+
+module.exports = [ CheckTree, CheckPath, CheckRoleMap ];
