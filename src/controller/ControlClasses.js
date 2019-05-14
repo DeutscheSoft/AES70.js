@@ -206,15 +206,14 @@ export const OcaRoot = make_control_class(
       [ "LockReadonly", 1, 6, [  ], [  ] ]
     ],
     [
-      new Property("ClassID", new signature(BLOB16), 1, 1, true, true, null),
-      new Property("ClassVersion", new signature(UINT16), 1, 2, true, true, null),
-      new Property("ObjectNumber", new signature(UINT32), 1, 3, true, false, null),
-      new Property("Lockable", new signature(BOOLEAN), 1, 4, true, false, null),
-      new Property("Role", new signature(STRING), 1, 5, true, false, null)
+      [ "ClassID", [ BLOB16 ], 1, 1, true, true, null],
+      [ "ClassVersion", [ UINT16 ], 1, 2, true, true, null],
+      [ "ObjectNumber", [ UINT32 ], 1, 3, true, false, null],
+      [ "Lockable", [ BOOLEAN ], 1, 4, true, false, null],
+      [ "Role", [ STRING ], 1, 5, true, false, null]
     ],
     [
-      [ "PropertyChanged", 1, 1, [ OcaPropertyID, REST ] ]
-    ]
+      [ "PropertyChanged", 1, 1, [ OcaPropertyID, REST ] ]    ]
 );
 
 /**
@@ -328,14 +327,13 @@ export const OcaWorker = make_control_class(
       [ "GetPath", 2, 13, [  ], [ LIST(STRING), LIST(UINT32) ] ]
     ],
     [
-      new Property("Enabled", new signature(BOOLEAN), 2, 1, false, false, null),
-      new Property("Ports", new signature(LIST(OcaPort)), 2, 2, false, false, null),
-      new Property("Label", new signature(STRING), 2, 3, false, false, null),
-      new Property("Owner", new signature(UINT32), 2, 4, false, false, null),
-      new Property("Latency", new signature(FLOAT32), 2, 5, false, false, null)
+      [ "Enabled", [ BOOLEAN ], 2, 1, false, false, null],
+      [ "Ports", [ LIST(OcaPort) ], 2, 2, false, false, null],
+      [ "Label", [ STRING ], 2, 3, false, false, null],
+      [ "Owner", [ UINT32 ], 2, 4, false, false, null],
+      [ "Latency", [ FLOAT32 ], 2, 5, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -483,8 +481,7 @@ export const OcaActuator = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -506,10 +503,9 @@ export const OcaMute = make_control_class(
       [ "SetState", 4, 2, [ OcaMuteState ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaMuteState), 4, 1, false, false, null)
+      [ "State", [ OcaMuteState ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -549,10 +545,9 @@ export const OcaPolarity = make_control_class(
       [ "SetState", 4, 2, [ OcaPolarityState ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaPolarityState), 4, 1, false, false, null)
+      [ "State", [ OcaPolarityState ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -600,12 +595,11 @@ export const OcaSwitch = make_control_class(
       [ "SetPositionEnableds", 4, 10, [ LIST(BOOLEAN) ], [  ] ]
     ],
     [
-      new Property("Position", new signature(UINT16), 4, 1, false, false, null),
-      new Property("PositionNames", new signature(LIST(STRING)), 4, 2, false, false, null),
-      new Property("PositionEnable", new signature(LIST(BOOLEAN)), 4, 3, false, false, null)
+      [ "Position", [ UINT16 ], 4, 1, false, false, null],
+      [ "PositionNames", [ LIST(STRING) ], 4, 2, false, false, null],
+      [ "PositionEnable", [ LIST(BOOLEAN) ], 4, 3, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -723,10 +717,9 @@ export const OcaGain = make_control_class(
       [ "SetGain", 4, 2, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Gain", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Gain", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -768,11 +761,10 @@ export const OcaPanBalance = make_control_class(
       [ "SetMidpointGain", 4, 4, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Position", new signature(FLOAT32), 4, 1, false, false, null),
-      new Property("MidpointGain", new signature(FLOAT32), 4, 2, false, false, null)
+      [ "Position", [ FLOAT32 ], 4, 1, false, false, null],
+      [ "MidpointGain", [ FLOAT32 ], 4, 2, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -832,10 +824,9 @@ export const OcaDelay = make_control_class(
       [ "SetDelayTime", 4, 2, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("DelayTime", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "DelayTime", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -878,10 +869,9 @@ export const OcaDelayExtended = make_control_class(
       [ "GetDelayValueConverted", 5, 3, [ OcaDelayUnit ], [ OcaDelayValue ] ]
     ],
     [
-      new Property("DelayValue", new signature(OcaDelayValue), 5, 1, false, false, null)
+      [ "DelayValue", [ OcaDelayValue ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -929,10 +919,9 @@ export const OcaFrequencyActuator = make_control_class(
       [ "SetFrequency", 4, 2, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -983,14 +972,13 @@ export const OcaFilterClassical = make_control_class(
       [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaFilterPassband, OcaClassicalFilterShape, UINT16, FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
-      new Property("Passband", new signature(OcaFilterPassband), 4, 2, false, false, null),
-      new Property("Shape", new signature(OcaClassicalFilterShape), 4, 3, false, false, null),
-      new Property("Order", new signature(UINT16), 4, 4, false, false, null),
-      new Property("Parameter", new signature(FLOAT32), 4, 5, false, false, null)
+      [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null],
+      [ "Passband", [ OcaFilterPassband ], 4, 2, false, false, null],
+      [ "Shape", [ OcaClassicalFilterShape ], 4, 3, false, false, null],
+      [ "Order", [ UINT16 ], 4, 4, false, false, null],
+      [ "Parameter", [ FLOAT32 ], 4, 5, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -1131,14 +1119,13 @@ export const OcaFilterParametric = make_control_class(
       [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaParametricEQShape, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Frequency", new signature(FLOAT32), 4, 1, false, false, null),
-      new Property("Shape", new signature(OcaParametricEQShape), 4, 2, false, false, null),
-      new Property("WidthParameter", new signature(FLOAT32), 4, 3, false, false, ["Q"]),
-      new Property("InBandGain", new signature(FLOAT32), 4, 4, false, false, null),
-      new Property("ShapeParameter", new signature(FLOAT32), 4, 5, false, false, null)
+      [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null],
+      [ "Shape", [ OcaParametricEQShape ], 4, 2, false, false, null],
+      [ "WidthParameter", [ FLOAT32 ], 4, 3, false, false, ["Q"]],
+      [ "InBandGain", [ FLOAT32 ], 4, 4, false, false, null],
+      [ "ShapeParameter", [ FLOAT32 ], 4, 5, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -1276,13 +1263,12 @@ export const OcaFilterPolynomial = make_control_class(
       [ "GetMaxOrder", 4, 5, [  ], [ UINT8 ] ]
     ],
     [
-      new Property("A", new signature(LIST(FLOAT32)), 4, 1, false, false, null),
-      new Property("B", new signature(LIST(FLOAT32)), 4, 2, false, false, null),
-      new Property("SampleRate", new signature(FLOAT32), 4, 3, false, false, null),
-      new Property("MaxOrder", new signature(UINT8), 4, 4, true, false, null)
+      [ "A", [ LIST(FLOAT32) ], 4, 1, false, false, null],
+      [ "B", [ LIST(FLOAT32) ], 4, 2, false, false, null],
+      [ "SampleRate", [ FLOAT32 ], 4, 3, false, false, null],
+      [ "MaxOrder", [ UINT8 ], 4, 4, true, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -1355,12 +1341,11 @@ export const OcaFilterFIR = make_control_class(
       [ "SetSampleRate", 4, 5, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Length", new signature(UINT32), 4, 1, true, false, null),
-      new Property("Coefficients", new signature(LIST(FLOAT32)), 4, 2, false, false, null),
-      new Property("SampleRate", new signature(FLOAT32), 4, 3, false, false, null)
+      [ "Length", [ UINT32 ], 4, 1, true, false, null],
+      [ "Coefficients", [ LIST(FLOAT32) ], 4, 2, false, false, null],
+      [ "SampleRate", [ FLOAT32 ], 4, 3, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -1434,13 +1419,12 @@ export const OcaFilterArbitraryCurve = make_control_class(
       [ "GetTFMaxLength", 4, 6, [  ], [ UINT16 ] ]
     ],
     [
-      new Property("TransferFunction", new signature(OcaTransferFunction), 4, 1, false, false, null),
-      new Property("SampleRate", new signature(FLOAT32), 4, 2, false, false, null),
-      new Property("TFMinLength", new signature(UINT16), 4, 3, false, false, null),
-      new Property("TFMaxLength", new signature(UINT16), 4, 4, false, false, null)
+      [ "TransferFunction", [ OcaTransferFunction ], 4, 1, false, false, null],
+      [ "SampleRate", [ FLOAT32 ], 4, 2, false, false, null],
+      [ "TFMinLength", [ UINT16 ], 4, 3, false, false, null],
+      [ "TFMaxLength", [ UINT16 ], 4, 4, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -1545,23 +1529,22 @@ export const OcaDynamics = make_control_class(
       [ "SetMultiple", 4, 27, [ UINT16, OcaDynamicsFunction, FLOAT32, OcaPresentationUnit, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Triggered", new signature(BOOLEAN), 4, 1, false, false, null),
-      new Property("DynamicGain", new signature(FLOAT32), 4, 2, false, false, null),
-      new Property("Function", new signature(OcaDynamicsFunction), 4, 3, false, false, null),
-      new Property("Ratio", new signature(FLOAT32), 4, 4, false, false, null),
-      new Property("Threshold", new signature(FLOAT32), 4, 5, false, false, null),
-      new Property("ThresholdPresentationUnits", new signature(OcaPresentationUnit), 4, 6, false, false, null),
-      new Property("DetectorLaw", new signature(OcaLevelDetectionLaw), 4, 7, false, false, null),
-      new Property("AttackTime", new signature(FLOAT32), 4, 8, false, false, null),
-      new Property("ReleaseTime", new signature(FLOAT32), 4, 9, false, false, null),
-      new Property("HoldTime", new signature(FLOAT32), 4, 10, false, false, null),
-      new Property("DynamicGainCeiling", new signature(FLOAT32), 4, 11, false, false, null),
-      new Property("DynamicGainFloor", new signature(FLOAT32), 4, 12, false, false, null),
-      new Property("KneeParameter", new signature(FLOAT32), 4, 13, false, false, null),
-      new Property("Slope", new signature(FLOAT32), 4, 14, false, false, null)
+      [ "Triggered", [ BOOLEAN ], 4, 1, false, false, null],
+      [ "DynamicGain", [ FLOAT32 ], 4, 2, false, false, null],
+      [ "Function", [ OcaDynamicsFunction ], 4, 3, false, false, null],
+      [ "Ratio", [ FLOAT32 ], 4, 4, false, false, null],
+      [ "Threshold", [ FLOAT32 ], 4, 5, false, false, null],
+      [ "ThresholdPresentationUnits", [ OcaPresentationUnit ], 4, 6, false, false, null],
+      [ "DetectorLaw", [ OcaLevelDetectionLaw ], 4, 7, false, false, null],
+      [ "AttackTime", [ FLOAT32 ], 4, 8, false, false, null],
+      [ "ReleaseTime", [ FLOAT32 ], 4, 9, false, false, null],
+      [ "HoldTime", [ FLOAT32 ], 4, 10, false, false, null],
+      [ "DynamicGainCeiling", [ FLOAT32 ], 4, 11, false, false, null],
+      [ "DynamicGainFloor", [ FLOAT32 ], 4, 12, false, false, null],
+      [ "KneeParameter", [ FLOAT32 ], 4, 13, false, false, null],
+      [ "Slope", [ FLOAT32 ], 4, 14, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -1869,13 +1852,12 @@ export const OcaDynamicsDetector = make_control_class(
       [ "SetMultiple", 4, 9, [ UINT16, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Law", new signature(OcaLevelDetectionLaw), 4, 1, false, false, null),
-      new Property("AttackTime", new signature(FLOAT32), 4, 2, false, false, null),
-      new Property("ReleaseTime", new signature(FLOAT32), 4, 3, false, false, null),
-      new Property("HoldTime", new signature(FLOAT32), 4, 4, false, false, null)
+      [ "Law", [ OcaLevelDetectionLaw ], 4, 1, false, false, null],
+      [ "AttackTime", [ FLOAT32 ], 4, 2, false, false, null],
+      [ "ReleaseTime", [ FLOAT32 ], 4, 3, false, false, null],
+      [ "HoldTime", [ FLOAT32 ], 4, 4, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2041,15 +2023,14 @@ export const OcaDynamicsCurve = make_control_class(
       [ "SetMultiple", 4, 13, [ UINT16, UINT8, LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32), FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
-      new Property("nSegments", new signature(UINT8), 4, 1, false, false, null),
-      new Property("Threshold", new signature(LIST(FLOAT32)), 4, 2, false, false, null),
-      new Property("Slope", new signature(LIST(FLOAT32)), 4, 3, false, false, null),
-      new Property("KneeParameter", new signature(LIST(FLOAT32)), 4, 4, false, false, null),
-      new Property("DynamicGainFloor", new signature(FLOAT32), 4, 5, false, false, null),
-      new Property("DynamicGainCeiling", new signature(FLOAT32), 4, 6, false, false, null)
+      [ "nSegments", [ UINT8 ], 4, 1, false, false, null],
+      [ "Threshold", [ LIST(FLOAT32) ], 4, 2, false, false, null],
+      [ "Slope", [ LIST(FLOAT32) ], 4, 3, false, false, null],
+      [ "KneeParameter", [ LIST(FLOAT32) ], 4, 4, false, false, null],
+      [ "DynamicGainFloor", [ FLOAT32 ], 4, 5, false, false, null],
+      [ "DynamicGainCeiling", [ FLOAT32 ], 4, 6, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2220,17 +2201,16 @@ export const OcaSignalGenerator = make_control_class(
       [ "SetMultiple", 4, 18, [ UINT16, FLOAT32, FLOAT32, FLOAT32, OcaWaveformType, OcaSweepType, FLOAT32, BOOLEAN ], [  ] ]
     ],
     [
-      new Property("Frequency1", new signature(FLOAT32), 4, 1, false, false, null),
-      new Property("Frequency2", new signature(FLOAT32), 4, 2, false, false, null),
-      new Property("Level", new signature(FLOAT32), 4, 3, false, false, null),
-      new Property("Waveform", new signature(OcaWaveformType), 4, 4, false, false, null),
-      new Property("SweepType", new signature(OcaSweepType), 4, 5, false, false, null),
-      new Property("SweepTime", new signature(FLOAT32), 4, 6, false, false, null),
-      new Property("SweepRepeat", new signature(BOOLEAN), 4, 7, false, false, null),
-      new Property("Generating", new signature(BOOLEAN), 4, 8, false, false, null)
+      [ "Frequency1", [ FLOAT32 ], 4, 1, false, false, null],
+      [ "Frequency2", [ FLOAT32 ], 4, 2, false, false, null],
+      [ "Level", [ FLOAT32 ], 4, 3, false, false, null],
+      [ "Waveform", [ OcaWaveformType ], 4, 4, false, false, null],
+      [ "SweepType", [ OcaSweepType ], 4, 5, false, false, null],
+      [ "SweepTime", [ FLOAT32 ], 4, 6, false, false, null],
+      [ "SweepRepeat", [ BOOLEAN ], 4, 7, false, false, null],
+      [ "Generating", [ BOOLEAN ], 4, 8, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2430,8 +2410,7 @@ export const OcaSignalInput = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -2456,8 +2435,7 @@ export const OcaSignalOutput = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -2479,10 +2457,9 @@ export const OcaTemperatureActuator = make_control_class(
       [ "SetTemperature", 4, 2, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Temperature", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Temperature", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2527,10 +2504,9 @@ export const OcaIdentificationActuator = make_control_class(
       [ "SetActive", 4, 2, [ BOOLEAN ], [  ] ]
     ],
     [
-      new Property("active", new signature(BOOLEAN), 4, 1, false, false, null)
+      [ "active", [ BOOLEAN ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2570,8 +2546,7 @@ export const OcaSummingPoint = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -2592,8 +2567,7 @@ export const OcaBasicActuator = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -2615,10 +2589,9 @@ export const OcaBooleanActuator = make_control_class(
       [ "SetSetting", 5, 2, [ BOOLEAN ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(BOOLEAN), 5, 1, false, false, null)
+      [ "Setting", [ BOOLEAN ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2658,10 +2631,9 @@ export const OcaInt8Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ INT8 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(INT8), 5, 1, false, false, null)
+      [ "Setting", [ INT8 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2701,10 +2673,9 @@ export const OcaInt16Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ INT16 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(INT16), 5, 1, false, false, null)
+      [ "Setting", [ INT16 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2744,10 +2715,9 @@ export const OcaInt32Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ INT32 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(INT32), 5, 1, false, false, null)
+      [ "Setting", [ INT32 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2787,10 +2757,9 @@ export const OcaInt64Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ INT64 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(INT64), 5, 1, false, false, null)
+      [ "Setting", [ INT64 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2830,10 +2799,9 @@ export const OcaUint8Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ UINT8 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(UINT8), 5, 1, false, false, null)
+      [ "Setting", [ UINT8 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2873,10 +2841,9 @@ export const OcaUint16Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ UINT16 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(UINT16), 5, 1, false, false, null)
+      [ "Setting", [ UINT16 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2916,10 +2883,9 @@ export const OcaUint32Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ UINT32 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(UINT32), 5, 1, false, false, null)
+      [ "Setting", [ UINT32 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -2959,10 +2925,9 @@ export const OcaUint64Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ UINT64 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(UINT64), 5, 1, false, false, null)
+      [ "Setting", [ UINT64 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3002,10 +2967,9 @@ export const OcaFloat32Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(FLOAT32), 5, 1, false, false, null)
+      [ "Setting", [ FLOAT32 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3045,10 +3009,9 @@ export const OcaFloat64Actuator = make_control_class(
       [ "SetSetting", 5, 2, [ FLOAT64 ], [  ] ]
     ],
     [
-      new Property("Setting", new signature(FLOAT64), 5, 1, false, false, null)
+      [ "Setting", [ FLOAT64 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3089,11 +3052,10 @@ export const OcaStringActuator = make_control_class(
       [ "GetMaxLen", 5, 3, [  ], [ UINT16 ] ]
     ],
     [
-      new Property("Setting", new signature(STRING), 5, 1, false, false, null),
-      new Property("MaxLen", new signature(UINT16), 5, 2, true, false, null)
+      [ "Setting", [ STRING ], 5, 1, false, false, null],
+      [ "MaxLen", [ UINT16 ], 5, 2, true, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3143,10 +3105,9 @@ export const OcaBitstringActuator = make_control_class(
       [ "SetBitstring", 5, 5, [ BITSTRING ], [  ] ]
     ],
     [
-      new Property("Bitstring", new signature(BITSTRING), 5, 1, false, false, null)
+      [ "Bitstring", [ BITSTRING ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3209,10 +3170,9 @@ export const OcaSensor = make_control_class(
       [ "GetReadingState", 3, 1, [  ], [ OcaSensorReadingState ] ]
     ],
     [
-      new Property("ReadingState", new signature(OcaSensorReadingState), 3, 1, false, true, null)
+      [ "ReadingState", [ OcaSensorReadingState ], 3, 1, false, true, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3242,10 +3202,9 @@ export const OcaLevelSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3279,10 +3238,9 @@ export const OcaAudioLevelSensor = make_control_class(
       [ "SetLaw", 5, 2, [ OcaLevelMeterLaw ], [  ] ]
     ],
     [
-      new Property("Law", new signature(OcaLevelMeterLaw), 5, 1, false, false, null)
+      [ "Law", [ OcaLevelMeterLaw ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3324,10 +3282,9 @@ export const OcaTimeIntervalSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3358,10 +3315,9 @@ export const OcaFrequencySensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3392,10 +3348,9 @@ export const OcaTemperatureSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3430,8 +3385,7 @@ export const OcaIdentificationSensor = make_control_class(
     [
     ],
     [
-      [ "Identify", 4, 1, [  ] ]
-    ]
+      [ "Identify", 4, 1, [  ] ]    ]
 );
 
 /**
@@ -3459,10 +3413,9 @@ export const OcaVoltageSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3493,10 +3446,9 @@ export const OcaCurrentSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3527,10 +3479,9 @@ export const OcaImpedanceSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ OcaImpedance, OcaImpedance, OcaImpedance ] ]
     ],
     [
-      new Property("Reading", new signature(OcaImpedance), 4, 1, false, false, null)
+      [ "Reading", [ OcaImpedance ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3562,10 +3513,9 @@ export const OcaGainSensor = make_control_class(
       [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 4, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3596,8 +3546,7 @@ export const OcaBasicSensor = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -3618,10 +3567,9 @@ export const OcaBooleanSensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ BOOLEAN ] ]
     ],
     [
-      new Property("Reading", new signature(BOOLEAN), 5, 1, false, false, null)
+      [ "Reading", [ BOOLEAN ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3652,10 +3600,9 @@ export const OcaInt8Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ INT8, INT8, INT8 ] ]
     ],
     [
-      new Property("Reading", new signature(INT8), 5, 1, false, false, null)
+      [ "Reading", [ INT8 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3686,10 +3633,9 @@ export const OcaInt16Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ INT16, INT16, INT16 ] ]
     ],
     [
-      new Property("Reading", new signature(INT16), 5, 1, false, false, null)
+      [ "Reading", [ INT16 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3720,10 +3666,9 @@ export const OcaInt32Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ INT32, INT32, INT32 ] ]
     ],
     [
-      new Property("Reading", new signature(INT32), 5, 1, false, false, null)
+      [ "Reading", [ INT32 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3754,10 +3699,9 @@ export const OcaInt64Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ INT64, INT64, INT64 ] ]
     ],
     [
-      new Property("Reading", new signature(INT64), 5, 1, false, false, null)
+      [ "Reading", [ INT64 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3788,10 +3732,9 @@ export const OcaUint8Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ UINT8, UINT8, UINT8 ] ]
     ],
     [
-      new Property("Reading", new signature(UINT8), 5, 1, false, false, null)
+      [ "Reading", [ UINT8 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3822,10 +3765,9 @@ export const OcaUint16Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ UINT16, UINT16, UINT16 ] ]
     ],
     [
-      new Property("Reading", new signature(UINT16), 5, 1, false, false, null)
+      [ "Reading", [ UINT16 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3856,10 +3798,9 @@ export const OcaUint32Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ UINT32, UINT32, UINT32 ] ]
     ],
     [
-      new Property("Reading", new signature(UINT32), 5, 1, false, false, null)
+      [ "Reading", [ UINT32 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3890,10 +3831,9 @@ export const OcaFloat32Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT32), 5, 1, false, false, null)
+      [ "Reading", [ FLOAT32 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3924,10 +3864,9 @@ export const OcaFloat64Sensor = make_control_class(
       [ "GetReading", 5, 1, [  ], [ FLOAT64, FLOAT64, FLOAT64 ] ]
     ],
     [
-      new Property("Reading", new signature(FLOAT64), 5, 1, false, false, null)
+      [ "Reading", [ FLOAT64 ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -3960,11 +3899,10 @@ export const OcaStringSensor = make_control_class(
       [ "SetMaxLen", 5, 3, [ UINT16 ], [  ] ]
     ],
     [
-      new Property("String", new signature(STRING), 5, 1, false, false, null),
-      new Property("MaxLen", new signature(UINT16), 5, 2, false, false, null)
+      [ "String", [ STRING ], 5, 1, false, false, null],
+      [ "MaxLen", [ UINT16 ], 5, 2, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -4016,10 +3954,9 @@ export const OcaBitstringSensor = make_control_class(
       [ "GetBitString", 5, 3, [  ], [ BITSTRING ] ]
     ],
     [
-      new Property("BitString", new signature(BITSTRING), 5, 1, false, false, null)
+      [ "BitString", [ BITSTRING ], 5, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -4089,15 +4026,14 @@ export const OcaBlock = make_control_class(
       [ "FindObjectsByLabelRecursive", 3, 19, [ STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ]
     ],
     [
-      new Property("Type", new signature(UINT32), 3, 1, true, false, null),
-      new Property("Members", new signature(LIST(OcaObjectIdentification)), 3, 2, false, false, null),
-      new Property("SignalPaths", new signature(MAP(UINT16, OcaSignalPath)), 3, 3, false, false, null),
-      new Property("MostRecentParamSetIdentifier", new signature(OcaLibVolIdentifier), 3, 4, false, false, null),
-      new Property("GlobalType", new signature(OcaGlobalTypeIdentifier), 3, 5, true, false, null),
-      new Property("ONoMap", new signature(MAP(UINT32, UINT32)), 3, 6, true, false, null)
+      [ "Type", [ UINT32 ], 3, 1, true, false, null],
+      [ "Members", [ LIST(OcaObjectIdentification) ], 3, 2, false, false, null],
+      [ "SignalPaths", [ MAP(UINT16, OcaSignalPath) ], 3, 3, false, false, null],
+      [ "MostRecentParamSetIdentifier", [ OcaLibVolIdentifier ], 3, 4, false, false, null],
+      [ "GlobalType", [ OcaGlobalTypeIdentifier ], 3, 5, true, false, null],
+      [ "ONoMap", [ MAP(UINT32, UINT32) ], 3, 6, true, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -4362,13 +4298,12 @@ export const OcaBlockFactory = make_control_class(
       [ "SetGlobalType", 3, 12, [ OcaGlobalTypeIdentifier ], [  ] ]
     ],
     [
-      new Property("ProtoPorts", new signature(LIST(OcaProtoPort)), 3, 1, false, false, null),
-      new Property("ProtoMembers", new signature(LIST(OcaProtoObjectIdentification)), 3, 2, false, false, null),
-      new Property("ProtoSignalPaths", new signature(MAP(UINT16, OcaProtoSignalPath)), 3, 3, false, false, null),
-      new Property("GlobalType", new signature(OcaGlobalTypeIdentifier), 3, 4, false, false, null)
+      [ "ProtoPorts", [ LIST(OcaProtoPort) ], 3, 1, false, false, null],
+      [ "ProtoMembers", [ LIST(OcaProtoObjectIdentification) ], 3, 2, false, false, null],
+      [ "ProtoSignalPaths", [ MAP(UINT16, OcaProtoSignalPath) ], 3, 3, false, false, null],
+      [ "GlobalType", [ OcaGlobalTypeIdentifier ], 3, 4, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -4579,17 +4514,16 @@ export const OcaMatrix = make_control_class(
       [ "UnlockCurrent", 3, 16, [  ], [  ] ]
     ],
     [
-      new Property("X", new signature(UINT16), 3, 1, false, false, null),
-      new Property("Y", new signature(UINT16), 3, 2, false, false, null),
-      new Property("xSize", new signature(UINT16), 3, 3, false, false, null),
-      new Property("ySize", new signature(UINT16), 3, 4, false, false, null),
-      new Property("Members", new signature(LIST2D(UINT32)), 3, 5, false, false, null),
-      new Property("Proxy", new signature(UINT32), 3, 6, false, false, null),
-      new Property("PortsPerRow", new signature(UINT8), 3, 7, false, false, null),
-      new Property("PortsPerColumn", new signature(UINT8), 3, 8, false, false, null)
+      [ "X", [ UINT16 ], 3, 1, false, false, null],
+      [ "Y", [ UINT16 ], 3, 2, false, false, null],
+      [ "xSize", [ UINT16 ], 3, 3, false, false, null],
+      [ "ySize", [ UINT16 ], 3, 4, false, false, null],
+      [ "Members", [ LIST2D(UINT32) ], 3, 5, false, false, null],
+      [ "Proxy", [ UINT32 ], 3, 6, false, false, null],
+      [ "PortsPerRow", [ UINT8 ], 3, 7, false, false, null],
+      [ "PortsPerColumn", [ UINT8 ], 3, 8, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -4780,11 +4714,10 @@ export const OcaAgent = make_control_class(
       [ "GetPath", 2, 4, [  ], [ LIST(STRING), LIST(UINT32) ] ]
     ],
     [
-      new Property("Label", new signature(STRING), 2, 1, false, false, null),
-      new Property("Owner", new signature(UINT32), 2, 2, false, false, null)
+      [ "Label", [ STRING ], 2, 1, false, false, null],
+      [ "Owner", [ UINT32 ], 2, 2, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -4941,15 +4874,14 @@ export const OcaGrouper = make_control_class(
       [ "SetMode", 3, 15, [ OcaGrouperMode ], [  ] ]
     ],
     [
-      new Property("ActuatorOrSensor", new signature(BOOLEAN), 3, 1, false, false, null),
-      new Property("Groups", new signature(LIST(OcaGrouperGroup)), 3, 2, false, false, ["GroupList"]),
-      new Property("Citizens", new signature(LIST(OcaGrouperCitizen)), 3, 3, false, false, ["CitizenList"]),
-      new Property("Enrollments", new signature(LIST(OcaGrouperEnrollment)), 3, 4, false, false, ["EnrollmentList"]),
-      new Property("Mode", new signature(OcaGrouperMode), 3, 5, false, false, null)
+      [ "ActuatorOrSensor", [ BOOLEAN ], 3, 1, false, false, null],
+      [ "Groups", [ LIST(OcaGrouperGroup) ], 3, 2, false, false, ["GroupList"]],
+      [ "Citizens", [ LIST(OcaGrouperCitizen) ], 3, 3, false, false, ["CitizenList"]],
+      [ "Enrollments", [ LIST(OcaGrouperEnrollment) ], 3, 4, false, false, ["EnrollmentList"]],
+      [ "Mode", [ OcaGrouperMode ], 3, 5, false, false, null]
     ],
     [
-      [ "StatusChange", 3, 1, [ UINT16, UINT16, OcaGrouperStatusChangeType ] ]
-    ]
+      [ "StatusChange", 3, 1, [ UINT16, UINT16, OcaGrouperStatusChangeType ] ]    ]
 );
 
 /**
@@ -5149,16 +5081,15 @@ export const OcaRamper = make_control_class(
       [ "SetGoal", 3, 14, [ FLOAT64 ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaRamperState), 3, 1, false, false, null),
-      new Property("RampedProperty", new signature(OcaProperty), 3, 2, false, false, null),
-      new Property("TimeMode", new signature(OcaTimeMode), 3, 3, false, false, null),
-      new Property("StartTime", new signature(UINT64), 3, 4, false, false, null),
-      new Property("Duration", new signature(FLOAT32), 3, 5, false, false, null),
-      new Property("InterpolationLaw", new signature(OcaRamperInterpolationLaw), 3, 6, false, false, null),
-      new Property("Goal", new signature(FLOAT64), 3, 7, false, false, null)
+      [ "State", [ OcaRamperState ], 3, 1, false, false, null],
+      [ "RampedProperty", [ OcaProperty ], 3, 2, false, false, null],
+      [ "TimeMode", [ OcaTimeMode ], 3, 3, false, false, null],
+      [ "StartTime", [ UINT64 ], 3, 4, false, false, null],
+      [ "Duration", [ FLOAT32 ], 3, 5, false, false, null],
+      [ "InterpolationLaw", [ OcaRamperInterpolationLaw ], 3, 6, false, false, null],
+      [ "Goal", [ FLOAT64 ], 3, 7, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -5354,17 +5285,16 @@ export const OcaNumericObserver = make_control_class(
       [ "SetPeriod", 3, 14, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaObserverState), 3, 1, false, false, null),
-      new Property("ObservedProperty", new signature(OcaProperty), 3, 2, false, false, null),
-      new Property("Threshold", new signature(FLOAT64), 3, 3, false, false, null),
-      new Property("Operator", new signature(OcaRelationalOperator), 3, 4, false, false, null),
-      new Property("TwoWay", new signature(BOOLEAN), 3, 5, false, false, null),
-      new Property("Hysteresis", new signature(FLOAT64), 3, 6, false, false, null),
-      new Property("Period", new signature(FLOAT32), 3, 7, false, false, null)
+      [ "State", [ OcaObserverState ], 3, 1, false, false, null],
+      [ "ObservedProperty", [ OcaProperty ], 3, 2, false, false, null],
+      [ "Threshold", [ FLOAT64 ], 3, 3, false, false, null],
+      [ "Operator", [ OcaRelationalOperator ], 3, 4, false, false, null],
+      [ "TwoWay", [ BOOLEAN ], 3, 5, false, false, null],
+      [ "Hysteresis", [ FLOAT64 ], 3, 6, false, false, null],
+      [ "Period", [ FLOAT32 ], 3, 7, false, false, null]
     ],
     [
-      [ "Observation", 3, 1, [ OcaEvent, FLOAT64 ] ]
-    ]
+      [ "Observation", 3, 1, [ OcaEvent, FLOAT64 ] ]    ]
 );
 
 /**
@@ -5561,13 +5491,12 @@ export const OcaLibrary = make_control_class(
       [ "SetAccess", 3, 8, [ OcaLibAccess ], [  ] ]
     ],
     [
-      new Property("VolumeType", new signature(OcaLibVolType), 3, 1, false, false, null),
-      new Property("Access", new signature(OcaLibAccess), 3, 2, false, false, null),
-      new Property("Volumes", new signature(MAP(UINT32, OcaLibVol)), 3, 3, false, false, null)
+      [ "VolumeType", [ OcaLibVolType ], 3, 1, false, false, null],
+      [ "Access", [ OcaLibAccess ], 3, 2, false, false, null],
+      [ "Volumes", [ MAP(UINT32, OcaLibVol) ], 3, 3, false, false, null]
     ],
     [
-      [ "OcaLibVolChanged", 3, 1, [ UINT32, OcaPropertyChangeType ] ]
-    ]
+      [ "OcaLibVolChanged", 3, 1, [ UINT32, OcaPropertyChangeType ] ]    ]
 );
 
 /**
@@ -5682,16 +5611,15 @@ export const OcaPowerSupply = make_control_class(
       [ "GetLocation", 3, 8, [  ], [ OcaPowerSupplyLocation ] ]
     ],
     [
-      new Property("Type", new signature(OcaPowerSupplyType), 3, 1, false, false, null),
-      new Property("ModelInfo", new signature(STRING), 3, 2, false, false, null),
-      new Property("State", new signature(OcaPowerSupplyState), 3, 3, false, false, null),
-      new Property("Charging", new signature(BOOLEAN), 3, 4, false, false, null),
-      new Property("LoadFractionAvailable", new signature(FLOAT32), 3, 5, true, false, null),
-      new Property("StorageFractionAvailable", new signature(FLOAT32), 3, 6, true, false, null),
-      new Property("Location", new signature(OcaPowerSupplyLocation), 3, 7, true, false, null)
+      [ "Type", [ OcaPowerSupplyType ], 3, 1, false, false, null],
+      [ "ModelInfo", [ STRING ], 3, 2, false, false, null],
+      [ "State", [ OcaPowerSupplyState ], 3, 3, false, false, null],
+      [ "Charging", [ BOOLEAN ], 3, 4, false, false, null],
+      [ "LoadFractionAvailable", [ FLOAT32 ], 3, 5, true, false, null],
+      [ "StorageFractionAvailable", [ FLOAT32 ], 3, 6, true, false, null],
+      [ "Location", [ OcaPowerSupplyLocation ], 3, 7, true, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -5794,8 +5722,7 @@ export const OcaEventHandler = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -5874,17 +5801,16 @@ export const OcaNumericObserverList = make_control_class(
       [ "SetPeriod", 3, 14, [ FLOAT32 ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaObserverState), 3, 1, false, false, null),
-      new Property("ObservedProperties", new signature(LIST(OcaProperty)), 3, 2, false, false, null),
-      new Property("Threshold", new signature(FLOAT64), 3, 3, false, false, null),
-      new Property("Operator", new signature(OcaRelationalOperator), 3, 4, false, false, null),
-      new Property("TwoWay", new signature(BOOLEAN), 3, 5, false, false, null),
-      new Property("Hysteresis", new signature(FLOAT64), 3, 6, false, false, null),
-      new Property("Period", new signature(FLOAT32), 3, 7, false, false, null)
+      [ "State", [ OcaObserverState ], 3, 1, false, false, null],
+      [ "ObservedProperties", [ LIST(OcaProperty) ], 3, 2, false, false, null],
+      [ "Threshold", [ FLOAT64 ], 3, 3, false, false, null],
+      [ "Operator", [ OcaRelationalOperator ], 3, 4, false, false, null],
+      [ "TwoWay", [ BOOLEAN ], 3, 5, false, false, null],
+      [ "Hysteresis", [ FLOAT64 ], 3, 6, false, false, null],
+      [ "Period", [ FLOAT32 ], 3, 7, false, false, null]
     ],
     [
-      [ "Observation", 3, 1, [ OcaEvent, LIST(FLOAT64) ] ]
-    ]
+      [ "Observation", 3, 1, [ OcaEvent, LIST(FLOAT64) ] ]    ]
 );
 
 /**
@@ -6089,14 +6015,13 @@ export const OcaMediaClock3 = make_control_class(
       [ "GetSupportedRates", 3, 7, [  ], [ MAP(UINT32, LIST(OcaMediaClockRate)) ] ]
     ],
     [
-      new Property("Availability", new signature(OcaMediaClockAvailability), 3, 1, false, false, null),
-      new Property("TimeSourceONo", new signature(UINT32), 3, 2, false, false, null),
-      new Property("Offset", new signature(OcaTimePTP), 3, 3, false, false, null),
-      new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
-      new Property("SupportedRates", new signature(MAP(UINT32, LIST(OcaMediaClockRate))), 3, 5, false, false, null)
+      [ "Availability", [ OcaMediaClockAvailability ], 3, 1, false, false, null],
+      [ "TimeSourceONo", [ UINT32 ], 3, 2, false, false, null],
+      [ "Offset", [ OcaTimePTP ], 3, 3, false, false, null],
+      [ "CurrentRate", [ OcaMediaClockRate ], 3, 4, false, false, null],
+      [ "SupportedRates", [ MAP(UINT32, LIST(OcaMediaClockRate)) ], 3, 5, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -6211,15 +6136,14 @@ export const OcaTimeSource = make_control_class(
       [ "Reset", 3, 11, [  ], [  ] ]
     ],
     [
-      new Property("Availability", new signature(OcaTimeSourceAvailability), 3, 1, false, false, null),
-      new Property("Protocol", new signature(OcaTimeProtocol), 3, 2, false, false, null),
-      new Property("Parameters", new signature(STRING), 3, 3, false, false, null),
-      new Property("ReferenceType", new signature(OcaTimeReferenceType), 3, 4, false, false, null),
-      new Property("ReferenceID", new signature(STRING), 3, 5, false, false, null),
-      new Property("SyncStatus", new signature(OcaTimeSourceSyncStatus), 3, 6, false, false, null)
+      [ "Availability", [ OcaTimeSourceAvailability ], 3, 1, false, false, null],
+      [ "Protocol", [ OcaTimeProtocol ], 3, 2, false, false, null],
+      [ "Parameters", [ STRING ], 3, 3, false, false, null],
+      [ "ReferenceType", [ OcaTimeReferenceType ], 3, 4, false, false, null],
+      [ "ReferenceID", [ STRING ], 3, 5, false, false, null],
+      [ "SyncStatus", [ OcaTimeSourceSyncStatus ], 3, 6, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -6350,12 +6274,11 @@ export const OcaPhysicalPosition = make_control_class(
       [ "SetPositionDescriptor", 3, 4, [ OcaPositionDescriptor ], [  ] ]
     ],
     [
-      new Property("CoordinateSystem", new signature(OcaPositionCoordinateSystem), 3, 1, true, false, null),
-      new Property("PositionDescriptorFieldFlags", new signature(UINT16), 3, 2, true, false, null),
-      new Property("PositionDescriptor", new signature(OcaPositionDescriptor), 3, 3, false, false, null)
+      [ "CoordinateSystem", [ OcaPositionCoordinateSystem ], 3, 1, true, false, null],
+      [ "PositionDescriptorFieldFlags", [ UINT16 ], 3, 2, true, false, null],
+      [ "PositionDescriptor", [ OcaPositionDescriptor ], 3, 3, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -6432,15 +6355,14 @@ export const OcaApplicationNetwork = make_control_class(
       [ "GetPath", 2, 11, [  ], [ LIST(STRING), LIST(UINT32) ] ]
     ],
     [
-      new Property("Label", new signature(STRING), 2, 1, false, true, null),
-      new Property("Owner", new signature(UINT32), 2, 2, false, true, null),
-      new Property("ServiceID", new signature(BLOB), 2, 3, false, false, null),
-      new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceDescriptor)), 2, 4, false, false, null),
-      new Property("State", new signature(OcaApplicationNetworkState), 2, 5, false, false, null),
-      new Property("ErrorCode", new signature(UINT16), 2, 6, false, false, null)
+      [ "Label", [ STRING ], 2, 1, false, true, null],
+      [ "Owner", [ UINT32 ], 2, 2, false, true, null],
+      [ "ServiceID", [ BLOB ], 2, 3, false, false, null],
+      [ "SystemInterfaces", [ LIST(OcaNetworkSystemInterfaceDescriptor) ], 2, 4, false, false, null],
+      [ "State", [ OcaApplicationNetworkState ], 2, 5, false, false, null],
+      [ "ErrorCode", [ UINT16 ], 2, 6, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -6569,10 +6491,9 @@ export const OcaControlNetwork = make_control_class(
       [ "GetControlProtocol", 3, 1, [  ], [ OcaNetworkControlProtocol ] ]
     ],
     [
-      new Property("Protocol", new signature(OcaNetworkControlProtocol), 3, 1, false, false, ["ControlProtocol"])
+      [ "Protocol", [ OcaNetworkControlProtocol ], 3, 1, false, false, ["ControlProtocol"]]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -6629,20 +6550,19 @@ export const OcaMediaTransportNetwork = make_control_class(
       [ "GetAlignmentGain", 3, 26, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
     ],
     [
-      new Property("Protocol", new signature(OcaNetworkMediaProtocol), 3, 1, false, false, ["MediaProtocol"]),
-      new Property("Ports", new signature(LIST(OcaPort)), 3, 2, false, false, null),
-      new Property("MaxSourceConnectors", new signature(UINT16), 3, 3, false, false, null),
-      new Property("MaxSinkConnectors", new signature(UINT16), 3, 4, false, false, null),
-      new Property("MaxPinsPerConnector", new signature(UINT16), 3, 5, false, false, null),
-      new Property("MaxPortsPerPin", new signature(UINT16), 3, 6, false, false, null),
-      new Property("AlignmentLevel", new signature(FLOAT32), 3, 7, false, false, null),
-      new Property("AlignmentGain", new signature(FLOAT32), 3, 8, false, false, null)
+      [ "Protocol", [ OcaNetworkMediaProtocol ], 3, 1, false, false, ["MediaProtocol"]],
+      [ "Ports", [ LIST(OcaPort) ], 3, 2, false, false, null],
+      [ "MaxSourceConnectors", [ UINT16 ], 3, 3, false, false, null],
+      [ "MaxSinkConnectors", [ UINT16 ], 3, 4, false, false, null],
+      [ "MaxPinsPerConnector", [ UINT16 ], 3, 5, false, false, null],
+      [ "MaxPortsPerPin", [ UINT16 ], 3, 6, false, false, null],
+      [ "AlignmentLevel", [ FLOAT32 ], 3, 7, false, false, null],
+      [ "AlignmentGain", [ FLOAT32 ], 3, 8, false, false, null]
     ],
     [
       [ "SourceConnectorChanged", 3, 1, [ OcaMediaSourceConnector, OcaPropertyChangeType, OcaMediaConnectorElement ] ],
       [ "SinkConnectorChanged", 3, 2, [ OcaMediaSinkConnector, OcaPropertyChangeType, OcaMediaConnectorElement ] ],
-      [ "ConnectorStatusChanged", 3, 3, [ OcaMediaConnectorStatus ] ]
-    ]
+      [ "ConnectorStatusChanged", 3, 3, [ OcaMediaConnectorStatus ] ]    ]
 );
 
 /**
@@ -6963,8 +6883,7 @@ export const OcaManager = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -7006,23 +6925,22 @@ export const OcaDeviceManager = make_control_class(
       [ "GetDeviceRevisionID", 3, 20, [  ], [ STRING ] ]
     ],
     [
-      new Property("ModelGUID", new signature(OcaModelGUID), 3, 1, false, false, null),
-      new Property("SerialNumber", new signature(STRING), 3, 2, false, false, null),
-      new Property("ModelDescription", new signature(OcaModelDescription), 3, 3, false, false, null),
-      new Property("DeviceName", new signature(STRING), 3, 4, false, false, null),
-      new Property("OcaVersion", new signature(UINT16), 3, 5, false, false, null),
-      new Property("DeviceRole", new signature(STRING), 3, 6, false, false, null),
-      new Property("UserInventoryCode", new signature(STRING), 3, 7, false, false, null),
-      new Property("Enabled", new signature(BOOLEAN), 3, 8, false, false, null),
-      new Property("State", new signature(OcaDeviceState), 3, 9, false, false, null),
-      new Property("Busy", new signature(BOOLEAN), 3, 10, false, false, null),
-      new Property("ResetCause", new signature(OcaResetCause), 3, 11, false, false, null),
-      new Property("Message", new signature(STRING), 3, 12, false, false, null),
-      new Property("Managers", new signature(LIST(OcaManagerDescriptor)), 3, 13, false, false, null),
-      new Property("DeviceRevisionID", new signature(STRING), 3, 14, true, false, null)
+      [ "ModelGUID", [ OcaModelGUID ], 3, 1, false, false, null],
+      [ "SerialNumber", [ STRING ], 3, 2, false, false, null],
+      [ "ModelDescription", [ OcaModelDescription ], 3, 3, false, false, null],
+      [ "DeviceName", [ STRING ], 3, 4, false, false, null],
+      [ "OcaVersion", [ UINT16 ], 3, 5, false, false, null],
+      [ "DeviceRole", [ STRING ], 3, 6, false, false, null],
+      [ "UserInventoryCode", [ STRING ], 3, 7, false, false, null],
+      [ "Enabled", [ BOOLEAN ], 3, 8, false, false, null],
+      [ "State", [ OcaDeviceState ], 3, 9, false, false, null],
+      [ "Busy", [ BOOLEAN ], 3, 10, false, false, null],
+      [ "ResetCause", [ OcaResetCause ], 3, 11, false, false, null],
+      [ "Message", [ STRING ], 3, 12, false, false, null],
+      [ "Managers", [ LIST(OcaManagerDescriptor) ], 3, 13, false, false, null],
+      [ "DeviceRevisionID", [ STRING ], 3, 14, true, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -7260,10 +7178,9 @@ export const OcaSecurityManager = make_control_class(
       [ "EnableControlSecurity", 3, 1, [  ], [  ] ]
     ],
     [
-      new Property("secureControlData", new signature(BOOLEAN), 3, 1, false, false, null)
+      [ "secureControlData", [ BOOLEAN ], 3, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -7368,10 +7285,9 @@ export const OcaFirmwareManager = make_control_class(
       [ "EndUpdateProcess", 3, 8, [  ], [  ] ]
     ],
     [
-      new Property("ComponentVersions", new signature(LIST(OcaVersion)), 3, 1, false, false, null)
+      [ "ComponentVersions", [ LIST(OcaVersion) ], 3, 1, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -7503,12 +7419,11 @@ export const OcaSubscriptionManager = make_control_class(
       [ "GetMaximumSubscriberContextLength", 3, 7, [  ], [ UINT16 ] ]
     ],
     [
-      new Property("State", new signature(OcaSubscriptionManagerState), 3, 1, false, false, null)
+      [ "State", [ OcaSubscriptionManagerState ], 3, 1, false, false, null]
     ],
     [
       [ "NotificationsDisabled", 3, 1, [  ] ],
-      [ "SynchronizeState", 3, 2, [ LIST(UINT32) ] ]
-    ]
+      [ "SynchronizeState", 3, 2, [ LIST(UINT32) ] ]    ]
 );
 
 /**
@@ -7674,14 +7589,13 @@ export const OcaPowerManager = make_control_class(
       [ "GetAutoState", 3, 6, [  ], [ BOOLEAN ] ]
     ],
     [
-      new Property("State", new signature(OcaPowerState), 3, 1, false, false, null),
-      new Property("PowerSupplies", new signature(LIST(UINT32)), 3, 2, false, false, null),
-      new Property("ActivePowerSupplies", new signature(LIST(UINT32)), 3, 3, false, false, null),
-      new Property("AutoState", new signature(BOOLEAN), 3, 4, false, false, null),
-      new Property("TargetState", new signature(OcaPowerState), 3, 5, true, false, null)
+      [ "State", [ OcaPowerState ], 3, 1, false, false, null],
+      [ "PowerSupplies", [ LIST(UINT32) ], 3, 2, false, false, null],
+      [ "ActivePowerSupplies", [ LIST(UINT32) ], 3, 3, false, false, null],
+      [ "AutoState", [ BOOLEAN ], 3, 4, false, false, null],
+      [ "TargetState", [ OcaPowerState ], 3, 5, true, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -7779,13 +7693,12 @@ export const OcaNetworkManager = make_control_class(
       [ "GetMediaTransportNetworks", 3, 4, [  ], [ LIST(UINT32) ] ]
     ],
     [
-      new Property("Networks", new signature(LIST(UINT32)), 3, 1, false, false, null),
-      new Property("StreamNetworks", new signature(LIST(UINT32)), 3, 2, false, false, null),
-      new Property("ControlNetworks", new signature(LIST(UINT32)), 3, 3, false, false, null),
-      new Property("MediaTransportNetworks", new signature(LIST(UINT32)), 3, 4, false, false, null)
+      [ "Networks", [ LIST(UINT32) ], 3, 1, false, false, null],
+      [ "StreamNetworks", [ LIST(UINT32) ], 3, 2, false, false, null],
+      [ "ControlNetworks", [ LIST(UINT32) ], 3, 3, false, false, null],
+      [ "MediaTransportNetworks", [ LIST(UINT32) ], 3, 4, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -7863,12 +7776,11 @@ export const OcaMediaClockManager = make_control_class(
       [ "GetClock3s", 3, 3, [  ], [ LIST(UINT32) ] ]
     ],
     [
-      new Property("ClockSourceTypesSupported", new signature(LIST(OcaMediaClockType)), 3, 1, false, false, ["MediaClockTypesSupported"]),
-      new Property("Clocks", new signature(LIST(UINT32)), 3, 2, false, false, null),
-      new Property("Clock3s", new signature(LIST(UINT32)), 3, 3, false, false, null)
+      [ "ClockSourceTypesSupported", [ LIST(OcaMediaClockType) ], 3, 1, false, false, ["MediaClockTypesSupported"]],
+      [ "Clocks", [ LIST(UINT32) ], 3, 2, false, false, null],
+      [ "Clock3s", [ LIST(UINT32) ], 3, 3, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -7939,11 +7851,10 @@ export const OcaLibraryManager = make_control_class(
       [ "ApplyPatch", 3, 6, [ OcaLibVolIdentifier ], [  ] ]
     ],
     [
-      new Property("Libraries", new signature(LIST(OcaLibraryIdentifier)), 3, 1, false, false, null),
-      new Property("CurrentPatch", new signature(OcaLibVolIdentifier), 3, 2, false, false, null)
+      [ "Libraries", [ LIST(OcaLibraryIdentifier) ], 3, 1, false, false, null],
+      [ "CurrentPatch", [ OcaLibVolIdentifier ], 3, 2, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8021,8 +7932,7 @@ export const OcaAudioProcessingManager = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 
@@ -8061,11 +7971,10 @@ export const OcaDeviceTimeManager = make_control_class(
       [ "SetDeviceTimePTP", 3, 7, [ OcaTimePTP ], [  ] ]
     ],
     [
-      new Property("TimeSources", new signature(LIST(UINT32)), 3, 1, false, false, null),
-      new Property("CurrentDeviceTimeSource", new signature(UINT32), 3, 2, false, false, null)
+      [ "TimeSources", [ LIST(UINT32) ], 3, 1, false, false, null],
+      [ "CurrentDeviceTimeSource", [ UINT32 ], 3, 2, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8172,12 +8081,11 @@ export const OcaTaskManager = make_control_class(
       [ "DeleteTask", 3, 12, [ UINT32 ], [  ] ]
     ],
     [
-      new Property("State", new signature(OcaTaskManagerState), 3, 1, false, false, null),
-      new Property("Tasks", new signature(MAP(UINT32, OcaTask)), 3, 2, false, false, null)
+      [ "State", [ OcaTaskManagerState ], 3, 1, false, false, null],
+      [ "Tasks", [ MAP(UINT32, OcaTask) ], 3, 2, false, false, null]
     ],
     [
-      [ "TaskStateChanged", 3, 1, [ UINT32, OcaLibVolIdentifier, OcaTaskStatus ] ]
-    ]
+      [ "TaskStateChanged", 3, 1, [ UINT32, OcaLibVolIdentifier, OcaTaskStatus ] ]    ]
 );
 
 /**
@@ -8320,11 +8228,10 @@ export const OcaCodingManager = make_control_class(
       [ "GetAvailableDecodingSchemes", 3, 2, [  ], [ MAP(UINT16, STRING) ] ]
     ],
     [
-      new Property("AvailableEncodingSchemes", new signature(MAP(UINT16, STRING)), 3, 1, false, false, null),
-      new Property("AvailableDecodingSchemes", new signature(MAP(UINT16, STRING)), 3, 2, false, false, null)
+      [ "AvailableEncodingSchemes", [ MAP(UINT16, STRING) ], 3, 1, false, false, null],
+      [ "AvailableDecodingSchemes", [ MAP(UINT16, STRING) ], 3, 2, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8372,8 +8279,7 @@ export const OcaDiagnosticManager = make_control_class(
     ],
     [
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8422,15 +8328,14 @@ export const OcaNetworkSignalChannel = make_control_class(
       [ "SetRemoteChannelID", 3, 9, [ BLOB ], [  ] ]
     ],
     [
-      new Property("ConnectorPins", new signature(MAP(UINT32, UINT16)), 3, 3, false, false, null),
-      new Property("IDAdvertised", new signature(BLOB), 3, 1, false, false, null),
-      new Property("Network", new signature(UINT32), 3, 2, false, false, null),
-      new Property("RemoteChannelID", new signature(BLOB), 3, 4, false, false, null),
-      new Property("SourceOrSink", new signature(OcaNetworkMediaSourceOrSink), 3, 5, false, false, null),
-      new Property("Status", new signature(OcaNetworkSignalChannelStatus), 3, 6, false, false, null)
+      [ "ConnectorPins", [ MAP(UINT32, UINT16) ], 3, 3, false, false, null],
+      [ "IDAdvertised", [ BLOB ], 3, 1, false, false, null],
+      [ "Network", [ UINT32 ], 3, 2, false, false, null],
+      [ "RemoteChannelID", [ BLOB ], 3, 4, false, false, null],
+      [ "SourceOrSink", [ OcaNetworkMediaSourceOrSink ], 3, 5, false, false, null],
+      [ "Status", [ OcaNetworkSignalChannelStatus ], 3, 6, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8597,17 +8502,16 @@ export const OcaNetwork = make_control_class(
       [ "Shutdown", 3, 13, [  ], [  ] ]
     ],
     [
-      new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, false, null),
-      new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
-      new Property("ControlProtocol", new signature(OcaNetworkControlProtocol), 3, 3, false, false, null),
-      new Property("MediaProtocol", new signature(OcaNetworkMediaProtocol), 3, 4, false, false, null),
-      new Property("Status", new signature(OcaNetworkStatus), 3, 5, false, false, null),
-      new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null),
-      new Property("MediaPorts", new signature(LIST(UINT32)), 3, 7, false, false, null),
-      new Property("Statistics", new signature(OcaNetworkStatistics), 3, 8, false, false, null)
+      [ "LinkType", [ OcaNetworkLinkType ], 3, 1, true, false, null],
+      [ "IDAdvertised", [ BLOB ], 3, 2, false, false, null],
+      [ "ControlProtocol", [ OcaNetworkControlProtocol ], 3, 3, false, false, null],
+      [ "MediaProtocol", [ OcaNetworkMediaProtocol ], 3, 4, false, false, null],
+      [ "Status", [ OcaNetworkStatus ], 3, 5, false, false, null],
+      [ "SystemInterfaces", [ LIST(OcaNetworkSystemInterfaceID) ], 3, 6, false, false, null],
+      [ "MediaPorts", [ LIST(UINT32) ], 3, 7, false, false, null],
+      [ "Statistics", [ OcaNetworkStatistics ], 3, 8, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8764,14 +8668,13 @@ export const OcaMediaClock = make_control_class(
       [ "GetLockState", 3, 8, [  ], [ OcaMediaClockLockState ] ]
     ],
     [
-      new Property("Type", new signature(OcaMediaClockType), 3, 1, false, false, null),
-      new Property("DomainID", new signature(UINT16), 3, 2, false, false, null),
-      new Property("RatesSupported", new signature(LIST(OcaMediaClockRate)), 3, 3, false, false, null),
-      new Property("CurrentRate", new signature(OcaMediaClockRate), 3, 4, false, false, null),
-      new Property("LockState", new signature(OcaMediaClockLockState), 3, 5, false, false, null)
+      [ "Type", [ OcaMediaClockType ], 3, 1, false, false, null],
+      [ "DomainID", [ UINT16 ], 3, 2, false, false, null],
+      [ "RatesSupported", [ LIST(OcaMediaClockRate) ], 3, 3, false, false, null],
+      [ "CurrentRate", [ OcaMediaClockRate ], 3, 4, false, false, null],
+      [ "LockState", [ OcaMediaClockLockState ], 3, 5, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -8894,20 +8797,19 @@ export const OcaStreamNetwork = make_control_class(
       [ "Shutdown", 3, 20, [  ], [  ] ]
     ],
     [
-      new Property("ControlProtocol", new signature(OcaNetworkControlProtocol), 3, 3, false, false, null),
-      new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
-      new Property("LinkType", new signature(OcaNetworkLinkType), 3, 1, true, false, null),
-      new Property("MediaProtocol", new signature(OcaNetworkMediaProtocol), 3, 4, false, false, null),
-      new Property("SignalChannelsSink", new signature(LIST(UINT32)), 3, 10, false, false, null),
-      new Property("SignalChannelsSource", new signature(LIST(UINT32)), 3, 9, false, false, null),
-      new Property("Statistics", new signature(OcaNetworkStatistics), 3, 11, false, false, null),
-      new Property("Status", new signature(OcaNetworkStatus), 3, 5, false, false, null),
-      new Property("StreamConnectorsSink", new signature(LIST(UINT32)), 3, 8, false, false, null),
-      new Property("StreamConnectorsSource", new signature(LIST(UINT32)), 3, 7, false, false, null),
-      new Property("SystemInterfaces", new signature(LIST(OcaNetworkSystemInterfaceID)), 3, 6, false, false, null)
+      [ "ControlProtocol", [ OcaNetworkControlProtocol ], 3, 3, false, false, null],
+      [ "IDAdvertised", [ BLOB ], 3, 2, false, false, null],
+      [ "LinkType", [ OcaNetworkLinkType ], 3, 1, true, false, null],
+      [ "MediaProtocol", [ OcaNetworkMediaProtocol ], 3, 4, false, false, null],
+      [ "SignalChannelsSink", [ LIST(UINT32) ], 3, 10, false, false, null],
+      [ "SignalChannelsSource", [ LIST(UINT32) ], 3, 9, false, false, null],
+      [ "Statistics", [ OcaNetworkStatistics ], 3, 11, false, false, null],
+      [ "Status", [ OcaNetworkStatus ], 3, 5, false, false, null],
+      [ "StreamConnectorsSink", [ LIST(UINT32) ], 3, 8, false, false, null],
+      [ "StreamConnectorsSource", [ LIST(UINT32) ], 3, 7, false, false, null],
+      [ "SystemInterfaces", [ LIST(OcaNetworkSystemInterfaceID) ], 3, 6, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -9209,15 +9111,14 @@ export const OcaStreamConnector = make_control_class(
       [ "SetSourceOrSink", 3, 6, [ OcaNetworkMediaSourceOrSink ], [  ] ]
     ],
     [
-      new Property("IDAdvertised", new signature(BLOB), 3, 2, false, false, null),
-      new Property("OwnerNetwork", new signature(UINT32), 3, 1, false, false, null),
-      new Property("Pins", new signature(MAP(UINT16, UINT32)), 3, 5, false, false, null),
-      new Property("SourceOrSink", new signature(OcaNetworkMediaSourceOrSink), 3, 3, false, false, null),
-      new Property("Status", new signature(OcaStreamConnectorStatus), 3, 6, false, false, null),
-      new Property("Streams", new signature(MAP(UINT16, OcaStream)), 3, 4, false, false, null)
+      [ "IDAdvertised", [ BLOB ], 3, 2, false, false, null],
+      [ "OwnerNetwork", [ UINT32 ], 3, 1, false, false, null],
+      [ "Pins", [ MAP(UINT16, UINT32) ], 3, 5, false, false, null],
+      [ "SourceOrSink", [ OcaNetworkMediaSourceOrSink ], 3, 3, false, false, null],
+      [ "Status", [ OcaStreamConnectorStatus ], 3, 6, false, false, null],
+      [ "Streams", [ MAP(UINT16, OcaStream) ], 3, 4, false, false, null]
     ],
-    [
-    ]
+    [    ]
 );
 
 /**
@@ -9343,114 +9244,5 @@ export const OcaStreamConnector = make_control_class(
 /**
  * All classes defined in this module by their ClassID.
  */
-export const Classes = {
-  "\u0001" : OcaRoot,
-  "\u0001\u0001" : OcaWorker,
-  "\u0001\u0001\u0001" : OcaActuator,
-  "\u0001\u0001\u0001\u0002" : OcaMute,
-  "\u0001\u0001\u0001\u0003" : OcaPolarity,
-  "\u0001\u0001\u0001\u0004" : OcaSwitch,
-  "\u0001\u0001\u0001\u0005" : OcaGain,
-  "\u0001\u0001\u0001\u0006" : OcaPanBalance,
-  "\u0001\u0001\u0001\u0007" : OcaDelay,
-  "\u0001\u0001\u0001\u0007\u0001" : OcaDelayExtended,
-  "\u0001\u0001\u0001\b" : OcaFrequencyActuator,
-  "\u0001\u0001\u0001\t" : OcaFilterClassical,
-  "\u0001\u0001\u0001\n" : OcaFilterParametric,
-  "\u0001\u0001\u0001\u000b" : OcaFilterPolynomial,
-  "\u0001\u0001\u0001\f" : OcaFilterFIR,
-  "\u0001\u0001\u0001\r" : OcaFilterArbitraryCurve,
-  "\u0001\u0001\u0001\u000e" : OcaDynamics,
-  "\u0001\u0001\u0001\u000f" : OcaDynamicsDetector,
-  "\u0001\u0001\u0001\u0010" : OcaDynamicsCurve,
-  "\u0001\u0001\u0001\u0011" : OcaSignalGenerator,
-  "\u0001\u0001\u0001\u0012" : OcaSignalInput,
-  "\u0001\u0001\u0001\u0013" : OcaSignalOutput,
-  "\u0001\u0001\u0001\u0014" : OcaTemperatureActuator,
-  "\u0001\u0001\u0001\u0015" : OcaIdentificationActuator,
-  "\u0001\u0001\u0001\u0016" : OcaSummingPoint,
-  "\u0001\u0001\u0001\u0001" : OcaBasicActuator,
-  "\u0001\u0001\u0001\u0001\u0001" : OcaBooleanActuator,
-  "\u0001\u0001\u0001\u0001\u0002" : OcaInt8Actuator,
-  "\u0001\u0001\u0001\u0001\u0003" : OcaInt16Actuator,
-  "\u0001\u0001\u0001\u0001\u0004" : OcaInt32Actuator,
-  "\u0001\u0001\u0001\u0001\u0005" : OcaInt64Actuator,
-  "\u0001\u0001\u0001\u0001\u0006" : OcaUint8Actuator,
-  "\u0001\u0001\u0001\u0001\u0007" : OcaUint16Actuator,
-  "\u0001\u0001\u0001\u0001\b" : OcaUint32Actuator,
-  "\u0001\u0001\u0001\u0001\t" : OcaUint64Actuator,
-  "\u0001\u0001\u0001\u0001\n" : OcaFloat32Actuator,
-  "\u0001\u0001\u0001\u0001\u000b" : OcaFloat64Actuator,
-  "\u0001\u0001\u0001\u0001\f" : OcaStringActuator,
-  "\u0001\u0001\u0001\u0001\r" : OcaBitstringActuator,
-  "\u0001\u0001\u0002" : OcaSensor,
-  "\u0001\u0001\u0002\u0002" : OcaLevelSensor,
-  "\u0001\u0001\u0002\u0002\u0001" : OcaAudioLevelSensor,
-  "\u0001\u0001\u0002\u0003" : OcaTimeIntervalSensor,
-  "\u0001\u0001\u0002\u0004" : OcaFrequencySensor,
-  "\u0001\u0001\u0002\u0005" : OcaTemperatureSensor,
-  "\u0001\u0001\u0002\u0006" : OcaIdentificationSensor,
-  "\u0001\u0001\u0002\u0007" : OcaVoltageSensor,
-  "\u0001\u0001\u0002\b" : OcaCurrentSensor,
-  "\u0001\u0001\u0002\t" : OcaImpedanceSensor,
-  "\u0001\u0001\u0002\n" : OcaGainSensor,
-  "\u0001\u0001\u0002\u0001" : OcaBasicSensor,
-  "\u0001\u0001\u0002\u0001\u0001" : OcaBooleanSensor,
-  "\u0001\u0001\u0002\u0001\u0002" : OcaInt8Sensor,
-  "\u0001\u0001\u0002\u0001\u0003" : OcaInt16Sensor,
-  "\u0001\u0001\u0002\u0001\u0004" : OcaInt32Sensor,
-  "\u0001\u0001\u0002\u0001\u0005" : OcaInt64Sensor,
-  "\u0001\u0001\u0002\u0001\u0006" : OcaUint8Sensor,
-  "\u0001\u0001\u0002\u0001\u0007" : OcaUint16Sensor,
-  "\u0001\u0001\u0002\u0001\b" : OcaUint32Sensor,
-  "\u0001\u0001\u0002\u0001\n" : OcaFloat32Sensor,
-  "\u0001\u0001\u0002\u0001\u000b" : OcaFloat64Sensor,
-  "\u0001\u0001\u0002\u0001\f" : OcaStringSensor,
-  "\u0001\u0001\u0002\u0001\r" : OcaBitstringSensor,
-  "\u0001\u0001\u0003" : OcaBlock,
-  "\u0001\u0001\u0004" : OcaBlockFactory,
-  "\u0001\u0001\u0005" : OcaMatrix,
-  "\u0001\u0002" : OcaAgent,
-  "\u0001\u0002\u0002" : OcaGrouper,
-  "\u0001\u0002\u0003" : OcaRamper,
-  "\u0001\u0002\u0004" : OcaNumericObserver,
-  "\u0001\u0002\u0005" : OcaLibrary,
-  "\u0001\u0002\u0007" : OcaPowerSupply,
-  "\u0001\u0002\b" : OcaEventHandler,
-  "\u0001\u0002\t" : OcaNumericObserverList,
-  "\u0001\u0002\u000f" : OcaMediaClock3,
-  "\u0001\u0002\u0010" : OcaTimeSource,
-  "\u0001\u0002\u0011" : OcaPhysicalPosition,
-  "\u0001\u0004" : OcaApplicationNetwork,
-  "\u0001\u0004\u0001" : OcaControlNetwork,
-  "\u0001\u0004\u0002" : OcaMediaTransportNetwork,
-  "\u0001\u0003" : OcaManager,
-  "\u0001\u0003\u0001" : OcaDeviceManager,
-  "\u0001\u0003\u0002" : OcaSecurityManager,
-  "\u0001\u0003\u0003" : OcaFirmwareManager,
-  "\u0001\u0003\u0004" : OcaSubscriptionManager,
-  "\u0001\u0003\u0005" : OcaPowerManager,
-  "\u0001\u0003\u0006" : OcaNetworkManager,
-  "\u0001\u0003\u0007" : OcaMediaClockManager,
-  "\u0001\u0003\b" : OcaLibraryManager,
-  "\u0001\u0003\t" : OcaAudioProcessingManager,
-  "\u0001\u0003\n" : OcaDeviceTimeManager,
-  "\u0001\u0003\u000b" : OcaTaskManager,
-  "\u0001\u0003\f" : OcaCodingManager,
-  "\u0001\u0003\r" : OcaDiagnosticManager,
-  "\u0001\u0001\u0006" : OcaNetworkSignalChannel,
-  "\u0001\u0002\u0001" : OcaNetwork,
-  "\u0001\u0002\u0006" : OcaMediaClock,
-  "\u0001\u0002\n" : OcaStreamNetwork,
-  "\u0001\u0002\u000b" : OcaStreamConnector,
-};
-
-/**
- * A factory function for classes in this module.
- */
-export function CreateObject(ClassID, device, ono)
-{
-  if (Classes.hasOwnProperty(ClassID))
-    return new Classes[ClassID](device, ono);
-  return null;
-}
+export const Classes = [
+OcaRoot, OcaWorker, OcaActuator, OcaMute, OcaPolarity, OcaSwitch, OcaGain, OcaPanBalance, OcaDelay, OcaDelayExtended, OcaFrequencyActuator, OcaFilterClassical, OcaFilterParametric, OcaFilterPolynomial, OcaFilterFIR, OcaFilterArbitraryCurve, OcaDynamics, OcaDynamicsDetector, OcaDynamicsCurve, OcaSignalGenerator, OcaSignalInput, OcaSignalOutput, OcaTemperatureActuator, OcaIdentificationActuator, OcaSummingPoint, OcaBasicActuator, OcaBooleanActuator, OcaInt8Actuator, OcaInt16Actuator, OcaInt32Actuator, OcaInt64Actuator, OcaUint8Actuator, OcaUint16Actuator, OcaUint32Actuator, OcaUint64Actuator, OcaFloat32Actuator, OcaFloat64Actuator, OcaStringActuator, OcaBitstringActuator, OcaSensor, OcaLevelSensor, OcaAudioLevelSensor, OcaTimeIntervalSensor, OcaFrequencySensor, OcaTemperatureSensor, OcaIdentificationSensor, OcaVoltageSensor, OcaCurrentSensor, OcaImpedanceSensor, OcaGainSensor, OcaBasicSensor, OcaBooleanSensor, OcaInt8Sensor, OcaInt16Sensor, OcaInt32Sensor, OcaInt64Sensor, OcaUint8Sensor, OcaUint16Sensor, OcaUint32Sensor, OcaFloat32Sensor, OcaFloat64Sensor, OcaStringSensor, OcaBitstringSensor, OcaBlock, OcaBlockFactory, OcaMatrix, OcaAgent, OcaGrouper, OcaRamper, OcaNumericObserver, OcaLibrary, OcaPowerSupply, OcaEventHandler, OcaNumericObserverList, OcaMediaClock3, OcaTimeSource, OcaPhysicalPosition, OcaApplicationNetwork, OcaControlNetwork, OcaMediaTransportNetwork, OcaManager, OcaDeviceManager, OcaSecurityManager, OcaFirmwareManager, OcaSubscriptionManager, OcaPowerManager, OcaNetworkManager, OcaMediaClockManager, OcaLibraryManager, OcaAudioProcessingManager, OcaDeviceTimeManager, OcaTaskManager, OcaCodingManager, OcaDiagnosticManager, OcaNetworkSignalChannel, OcaNetwork, OcaMediaClock, OcaStreamNetwork, OcaStreamConnector];
