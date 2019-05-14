@@ -298,10 +298,9 @@ export class RemoteDevice extends Events
       this.emit('close', e);
     });
 
-    if (!modules.length) {
-      modules = [ Classes ];
-    }
-    this.modules = modules;
+    this.modules = [];
+    this.add_control_classes(Classes);
+    modules.map((m) => this.add_control_classes(m));
 
     this.DeviceManager = new OcaDeviceManager(OcaManagerDefaultObjectNumbers.DeviceManager, this);
     this.SecurityManager = new OcaSecurityManager(OcaManagerDefaultObjectNumbers.SecurityManager, this);
@@ -409,6 +408,37 @@ export class RemoteDevice extends Events
     }
 
     return null;
+  }
+
+  /**
+   * Add a set of control classes. When communicating with a device the
+   * objects created for remote control objects will be picked from the
+   * ones added. The standard control classes are always added by
+   * default.
+   *
+   * @param {Object|Array} module - The set of classes to add. Either an
+   *    object contains the control classes with the classid as key, or
+   *    an array of control classes.
+   */
+  add_control_classes(module)
+  {
+    if (Array.isArray(module))
+    {
+      const m = {};
+
+      for (let i = 0; i < module.length; i++)
+      {
+        const o = module[i];
+        m[o.ClassID] = o;
+      }
+
+      module = m;
+    }
+    else if (typeof(module) !== 'object')
+    {
+      throw new Error("Unsupported module.");
+    }
+    this.modules.push(module);
   }
 
   find_class_by_id(id)

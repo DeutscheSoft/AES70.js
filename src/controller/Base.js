@@ -10,7 +10,7 @@ import {
     OcaEventID,
   } from '../Types';
 
-import { signature, Arguments } from '../signature_parser';
+import { signature, Arguments, make_encoder } from '../signature_parser';
 
 /**
  * Describes an AES70 property. Simplifies getting or setting properties
@@ -678,12 +678,18 @@ function implement_method(cls, method)
       rs = method[4];
 
   if (as && as.length)
+  {
+    as = as.map((v) => make_encoder(v));
     as = new signature(...as);
+  }
   else
     as = null;
 
   if (rs && rs.length)
+  {
+    rs = rs.map((v) => make_encoder(v));
     rs = new signature(...rs);
+  }
   else
     rs = null;
 
@@ -702,7 +708,7 @@ function implement_event(cls, event)
   const name = event[0],
         level = event[1],
         index = event[2],
-        as = new signature(...event[3]);
+        as = new signature(...event[3].map((v) => make_encoder(v)));
 
   Object.defineProperty(cls.prototype, "On" + name, {
     get: function()
@@ -736,10 +742,58 @@ function implement_property_event(cls, property)
   });
 }
 
+function make_signature(o)
+{
+  if (o instanceof signature)
+  {
+    return o;
+  }
+  else if (Array.isArray(o))
+  {
+    return new signature(... o.map((v) => make_encoder(v)));
+  }
+  else if (typeof(o) === 'string')
+  {
+    return new signature(make_encoder(o));
+  }
+}
+
+function make_property(o)
+{
+  if (typeof(o) === 'object')
+  {
+    if (o instanceof Property)
+    {
+      return o;
+    }
+    else if (Array.isArray(o))
+    {
+      o[1] = make_signature(o[1]);
+      return new Property(... o);
+    }
+  }
+
+  throw new Error("Bad property.");
+}
+
+/**
+ * Creates a control class.
+ *
+ * @param {String} name - The name of this control class.
+ * @param {number} level - The level in the class hierachy.
+ * @param {String} class_id - The class ID.
+ * @param {number} class_version - The class version.
+ * @param {Function} base - Class to extend.
+ * @param {Array} methods - List of methods.
+ * @param {Array} properties - List of properties.
+ * @param {Array} events - List of events.
+ */
 export function make_control_class(name, level, class_id, class_version, base, methods, properties, events)
 {
   let property_sync = null;
   let _properties = null;
+
+  properties = properties.map((v) => make_property(v));
 
   const cls = class extends base
   {

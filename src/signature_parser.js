@@ -230,9 +230,10 @@ export class signature extends signature_base
     for (i = 0; i < args.length; i++) {
       switch (typeof(args[i])) {
       case "number":
-        if ((args[i]|0) !== args[i] ||
-            args[i] < BOOLEAN || args[i] > PT_CUSTOM)
-              throw("Bad argument. Expected signature type.");
+        if ((args[i]|0) !== args[i] || args[i] < BOOLEAN || args[i] > PT_CUSTOM)
+        {
+          throw new Error("Bad argument. Expected signature type.");
+        }
         break;
       case "function":
         num_custom++;
@@ -968,6 +969,58 @@ export function BLOBFIXED(length) {
 }
 export function BITSTRINGFIXED(length) {
   return [ PT_BITSTRINGFIXED, length ];
+}
+
+export function make_encoder(type, ...args)
+{
+  if (args.length === 0)
+  {
+    if (typeof(type) === 'number') return type;
+    if (Array.isArray(type)) return make_encoder(... type);
+
+    switch (type)
+    {
+    case 'BOOLEAN': return BOOLEAN;
+    case 'UINT8': return UINT8;
+    case 'UINT16': return UINT16;
+    case 'UINT32': return UINT32;
+    case 'UINT64': return UINT64;
+    case 'INT8': return INT8;
+    case 'INT16': return INT16;
+    case 'INT32': return INT32;
+    case 'INT64': return INT64;
+    case 'FLOAT32': return FLOAT32;
+    case 'FLOAT64': return FLOAT64;
+    case 'BLOB': return BLOB;
+    case 'BLOB16': return BLOB16;
+    case 'REST': return REST;
+    case 'STRING': return STRING;
+    case 'BITSTRING': return BITSTRING;
+    default:
+      if (typeof(type) === 'function' && type.signature)
+        return type;
+    }
+  }
+  else
+  {
+    if (typeof(type) === 'number')
+    {
+      return [ type, ...args ];
+    }
+
+    switch (type)
+    {
+      case 'BITSTRINGFIXED': return BITSTRINGFIXED(args[0]);
+      case 'BLOBFIXED': return BLOBFIXED(args[0]);
+      case 'MAP': return MAP(make_encoder(args[0]), make_encoder(args[1]));
+      case 'LIST': return LIST(make_encoder(args[0]));
+      case 'LIST2D': return LIST2D(make_encoder(args[0]));
+      case 'LISTFIXED': return LISTFIXED(args[0], make_encoder(args[1]));
+      case 'MULTIMAP': return MULTIMAP(make_encoder(args[0]), make_encoder(args[1]));
+    }
+  }
+
+  throw new Error('Unsupported type: ' + type);
 }
 
 export class dynamic_signature extends signature_base

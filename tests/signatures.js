@@ -72,10 +72,12 @@ test_rand(new SP.signature(SP.MAP(SP.FLOAT32, SP.LIST(SP.INT32)), SP.BLOBFIXED(1
 test_rand(new SP.signature(SP.BLOBFIXED(10), SP.BLOB, SP.BLOBFIXED(10)));
 test_rand(new SP.signature(SP.BLOBFIXED(10)));
 test_enc(new SP.signature(SP.UINT16), 45);
+test_enc(new SP.signature(SP.make_encoder('UINT16')), 45);
 test_enc(new SP.signature(SP.UINT16), 0xffff);
 test_enc(new SP.signature(SP.LIST(SP.UINT16), SP.FLOAT32), [ 45, 34, 22, 55 ], 44);
 test_enc(new SP.signature(SP.BLOB), new ArrayBuffer(10));
 test_enc(new SP.signature(SP.MAP(SP.UINT16, SP.STRING)), new Map([ [34, "foo"], [23, "bar"] ]));
+test_enc(new SP.signature(SP.make_encoder(['MAP', 'UINT16', 'STRING' ])), new Map([ [34, "foo"], [23, "bar"] ]));
 
 for (var i = 0; i < 1000; i++) {
   test_rand(utils.get_random_signature(utils.get_random_int(5)));
