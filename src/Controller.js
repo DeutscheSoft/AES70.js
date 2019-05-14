@@ -444,12 +444,11 @@ export class RemoteDevice extends Events
 
   find_class_by_id(id)
   {
-    var ret;
     if (typeof(id) === "object" && id.ClassID) id = id.ClassID;
-    for (var i = 0; i < this.modules.length; i++) {
-      if (ret = this.modules[i][id]) {
-        return ret;
-      }
+    const modules = this.modules;
+    for (var i = modules.length - 1; i >= 0; i--) {
+      const ret = modules[i][id];
+      if (ret) return ret;
     }
     return null;
   }
@@ -491,7 +490,7 @@ export class RemoteDevice extends Events
         {
           ret.push(Promise.resolve(a[i]));
 
-          if (a[i] instanceof OcaBlock)
+          if (a[i].ClassID.startsWith(OcaBlock.ClassID))
           {
             ret.push(get_members(a[i]));
           }
