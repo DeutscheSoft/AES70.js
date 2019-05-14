@@ -21,6 +21,8 @@ class Throttler {
     this.interval = null;
     this.sending = false;
     this.buffer = null;
+    this.socket.on('error', () => this.close());
+    this.socket.on('close', () => this.close());
   }
 
   write() {
@@ -82,7 +84,7 @@ class FragmentationConnection {
     this.b = new Throttler(b);
 
     const onerror = (e) => {
-      console.warn(e);
+      //console.warn(e);
       this.close();
     };
 
