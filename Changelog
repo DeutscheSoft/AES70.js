@@ -2,7 +2,16 @@
 
 All notable changes and version updates will be documented in this file.
 
-## [1.1.0] - 2019-05-14
+## [1.1.2] - 2019-05-14
+
+### Fixed
+- Fixed a bug in define_custom_class when using complex
+  property types.
+
+### Fixed
+- Fixed a bug in define_custom_class
+
+## [1.1.1] - 2019-05-14
 
 ### Fixed
 - Fixed a bug in define_custom_class
