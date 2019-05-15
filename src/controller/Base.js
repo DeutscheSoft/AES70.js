@@ -750,7 +750,7 @@ function make_signature(o)
   }
   else if (Array.isArray(o))
   {
-    return new signature(... o.map((v) => make_encoder(v)));
+    return new signature(make_encoder(...o));
   }
   else if (typeof(o) === 'string')
   {
