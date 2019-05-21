@@ -597,7 +597,7 @@ export const OcaSwitch = make_control_class(
     [
       [ "Position", [ UINT16 ], 4, 1, false, false, null],
       [ "PositionNames", [ LIST(STRING) ], 4, 2, false, false, null],
-      [ "PositionEnable", [ LIST(BOOLEAN) ], 4, 3, false, false, null]
+      [ "PositionEnableds", [ LIST(BOOLEAN) ], 4, 3, false, false, null]
     ],
     [    ]
 );
@@ -696,7 +696,7 @@ export const OcaSwitch = make_control_class(
  * Vector of booleans which enable or disable corresponding switch
  * positions. Default values are a construction parameter. The usual
  * default value is True.
- * @member RemoteControlClasses.OcaSwitch#OnPositionEnableChanged {PropertyEvent<OcaList>} - This event is emitted when PositionEnable changes in the remote object.
+ * @member RemoteControlClasses.OcaSwitch#OnPositionEnabledsChanged {PropertyEvent<OcaList>} - This event is emitted when PositionEnableds changes in the remote object.
  */
 
 /**
@@ -1113,7 +1113,7 @@ export const OcaFilterParametric = make_control_class(
       [ "GetWidthParameter", 4, 5, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetWidthParameter", 4, 6, [ FLOAT32 ], [  ] ],
       [ "GetInbandGain", 4, 7, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetInbandgain", 4, 8, [ FLOAT32 ], [  ] ],
+      [ "SetInbandGain", 4, 8, [ FLOAT32 ], [  ] ],
       [ "GetShapeParameter", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
       [ "SetShapeParameter", 4, 10, [ FLOAT32 ], [  ] ],
       [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaParametricEQShape, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
@@ -1122,7 +1122,7 @@ export const OcaFilterParametric = make_control_class(
       [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null],
       [ "Shape", [ OcaParametricEQShape ], 4, 2, false, false, null],
       [ "WidthParameter", [ FLOAT32 ], 4, 3, false, false, ["Q"]],
-      [ "InBandGain", [ FLOAT32 ], 4, 4, false, false, null],
+      [ "InbandGain", [ FLOAT32 ], 4, 4, false, false, null],
       [ "ShapeParameter", [ FLOAT32 ], 4, 5, false, false, null]
     ],
     [    ]
@@ -1179,7 +1179,7 @@ export const OcaFilterParametric = make_control_class(
 /**
  * Sets the in-band gain of the equalizer. The return value indicates
  * whether the gain was successfully set.
- * @method RemoteControlClasses.OcaFilterParametric#SetInbandgain
+ * @method RemoteControlClasses.OcaFilterParametric#SetInbandGain
  * @param gain {OcaDB}
  *
  * @returns {Promise}
@@ -1232,7 +1232,7 @@ export const OcaFilterParametric = make_control_class(
  */
 /**
  * In-band gain of the parametric filter.
- * @member RemoteControlClasses.OcaFilterParametric#OnInBandGainChanged {PropertyEvent<OcaDB>} - This event is emitted when InBandGain changes in the remote object.
+ * @member RemoteControlClasses.OcaFilterParametric#OnInbandGainChanged {PropertyEvent<OcaDB>} - This event is emitted when InbandGain changes in the remote object.
  */
 /**
  * Width parameter. For certain filter types, this parameter may be used
@@ -2023,7 +2023,7 @@ export const OcaDynamicsCurve = make_control_class(
       [ "SetMultiple", 4, 13, [ UINT16, UINT8, LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32), FLOAT32, FLOAT32 ], [  ] ]
     ],
     [
-      [ "nSegments", [ UINT8 ], 4, 1, false, false, null],
+      [ "NSegments", [ UINT8 ], 4, 1, false, false, null],
       [ "Threshold", [ LIST(FLOAT32) ], 4, 2, false, false, null],
       [ "Slope", [ LIST(FLOAT32) ], 4, 3, false, false, null],
       [ "KneeParameter", [ LIST(FLOAT32) ], 4, 4, false, false, null],
@@ -2144,7 +2144,7 @@ export const OcaDynamicsCurve = make_control_class(
  */
 /**
  * Number of curve segments.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnnSegmentsChanged {PropertyEvent<OcaUint8>} - This event is emitted when nSegments changes in the remote object.
+ * @member RemoteControlClasses.OcaDynamicsCurve#OnNSegmentsChanged {PropertyEvent<OcaUint8>} - This event is emitted when NSegments changes in the remote object.
  */
 /**
  * <b>T[1..n-1]</b>. See class description for details.
@@ -2504,7 +2504,7 @@ export const OcaIdentificationActuator = make_control_class(
       [ "SetActive", 4, 2, [ BOOLEAN ], [  ] ]
     ],
     [
-      [ "active", [ BOOLEAN ], 4, 1, false, false, null]
+      [ "Active", [ BOOLEAN ], 4, 1, false, false, null]
     ],
     [    ]
 );
@@ -2525,7 +2525,7 @@ export const OcaIdentificationActuator = make_control_class(
  */
 /**
  * True iff indicator is active.
- * @member RemoteControlClasses.OcaIdentificationActuator#OnactiveChanged {PropertyEvent<OcaBoolean>} - This event is emitted when active changes in the remote object.
+ * @member RemoteControlClasses.OcaIdentificationActuator#OnActiveChanged {PropertyEvent<OcaBoolean>} - This event is emitted when Active changes in the remote object.
  */
 
 /**
@@ -3047,8 +3047,8 @@ export const OcaStringActuator = make_control_class(
     2,
     OcaBasicActuator,
     [
-      [ "GetValue", 5, 1, [  ], [ STRING ] ],
-      [ "SetValue", 5, 2, [ STRING ], [  ] ],
+      [ "GetSetting", 5, 1, [  ], [ STRING ] ],
+      [ "SetSetting", 5, 2, [ STRING ], [  ] ],
       [ "GetMaxLen", 5, 3, [  ], [ UINT16 ] ]
     ],
     [
@@ -3061,13 +3061,13 @@ export const OcaStringActuator = make_control_class(
 /**
  * Gets the value and max length of the Value property. The return value
  * indicates whether the data was successfully retrieved.
- * @method RemoteControlClasses.OcaStringActuator#GetValue
+ * @method RemoteControlClasses.OcaStringActuator#GetSetting
  * @returns {Promise<OcaString>}
  */
 /**
  * Sets the value of the Value property. The return value indicates
  * whether the property was successfully set.
- * @method RemoteControlClasses.OcaStringActuator#SetValue
+ * @method RemoteControlClasses.OcaStringActuator#SetSetting
  * @param Value {OcaString}
  *
  * @returns {Promise}
@@ -6910,7 +6910,7 @@ export const OcaDeviceManager = make_control_class(
       [ "SetDeviceName", 3, 5, [ STRING ], [  ] ],
       [ "GetModelDescription", 3, 6, [  ], [ OcaModelDescription ] ],
       [ "GetDeviceRole", 3, 7, [  ], [ STRING ] ],
-      [ "SetRole", 3, 8, [ STRING ], [  ] ],
+      [ "SetDeviceRole", 3, 8, [ STRING ], [  ] ],
       [ "GetUserInventoryCode", 3, 9, [  ], [ STRING ] ],
       [ "SetUserInventoryCode", 3, 10, [ STRING ], [  ] ],
       [ "GetEnabled", 3, 11, [  ], [ BOOLEAN ] ],
@@ -6990,7 +6990,7 @@ export const OcaDeviceManager = make_control_class(
 /**
  * Sets the value of the Role property. The return value indicates
  * whether the property was successfully set.
- * @method RemoteControlClasses.OcaDeviceManager#SetRole
+ * @method RemoteControlClasses.OcaDeviceManager#SetDeviceRole
  * @param role {OcaString}
  *
  * @returns {Promise}
@@ -8663,8 +8663,8 @@ export const OcaMediaClock = make_control_class(
       [ "GetDomainID", 3, 3, [  ], [ UINT16 ] ],
       [ "SetDomainID", 3, 4, [ UINT16 ], [  ] ],
       [ "GetSupportedRates", 3, 5, [  ], [ LIST(OcaMediaClockRate) ] ],
-      [ "GetRate", 3, 6, [  ], [ OcaMediaClockRate ] ],
-      [ "SetRate", 3, 7, [ OcaMediaClockRate ], [  ] ],
+      [ "GetCurrentRate", 3, 6, [  ], [ OcaMediaClockRate ] ],
+      [ "SetCurrentRate", 3, 7, [ OcaMediaClockRate ], [  ] ],
       [ "GetLockState", 3, 8, [  ], [ OcaMediaClockLockState ] ]
     ],
     [
@@ -8716,13 +8716,13 @@ export const OcaMediaClock = make_control_class(
 /**
  * Gets the current sampling rate. The return value indicates whether the
  * value was successfully retrieved.
- * @method RemoteControlClasses.OcaMediaClock#GetRate
+ * @method RemoteControlClasses.OcaMediaClock#GetCurrentRate
  * @returns {Promise<OcaMediaClockRate>}
  */
 /**
  * Sets the sampling rate. The return value indicates whether the rate
  * was successfully set.
- * @method RemoteControlClasses.OcaMediaClock#SetRate
+ * @method RemoteControlClasses.OcaMediaClock#SetCurrentRate
  * @param rate {OcaMediaClockRate}
  *
  * @returns {Promise}
