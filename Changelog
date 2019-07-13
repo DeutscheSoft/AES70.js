@@ -2,6 +2,10 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.1.3] - 2019-07-13
+
+- Renamed some getters/setters to match the corresponding property types
+
 ## [1.1.2] - 2019-05-14
 
 ### Fixed
