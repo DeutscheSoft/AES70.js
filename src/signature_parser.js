@@ -1,7 +1,7 @@
 import {
     buffer_to_utf8,
     utf8_to_buffer,
-    utf8_encoded_length,
+    utf8_encoded_length
   } from './utf8.js';
 
 export const
@@ -81,15 +81,43 @@ function utf8_codepoint_length(buf, pos, codepoints) {
     var c = buf.getUint8(pos);
     pos ++;
     if (c <= 0x7f) continue;
+    if (c <  0xc2)
+      throw new Error("Invalid UTF8 sequence.");
     pos ++;
     if (c <= 0xdf) continue;
     pos ++;
     if (c <= 0xef) continue;
     pos ++;
+    if (c <= 0xf4) continue;
+
+    throw new Error("Invalid UTF8 sequence.");
   }
 
   return pos - tmp;
 }
+
+function count_codepoints(s)
+{
+  let n = 0;
+
+  for (let i = 0; i < s.length; i++, n++)
+  {
+    const c = s.charCodeAt(i);
+
+    if (c >= 0xd800 && c <= 0xdbff)
+    {
+      i++;
+
+      const c = s.charCodeAt(i);
+
+      if (c < 0xDC00 || c > 0xDFFF)
+        throw new TypeError("Expected valid unicode string.");
+    }
+  }
+
+  return n;
+}
+
 
 function memcpy(dst, src, len) {
   var i;
@@ -680,11 +708,11 @@ export class signature extends signature_base
         break;
       case STRING:
         {
-          var len = src[src_pos].length;
-          dst.setUint16(pos, len);
+          const str = src[src_pos];
+          dst.setUint16(pos, count_codepoints(str));
           pos += 2;
-          var abuf = utf8_to_buffer(src[src_pos]);
-          len = abuf.byteLength;
+          const abuf = utf8_to_buffer(str);
+          const len = abuf.byteLength;
 
           memcpy(new Uint8Array(dst.buffer, dst.byteOffset+pos, len),
                  new Uint8Array(abuf),
