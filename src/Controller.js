@@ -258,11 +258,17 @@ export class ClientConnection extends Connection
         } else if (!h[0]) {
           h[1](o);
         } else {
-          var retval;
-          if (o.param_count) {
-            retval = h[0].decode(new DataView(o.parameters));
+          try
+          {
+            let retval;
+            if (o.param_count) {
+              retval = h[0].decode(new DataView(o.parameters));
+            }
+            h[1](retval);
+          } catch (err) {
+            h[2](err);
+            throw err;
           }
-          h[1](retval);
         }
       } else if (o instanceof Notification) {
         const subscribers = this.subscribers;
