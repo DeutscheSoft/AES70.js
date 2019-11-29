@@ -267,7 +267,6 @@ export class ClientConnection extends Connection
             h[1](retval);
           } catch (err) {
             h[2](err);
-            throw err;
           }
         }
       } else if (o instanceof Notification) {
