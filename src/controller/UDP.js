@@ -159,7 +159,11 @@ export class UDPConnection extends ClientConnection
         {
           if (--retry_count < 0)
           {
-            this.remove_command_handle(id)[2](new Error("Timeout"));
+            try
+            {
+              this.remove_command_handle(id)[2](new Error("Timeout"));
+            }
+            catch (err) {}
             return;
           }
 
