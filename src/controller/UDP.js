@@ -80,6 +80,11 @@ export class UDPConnection extends ClientConnection
     this.set_keepalive_interval(1);
   }
 
+  get is_reliable()
+  {
+    return false;
+  }
+
   /**
    * Connect to the given endpoint.
    *

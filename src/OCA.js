@@ -174,6 +174,11 @@ export class Connection extends Events
     };
   }
 
+  get is_reliable()
+  {
+    return true;
+  }
+
   send(buf)
   {
     if (this.is_closed()) throw new Error("Connection is closed.");
@@ -235,8 +240,11 @@ export class Connection extends Events
       } while (pos < buf.byteLength);
     } catch (e) {
       error(e);
-      error("Error when handling incoming data. Closing connection.");
-      this.close();
+      if (this.is_reliable)
+      {
+        error("Error when handling incoming data. Closing connection.");
+        this.close();
+      }
     }
   }
 
