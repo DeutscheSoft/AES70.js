@@ -66,7 +66,14 @@ export class UDPConnection extends ClientConnection
     this.q = [];
     socket.on('message', (data, rinfo) => {
       if (rinfo.port !== this.options.port || rinfo.address !== this.options.address) return;
-      this.read(data.buffer);
+      try
+      {
+        this.read(data.buffer);
+      }
+      catch (err)
+      {
+        console.warning("Failed to parse incoming AES70 packet: %o", err);
+      }
       if (this.inbuf !== null)
         this.close();
     });
