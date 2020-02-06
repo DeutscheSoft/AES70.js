@@ -2,6 +2,10 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.1.6] - 2020-02-06
+
+- Handle decoding errors incoming data in UDP connections gracefully
+
 ## [1.1.5] - 2019-11-29
 
 - Handle decoding errors for response payloads gracefully
