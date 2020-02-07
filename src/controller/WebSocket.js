@@ -24,7 +24,6 @@ export class WebSocketConnection extends ClientConnection
 
   write(buf)
   {
-    console.log('sending frame with length %d', buf.byteLength);
     this.ws.send(buf);
     super.write(buf);
   }
