@@ -6,9 +6,9 @@ import { ClientConnection } from '../Controller';
  */
 export class WebSocketConnection extends ClientConnection
 {
-  constructor(ws)
+  constructor(ws, options)
   {
-    super();
+    super(options);
     this.ws = ws;
     ws.binaryType = "arraybuffer";
     ws.addEventListener('message', (ev) => {
@@ -24,6 +24,7 @@ export class WebSocketConnection extends ClientConnection
 
   write(buf)
   {
+    console.log('sending frame with length %d', buf.byteLength);
     this.ws.send(buf);
     super.write(buf);
   }
@@ -54,7 +55,7 @@ export class WebSocketConnection extends ClientConnection
 
       ws.addEventListener('open', () => {
         ws.removeEventListener('error', on_error);
-        resolve(new this(ws));
+        resolve(new this(ws, options));
       });
       ws.addEventListener('error', on_error);
     });

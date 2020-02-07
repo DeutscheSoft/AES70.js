@@ -150,9 +150,9 @@ export class RemoteError
  */
 export class ClientConnection extends Connection
 {
-  constructor()
+  constructor(options)
   {
-    super();
+    super(options);
     this.command_handles = new Map();
     this.subscribers = new Map();
     this.keepalive_interval = null;

@@ -53,12 +53,11 @@ export class UDPConnection extends ClientConnection
 {
   constructor(socket, options)
   {
-    super();
     // allow us to batch 128 bytes max
     // Set this to a higher value, e.g. close to MTU
     // if you are sure that the device can handle it.
-    this.batch = options.batch >= 0 ? options.batch : 128;
-    this.options = options;
+    if (!(options.batch >= 0)) options.batch = 128;
+    super(options);
     this.socket = socket;
     this.delay = options.delay >= 0 ? options.delay : 5;
     this.retry_interval = options.retry_interval >= 0 ? options.retry_interval : 500;

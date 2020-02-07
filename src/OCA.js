@@ -120,10 +120,12 @@ function now() {
  */
 export class Connection extends Events
 {
-  constructor()
+  constructor(options)
   {
+    if (!options) options = {};
     super();
-    this.batch = 64000;
+    this.options = options;
+    this.batch = options.batch >= 0 ? options.batch : (64 * 1024);
     this.inbuf = null;
     this.inpos = 0;
     this.last_rx_time = now();
@@ -155,6 +157,10 @@ export class Connection extends Events
           for (i = start, len = 0; i < out.length && (!len || len + out[i].byteLength < this.batch); i++)
               len += out[i].byteLength;
 
+          console.log('Batching %d messages into %d bytes (batch: %d).',
+                      i, len, this.batch);
+
+
           let buf = new ArrayBuffer(len);
           let tmp = new Uint8Array(buf);
 
@@ -185,6 +191,7 @@ export class Connection extends Events
     if (!this.outbuf.length)
       setTimeout(this.write_cb, 0);
 
+    console.log('adding message with size %d', buf.byteLength);
     this.outbuf.push(buf);
   }
 

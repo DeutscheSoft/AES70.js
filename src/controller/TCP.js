@@ -12,9 +12,9 @@ import {
  */
 export class TCPConnection extends ClientConnection
 {
-  constructor(socket)
+  constructor(socket, options)
   {
-    super();
+    super(options);
     this.socket = socket;
     socket.on('data', (data) => {
       this.read(data.buffer);
@@ -51,7 +51,7 @@ export class TCPConnection extends ClientConnection
       socket.on('connect', () => {
         socket.removeListener('error', onerror);
         socket.removeListener('timeout', onerror);
-        resolve(new this(socket));
+        resolve(new this(socket, options));
       });
       socket.connect(options);
     });
