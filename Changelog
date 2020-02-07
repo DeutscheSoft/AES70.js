@@ -2,6 +2,12 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.1.9] - 2020-02-07
+
+- Allow configuring the maximum number of bytes per writes
+  for all connections. This can be useful for devices which
+  have limited network buffer space
+
 ## [1.1.8] - 2020-02-06
 
 - Handle decoding errors incoming data in UDP connections gracefully
