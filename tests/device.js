@@ -191,7 +191,7 @@ async function run(targets)
     try {
       if (remote.startsWith("ws://"))
       {
-        await run_tests(WebSocketConnection, { url: remote });
+        await run_tests(WebSocketConnection, { url: remote, batch: 2048 });
 
         console.log("");
         console.log("Testing device at %o (with packet fragmentation):", remote);
@@ -205,7 +205,7 @@ async function run(targets)
 
         await fragmentation.ready();
 
-        await run_tests(WebSocketConnection, { url: fragmentation.get_websocket_url() });
+        await run_tests(WebSocketConnection, { url: fragmentation.get_websocket_url(), batch: 2048 });
         fragmentation.close();
       }
       else
@@ -219,7 +219,7 @@ async function run(targets)
         {
         case "tcp":
           {
-            const target = { host: tmp[1], port: parseInt(tmp[2]) };
+            const target = { host: tmp[1], port: parseInt(tmp[2]), batch: 2048 };
             await run_tests(TCPConnection, target);
 
             console.log("");
@@ -234,7 +234,7 @@ async function run(targets)
           }
           break;
         case "udp":
-          await run_tests(UDPConnection, { host: tmp[1], port: parseInt(tmp[2]) });
+          await run_tests(UDPConnection, { host: tmp[1], port: parseInt(tmp[2]), batch: 2048 });
           break;
         default:
           throw new Error("Unsupported connection type: "+remote);
