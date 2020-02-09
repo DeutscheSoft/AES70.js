@@ -15,6 +15,15 @@ if (process.argv.length < 3)
 
 const delay = 4;
 
+const default_connect_options = {
+  batch: 2048
+};
+
+function connect_options(o)
+{
+  return Object.assign({}, default_connect_options, o);
+}
+
 class Throttler {
   constructor(socket) {
     this.socket = socket;
@@ -161,7 +170,7 @@ function get_runner(get_device)
 async function run_tests(type, target)
 {
   const get_device = async () => {
-    const connection = await type.connect(target);
+    const connection = await type.connect(connect_options(target));
     const device = new RemoteDevice(connection);
 
     device.set_keepalive_interval(1);
@@ -191,7 +200,7 @@ async function run(targets)
     try {
       if (remote.startsWith("ws://"))
       {
-        await run_tests(WebSocketConnection, { url: remote, batch: 2048 });
+        await run_tests(WebSocketConnection, { url: remote });
 
         console.log("");
         console.log("Testing device at %o (with packet fragmentation):", remote);
@@ -205,7 +214,7 @@ async function run(targets)
 
         await fragmentation.ready();
 
-        await run_tests(WebSocketConnection, { url: fragmentation.get_websocket_url(), batch: 2048 });
+        await run_tests(WebSocketConnection, { url: fragmentation.get_websocket_url() });
         fragmentation.close();
       }
       else
@@ -219,7 +228,7 @@ async function run(targets)
         {
         case "tcp":
           {
-            const target = { host: tmp[1], port: parseInt(tmp[2]), batch: 2048 };
+            const target = { host: tmp[1], port: parseInt(tmp[2]) };
             await run_tests(TCPConnection, target);
 
             console.log("");
@@ -234,7 +243,7 @@ async function run(targets)
           }
           break;
         case "udp":
-          await run_tests(UDPConnection, { host: tmp[1], port: parseInt(tmp[2]), batch: 2048 });
+          await run_tests(UDPConnection, { host: tmp[1], port: parseInt(tmp[2]) });
           break;
         default:
           throw new Error("Unsupported connection type: "+remote);
