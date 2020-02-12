@@ -164,6 +164,17 @@ class TestRunner
       this.log("OK (%d ms)\n", t2 - t1);
     }
   }
+
+  cleanup()
+  {
+    this.tests.forEach((t) => {
+      try
+      {
+        t.cleanup();
+      }
+      catch (er) {}
+    });
+  }
 }
 
 module.exports = {

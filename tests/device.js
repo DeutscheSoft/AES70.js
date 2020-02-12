@@ -167,6 +167,11 @@ function get_runner(get_device)
   return test_runner;
 }
 
+function timeout(n)
+{
+  return new Promise((resolve, reject) => setTimeout(resolve, n));
+}
+
 async function run_tests(type, target)
 {
   const get_device = async () => {
@@ -181,7 +186,18 @@ async function run_tests(type, target)
   const test_runner = get_runner(get_device);
 
   try {
-    await test_runner.run();
+    let timed_out = false;
+    const timeout_p = timeout(60*1000);
+    const test_p = test_runner.run();
+
+    await Promise.race([ timeout_p.then(() => { timed_out = true; }), test_p ]);
+
+    if (timed_out)
+    {
+      test_runner.cleanup();
+      test_p.catch((err) => {});
+      console.error("Test times out.\n");
+    }
   } catch (e) {
     throw e;
   }
