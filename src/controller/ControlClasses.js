@@ -278,24 +278,29 @@ export const OcaRoot = make_control_class(
  * class property instead of an object property. This property will be
  * overridden by each descendant class, in order to specify that class's
  * ClassID.
+ */
 /**
  * Identifies the interface version of the class. Any change to the class
  * definition leads to a higher class version. This property will be
  * overridden by each descendant class, in order to specify that class's
  * ClassVersion.
+ */
 /**
  * The object number that uniquely identifies the instantiated object.
  * This read-only property must be set at creation of the object. Derived
  * objects can hardcode the object number in its constructor, or offer a
  * constructor with object number parameter for dynamic allocation of
  * object numbers.
+ */
 /**
  * Read-only property that indicates whether the object is lockable or
  * non-lockable. The property value must be set during construction of
  * the object.
+ */
 /**
  * Read-only text property that describes object's role in the device.
  * Particularly useful for workers, e.g. "Input 1 Gain".
+ */
 
 /**
  * Abstract base class for classes that represent the device's
@@ -1319,6 +1324,7 @@ export const OcaFilterPolynomial = make_control_class(
 /**
  * Maximum order of A[] and B[], i.e. the maximum size of the A[] and B[]
  * arrays. Readonly.
+ */
 
 /**
  * A finite impulse response (FIR) filter.
@@ -1385,6 +1391,7 @@ export const OcaFilterFIR = make_control_class(
 /**
  * Length of the filter, in samples. Readonly. Value is set when
  * SetCoefficients(...) method executes.
+ */
 /**
  * Array of FIR Coefficients. The size of the array (number of entries)
  * is equal to the Order property plus 1.
@@ -3083,6 +3090,7 @@ export const OcaStringActuator = make_control_class(
  */
 /**
  * Maximum string length that this object can accept.
+ */
 
 /**
  * Bitstring actuator. Maximum bitstring length is 65,536 bits.
@@ -3184,6 +3192,7 @@ export const OcaSensor = make_control_class(
 /**
  * Enum that describes whether current reading value is valid and if not,
  * why not. Readonly.
+ */
 
 /**
  * Signal level sensor.
@@ -4222,6 +4231,7 @@ export const OcaBlock = make_control_class(
  * block. For dynamically-defined blocks, this value is the object number
  * of the block's factory. For the root block, the value of this property
  * is 1.
+ */
 /**
  * List of members in the block.
  * @member RemoteControlClasses.OcaBlock#OnMembersChanged {PropertyEvent<OcaList>} - This event is emitted when Members changes in the remote object.
@@ -4238,11 +4248,13 @@ export const OcaBlock = make_control_class(
 /**
  * Global block type identifier for reusable blocks. <b>Added in version
  * 2 of this class.</b>
+ */
 /**
  * For blocks constructed by factories. Map that indicates the actual
  * ONos allocated to the constructing OcaBlockFactory's prototype ONos.
  * Key is prototype ONo, value is actual ONo. <b>Added in version 2 of
  * this class.</b>
+ */
 
 /**
  * Factory to create custom block instances. Used only in reconfigurable
@@ -5586,6 +5598,7 @@ export const OcaLibrary = make_control_class(
  * definition of OcaLibVolMetaData, which is part of OcaLibVol, has
  * changed, and because it is now a private property whose changes are
  * signaled by the <b>OcaLibVolChanged </b>event.
+ */
 
 /**
  * A power supply.
@@ -5693,12 +5706,15 @@ export const OcaPowerSupply = make_control_class(
  * Fraction of power supply's load capacity that is currently not being
  * used. Readonly. Normal value range 0...1. A negative value indicates
  * this data is not available.
+ */
 /**
  * Fraction of power supply's energy storage that remains available. For
  * battery supplies. Readonly. Normal value range 0...1. A negative value
  * indicates this data is not available.
+ */
 /**
  * Physical location of power supply - internal or external.
+ */
 
 /**
  * Base class for event handler objects. This class applies to
@@ -6317,10 +6333,12 @@ export const OcaPhysicalPosition = make_control_class(
 /**
  * Type of physical coordinate system this object uses. Read-only, set at
  * object construction time.
+ */
 /**
  * Position descriptor field flags. Describe which position descriptor
  * fields are used by this object. Read-only, set at object construction
  * time.
+ */
 /**
  * Position coordinates. For details, see AES70-1, section 5.5.9 and the
  * <b>OcaPositionDescriptor </b>datatype definition.
@@ -6445,8 +6463,10 @@ export const OcaApplicationNetwork = make_control_class(
  * Specific label of the network. Can be used to provide human readable
  * information about the network. The label can be get and set over any
  * network.
+ */
 /**
  * Object number of block that contains this network.
+ */
 /**
  * Name or GUID that this device publishes in the network's
  * directory/discovery system to designate the services offered via this
@@ -7152,6 +7172,7 @@ export const OcaDeviceManager = make_control_class(
  * Overall device revision identifier. Format of string is
  * manufacturer-specific. Readonly. May be changed by proprietery
  * functions of firmware upload processes.
+ */
 
 /**
  * Manager that collects and controls security settings (including
@@ -7666,6 +7687,7 @@ export const OcaPowerManager = make_control_class(
 /**
  * Power state to which the device is transitioning. If no transition is
  * in progress, has value None. Readonly.
+ */
 
 /**
  * Optional manager that collects all media transport and control
@@ -8600,6 +8622,7 @@ export const OcaNetwork = make_control_class(
  * OcaNetworkType enum for details. This is a read-only property whose
  * value is fixed to the class that is inherited from OcaNetwork to
  * implement each specific type of network.
+ */
 /**
  * ID by which this network object is known on the network, i.e. the name
  * or GUID that this network object publishes in the network's
@@ -9015,6 +9038,7 @@ export const OcaStreamNetwork = make_control_class(
  * OcaNetworkType enum for details. This is a read-only property whose
  * value is fixed to the class that is inherited from OcaNetwork to
  * implement each specific type of network.
+ */
 /**
  * Type of media transport protocol used by the network, or NONE if this
  * network is not used for media transport.
