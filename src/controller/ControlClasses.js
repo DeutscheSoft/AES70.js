@@ -3994,6 +3994,39 @@ export const OcaBitstringSensor = make_control_class(
  */
 
 /**
+ * Basic Uint64 sensor.
+ * @extends RemoteControlClasses.OcaBasicSensor
+ * @class OcaUint64Sensor
+ * @memberof RemoteControlClasses
+ * @category RemoteControlClasses
+ */
+export const OcaUint64Sensor = make_control_class(
+    "OcaUint64Sensor",
+    5,
+    "\u0001\u0001\u0002\u0001\t",
+    2,
+    OcaBasicSensor,
+    [
+      [ "GetReading", 5, 1, [  ], [ UINT64, UINT64, UINT64 ] ]
+    ],
+    [
+      [ "Reading", [ UINT64 ], 5, 1, false, false, null]
+    ],
+    [    ]
+);
+
+/**
+ * Gets the value and limits of the <b>Reading </b>property. The return
+ * value indicates whether the data was successfully retrieved.
+ * @method RemoteControlClasses.OcaUint64Sensor#GetReading
+ * @returns {Promise<Arguments<OcaUint64,OcaUint64,OcaUint64>>}
+ */
+/**
+ * Uint64 reading.
+ * @member RemoteControlClasses.OcaUint64Sensor#OnReadingChanged {PropertyEvent<OcaUint64>} - This event is emitted when Reading changes in the remote object.
+ */
+
+/**
  * A block is an object with three aspects: - It can contain other
  * blocks. - It can contain workers. - It can contain agents. - It can
  * contain data networks. - It can contain application networks. - It has
@@ -9269,4 +9302,4 @@ export const OcaStreamConnector = make_control_class(
  * All classes defined in this module by their ClassID.
  */
 export const Classes = [
-OcaRoot, OcaWorker, OcaActuator, OcaMute, OcaPolarity, OcaSwitch, OcaGain, OcaPanBalance, OcaDelay, OcaDelayExtended, OcaFrequencyActuator, OcaFilterClassical, OcaFilterParametric, OcaFilterPolynomial, OcaFilterFIR, OcaFilterArbitraryCurve, OcaDynamics, OcaDynamicsDetector, OcaDynamicsCurve, OcaSignalGenerator, OcaSignalInput, OcaSignalOutput, OcaTemperatureActuator, OcaIdentificationActuator, OcaSummingPoint, OcaBasicActuator, OcaBooleanActuator, OcaInt8Actuator, OcaInt16Actuator, OcaInt32Actuator, OcaInt64Actuator, OcaUint8Actuator, OcaUint16Actuator, OcaUint32Actuator, OcaUint64Actuator, OcaFloat32Actuator, OcaFloat64Actuator, OcaStringActuator, OcaBitstringActuator, OcaSensor, OcaLevelSensor, OcaAudioLevelSensor, OcaTimeIntervalSensor, OcaFrequencySensor, OcaTemperatureSensor, OcaIdentificationSensor, OcaVoltageSensor, OcaCurrentSensor, OcaImpedanceSensor, OcaGainSensor, OcaBasicSensor, OcaBooleanSensor, OcaInt8Sensor, OcaInt16Sensor, OcaInt32Sensor, OcaInt64Sensor, OcaUint8Sensor, OcaUint16Sensor, OcaUint32Sensor, OcaFloat32Sensor, OcaFloat64Sensor, OcaStringSensor, OcaBitstringSensor, OcaBlock, OcaBlockFactory, OcaMatrix, OcaAgent, OcaGrouper, OcaRamper, OcaNumericObserver, OcaLibrary, OcaPowerSupply, OcaEventHandler, OcaNumericObserverList, OcaMediaClock3, OcaTimeSource, OcaPhysicalPosition, OcaApplicationNetwork, OcaControlNetwork, OcaMediaTransportNetwork, OcaManager, OcaDeviceManager, OcaSecurityManager, OcaFirmwareManager, OcaSubscriptionManager, OcaPowerManager, OcaNetworkManager, OcaMediaClockManager, OcaLibraryManager, OcaAudioProcessingManager, OcaDeviceTimeManager, OcaTaskManager, OcaCodingManager, OcaDiagnosticManager, OcaNetworkSignalChannel, OcaNetwork, OcaMediaClock, OcaStreamNetwork, OcaStreamConnector];
+OcaRoot, OcaWorker, OcaActuator, OcaMute, OcaPolarity, OcaSwitch, OcaGain, OcaPanBalance, OcaDelay, OcaDelayExtended, OcaFrequencyActuator, OcaFilterClassical, OcaFilterParametric, OcaFilterPolynomial, OcaFilterFIR, OcaFilterArbitraryCurve, OcaDynamics, OcaDynamicsDetector, OcaDynamicsCurve, OcaSignalGenerator, OcaSignalInput, OcaSignalOutput, OcaTemperatureActuator, OcaIdentificationActuator, OcaSummingPoint, OcaBasicActuator, OcaBooleanActuator, OcaInt8Actuator, OcaInt16Actuator, OcaInt32Actuator, OcaInt64Actuator, OcaUint8Actuator, OcaUint16Actuator, OcaUint32Actuator, OcaUint64Actuator, OcaFloat32Actuator, OcaFloat64Actuator, OcaStringActuator, OcaBitstringActuator, OcaSensor, OcaLevelSensor, OcaAudioLevelSensor, OcaTimeIntervalSensor, OcaFrequencySensor, OcaTemperatureSensor, OcaIdentificationSensor, OcaVoltageSensor, OcaCurrentSensor, OcaImpedanceSensor, OcaGainSensor, OcaBasicSensor, OcaBooleanSensor, OcaInt8Sensor, OcaInt16Sensor, OcaInt32Sensor, OcaInt64Sensor, OcaUint8Sensor, OcaUint16Sensor, OcaUint32Sensor, OcaFloat32Sensor, OcaFloat64Sensor, OcaStringSensor, OcaBitstringSensor, OcaUint64Sensor, OcaBlock, OcaBlockFactory, OcaMatrix, OcaAgent, OcaGrouper, OcaRamper, OcaNumericObserver, OcaLibrary, OcaPowerSupply, OcaEventHandler, OcaNumericObserverList, OcaMediaClock3, OcaTimeSource, OcaPhysicalPosition, OcaApplicationNetwork, OcaControlNetwork, OcaMediaTransportNetwork, OcaManager, OcaDeviceManager, OcaSecurityManager, OcaFirmwareManager, OcaSubscriptionManager, OcaPowerManager, OcaNetworkManager, OcaMediaClockManager, OcaLibraryManager, OcaAudioProcessingManager, OcaDeviceTimeManager, OcaTaskManager, OcaCodingManager, OcaDiagnosticManager, OcaNetworkSignalChannel, OcaNetwork, OcaMediaClock, OcaStreamNetwork, OcaStreamConnector];
