@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "module": "src/index.js",
   "browser": "src/index.browser.js",
+  "browser:module": "src/index.browser.js",
   "bin": {},
   "directories": {
     "lib": "lib"
