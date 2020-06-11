@@ -4,6 +4,7 @@
   "description": "A controller library for the AES70 protocol.",
   "main": "lib/index.js",
   "module": "src/index.js",
+  "browser": "src/index.browser.js",
   "bin": {},
   "directories": {
     "lib": "lib"
