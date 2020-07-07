@@ -887,8 +887,13 @@ export class signature extends signature_base
         num_custom++;
         break;
       case STRING:
-        pos += 2 + utf8_encoded_length(src[src_pos]);
-        break;
+        {
+          const str = src[src_pos];
+          if (str === void 0)
+            throw new TypeError('Expected string.');
+          pos += 2 + utf8_encoded_length(str);
+          break;
+        }
       case BITSTRING: 
         pos += 2 + ((src[src_pos].length + 7) >> 3);
         break;
