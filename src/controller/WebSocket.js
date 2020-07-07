@@ -1,4 +1,4 @@
-import { ClientConnection } from '../Controller';
+import { ClientConnection } from '../Controller.js';
 
 /**
  * {@link ClientConnection} subclass which implements OCP.1 with WebSocket

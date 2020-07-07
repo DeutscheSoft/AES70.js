@@ -8,9 +8,9 @@ import {
     OcaPropertyID,
     OcaEvent,
     OcaEventID,
-  } from '../Types';
+  } from '../Types.js';
 
-import { signature, Arguments, make_encoder } from '../signature_parser';
+import { signature, Arguments, make_encoder } from '../signature_parser.js';
 
 /**
  * Describes an AES70 property. Simplifies getting or setting properties

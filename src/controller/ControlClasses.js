@@ -8,7 +8,7 @@
 
 import {
     CommandRrq,
-  } from '../OCA';
+  } from '../OCA.js';
 
 import {
     ObjectBase,
@@ -150,7 +150,7 @@ import {
     OcaStreamConnectorStatus,
     OcaNetworkSignalChannelStatus,
     OcaNetworkMediaSourceOrSink,
-  } from '../Types';
+  } from '../Types.js';
 
 import {
     signature,
@@ -177,7 +177,7 @@ import {
     MULTIMAP,
     BLOBFIXED,
     BITSTRINGFIXED,
-  } from '../signature_parser';
+  } from '../signature_parser.js';
 
 const OcaMultiMap = MULTIMAP;
 

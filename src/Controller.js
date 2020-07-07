@@ -12,7 +12,7 @@ import {
     warn,
     error,
     tree_to_rolemap
-  } from './OCA';
+  } from './OCA.js';
 
 import {
     make_control_class
@@ -45,11 +45,11 @@ import {
     OcaBlockMember,
     OcaNotificationDeliveryMode,
     OcaStatus,
-  } from './Types';
+  } from './Types.js';
 
 import {
     signature
-  } from './signature_parser';
+  } from './signature_parser.js';
   
 const event_signature = new signature(OcaEvent);
 
