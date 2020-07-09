@@ -4,13 +4,11 @@ import { ClientConnection } from '../Controller.js';
  * {@link ClientConnection} subclass which implements OCP.1 with WebSocket
  * transport.
  */
-export class WebSocketConnection extends ClientConnection
-{
-  constructor(ws, options)
-  {
+export class WebSocketConnection extends ClientConnection {
+  constructor(ws, options) {
     super(options);
     this.ws = ws;
-    ws.binaryType = "arraybuffer";
+    ws.binaryType = 'arraybuffer';
     ws.addEventListener('message', (ev) => {
       this.read(ev.data);
     });
@@ -22,8 +20,7 @@ export class WebSocketConnection extends ClientConnection
     });
   }
 
-  write(buf)
-  {
+  write(buf) {
     this.ws.send(buf);
     super.write(buf);
   }
@@ -34,21 +31,17 @@ export class WebSocketConnection extends ClientConnection
    * @param {String} options.url - Endpoint WebSocket url.
    * @returns {Promise<WebSocketConnection>} - The connection.
    */
-  static connect(options)
-  {
+  static connect(options) {
     return new Promise((resolve, reject) => {
       let ws;
-      if (typeof WebSocket !== 'undefined')
-      {
+      if (typeof WebSocket !== 'undefined') {
         ws = new WebSocket(options.url);
-      }
-      else
-      {
+      } else {
         const WebSocket = require('ws');
         ws = new WebSocket(options.url);
       }
 
-      const on_error = function(e) {
+      const on_error = function (e) {
         reject(e);
       };
 
@@ -63,8 +56,7 @@ export class WebSocketConnection extends ClientConnection
   /**
    * Close the WebSocket.
    */
-  close()
-  {
+  close() {
     this.ws.close();
   }
 }

@@ -1,19 +1,13 @@
-import {
-    Socket
-  } from 'net';
+import { Socket } from 'net';
 
-import {
-    ClientConnection
-  } from '../Controller';
+import { ClientConnection } from '../Controller';
 
 /**
  * {@link ClientConnection} subclass which implements OCP.1 with TCP
  * transport.
  */
-export class TCPConnection extends ClientConnection
-{
-  constructor(socket, options)
-  {
+export class TCPConnection extends ClientConnection {
+  constructor(socket, options) {
     super(options);
     this.socket = socket;
     socket.on('data', (data) => {
@@ -29,8 +23,10 @@ export class TCPConnection extends ClientConnection
 
   cleanup() {
     super.cleanup();
-    try { this.socket.destroy(); } catch (e) {}
-  };
+    try {
+      this.socket.destroy();
+    } catch (e) {}
+  }
 
   /**
    * Connect to the given endpoint.
@@ -39,11 +35,10 @@ export class TCPConnection extends ClientConnection
    * @param {number} options.port - port
    * @returns {Promise<TCPConnection>} - The connection.
    */
-  static connect(options)
-  {
+  static connect(options) {
     return new Promise((resolve, reject) => {
       const socket = new Socket();
-      const onerror = function(ev) {
+      const onerror = function (ev) {
         reject(ev);
       };
       socket.on('error', onerror);
@@ -57,8 +52,7 @@ export class TCPConnection extends ClientConnection
     });
   }
 
-  write(buf)
-  {
+  write(buf) {
     this.socket.write(Buffer.from(buf), 'binary');
     super.write(buf);
   }
@@ -66,8 +60,7 @@ export class TCPConnection extends ClientConnection
   /**
    * Close the TCP connection.
    */
-  close()
-  {
+  close() {
     super.close();
     this.socket.destroy();
     this.emit('close');

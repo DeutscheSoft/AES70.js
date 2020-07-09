@@ -1,4 +1,3 @@
-
 /*
  * @namespace RemoteControlClasses
  * This namespace contains all control classes generated from the AES70
@@ -6,181 +5,178 @@
  * AES70-2018.
  */
 
-import {
-    CommandRrq,
-  } from '../OCA.js';
+import { CommandRrq } from '../OCA.js';
 
 import {
-    ObjectBase,
-    Event,
-    PropertyEvent,
-    Property,
-    Properties,
-    createPropertySync,
-    make_control_class,
-  } from './Base.js';
+  ObjectBase,
+  Event,
+  PropertyEvent,
+  Property,
+  Properties,
+  createPropertySync,
+  make_control_class,
+} from './Base.js';
 
 import {
-    OcaBaseDataType,
-    OcaClassAuthorityID,
-    OcaComponent,
-    OcaVersion,
-    OcaClassIdentification,
-    OcaOPath,
-    OcaObjectIdentification,
-    OcaMethodID,
-    OcaPropertyID,
-    OcaEventID,
-    OcaPropertyDescriptor,
-    OcaProperty,
-    OcaStatus,
-    OcaGlobalTypeIdentifier,
-    OcaStringComparisonType,
-    OcaPositionCoordinateSystem,
-    OcaPositionDescriptor,
-    OcaManagerDescriptor,
-    OcaManagerDefaultObjectNumbers,
-    OcaDeviceState,
-    OcaModelGUID,
-    OcaModelDescription,
-    OcaResetCause,
-    OcaPowerState,
-    OcaEvent,
-    OcaMethod,
-    OcaPropertyChangeType,
-    OcaLibVolChangedEventData,
-    OcaMediaConnectorElement,
-    OcaMediaConnectorState,
-    OcaMediaConnectorStatus,
-    OcaMediaConnectorStatusChangedEventData,
-    OcaTaskState,
-    OcaTaskStatus,
-    OcaLibVolIdentifier,
-    OcaTaskStateChangedEventData,
-    OcaPortMode,
-    OcaPortID,
-    OcaMediaStreamCastMode,
-    OcaMediaConnection,
-    OcaMediaCoding,
-    OcaMediaSourceConnector,
-    OcaMediaSourceConnectorChangedEventData,
-    OcaMediaSinkConnector,
-    OcaMediaSinkConnectorChangedEventData,
-    OcaObjectListEventData,
-    OcaObservationEventData,
-    OcaObservationListEventData,
-    OcaGrouperStatusChangeType,
-    OcaGrouperStatusChangeEventData,
-    OcaNotificationDeliveryMode,
-    OcaSubscriptionManagerState,
-    OcaImpedance,
-    OcaMuteState,
-    OcaPolarityState,
-    OcaDelayUnit,
-    OcaDelayValue,
-    OcaTransferFunction,
-    OcaClassicalFilterShape,
-    OcaFilterPassband,
-    OcaParametricEQShape,
-    OcaDynamicsFunction,
-    OcaPilotToneDetectorSpec,
-    OcaWaveformType,
-    OcaSweepType,
-    OcaUnitOfMeasure,
-    OcaPresentationUnit,
-    OcaLevelDetectionLaw,
-    OcaSensorReadingState,
-    OcaLevelMeterLaw,
-    OcaBlockMember,
-    OcaPort,
-    OcaSignalPath,
-    OcaProtoObjectIdentification,
-    OcaProtoPortID,
-    OcaProtoPort,
-    OcaProtoSignalPath,
-    OcaObjectSearchResult,
-    OcaObjectSearchResultFlags,
-    OcaGrouperGroup,
-    OcaGrouperCitizen,
-    OcaGrouperEnrollment,
-    OcaGrouperMode,
-    OcaObserverState,
-    OcaRelationalOperator,
-    OcaPowerSupplyType,
-    OcaPowerSupplyLocation,
-    OcaPowerSupplyState,
-    OcaRamperCommand,
-    OcaRamperState,
-    OcaTimeMode,
-    OcaTimePTP,
-    OcaTask,
-    OcaTaskCommand,
-    OcaTaskManagerState,
-    OcaRamperInterpolationLaw,
-    OcaLibVolStandardTypeID,
-    OcaLibVolType,
-    OcaLibraryIdentifier,
-    OcaLibAccess,
-    OcaLibVolMetadata,
-    OcaLibVol,
-    OcaLibVolData_ParamSet,
-    OcaLibParamSetAssignment,
-    OcaNetworkLinkType,
-    OcaNetworkSystemInterfaceDescriptor,
-    OcaApplicationNetworkState,
-    OcaApplicationNetworkCommand,
-    OcaNetworkMediaProtocol,
-    OcaNetworkControlProtocol,
-    OcaMediaConnectorCommand,
-    OcaMediaClockAvailability,
-    OcaMediaClockRate,
-    OcaTimeReferenceType,
-    OcaTimeProtocol,
-    OcaTimeSourceAvailability,
-    OcaTimeSourceSyncStatus,
-    OcaNetworkSystemInterfaceID,
-    OcaNetworkStatistics,
-    OcaStreamConnectorIdentification,
-    OcaStreamType,
-    OcaStreamStatus,
-    OcaStream,
-    OcaMediaClockLockState,
-    OcaMediaClockType,
-    OcaNetworkStatus,
-    OcaStreamConnectorStatus,
-    OcaNetworkSignalChannelStatus,
-    OcaNetworkMediaSourceOrSink,
-  } from '../Types.js';
+  OcaBaseDataType,
+  OcaClassAuthorityID,
+  OcaComponent,
+  OcaVersion,
+  OcaClassIdentification,
+  OcaOPath,
+  OcaObjectIdentification,
+  OcaMethodID,
+  OcaPropertyID,
+  OcaEventID,
+  OcaPropertyDescriptor,
+  OcaProperty,
+  OcaStatus,
+  OcaGlobalTypeIdentifier,
+  OcaStringComparisonType,
+  OcaPositionCoordinateSystem,
+  OcaPositionDescriptor,
+  OcaManagerDescriptor,
+  OcaManagerDefaultObjectNumbers,
+  OcaDeviceState,
+  OcaModelGUID,
+  OcaModelDescription,
+  OcaResetCause,
+  OcaPowerState,
+  OcaEvent,
+  OcaMethod,
+  OcaPropertyChangeType,
+  OcaLibVolChangedEventData,
+  OcaMediaConnectorElement,
+  OcaMediaConnectorState,
+  OcaMediaConnectorStatus,
+  OcaMediaConnectorStatusChangedEventData,
+  OcaTaskState,
+  OcaTaskStatus,
+  OcaLibVolIdentifier,
+  OcaTaskStateChangedEventData,
+  OcaPortMode,
+  OcaPortID,
+  OcaMediaStreamCastMode,
+  OcaMediaConnection,
+  OcaMediaCoding,
+  OcaMediaSourceConnector,
+  OcaMediaSourceConnectorChangedEventData,
+  OcaMediaSinkConnector,
+  OcaMediaSinkConnectorChangedEventData,
+  OcaObjectListEventData,
+  OcaObservationEventData,
+  OcaObservationListEventData,
+  OcaGrouperStatusChangeType,
+  OcaGrouperStatusChangeEventData,
+  OcaNotificationDeliveryMode,
+  OcaSubscriptionManagerState,
+  OcaImpedance,
+  OcaMuteState,
+  OcaPolarityState,
+  OcaDelayUnit,
+  OcaDelayValue,
+  OcaTransferFunction,
+  OcaClassicalFilterShape,
+  OcaFilterPassband,
+  OcaParametricEQShape,
+  OcaDynamicsFunction,
+  OcaPilotToneDetectorSpec,
+  OcaWaveformType,
+  OcaSweepType,
+  OcaUnitOfMeasure,
+  OcaPresentationUnit,
+  OcaLevelDetectionLaw,
+  OcaSensorReadingState,
+  OcaLevelMeterLaw,
+  OcaBlockMember,
+  OcaPort,
+  OcaSignalPath,
+  OcaProtoObjectIdentification,
+  OcaProtoPortID,
+  OcaProtoPort,
+  OcaProtoSignalPath,
+  OcaObjectSearchResult,
+  OcaObjectSearchResultFlags,
+  OcaGrouperGroup,
+  OcaGrouperCitizen,
+  OcaGrouperEnrollment,
+  OcaGrouperMode,
+  OcaObserverState,
+  OcaRelationalOperator,
+  OcaPowerSupplyType,
+  OcaPowerSupplyLocation,
+  OcaPowerSupplyState,
+  OcaRamperCommand,
+  OcaRamperState,
+  OcaTimeMode,
+  OcaTimePTP,
+  OcaTask,
+  OcaTaskCommand,
+  OcaTaskManagerState,
+  OcaRamperInterpolationLaw,
+  OcaLibVolStandardTypeID,
+  OcaLibVolType,
+  OcaLibraryIdentifier,
+  OcaLibAccess,
+  OcaLibVolMetadata,
+  OcaLibVol,
+  OcaLibVolData_ParamSet,
+  OcaLibParamSetAssignment,
+  OcaNetworkLinkType,
+  OcaNetworkSystemInterfaceDescriptor,
+  OcaApplicationNetworkState,
+  OcaApplicationNetworkCommand,
+  OcaNetworkMediaProtocol,
+  OcaNetworkControlProtocol,
+  OcaMediaConnectorCommand,
+  OcaMediaClockAvailability,
+  OcaMediaClockRate,
+  OcaTimeReferenceType,
+  OcaTimeProtocol,
+  OcaTimeSourceAvailability,
+  OcaTimeSourceSyncStatus,
+  OcaNetworkSystemInterfaceID,
+  OcaNetworkStatistics,
+  OcaStreamConnectorIdentification,
+  OcaStreamType,
+  OcaStreamStatus,
+  OcaStream,
+  OcaMediaClockLockState,
+  OcaMediaClockType,
+  OcaNetworkStatus,
+  OcaStreamConnectorStatus,
+  OcaNetworkSignalChannelStatus,
+  OcaNetworkMediaSourceOrSink,
+} from '../Types.js';
 
 import {
-    signature,
-    BOOLEAN,
-    UINT8,
-    UINT16,
-    UINT32,
-    UINT64,
-    INT8,
-    INT16,
-    INT32,
-    INT64,
-    FLOAT32,
-    FLOAT64,
-    BLOB,
-    BLOB16,
-    REST,
-    STRING,
-    BITSTRING,
-    LIST,
-    LIST2D,
-    LISTFIXED,
-    MAP,
-    MULTIMAP,
-    BLOBFIXED,
-    BITSTRINGFIXED,
-  } from '../signature_parser.js';
+  signature,
+  BOOLEAN,
+  UINT8,
+  UINT16,
+  UINT32,
+  UINT64,
+  INT8,
+  INT16,
+  INT32,
+  INT64,
+  FLOAT32,
+  FLOAT64,
+  BLOB,
+  BLOB16,
+  REST,
+  STRING,
+  BITSTRING,
+  LIST,
+  LIST2D,
+  LISTFIXED,
+  MAP,
+  MULTIMAP,
+  BLOBFIXED,
+  BITSTRINGFIXED,
+} from '../signature_parser.js';
 
 const OcaMultiMap = MULTIMAP;
-
 
 /**
  * The abstract root class of which all OCA classes derive. It offers
@@ -192,28 +188,27 @@ const OcaMultiMap = MULTIMAP;
  * @category RemoteControlClasses
  */
 export const OcaRoot = make_control_class(
-    "OcaRoot",
-    1,
-    "\u0001",
-    2,
-    ObjectBase,
-    [
-      [ "GetClassIdentification", 1, 1, [  ], [ OcaClassIdentification ] ],
-      [ "GetLockable", 1, 2, [  ], [ BOOLEAN ] ],
-      [ "LockTotal", 1, 3, [  ], [  ] ],
-      [ "Unlock", 1, 4, [  ], [  ] ],
-      [ "GetRole", 1, 5, [  ], [ STRING ] ],
-      [ "LockReadonly", 1, 6, [  ], [  ] ]
-    ],
-    [
-      [ "ClassID", [ BLOB16 ], 1, 1, true, true, null],
-      [ "ClassVersion", [ UINT16 ], 1, 2, true, true, null],
-      [ "ObjectNumber", [ UINT32 ], 1, 3, true, false, null],
-      [ "Lockable", [ BOOLEAN ], 1, 4, true, false, null],
-      [ "Role", [ STRING ], 1, 5, true, false, null]
-    ],
-    [
-      [ "PropertyChanged", 1, 1, [ OcaPropertyID, REST ] ]    ]
+  'OcaRoot',
+  1,
+  '\u0001',
+  2,
+  ObjectBase,
+  [
+    ['GetClassIdentification', 1, 1, [], [OcaClassIdentification]],
+    ['GetLockable', 1, 2, [], [BOOLEAN]],
+    ['LockTotal', 1, 3, [], []],
+    ['Unlock', 1, 4, [], []],
+    ['GetRole', 1, 5, [], [STRING]],
+    ['LockReadonly', 1, 6, [], []],
+  ],
+  [
+    ['ClassID', [BLOB16], 1, 1, true, true, null],
+    ['ClassVersion', [UINT16], 1, 2, true, true, null],
+    ['ObjectNumber', [UINT32], 1, 3, true, false, null],
+    ['Lockable', [BOOLEAN], 1, 4, true, false, null],
+    ['Role', [STRING], 1, 5, true, false, null],
+  ],
+  [['PropertyChanged', 1, 1, [OcaPropertyID, REST]]]
 );
 
 /**
@@ -311,34 +306,34 @@ export const OcaRoot = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaWorker = make_control_class(
-    "OcaWorker",
-    2,
-    "\u0001\u0001",
-    2,
-    OcaRoot,
-    [
-      [ "GetEnabled", 2, 1, [  ], [ BOOLEAN ] ],
-      [ "SetEnabled", 2, 2, [ BOOLEAN ], [  ] ],
-      [ "AddPort", 2, 3, [ STRING, OcaPortMode ], [ OcaPortID ] ],
-      [ "DeletePort", 2, 4, [ OcaPortID ], [  ] ],
-      [ "GetPorts", 2, 5, [  ], [ LIST(OcaPort) ] ],
-      [ "GetPortName", 2, 6, [ OcaPortID ], [ STRING ] ],
-      [ "SetPortName", 2, 7, [ OcaPortID, STRING ], [  ] ],
-      [ "GetLabel", 2, 8, [  ], [ STRING ] ],
-      [ "SetLabel", 2, 9, [ STRING ], [  ] ],
-      [ "GetOwner", 2, 10, [  ], [ UINT32 ] ],
-      [ "GetLatency", 2, 11, [  ], [ FLOAT32 ] ],
-      [ "SetLatency", 2, 12, [ FLOAT32 ], [  ] ],
-      [ "GetPath", 2, 13, [  ], [ LIST(STRING), LIST(UINT32) ] ]
-    ],
-    [
-      [ "Enabled", [ BOOLEAN ], 2, 1, false, false, null],
-      [ "Ports", [ LIST(OcaPort) ], 2, 2, false, false, null],
-      [ "Label", [ STRING ], 2, 3, false, false, null],
-      [ "Owner", [ UINT32 ], 2, 4, false, false, null],
-      [ "Latency", [ FLOAT32 ], 2, 5, false, false, null]
-    ],
-    [    ]
+  'OcaWorker',
+  2,
+  '\u0001\u0001',
+  2,
+  OcaRoot,
+  [
+    ['GetEnabled', 2, 1, [], [BOOLEAN]],
+    ['SetEnabled', 2, 2, [BOOLEAN], []],
+    ['AddPort', 2, 3, [STRING, OcaPortMode], [OcaPortID]],
+    ['DeletePort', 2, 4, [OcaPortID], []],
+    ['GetPorts', 2, 5, [], [LIST(OcaPort)]],
+    ['GetPortName', 2, 6, [OcaPortID], [STRING]],
+    ['SetPortName', 2, 7, [OcaPortID, STRING], []],
+    ['GetLabel', 2, 8, [], [STRING]],
+    ['SetLabel', 2, 9, [STRING], []],
+    ['GetOwner', 2, 10, [], [UINT32]],
+    ['GetLatency', 2, 11, [], [FLOAT32]],
+    ['SetLatency', 2, 12, [FLOAT32], []],
+    ['GetPath', 2, 13, [], [LIST(STRING), LIST(UINT32)]],
+  ],
+  [
+    ['Enabled', [BOOLEAN], 2, 1, false, false, null],
+    ['Ports', [LIST(OcaPort)], 2, 2, false, false, null],
+    ['Label', [STRING], 2, 3, false, false, null],
+    ['Owner', [UINT32], 2, 4, false, false, null],
+    ['Latency', [FLOAT32], 2, 5, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -477,18 +472,15 @@ export const OcaWorker = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaActuator = make_control_class(
-    "OcaActuator",
-    3,
-    "\u0001\u0001\u0001",
-    2,
-    OcaWorker,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaActuator',
+  3,
+  '\u0001\u0001\u0001',
+  2,
+  OcaWorker,
+  [],
+  [],
+  []
 );
-
 
 /**
  * Signal mute.
@@ -498,19 +490,17 @@ export const OcaActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaMute = make_control_class(
-    "OcaMute",
-    4,
-    "\u0001\u0001\u0001\u0002",
-    2,
-    OcaActuator,
-    [
-      [ "GetState", 4, 1, [  ], [ OcaMuteState ] ],
-      [ "SetState", 4, 2, [ OcaMuteState ], [  ] ]
-    ],
-    [
-      [ "State", [ OcaMuteState ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaMute',
+  4,
+  '\u0001\u0001\u0001\u0002',
+  2,
+  OcaActuator,
+  [
+    ['GetState', 4, 1, [], [OcaMuteState]],
+    ['SetState', 4, 2, [OcaMuteState], []],
+  ],
+  [['State', [OcaMuteState], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -540,19 +530,17 @@ export const OcaMute = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaPolarity = make_control_class(
-    "OcaPolarity",
-    4,
-    "\u0001\u0001\u0001\u0003",
-    2,
-    OcaActuator,
-    [
-      [ "GetState", 4, 1, [  ], [ OcaPolarityState ] ],
-      [ "SetState", 4, 2, [ OcaPolarityState ], [  ] ]
-    ],
-    [
-      [ "State", [ OcaPolarityState ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaPolarity',
+  4,
+  '\u0001\u0001\u0001\u0003',
+  2,
+  OcaActuator,
+  [
+    ['GetState', 4, 1, [], [OcaPolarityState]],
+    ['SetState', 4, 2, [OcaPolarityState], []],
+  ],
+  [['State', [OcaPolarityState], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -582,29 +570,29 @@ export const OcaPolarity = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSwitch = make_control_class(
-    "OcaSwitch",
-    4,
-    "\u0001\u0001\u0001\u0004",
-    2,
-    OcaActuator,
-    [
-      [ "GetPosition", 4, 1, [  ], [ UINT16, UINT16, UINT16 ] ],
-      [ "SetPosition", 4, 2, [ UINT16 ], [  ] ],
-      [ "GetPositionName", 4, 3, [ UINT16 ], [ STRING ] ],
-      [ "SetPositionName", 4, 4, [ UINT16, STRING ], [  ] ],
-      [ "GetPositionNames", 4, 5, [  ], [ LIST(STRING) ] ],
-      [ "SetPositionNames", 4, 6, [ LIST(STRING) ], [  ] ],
-      [ "GetPositionEnabled", 4, 7, [ UINT16 ], [ BOOLEAN ] ],
-      [ "SetPositionEnabled", 4, 8, [ UINT16, BOOLEAN ], [  ] ],
-      [ "GetPositionEnableds", 4, 9, [  ], [ LIST(BOOLEAN) ] ],
-      [ "SetPositionEnableds", 4, 10, [ LIST(BOOLEAN) ], [  ] ]
-    ],
-    [
-      [ "Position", [ UINT16 ], 4, 1, false, false, null],
-      [ "PositionNames", [ LIST(STRING) ], 4, 2, false, false, null],
-      [ "PositionEnableds", [ LIST(BOOLEAN) ], 4, 3, false, false, null]
-    ],
-    [    ]
+  'OcaSwitch',
+  4,
+  '\u0001\u0001\u0001\u0004',
+  2,
+  OcaActuator,
+  [
+    ['GetPosition', 4, 1, [], [UINT16, UINT16, UINT16]],
+    ['SetPosition', 4, 2, [UINT16], []],
+    ['GetPositionName', 4, 3, [UINT16], [STRING]],
+    ['SetPositionName', 4, 4, [UINT16, STRING], []],
+    ['GetPositionNames', 4, 5, [], [LIST(STRING)]],
+    ['SetPositionNames', 4, 6, [LIST(STRING)], []],
+    ['GetPositionEnabled', 4, 7, [UINT16], [BOOLEAN]],
+    ['SetPositionEnabled', 4, 8, [UINT16, BOOLEAN], []],
+    ['GetPositionEnableds', 4, 9, [], [LIST(BOOLEAN)]],
+    ['SetPositionEnableds', 4, 10, [LIST(BOOLEAN)], []],
+  ],
+  [
+    ['Position', [UINT16], 4, 1, false, false, null],
+    ['PositionNames', [LIST(STRING)], 4, 2, false, false, null],
+    ['PositionEnableds', [LIST(BOOLEAN)], 4, 3, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -712,19 +700,17 @@ export const OcaSwitch = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaGain = make_control_class(
-    "OcaGain",
-    4,
-    "\u0001\u0001\u0001\u0005",
-    2,
-    OcaActuator,
-    [
-      [ "GetGain", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetGain", 4, 2, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "Gain", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaGain',
+  4,
+  '\u0001\u0001\u0001\u0005',
+  2,
+  OcaActuator,
+  [
+    ['GetGain', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetGain', 4, 2, [FLOAT32], []],
+  ],
+  [['Gain', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -754,22 +740,22 @@ export const OcaGain = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaPanBalance = make_control_class(
-    "OcaPanBalance",
-    4,
-    "\u0001\u0001\u0001\u0006",
-    2,
-    OcaActuator,
-    [
-      [ "GetPosition", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetPosition", 4, 2, [ FLOAT32 ], [  ] ],
-      [ "GetMidpointGain", 4, 3, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetMidpointGain", 4, 4, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "Position", [ FLOAT32 ], 4, 1, false, false, null],
-      [ "MidpointGain", [ FLOAT32 ], 4, 2, false, false, null]
-    ],
-    [    ]
+  'OcaPanBalance',
+  4,
+  '\u0001\u0001\u0001\u0006',
+  2,
+  OcaActuator,
+  [
+    ['GetPosition', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetPosition', 4, 2, [FLOAT32], []],
+    ['GetMidpointGain', 4, 3, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetMidpointGain', 4, 4, [FLOAT32], []],
+  ],
+  [
+    ['Position', [FLOAT32], 4, 1, false, false, null],
+    ['MidpointGain', [FLOAT32], 4, 2, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -819,19 +805,17 @@ export const OcaPanBalance = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDelay = make_control_class(
-    "OcaDelay",
-    4,
-    "\u0001\u0001\u0001\u0007",
-    2,
-    OcaActuator,
-    [
-      [ "GetDelayTime", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDelayTime", 4, 2, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "DelayTime", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaDelay',
+  4,
+  '\u0001\u0001\u0001\u0007',
+  2,
+  OcaActuator,
+  [
+    ['GetDelayTime', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetDelayTime', 4, 2, [FLOAT32], []],
+  ],
+  [['DelayTime', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -863,20 +847,18 @@ export const OcaDelay = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDelayExtended = make_control_class(
-    "OcaDelayExtended",
-    5,
-    "\u0001\u0001\u0001\u0007\u0001",
-    2,
-    OcaDelay,
-    [
-      [ "GetDelayValue", 5, 1, [  ], [ OcaDelayValue, OcaDelayValue, OcaDelayValue ] ],
-      [ "SetDelayValue", 5, 2, [ OcaDelayValue ], [  ] ],
-      [ "GetDelayValueConverted", 5, 3, [ OcaDelayUnit ], [ OcaDelayValue ] ]
-    ],
-    [
-      [ "DelayValue", [ OcaDelayValue ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaDelayExtended',
+  5,
+  '\u0001\u0001\u0001\u0007\u0001',
+  2,
+  OcaDelay,
+  [
+    ['GetDelayValue', 5, 1, [], [OcaDelayValue, OcaDelayValue, OcaDelayValue]],
+    ['SetDelayValue', 5, 2, [OcaDelayValue], []],
+    ['GetDelayValueConverted', 5, 3, [OcaDelayUnit], [OcaDelayValue]],
+  ],
+  [['DelayValue', [OcaDelayValue], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -914,19 +896,17 @@ export const OcaDelayExtended = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFrequencyActuator = make_control_class(
-    "OcaFrequencyActuator",
-    4,
-    "\u0001\u0001\u0001\b",
-    2,
-    OcaActuator,
-    [
-      [ "GetFrequency", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetFrequency", 4, 2, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFrequencyActuator',
+  4,
+  '\u0001\u0001\u0001\b',
+  2,
+  OcaActuator,
+  [
+    ['GetFrequency', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetFrequency', 4, 2, [FLOAT32], []],
+  ],
+  [['Frequency', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -958,32 +938,45 @@ export const OcaFrequencyActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFilterClassical = make_control_class(
-    "OcaFilterClassical",
-    4,
-    "\u0001\u0001\u0001\t",
-    2,
-    OcaActuator,
+  'OcaFilterClassical',
+  4,
+  '\u0001\u0001\u0001\t',
+  2,
+  OcaActuator,
+  [
+    ['GetFrequency', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetFrequency', 4, 2, [FLOAT32], []],
+    ['GetPassband', 4, 3, [], [OcaFilterPassband]],
+    ['SetPassband', 4, 4, [OcaFilterPassband], []],
+    ['GetShape', 4, 5, [], [OcaClassicalFilterShape]],
+    ['SetShape', 4, 6, [OcaClassicalFilterShape], []],
+    ['GetOrder', 4, 7, [], [UINT16, UINT16, UINT16]],
+    ['SetOrder', 4, 8, [UINT16], []],
+    ['GetParameter', 4, 9, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetParameter', 4, 10, [FLOAT32], []],
     [
-      [ "GetFrequency", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetFrequency", 4, 2, [ FLOAT32 ], [  ] ],
-      [ "GetPassband", 4, 3, [  ], [ OcaFilterPassband ] ],
-      [ "SetPassband", 4, 4, [ OcaFilterPassband ], [  ] ],
-      [ "GetShape", 4, 5, [  ], [ OcaClassicalFilterShape ] ],
-      [ "SetShape", 4, 6, [ OcaClassicalFilterShape ], [  ] ],
-      [ "GetOrder", 4, 7, [  ], [ UINT16, UINT16, UINT16 ] ],
-      [ "SetOrder", 4, 8, [ UINT16 ], [  ] ],
-      [ "GetParameter", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetParameter", 4, 10, [ FLOAT32 ], [  ] ],
-      [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaFilterPassband, OcaClassicalFilterShape, UINT16, FLOAT32 ], [  ] ]
+      'SetMultiple',
+      4,
+      11,
+      [
+        UINT16,
+        FLOAT32,
+        OcaFilterPassband,
+        OcaClassicalFilterShape,
+        UINT16,
+        FLOAT32,
+      ],
+      [],
     ],
-    [
-      [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null],
-      [ "Passband", [ OcaFilterPassband ], 4, 2, false, false, null],
-      [ "Shape", [ OcaClassicalFilterShape ], 4, 3, false, false, null],
-      [ "Order", [ UINT16 ], 4, 4, false, false, null],
-      [ "Parameter", [ FLOAT32 ], 4, 5, false, false, null]
-    ],
-    [    ]
+  ],
+  [
+    ['Frequency', [FLOAT32], 4, 1, false, false, null],
+    ['Passband', [OcaFilterPassband], 4, 2, false, false, null],
+    ['Shape', [OcaClassicalFilterShape], 4, 3, false, false, null],
+    ['Order', [UINT16], 4, 4, false, false, null],
+    ['Parameter', [FLOAT32], 4, 5, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -1105,32 +1098,38 @@ export const OcaFilterClassical = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFilterParametric = make_control_class(
-    "OcaFilterParametric",
-    4,
-    "\u0001\u0001\u0001\n",
-    2,
-    OcaActuator,
+  'OcaFilterParametric',
+  4,
+  '\u0001\u0001\u0001\n',
+  2,
+  OcaActuator,
+  [
+    ['GetFrequency', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetFrequency', 4, 2, [FLOAT32], []],
+    ['GetShape', 4, 3, [], [OcaParametricEQShape]],
+    ['SetShape', 4, 4, [OcaParametricEQShape], []],
+    ['GetWidthParameter', 4, 5, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetWidthParameter', 4, 6, [FLOAT32], []],
+    ['GetInbandGain', 4, 7, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetInbandGain', 4, 8, [FLOAT32], []],
+    ['GetShapeParameter', 4, 9, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetShapeParameter', 4, 10, [FLOAT32], []],
     [
-      [ "GetFrequency", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetFrequency", 4, 2, [ FLOAT32 ], [  ] ],
-      [ "GetShape", 4, 3, [  ], [ OcaParametricEQShape ] ],
-      [ "SetShape", 4, 4, [ OcaParametricEQShape ], [  ] ],
-      [ "GetWidthParameter", 4, 5, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetWidthParameter", 4, 6, [ FLOAT32 ], [  ] ],
-      [ "GetInbandGain", 4, 7, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetInbandGain", 4, 8, [ FLOAT32 ], [  ] ],
-      [ "GetShapeParameter", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetShapeParameter", 4, 10, [ FLOAT32 ], [  ] ],
-      [ "SetMultiple", 4, 11, [ UINT16, FLOAT32, OcaParametricEQShape, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
+      'SetMultiple',
+      4,
+      11,
+      [UINT16, FLOAT32, OcaParametricEQShape, FLOAT32, FLOAT32, FLOAT32],
+      [],
     ],
-    [
-      [ "Frequency", [ FLOAT32 ], 4, 1, false, false, null],
-      [ "Shape", [ OcaParametricEQShape ], 4, 2, false, false, null],
-      [ "WidthParameter", [ FLOAT32 ], 4, 3, false, false, ["Q"]],
-      [ "InbandGain", [ FLOAT32 ], 4, 4, false, false, null],
-      [ "ShapeParameter", [ FLOAT32 ], 4, 5, false, false, null]
-    ],
-    [    ]
+  ],
+  [
+    ['Frequency', [FLOAT32], 4, 1, false, false, null],
+    ['Shape', [OcaParametricEQShape], 4, 2, false, false, null],
+    ['WidthParameter', [FLOAT32], 4, 3, false, false, ['Q']],
+    ['InbandGain', [FLOAT32], 4, 4, false, false, null],
+    ['ShapeParameter', [FLOAT32], 4, 5, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -1255,25 +1254,25 @@ export const OcaFilterParametric = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFilterPolynomial = make_control_class(
-    "OcaFilterPolynomial",
-    4,
-    "\u0001\u0001\u0001\u000b",
-    2,
-    OcaActuator,
-    [
-      [ "GetCoefficients", 4, 1, [  ], [ LIST(FLOAT32), LIST(FLOAT32) ] ],
-      [ "SetCoefficients", 4, 2, [ LIST(FLOAT32), LIST(FLOAT32) ], [  ] ],
-      [ "GetSampleRate", 4, 3, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSampleRate", 4, 4, [ FLOAT32 ], [  ] ],
-      [ "GetMaxOrder", 4, 5, [  ], [ UINT8 ] ]
-    ],
-    [
-      [ "A", [ LIST(FLOAT32) ], 4, 1, false, false, null],
-      [ "B", [ LIST(FLOAT32) ], 4, 2, false, false, null],
-      [ "SampleRate", [ FLOAT32 ], 4, 3, false, false, null],
-      [ "MaxOrder", [ UINT8 ], 4, 4, true, false, null]
-    ],
-    [    ]
+  'OcaFilterPolynomial',
+  4,
+  '\u0001\u0001\u0001\u000b',
+  2,
+  OcaActuator,
+  [
+    ['GetCoefficients', 4, 1, [], [LIST(FLOAT32), LIST(FLOAT32)]],
+    ['SetCoefficients', 4, 2, [LIST(FLOAT32), LIST(FLOAT32)], []],
+    ['GetSampleRate', 4, 3, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetSampleRate', 4, 4, [FLOAT32], []],
+    ['GetMaxOrder', 4, 5, [], [UINT8]],
+  ],
+  [
+    ['A', [LIST(FLOAT32)], 4, 1, false, false, null],
+    ['B', [LIST(FLOAT32)], 4, 2, false, false, null],
+    ['SampleRate', [FLOAT32], 4, 3, false, false, null],
+    ['MaxOrder', [UINT8], 4, 4, true, false, null],
+  ],
+  []
 );
 
 /**
@@ -1334,24 +1333,24 @@ export const OcaFilterPolynomial = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFilterFIR = make_control_class(
-    "OcaFilterFIR",
-    4,
-    "\u0001\u0001\u0001\f",
-    2,
-    OcaActuator,
-    [
-      [ "GetLength", 4, 1, [  ], [ UINT32, UINT32, UINT32 ] ],
-      [ "GetCoefficients", 4, 2, [  ], [ LIST(FLOAT32) ] ],
-      [ "SetCoefficients", 4, 3, [ LIST(FLOAT32) ], [  ] ],
-      [ "GetSampleRate", 4, 4, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSampleRate", 4, 5, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "Length", [ UINT32 ], 4, 1, true, false, null],
-      [ "Coefficients", [ LIST(FLOAT32) ], 4, 2, false, false, null],
-      [ "SampleRate", [ FLOAT32 ], 4, 3, false, false, null]
-    ],
-    [    ]
+  'OcaFilterFIR',
+  4,
+  '\u0001\u0001\u0001\f',
+  2,
+  OcaActuator,
+  [
+    ['GetLength', 4, 1, [], [UINT32, UINT32, UINT32]],
+    ['GetCoefficients', 4, 2, [], [LIST(FLOAT32)]],
+    ['SetCoefficients', 4, 3, [LIST(FLOAT32)], []],
+    ['GetSampleRate', 4, 4, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetSampleRate', 4, 5, [FLOAT32], []],
+  ],
+  [
+    ['Length', [UINT32], 4, 1, true, false, null],
+    ['Coefficients', [LIST(FLOAT32)], 4, 2, false, false, null],
+    ['SampleRate', [FLOAT32], 4, 3, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -1412,26 +1411,26 @@ export const OcaFilterFIR = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFilterArbitraryCurve = make_control_class(
-    "OcaFilterArbitraryCurve",
-    4,
-    "\u0001\u0001\u0001\r",
-    2,
-    OcaActuator,
-    [
-      [ "GetTransferFunction", 4, 1, [  ], [ OcaTransferFunction ] ],
-      [ "SetTransferFunction", 4, 2, [ OcaTransferFunction ], [  ] ],
-      [ "GetSampleRate", 4, 3, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSampleRate", 4, 4, [ FLOAT32 ], [  ] ],
-      [ "GetTFMinLength", 4, 5, [  ], [ UINT16 ] ],
-      [ "GetTFMaxLength", 4, 6, [  ], [ UINT16 ] ]
-    ],
-    [
-      [ "TransferFunction", [ OcaTransferFunction ], 4, 1, false, false, null],
-      [ "SampleRate", [ FLOAT32 ], 4, 2, false, false, null],
-      [ "TFMinLength", [ UINT16 ], 4, 3, false, false, null],
-      [ "TFMaxLength", [ UINT16 ], 4, 4, false, false, null]
-    ],
-    [    ]
+  'OcaFilterArbitraryCurve',
+  4,
+  '\u0001\u0001\u0001\r',
+  2,
+  OcaActuator,
+  [
+    ['GetTransferFunction', 4, 1, [], [OcaTransferFunction]],
+    ['SetTransferFunction', 4, 2, [OcaTransferFunction], []],
+    ['GetSampleRate', 4, 3, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetSampleRate', 4, 4, [FLOAT32], []],
+    ['GetTFMinLength', 4, 5, [], [UINT16]],
+    ['GetTFMaxLength', 4, 6, [], [UINT16]],
+  ],
+  [
+    ['TransferFunction', [OcaTransferFunction], 4, 1, false, false, null],
+    ['SampleRate', [FLOAT32], 4, 2, false, false, null],
+    ['TFMinLength', [UINT16], 4, 3, false, false, null],
+    ['TFMaxLength', [UINT16], 4, 4, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -1501,57 +1500,84 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDynamics = make_control_class(
-    "OcaDynamics",
-    4,
-    "\u0001\u0001\u0001\u000e",
-    2,
-    OcaActuator,
+  'OcaDynamics',
+  4,
+  '\u0001\u0001\u0001\u000e',
+  2,
+  OcaActuator,
+  [
+    ['GetTriggered', 4, 1, [], [BOOLEAN]],
+    ['GetDynamicGain', 4, 2, [], [FLOAT32]],
+    ['GetFunction', 4, 3, [], [OcaDynamicsFunction]],
+    ['SetFunction', 4, 4, [OcaDynamicsFunction], []],
+    ['GetRatio', 4, 5, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetRatio', 4, 6, [FLOAT32], []],
+    ['GetThreshold', 4, 7, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetThreshold', 4, 8, [FLOAT32], []],
+    ['GetThresholdPresentationUnits', 4, 9, [], [OcaPresentationUnit]],
+    ['SetThresholdPresentationUnits', 4, 10, [OcaPresentationUnit], []],
+    ['GetDetectorLaw', 4, 11, [], [OcaLevelDetectionLaw]],
+    ['SetDetectorLaw', 4, 12, [OcaLevelDetectionLaw], []],
+    ['GetAttackTime', 4, 13, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetAttackTime', 4, 14, [FLOAT32], []],
+    ['GetReleaseTime', 4, 15, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetReleaseTime', 4, 16, [FLOAT32], []],
+    ['GetHoldTime', 4, 17, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetHoldTime', 4, 18, [FLOAT32], []],
+    ['GetDynamicGainFloor', 4, 19, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetDynamicGainFloor', 4, 20, [FLOAT32], []],
+    ['GetDynamicGainCeiling', 4, 21, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetDynamicGainCeiling', 4, 22, [FLOAT32], []],
+    ['GetKneeParameter', 4, 23, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetKneeParameter', 4, 24, [FLOAT32], []],
+    ['GetSlope', 4, 25, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetSlope', 4, 26, [FLOAT32], []],
     [
-      [ "GetTriggered", 4, 1, [  ], [ BOOLEAN ] ],
-      [ "GetDynamicGain", 4, 2, [  ], [ FLOAT32 ] ],
-      [ "GetFunction", 4, 3, [  ], [ OcaDynamicsFunction ] ],
-      [ "SetFunction", 4, 4, [ OcaDynamicsFunction ], [  ] ],
-      [ "GetRatio", 4, 5, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetRatio", 4, 6, [ FLOAT32 ], [  ] ],
-      [ "GetThreshold", 4, 7, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetThreshold", 4, 8, [ FLOAT32 ], [  ] ],
-      [ "GetThresholdPresentationUnits", 4, 9, [  ], [ OcaPresentationUnit ] ],
-      [ "SetThresholdPresentationUnits", 4, 10, [ OcaPresentationUnit ], [  ] ],
-      [ "GetDetectorLaw", 4, 11, [  ], [ OcaLevelDetectionLaw ] ],
-      [ "SetDetectorLaw", 4, 12, [ OcaLevelDetectionLaw ], [  ] ],
-      [ "GetAttackTime", 4, 13, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetAttackTime", 4, 14, [ FLOAT32 ], [  ] ],
-      [ "GetReleaseTime", 4, 15, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetReleaseTime", 4, 16, [ FLOAT32 ], [  ] ],
-      [ "GetHoldTime", 4, 17, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetHoldTime", 4, 18, [ FLOAT32 ], [  ] ],
-      [ "GetDynamicGainFloor", 4, 19, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDynamicGainFloor", 4, 20, [ FLOAT32 ], [  ] ],
-      [ "GetDynamicGainCeiling", 4, 21, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDynamicGainCeiling", 4, 22, [ FLOAT32 ], [  ] ],
-      [ "GetKneeParameter", 4, 23, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetKneeParameter", 4, 24, [ FLOAT32 ], [  ] ],
-      [ "GetSlope", 4, 25, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSlope", 4, 26, [ FLOAT32 ], [  ] ],
-      [ "SetMultiple", 4, 27, [ UINT16, OcaDynamicsFunction, FLOAT32, OcaPresentationUnit, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
+      'SetMultiple',
+      4,
+      27,
+      [
+        UINT16,
+        OcaDynamicsFunction,
+        FLOAT32,
+        OcaPresentationUnit,
+        OcaLevelDetectionLaw,
+        FLOAT32,
+        FLOAT32,
+        FLOAT32,
+        FLOAT32,
+        FLOAT32,
+        FLOAT32,
+        FLOAT32,
+      ],
+      [],
     ],
+  ],
+  [
+    ['Triggered', [BOOLEAN], 4, 1, false, false, null],
+    ['DynamicGain', [FLOAT32], 4, 2, false, false, null],
+    ['Function', [OcaDynamicsFunction], 4, 3, false, false, null],
+    ['Ratio', [FLOAT32], 4, 4, false, false, null],
+    ['Threshold', [FLOAT32], 4, 5, false, false, null],
     [
-      [ "Triggered", [ BOOLEAN ], 4, 1, false, false, null],
-      [ "DynamicGain", [ FLOAT32 ], 4, 2, false, false, null],
-      [ "Function", [ OcaDynamicsFunction ], 4, 3, false, false, null],
-      [ "Ratio", [ FLOAT32 ], 4, 4, false, false, null],
-      [ "Threshold", [ FLOAT32 ], 4, 5, false, false, null],
-      [ "ThresholdPresentationUnits", [ OcaPresentationUnit ], 4, 6, false, false, null],
-      [ "DetectorLaw", [ OcaLevelDetectionLaw ], 4, 7, false, false, null],
-      [ "AttackTime", [ FLOAT32 ], 4, 8, false, false, null],
-      [ "ReleaseTime", [ FLOAT32 ], 4, 9, false, false, null],
-      [ "HoldTime", [ FLOAT32 ], 4, 10, false, false, null],
-      [ "DynamicGainCeiling", [ FLOAT32 ], 4, 11, false, false, null],
-      [ "DynamicGainFloor", [ FLOAT32 ], 4, 12, false, false, null],
-      [ "KneeParameter", [ FLOAT32 ], 4, 13, false, false, null],
-      [ "Slope", [ FLOAT32 ], 4, 14, false, false, null]
+      'ThresholdPresentationUnits',
+      [OcaPresentationUnit],
+      4,
+      6,
+      false,
+      false,
+      null,
     ],
-    [    ]
+    ['DetectorLaw', [OcaLevelDetectionLaw], 4, 7, false, false, null],
+    ['AttackTime', [FLOAT32], 4, 8, false, false, null],
+    ['ReleaseTime', [FLOAT32], 4, 9, false, false, null],
+    ['HoldTime', [FLOAT32], 4, 10, false, false, null],
+    ['DynamicGainCeiling', [FLOAT32], 4, 11, false, false, null],
+    ['DynamicGainFloor', [FLOAT32], 4, 12, false, false, null],
+    ['KneeParameter', [FLOAT32], 4, 13, false, false, null],
+    ['Slope', [FLOAT32], 4, 14, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -1842,29 +1868,35 @@ export const OcaDynamics = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDynamicsDetector = make_control_class(
-    "OcaDynamicsDetector",
-    4,
-    "\u0001\u0001\u0001\u000f",
-    2,
-    OcaActuator,
+  'OcaDynamicsDetector',
+  4,
+  '\u0001\u0001\u0001\u000f',
+  2,
+  OcaActuator,
+  [
+    ['GetLaw', 4, 1, [], [OcaLevelDetectionLaw]],
+    ['SetLaw', 4, 2, [OcaLevelDetectionLaw], []],
+    ['GetAttackTime', 4, 3, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetAttackTime', 4, 4, [FLOAT32], []],
+    ['GetReleaseTime', 4, 5, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetReleaseTime', 4, 6, [FLOAT32], []],
+    ['GetHoldTime', 4, 7, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetHoldTime', 4, 8, [FLOAT32], []],
     [
-      [ "GetLaw", 4, 1, [  ], [ OcaLevelDetectionLaw ] ],
-      [ "SetLaw", 4, 2, [ OcaLevelDetectionLaw ], [  ] ],
-      [ "GetAttackTime", 4, 3, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetAttackTime", 4, 4, [ FLOAT32 ], [  ] ],
-      [ "GetReleaseTime", 4, 5, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetReleaseTime", 4, 6, [ FLOAT32 ], [  ] ],
-      [ "GetHoldTime", 4, 7, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetHoldTime", 4, 8, [ FLOAT32 ], [  ] ],
-      [ "SetMultiple", 4, 9, [ UINT16, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32 ], [  ] ]
+      'SetMultiple',
+      4,
+      9,
+      [UINT16, OcaLevelDetectionLaw, FLOAT32, FLOAT32, FLOAT32],
+      [],
     ],
-    [
-      [ "Law", [ OcaLevelDetectionLaw ], 4, 1, false, false, null],
-      [ "AttackTime", [ FLOAT32 ], 4, 2, false, false, null],
-      [ "ReleaseTime", [ FLOAT32 ], 4, 3, false, false, null],
-      [ "HoldTime", [ FLOAT32 ], 4, 4, false, false, null]
-    ],
-    [    ]
+  ],
+  [
+    ['Law', [OcaLevelDetectionLaw], 4, 1, false, false, null],
+    ['AttackTime', [FLOAT32], 4, 2, false, false, null],
+    ['ReleaseTime', [FLOAT32], 4, 3, false, false, null],
+    ['HoldTime', [FLOAT32], 4, 4, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -2009,35 +2041,55 @@ export const OcaDynamicsDetector = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDynamicsCurve = make_control_class(
-    "OcaDynamicsCurve",
-    4,
-    "\u0001\u0001\u0001\u0010",
-    2,
-    OcaActuator,
+  'OcaDynamicsCurve',
+  4,
+  '\u0001\u0001\u0001\u0010',
+  2,
+  OcaActuator,
+  [
+    ['GetNSegments', 4, 1, [], [UINT8, UINT8, UINT8]],
+    ['SetNSegments', 4, 2, [UINT8], []],
+    ['GetThreshold', 4, 3, [], [LIST(FLOAT32), FLOAT32, FLOAT32]],
+    ['SetThreshold', 4, 4, [LIST(FLOAT32)], []],
+    ['GetSlope', 4, 5, [], [LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32)]],
+    ['SetSlope', 4, 6, [LIST(FLOAT32)], []],
     [
-      [ "GetNSegments", 4, 1, [  ], [ UINT8, UINT8, UINT8 ] ],
-      [ "SetNSegments", 4, 2, [ UINT8 ], [  ] ],
-      [ "GetThreshold", 4, 3, [  ], [ LIST(FLOAT32), FLOAT32, FLOAT32 ] ],
-      [ "SetThreshold", 4, 4, [ LIST(FLOAT32) ], [  ] ],
-      [ "GetSlope", 4, 5, [  ], [ LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32) ] ],
-      [ "SetSlope", 4, 6, [ LIST(FLOAT32) ], [  ] ],
-      [ "GetKneeParameter", 4, 7, [  ], [ LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32) ] ],
-      [ "SetKneeParameter", 4, 8, [ LIST(FLOAT32) ], [  ] ],
-      [ "GetDynamicGainCeiling", 4, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDynamicGainCeiling", 4, 10, [ FLOAT32 ], [  ] ],
-      [ "GetDynamicGainFloor", 4, 11, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDynamicGainFloor", 4, 12, [ FLOAT32 ], [  ] ],
-      [ "SetMultiple", 4, 13, [ UINT16, UINT8, LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32), FLOAT32, FLOAT32 ], [  ] ]
+      'GetKneeParameter',
+      4,
+      7,
+      [],
+      [LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32)],
     ],
+    ['SetKneeParameter', 4, 8, [LIST(FLOAT32)], []],
+    ['GetDynamicGainCeiling', 4, 9, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetDynamicGainCeiling', 4, 10, [FLOAT32], []],
+    ['GetDynamicGainFloor', 4, 11, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetDynamicGainFloor', 4, 12, [FLOAT32], []],
     [
-      [ "NSegments", [ UINT8 ], 4, 1, false, false, null],
-      [ "Threshold", [ LIST(FLOAT32) ], 4, 2, false, false, null],
-      [ "Slope", [ LIST(FLOAT32) ], 4, 3, false, false, null],
-      [ "KneeParameter", [ LIST(FLOAT32) ], 4, 4, false, false, null],
-      [ "DynamicGainFloor", [ FLOAT32 ], 4, 5, false, false, null],
-      [ "DynamicGainCeiling", [ FLOAT32 ], 4, 6, false, false, null]
+      'SetMultiple',
+      4,
+      13,
+      [
+        UINT16,
+        UINT8,
+        LIST(FLOAT32),
+        LIST(FLOAT32),
+        LIST(FLOAT32),
+        FLOAT32,
+        FLOAT32,
+      ],
+      [],
     ],
-    [    ]
+  ],
+  [
+    ['NSegments', [UINT8], 4, 1, false, false, null],
+    ['Threshold', [LIST(FLOAT32)], 4, 2, false, false, null],
+    ['Slope', [LIST(FLOAT32)], 4, 3, false, false, null],
+    ['KneeParameter', [LIST(FLOAT32)], 4, 4, false, false, null],
+    ['DynamicGainFloor', [FLOAT32], 4, 5, false, false, null],
+    ['DynamicGainCeiling', [FLOAT32], 4, 6, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -2182,42 +2234,57 @@ export const OcaDynamicsCurve = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSignalGenerator = make_control_class(
-    "OcaSignalGenerator",
-    4,
-    "\u0001\u0001\u0001\u0011",
-    2,
-    OcaActuator,
+  'OcaSignalGenerator',
+  4,
+  '\u0001\u0001\u0001\u0011',
+  2,
+  OcaActuator,
+  [
+    ['GetFrequency1', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetFrequency1', 4, 2, [FLOAT32], []],
+    ['GetFrequency2', 4, 3, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetFrequency2', 4, 4, [FLOAT32], []],
+    ['GetLevel', 4, 5, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetLevel', 4, 6, [FLOAT32], []],
+    ['GetWaveform', 4, 7, [], [OcaWaveformType]],
+    ['SetWaveform', 4, 8, [OcaWaveformType], []],
+    ['GetSweepType', 4, 9, [], [OcaSweepType]],
+    ['SetSweepType', 4, 10, [OcaSweepType], []],
+    ['GetSweepTime', 4, 11, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetSweepTime', 4, 12, [FLOAT32], []],
+    ['GetSweepRepeat', 4, 13, [], [BOOLEAN]],
+    ['SetSweepRepeat', 4, 14, [BOOLEAN], []],
+    ['GetGenerating', 4, 15, [], [BOOLEAN]],
+    ['Start', 4, 16, [], []],
+    ['Stop', 4, 17, [], []],
     [
-      [ "GetFrequency1", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetFrequency1", 4, 2, [ FLOAT32 ], [  ] ],
-      [ "GetFrequency2", 4, 3, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetFrequency2", 4, 4, [ FLOAT32 ], [  ] ],
-      [ "GetLevel", 4, 5, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetLevel", 4, 6, [ FLOAT32 ], [  ] ],
-      [ "GetWaveform", 4, 7, [  ], [ OcaWaveformType ] ],
-      [ "SetWaveform", 4, 8, [ OcaWaveformType ], [  ] ],
-      [ "GetSweepType", 4, 9, [  ], [ OcaSweepType ] ],
-      [ "SetSweepType", 4, 10, [ OcaSweepType ], [  ] ],
-      [ "GetSweepTime", 4, 11, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSweepTime", 4, 12, [ FLOAT32 ], [  ] ],
-      [ "GetSweepRepeat", 4, 13, [  ], [ BOOLEAN ] ],
-      [ "SetSweepRepeat", 4, 14, [ BOOLEAN ], [  ] ],
-      [ "GetGenerating", 4, 15, [  ], [ BOOLEAN ] ],
-      [ "Start", 4, 16, [  ], [  ] ],
-      [ "Stop", 4, 17, [  ], [  ] ],
-      [ "SetMultiple", 4, 18, [ UINT16, FLOAT32, FLOAT32, FLOAT32, OcaWaveformType, OcaSweepType, FLOAT32, BOOLEAN ], [  ] ]
+      'SetMultiple',
+      4,
+      18,
+      [
+        UINT16,
+        FLOAT32,
+        FLOAT32,
+        FLOAT32,
+        OcaWaveformType,
+        OcaSweepType,
+        FLOAT32,
+        BOOLEAN,
+      ],
+      [],
     ],
-    [
-      [ "Frequency1", [ FLOAT32 ], 4, 1, false, false, null],
-      [ "Frequency2", [ FLOAT32 ], 4, 2, false, false, null],
-      [ "Level", [ FLOAT32 ], 4, 3, false, false, null],
-      [ "Waveform", [ OcaWaveformType ], 4, 4, false, false, null],
-      [ "SweepType", [ OcaSweepType ], 4, 5, false, false, null],
-      [ "SweepTime", [ FLOAT32 ], 4, 6, false, false, null],
-      [ "SweepRepeat", [ BOOLEAN ], 4, 7, false, false, null],
-      [ "Generating", [ BOOLEAN ], 4, 8, false, false, null]
-    ],
-    [    ]
+  ],
+  [
+    ['Frequency1', [FLOAT32], 4, 1, false, false, null],
+    ['Frequency2', [FLOAT32], 4, 2, false, false, null],
+    ['Level', [FLOAT32], 4, 3, false, false, null],
+    ['Waveform', [OcaWaveformType], 4, 4, false, false, null],
+    ['SweepType', [OcaSweepType], 4, 5, false, false, null],
+    ['SweepTime', [FLOAT32], 4, 6, false, false, null],
+    ['SweepRepeat', [BOOLEAN], 4, 7, false, false, null],
+    ['Generating', [BOOLEAN], 4, 8, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -2408,18 +2475,15 @@ export const OcaSignalGenerator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSignalInput = make_control_class(
-    "OcaSignalInput",
-    4,
-    "\u0001\u0001\u0001\u0012",
-    2,
-    OcaActuator,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaSignalInput',
+  4,
+  '\u0001\u0001\u0001\u0012',
+  2,
+  OcaActuator,
+  [],
+  [],
+  []
 );
-
 
 /**
  * A set of one or more non-network signal outputs. Number of channels is
@@ -2433,18 +2497,15 @@ export const OcaSignalInput = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSignalOutput = make_control_class(
-    "OcaSignalOutput",
-    4,
-    "\u0001\u0001\u0001\u0013",
-    2,
-    OcaActuator,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaSignalOutput',
+  4,
+  '\u0001\u0001\u0001\u0013',
+  2,
+  OcaActuator,
+  [],
+  [],
+  []
 );
-
 
 /**
  * A temperature actuator. Works in Celsius.
@@ -2454,19 +2515,17 @@ export const OcaSignalOutput = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaTemperatureActuator = make_control_class(
-    "OcaTemperatureActuator",
-    4,
-    "\u0001\u0001\u0001\u0014",
-    2,
-    OcaActuator,
-    [
-      [ "GetTemperature", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetTemperature", 4, 2, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "Temperature", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaTemperatureActuator',
+  4,
+  '\u0001\u0001\u0001\u0014',
+  2,
+  OcaActuator,
+  [
+    ['GetTemperature', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetTemperature', 4, 2, [FLOAT32], []],
+  ],
+  [['Temperature', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2501,19 +2560,17 @@ export const OcaTemperatureActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaIdentificationActuator = make_control_class(
-    "OcaIdentificationActuator",
-    4,
-    "\u0001\u0001\u0001\u0015",
-    2,
-    OcaActuator,
-    [
-      [ "GetActive", 4, 1, [  ], [ BOOLEAN ] ],
-      [ "SetActive", 4, 2, [ BOOLEAN ], [  ] ]
-    ],
-    [
-      [ "Active", [ BOOLEAN ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaIdentificationActuator',
+  4,
+  '\u0001\u0001\u0001\u0015',
+  2,
+  OcaActuator,
+  [
+    ['GetActive', 4, 1, [], [BOOLEAN]],
+    ['SetActive', 4, 2, [BOOLEAN], []],
+  ],
+  [['Active', [BOOLEAN], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2544,18 +2601,15 @@ export const OcaIdentificationActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSummingPoint = make_control_class(
-    "OcaSummingPoint",
-    4,
-    "\u0001\u0001\u0001\u0016",
-    1,
-    OcaActuator,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaSummingPoint',
+  4,
+  '\u0001\u0001\u0001\u0016',
+  1,
+  OcaActuator,
+  [],
+  [],
+  []
 );
-
 
 /**
  * Abstract base class for weakly typed actuators.
@@ -2565,18 +2619,15 @@ export const OcaSummingPoint = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBasicActuator = make_control_class(
-    "OcaBasicActuator",
-    4,
-    "\u0001\u0001\u0001\u0001",
-    2,
-    OcaActuator,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaBasicActuator',
+  4,
+  '\u0001\u0001\u0001\u0001',
+  2,
+  OcaActuator,
+  [],
+  [],
+  []
 );
-
 
 /**
  * Basic boolean actuator.
@@ -2586,19 +2637,17 @@ export const OcaBasicActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBooleanActuator = make_control_class(
-    "OcaBooleanActuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0001",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ BOOLEAN ] ],
-      [ "SetSetting", 5, 2, [ BOOLEAN ], [  ] ]
-    ],
-    [
-      [ "Setting", [ BOOLEAN ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaBooleanActuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0001',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [BOOLEAN]],
+    ['SetSetting', 5, 2, [BOOLEAN], []],
+  ],
+  [['Setting', [BOOLEAN], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2628,19 +2677,17 @@ export const OcaBooleanActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt8Actuator = make_control_class(
-    "OcaInt8Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0002",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ INT8, INT8, INT8 ] ],
-      [ "SetSetting", 5, 2, [ INT8 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ INT8 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt8Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0002',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [INT8, INT8, INT8]],
+    ['SetSetting', 5, 2, [INT8], []],
+  ],
+  [['Setting', [INT8], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2670,19 +2717,17 @@ export const OcaInt8Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt16Actuator = make_control_class(
-    "OcaInt16Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0003",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ INT16, INT16, INT16 ] ],
-      [ "SetSetting", 5, 2, [ INT16 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ INT16 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt16Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0003',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [INT16, INT16, INT16]],
+    ['SetSetting', 5, 2, [INT16], []],
+  ],
+  [['Setting', [INT16], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2712,19 +2757,17 @@ export const OcaInt16Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt32Actuator = make_control_class(
-    "OcaInt32Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0004",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ INT32, INT32, INT32 ] ],
-      [ "SetSetting", 5, 2, [ INT32 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ INT32 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt32Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0004',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [INT32, INT32, INT32]],
+    ['SetSetting', 5, 2, [INT32], []],
+  ],
+  [['Setting', [INT32], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2754,19 +2797,17 @@ export const OcaInt32Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt64Actuator = make_control_class(
-    "OcaInt64Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0005",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ INT64, INT64, INT64 ] ],
-      [ "SetSetting", 5, 2, [ INT64 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ INT64 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt64Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0005',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [INT64, INT64, INT64]],
+    ['SetSetting', 5, 2, [INT64], []],
+  ],
+  [['Setting', [INT64], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2796,19 +2837,17 @@ export const OcaInt64Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint8Actuator = make_control_class(
-    "OcaUint8Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0006",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ UINT8, UINT8, UINT8 ] ],
-      [ "SetSetting", 5, 2, [ UINT8 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ UINT8 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint8Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0006',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [UINT8, UINT8, UINT8]],
+    ['SetSetting', 5, 2, [UINT8], []],
+  ],
+  [['Setting', [UINT8], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2838,19 +2877,17 @@ export const OcaUint8Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint16Actuator = make_control_class(
-    "OcaUint16Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u0007",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ UINT16, UINT16, UINT16 ] ],
-      [ "SetSetting", 5, 2, [ UINT16 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ UINT16 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint16Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u0007',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [UINT16, UINT16, UINT16]],
+    ['SetSetting', 5, 2, [UINT16], []],
+  ],
+  [['Setting', [UINT16], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2880,19 +2917,17 @@ export const OcaUint16Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint32Actuator = make_control_class(
-    "OcaUint32Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\b",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ UINT32, UINT32, UINT32 ] ],
-      [ "SetSetting", 5, 2, [ UINT32 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ UINT32 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint32Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\b',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [UINT32, UINT32, UINT32]],
+    ['SetSetting', 5, 2, [UINT32], []],
+  ],
+  [['Setting', [UINT32], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2922,19 +2957,17 @@ export const OcaUint32Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint64Actuator = make_control_class(
-    "OcaUint64Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\t",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ UINT64, UINT64, UINT64 ] ],
-      [ "SetSetting", 5, 2, [ UINT64 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ UINT64 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint64Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\t',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [UINT64, UINT64, UINT64]],
+    ['SetSetting', 5, 2, [UINT64], []],
+  ],
+  [['Setting', [UINT64], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -2964,19 +2997,17 @@ export const OcaUint64Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFloat32Actuator = make_control_class(
-    "OcaFloat32Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\n",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetSetting", 5, 2, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ FLOAT32 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFloat32Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\n',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetSetting', 5, 2, [FLOAT32], []],
+  ],
+  [['Setting', [FLOAT32], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3006,19 +3037,17 @@ export const OcaFloat32Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFloat64Actuator = make_control_class(
-    "OcaFloat64Actuator",
-    5,
-    "\u0001\u0001\u0001\u0001\u000b",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ FLOAT64, FLOAT64, FLOAT64 ] ],
-      [ "SetSetting", 5, 2, [ FLOAT64 ], [  ] ]
-    ],
-    [
-      [ "Setting", [ FLOAT64 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFloat64Actuator',
+  5,
+  '\u0001\u0001\u0001\u0001\u000b',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [FLOAT64, FLOAT64, FLOAT64]],
+    ['SetSetting', 5, 2, [FLOAT64], []],
+  ],
+  [['Setting', [FLOAT64], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3048,21 +3077,21 @@ export const OcaFloat64Actuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaStringActuator = make_control_class(
-    "OcaStringActuator",
-    5,
-    "\u0001\u0001\u0001\u0001\f",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetSetting", 5, 1, [  ], [ STRING ] ],
-      [ "SetSetting", 5, 2, [ STRING ], [  ] ],
-      [ "GetMaxLen", 5, 3, [  ], [ UINT16 ] ]
-    ],
-    [
-      [ "Setting", [ STRING ], 5, 1, false, false, null],
-      [ "MaxLen", [ UINT16 ], 5, 2, true, false, null]
-    ],
-    [    ]
+  'OcaStringActuator',
+  5,
+  '\u0001\u0001\u0001\u0001\f',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetSetting', 5, 1, [], [STRING]],
+    ['SetSetting', 5, 2, [STRING], []],
+    ['GetMaxLen', 5, 3, [], [UINT16]],
+  ],
+  [
+    ['Setting', [STRING], 5, 1, false, false, null],
+    ['MaxLen', [UINT16], 5, 2, true, false, null],
+  ],
+  []
 );
 
 /**
@@ -3100,22 +3129,20 @@ export const OcaStringActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBitstringActuator = make_control_class(
-    "OcaBitstringActuator",
-    5,
-    "\u0001\u0001\u0001\u0001\r",
-    2,
-    OcaBasicActuator,
-    [
-      [ "GetNrBits", 5, 1, [  ], [ UINT16 ] ],
-      [ "GetBit", 5, 2, [ UINT16 ], [ BOOLEAN ] ],
-      [ "SetBit", 5, 3, [ UINT16, BOOLEAN ], [  ] ],
-      [ "GetBitstring", 5, 4, [  ], [ BITSTRING ] ],
-      [ "SetBitstring", 5, 5, [ BITSTRING ], [  ] ]
-    ],
-    [
-      [ "Bitstring", [ BITSTRING ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaBitstringActuator',
+  5,
+  '\u0001\u0001\u0001\u0001\r',
+  2,
+  OcaBasicActuator,
+  [
+    ['GetNrBits', 5, 1, [], [UINT16]],
+    ['GetBit', 5, 2, [UINT16], [BOOLEAN]],
+    ['SetBit', 5, 3, [UINT16, BOOLEAN], []],
+    ['GetBitstring', 5, 4, [], [BITSTRING]],
+    ['SetBitstring', 5, 5, [BITSTRING], []],
+  ],
+  [['Bitstring', [BITSTRING], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3169,18 +3196,14 @@ export const OcaBitstringActuator = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSensor = make_control_class(
-    "OcaSensor",
-    3,
-    "\u0001\u0001\u0002",
-    2,
-    OcaWorker,
-    [
-      [ "GetReadingState", 3, 1, [  ], [ OcaSensorReadingState ] ]
-    ],
-    [
-      [ "ReadingState", [ OcaSensorReadingState ], 3, 1, false, true, null]
-    ],
-    [    ]
+  'OcaSensor',
+  3,
+  '\u0001\u0001\u0002',
+  2,
+  OcaWorker,
+  [['GetReadingState', 3, 1, [], [OcaSensorReadingState]]],
+  [['ReadingState', [OcaSensorReadingState], 3, 1, false, true, null]],
+  []
 );
 
 /**
@@ -3202,18 +3225,14 @@ export const OcaSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaLevelSensor = make_control_class(
-    "OcaLevelSensor",
-    4,
-    "\u0001\u0001\u0002\u0002",
-    2,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaLevelSensor',
+  4,
+  '\u0001\u0001\u0002\u0002',
+  2,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3237,19 +3256,17 @@ export const OcaLevelSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaAudioLevelSensor = make_control_class(
-    "OcaAudioLevelSensor",
-    5,
-    "\u0001\u0001\u0002\u0002\u0001",
-    2,
-    OcaLevelSensor,
-    [
-      [ "GetLaw", 5, 1, [  ], [ OcaLevelMeterLaw ] ],
-      [ "SetLaw", 5, 2, [ OcaLevelMeterLaw ], [  ] ]
-    ],
-    [
-      [ "Law", [ OcaLevelMeterLaw ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaAudioLevelSensor',
+  5,
+  '\u0001\u0001\u0002\u0002\u0001',
+  2,
+  OcaLevelSensor,
+  [
+    ['GetLaw', 5, 1, [], [OcaLevelMeterLaw]],
+    ['SetLaw', 5, 2, [OcaLevelMeterLaw], []],
+  ],
+  [['Law', [OcaLevelMeterLaw], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3282,18 +3299,14 @@ export const OcaAudioLevelSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaTimeIntervalSensor = make_control_class(
-    "OcaTimeIntervalSensor",
-    4,
-    "\u0001\u0001\u0002\u0003",
-    2,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaTimeIntervalSensor',
+  4,
+  '\u0001\u0001\u0002\u0003',
+  2,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3315,18 +3328,14 @@ export const OcaTimeIntervalSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFrequencySensor = make_control_class(
-    "OcaFrequencySensor",
-    4,
-    "\u0001\u0001\u0002\u0004",
-    2,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFrequencySensor',
+  4,
+  '\u0001\u0001\u0002\u0004',
+  2,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3348,18 +3357,14 @@ export const OcaFrequencySensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaTemperatureSensor = make_control_class(
-    "OcaTemperatureSensor",
-    4,
-    "\u0001\u0001\u0002\u0005",
-    2,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaTemperatureSensor',
+  4,
+  '\u0001\u0001\u0002\u0005',
+  2,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3384,17 +3389,14 @@ export const OcaTemperatureSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaIdentificationSensor = make_control_class(
-    "OcaIdentificationSensor",
-    4,
-    "\u0001\u0001\u0002\u0006",
-    2,
-    OcaSensor,
-    [
-    ],
-    [
-    ],
-    [
-      [ "Identify", 4, 1, [  ] ]    ]
+  'OcaIdentificationSensor',
+  4,
+  '\u0001\u0001\u0002\u0006',
+  2,
+  OcaSensor,
+  [],
+  [],
+  [['Identify', 4, 1, []]]
 );
 
 /**
@@ -3413,18 +3415,14 @@ export const OcaIdentificationSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaVoltageSensor = make_control_class(
-    "OcaVoltageSensor",
-    4,
-    "\u0001\u0001\u0002\u0007",
-    1,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaVoltageSensor',
+  4,
+  '\u0001\u0001\u0002\u0007',
+  1,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3446,18 +3444,14 @@ export const OcaVoltageSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaCurrentSensor = make_control_class(
-    "OcaCurrentSensor",
-    4,
-    "\u0001\u0001\u0002\b",
-    1,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaCurrentSensor',
+  4,
+  '\u0001\u0001\u0002\b',
+  1,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3479,18 +3473,14 @@ export const OcaCurrentSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaImpedanceSensor = make_control_class(
-    "OcaImpedanceSensor",
-    4,
-    "\u0001\u0001\u0002\t",
-    1,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ OcaImpedance, OcaImpedance, OcaImpedance ] ]
-    ],
-    [
-      [ "Reading", [ OcaImpedance ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaImpedanceSensor',
+  4,
+  '\u0001\u0001\u0002\t',
+  1,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [OcaImpedance, OcaImpedance, OcaImpedance]]],
+  [['Reading', [OcaImpedance], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3513,18 +3503,14 @@ export const OcaImpedanceSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaGainSensor = make_control_class(
-    "OcaGainSensor",
-    4,
-    "\u0001\u0001\u0002\n",
-    1,
-    OcaSensor,
-    [
-      [ "GetReading", 4, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 4, 1, false, false, null]
-    ],
-    [    ]
+  'OcaGainSensor',
+  4,
+  '\u0001\u0001\u0002\n',
+  1,
+  OcaSensor,
+  [['GetReading', 4, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 4, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3546,18 +3532,15 @@ export const OcaGainSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBasicSensor = make_control_class(
-    "OcaBasicSensor",
-    4,
-    "\u0001\u0001\u0002\u0001",
-    2,
-    OcaSensor,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaBasicSensor',
+  4,
+  '\u0001\u0001\u0002\u0001',
+  2,
+  OcaSensor,
+  [],
+  [],
+  []
 );
-
 
 /**
  * Basic boolean sensor.
@@ -3567,18 +3550,14 @@ export const OcaBasicSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBooleanSensor = make_control_class(
-    "OcaBooleanSensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0001",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ BOOLEAN ] ]
-    ],
-    [
-      [ "Reading", [ BOOLEAN ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaBooleanSensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0001',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [BOOLEAN]]],
+  [['Reading', [BOOLEAN], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3600,18 +3579,14 @@ export const OcaBooleanSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt8Sensor = make_control_class(
-    "OcaInt8Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0002",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ INT8, INT8, INT8 ] ]
-    ],
-    [
-      [ "Reading", [ INT8 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt8Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0002',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [INT8, INT8, INT8]]],
+  [['Reading', [INT8], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3633,18 +3608,14 @@ export const OcaInt8Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt16Sensor = make_control_class(
-    "OcaInt16Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0003",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ INT16, INT16, INT16 ] ]
-    ],
-    [
-      [ "Reading", [ INT16 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt16Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0003',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [INT16, INT16, INT16]]],
+  [['Reading', [INT16], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3666,18 +3637,14 @@ export const OcaInt16Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt32Sensor = make_control_class(
-    "OcaInt32Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0004",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ INT32, INT32, INT32 ] ]
-    ],
-    [
-      [ "Reading", [ INT32 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt32Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0004',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [INT32, INT32, INT32]]],
+  [['Reading', [INT32], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3699,18 +3666,14 @@ export const OcaInt32Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaInt64Sensor = make_control_class(
-    "OcaInt64Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0005",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ INT64, INT64, INT64 ] ]
-    ],
-    [
-      [ "Reading", [ INT64 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaInt64Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0005',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [INT64, INT64, INT64]]],
+  [['Reading', [INT64], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3732,18 +3695,14 @@ export const OcaInt64Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint8Sensor = make_control_class(
-    "OcaUint8Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0006",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ UINT8, UINT8, UINT8 ] ]
-    ],
-    [
-      [ "Reading", [ UINT8 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint8Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0006',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [UINT8, UINT8, UINT8]]],
+  [['Reading', [UINT8], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3765,18 +3724,14 @@ export const OcaUint8Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint16Sensor = make_control_class(
-    "OcaUint16Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u0007",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ UINT16, UINT16, UINT16 ] ]
-    ],
-    [
-      [ "Reading", [ UINT16 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint16Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u0007',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [UINT16, UINT16, UINT16]]],
+  [['Reading', [UINT16], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3798,18 +3753,14 @@ export const OcaUint16Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint32Sensor = make_control_class(
-    "OcaUint32Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\b",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ UINT32, UINT32, UINT32 ] ]
-    ],
-    [
-      [ "Reading", [ UINT32 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint32Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\b',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [UINT32, UINT32, UINT32]]],
+  [['Reading', [UINT32], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3831,18 +3782,14 @@ export const OcaUint32Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFloat32Sensor = make_control_class(
-    "OcaFloat32Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\n",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT32 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFloat32Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\n',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [FLOAT32, FLOAT32, FLOAT32]]],
+  [['Reading', [FLOAT32], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3864,18 +3811,14 @@ export const OcaFloat32Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFloat64Sensor = make_control_class(
-    "OcaFloat64Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\u000b",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ FLOAT64, FLOAT64, FLOAT64 ] ]
-    ],
-    [
-      [ "Reading", [ FLOAT64 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFloat64Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\u000b',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [FLOAT64, FLOAT64, FLOAT64]]],
+  [['Reading', [FLOAT64], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -3897,21 +3840,21 @@ export const OcaFloat64Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaStringSensor = make_control_class(
-    "OcaStringSensor",
-    5,
-    "\u0001\u0001\u0002\u0001\f",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetString", 5, 1, [  ], [ STRING ] ],
-      [ "GetMaxLen", 5, 2, [  ], [ UINT16 ] ],
-      [ "SetMaxLen", 5, 3, [ UINT16 ], [  ] ]
-    ],
-    [
-      [ "String", [ STRING ], 5, 1, false, false, null],
-      [ "MaxLen", [ UINT16 ], 5, 2, false, false, null]
-    ],
-    [    ]
+  'OcaStringSensor',
+  5,
+  '\u0001\u0001\u0002\u0001\f',
+  2,
+  OcaBasicSensor,
+  [
+    ['GetString', 5, 1, [], [STRING]],
+    ['GetMaxLen', 5, 2, [], [UINT16]],
+    ['SetMaxLen', 5, 3, [UINT16], []],
+  ],
+  [
+    ['String', [STRING], 5, 1, false, false, null],
+    ['MaxLen', [UINT16], 5, 2, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -3952,20 +3895,18 @@ export const OcaStringSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBitstringSensor = make_control_class(
-    "OcaBitstringSensor",
-    5,
-    "\u0001\u0001\u0002\u0001\r",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetNrBits", 5, 1, [  ], [ UINT16 ] ],
-      [ "GetBit", 5, 2, [ UINT16 ], [ UINT8 ] ],
-      [ "GetBitString", 5, 3, [  ], [ BITSTRING ] ]
-    ],
-    [
-      [ "BitString", [ BITSTRING ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaBitstringSensor',
+  5,
+  '\u0001\u0001\u0002\u0001\r',
+  2,
+  OcaBasicSensor,
+  [
+    ['GetNrBits', 5, 1, [], [UINT16]],
+    ['GetBit', 5, 2, [UINT16], [UINT8]],
+    ['GetBitString', 5, 3, [], [BITSTRING]],
+  ],
+  [['BitString', [BITSTRING], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -4001,18 +3942,14 @@ export const OcaBitstringSensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaUint64Sensor = make_control_class(
-    "OcaUint64Sensor",
-    5,
-    "\u0001\u0001\u0002\u0001\t",
-    2,
-    OcaBasicSensor,
-    [
-      [ "GetReading", 5, 1, [  ], [ UINT64, UINT64, UINT64 ] ]
-    ],
-    [
-      [ "Reading", [ UINT64 ], 5, 1, false, false, null]
-    ],
-    [    ]
+  'OcaUint64Sensor',
+  5,
+  '\u0001\u0001\u0002\u0001\t',
+  2,
+  OcaBasicSensor,
+  [['GetReading', 5, 1, [], [UINT64, UINT64, UINT64]]],
+  [['Reading', [UINT64], 5, 1, false, false, null]],
+  []
 );
 
 /**
@@ -4041,41 +3978,74 @@ export const OcaUint64Sensor = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBlock = make_control_class(
-    "OcaBlock",
-    3,
-    "\u0001\u0001\u0003",
-    2,
-    OcaWorker,
+  'OcaBlock',
+  3,
+  '\u0001\u0001\u0003',
+  2,
+  OcaWorker,
+  [
+    ['GetType', 3, 1, [], [UINT32]],
+    ,
+    ['ConstructMemberUsingFactory', 3, 3, [UINT32], [UINT32]],
+    ['DeleteMember', 3, 4, [UINT32], []],
+    ['GetMembers', 3, 5, [], [LIST(OcaObjectIdentification)]],
+    ['GetMembersRecursive', 3, 6, [], [LIST(OcaBlockMember)]],
+    ['AddSignalPath', 3, 7, [OcaSignalPath], [UINT16]],
+    ['DeleteSignalPath', 3, 8, [UINT16], []],
+    ['GetSignalPaths', 3, 9, [], [MAP(UINT16, OcaSignalPath)]],
+    ['GetSignalPathsRecursive', 3, 10, [], [MAP(UINT16, OcaSignalPath)]],
+    ['GetMostRecentParamSetIdentifier', 3, 11, [], [OcaLibVolIdentifier]],
+    ['ApplyParamSet', 3, 12, [], [OcaLibVolIdentifier]],
+    ['GetCurrentParamSetData', 3, 13, [], [OcaLibVolData_ParamSet]],
+    ['StoreCurrentParamSetData', 3, 14, [OcaLibVolIdentifier], []],
+    ['GetGlobalType', 3, 15, [], [OcaGlobalTypeIdentifier]],
+    ['GetONoMap', 3, 16, [], [MAP(UINT32, UINT32)]],
     [
-      [ "GetType", 3, 1, [  ], [ UINT32 ] ], ,
-      [ "ConstructMemberUsingFactory", 3, 3, [ UINT32 ], [ UINT32 ] ],
-      [ "DeleteMember", 3, 4, [ UINT32 ], [  ] ],
-      [ "GetMembers", 3, 5, [  ], [ LIST(OcaObjectIdentification) ] ],
-      [ "GetMembersRecursive", 3, 6, [  ], [ LIST(OcaBlockMember) ] ],
-      [ "AddSignalPath", 3, 7, [ OcaSignalPath ], [ UINT16 ] ],
-      [ "DeleteSignalPath", 3, 8, [ UINT16 ], [  ] ],
-      [ "GetSignalPaths", 3, 9, [  ], [ MAP(UINT16, OcaSignalPath) ] ],
-      [ "GetSignalPathsRecursive", 3, 10, [  ], [ MAP(UINT16, OcaSignalPath) ] ],
-      [ "GetMostRecentParamSetIdentifier", 3, 11, [  ], [ OcaLibVolIdentifier ] ],
-      [ "ApplyParamSet", 3, 12, [  ], [ OcaLibVolIdentifier ] ],
-      [ "GetCurrentParamSetData", 3, 13, [  ], [ OcaLibVolData_ParamSet ] ],
-      [ "StoreCurrentParamSetData", 3, 14, [ OcaLibVolIdentifier ], [  ] ],
-      [ "GetGlobalType", 3, 15, [  ], [ OcaGlobalTypeIdentifier ] ],
-      [ "GetONoMap", 3, 16, [  ], [ MAP(UINT32, UINT32) ] ],
-      [ "FindObjectsByRole", 3, 17, [ STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ],
-      [ "FindObjectsByRoleRecursive", 3, 18, [ STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ],
-      [ "FindObjectsByPath", 3, 20, [ LIST(STRING), OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ],
-      [ "FindObjectsByLabelRecursive", 3, 19, [ STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags ], [ LIST(OcaObjectSearchResult) ] ]
+      'FindObjectsByRole',
+      3,
+      17,
+      [STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags],
+      [LIST(OcaObjectSearchResult)],
     ],
     [
-      [ "Type", [ UINT32 ], 3, 1, true, false, null],
-      [ "Members", [ LIST(OcaObjectIdentification) ], 3, 2, false, false, null],
-      [ "SignalPaths", [ MAP(UINT16, OcaSignalPath) ], 3, 3, false, false, null],
-      [ "MostRecentParamSetIdentifier", [ OcaLibVolIdentifier ], 3, 4, false, false, null],
-      [ "GlobalType", [ OcaGlobalTypeIdentifier ], 3, 5, true, false, null],
-      [ "ONoMap", [ MAP(UINT32, UINT32) ], 3, 6, true, false, null]
+      'FindObjectsByRoleRecursive',
+      3,
+      18,
+      [STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags],
+      [LIST(OcaObjectSearchResult)],
     ],
-    [    ]
+    [
+      'FindObjectsByPath',
+      3,
+      20,
+      [LIST(STRING), OcaObjectSearchResultFlags],
+      [LIST(OcaObjectSearchResult)],
+    ],
+    [
+      'FindObjectsByLabelRecursive',
+      3,
+      19,
+      [STRING, OcaStringComparisonType, BLOB16, OcaObjectSearchResultFlags],
+      [LIST(OcaObjectSearchResult)],
+    ],
+  ],
+  [
+    ['Type', [UINT32], 3, 1, true, false, null],
+    ['Members', [LIST(OcaObjectIdentification)], 3, 2, false, false, null],
+    ['SignalPaths', [MAP(UINT16, OcaSignalPath)], 3, 3, false, false, null],
+    [
+      'MostRecentParamSetIdentifier',
+      [OcaLibVolIdentifier],
+      3,
+      4,
+      false,
+      false,
+      null,
+    ],
+    ['GlobalType', [OcaGlobalTypeIdentifier], 3, 5, true, false, null],
+    ['ONoMap', [MAP(UINT32, UINT32)], 3, 6, true, false, null],
+  ],
+  []
 );
 
 /**
@@ -4324,31 +4294,48 @@ export const OcaBlock = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaBlockFactory = make_control_class(
-    "OcaBlockFactory",
-    3,
-    "\u0001\u0001\u0004",
-    2,
-    OcaWorker,
+  'OcaBlockFactory',
+  3,
+  '\u0001\u0001\u0004',
+  2,
+  OcaWorker,
+  [
+    ['DefineProtoPort', 3, 1, [STRING, OcaPortMode], [OcaProtoPortID]],
+    ['UndefineProtoPort', 3, 2, [OcaProtoPortID], []],
+    ['GetProtoPorts', 3, 3, [], [LIST(OcaProtoPort)]],
+    ,
+    ['DefineProtoMemberUsingFactory', 3, 5, [UINT32], [UINT32]],
+    ['UndefineProtoMember', 3, 6, [UINT32], []],
+    ['GetProtoMembers', 3, 7, [], [LIST(OcaProtoObjectIdentification)]],
+    ['DefineProtoSignalPath', 3, 8, [OcaProtoSignalPath], [UINT16]],
+    ['UndefineProtoSignalPath', 3, 9, [], [UINT16]],
+    ['GetProtoSignalPaths', 3, 10, [], [MAP(UINT16, OcaProtoSignalPath)]],
+    ['GetGlobalType', 3, 11, [], [OcaGlobalTypeIdentifier]],
+    ['SetGlobalType', 3, 12, [OcaGlobalTypeIdentifier], []],
+  ],
+  [
+    ['ProtoPorts', [LIST(OcaProtoPort)], 3, 1, false, false, null],
     [
-      [ "DefineProtoPort", 3, 1, [ STRING, OcaPortMode ], [ OcaProtoPortID ] ],
-      [ "UndefineProtoPort", 3, 2, [ OcaProtoPortID ], [  ] ],
-      [ "GetProtoPorts", 3, 3, [  ], [ LIST(OcaProtoPort) ] ], ,
-      [ "DefineProtoMemberUsingFactory", 3, 5, [ UINT32 ], [ UINT32 ] ],
-      [ "UndefineProtoMember", 3, 6, [ UINT32 ], [  ] ],
-      [ "GetProtoMembers", 3, 7, [  ], [ LIST(OcaProtoObjectIdentification) ] ],
-      [ "DefineProtoSignalPath", 3, 8, [ OcaProtoSignalPath ], [ UINT16 ] ],
-      [ "UndefineProtoSignalPath", 3, 9, [  ], [ UINT16 ] ],
-      [ "GetProtoSignalPaths", 3, 10, [  ], [ MAP(UINT16, OcaProtoSignalPath) ] ],
-      [ "GetGlobalType", 3, 11, [  ], [ OcaGlobalTypeIdentifier ] ],
-      [ "SetGlobalType", 3, 12, [ OcaGlobalTypeIdentifier ], [  ] ]
+      'ProtoMembers',
+      [LIST(OcaProtoObjectIdentification)],
+      3,
+      2,
+      false,
+      false,
+      null,
     ],
     [
-      [ "ProtoPorts", [ LIST(OcaProtoPort) ], 3, 1, false, false, null],
-      [ "ProtoMembers", [ LIST(OcaProtoObjectIdentification) ], 3, 2, false, false, null],
-      [ "ProtoSignalPaths", [ MAP(UINT16, OcaProtoSignalPath) ], 3, 3, false, false, null],
-      [ "GlobalType", [ OcaGlobalTypeIdentifier ], 3, 4, false, false, null]
+      'ProtoSignalPaths',
+      [MAP(UINT16, OcaProtoSignalPath)],
+      3,
+      3,
+      false,
+      false,
+      null,
     ],
-    [    ]
+    ['GlobalType', [OcaGlobalTypeIdentifier], 3, 4, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -4535,40 +4522,40 @@ export const OcaBlockFactory = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaMatrix = make_control_class(
-    "OcaMatrix",
-    3,
-    "\u0001\u0001\u0005",
-    2,
-    OcaWorker,
-    [
-      [ "GetCurrentXY", 3, 1, [  ], [ UINT16, UINT16 ] ],
-      [ "SetCurrentXY", 3, 2, [ UINT16, UINT16 ], [  ] ],
-      [ "GetSize", 3, 3, [  ], [ UINT16, UINT16, UINT16, UINT16, UINT16, UINT16 ] ],
-      [ "SetSize", 3, 4, [ UINT16, UINT16 ], [  ] ],
-      [ "GetMembers", 3, 5, [  ], [ LIST2D(UINT32) ] ],
-      [ "SetMembers", 3, 6, [ LIST2D(UINT32) ], [  ] ],
-      [ "GetMember", 3, 7, [ UINT16, UINT16 ], [ UINT32 ] ],
-      [ "SetMember", 3, 8, [ UINT16, UINT16, UINT32 ], [  ] ],
-      [ "GetProxy", 3, 9, [  ], [ UINT32 ] ],
-      [ "SetProxy", 3, 10, [ UINT32 ], [  ] ],
-      [ "GetPortsPerRow", 3, 11, [  ], [ UINT8 ] ],
-      [ "SetPortsPerRow", 3, 12, [ UINT8 ], [  ] ],
-      [ "GetPortsPerColumn", 3, 13, [  ], [ UINT8 ] ],
-      [ "SetPortsPerColumn", 3, 14, [ UINT8 ], [  ] ],
-      [ "SetCurrentXYLock", 3, 15, [ UINT16, UINT16 ], [  ] ],
-      [ "UnlockCurrent", 3, 16, [  ], [  ] ]
-    ],
-    [
-      [ "X", [ UINT16 ], 3, 1, false, false, null],
-      [ "Y", [ UINT16 ], 3, 2, false, false, null],
-      [ "xSize", [ UINT16 ], 3, 3, false, false, null],
-      [ "ySize", [ UINT16 ], 3, 4, false, false, null],
-      [ "Members", [ LIST2D(UINT32) ], 3, 5, false, false, null],
-      [ "Proxy", [ UINT32 ], 3, 6, false, false, null],
-      [ "PortsPerRow", [ UINT8 ], 3, 7, false, false, null],
-      [ "PortsPerColumn", [ UINT8 ], 3, 8, false, false, null]
-    ],
-    [    ]
+  'OcaMatrix',
+  3,
+  '\u0001\u0001\u0005',
+  2,
+  OcaWorker,
+  [
+    ['GetCurrentXY', 3, 1, [], [UINT16, UINT16]],
+    ['SetCurrentXY', 3, 2, [UINT16, UINT16], []],
+    ['GetSize', 3, 3, [], [UINT16, UINT16, UINT16, UINT16, UINT16, UINT16]],
+    ['SetSize', 3, 4, [UINT16, UINT16], []],
+    ['GetMembers', 3, 5, [], [LIST2D(UINT32)]],
+    ['SetMembers', 3, 6, [LIST2D(UINT32)], []],
+    ['GetMember', 3, 7, [UINT16, UINT16], [UINT32]],
+    ['SetMember', 3, 8, [UINT16, UINT16, UINT32], []],
+    ['GetProxy', 3, 9, [], [UINT32]],
+    ['SetProxy', 3, 10, [UINT32], []],
+    ['GetPortsPerRow', 3, 11, [], [UINT8]],
+    ['SetPortsPerRow', 3, 12, [UINT8], []],
+    ['GetPortsPerColumn', 3, 13, [], [UINT8]],
+    ['SetPortsPerColumn', 3, 14, [UINT8], []],
+    ['SetCurrentXYLock', 3, 15, [UINT16, UINT16], []],
+    ['UnlockCurrent', 3, 16, [], []],
+  ],
+  [
+    ['X', [UINT16], 3, 1, false, false, null],
+    ['Y', [UINT16], 3, 2, false, false, null],
+    ['xSize', [UINT16], 3, 3, false, false, null],
+    ['ySize', [UINT16], 3, 4, false, false, null],
+    ['Members', [LIST2D(UINT32)], 3, 5, false, false, null],
+    ['Proxy', [UINT32], 3, 6, false, false, null],
+    ['PortsPerRow', [UINT8], 3, 7, false, false, null],
+    ['PortsPerColumn', [UINT8], 3, 8, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -4747,22 +4734,22 @@ export const OcaMatrix = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaAgent = make_control_class(
-    "OcaAgent",
-    2,
-    "\u0001\u0002",
-    2,
-    OcaRoot,
-    [
-      [ "GetLabel", 2, 1, [  ], [ STRING ] ],
-      [ "SetLabel", 2, 2, [ STRING ], [  ] ],
-      [ "GetOwner", 2, 3, [  ], [ UINT32 ] ],
-      [ "GetPath", 2, 4, [  ], [ LIST(STRING), LIST(UINT32) ] ]
-    ],
-    [
-      [ "Label", [ STRING ], 2, 1, false, false, null],
-      [ "Owner", [ UINT32 ], 2, 2, false, false, null]
-    ],
-    [    ]
+  'OcaAgent',
+  2,
+  '\u0001\u0002',
+  2,
+  OcaRoot,
+  [
+    ['GetLabel', 2, 1, [], [STRING]],
+    ['SetLabel', 2, 2, [STRING], []],
+    ['GetOwner', 2, 3, [], [UINT32]],
+    ['GetPath', 2, 4, [], [LIST(STRING), LIST(UINT32)]],
+  ],
+  [
+    ['Label', [STRING], 2, 1, false, false, null],
+    ['Owner', [UINT32], 2, 2, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -4896,37 +4883,52 @@ export const OcaAgent = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaGrouper = make_control_class(
-    "OcaGrouper",
-    3,
-    "\u0001\u0002\u0002",
-    2,
-    OcaAgent,
+  'OcaGrouper',
+  3,
+  '\u0001\u0002\u0002',
+  2,
+  OcaAgent,
+  [
+    ['AddGroup', 3, 1, [STRING], [UINT16, UINT32]],
+    ['DeleteGroup', 3, 2, [UINT16], []],
+    ['GetGroupCount', 3, 3, [], [UINT16]],
+    ['GetGroupList', 3, 4, [], [LIST(OcaGrouperGroup)]],
+    ['AddCitizen', 3, 5, [OcaGrouperCitizen], [UINT16]],
+    ['DeleteCitizen', 3, 6, [UINT16], []],
+    ['GetCitizenCount', 3, 7, [], [UINT16]],
+    ['GetCitizenList', 3, 8, [], [LIST(OcaGrouperCitizen)]],
+    ['GetEnrollment', 3, 9, [OcaGrouperEnrollment], [BOOLEAN]],
+    ['SetEnrollment', 3, 10, [OcaGrouperEnrollment, BOOLEAN], []],
+    ['GetGroupMemberList', 3, 11, [UINT16], [LIST(OcaGrouperCitizen)]],
+    ['GetActuatorOrSensor', 3, 12, [], [BOOLEAN]],
+    ['SetActuatorOrSensor', 3, 13, [BOOLEAN], []],
+    ['GetMode', 3, 14, [], [OcaGrouperMode]],
+    ['SetMode', 3, 15, [OcaGrouperMode], []],
+  ],
+  [
+    ['ActuatorOrSensor', [BOOLEAN], 3, 1, false, false, null],
+    ['Groups', [LIST(OcaGrouperGroup)], 3, 2, false, false, ['GroupList']],
     [
-      [ "AddGroup", 3, 1, [ STRING ], [ UINT16, UINT32 ] ],
-      [ "DeleteGroup", 3, 2, [ UINT16 ], [  ] ],
-      [ "GetGroupCount", 3, 3, [  ], [ UINT16 ] ],
-      [ "GetGroupList", 3, 4, [  ], [ LIST(OcaGrouperGroup) ] ],
-      [ "AddCitizen", 3, 5, [ OcaGrouperCitizen ], [ UINT16 ] ],
-      [ "DeleteCitizen", 3, 6, [ UINT16 ], [  ] ],
-      [ "GetCitizenCount", 3, 7, [  ], [ UINT16 ] ],
-      [ "GetCitizenList", 3, 8, [  ], [ LIST(OcaGrouperCitizen) ] ],
-      [ "GetEnrollment", 3, 9, [ OcaGrouperEnrollment ], [ BOOLEAN ] ],
-      [ "SetEnrollment", 3, 10, [ OcaGrouperEnrollment, BOOLEAN ], [  ] ],
-      [ "GetGroupMemberList", 3, 11, [ UINT16 ], [ LIST(OcaGrouperCitizen) ] ],
-      [ "GetActuatorOrSensor", 3, 12, [  ], [ BOOLEAN ] ],
-      [ "SetActuatorOrSensor", 3, 13, [ BOOLEAN ], [  ] ],
-      [ "GetMode", 3, 14, [  ], [ OcaGrouperMode ] ],
-      [ "SetMode", 3, 15, [ OcaGrouperMode ], [  ] ]
+      'Citizens',
+      [LIST(OcaGrouperCitizen)],
+      3,
+      3,
+      false,
+      false,
+      ['CitizenList'],
     ],
     [
-      [ "ActuatorOrSensor", [ BOOLEAN ], 3, 1, false, false, null],
-      [ "Groups", [ LIST(OcaGrouperGroup) ], 3, 2, false, false, ["GroupList"]],
-      [ "Citizens", [ LIST(OcaGrouperCitizen) ], 3, 3, false, false, ["CitizenList"]],
-      [ "Enrollments", [ LIST(OcaGrouperEnrollment) ], 3, 4, false, false, ["EnrollmentList"]],
-      [ "Mode", [ OcaGrouperMode ], 3, 5, false, false, null]
+      'Enrollments',
+      [LIST(OcaGrouperEnrollment)],
+      3,
+      4,
+      false,
+      false,
+      ['EnrollmentList'],
     ],
-    [
-      [ "StatusChange", 3, 1, [ UINT16, UINT16, OcaGrouperStatusChangeType ] ]    ]
+    ['Mode', [OcaGrouperMode], 3, 5, false, false, null],
+  ],
+  [['StatusChange', 3, 1, [UINT16, UINT16, OcaGrouperStatusChangeType]]]
 );
 
 /**
@@ -5104,37 +5106,37 @@ export const OcaGrouper = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaRamper = make_control_class(
-    "OcaRamper",
-    3,
-    "\u0001\u0002\u0003",
-    2,
-    OcaAgent,
-    [
-      [ "Control", 3, 1, [ OcaRamperCommand ], [  ] ],
-      [ "GetState", 3, 2, [  ], [ OcaRamperState ] ],
-      [ "GetRampedProperty", 3, 3, [  ], [ OcaProperty ] ],
-      [ "SetRampedProperty", 3, 4, [ OcaProperty ], [  ] ],
-      [ "GetTimeMode", 3, 5, [  ], [ OcaTimeMode ] ],
-      [ "SetTimeMode", 3, 6, [ OcaTimeMode ], [  ] ],
-      [ "GetStartTime", 3, 7, [  ], [ UINT64 ] ],
-      [ "SetStartTime", 3, 8, [ UINT64 ], [  ] ],
-      [ "GetDuration", 3, 9, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "SetDuration", 3, 10, [ FLOAT32 ], [  ] ],
-      [ "GetInterpolationLaw", 3, 11, [  ], [ OcaRamperInterpolationLaw ] ],
-      [ "SetInterpolationLaw", 3, 12, [ OcaRamperInterpolationLaw ], [  ] ],
-      [ "GetGoal", 3, 13, [  ], [ FLOAT64 ] ],
-      [ "SetGoal", 3, 14, [ FLOAT64 ], [  ] ]
-    ],
-    [
-      [ "State", [ OcaRamperState ], 3, 1, false, false, null],
-      [ "RampedProperty", [ OcaProperty ], 3, 2, false, false, null],
-      [ "TimeMode", [ OcaTimeMode ], 3, 3, false, false, null],
-      [ "StartTime", [ UINT64 ], 3, 4, false, false, null],
-      [ "Duration", [ FLOAT32 ], 3, 5, false, false, null],
-      [ "InterpolationLaw", [ OcaRamperInterpolationLaw ], 3, 6, false, false, null],
-      [ "Goal", [ FLOAT64 ], 3, 7, false, false, null]
-    ],
-    [    ]
+  'OcaRamper',
+  3,
+  '\u0001\u0002\u0003',
+  2,
+  OcaAgent,
+  [
+    ['Control', 3, 1, [OcaRamperCommand], []],
+    ['GetState', 3, 2, [], [OcaRamperState]],
+    ['GetRampedProperty', 3, 3, [], [OcaProperty]],
+    ['SetRampedProperty', 3, 4, [OcaProperty], []],
+    ['GetTimeMode', 3, 5, [], [OcaTimeMode]],
+    ['SetTimeMode', 3, 6, [OcaTimeMode], []],
+    ['GetStartTime', 3, 7, [], [UINT64]],
+    ['SetStartTime', 3, 8, [UINT64], []],
+    ['GetDuration', 3, 9, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['SetDuration', 3, 10, [FLOAT32], []],
+    ['GetInterpolationLaw', 3, 11, [], [OcaRamperInterpolationLaw]],
+    ['SetInterpolationLaw', 3, 12, [OcaRamperInterpolationLaw], []],
+    ['GetGoal', 3, 13, [], [FLOAT64]],
+    ['SetGoal', 3, 14, [FLOAT64], []],
+  ],
+  [
+    ['State', [OcaRamperState], 3, 1, false, false, null],
+    ['RampedProperty', [OcaProperty], 3, 2, false, false, null],
+    ['TimeMode', [OcaTimeMode], 3, 3, false, false, null],
+    ['StartTime', [UINT64], 3, 4, false, false, null],
+    ['Duration', [FLOAT32], 3, 5, false, false, null],
+    ['InterpolationLaw', [OcaRamperInterpolationLaw], 3, 6, false, false, null],
+    ['Goal', [FLOAT64], 3, 7, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -5308,38 +5310,37 @@ export const OcaRamper = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaNumericObserver = make_control_class(
-    "OcaNumericObserver",
-    3,
-    "\u0001\u0002\u0004",
-    2,
-    OcaAgent,
-    [
-      [ "GetLastObservation", 3, 1, [  ], [ FLOAT64 ] ],
-      [ "GetState", 3, 2, [  ], [ OcaObserverState ] ],
-      [ "GetObservedProperty", 3, 3, [  ], [ OcaProperty ] ],
-      [ "SetObservedProperty", 3, 4, [ OcaProperty ], [  ] ],
-      [ "GetThreshold", 3, 5, [  ], [ FLOAT64 ] ],
-      [ "SetThreshold", 3, 6, [ FLOAT64 ], [  ] ],
-      [ "GetOperator", 3, 7, [  ], [ OcaRelationalOperator ] ],
-      [ "SetOperator", 3, 8, [ OcaRelationalOperator ], [  ] ],
-      [ "GetTwoWay", 3, 9, [  ], [ BOOLEAN ] ],
-      [ "SetTwoWay", 3, 10, [ BOOLEAN ], [  ] ],
-      [ "GetHysteresis", 3, 11, [  ], [ FLOAT64 ] ],
-      [ "SetHysteresis", 3, 12, [ FLOAT64 ], [  ] ],
-      [ "GetPeriod", 3, 13, [  ], [ FLOAT32 ] ],
-      [ "SetPeriod", 3, 14, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "State", [ OcaObserverState ], 3, 1, false, false, null],
-      [ "ObservedProperty", [ OcaProperty ], 3, 2, false, false, null],
-      [ "Threshold", [ FLOAT64 ], 3, 3, false, false, null],
-      [ "Operator", [ OcaRelationalOperator ], 3, 4, false, false, null],
-      [ "TwoWay", [ BOOLEAN ], 3, 5, false, false, null],
-      [ "Hysteresis", [ FLOAT64 ], 3, 6, false, false, null],
-      [ "Period", [ FLOAT32 ], 3, 7, false, false, null]
-    ],
-    [
-      [ "Observation", 3, 1, [ OcaEvent, FLOAT64 ] ]    ]
+  'OcaNumericObserver',
+  3,
+  '\u0001\u0002\u0004',
+  2,
+  OcaAgent,
+  [
+    ['GetLastObservation', 3, 1, [], [FLOAT64]],
+    ['GetState', 3, 2, [], [OcaObserverState]],
+    ['GetObservedProperty', 3, 3, [], [OcaProperty]],
+    ['SetObservedProperty', 3, 4, [OcaProperty], []],
+    ['GetThreshold', 3, 5, [], [FLOAT64]],
+    ['SetThreshold', 3, 6, [FLOAT64], []],
+    ['GetOperator', 3, 7, [], [OcaRelationalOperator]],
+    ['SetOperator', 3, 8, [OcaRelationalOperator], []],
+    ['GetTwoWay', 3, 9, [], [BOOLEAN]],
+    ['SetTwoWay', 3, 10, [BOOLEAN], []],
+    ['GetHysteresis', 3, 11, [], [FLOAT64]],
+    ['SetHysteresis', 3, 12, [FLOAT64], []],
+    ['GetPeriod', 3, 13, [], [FLOAT32]],
+    ['SetPeriod', 3, 14, [FLOAT32], []],
+  ],
+  [
+    ['State', [OcaObserverState], 3, 1, false, false, null],
+    ['ObservedProperty', [OcaProperty], 3, 2, false, false, null],
+    ['Threshold', [FLOAT64], 3, 3, false, false, null],
+    ['Operator', [OcaRelationalOperator], 3, 4, false, false, null],
+    ['TwoWay', [BOOLEAN], 3, 5, false, false, null],
+    ['Hysteresis', [FLOAT64], 3, 6, false, false, null],
+    ['Period', [FLOAT32], 3, 7, false, false, null],
+  ],
+  [['Observation', 3, 1, [OcaEvent, FLOAT64]]]
 );
 
 /**
@@ -5520,28 +5521,27 @@ export const OcaNumericObserver = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaLibrary = make_control_class(
-    "OcaLibrary",
-    3,
-    "\u0001\u0002\u0005",
-    2,
-    OcaAgent,
-    [
-      [ "AddVolume", 3, 1, [ OcaLibVol ], [ UINT32 ] ],
-      [ "ReplaceVolume", 3, 2, [ UINT32, OcaLibVol ], [  ] ],
-      [ "DeleteVolume", 3, 3, [ UINT32 ], [  ] ],
-      [ "GetVolume", 3, 4, [  ], [ OcaLibVol ] ],
-      [ "GetVolumeCount", 3, 5, [  ], [ UINT16 ] ],
-      [ "GetVolumes", 3, 6, [  ], [ MAP(UINT32, OcaLibVol) ] ],
-      [ "GetAccess", 3, 7, [  ], [ OcaLibAccess ] ],
-      [ "SetAccess", 3, 8, [ OcaLibAccess ], [  ] ]
-    ],
-    [
-      [ "VolumeType", [ OcaLibVolType ], 3, 1, false, false, null],
-      [ "Access", [ OcaLibAccess ], 3, 2, false, false, null],
-      [ "Volumes", [ MAP(UINT32, OcaLibVol) ], 3, 3, false, false, null]
-    ],
-    [
-      [ "OcaLibVolChanged", 3, 1, [ UINT32, OcaPropertyChangeType ] ]    ]
+  'OcaLibrary',
+  3,
+  '\u0001\u0002\u0005',
+  2,
+  OcaAgent,
+  [
+    ['AddVolume', 3, 1, [OcaLibVol], [UINT32]],
+    ['ReplaceVolume', 3, 2, [UINT32, OcaLibVol], []],
+    ['DeleteVolume', 3, 3, [UINT32], []],
+    ['GetVolume', 3, 4, [], [OcaLibVol]],
+    ['GetVolumeCount', 3, 5, [], [UINT16]],
+    ['GetVolumes', 3, 6, [], [MAP(UINT32, OcaLibVol)]],
+    ['GetAccess', 3, 7, [], [OcaLibAccess]],
+    ['SetAccess', 3, 8, [OcaLibAccess], []],
+  ],
+  [
+    ['VolumeType', [OcaLibVolType], 3, 1, false, false, null],
+    ['Access', [OcaLibAccess], 3, 2, false, false, null],
+    ['Volumes', [MAP(UINT32, OcaLibVol)], 3, 3, false, false, null],
+  ],
+  [['OcaLibVolChanged', 3, 1, [UINT32, OcaPropertyChangeType]]]
 );
 
 /**
@@ -5641,31 +5641,31 @@ export const OcaLibrary = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaPowerSupply = make_control_class(
-    "OcaPowerSupply",
-    3,
-    "\u0001\u0002\u0007",
-    3,
-    OcaAgent,
-    [
-      [ "GetType", 3, 1, [  ], [ OcaPowerSupplyType ] ],
-      [ "GetModelInfo", 3, 2, [  ], [ STRING ] ],
-      [ "GetState", 3, 3, [  ], [ OcaPowerSupplyState ] ],
-      [ "SetState", 3, 4, [ OcaPowerSupplyState ], [  ] ],
-      [ "GetCharging", 3, 5, [  ], [ BOOLEAN ] ],
-      [ "GetLoadFractionAvailable", 3, 6, [  ], [ FLOAT32 ] ],
-      [ "GetStorageFractionAvailable", 3, 7, [  ], [ FLOAT32 ] ],
-      [ "GetLocation", 3, 8, [  ], [ OcaPowerSupplyLocation ] ]
-    ],
-    [
-      [ "Type", [ OcaPowerSupplyType ], 3, 1, false, false, null],
-      [ "ModelInfo", [ STRING ], 3, 2, false, false, null],
-      [ "State", [ OcaPowerSupplyState ], 3, 3, false, false, null],
-      [ "Charging", [ BOOLEAN ], 3, 4, false, false, null],
-      [ "LoadFractionAvailable", [ FLOAT32 ], 3, 5, true, false, null],
-      [ "StorageFractionAvailable", [ FLOAT32 ], 3, 6, true, false, null],
-      [ "Location", [ OcaPowerSupplyLocation ], 3, 7, true, false, null]
-    ],
-    [    ]
+  'OcaPowerSupply',
+  3,
+  '\u0001\u0002\u0007',
+  3,
+  OcaAgent,
+  [
+    ['GetType', 3, 1, [], [OcaPowerSupplyType]],
+    ['GetModelInfo', 3, 2, [], [STRING]],
+    ['GetState', 3, 3, [], [OcaPowerSupplyState]],
+    ['SetState', 3, 4, [OcaPowerSupplyState], []],
+    ['GetCharging', 3, 5, [], [BOOLEAN]],
+    ['GetLoadFractionAvailable', 3, 6, [], [FLOAT32]],
+    ['GetStorageFractionAvailable', 3, 7, [], [FLOAT32]],
+    ['GetLocation', 3, 8, [], [OcaPowerSupplyLocation]],
+  ],
+  [
+    ['Type', [OcaPowerSupplyType], 3, 1, false, false, null],
+    ['ModelInfo', [STRING], 3, 2, false, false, null],
+    ['State', [OcaPowerSupplyState], 3, 3, false, false, null],
+    ['Charging', [BOOLEAN], 3, 4, false, false, null],
+    ['LoadFractionAvailable', [FLOAT32], 3, 5, true, false, null],
+    ['StorageFractionAvailable', [FLOAT32], 3, 6, true, false, null],
+    ['Location', [OcaPowerSupplyLocation], 3, 7, true, false, null],
+  ],
+  []
 );
 
 /**
@@ -5761,17 +5761,14 @@ export const OcaPowerSupply = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaEventHandler = make_control_class(
-    "OcaEventHandler",
-    3,
-    "\u0001\u0002\b",
-    2,
-    OcaAgent,
-    [
-      [ "OnEvent", 3, 1, [ BLOB, OcaEvent ], [  ] ]
-    ],
-    [
-    ],
-    [    ]
+  'OcaEventHandler',
+  3,
+  '\u0001\u0002\b',
+  2,
+  OcaAgent,
+  [['OnEvent', 3, 1, [BLOB, OcaEvent], []]],
+  [],
+  []
 );
 
 /**
@@ -5828,38 +5825,37 @@ export const OcaEventHandler = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaNumericObserverList = make_control_class(
-    "OcaNumericObserverList",
-    3,
-    "\u0001\u0002\t",
-    2,
-    OcaAgent,
-    [
-      [ "GetLastObservation", 3, 1, [  ], [ LIST(FLOAT64) ] ],
-      [ "GetState", 3, 2, [  ], [ OcaObserverState ] ],
-      [ "GetObservedProperties", 3, 3, [  ], [ LIST(OcaProperty) ] ],
-      [ "SetObservedProperties", 3, 4, [ LIST(OcaProperty) ], [  ] ],
-      [ "GetThreshold", 3, 5, [  ], [ FLOAT64 ] ],
-      [ "SetThreshold", 3, 6, [ FLOAT64 ], [  ] ],
-      [ "GetOperator", 3, 7, [  ], [ OcaRelationalOperator ] ],
-      [ "SetOperator", 3, 8, [ OcaRelationalOperator ], [  ] ],
-      [ "GetTwoWay", 3, 9, [  ], [ BOOLEAN ] ],
-      [ "SetTwoWay", 3, 10, [ BOOLEAN ], [  ] ],
-      [ "GetHysteresis", 3, 11, [  ], [ FLOAT64 ] ],
-      [ "SetHysteresis", 3, 12, [ FLOAT64 ], [  ] ],
-      [ "GetPeriod", 3, 13, [  ], [ FLOAT32 ] ],
-      [ "SetPeriod", 3, 14, [ FLOAT32 ], [  ] ]
-    ],
-    [
-      [ "State", [ OcaObserverState ], 3, 1, false, false, null],
-      [ "ObservedProperties", [ LIST(OcaProperty) ], 3, 2, false, false, null],
-      [ "Threshold", [ FLOAT64 ], 3, 3, false, false, null],
-      [ "Operator", [ OcaRelationalOperator ], 3, 4, false, false, null],
-      [ "TwoWay", [ BOOLEAN ], 3, 5, false, false, null],
-      [ "Hysteresis", [ FLOAT64 ], 3, 6, false, false, null],
-      [ "Period", [ FLOAT32 ], 3, 7, false, false, null]
-    ],
-    [
-      [ "Observation", 3, 1, [ OcaEvent, LIST(FLOAT64) ] ]    ]
+  'OcaNumericObserverList',
+  3,
+  '\u0001\u0002\t',
+  2,
+  OcaAgent,
+  [
+    ['GetLastObservation', 3, 1, [], [LIST(FLOAT64)]],
+    ['GetState', 3, 2, [], [OcaObserverState]],
+    ['GetObservedProperties', 3, 3, [], [LIST(OcaProperty)]],
+    ['SetObservedProperties', 3, 4, [LIST(OcaProperty)], []],
+    ['GetThreshold', 3, 5, [], [FLOAT64]],
+    ['SetThreshold', 3, 6, [FLOAT64], []],
+    ['GetOperator', 3, 7, [], [OcaRelationalOperator]],
+    ['SetOperator', 3, 8, [OcaRelationalOperator], []],
+    ['GetTwoWay', 3, 9, [], [BOOLEAN]],
+    ['SetTwoWay', 3, 10, [BOOLEAN], []],
+    ['GetHysteresis', 3, 11, [], [FLOAT64]],
+    ['SetHysteresis', 3, 12, [FLOAT64], []],
+    ['GetPeriod', 3, 13, [], [FLOAT32]],
+    ['SetPeriod', 3, 14, [FLOAT32], []],
+  ],
+  [
+    ['State', [OcaObserverState], 3, 1, false, false, null],
+    ['ObservedProperties', [LIST(OcaProperty)], 3, 2, false, false, null],
+    ['Threshold', [FLOAT64], 3, 3, false, false, null],
+    ['Operator', [OcaRelationalOperator], 3, 4, false, false, null],
+    ['TwoWay', [BOOLEAN], 3, 5, false, false, null],
+    ['Hysteresis', [FLOAT64], 3, 6, false, false, null],
+    ['Period', [FLOAT32], 3, 7, false, false, null],
+  ],
+  [['Observation', 3, 1, [OcaEvent, LIST(FLOAT64)]]]
 );
 
 /**
@@ -6049,28 +6045,36 @@ export const OcaNumericObserverList = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaMediaClock3 = make_control_class(
-    "OcaMediaClock3",
-    3,
-    "\u0001\u0002\u000f",
-    1,
-    OcaAgent,
+  'OcaMediaClock3',
+  3,
+  '\u0001\u0002\u000f',
+  1,
+  OcaAgent,
+  [
+    ['GetAvailability', 3, 1, [], [OcaMediaClockAvailability]],
+    ['SetAvailability', 3, 2, [OcaMediaClockAvailability], []],
+    ['GetCurrentRate', 3, 3, [], [OcaMediaClockRate, UINT32]],
+    ['SetCurrentRate', 3, 4, [OcaMediaClockRate, UINT32], []],
+    ['GetOffset', 3, 5, [], [OcaTimePTP]],
+    ['SetOffset', 3, 6, [OcaTimePTP], []],
+    ['GetSupportedRates', 3, 7, [], [MAP(UINT32, LIST(OcaMediaClockRate))]],
+  ],
+  [
+    ['Availability', [OcaMediaClockAvailability], 3, 1, false, false, null],
+    ['TimeSourceONo', [UINT32], 3, 2, false, false, null],
+    ['Offset', [OcaTimePTP], 3, 3, false, false, null],
+    ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, null],
     [
-      [ "GetAvailability", 3, 1, [  ], [ OcaMediaClockAvailability ] ],
-      [ "SetAvailability", 3, 2, [ OcaMediaClockAvailability ], [  ] ],
-      [ "GetCurrentRate", 3, 3, [  ], [ OcaMediaClockRate, UINT32 ] ],
-      [ "SetCurrentRate", 3, 4, [ OcaMediaClockRate, UINT32 ], [  ] ],
-      [ "GetOffset", 3, 5, [  ], [ OcaTimePTP ] ],
-      [ "SetOffset", 3, 6, [ OcaTimePTP ], [  ] ],
-      [ "GetSupportedRates", 3, 7, [  ], [ MAP(UINT32, LIST(OcaMediaClockRate)) ] ]
+      'SupportedRates',
+      [MAP(UINT32, LIST(OcaMediaClockRate))],
+      3,
+      5,
+      false,
+      false,
+      null,
     ],
-    [
-      [ "Availability", [ OcaMediaClockAvailability ], 3, 1, false, false, null],
-      [ "TimeSourceONo", [ UINT32 ], 3, 2, false, false, null],
-      [ "Offset", [ OcaTimePTP ], 3, 3, false, false, null],
-      [ "CurrentRate", [ OcaMediaClockRate ], 3, 4, false, false, null],
-      [ "SupportedRates", [ MAP(UINT32, LIST(OcaMediaClockRate)) ], 3, 5, false, false, null]
-    ],
-    [    ]
+  ],
+  []
 );
 
 /**
@@ -6166,33 +6170,33 @@ export const OcaMediaClock3 = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaTimeSource = make_control_class(
-    "OcaTimeSource",
-    3,
-    "\u0001\u0002\u0010",
-    1,
-    OcaAgent,
-    [
-      [ "GetAvailability", 3, 1, [  ], [ OcaTimeSourceAvailability ] ],
-      [ "GetProtocol", 3, 2, [  ], [ OcaTimeProtocol ] ],
-      [ "SetProtocol", 3, 3, [ OcaTimeProtocol ], [  ] ],
-      [ "GetParameters", 3, 4, [  ], [ STRING ] ],
-      [ "SetParameters", 3, 5, [ STRING ], [  ] ],
-      [ "GetReferenceType", 3, 6, [  ], [ OcaTimeReferenceType ] ],
-      [ "SetReferenceType", 3, 7, [ OcaTimeReferenceType ], [  ] ],
-      [ "GetReferenceID", 3, 8, [  ], [ STRING ] ],
-      [ "SetReferenceID", 3, 9, [ STRING ], [  ] ],
-      [ "GetSyncStatus", 3, 10, [  ], [ OcaTimeSourceSyncStatus ] ],
-      [ "Reset", 3, 11, [  ], [  ] ]
-    ],
-    [
-      [ "Availability", [ OcaTimeSourceAvailability ], 3, 1, false, false, null],
-      [ "Protocol", [ OcaTimeProtocol ], 3, 2, false, false, null],
-      [ "Parameters", [ STRING ], 3, 3, false, false, null],
-      [ "ReferenceType", [ OcaTimeReferenceType ], 3, 4, false, false, null],
-      [ "ReferenceID", [ STRING ], 3, 5, false, false, null],
-      [ "SyncStatus", [ OcaTimeSourceSyncStatus ], 3, 6, false, false, null]
-    ],
-    [    ]
+  'OcaTimeSource',
+  3,
+  '\u0001\u0002\u0010',
+  1,
+  OcaAgent,
+  [
+    ['GetAvailability', 3, 1, [], [OcaTimeSourceAvailability]],
+    ['GetProtocol', 3, 2, [], [OcaTimeProtocol]],
+    ['SetProtocol', 3, 3, [OcaTimeProtocol], []],
+    ['GetParameters', 3, 4, [], [STRING]],
+    ['SetParameters', 3, 5, [STRING], []],
+    ['GetReferenceType', 3, 6, [], [OcaTimeReferenceType]],
+    ['SetReferenceType', 3, 7, [OcaTimeReferenceType], []],
+    ['GetReferenceID', 3, 8, [], [STRING]],
+    ['SetReferenceID', 3, 9, [STRING], []],
+    ['GetSyncStatus', 3, 10, [], [OcaTimeSourceSyncStatus]],
+    ['Reset', 3, 11, [], []],
+  ],
+  [
+    ['Availability', [OcaTimeSourceAvailability], 3, 1, false, false, null],
+    ['Protocol', [OcaTimeProtocol], 3, 2, false, false, null],
+    ['Parameters', [STRING], 3, 3, false, false, null],
+    ['ReferenceType', [OcaTimeReferenceType], 3, 4, false, false, null],
+    ['ReferenceID', [STRING], 3, 5, false, false, null],
+    ['SyncStatus', [OcaTimeSourceSyncStatus], 3, 6, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -6311,23 +6315,37 @@ export const OcaTimeSource = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaPhysicalPosition = make_control_class(
-    "OcaPhysicalPosition",
-    3,
-    "\u0001\u0002\u0011",
-    1,
-    OcaAgent,
+  'OcaPhysicalPosition',
+  3,
+  '\u0001\u0002\u0011',
+  1,
+  OcaAgent,
+  [
+    ['GetCoordinateSystem', 3, 1, [], [OcaPositionCoordinateSystem]],
+    ['GetPositionDescriptorFieldFlags', 3, 2, [], [UINT16]],
     [
-      [ "GetCoordinateSystem", 3, 1, [  ], [ OcaPositionCoordinateSystem ] ],
-      [ "GetPositionDescriptorFieldFlags", 3, 2, [  ], [ UINT16 ] ],
-      [ "GetPositionDescriptor", 3, 3, [  ], [ OcaPositionDescriptor, OcaPositionDescriptor, OcaPositionDescriptor ] ],
-      [ "SetPositionDescriptor", 3, 4, [ OcaPositionDescriptor ], [  ] ]
+      'GetPositionDescriptor',
+      3,
+      3,
+      [],
+      [OcaPositionDescriptor, OcaPositionDescriptor, OcaPositionDescriptor],
     ],
+    ['SetPositionDescriptor', 3, 4, [OcaPositionDescriptor], []],
+  ],
+  [
     [
-      [ "CoordinateSystem", [ OcaPositionCoordinateSystem ], 3, 1, true, false, null],
-      [ "PositionDescriptorFieldFlags", [ UINT16 ], 3, 2, true, false, null],
-      [ "PositionDescriptor", [ OcaPositionDescriptor ], 3, 3, false, false, null]
+      'CoordinateSystem',
+      [OcaPositionCoordinateSystem],
+      3,
+      1,
+      true,
+      false,
+      null,
     ],
-    [    ]
+    ['PositionDescriptorFieldFlags', [UINT16], 3, 2, true, false, null],
+    ['PositionDescriptor', [OcaPositionDescriptor], 3, 3, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -6387,33 +6405,53 @@ export const OcaPhysicalPosition = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaApplicationNetwork = make_control_class(
-    "OcaApplicationNetwork",
-    2,
-    "\u0001\u0004",
-    1,
-    OcaRoot,
+  'OcaApplicationNetwork',
+  2,
+  '\u0001\u0004',
+  1,
+  OcaRoot,
+  [
+    ['GetLabel', 2, 1, [], [STRING]],
+    ['SetLabel', 2, 2, [STRING], []],
+    ['GetOwner', 2, 3, [], [UINT32]],
+    ['GetServiceID', 2, 4, [], [BLOB]],
+    ['SetServiceID', 2, 5, [BLOB], []],
     [
-      [ "GetLabel", 2, 1, [  ], [ STRING ] ],
-      [ "SetLabel", 2, 2, [ STRING ], [  ] ],
-      [ "GetOwner", 2, 3, [  ], [ UINT32 ] ],
-      [ "GetServiceID", 2, 4, [  ], [ BLOB ] ],
-      [ "SetServiceID", 2, 5, [ BLOB ], [  ] ],
-      [ "GetSystemInterfaces", 2, 6, [  ], [ LIST(OcaNetworkSystemInterfaceDescriptor) ] ],
-      [ "SetSystemInterfaces", 2, 7, [ LIST(OcaNetworkSystemInterfaceDescriptor) ], [  ] ],
-      [ "GetState", 2, 8, [  ], [ OcaApplicationNetworkState ] ],
-      [ "GetErrorCode", 2, 9, [  ], [ UINT16 ] ],
-      [ "Control", 2, 10, [ OcaApplicationNetworkCommand ], [  ] ],
-      [ "GetPath", 2, 11, [  ], [ LIST(STRING), LIST(UINT32) ] ]
+      'GetSystemInterfaces',
+      2,
+      6,
+      [],
+      [LIST(OcaNetworkSystemInterfaceDescriptor)],
     ],
     [
-      [ "Label", [ STRING ], 2, 1, false, true, null],
-      [ "Owner", [ UINT32 ], 2, 2, false, true, null],
-      [ "ServiceID", [ BLOB ], 2, 3, false, false, null],
-      [ "SystemInterfaces", [ LIST(OcaNetworkSystemInterfaceDescriptor) ], 2, 4, false, false, null],
-      [ "State", [ OcaApplicationNetworkState ], 2, 5, false, false, null],
-      [ "ErrorCode", [ UINT16 ], 2, 6, false, false, null]
+      'SetSystemInterfaces',
+      2,
+      7,
+      [LIST(OcaNetworkSystemInterfaceDescriptor)],
+      [],
     ],
-    [    ]
+    ['GetState', 2, 8, [], [OcaApplicationNetworkState]],
+    ['GetErrorCode', 2, 9, [], [UINT16]],
+    ['Control', 2, 10, [OcaApplicationNetworkCommand], []],
+    ['GetPath', 2, 11, [], [LIST(STRING), LIST(UINT32)]],
+  ],
+  [
+    ['Label', [STRING], 2, 1, false, true, null],
+    ['Owner', [UINT32], 2, 2, false, true, null],
+    ['ServiceID', [BLOB], 2, 3, false, false, null],
+    [
+      'SystemInterfaces',
+      [LIST(OcaNetworkSystemInterfaceDescriptor)],
+      2,
+      4,
+      false,
+      false,
+      null,
+    ],
+    ['State', [OcaApplicationNetworkState], 2, 5, false, false, null],
+    ['ErrorCode', [UINT16], 2, 6, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -6535,18 +6573,24 @@ export const OcaApplicationNetwork = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaControlNetwork = make_control_class(
-    "OcaControlNetwork",
-    3,
-    "\u0001\u0004\u0001",
-    1,
-    OcaApplicationNetwork,
+  'OcaControlNetwork',
+  3,
+  '\u0001\u0004\u0001',
+  1,
+  OcaApplicationNetwork,
+  [['GetControlProtocol', 3, 1, [], [OcaNetworkControlProtocol]]],
+  [
     [
-      [ "GetControlProtocol", 3, 1, [  ], [ OcaNetworkControlProtocol ] ]
+      'Protocol',
+      [OcaNetworkControlProtocol],
+      3,
+      1,
+      false,
+      false,
+      ['ControlProtocol'],
     ],
-    [
-      [ "Protocol", [ OcaNetworkControlProtocol ], 3, 1, false, false, ["ControlProtocol"]]
-    ],
-    [    ]
+  ],
+  []
 );
 
 /**
@@ -6569,53 +6613,94 @@ export const OcaControlNetwork = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaMediaTransportNetwork = make_control_class(
-    "OcaMediaTransportNetwork",
-    3,
-    "\u0001\u0004\u0002",
-    1,
-    OcaApplicationNetwork,
+  'OcaMediaTransportNetwork',
+  3,
+  '\u0001\u0004\u0002',
+  1,
+  OcaApplicationNetwork,
+  [
+    ['GetMediaProtocol', 3, 1, [], [OcaNetworkMediaProtocol]],
+    ['GetPorts', 3, 2, [], [LIST(OcaPort)]],
+    ['GetPortName', 3, 3, [OcaPortID], [STRING]],
+    ['SetPortName', 3, 4, [OcaPortID, STRING], []],
+    ['GetMaxSourceConnectors', 3, 5, [], [UINT16]],
+    ['GetMaxSinkConnectors', 3, 6, [], [UINT16]],
+    ['GetMaxPinsPerConnector', 3, 7, [], [UINT16]],
+    ['GetMaxPortsPerPin', 3, 8, [], [UINT16]],
+    ['GetSourceConnectors', 3, 9, [], [LIST(OcaMediaSourceConnector)]],
+    ['GetSourceConnector', 3, 10, [UINT16], [OcaMediaSourceConnector]],
+    ['GetSinkConnectors', 3, 11, [], [LIST(OcaMediaSinkConnector)]],
+    ['GetSinkConnector', 3, 12, [UINT16], [OcaMediaSinkConnector]],
+    ['GetConnectorsStatuses', 3, 13, [], [LIST(OcaMediaConnectorStatus)]],
+    ['GetConnectorStatus', 3, 14, [UINT16], [OcaMediaConnectorStatus]],
     [
-      [ "GetMediaProtocol", 3, 1, [  ], [ OcaNetworkMediaProtocol ] ],
-      [ "GetPorts", 3, 2, [  ], [ LIST(OcaPort) ] ],
-      [ "GetPortName", 3, 3, [ OcaPortID ], [ STRING ] ],
-      [ "SetPortName", 3, 4, [ OcaPortID, STRING ], [  ] ],
-      [ "GetMaxSourceConnectors", 3, 5, [  ], [ UINT16 ] ],
-      [ "GetMaxSinkConnectors", 3, 6, [  ], [ UINT16 ] ],
-      [ "GetMaxPinsPerConnector", 3, 7, [  ], [ UINT16 ] ],
-      [ "GetMaxPortsPerPin", 3, 8, [  ], [ UINT16 ] ],
-      [ "GetSourceConnectors", 3, 9, [  ], [ LIST(OcaMediaSourceConnector) ] ],
-      [ "GetSourceConnector", 3, 10, [ UINT16 ], [ OcaMediaSourceConnector ] ],
-      [ "GetSinkConnectors", 3, 11, [  ], [ LIST(OcaMediaSinkConnector) ] ],
-      [ "GetSinkConnector", 3, 12, [ UINT16 ], [ OcaMediaSinkConnector ] ],
-      [ "GetConnectorsStatuses", 3, 13, [  ], [ LIST(OcaMediaConnectorStatus) ] ],
-      [ "GetConnectorStatus", 3, 14, [ UINT16 ], [ OcaMediaConnectorStatus ] ],
-      [ "AddSourceConnector", 3, 15, [ OcaMediaSourceConnector, OcaMediaConnectorState ], [ OcaMediaSourceConnector ] ],
-      [ "AddSinkConnector", 3, 16, [ OcaMediaConnectorStatus, OcaMediaSinkConnector ], [ OcaMediaSinkConnector ] ],
-      [ "ControlConnector", 3, 17, [ UINT16, OcaMediaConnectorCommand ], [  ] ],
-      [ "SetSourceConnectorPinMap", 3, 18, [ UINT16, MAP(UINT16, OcaPortID) ], [  ] ],
-      [ "SetSinkConnectorPinMap", 3, 19, [ UINT16, OcaMultiMap(UINT16, OcaPortID) ], [  ] ],
-      [ "SetConnectorConnection", 3, 20, [ UINT16, OcaMediaConnection ], [  ] ],
-      [ "SetConnectorCoding", 3, 21, [ UINT16, OcaMediaCoding ], [  ] ],
-      [ "SetConnectorAlignmentLevel", 3, 22, [ UINT16, FLOAT32 ], [  ] ],
-      [ "SetConnectorAlignmentGain", 3, 23, [ UINT16, FLOAT32 ], [  ] ],
-      [ "DeleteConnector", 3, 24, [ UINT16 ], [  ] ],
-      [ "GetAlignmentLevel", 3, 25, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ],
-      [ "GetAlignmentGain", 3, 26, [  ], [ FLOAT32, FLOAT32, FLOAT32 ] ]
+      'AddSourceConnector',
+      3,
+      15,
+      [OcaMediaSourceConnector, OcaMediaConnectorState],
+      [OcaMediaSourceConnector],
     ],
     [
-      [ "Protocol", [ OcaNetworkMediaProtocol ], 3, 1, false, false, ["MediaProtocol"]],
-      [ "Ports", [ LIST(OcaPort) ], 3, 2, false, false, null],
-      [ "MaxSourceConnectors", [ UINT16 ], 3, 3, false, false, null],
-      [ "MaxSinkConnectors", [ UINT16 ], 3, 4, false, false, null],
-      [ "MaxPinsPerConnector", [ UINT16 ], 3, 5, false, false, null],
-      [ "MaxPortsPerPin", [ UINT16 ], 3, 6, false, false, null],
-      [ "AlignmentLevel", [ FLOAT32 ], 3, 7, false, false, null],
-      [ "AlignmentGain", [ FLOAT32 ], 3, 8, false, false, null]
+      'AddSinkConnector',
+      3,
+      16,
+      [OcaMediaConnectorStatus, OcaMediaSinkConnector],
+      [OcaMediaSinkConnector],
+    ],
+    ['ControlConnector', 3, 17, [UINT16, OcaMediaConnectorCommand], []],
+    ['SetSourceConnectorPinMap', 3, 18, [UINT16, MAP(UINT16, OcaPortID)], []],
+    [
+      'SetSinkConnectorPinMap',
+      3,
+      19,
+      [UINT16, OcaMultiMap(UINT16, OcaPortID)],
+      [],
+    ],
+    ['SetConnectorConnection', 3, 20, [UINT16, OcaMediaConnection], []],
+    ['SetConnectorCoding', 3, 21, [UINT16, OcaMediaCoding], []],
+    ['SetConnectorAlignmentLevel', 3, 22, [UINT16, FLOAT32], []],
+    ['SetConnectorAlignmentGain', 3, 23, [UINT16, FLOAT32], []],
+    ['DeleteConnector', 3, 24, [UINT16], []],
+    ['GetAlignmentLevel', 3, 25, [], [FLOAT32, FLOAT32, FLOAT32]],
+    ['GetAlignmentGain', 3, 26, [], [FLOAT32, FLOAT32, FLOAT32]],
+  ],
+  [
+    [
+      'Protocol',
+      [OcaNetworkMediaProtocol],
+      3,
+      1,
+      false,
+      false,
+      ['MediaProtocol'],
+    ],
+    ['Ports', [LIST(OcaPort)], 3, 2, false, false, null],
+    ['MaxSourceConnectors', [UINT16], 3, 3, false, false, null],
+    ['MaxSinkConnectors', [UINT16], 3, 4, false, false, null],
+    ['MaxPinsPerConnector', [UINT16], 3, 5, false, false, null],
+    ['MaxPortsPerPin', [UINT16], 3, 6, false, false, null],
+    ['AlignmentLevel', [FLOAT32], 3, 7, false, false, null],
+    ['AlignmentGain', [FLOAT32], 3, 8, false, false, null],
+  ],
+  [
+    [
+      'SourceConnectorChanged',
+      3,
+      1,
+      [
+        OcaMediaSourceConnector,
+        OcaPropertyChangeType,
+        OcaMediaConnectorElement,
+      ],
     ],
     [
-      [ "SourceConnectorChanged", 3, 1, [ OcaMediaSourceConnector, OcaPropertyChangeType, OcaMediaConnectorElement ] ],
-      [ "SinkConnectorChanged", 3, 2, [ OcaMediaSinkConnector, OcaPropertyChangeType, OcaMediaConnectorElement ] ],
-      [ "ConnectorStatusChanged", 3, 3, [ OcaMediaConnectorStatus ] ]    ]
+      'SinkConnectorChanged',
+      3,
+      2,
+      [OcaMediaSinkConnector, OcaPropertyChangeType, OcaMediaConnectorElement],
+    ],
+    ['ConnectorStatusChanged', 3, 3, [OcaMediaConnectorStatus]],
+  ]
 );
 
 /**
@@ -6927,18 +7012,15 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaManager = make_control_class(
-    "OcaManager",
-    2,
-    "\u0001\u0003",
-    2,
-    OcaRoot,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaManager',
+  2,
+  '\u0001\u0003',
+  2,
+  OcaRoot,
+  [],
+  [],
+  []
 );
-
 
 /**
  * Mandatory manager that contains information relevant to the whole
@@ -6950,50 +7032,50 @@ export const OcaManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDeviceManager = make_control_class(
-    "OcaDeviceManager",
-    3,
-    "\u0001\u0003\u0001",
-    2,
-    OcaManager,
-    [
-      [ "GetOcaVersion", 3, 1, [  ], [ UINT16 ] ],
-      [ "GetModelGUID", 3, 2, [  ], [ OcaModelGUID ] ],
-      [ "GetSerialNumber", 3, 3, [  ], [ STRING ] ],
-      [ "GetDeviceName", 3, 4, [  ], [ STRING ] ],
-      [ "SetDeviceName", 3, 5, [ STRING ], [  ] ],
-      [ "GetModelDescription", 3, 6, [  ], [ OcaModelDescription ] ],
-      [ "GetDeviceRole", 3, 7, [  ], [ STRING ] ],
-      [ "SetDeviceRole", 3, 8, [ STRING ], [  ] ],
-      [ "GetUserInventoryCode", 3, 9, [  ], [ STRING ] ],
-      [ "SetUserInventoryCode", 3, 10, [ STRING ], [  ] ],
-      [ "GetEnabled", 3, 11, [  ], [ BOOLEAN ] ],
-      [ "SetEnabled", 3, 12, [ BOOLEAN ], [  ] ],
-      [ "GetState", 3, 13, [  ], [ OcaDeviceState ] ],
-      [ "SetResetKey", 3, 14, [ BLOBFIXED(16), BLOB ], [  ] ],
-      [ "GetResetCause", 3, 15, [  ], [ OcaResetCause ] ],
-      [ "ClearResetCause", 3, 16, [  ], [  ] ],
-      [ "GetMessage", 3, 17, [  ], [ STRING ] ],
-      [ "SetMessage", 3, 18, [ STRING ], [  ] ],
-      [ "GetManagers", 3, 19, [  ], [ LIST(OcaManagerDescriptor) ] ],
-      [ "GetDeviceRevisionID", 3, 20, [  ], [ STRING ] ]
-    ],
-    [
-      [ "ModelGUID", [ OcaModelGUID ], 3, 1, false, false, null],
-      [ "SerialNumber", [ STRING ], 3, 2, false, false, null],
-      [ "ModelDescription", [ OcaModelDescription ], 3, 3, false, false, null],
-      [ "DeviceName", [ STRING ], 3, 4, false, false, null],
-      [ "OcaVersion", [ UINT16 ], 3, 5, false, false, null],
-      [ "DeviceRole", [ STRING ], 3, 6, false, false, null],
-      [ "UserInventoryCode", [ STRING ], 3, 7, false, false, null],
-      [ "Enabled", [ BOOLEAN ], 3, 8, false, false, null],
-      [ "State", [ OcaDeviceState ], 3, 9, false, false, null],
-      [ "Busy", [ BOOLEAN ], 3, 10, false, false, null],
-      [ "ResetCause", [ OcaResetCause ], 3, 11, false, false, null],
-      [ "Message", [ STRING ], 3, 12, false, false, null],
-      [ "Managers", [ LIST(OcaManagerDescriptor) ], 3, 13, false, false, null],
-      [ "DeviceRevisionID", [ STRING ], 3, 14, true, false, null]
-    ],
-    [    ]
+  'OcaDeviceManager',
+  3,
+  '\u0001\u0003\u0001',
+  2,
+  OcaManager,
+  [
+    ['GetOcaVersion', 3, 1, [], [UINT16]],
+    ['GetModelGUID', 3, 2, [], [OcaModelGUID]],
+    ['GetSerialNumber', 3, 3, [], [STRING]],
+    ['GetDeviceName', 3, 4, [], [STRING]],
+    ['SetDeviceName', 3, 5, [STRING], []],
+    ['GetModelDescription', 3, 6, [], [OcaModelDescription]],
+    ['GetDeviceRole', 3, 7, [], [STRING]],
+    ['SetDeviceRole', 3, 8, [STRING], []],
+    ['GetUserInventoryCode', 3, 9, [], [STRING]],
+    ['SetUserInventoryCode', 3, 10, [STRING], []],
+    ['GetEnabled', 3, 11, [], [BOOLEAN]],
+    ['SetEnabled', 3, 12, [BOOLEAN], []],
+    ['GetState', 3, 13, [], [OcaDeviceState]],
+    ['SetResetKey', 3, 14, [BLOBFIXED(16), BLOB], []],
+    ['GetResetCause', 3, 15, [], [OcaResetCause]],
+    ['ClearResetCause', 3, 16, [], []],
+    ['GetMessage', 3, 17, [], [STRING]],
+    ['SetMessage', 3, 18, [STRING], []],
+    ['GetManagers', 3, 19, [], [LIST(OcaManagerDescriptor)]],
+    ['GetDeviceRevisionID', 3, 20, [], [STRING]],
+  ],
+  [
+    ['ModelGUID', [OcaModelGUID], 3, 1, false, false, null],
+    ['SerialNumber', [STRING], 3, 2, false, false, null],
+    ['ModelDescription', [OcaModelDescription], 3, 3, false, false, null],
+    ['DeviceName', [STRING], 3, 4, false, false, null],
+    ['OcaVersion', [UINT16], 3, 5, false, false, null],
+    ['DeviceRole', [STRING], 3, 6, false, false, null],
+    ['UserInventoryCode', [STRING], 3, 7, false, false, null],
+    ['Enabled', [BOOLEAN], 3, 8, false, false, null],
+    ['State', [OcaDeviceState], 3, 9, false, false, null],
+    ['Busy', [BOOLEAN], 3, 10, false, false, null],
+    ['ResetCause', [OcaResetCause], 3, 11, false, false, null],
+    ['Message', [STRING], 3, 12, false, false, null],
+    ['Managers', [LIST(OcaManagerDescriptor)], 3, 13, false, false, null],
+    ['DeviceRevisionID', [STRING], 3, 14, true, false, null],
+  ],
+  []
 );
 
 /**
@@ -7219,22 +7301,20 @@ export const OcaDeviceManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSecurityManager = make_control_class(
-    "OcaSecurityManager",
-    3,
-    "\u0001\u0003\u0002",
-    2,
-    OcaManager,
-    [
-      [ "AddPreSharedKey", 3, 4, [ STRING, BLOB ], [  ] ],
-      [ "ChangePreSharedKey", 3, 3, [ STRING, BLOB ], [  ] ],
-      [ "DeletePreSharedKey", 3, 5, [ STRING ], [  ] ],
-      [ "DisableControlSecurity", 3, 2, [  ], [  ] ],
-      [ "EnableControlSecurity", 3, 1, [  ], [  ] ]
-    ],
-    [
-      [ "secureControlData", [ BOOLEAN ], 3, 1, false, false, null]
-    ],
-    [    ]
+  'OcaSecurityManager',
+  3,
+  '\u0001\u0003\u0002',
+  2,
+  OcaManager,
+  [
+    ['AddPreSharedKey', 3, 4, [STRING, BLOB], []],
+    ['ChangePreSharedKey', 3, 3, [STRING, BLOB], []],
+    ['DeletePreSharedKey', 3, 5, [STRING], []],
+    ['DisableControlSecurity', 3, 2, [], []],
+    ['EnableControlSecurity', 3, 1, [], []],
+  ],
+  [['secureControlData', [BOOLEAN], 3, 1, false, false, null]],
+  []
 );
 
 /**
@@ -7323,25 +7403,23 @@ export const OcaSecurityManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaFirmwareManager = make_control_class(
-    "OcaFirmwareManager",
-    3,
-    "\u0001\u0003\u0003",
-    2,
-    OcaManager,
-    [
-      [ "GetComponentVersions", 3, 1, [  ], [ LIST(OcaVersion) ] ],
-      [ "StartUpdateProcess", 3, 2, [  ], [  ] ],
-      [ "BeginActiveImageUpdate", 3, 3, [ OcaComponent ], [  ] ],
-      [ "AddImageData", 3, 4, [ UINT32, BLOB ], [  ] ],
-      [ "VerifyImage", 3, 5, [ BLOB ], [  ] ],
-      [ "EndActiveImageUpdate", 3, 6, [  ], [  ] ],
-      [ "BeginPassiveComponentUpdate", 3, 7, [ OcaComponent, BLOB, STRING ], [  ] ],
-      [ "EndUpdateProcess", 3, 8, [  ], [  ] ]
-    ],
-    [
-      [ "ComponentVersions", [ LIST(OcaVersion) ], 3, 1, false, false, null]
-    ],
-    [    ]
+  'OcaFirmwareManager',
+  3,
+  '\u0001\u0003\u0003',
+  2,
+  OcaManager,
+  [
+    ['GetComponentVersions', 3, 1, [], [LIST(OcaVersion)]],
+    ['StartUpdateProcess', 3, 2, [], []],
+    ['BeginActiveImageUpdate', 3, 3, [OcaComponent], []],
+    ['AddImageData', 3, 4, [UINT32, BLOB], []],
+    ['VerifyImage', 3, 5, [BLOB], []],
+    ['EndActiveImageUpdate', 3, 6, [], []],
+    ['BeginPassiveComponentUpdate', 3, 7, [OcaComponent, BLOB, STRING], []],
+    ['EndUpdateProcess', 3, 8, [], []],
+  ],
+  [['ComponentVersions', [LIST(OcaVersion)], 3, 1, false, false, null]],
+  []
 );
 
 /**
@@ -7458,26 +7536,50 @@ export const OcaFirmwareManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaSubscriptionManager = make_control_class(
-    "OcaSubscriptionManager",
-    3,
-    "\u0001\u0003\u0004",
-    2,
-    OcaManager,
+  'OcaSubscriptionManager',
+  3,
+  '\u0001\u0003\u0004',
+  2,
+  OcaManager,
+  [
+    ['RemoveSubscription', 3, 2, [OcaEvent, OcaMethod], []],
     [
-      [ "RemoveSubscription", 3, 2, [ OcaEvent, OcaMethod ], [  ] ],
-      [ "AddSubscription", 3, 1, [ OcaEvent, OcaMethod, BLOB, OcaNotificationDeliveryMode, BLOB ], [  ] ],
-      [ "DisableNotifications", 3, 3, [  ], [  ] ],
-      [ "ReEnableNotifications", 3, 4, [  ], [  ] ],
-      [ "AddPropertyChangeSubscription", 3, 5, [ UINT32, OcaPropertyID, OcaMethod, BLOB, OcaNotificationDeliveryMode, BLOB ], [  ] ],
-      [ "RemovePropertyChangeSubscription", 3, 6, [ UINT32, OcaPropertyID, OcaMethod ], [  ] ],
-      [ "GetMaximumSubscriberContextLength", 3, 7, [  ], [ UINT16 ] ]
+      'AddSubscription',
+      3,
+      1,
+      [OcaEvent, OcaMethod, BLOB, OcaNotificationDeliveryMode, BLOB],
+      [],
+    ],
+    ['DisableNotifications', 3, 3, [], []],
+    ['ReEnableNotifications', 3, 4, [], []],
+    [
+      'AddPropertyChangeSubscription',
+      3,
+      5,
+      [
+        UINT32,
+        OcaPropertyID,
+        OcaMethod,
+        BLOB,
+        OcaNotificationDeliveryMode,
+        BLOB,
+      ],
+      [],
     ],
     [
-      [ "State", [ OcaSubscriptionManagerState ], 3, 1, false, false, null]
+      'RemovePropertyChangeSubscription',
+      3,
+      6,
+      [UINT32, OcaPropertyID, OcaMethod],
+      [],
     ],
-    [
-      [ "NotificationsDisabled", 3, 1, [  ] ],
-      [ "SynchronizeState", 3, 2, [ LIST(UINT32) ] ]    ]
+    ['GetMaximumSubscriberContextLength', 3, 7, [], [UINT16]],
+  ],
+  [['State', [OcaSubscriptionManagerState], 3, 1, false, false, null]],
+  [
+    ['NotificationsDisabled', 3, 1, []],
+    ['SynchronizeState', 3, 2, [LIST(UINT32)]],
+  ]
 );
 
 /**
@@ -7629,27 +7731,27 @@ export const OcaSubscriptionManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaPowerManager = make_control_class(
-    "OcaPowerManager",
-    3,
-    "\u0001\u0003\u0005",
-    2,
-    OcaManager,
-    [
-      [ "GetState", 3, 1, [  ], [ OcaPowerState ] ],
-      [ "SetState", 3, 2, [ OcaPowerState ], [  ] ],
-      [ "GetPowerSupplies", 3, 3, [  ], [ LIST(UINT32) ] ],
-      [ "GetActivePowerSupplies", 3, 4, [  ], [ LIST(UINT32) ] ],
-      [ "ExchangePowerSupply", 3, 5, [ UINT32, UINT32, BOOLEAN ], [  ] ],
-      [ "GetAutoState", 3, 6, [  ], [ BOOLEAN ] ]
-    ],
-    [
-      [ "State", [ OcaPowerState ], 3, 1, false, false, null],
-      [ "PowerSupplies", [ LIST(UINT32) ], 3, 2, false, false, null],
-      [ "ActivePowerSupplies", [ LIST(UINT32) ], 3, 3, false, false, null],
-      [ "AutoState", [ BOOLEAN ], 3, 4, false, false, null],
-      [ "TargetState", [ OcaPowerState ], 3, 5, true, false, null]
-    ],
-    [    ]
+  'OcaPowerManager',
+  3,
+  '\u0001\u0003\u0005',
+  2,
+  OcaManager,
+  [
+    ['GetState', 3, 1, [], [OcaPowerState]],
+    ['SetState', 3, 2, [OcaPowerState], []],
+    ['GetPowerSupplies', 3, 3, [], [LIST(UINT32)]],
+    ['GetActivePowerSupplies', 3, 4, [], [LIST(UINT32)]],
+    ['ExchangePowerSupply', 3, 5, [UINT32, UINT32, BOOLEAN], []],
+    ['GetAutoState', 3, 6, [], [BOOLEAN]],
+  ],
+  [
+    ['State', [OcaPowerState], 3, 1, false, false, null],
+    ['PowerSupplies', [LIST(UINT32)], 3, 2, false, false, null],
+    ['ActivePowerSupplies', [LIST(UINT32)], 3, 3, false, false, null],
+    ['AutoState', [BOOLEAN], 3, 4, false, false, null],
+    ['TargetState', [OcaPowerState], 3, 5, true, false, null],
+  ],
+  []
 );
 
 /**
@@ -7736,24 +7838,24 @@ export const OcaPowerManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaNetworkManager = make_control_class(
-    "OcaNetworkManager",
-    3,
-    "\u0001\u0003\u0006",
-    2,
-    OcaManager,
-    [
-      [ "GetNetworks", 3, 1, [  ], [ LIST(UINT32) ] ],
-      [ "GetStreamNetworks", 3, 2, [  ], [ LIST(UINT32) ] ],
-      [ "GetControlNetworks", 3, 3, [  ], [ LIST(UINT32) ] ],
-      [ "GetMediaTransportNetworks", 3, 4, [  ], [ LIST(UINT32) ] ]
-    ],
-    [
-      [ "Networks", [ LIST(UINT32) ], 3, 1, false, false, null],
-      [ "StreamNetworks", [ LIST(UINT32) ], 3, 2, false, false, null],
-      [ "ControlNetworks", [ LIST(UINT32) ], 3, 3, false, false, null],
-      [ "MediaTransportNetworks", [ LIST(UINT32) ], 3, 4, false, false, null]
-    ],
-    [    ]
+  'OcaNetworkManager',
+  3,
+  '\u0001\u0003\u0006',
+  2,
+  OcaManager,
+  [
+    ['GetNetworks', 3, 1, [], [LIST(UINT32)]],
+    ['GetStreamNetworks', 3, 2, [], [LIST(UINT32)]],
+    ['GetControlNetworks', 3, 3, [], [LIST(UINT32)]],
+    ['GetMediaTransportNetworks', 3, 4, [], [LIST(UINT32)]],
+  ],
+  [
+    ['Networks', [LIST(UINT32)], 3, 1, false, false, null],
+    ['StreamNetworks', [LIST(UINT32)], 3, 2, false, false, null],
+    ['ControlNetworks', [LIST(UINT32)], 3, 3, false, false, null],
+    ['MediaTransportNetworks', [LIST(UINT32)], 3, 4, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -7820,22 +7922,30 @@ export const OcaNetworkManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaMediaClockManager = make_control_class(
-    "OcaMediaClockManager",
-    3,
-    "\u0001\u0003\u0007",
-    2,
-    OcaManager,
+  'OcaMediaClockManager',
+  3,
+  '\u0001\u0003\u0007',
+  2,
+  OcaManager,
+  [
+    ['GetClocks', 3, 1, [], [LIST(UINT32)]],
+    ['GetMediaClockTypesSupported', 3, 2, [], [LIST(OcaMediaClockType)]],
+    ['GetClock3s', 3, 3, [], [LIST(UINT32)]],
+  ],
+  [
     [
-      [ "GetClocks", 3, 1, [  ], [ LIST(UINT32) ] ],
-      [ "GetMediaClockTypesSupported", 3, 2, [  ], [ LIST(OcaMediaClockType) ] ],
-      [ "GetClock3s", 3, 3, [  ], [ LIST(UINT32) ] ]
+      'ClockSourceTypesSupported',
+      [LIST(OcaMediaClockType)],
+      3,
+      1,
+      false,
+      false,
+      ['MediaClockTypesSupported'],
     ],
-    [
-      [ "ClockSourceTypesSupported", [ LIST(OcaMediaClockType) ], 3, 1, false, false, ["MediaClockTypesSupported"]],
-      [ "Clocks", [ LIST(UINT32) ], 3, 2, false, false, null],
-      [ "Clock3s", [ LIST(UINT32) ], 3, 3, false, false, null]
-    ],
-    [    ]
+    ['Clocks', [LIST(UINT32)], 3, 2, false, false, null],
+    ['Clock3s', [LIST(UINT32)], 3, 3, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -7892,24 +8002,24 @@ export const OcaMediaClockManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaLibraryManager = make_control_class(
-    "OcaLibraryManager",
-    3,
-    "\u0001\u0003\b",
-    2,
-    OcaManager,
-    [
-      [ "AddLibrary", 3, 1, [ OcaLibVolType ], [ OcaLibraryIdentifier ] ],
-      [ "DeleteLibrary", 3, 2, [ UINT32 ], [  ] ],
-      [ "GetLibraryCount", 3, 3, [ OcaLibVolType ], [ UINT16 ] ],
-      [ "GetLibraryList", 3, 4, [ OcaLibVolType ], [ LIST(OcaLibraryIdentifier) ] ],
-      [ "GetCurrentPatch", 3, 5, [  ], [ OcaLibVolIdentifier ] ],
-      [ "ApplyPatch", 3, 6, [ OcaLibVolIdentifier ], [  ] ]
-    ],
-    [
-      [ "Libraries", [ LIST(OcaLibraryIdentifier) ], 3, 1, false, false, null],
-      [ "CurrentPatch", [ OcaLibVolIdentifier ], 3, 2, false, false, null]
-    ],
-    [    ]
+  'OcaLibraryManager',
+  3,
+  '\u0001\u0003\b',
+  2,
+  OcaManager,
+  [
+    ['AddLibrary', 3, 1, [OcaLibVolType], [OcaLibraryIdentifier]],
+    ['DeleteLibrary', 3, 2, [UINT32], []],
+    ['GetLibraryCount', 3, 3, [OcaLibVolType], [UINT16]],
+    ['GetLibraryList', 3, 4, [OcaLibVolType], [LIST(OcaLibraryIdentifier)]],
+    ['GetCurrentPatch', 3, 5, [], [OcaLibVolIdentifier]],
+    ['ApplyPatch', 3, 6, [OcaLibVolIdentifier], []],
+  ],
+  [
+    ['Libraries', [LIST(OcaLibraryIdentifier)], 3, 1, false, false, null],
+    ['CurrentPatch', [OcaLibVolIdentifier], 3, 2, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -7978,18 +8088,15 @@ export const OcaLibraryManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaAudioProcessingManager = make_control_class(
-    "OcaAudioProcessingManager",
-    3,
-    "\u0001\u0003\t",
-    2,
-    OcaManager,
-    [
-    ],
-    [
-    ],
-    [    ]
+  'OcaAudioProcessingManager',
+  3,
+  '\u0001\u0003\t',
+  2,
+  OcaManager,
+  [],
+  [],
+  []
 );
-
 
 /**
  * Manager that allows controlling and monitoring a device's time-of-day
@@ -8011,25 +8118,25 @@ export const OcaAudioProcessingManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDeviceTimeManager = make_control_class(
-    "OcaDeviceTimeManager",
-    3,
-    "\u0001\u0003\n",
-    2,
-    OcaManager,
-    [
-      [ "GetDeviceTimeNTP", 3, 1, [  ], [ UINT64 ] ],
-      [ "SetDeviceTimeNTP", 3, 2, [ UINT64 ], [  ] ],
-      [ "GetTimeSources", 3, 3, [  ], [ LIST(UINT32) ] ],
-      [ "GetCurrentDeviceTimeSource", 3, 4, [  ], [ UINT32 ] ],
-      [ "SetCurrentDeviceTimeSource", 3, 5, [ UINT32 ], [  ] ],
-      [ "GetDeviceTimePTP", 3, 6, [  ], [ OcaTimePTP ] ],
-      [ "SetDeviceTimePTP", 3, 7, [ OcaTimePTP ], [  ] ]
-    ],
-    [
-      [ "TimeSources", [ LIST(UINT32) ], 3, 1, false, false, null],
-      [ "CurrentDeviceTimeSource", [ UINT32 ], 3, 2, false, false, null]
-    ],
-    [    ]
+  'OcaDeviceTimeManager',
+  3,
+  '\u0001\u0003\n',
+  2,
+  OcaManager,
+  [
+    ['GetDeviceTimeNTP', 3, 1, [], [UINT64]],
+    ['SetDeviceTimeNTP', 3, 2, [UINT64], []],
+    ['GetTimeSources', 3, 3, [], [LIST(UINT32)]],
+    ['GetCurrentDeviceTimeSource', 3, 4, [], [UINT32]],
+    ['SetCurrentDeviceTimeSource', 3, 5, [UINT32], []],
+    ['GetDeviceTimePTP', 3, 6, [], [OcaTimePTP]],
+    ['SetDeviceTimePTP', 3, 7, [OcaTimePTP], []],
+  ],
+  [
+    ['TimeSources', [LIST(UINT32)], 3, 1, false, false, null],
+    ['CurrentDeviceTimeSource', [UINT32], 3, 2, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -8116,31 +8223,30 @@ export const OcaDeviceTimeManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaTaskManager = make_control_class(
-    "OcaTaskManager",
-    3,
-    "\u0001\u0003\u000b",
-    1,
-    OcaManager,
-    [
-      [ "Enable", 3, 1, [ BOOLEAN ], [  ] ],
-      [ "ControlAllTasks", 3, 2, [ OcaTaskCommand, BLOB ], [  ] ],
-      [ "ControlTaskGroup", 3, 3, [ UINT16, OcaTaskCommand, BLOB ], [  ] ],
-      [ "ControlTask", 3, 4, [ UINT32, OcaTaskCommand, BLOB ], [  ] ],
-      [ "GetState", 3, 5, [  ], [ OcaTaskManagerState ] ],
-      [ "GetTaskStatuses", 3, 6, [  ], [ OcaTaskStatus ] ],
-      [ "GetTaskStatus", 3, 7, [ UINT32 ], [ OcaTaskStatus ] ],
-      [ "AddTask", 3, 8, [ OcaTask ], [ OcaTask ] ],
-      [ "GetTasks", 3, 9, [  ], [ MAP(UINT32, OcaTask) ] ],
-      [ "GetTask", 3, 10, [ UINT32 ], [ OcaTask ] ],
-      [ "SetTask", 3, 11, [ UINT32, OcaTask ], [  ] ],
-      [ "DeleteTask", 3, 12, [ UINT32 ], [  ] ]
-    ],
-    [
-      [ "State", [ OcaTaskManagerState ], 3, 1, false, false, null],
-      [ "Tasks", [ MAP(UINT32, OcaTask) ], 3, 2, false, false, null]
-    ],
-    [
-      [ "TaskStateChanged", 3, 1, [ UINT32, OcaLibVolIdentifier, OcaTaskStatus ] ]    ]
+  'OcaTaskManager',
+  3,
+  '\u0001\u0003\u000b',
+  1,
+  OcaManager,
+  [
+    ['Enable', 3, 1, [BOOLEAN], []],
+    ['ControlAllTasks', 3, 2, [OcaTaskCommand, BLOB], []],
+    ['ControlTaskGroup', 3, 3, [UINT16, OcaTaskCommand, BLOB], []],
+    ['ControlTask', 3, 4, [UINT32, OcaTaskCommand, BLOB], []],
+    ['GetState', 3, 5, [], [OcaTaskManagerState]],
+    ['GetTaskStatuses', 3, 6, [], [OcaTaskStatus]],
+    ['GetTaskStatus', 3, 7, [UINT32], [OcaTaskStatus]],
+    ['AddTask', 3, 8, [OcaTask], [OcaTask]],
+    ['GetTasks', 3, 9, [], [MAP(UINT32, OcaTask)]],
+    ['GetTask', 3, 10, [UINT32], [OcaTask]],
+    ['SetTask', 3, 11, [UINT32, OcaTask], []],
+    ['DeleteTask', 3, 12, [UINT32], []],
+  ],
+  [
+    ['State', [OcaTaskManagerState], 3, 1, false, false, null],
+    ['Tasks', [MAP(UINT32, OcaTask)], 3, 2, false, false, null],
+  ],
+  [['TaskStateChanged', 3, 1, [UINT32, OcaLibVolIdentifier, OcaTaskStatus]]]
 );
 
 /**
@@ -8273,20 +8379,36 @@ export const OcaTaskManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaCodingManager = make_control_class(
-    "OcaCodingManager",
-    3,
-    "\u0001\u0003\f",
-    1,
-    OcaManager,
+  'OcaCodingManager',
+  3,
+  '\u0001\u0003\f',
+  1,
+  OcaManager,
+  [
+    ['GetAvailableEncodingSchemes', 3, 1, [], [MAP(UINT16, STRING)]],
+    ['GetAvailableDecodingSchemes', 3, 2, [], [MAP(UINT16, STRING)]],
+  ],
+  [
     [
-      [ "GetAvailableEncodingSchemes", 3, 1, [  ], [ MAP(UINT16, STRING) ] ],
-      [ "GetAvailableDecodingSchemes", 3, 2, [  ], [ MAP(UINT16, STRING) ] ]
+      'AvailableEncodingSchemes',
+      [MAP(UINT16, STRING)],
+      3,
+      1,
+      false,
+      false,
+      null,
     ],
     [
-      [ "AvailableEncodingSchemes", [ MAP(UINT16, STRING) ], 3, 1, false, false, null],
-      [ "AvailableDecodingSchemes", [ MAP(UINT16, STRING) ], 3, 2, false, false, null]
+      'AvailableDecodingSchemes',
+      [MAP(UINT16, STRING)],
+      3,
+      2,
+      false,
+      false,
+      null,
     ],
-    [    ]
+  ],
+  []
 );
 
 /**
@@ -8324,17 +8446,14 @@ export const OcaCodingManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaDiagnosticManager = make_control_class(
-    "OcaDiagnosticManager",
-    3,
-    "\u0001\u0003\r",
-    1,
-    OcaManager,
-    [
-      [ "GetLockStatus", 3, 1, [ UINT32 ], [ STRING ] ]
-    ],
-    [
-    ],
-    [    ]
+  'OcaDiagnosticManager',
+  3,
+  '\u0001\u0003\r',
+  1,
+  OcaManager,
+  [['GetLockStatus', 3, 1, [UINT32], [STRING]]],
+  [],
+  []
 );
 
 /**
@@ -8364,33 +8483,33 @@ export const OcaDiagnosticManager = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaNetworkSignalChannel = make_control_class(
-    "OcaNetworkSignalChannel",
-    3,
-    "\u0001\u0001\u0006",
-    2,
-    OcaWorker,
-    [
-      [ "AddToConnector", 3, 6, [ UINT32, UINT16 ], [  ] ],
-      [ "GetConnectorPins", 3, 5, [  ], [ MAP(UINT32, UINT16) ] ],
-      [ "GetIDAdvertised", 3, 1, [  ], [ BLOB ] ],
-      [ "GetNetwork", 3, 3, [  ], [ UINT32 ] ],
-      [ "GetRemoteChannelID", 3, 8, [  ], [ BLOB ] ],
-      [ "GetSourceOrSink", 3, 10, [  ], [ OcaNetworkMediaSourceOrSink ] ],
-      [ "GetStatus", 3, 11, [  ], [ OcaNetworkSignalChannelStatus ] ],
-      [ "RemoveFromConnector", 3, 7, [ UINT32 ], [  ] ],
-      [ "SetIDAdvertised", 3, 2, [ BLOB ], [  ] ],
-      [ "SetNetwork", 3, 4, [ UINT32 ], [  ] ],
-      [ "SetRemoteChannelID", 3, 9, [ BLOB ], [  ] ]
-    ],
-    [
-      [ "ConnectorPins", [ MAP(UINT32, UINT16) ], 3, 3, false, false, null],
-      [ "IDAdvertised", [ BLOB ], 3, 1, false, false, null],
-      [ "Network", [ UINT32 ], 3, 2, false, false, null],
-      [ "RemoteChannelID", [ BLOB ], 3, 4, false, false, null],
-      [ "SourceOrSink", [ OcaNetworkMediaSourceOrSink ], 3, 5, false, false, null],
-      [ "Status", [ OcaNetworkSignalChannelStatus ], 3, 6, false, false, null]
-    ],
-    [    ]
+  'OcaNetworkSignalChannel',
+  3,
+  '\u0001\u0001\u0006',
+  2,
+  OcaWorker,
+  [
+    ['AddToConnector', 3, 6, [UINT32, UINT16], []],
+    ['GetConnectorPins', 3, 5, [], [MAP(UINT32, UINT16)]],
+    ['GetIDAdvertised', 3, 1, [], [BLOB]],
+    ['GetNetwork', 3, 3, [], [UINT32]],
+    ['GetRemoteChannelID', 3, 8, [], [BLOB]],
+    ['GetSourceOrSink', 3, 10, [], [OcaNetworkMediaSourceOrSink]],
+    ['GetStatus', 3, 11, [], [OcaNetworkSignalChannelStatus]],
+    ['RemoveFromConnector', 3, 7, [UINT32], []],
+    ['SetIDAdvertised', 3, 2, [BLOB], []],
+    ['SetNetwork', 3, 4, [UINT32], []],
+    ['SetRemoteChannelID', 3, 9, [BLOB], []],
+  ],
+  [
+    ['ConnectorPins', [MAP(UINT32, UINT16)], 3, 3, false, false, null],
+    ['IDAdvertised', [BLOB], 3, 1, false, false, null],
+    ['Network', [UINT32], 3, 2, false, false, null],
+    ['RemoteChannelID', [BLOB], 3, 4, false, false, null],
+    ['SourceOrSink', [OcaNetworkMediaSourceOrSink], 3, 5, false, false, null],
+    ['Status', [OcaNetworkSignalChannelStatus], 3, 6, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -8536,37 +8655,45 @@ export const OcaNetworkSignalChannel = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaNetwork = make_control_class(
-    "OcaNetwork",
-    3,
-    "\u0001\u0002\u0001",
-    2,
-    OcaAgent,
+  'OcaNetwork',
+  3,
+  '\u0001\u0002\u0001',
+  2,
+  OcaAgent,
+  [
+    ['GetLinkType', 3, 1, [], [OcaNetworkLinkType]],
+    ['GetIDAdvertised', 3, 2, [], [BLOB]],
+    ['SetIDAdvertised', 3, 3, [BLOB], []],
+    ['GetControlProtocol', 3, 4, [], [OcaNetworkControlProtocol]],
+    ['GetMediaProtocol', 3, 5, [], [OcaNetworkMediaProtocol]],
+    ['GetStatus', 3, 6, [], [OcaNetworkStatus]],
+    ['GetStatistics', 3, 7, [], [OcaNetworkStatistics]],
+    ['ResetStatistics', 3, 8, [], []],
+    ['GetSystemInterfaces', 3, 9, [], [LIST(OcaNetworkSystemInterfaceID)]],
+    ['SetSystemInterfaces', 3, 10, [LIST(OcaNetworkSystemInterfaceID)], []],
+    ['GetMediaPorts', 3, 11, [], [LIST(UINT32)]],
+    ['Startup', 3, 12, [], []],
+    ['Shutdown', 3, 13, [], []],
+  ],
+  [
+    ['LinkType', [OcaNetworkLinkType], 3, 1, true, false, null],
+    ['IDAdvertised', [BLOB], 3, 2, false, false, null],
+    ['ControlProtocol', [OcaNetworkControlProtocol], 3, 3, false, false, null],
+    ['MediaProtocol', [OcaNetworkMediaProtocol], 3, 4, false, false, null],
+    ['Status', [OcaNetworkStatus], 3, 5, false, false, null],
     [
-      [ "GetLinkType", 3, 1, [  ], [ OcaNetworkLinkType ] ],
-      [ "GetIDAdvertised", 3, 2, [  ], [ BLOB ] ],
-      [ "SetIDAdvertised", 3, 3, [ BLOB ], [  ] ],
-      [ "GetControlProtocol", 3, 4, [  ], [ OcaNetworkControlProtocol ] ],
-      [ "GetMediaProtocol", 3, 5, [  ], [ OcaNetworkMediaProtocol ] ],
-      [ "GetStatus", 3, 6, [  ], [ OcaNetworkStatus ] ],
-      [ "GetStatistics", 3, 7, [  ], [ OcaNetworkStatistics ] ],
-      [ "ResetStatistics", 3, 8, [  ], [  ] ],
-      [ "GetSystemInterfaces", 3, 9, [  ], [ LIST(OcaNetworkSystemInterfaceID) ] ],
-      [ "SetSystemInterfaces", 3, 10, [ LIST(OcaNetworkSystemInterfaceID) ], [  ] ],
-      [ "GetMediaPorts", 3, 11, [  ], [ LIST(UINT32) ] ],
-      [ "Startup", 3, 12, [  ], [  ] ],
-      [ "Shutdown", 3, 13, [  ], [  ] ]
+      'SystemInterfaces',
+      [LIST(OcaNetworkSystemInterfaceID)],
+      3,
+      6,
+      false,
+      false,
+      null,
     ],
-    [
-      [ "LinkType", [ OcaNetworkLinkType ], 3, 1, true, false, null],
-      [ "IDAdvertised", [ BLOB ], 3, 2, false, false, null],
-      [ "ControlProtocol", [ OcaNetworkControlProtocol ], 3, 3, false, false, null],
-      [ "MediaProtocol", [ OcaNetworkMediaProtocol ], 3, 4, false, false, null],
-      [ "Status", [ OcaNetworkStatus ], 3, 5, false, false, null],
-      [ "SystemInterfaces", [ LIST(OcaNetworkSystemInterfaceID) ], 3, 6, false, false, null],
-      [ "MediaPorts", [ LIST(UINT32) ], 3, 7, false, false, null],
-      [ "Statistics", [ OcaNetworkStatistics ], 3, 8, false, false, null]
-    ],
-    [    ]
+    ['MediaPorts', [LIST(UINT32)], 3, 7, false, false, null],
+    ['Statistics', [OcaNetworkStatistics], 3, 8, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -8708,29 +8835,29 @@ export const OcaNetwork = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaMediaClock = make_control_class(
-    "OcaMediaClock",
-    3,
-    "\u0001\u0002\u0006",
-    2,
-    OcaAgent,
-    [
-      [ "GetType", 3, 1, [  ], [ OcaMediaClockType ] ],
-      [ "SetType", 3, 2, [ OcaMediaClockType ], [  ] ],
-      [ "GetDomainID", 3, 3, [  ], [ UINT16 ] ],
-      [ "SetDomainID", 3, 4, [ UINT16 ], [  ] ],
-      [ "GetSupportedRates", 3, 5, [  ], [ LIST(OcaMediaClockRate) ] ],
-      [ "GetCurrentRate", 3, 6, [  ], [ OcaMediaClockRate ] ],
-      [ "SetCurrentRate", 3, 7, [ OcaMediaClockRate ], [  ] ],
-      [ "GetLockState", 3, 8, [  ], [ OcaMediaClockLockState ] ]
-    ],
-    [
-      [ "Type", [ OcaMediaClockType ], 3, 1, false, false, null],
-      [ "DomainID", [ UINT16 ], 3, 2, false, false, null],
-      [ "RatesSupported", [ LIST(OcaMediaClockRate) ], 3, 3, false, false, null],
-      [ "CurrentRate", [ OcaMediaClockRate ], 3, 4, false, false, null],
-      [ "LockState", [ OcaMediaClockLockState ], 3, 5, false, false, null]
-    ],
-    [    ]
+  'OcaMediaClock',
+  3,
+  '\u0001\u0002\u0006',
+  2,
+  OcaAgent,
+  [
+    ['GetType', 3, 1, [], [OcaMediaClockType]],
+    ['SetType', 3, 2, [OcaMediaClockType], []],
+    ['GetDomainID', 3, 3, [], [UINT16]],
+    ['SetDomainID', 3, 4, [UINT16], []],
+    ['GetSupportedRates', 3, 5, [], [LIST(OcaMediaClockRate)]],
+    ['GetCurrentRate', 3, 6, [], [OcaMediaClockRate]],
+    ['SetCurrentRate', 3, 7, [OcaMediaClockRate], []],
+    ['GetLockState', 3, 8, [], [OcaMediaClockLockState]],
+  ],
+  [
+    ['Type', [OcaMediaClockType], 3, 1, false, false, null],
+    ['DomainID', [UINT16], 3, 2, false, false, null],
+    ['RatesSupported', [LIST(OcaMediaClockRate)], 3, 3, false, false, null],
+    ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, null],
+    ['LockState', [OcaMediaClockLockState], 3, 5, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -8825,47 +8952,55 @@ export const OcaMediaClock = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaStreamNetwork = make_control_class(
-    "OcaStreamNetwork",
-    3,
-    "\u0001\u0002\n",
-    2,
-    OcaAgent,
+  'OcaStreamNetwork',
+  3,
+  '\u0001\u0002\n',
+  2,
+  OcaAgent,
+  [
+    ['GetLinkType', 3, 1, [], [OcaNetworkLinkType]],
+    ['GetIDAdvertised', 3, 2, [], [BLOB]],
+    ['SetIDAdvertised', 3, 3, [BLOB], []],
+    ['GetControlProtocol', 3, 4, [], [OcaNetworkControlProtocol]],
+    ['GetMediaProtocol', 3, 5, [], [OcaNetworkMediaProtocol]],
+    ['GetStatus', 3, 6, [], [OcaNetworkStatus]],
+    ['GetStatistics', 3, 7, [], [OcaNetworkStatistics]],
+    ['ResetStatistics', 3, 8, [], []],
+    ['GetSystemInterfaces', 3, 9, [], [LIST(OcaNetworkSystemInterfaceID)]],
+    ['SetSystemInterfaces', 3, 10, [LIST(OcaNetworkSystemInterfaceID)], []],
+    ['GetStreamConnectorsSource', 3, 11, [], [LIST(UINT32)]],
+    ['SetStreamConnectorsSource', 3, 12, [LIST(UINT32)], []],
+    ['GetStreamConnectorsSink', 3, 13, [], [LIST(UINT32)]],
+    ['SetStreamConnectorsSink', 3, 14, [LIST(UINT32)], []],
+    ['GetSignalChannelsSource', 3, 15, [], [LIST(UINT32)]],
+    ['SetSignalChannelsSource', 3, 16, [LIST(UINT32)], []],
+    ['GetSignalChannelsSink', 3, 17, [], [LIST(UINT32)]],
+    ['SetSignalChannelsSink', 3, 18, [LIST(UINT32)], []],
+    ['Startup', 3, 19, [], []],
+    ['Shutdown', 3, 20, [], []],
+  ],
+  [
+    ['ControlProtocol', [OcaNetworkControlProtocol], 3, 3, false, false, null],
+    ['IDAdvertised', [BLOB], 3, 2, false, false, null],
+    ['LinkType', [OcaNetworkLinkType], 3, 1, true, false, null],
+    ['MediaProtocol', [OcaNetworkMediaProtocol], 3, 4, false, false, null],
+    ['SignalChannelsSink', [LIST(UINT32)], 3, 10, false, false, null],
+    ['SignalChannelsSource', [LIST(UINT32)], 3, 9, false, false, null],
+    ['Statistics', [OcaNetworkStatistics], 3, 11, false, false, null],
+    ['Status', [OcaNetworkStatus], 3, 5, false, false, null],
+    ['StreamConnectorsSink', [LIST(UINT32)], 3, 8, false, false, null],
+    ['StreamConnectorsSource', [LIST(UINT32)], 3, 7, false, false, null],
     [
-      [ "GetLinkType", 3, 1, [  ], [ OcaNetworkLinkType ] ],
-      [ "GetIDAdvertised", 3, 2, [  ], [ BLOB ] ],
-      [ "SetIDAdvertised", 3, 3, [ BLOB ], [  ] ],
-      [ "GetControlProtocol", 3, 4, [  ], [ OcaNetworkControlProtocol ] ],
-      [ "GetMediaProtocol", 3, 5, [  ], [ OcaNetworkMediaProtocol ] ],
-      [ "GetStatus", 3, 6, [  ], [ OcaNetworkStatus ] ],
-      [ "GetStatistics", 3, 7, [  ], [ OcaNetworkStatistics ] ],
-      [ "ResetStatistics", 3, 8, [  ], [  ] ],
-      [ "GetSystemInterfaces", 3, 9, [  ], [ LIST(OcaNetworkSystemInterfaceID) ] ],
-      [ "SetSystemInterfaces", 3, 10, [ LIST(OcaNetworkSystemInterfaceID) ], [  ] ],
-      [ "GetStreamConnectorsSource", 3, 11, [  ], [ LIST(UINT32) ] ],
-      [ "SetStreamConnectorsSource", 3, 12, [ LIST(UINT32) ], [  ] ],
-      [ "GetStreamConnectorsSink", 3, 13, [  ], [ LIST(UINT32) ] ],
-      [ "SetStreamConnectorsSink", 3, 14, [ LIST(UINT32) ], [  ] ],
-      [ "GetSignalChannelsSource", 3, 15, [  ], [ LIST(UINT32) ] ],
-      [ "SetSignalChannelsSource", 3, 16, [ LIST(UINT32) ], [  ] ],
-      [ "GetSignalChannelsSink", 3, 17, [  ], [ LIST(UINT32) ] ],
-      [ "SetSignalChannelsSink", 3, 18, [ LIST(UINT32) ], [  ] ],
-      [ "Startup", 3, 19, [  ], [  ] ],
-      [ "Shutdown", 3, 20, [  ], [  ] ]
+      'SystemInterfaces',
+      [LIST(OcaNetworkSystemInterfaceID)],
+      3,
+      6,
+      false,
+      false,
+      null,
     ],
-    [
-      [ "ControlProtocol", [ OcaNetworkControlProtocol ], 3, 3, false, false, null],
-      [ "IDAdvertised", [ BLOB ], 3, 2, false, false, null],
-      [ "LinkType", [ OcaNetworkLinkType ], 3, 1, true, false, null],
-      [ "MediaProtocol", [ OcaNetworkMediaProtocol ], 3, 4, false, false, null],
-      [ "SignalChannelsSink", [ LIST(UINT32) ], 3, 10, false, false, null],
-      [ "SignalChannelsSource", [ LIST(UINT32) ], 3, 9, false, false, null],
-      [ "Statistics", [ OcaNetworkStatistics ], 3, 11, false, false, null],
-      [ "Status", [ OcaNetworkStatus ], 3, 5, false, false, null],
-      [ "StreamConnectorsSink", [ LIST(UINT32) ], 3, 8, false, false, null],
-      [ "StreamConnectorsSource", [ LIST(UINT32) ], 3, 7, false, false, null],
-      [ "SystemInterfaces", [ LIST(OcaNetworkSystemInterfaceID) ], 3, 6, false, false, null]
-    ],
-    [    ]
+  ],
+  []
 );
 
 /**
@@ -9149,33 +9284,33 @@ export const OcaStreamNetwork = make_control_class(
  * @category RemoteControlClasses
  */
 export const OcaStreamConnector = make_control_class(
-    "OcaStreamConnector",
-    3,
-    "\u0001\u0002\u000b",
-    2,
-    OcaAgent,
-    [
-      [ "ConnectStream", 3, 7, [ OcaStream ], [ UINT16 ] ],
-      [ "DisconnectStream", 3, 8, [ UINT16 ], [  ] ],
-      [ "GetIDAdvertised", 3, 3, [  ], [ BLOB ] ],
-      [ "GetOwnerNetwork", 3, 1, [  ], [ UINT32 ] ],
-      [ "GetPins", 3, 10, [  ], [ MAP(UINT16, UINT32) ] ],
-      [ "GetSourceOrSink", 3, 5, [  ], [ OcaNetworkMediaSourceOrSink ] ],
-      [ "GetStatus", 3, 11, [  ], [ OcaStreamConnectorStatus ] ],
-      [ "GetStreams", 3, 9, [  ], [ MAP(UINT16, OcaStream) ] ],
-      [ "SetIDAdvertised", 3, 4, [ BLOB ], [  ] ],
-      [ "SetOwnerNetwork", 3, 2, [ UINT32 ], [  ] ],
-      [ "SetSourceOrSink", 3, 6, [ OcaNetworkMediaSourceOrSink ], [  ] ]
-    ],
-    [
-      [ "IDAdvertised", [ BLOB ], 3, 2, false, false, null],
-      [ "OwnerNetwork", [ UINT32 ], 3, 1, false, false, null],
-      [ "Pins", [ MAP(UINT16, UINT32) ], 3, 5, false, false, null],
-      [ "SourceOrSink", [ OcaNetworkMediaSourceOrSink ], 3, 3, false, false, null],
-      [ "Status", [ OcaStreamConnectorStatus ], 3, 6, false, false, null],
-      [ "Streams", [ MAP(UINT16, OcaStream) ], 3, 4, false, false, null]
-    ],
-    [    ]
+  'OcaStreamConnector',
+  3,
+  '\u0001\u0002\u000b',
+  2,
+  OcaAgent,
+  [
+    ['ConnectStream', 3, 7, [OcaStream], [UINT16]],
+    ['DisconnectStream', 3, 8, [UINT16], []],
+    ['GetIDAdvertised', 3, 3, [], [BLOB]],
+    ['GetOwnerNetwork', 3, 1, [], [UINT32]],
+    ['GetPins', 3, 10, [], [MAP(UINT16, UINT32)]],
+    ['GetSourceOrSink', 3, 5, [], [OcaNetworkMediaSourceOrSink]],
+    ['GetStatus', 3, 11, [], [OcaStreamConnectorStatus]],
+    ['GetStreams', 3, 9, [], [MAP(UINT16, OcaStream)]],
+    ['SetIDAdvertised', 3, 4, [BLOB], []],
+    ['SetOwnerNetwork', 3, 2, [UINT32], []],
+    ['SetSourceOrSink', 3, 6, [OcaNetworkMediaSourceOrSink], []],
+  ],
+  [
+    ['IDAdvertised', [BLOB], 3, 2, false, false, null],
+    ['OwnerNetwork', [UINT32], 3, 1, false, false, null],
+    ['Pins', [MAP(UINT16, UINT32)], 3, 5, false, false, null],
+    ['SourceOrSink', [OcaNetworkMediaSourceOrSink], 3, 3, false, false, null],
+    ['Status', [OcaStreamConnectorStatus], 3, 6, false, false, null],
+    ['Streams', [MAP(UINT16, OcaStream)], 3, 4, false, false, null],
+  ],
+  []
 );
 
 /**
@@ -9302,4 +9437,104 @@ export const OcaStreamConnector = make_control_class(
  * All classes defined in this module by their ClassID.
  */
 export const Classes = [
-OcaRoot, OcaWorker, OcaActuator, OcaMute, OcaPolarity, OcaSwitch, OcaGain, OcaPanBalance, OcaDelay, OcaDelayExtended, OcaFrequencyActuator, OcaFilterClassical, OcaFilterParametric, OcaFilterPolynomial, OcaFilterFIR, OcaFilterArbitraryCurve, OcaDynamics, OcaDynamicsDetector, OcaDynamicsCurve, OcaSignalGenerator, OcaSignalInput, OcaSignalOutput, OcaTemperatureActuator, OcaIdentificationActuator, OcaSummingPoint, OcaBasicActuator, OcaBooleanActuator, OcaInt8Actuator, OcaInt16Actuator, OcaInt32Actuator, OcaInt64Actuator, OcaUint8Actuator, OcaUint16Actuator, OcaUint32Actuator, OcaUint64Actuator, OcaFloat32Actuator, OcaFloat64Actuator, OcaStringActuator, OcaBitstringActuator, OcaSensor, OcaLevelSensor, OcaAudioLevelSensor, OcaTimeIntervalSensor, OcaFrequencySensor, OcaTemperatureSensor, OcaIdentificationSensor, OcaVoltageSensor, OcaCurrentSensor, OcaImpedanceSensor, OcaGainSensor, OcaBasicSensor, OcaBooleanSensor, OcaInt8Sensor, OcaInt16Sensor, OcaInt32Sensor, OcaInt64Sensor, OcaUint8Sensor, OcaUint16Sensor, OcaUint32Sensor, OcaFloat32Sensor, OcaFloat64Sensor, OcaStringSensor, OcaBitstringSensor, OcaUint64Sensor, OcaBlock, OcaBlockFactory, OcaMatrix, OcaAgent, OcaGrouper, OcaRamper, OcaNumericObserver, OcaLibrary, OcaPowerSupply, OcaEventHandler, OcaNumericObserverList, OcaMediaClock3, OcaTimeSource, OcaPhysicalPosition, OcaApplicationNetwork, OcaControlNetwork, OcaMediaTransportNetwork, OcaManager, OcaDeviceManager, OcaSecurityManager, OcaFirmwareManager, OcaSubscriptionManager, OcaPowerManager, OcaNetworkManager, OcaMediaClockManager, OcaLibraryManager, OcaAudioProcessingManager, OcaDeviceTimeManager, OcaTaskManager, OcaCodingManager, OcaDiagnosticManager, OcaNetworkSignalChannel, OcaNetwork, OcaMediaClock, OcaStreamNetwork, OcaStreamConnector];
+  OcaRoot,
+  OcaWorker,
+  OcaActuator,
+  OcaMute,
+  OcaPolarity,
+  OcaSwitch,
+  OcaGain,
+  OcaPanBalance,
+  OcaDelay,
+  OcaDelayExtended,
+  OcaFrequencyActuator,
+  OcaFilterClassical,
+  OcaFilterParametric,
+  OcaFilterPolynomial,
+  OcaFilterFIR,
+  OcaFilterArbitraryCurve,
+  OcaDynamics,
+  OcaDynamicsDetector,
+  OcaDynamicsCurve,
+  OcaSignalGenerator,
+  OcaSignalInput,
+  OcaSignalOutput,
+  OcaTemperatureActuator,
+  OcaIdentificationActuator,
+  OcaSummingPoint,
+  OcaBasicActuator,
+  OcaBooleanActuator,
+  OcaInt8Actuator,
+  OcaInt16Actuator,
+  OcaInt32Actuator,
+  OcaInt64Actuator,
+  OcaUint8Actuator,
+  OcaUint16Actuator,
+  OcaUint32Actuator,
+  OcaUint64Actuator,
+  OcaFloat32Actuator,
+  OcaFloat64Actuator,
+  OcaStringActuator,
+  OcaBitstringActuator,
+  OcaSensor,
+  OcaLevelSensor,
+  OcaAudioLevelSensor,
+  OcaTimeIntervalSensor,
+  OcaFrequencySensor,
+  OcaTemperatureSensor,
+  OcaIdentificationSensor,
+  OcaVoltageSensor,
+  OcaCurrentSensor,
+  OcaImpedanceSensor,
+  OcaGainSensor,
+  OcaBasicSensor,
+  OcaBooleanSensor,
+  OcaInt8Sensor,
+  OcaInt16Sensor,
+  OcaInt32Sensor,
+  OcaInt64Sensor,
+  OcaUint8Sensor,
+  OcaUint16Sensor,
+  OcaUint32Sensor,
+  OcaFloat32Sensor,
+  OcaFloat64Sensor,
+  OcaStringSensor,
+  OcaBitstringSensor,
+  OcaUint64Sensor,
+  OcaBlock,
+  OcaBlockFactory,
+  OcaMatrix,
+  OcaAgent,
+  OcaGrouper,
+  OcaRamper,
+  OcaNumericObserver,
+  OcaLibrary,
+  OcaPowerSupply,
+  OcaEventHandler,
+  OcaNumericObserverList,
+  OcaMediaClock3,
+  OcaTimeSource,
+  OcaPhysicalPosition,
+  OcaApplicationNetwork,
+  OcaControlNetwork,
+  OcaMediaTransportNetwork,
+  OcaManager,
+  OcaDeviceManager,
+  OcaSecurityManager,
+  OcaFirmwareManager,
+  OcaSubscriptionManager,
+  OcaPowerManager,
+  OcaNetworkManager,
+  OcaMediaClockManager,
+  OcaLibraryManager,
+  OcaAudioProcessingManager,
+  OcaDeviceTimeManager,
+  OcaTaskManager,
+  OcaCodingManager,
+  OcaDiagnosticManager,
+  OcaNetworkSignalChannel,
+  OcaNetwork,
+  OcaMediaClock,
+  OcaStreamNetwork,
+  OcaStreamConnector,
+];
