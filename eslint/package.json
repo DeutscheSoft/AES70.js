@@ -1,0 +1,11 @@
+{
+  "name": "aes70-eslint",
+  "version": "1.0.0",
+  "description": "eslint setup for AES70.js.",
+  "scripts": {},
+  "author": "Arne Goedeke <arne@deuso.de>",
+  "private": "true",
+  "dependencies": {
+    "eslint": "^7.2.0"
+  }
+}
