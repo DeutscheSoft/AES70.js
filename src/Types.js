@@ -834,6 +834,19 @@ const _values_OcaSubscriptionManagerState = {
 export const OcaSubscriptionManagerState = make_enum(Enum8, "OcaSubscriptionManagerState", _values_OcaSubscriptionManagerState);
 
 /**
+ * An absolute level expressed in dB above the given absolute reference
+ * level.
+ * @category Types
+ * @class OcaDBr
+ * @extends Base
+ */
+export const OcaDBr = make_struct(
+  "OcaDBr",
+  [ "Value", "Ref" ],
+  [ FLOAT32, FLOAT32 ]
+);
+
+/**
  * Complex impedance. Expressed as a magnitude and phase.
  * @category Types
  * @class OcaImpedance
@@ -996,7 +1009,7 @@ export const OcaDynamicsFunction = make_enum(Enum8, "OcaDynamicsFunction", _valu
 export const OcaPilotToneDetectorSpec = make_struct(
   "OcaPilotToneDetectorSpec",
   [ "Threshold", "Frequency", "PollInterval" ],
-  [ FLOAT32, FLOAT32, UINT32 ]
+  [ OcaDBr, FLOAT32, UINT32 ]
 );
 
 const _values_OcaWaveformType = {
