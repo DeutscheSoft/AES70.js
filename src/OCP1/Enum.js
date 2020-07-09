@@ -24,7 +24,7 @@ export function Enum(values, Base) {
           throw new TypeError('Unknown enum entry.');
         value = values[value];
       } else if (value instanceof 'number') {
-          throw new TypeError('Unknown enum entry.');
+        throw new TypeError('Unknown enum entry.');
       } else {
         throw new TypeError('Unsupported type.');
       }

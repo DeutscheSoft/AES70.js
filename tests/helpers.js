@@ -43,7 +43,10 @@ export function assertDeepEqual(a, b) {
 
 export function assertEqual(a, b) {
   if (a !== b)
+  {
+    console.error('%O !== %O', a, b);
     throw new Error('Assertion failed.');
+  }
   ok++;
 }
 

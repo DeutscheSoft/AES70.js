@@ -487,7 +487,7 @@ export const OcaLibVolChangedEventData = make_struct(
  * @class OcaMediaConnectorElement
  * @extends Base
  */
-export const OcaMediaConnectorElement = make_bitset(5, "OcaMediaConnectorElement", [
+export const OcaMediaConnectorElement = make_bitset(8, "OcaMediaConnectorElement", [
 "PinMap", "Connection", "Coding", "AlignmentLevel", "AlignmentGain" ]);
 
 const _values_OcaMediaConnectorState = {
