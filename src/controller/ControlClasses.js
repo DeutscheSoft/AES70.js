@@ -70,6 +70,7 @@ import {
   OcaGrouperStatusChangeEventData,
   OcaNotificationDeliveryMode,
   OcaSubscriptionManagerState,
+  OcaDBr,
   OcaImpedance,
   OcaMuteState,
   OcaPolarityState,
@@ -1512,8 +1513,8 @@ export const OcaDynamics = make_control_class(
     ['SetFunction', 4, 4, [OcaDynamicsFunction], []],
     ['GetRatio', 4, 5, [], [FLOAT32, FLOAT32, FLOAT32]],
     ['SetRatio', 4, 6, [FLOAT32], []],
-    ['GetThreshold', 4, 7, [], [FLOAT32, FLOAT32, FLOAT32]],
-    ['SetThreshold', 4, 8, [FLOAT32], []],
+    ['GetThreshold', 4, 7, [], [OcaDBr, FLOAT32, FLOAT32]],
+    ['SetThreshold', 4, 8, [OcaDBr], []],
     ['GetThresholdPresentationUnits', 4, 9, [], [OcaPresentationUnit]],
     ['SetThresholdPresentationUnits', 4, 10, [OcaPresentationUnit], []],
     ['GetDetectorLaw', 4, 11, [], [OcaLevelDetectionLaw]],
@@ -1539,7 +1540,7 @@ export const OcaDynamics = make_control_class(
       [
         UINT16,
         OcaDynamicsFunction,
-        FLOAT32,
+        OcaDBr,
         OcaPresentationUnit,
         OcaLevelDetectionLaw,
         FLOAT32,
@@ -1558,7 +1559,7 @@ export const OcaDynamics = make_control_class(
     ['DynamicGain', [FLOAT32], 4, 2, false, false, null],
     ['Function', [OcaDynamicsFunction], 4, 3, false, false, null],
     ['Ratio', [FLOAT32], 4, 4, false, false, null],
-    ['Threshold', [FLOAT32], 4, 5, false, false, null],
+    ['Threshold', [OcaDBr], 4, 5, false, false, null],
     [
       'ThresholdPresentationUnits',
       [OcaPresentationUnit],
@@ -2049,8 +2050,8 @@ export const OcaDynamicsCurve = make_control_class(
   [
     ['GetNSegments', 4, 1, [], [UINT8, UINT8, UINT8]],
     ['SetNSegments', 4, 2, [UINT8], []],
-    ['GetThreshold', 4, 3, [], [LIST(FLOAT32), FLOAT32, FLOAT32]],
-    ['SetThreshold', 4, 4, [LIST(FLOAT32)], []],
+    ['GetThreshold', 4, 3, [], [LIST(OcaDBr), FLOAT32, FLOAT32]],
+    ['SetThreshold', 4, 4, [LIST(OcaDBr)], []],
     ['GetSlope', 4, 5, [], [LIST(FLOAT32), LIST(FLOAT32), LIST(FLOAT32)]],
     ['SetSlope', 4, 6, [LIST(FLOAT32)], []],
     [
@@ -2072,7 +2073,7 @@ export const OcaDynamicsCurve = make_control_class(
       [
         UINT16,
         UINT8,
-        LIST(FLOAT32),
+        LIST(OcaDBr),
         LIST(FLOAT32),
         LIST(FLOAT32),
         FLOAT32,
@@ -2083,7 +2084,7 @@ export const OcaDynamicsCurve = make_control_class(
   ],
   [
     ['NSegments', [UINT8], 4, 1, false, false, null],
-    ['Threshold', [LIST(FLOAT32)], 4, 2, false, false, null],
+    ['Threshold', [LIST(OcaDBr)], 4, 2, false, false, null],
     ['Slope', [LIST(FLOAT32)], 4, 3, false, false, null],
     ['KneeParameter', [LIST(FLOAT32)], 4, 4, false, false, null],
     ['DynamicGainFloor', [FLOAT32], 4, 5, false, false, null],
