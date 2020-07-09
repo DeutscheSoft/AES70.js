@@ -16,7 +16,7 @@ import {
     ClientConnection,
     RemoteDevice,
     define_custom_class
-  } from './Controller';
+  } from './Controller.js';
 
 import * as SP from './signature_parser.js';
 import * as Types from './Types.js';

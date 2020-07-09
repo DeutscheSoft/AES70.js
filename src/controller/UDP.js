@@ -2,7 +2,7 @@ import { createSocket } from 'dgram';
 
 import { lookup } from 'dns';
 
-import { ClientConnection } from '../Controller';
+import { ClientConnection } from '../Controller.js';
 
 function is_ip(host) {
   let tmp = host.split('.');

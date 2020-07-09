@@ -29,7 +29,7 @@ function string_to_buffer(s) {
   return buf.buffer;
 }
 
-if ('TextEncoder' in window && 'TextDecoder' in window) {
+if (typeof window !== 'undefined' && 'TextEncoder' in window && 'TextDecoder' in window) {
   const E = new TextEncoder();
   const D = new TextDecoder();
   buffer_to_utf8 = D.decode.bind(D);

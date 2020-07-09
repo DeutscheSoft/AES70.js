@@ -1,6 +1,6 @@
 import { Socket } from 'net';
 
-import { ClientConnection } from '../Controller';
+import { ClientConnection } from '../Controller.js';
 
 /**
  * {@link ClientConnection} subclass which implements OCP.1 with TCP
