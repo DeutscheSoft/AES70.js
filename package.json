@@ -6,6 +6,7 @@
   "module": "src/index.js",
   "browser": "src/index.browser.js",
   "browser:module": "src/index.browser.js",
+  "type" : "module",
   "bin": {},
   "directories": {
     "lib": "lib"
