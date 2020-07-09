@@ -1,0 +1,13 @@
+{
+  "name": "aes70-prettier",
+  "version": "1.0.0",
+  "description": "Internal project for running prettier on aes70.js.",
+  "scripts": {
+    "prettier": "prettier --write --single-quote --jsx-bracket-same-line ../src/**/*"
+  },
+  "author": "Arne Goedeke",
+  "private": true,
+  "dependencies": {
+    "prettier": "^2.0.5"
+  }
+}
