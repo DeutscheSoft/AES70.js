@@ -583,7 +583,7 @@ export class RemoteDevice extends Events
    *
    * @param {String} [separator='/'] Optional argument used as a separator
    *                                 for levels in the tree.
-   * @returns {Promise<Map<string, Object>> The map of role paths to control
+   * @returns {Promise<Map<string, Object>>} The map of role paths to control
    *                                        objects.
    */
   get_role_map(separator)
