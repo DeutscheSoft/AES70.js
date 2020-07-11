@@ -1,15 +1,4 @@
 import { Enum8 } from './Enum8.js';
+import { OcaMediaClockLockState as type } from '../types/OcaMediaClockLockState.js';
 
-/**
- * Lock states of media clocks.
- * @category Types
- * @class OcaMediaClockLockState
- * @extends Enum8
- */
-export const OcaMediaClockLockState = Enum8({
-  Undefined: 0,
-  Locked: 1,
-  Synchronizing: 2,
-  FreeRun: 3,
-  Stopped: 4,
-});
+export const OcaMediaClockLockState = Enum8(type);

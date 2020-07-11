@@ -6,8 +6,13 @@ import { OcaBitSet16 } from './OcaBitSet16.js';
 import { OcaFloat32 } from './OcaFloat32.js';
 import { OcaPositionCoordinateSystem } from './OcaPositionCoordinateSystem.js';
 
-export const OcaPositionDescriptor = Struct({
-  CoordinateSystem: OcaPositionCoordinateSystem,
-  FieldFlags: OcaBitSet16,
-  Values: OcaFloat32,
-});
+import { OcaPositionDescriptor as type } from '../types/OcaPositionDescriptor.js';
+
+export const OcaPositionDescriptor = Struct(
+  {
+    CoordinateSystem: OcaPositionCoordinateSystem,
+    FieldFlags: OcaBitSet16,
+    Values: OcaFloat32,
+  },
+  type
+);

@@ -1,19 +1,12 @@
 import { createType } from './createType.js';
-import { Enum as EnumType } from '../TypesBase.js';
 
-export function Enum(values, Base) {
-  const DataType = class extends EnumType {
-    static values() {
-      return values;
-    }
-  };
-
+export function Enum(DataType, Base) {
   const encodeTo = Base.encodeTo;
   const decode = Base.decode;
 
-  let Type;
+  const values = DataType.values();
 
-  Type = createType({
+  return createType({
     isConstantLength: true,
     encodedLength: Base.encodedLength,
     encodeTo: function (dataView, pos, value) {
@@ -38,10 +31,4 @@ export function Enum(values, Base) {
       return Type[name];
     },
   });
-
-  for (let name in values) {
-    Type[name] = new DataType(values[name]);
-  }
-
-  return Type;
 }

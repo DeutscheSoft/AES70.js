@@ -1,20 +1,6 @@
-import {
-    encoder,
-    signature,
-    BLOB
-  } from './signature_parser.js';
+import { OcaEvent } from './OCP1/OcaEvent.js';
 
-import {
-    OcaEvent,
-    OcaEventID,
-    OcaNotificationDeliveryMode,
-    OcaObjectIdentification,
-    OcaBlockMember,
-    OcaMethod,
-    OcaMethodID
-  } from './Types.js';
-
-
+import { EncodedArguments } from './OCP1/encoded_arguments.js';
 
 export function warn(...args) {
   try {
@@ -325,11 +311,12 @@ export class Command extends PDUBase
     dst.setUint8(pos, this.param_count);
     pos ++;
     if (this.param_count) {
-      if (this.parameters instanceof encoder) {
-        pos = this.parameters.encode_to(dst, pos);
+      const parameters = this.parameters;
+      if (parameters instanceof EncodedArguments) {
+        pos = parameters.encodeTo(dst, pos);
       } else {
-        new Uint8Array(dst.buffer).set(new Uint8Array(this.parameters), dst.byteOffset+pos);
-        pos += this.parameters.byteLength;
+        new Uint8Array(dst.buffer).set(new Uint8Array(parameters), dst.byteOffset+pos);
+        pos += parameters.byteLength;
       }
     }
     return pos;
@@ -438,8 +425,8 @@ export class Response extends PDUBase
     dst.setUint8(pos, this.param_count);
     pos ++;
     if (this.param_count) {
-      if (this.parameters instanceof encoder) {
-        pos = this.parameters.encode_to(dst, pos);
+      if (this.parameters instanceof EncodedArguments) {
+        pos = this.parameters.encodeTo(dst, pos);
       } else {
         new Uint8Array(dst.buffer).set(new Uint8Array(this.parameters), dst.byteOffset+pos);
         pos += this.parameters.byteLength;
@@ -448,8 +435,6 @@ export class Response extends PDUBase
     return pos;
   }
 }
-
-const notification_signature = new signature(BLOB, OcaEvent);
 
 /**
  * Notification packet.
@@ -502,8 +487,8 @@ export class Notification extends PDUBase
     dst.setUint16(pos, this.event.EventID.EventIndex);
     pos += 2;
     if (this.param_count > 1) {
-      if (this.parameters instanceof encoder) {
-        pos = this.parameters.encode_to(dst, pos);
+      if (this.parameters instanceof EncodedArguments) {
+        pos = this.parameters.encodeTo(dst, pos);
       } else {
         new Uint8Array(dst.buffer).set(new Uint8Array(this.parameters), dst.byteOffset+pos);
         pos += this.parameters.byteLength;
@@ -539,10 +524,12 @@ export class Notification extends PDUBase
       this.context = null
     }
 
-    this.event = new OcaEvent(data.getUint32(pos),
-                              new OcaEventID(data.getUint16(pos+4), data.getUint16(pos+6)));
+    let event;
 
-    pos += 8;
+    [ pos, event ] = OcaEvent.decodeFrom(data, pos);
+
+    this.event = event;
+
     len -= 23 + context_length;
     if (len < 0) throw new Error("Bad Notification Length.");
     if (len > 0) {

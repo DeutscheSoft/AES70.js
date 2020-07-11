@@ -1,12 +1,4 @@
 import { Enum8 } from './Enum8.js';
+import { OcaTimeMode as type } from '../types/OcaTimeMode.js';
 
-/**
- * Time mode of <b>OcaTask </b>agent.
- * @category Types
- * @class OcaTimeMode
- * @extends Enum8
- */
-export const OcaTimeMode = Enum8({
-  Absolute: 1,
-  Relative: 2,
-});
+export const OcaTimeMode = Enum8(type);

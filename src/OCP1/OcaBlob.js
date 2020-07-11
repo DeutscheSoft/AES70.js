@@ -23,7 +23,7 @@ export const OcaBlob = createType({
     u8.set(value, pos);
     return pos + length;
   },
-  deocdeFrom: function (dataView, pos) {
+  decodeFrom: function (dataView, pos) {
     const length = dataView.getUint16(pos);
 
     pos += 2;

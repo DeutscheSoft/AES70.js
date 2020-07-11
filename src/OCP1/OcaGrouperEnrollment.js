@@ -4,7 +4,12 @@
 import { Struct } from './Struct.js';
 import { OcaUint16 } from './OcaUint16.js';
 
-export const OcaGrouperEnrollment = Struct({
-  GroupIndex: OcaUint16,
-  CitizenIndex: OcaUint16,
-});
+import { OcaGrouperEnrollment as type } from '../types/OcaGrouperEnrollment.js';
+
+export const OcaGrouperEnrollment = Struct(
+  {
+    GroupIndex: OcaUint16,
+    CitizenIndex: OcaUint16,
+  },
+  type
+);

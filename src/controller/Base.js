@@ -1,22 +1,22 @@
 import { error, CommandRrq } from '../OCA.js';
 
-import {
-  OcaPropertyChangeType,
-  OcaPropertyID,
-  OcaEvent,
-  OcaEventID,
-} from '../Types.js';
+import { OcaPropertyChangeType } from '../types/OcaPropertyChangeType.js';
+import { OcaPropertyID } from '../types/OcaPropertyID.js';
+import { OcaEvent } from '../types/OcaEvent.js';
+import { OcaEventID } from '../types/OcaEventID.js';
 
-import { signature, Arguments, make_encoder } from '../signature_parser.js';
+import { makeEncoder } from '../OCP1/makeEncoder.js';
+import { Arguments } from './arguments.js';
+import { EncodedArguments } from '../OCP1/encoded_arguments.js';
 
 /**
  * Describes an AES70 property. Simplifies getting or setting properties
  * and listening to property changes.
  */
 export class Property {
-  constructor(name, signature, level, index, readonly, is_static, aliases) {
+  constructor(name, type, level, index, readonly, is_static, aliases) {
     this.name = name;
-    this.signature = signature;
+    this.type = type;
     this.level = level;
     this.index = index;
     this.readonly = readonly;
@@ -206,12 +206,6 @@ export class Properties {
     const p = this.find_property(id);
 
     if (p) return p.name;
-  }
-
-  find_signature(id) {
-    const p = this.find_property(id);
-
-    if (p) return p.signature;
   }
 
   /**
@@ -478,12 +472,12 @@ export class ObjectBase {
  * Base class for all events.
  */
 class BaseEvent {
-  constructor(object, id, signature) {
+  constructor(object, id, argumentTypes) {
     this.object = object;
     this.id = id;
     this.handlers = new Set();
     this.result = null;
-    this.signature = signature;
+    this.argumentTypes = argumentTypes;
   }
 
   GetOcaEvent() {
@@ -539,10 +533,11 @@ class BaseEvent {
  * @extends BaseEvent
  */
 export class Event extends BaseEvent {
-  constructor(object, id, signature) {
-    super(object, id, signature);
+  constructor(object, id, argumentTypes) {
+    super(object, id, argumentTypes);
     this.callback = (notification) => {
       if (!this.handlers.size) return;
+      throw new Error('FIXME');
       const args =
         signature && notification.param_count
           ? signature.low_decode(new DataView(notification.parameters))
@@ -572,8 +567,6 @@ export class Event extends BaseEvent {
     );
   }
 }
-
-const change_type_signature = new signature(OcaPropertyChangeType);
 
 /**
  * Class used to represent property changes.
@@ -612,44 +605,27 @@ export class PropertyEvent extends BaseEvent {
   }
 }
 
-// method = [ name, level, index, argument_signatures, return_value_signatures ]
+// method = [ name, level, index, argumentTypes, returnTypes ]
 function implement_method(cls, method) {
   if (!method || !method.length) return;
 
-  const name = method[0],
-    level = method[1],
-    index = method[2];
-  let as = method[3],
-    rs = method[4];
-
-  if (as && as.length) {
-    as = as.map((v) => make_encoder(v));
-    as = new signature(...as);
-  } else as = null;
-
-  if (rs && rs.length) {
-    rs = rs.map((v) => make_encoder(v));
-    rs = new signature(...rs);
-  } else rs = null;
+  const [name, level, index, argumentTypes, returnTypes] = method;
 
   cls.prototype[name] = function () {
     const cmd = new CommandRrq(
       this.ono,
       level,
       index,
-      as ? as.length : 0,
-      as ? as.encoder(Array.from(arguments)) : null
+      argumentTypes.length,
+      new EncodedArguments(argumentTypes, Array.from(arguments))
     );
-    return this.device.send_command(cmd, rs);
+    return this.device.send_command(cmd, returnTypes);
   };
 }
 
-// event = [ name, level, index, argument_signatures ]
+// event = [ name, level, index, argumentTypes ]
 function implement_event(cls, event) {
-  const name = event[0],
-    level = event[1],
-    index = event[2],
-    as = new signature(...event[3].map((v) => make_encoder(v)));
+  const [name, level, index, argumentTypes] = event;
 
   Object.defineProperty(cls.prototype, 'On' + name, {
     get: function () {
@@ -661,7 +637,7 @@ function implement_event(cls, event) {
       return (this[ev_name] = new Event(
         this,
         new OcaEventID(level, index),
-        as
+        argumentTypes
       ));
     },
   });
@@ -681,30 +657,18 @@ function implement_property_event(cls, property) {
       return (this[ev_name] = new PropertyEvent(
         this,
         new OcaPropertyID(property.level, property.index),
-        property.signature
+        property.type
       ));
     },
   });
 }
 
-function make_signature(o) {
-  if (o instanceof signature) {
-    return o;
-  } else if (Array.isArray(o)) {
-    return new signature(make_encoder(...o));
-  } else if (typeof o === 'string') {
-    return new signature(make_encoder(o));
-  }
-}
-
 function make_property(o) {
-  if (typeof o === 'object') {
-    if (o instanceof Property) {
-      return o;
-    } else if (Array.isArray(o)) {
-      o[1] = make_signature(o[1]);
-      return new Property(...o);
-    }
+  if (typeof o === 'object' && o instanceof Property) return o;
+
+  if (Array.isArray(o)) {
+    if (typeof o[1] !== 'object') o[1] = makeEncoder(o[1]);
+    return new Property(...o);
   }
 
   throw new Error('Bad property.');

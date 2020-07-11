@@ -4,6 +4,11 @@
 import { Struct } from './Struct.js';
 import { OcaUint8 } from './OcaUint8.js';
 
-export const OcaEnumItem = Struct({
-  Value: OcaUint8,
-});
+import { OcaEnumItem as type } from '../types/OcaEnumItem.js';
+
+export const OcaEnumItem = Struct(
+  {
+    Value: OcaUint8,
+  },
+  type
+);

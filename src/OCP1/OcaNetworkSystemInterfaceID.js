@@ -4,7 +4,12 @@
 import { Struct } from './Struct.js';
 import { OcaBlob } from './OcaBlob.js';
 
-export const OcaNetworkSystemInterfaceID = Struct({
-  SystemInterfaceHandle: OcaBlob,
-  MyNetworkAddress: OcaBlob,
-});
+import { OcaNetworkSystemInterfaceID as type } from '../types/OcaNetworkSystemInterfaceID.js';
+
+export const OcaNetworkSystemInterfaceID = Struct(
+  {
+    SystemInterfaceHandle: OcaBlob,
+    MyNetworkAddress: OcaBlob,
+  },
+  type
+);

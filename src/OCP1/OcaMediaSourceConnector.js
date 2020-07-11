@@ -11,13 +11,18 @@ import { OcaPortID } from './OcaPortID.js';
 import { OcaString } from './OcaString.js';
 import { OcaUint16 } from './OcaUint16.js';
 
-export const OcaMediaSourceConnector = Struct({
-  IDInternal: OcaUint16,
-  IDExternal: OcaString,
-  Connection: OcaMediaConnection,
-  AvailableCodings: OcaList(OcaMediaCoding),
-  PinCount: OcaUint16,
-  ChannelPinMap: OcaMap(OcaUint16, OcaPortID),
-  AlignmentLevel: OcaFloat32,
-  CurrentCoding: OcaMediaCoding,
-});
+import { OcaMediaSourceConnector as type } from '../types/OcaMediaSourceConnector.js';
+
+export const OcaMediaSourceConnector = Struct(
+  {
+    IDInternal: OcaUint16,
+    IDExternal: OcaString,
+    Connection: OcaMediaConnection,
+    AvailableCodings: OcaList(OcaMediaCoding),
+    PinCount: OcaUint16,
+    ChannelPinMap: OcaMap(OcaUint16, OcaPortID),
+    AlignmentLevel: OcaFloat32,
+    CurrentCoding: OcaMediaCoding,
+  },
+  type
+);

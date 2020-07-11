@@ -4,9 +4,14 @@
 import { Struct } from './Struct.js';
 import { OcaBlob } from './OcaBlob.js';
 
-export const OcaStreamConnectorIdentification = Struct({
-  HostID: OcaBlob,
-  NetworkAddress: OcaBlob,
-  NodeID: OcaBlob,
-  StreamConnectorID: OcaBlob,
-});
+import { OcaStreamConnectorIdentification as type } from '../types/OcaStreamConnectorIdentification.js';
+
+export const OcaStreamConnectorIdentification = Struct(
+  {
+    HostID: OcaBlob,
+    NetworkAddress: OcaBlob,
+    NodeID: OcaBlob,
+    StreamConnectorID: OcaBlob,
+  },
+  type
+);

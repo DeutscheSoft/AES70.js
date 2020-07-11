@@ -8,11 +8,16 @@ import { OcaString } from './OcaString.js';
 import { OcaTimePTP } from './OcaTimePTP.js';
 import { OcaUint32 } from './OcaUint32.js';
 
-export const OcaLibVolMetadata = Struct({
-  Name: OcaString,
-  VolType: OcaLibVolType,
-  Access: OcaLibAccess,
-  Version: OcaUint32,
-  Creator: OcaString,
-  UpDate: OcaTimePTP,
-});
+import { OcaLibVolMetadata as type } from '../types/OcaLibVolMetadata.js';
+
+export const OcaLibVolMetadata = Struct(
+  {
+    Name: OcaString,
+    VolType: OcaLibVolType,
+    Access: OcaLibAccess,
+    Version: OcaUint32,
+    Creator: OcaString,
+    UpDate: OcaTimePTP,
+  },
+  type
+);

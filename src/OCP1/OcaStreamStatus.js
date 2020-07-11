@@ -1,13 +1,4 @@
 import { Enum8 } from './Enum8.js';
+import { OcaStreamStatus as type } from '../types/OcaStreamStatus.js';
 
-/**
- * Status options for a stream.
- * @category Types
- * @class OcaStreamStatus
- * @extends Enum8
- */
-export const OcaStreamStatus = Enum8({
-  NotConnected: 0,
-  Connected: 1,
-  Paused: 2,
-});
+export const OcaStreamStatus = Enum8(type);

@@ -7,9 +7,14 @@ import { OcaBoolean } from './OcaBoolean.js';
 import { OcaMediaStreamCastMode } from './OcaMediaStreamCastMode.js';
 import { OcaUint16 } from './OcaUint16.js';
 
-export const OcaMediaConnection = Struct({
-  Secure: OcaBoolean,
-  StreamParameters: OcaBlob,
-  StreamCastMode: OcaMediaStreamCastMode,
-  StreamChannelCount: OcaUint16,
-});
+import { OcaMediaConnection as type } from '../types/OcaMediaConnection.js';
+
+export const OcaMediaConnection = Struct(
+  {
+    Secure: OcaBoolean,
+    StreamParameters: OcaBlob,
+    StreamCastMode: OcaMediaStreamCastMode,
+    StreamChannelCount: OcaUint16,
+  },
+  type
+);

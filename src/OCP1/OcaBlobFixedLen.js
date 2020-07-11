@@ -1,6 +1,6 @@
 import { createType } from './createType.js';
 
-export function OcaBlobFixed(Length) {
+export function OcaBlobFixedLen(Length) {
   return createType({
     isConstantLength: true,
     encodedLength: function (value) {
@@ -10,13 +10,15 @@ export function OcaBlobFixed(Length) {
       if (!Array.isArray(value) && !(value instanceof Uint8Array))
         throw new TypeError('Expected Array or Uint8Array');
 
-      if (value.length !== Length) throw new TypeError('Data length mismatch.');
+      const length = value.length;
+
+      if (length !== Length) throw new Error('Length mismatch.');
 
       const u8 = new Uint8Array(dataView.buffer, dataView.byteOffset);
       u8.set(value, pos);
       return pos + Length;
     },
-    deocde: function (dataView, pos) {
+    decode: function (dataView, pos) {
       return new Uint8Array(dataView.buffer, dataView.byteOffset + pos, Length);
     },
   });

@@ -1,13 +1,13 @@
-const process = require('process');
-const net = require('net');
-const RemoteDevice = require('../lib/Controller').RemoteDevice;
+import { argv, exit } from 'process';
+import { createServer, Socket } from 'net';
+import { RemoteDevice } from '../src/index.js';
 const TCPConnection = require('../lib/controller/TCP').TCPConnection;
 const UDPConnection = require('../lib/controller/UDP').UDPConnection;
 const WebSocketConnection = require('../lib/controller/WebSocket').WebSocketConnection;
 const test = require('./device/test');
 const url = require('url');
 
-if (process.argv.length < 3)
+if (argv.length < 3)
 {
   console.log('Usage: node device.js <ip>:<port> ws://<ip>:<port>');
   return;
@@ -275,13 +275,13 @@ async function run(targets)
   }
 }
 
-run(process.argv).then(
+run(argv).then(
     function() {
       console.log("DONE.");
-      process.exit(0);
+      exit(0);
     },
     function(e) {
       console.error(e);
-      process.exit(1);
+      exit(1);
     });
 

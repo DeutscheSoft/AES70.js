@@ -1,12 +1,4 @@
 import { Enum8 } from './Enum8.js';
+import { OcaTimeSourceAvailability as type } from '../types/OcaTimeSourceAvailability.js';
 
-/**
- * States of time sources
- * @category Types
- * @class OcaTimeSourceAvailability
- * @extends Enum8
- */
-export const OcaTimeSourceAvailability = Enum8({
-  Unavailable: 0,
-  Available: 1,
-});
+export const OcaTimeSourceAvailability = Enum8(type);

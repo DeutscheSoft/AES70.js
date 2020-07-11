@@ -6,7 +6,12 @@ import { OcaEvent } from './OcaEvent.js';
 import { OcaFloat64 } from './OcaFloat64.js';
 import { OcaList } from './OcaList.js';
 
-export const OcaObservationListEventData = Struct({
-  Event: OcaEvent,
-  Reading: OcaList(OcaFloat64),
-});
+import { OcaObservationListEventData as type } from '../types/OcaObservationListEventData.js';
+
+export const OcaObservationListEventData = Struct(
+  {
+    Event: OcaEvent,
+    Reading: OcaList(OcaFloat64),
+  },
+  type
+);

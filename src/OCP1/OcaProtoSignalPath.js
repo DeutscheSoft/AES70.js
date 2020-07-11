@@ -4,7 +4,12 @@
 import { Struct } from './Struct.js';
 import { OcaProtoPort } from './OcaProtoPort.js';
 
-export const OcaProtoSignalPath = Struct({
-  SourceProtoPort: OcaProtoPort,
-  SinkProtoPort: OcaProtoPort,
-});
+import { OcaProtoSignalPath as type } from '../types/OcaProtoSignalPath.js';
+
+export const OcaProtoSignalPath = Struct(
+  {
+    SourceProtoPort: OcaProtoPort,
+    SinkProtoPort: OcaProtoPort,
+  },
+  type
+);

@@ -7,9 +7,14 @@ import { OcaMediaConnectorElement } from './OcaMediaConnectorElement.js';
 import { OcaMediaSourceConnector } from './OcaMediaSourceConnector.js';
 import { OcaPropertyChangeType } from './OcaPropertyChangeType.js';
 
-export const OcaMediaSourceConnectorChangedEventData = Struct({
-  Event: OcaEvent,
-  SourceConnector: OcaMediaSourceConnector,
-  ChangeType: OcaPropertyChangeType,
-  ChangedElement: OcaMediaConnectorElement,
-});
+import { OcaMediaSourceConnectorChangedEventData as type } from '../types/OcaMediaSourceConnectorChangedEventData.js';
+
+export const OcaMediaSourceConnectorChangedEventData = Struct(
+  {
+    Event: OcaEvent,
+    SourceConnector: OcaMediaSourceConnector,
+    ChangeType: OcaPropertyChangeType,
+    ChangedElement: OcaMediaConnectorElement,
+  },
+  type
+);

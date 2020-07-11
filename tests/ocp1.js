@@ -14,7 +14,9 @@ import { OcaList } from '../src/OCP1/OcaList.js';
 import { OcaList2D } from '../src/OCP1/OcaList2D.js';
 import { OcaMap } from '../src/OCP1/OcaMap.js';
 import { Struct } from '../src/OCP1/Struct.js';
+import { Tuple } from '../src/OCP1/Tuple.js';
 import { Arguments } from '../src/OCP1/Arguments.js';
+import { String16 } from '../src/OCP1/String16.js';
 
 import { OcaClassicalFilterShape } from '../src/OCP1/OcaClassicalFilterShape.js';
 import { OcaDeviceState } from '../src/OCP1/OcaDeviceState.js';
@@ -76,4 +78,14 @@ defineEncodeDecode('OcaaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ]
   // bitset
   const Type = OcaDeviceState;
   defineEncodeDecode('OcaDeviceState', Type, Type.Disabled, 2);
+}
+
+{
+  const Type = Tuple(OcaUint32, OcaString);
+  defineEncodeDecode('Tuple(OcaUint32, OcaString)', Type, [ 23, 'foobar' ], 12);
+}
+
+{
+  const Type = String16
+  defineEncodeDecode('String16', Type, 'foobar', 2 + 2 * 6);
 }

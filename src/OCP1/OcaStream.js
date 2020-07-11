@@ -11,16 +11,21 @@ import { OcaString } from './OcaString.js';
 import { OcaUint16 } from './OcaUint16.js';
 import { OcaUint32 } from './OcaUint32.js';
 
-export const OcaStream = Struct({
-  ErrorNumber: OcaUint16,
-  IDAdvertised: OcaBlob,
-  Index: OcaUint16,
-  Label: OcaString,
-  LocalConnectorONo: OcaUint32,
-  Priority: OcaUint16,
-  RemoteConnectorIdentification: OcaStreamConnectorIdentification,
-  Secure: OcaBoolean,
-  Status: OcaStreamStatus,
-  StreamParameters: OcaBlob,
-  StreamType: OcaStreamType,
-});
+import { OcaStream as type } from '../types/OcaStream.js';
+
+export const OcaStream = Struct(
+  {
+    ErrorNumber: OcaUint16,
+    IDAdvertised: OcaBlob,
+    Index: OcaUint16,
+    Label: OcaString,
+    LocalConnectorONo: OcaUint32,
+    Priority: OcaUint16,
+    RemoteConnectorIdentification: OcaStreamConnectorIdentification,
+    Secure: OcaBoolean,
+    Status: OcaStreamStatus,
+    StreamParameters: OcaBlob,
+    StreamType: OcaStreamType,
+  },
+  type
+);

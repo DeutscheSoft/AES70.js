@@ -4,7 +4,12 @@
 import { Struct } from './Struct.js';
 import { OcaUint32 } from './OcaUint32.js';
 
-export const OcaLibVolIdentifier = Struct({
-  Library: OcaUint32,
-  ID: OcaUint32,
-});
+import { OcaLibVolIdentifier as type } from '../types/OcaLibVolIdentifier.js';
+
+export const OcaLibVolIdentifier = Struct(
+  {
+    Library: OcaUint32,
+    ID: OcaUint32,
+  },
+  type
+);

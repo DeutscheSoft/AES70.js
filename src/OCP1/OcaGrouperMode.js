@@ -1,12 +1,4 @@
 import { Enum8 } from './Enum8.js';
+import { OcaGrouperMode as type } from '../types/OcaGrouperMode.js';
 
-/**
- * Select mode of <b>OcaGrouper</b>: master-slave or peer-to-peer
- * @category Types
- * @class OcaGrouperMode
- * @extends Enum8
- */
-export const OcaGrouperMode = Enum8({
-  MasterSlave: 1,
-  PeerToPeer: 2,
-});
+export const OcaGrouperMode = Enum8(type);

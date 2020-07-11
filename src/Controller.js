@@ -14,44 +14,32 @@ import {
     tree_to_rolemap
   } from './OCA.js';
 
+import { Arguments } from './controller/arguments.js';
+
 import {
     make_control_class
   } from './controller/Base.js';
 
-import {
-    OcaDeviceManager,
-    OcaSecurityManager,
-    OcaFirmwareManager,
-    OcaSubscriptionManager,
-    OcaPowerManager,
-    OcaNetworkManager,
-    OcaMediaClockManager,
-    OcaLibraryManager,
-    OcaAudioProcessingManager,
-    OcaDeviceTimeManager,
-    OcaTaskManager,
-    OcaCodingManager,
-    OcaDiagnosticManager,
-    OcaBlock,
-    Classes,
-  } from './controller/ControlClasses.js';
+import { OcaDeviceManager } from './controller/OcaDeviceManager.js';
+import { OcaSecurityManager } from './controller/OcaSecurityManager.js';
+import { OcaFirmwareManager } from './controller/OcaFirmwareManager.js';
+import { OcaSubscriptionManager } from './controller/OcaSubscriptionManager.js';
+import { OcaPowerManager } from './controller/OcaPowerManager.js';
+import { OcaNetworkManager } from './controller/OcaNetworkManager.js';
+import { OcaMediaClockManager } from './controller/OcaMediaClockManager.js';
+import { OcaLibraryManager } from './controller/OcaLibraryManager.js';
+import { OcaAudioProcessingManager } from './controller/OcaAudioProcessingManager.js';
+import { OcaDeviceTimeManager } from './controller/OcaDeviceTimeManager.js';
+import { OcaTaskManager } from './controller/OcaTaskManager.js';
+import { OcaCodingManager } from './controller/OcaCodingManager.js';
+import { OcaDiagnosticManager } from './controller/OcaDiagnosticManager.js';
+import { OcaBlock } from './controller/OcaBlock.js';
 
-import {
-    OcaManagerDefaultObjectNumbers,
-    OcaEvent,
-    OcaMethodID,
-    OcaMethod,
-    OcaObjectIdentification,
-    OcaBlockMember,
-    OcaNotificationDeliveryMode,
-    OcaStatus,
-  } from './Types.js';
+import { Classes } from './controller/ControlClasses.js';
 
-import {
-    signature
-  } from './signature_parser.js';
-  
-const event_signature = new signature(OcaEvent);
+import { OcaManagerDefaultObjectNumbers } from './types/OcaManagerDefaultObjectNumbers.js';
+
+import { OcaStatus } from './types/OcaStatus.js';
 
 /**
  * Creates a custom control class.
@@ -118,6 +106,13 @@ function timeout(p, time)
         reject(err);
       });
   });
+}
+
+function eventToKey(event) {
+  const ono = event.EmitterONo;
+  const id = event.EventID;
+
+  return [ ono, id.DefLevel, id.EventIndex ].join(',');
 }
 
 /**
@@ -196,19 +191,25 @@ export class ClientConnection extends Connection
     return id;
   }
 
-  add_command_handle(id, return_signature, resolve, reject, cmd)
+  add_command_handle(id, returnTypes, resolve, reject, cmd)
   {
-    const h = [ return_signature, resolve, reject, cmd ];
+    const h = [ returnTypes, resolve, reject, cmd ];
     this.command_handles.set(id, h);
     return h;
   }
 
   get_new_subscriber(callback)
   {
-    var id;
+    let id;
     while (this.subscribers.has(id = 1 + (Math.random()*0xffff)|0)) {}
     this.subscribers.set(id, callback);
-    return new OcaMethod(id, new OcaMethodID(1, 1));
+    return {
+      ONo: id,
+      MethodID: {
+        DefLevel: 1,
+        MethodIndex: 1,
+      }
+    };
   }
 
   remove_subscriber(method)
@@ -218,14 +219,14 @@ export class ClientConnection extends Connection
     S.delete(method.ONo);
   }
 
-  send_command(cmd, return_signature)
+  send_command(cmd, returnTypes)
   {
-    const id = this.get_command_handle();
-    cmd.handle = id;
-    const buf = encodeMessage(cmd); 
-
     return new Promise((resolve, reject) => {
-      this.add_command_handle(id, return_signature, resolve, reject, cmd, buf);
+      const id = this.get_command_handle();
+      cmd.handle = id;
+      const buf = encodeMessage(cmd); 
+
+      this.add_command_handle(id, returnTypes, resolve, reject, cmd, buf);
       this.send(buf);
     });
   }
@@ -243,30 +244,38 @@ export class ClientConnection extends Connection
     return h;
   }
 
-  incoming(a)
+  incoming(pdus)
   {
-    var i, o;
-
-    for (i = 0; i < a.length; i++) {
-      o = a[i];
+    for (let i = 0; i < pdus.length; i++) {
+      const o = pdus[i];
       //log("INCOMING", o);
       if (o instanceof Response) {
-        const h = this.remove_command_handle(o.handle);
+        const [ returnTypes, resolve, reject, cmd ] = this.remove_command_handle(o.handle);
 
         if (o.status_code !== 0) {
-          h[2](new RemoteError(o.status_code, h[3]));
-        } else if (!h[0]) {
-          h[1](o);
+          reject(new RemoteError(o.status_code, cmd));
+        } else if (!returnTypes) {
+          resolve(o);
         } else {
-          try
-          {
-            let retval;
-            if (o.param_count) {
-              retval = h[0].decode(new DataView(o.parameters));
+          try {
+            const length = Math.min(o.param_count, returnTypes.length);
+
+            if (length === 0) {
+              resolve();
+            } else {
+              const result = new Array(length);
+              const dataView = new DataView(o.parameters);
+
+              for (let i = 0, pos = 0; i < length; i++) {
+                let tmp;
+                [ pos, tmp ] = returnTypes[i].decodeFrom(dataView, pos);
+                result[i] = tmp;
+              }
+
+              resolve(length === 1 ? result[0] : new Arguments(result));
             }
-            h[1](retval);
           } catch (err) {
-            h[2](err);
+            reject(err);
           }
         }
       } else if (o instanceof Notification) {
@@ -386,18 +395,16 @@ export class RemoteDevice extends Events
     this.connection.close();
   }
 
-  send_command(cmd, return_signature)
+  send_command(cmd, returnType)
   {
-    return this.connection.send_command(cmd, return_signature);
+    return this.connection.send_command(cmd, returnType);
   }
 
   add_subscription(event, callback)
   {
-    var key = event_signature.encode(event);
+    const key = eventToKey(event);
 
-    key = String.fromCharCode.apply(String, new Uint8Array(key));
-
-    var S = this.subscriptions.get(key);
+    const S = this.subscriptions.get(key);
 
     if (S) {
       S.callbacks.add(callback);
@@ -406,13 +413,13 @@ export class RemoteDevice extends Events
 
     /* do the actual subscription */
 
-    var cb = (o) => {
-      var S = this.subscriptions.get(key);
+    const cb = (o) => {
+      const S = this.subscriptions.get(key);
       if (!S) {
         warn("Subscription lost.\n");
         return;
       }
-      var a = S.callbacks;
+      const a = S.callbacks;
       a.forEach(function(cb) {
         try {
           cb(o);
@@ -438,11 +445,9 @@ export class RemoteDevice extends Events
 
   remove_subscription(event, callback)
   {
-    var key = event_signature.encode(event);
+    const key = eventToKey(event);
 
-    key = String.fromCharCode.apply(String, new Uint8Array(key));
-
-    var S = this.subscriptions.get(key);
+    const S = this.subscriptions.get(key);
 
     if (!S) return Promise.reject("Callback not registered.");
 
@@ -523,19 +528,20 @@ export class RemoteDevice extends Events
     return objects.get(ono);
   }
 
-  resolve_object(oid)
+  resolve_object(o)
   {
-    var ono, id;
+    // OcaBlockMember
+    if ('MemberObjectIdentification' in o)
+      return this.resolve_object(o.MemberObjectIdentification);
 
-    if (oid instanceof OcaObjectIdentification) {
-      id = oid.ClassIdentification;
-      ono = oid.ONo;
-    } else if (oid instanceof OcaBlockMember) {
-      id = oid.MemberObjectIdentification.ClassIdentification;
-      ono = oid.MemberObjectIdentification.ONo;
-    } else throw new Error("Bad Argument: ", oid);
+    // OcaObjectIdentification
+    if ('ONo' in o && 'ClassIdentification' in o) {
+      const ono = o.ONo;
+      const id = o.ClassIdentification;
+      return this.allocate(this.find_best_class(id), ono);
+    } 
 
-    return this.allocate(this.find_best_class(id), ono);
+    throw new TypeError('Expected OcaObjectIdentification or OcaBlockMember');
   }
 
   GetDeviceTree()
@@ -543,6 +549,8 @@ export class RemoteDevice extends Events
     const get_members = (block) => {
       return block.GetMembers().then((a) => {
         var ret = [];
+
+        console.log(a);
 
         a = a.map(this.resolve_object, this);
 

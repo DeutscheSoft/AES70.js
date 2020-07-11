@@ -5,7 +5,12 @@ import { Struct } from './Struct.js';
 import { FieldType } from './FieldType.js';
 import { OcaUint16 } from './OcaUint16.js';
 
-export const OcaClassID = Struct({
-  FieldCount: OcaUint16,
-  Fields: FieldType,
-});
+import { OcaClassID as type } from '../types/OcaClassID.js';
+
+export const OcaClassID = Struct(
+  {
+    FieldCount: OcaUint16,
+    Fields: FieldType,
+  },
+  type
+);

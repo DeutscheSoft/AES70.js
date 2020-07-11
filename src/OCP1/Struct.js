@@ -1,16 +1,18 @@
 import { createType } from './createType.js';
 
-export function Struct(Types) {
-  const DataType = class {
-    constructor(args) {
-      if (!args) args = {};
-      for (let name in Types) {
-        if (!Types.hasOwnProperty(name)) continue;
+export function Struct(Types, DataType) {
+  if (!DataType) {
+    DataType = class {
+      constructor(args) {
+        if (!args) args = {};
+        for (let name in Types) {
+          if (!Types.hasOwnProperty(name)) continue;
 
-        this[name] = args[name];
+          this[name] = args[name];
+        }
       }
-    }
-  };
+    };
+  }
 
   return createType({
     type: DataType,
@@ -37,7 +39,8 @@ export function Struct(Types) {
       return pos;
     },
     decodeFrom: function (dataView, pos) {
-      let args = {};
+      const args = new Array(Types.length);
+      let i = 0;
       for (let name in Types) {
         if (!Types.hasOwnProperty(name)) continue;
         const Type = Types[name];
@@ -45,9 +48,9 @@ export function Struct(Types) {
 
         [pos, tmp] = Type.decodeFrom(dataView, pos);
 
-        args[name] = tmp;
+        args[i++] = tmp;
       }
-      return [pos, new DataType(args)];
+      return [pos, new DataType(...args)];
     },
     decodeLength: function (dataView, pos) {
       for (let name in Types) {

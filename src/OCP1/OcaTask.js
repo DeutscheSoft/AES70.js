@@ -10,14 +10,19 @@ import { OcaTimePTP } from './OcaTimePTP.js';
 import { OcaUint16 } from './OcaUint16.js';
 import { OcaUint32 } from './OcaUint32.js';
 
-export const OcaTask = Struct({
-  ID: OcaUint32,
-  Label: OcaString,
-  ProgramID: OcaLibVolIdentifier,
-  GroupID: OcaUint16,
-  TimeMode: OcaTimeMode,
-  TimeSourceONo: OcaUint32,
-  StartTime: OcaTimePTP,
-  Duration: OcaTimePTP,
-  ApplicationSpecificParameters: OcaBlob,
-});
+import { OcaTask as type } from '../types/OcaTask.js';
+
+export const OcaTask = Struct(
+  {
+    ID: OcaUint32,
+    Label: OcaString,
+    ProgramID: OcaLibVolIdentifier,
+    GroupID: OcaUint16,
+    TimeMode: OcaTimeMode,
+    TimeSourceONo: OcaUint32,
+    StartTime: OcaTimePTP,
+    Duration: OcaTimePTP,
+    ApplicationSpecificParameters: OcaBlob,
+  },
+  type
+);

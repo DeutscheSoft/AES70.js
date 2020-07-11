@@ -6,8 +6,13 @@ import { OcaBoolean } from './OcaBoolean.js';
 import { OcaOPath } from './OcaOPath.js';
 import { OcaUint16 } from './OcaUint16.js';
 
-export const OcaGrouperCitizen = Struct({
-  Index: OcaUint16,
-  ObjectPath: OcaOPath,
-  Online: OcaBoolean,
-});
+import { OcaGrouperCitizen as type } from '../types/OcaGrouperCitizen.js';
+
+export const OcaGrouperCitizen = Struct(
+  {
+    Index: OcaUint16,
+    ObjectPath: OcaOPath,
+    Online: OcaBoolean,
+  },
+  type
+);

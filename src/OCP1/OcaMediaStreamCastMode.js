@@ -1,13 +1,4 @@
 import { Enum8 } from './Enum8.js';
+import { OcaMediaStreamCastMode as type } from '../types/OcaMediaStreamCastMode.js';
 
-/**
- * Type of media endpoint: unicast or multicast.
- * @category Types
- * @class OcaMediaStreamCastMode
- * @extends Enum8
- */
-export const OcaMediaStreamCastMode = Enum8({
-  None: 0,
-  Unicast: 1,
-  Multicast: 2,
-});
+export const OcaMediaStreamCastMode = Enum8(type);

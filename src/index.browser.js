@@ -18,7 +18,6 @@ import {
     define_custom_class
   } from './Controller.js';
 
-import * as SP from './signature_parser.js';
 import * as Types from './Types.js';
 import * as RemoteControlClasses from './controller/ControlClasses.js';
 import { WebSocketConnection } from './controller/WebSocket.js';
@@ -48,6 +47,5 @@ export {
   decodeMessage,
   WebSocketConnection,
   RemoteDevice,
-  SP,
   controller,
 };
