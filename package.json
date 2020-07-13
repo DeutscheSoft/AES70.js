@@ -1,12 +1,12 @@
 {
   "name": "aes70",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "A controller library for the AES70 protocol.",
   "main": "lib/index.js",
   "module": "src/index.js",
   "browser": "src/index.browser.js",
   "browser:module": "src/index.browser.js",
-  "type" : "module",
+  "type": "module",
   "bin": {},
   "directories": {
     "lib": "lib"
