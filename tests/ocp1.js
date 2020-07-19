@@ -77,7 +77,7 @@ defineEncodeDecode('OcaaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ]
 {
   // bitset
   const Type = OcaDeviceState;
-  defineEncodeDecode('OcaDeviceState', Type, Type.Disabled, 2);
+  defineEncodeDecode('OcaDeviceState', Type, 2, 2);
 }
 
 {
