@@ -1,15 +1,26 @@
 import { createType } from './createType.js';
 
 export function Struct(Types, DataType) {
+  const countTypes = Object.keys(Types).length;
+
   if (!DataType) {
     DataType = class {
-      constructor(args) {
-        if (!args) args = {};
-        for (let name in Types) {
-          if (!Types.hasOwnProperty(name)) continue;
+      constructor(...args) {
+        if (args.length === countTypes) {
+          let i = 0;
+          for (const name in Types) {
+            if (!Types.hasOwnProperty(name)) continue;
 
-          this[name] = args[name];
-        }
+            this[name] = args[i++];
+          }
+        } else if (args.length === 1 && typeof args[0] === 'object') {
+          const o = args[0];
+          for (const name in Types) {
+            if (!Types.hasOwnProperty(name)) continue;
+
+            this[name] = o[name];
+          }
+        } else throw new TypeError('Unexpected arguments.');
       }
     };
   }
@@ -20,7 +31,7 @@ export function Struct(Types, DataType) {
     encodedLength: function (value) {
       let result = 0;
 
-      for (let name in Types) {
+      for (const name in Types) {
         if (!Types.hasOwnProperty(name)) continue;
         const Type = Types[name];
 
@@ -30,7 +41,7 @@ export function Struct(Types, DataType) {
       return result;
     },
     encodeTo: function (dataView, pos, value) {
-      for (let name in Types) {
+      for (const name in Types) {
         if (!Types.hasOwnProperty(name)) continue;
         const Type = Types[name];
 
@@ -41,7 +52,7 @@ export function Struct(Types, DataType) {
     decodeFrom: function (dataView, pos) {
       const args = new Array(Types.length);
       let i = 0;
-      for (let name in Types) {
+      for (const name in Types) {
         if (!Types.hasOwnProperty(name)) continue;
         const Type = Types[name];
         let tmp;
@@ -53,7 +64,7 @@ export function Struct(Types, DataType) {
       return [pos, new DataType(...args)];
     },
     decodeLength: function (dataView, pos) {
-      for (let name in Types) {
+      for (const name in Types) {
         if (!Types.hasOwnProperty(name)) continue;
         const Type = Types[name];
 
