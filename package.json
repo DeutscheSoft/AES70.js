@@ -14,7 +14,9 @@
   "scripts": {
     "test": "node tests/signatures.js",
     "prepublishOnly": "make",
-    "docs": "make docs"
+    "docs": "make docs",
+    "prettier": "cd prettier && npm run prettier",
+    "eslint": "./eslint/node_modules/.bin/eslint ."
   },
   "repository": {
     "type": "git",
