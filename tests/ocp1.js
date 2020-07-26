@@ -1,4 +1,4 @@
-import { defineEncodeDecode } from './helpers.js';
+import { define, defineEncodeDecode } from './helpers.js';
 
 import { OcaBoolean } from '../src/OCP1/OcaBoolean.js';
 import { OcaInt8 } from '../src/OCP1/OcaInt8.js';
@@ -15,11 +15,14 @@ import { OcaList2D } from '../src/OCP1/OcaList2D.js';
 import { OcaMap } from '../src/OCP1/OcaMap.js';
 import { Struct } from '../src/OCP1/Struct.js';
 import { Tuple } from '../src/OCP1/Tuple.js';
+import { OcaBlob } from '../src/OCP1/OcaBlob.js';
 import { Arguments } from '../src/OCP1/Arguments.js';
 import { String16 } from '../src/OCP1/String16.js';
 
 import { OcaClassicalFilterShape } from '../src/OCP1/OcaClassicalFilterShape.js';
 import { OcaDeviceState } from '../src/OCP1/OcaDeviceState.js';
+
+import { EncodedArguments } from '../src/OCP1/encoded_arguments.js';
 
 defineEncodeDecode('OcaFloat32', OcaFloat32, 0.5, 4);
 defineEncodeDecode('OcaFloat64', OcaFloat64, 2.4, 8);
@@ -89,3 +92,24 @@ defineEncodeDecode('OcaaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ]
   const Type = String16
   defineEncodeDecode('String16', Type, 'foobar', 2 + 2 * 6);
 }
+
+import { OcaEvent } from '../src/OCP1/OcaEvent.js';
+import { OcaMethod } from '../src/OCP1/OcaMethod.js';
+import { OcaNotificationDeliveryMode, } from '../src/OCP1/OcaNotificationDeliveryMode.js';
+
+define('OcaSubscriptionManager.AddSubscription', () => {
+  const encodedArguments = new EncodedArguments(
+    [ OcaEvent, OcaMethod, OcaBlob, OcaNotificationDeliveryMode, OcaBlob],
+    [
+      { EmitterONo: 1, EventID: { DefLevel: 1, EventIndex: 3 } },
+      { ONo: 1, MethodID: { DefLevel: 1, MethodIndex: 5 } },
+      new ArrayBuffer(0),
+      1,
+      new ArrayBuffer(0)
+    ]
+  );
+
+  const data = new DataView(new ArrayBuffer(encodedArguments.byteLength));
+
+  encodedArguments.encodeTo(data);
+});
