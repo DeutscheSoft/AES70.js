@@ -3,6 +3,7 @@ import { createType } from './createType.js';
 export const OcaBlob = createType({
   isConstantLength: false,
   encodedLength: function (value) {
+    if (value instanceof ArrayBuffer) value = new Uint8Array(value);
     if (!Array.isArray(value) && !(value instanceof Uint8Array))
       throw new TypeError('Expected Array or Uint8Array');
 
@@ -14,6 +15,8 @@ export const OcaBlob = createType({
     return 2 + length;
   },
   encodeTo: function (dataView, pos, value) {
+    if (value instanceof ArrayBuffer) value = new Uint8Array(value);
+
     const length = value.length;
 
     dataView.setUint16(pos, length);
