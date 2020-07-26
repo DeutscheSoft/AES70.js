@@ -11,7 +11,7 @@ export class EncodedArguments {
       for (let i = 0; i < encoders.length; i++) {
         byteLength += encoders[i].encodedLength(data[i]);
       }
-      this.byteLength = byteLength;
+      this._byteLength = byteLength;
     }
 
     return byteLength;
@@ -24,8 +24,12 @@ export class EncodedArguments {
   }
 
   encodeTo(dataView, pos) {
+    pos = pos | 0;
+
+    const { encoders, data } = this;
+
     for (let i = 0; i < encoders.length; i++) {
-      pos += encoders[i].encodeTo(dataView, pos, data[i]);
+      pos = encoders[i].encodeTo(dataView, pos, data[i]);
     }
 
     return pos;
