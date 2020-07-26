@@ -62,6 +62,9 @@ class PropertyChanges extends ObjectTest
       const min = a.item(1);
       const max = a.item(2);
 
+      // this happens with GetThreshold() in OcaDynamics
+      if (typeof val !== typeof min || typeof val !== typeof max) return;
+
       this.check(isEqual(sync[name], val),
                  "Property Sync value '%s' is not equal to current: %o vs. %o", name, sync[name], val);
 
