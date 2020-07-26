@@ -1,4 +1,5 @@
-import { error, CommandRrq } from '../OCA.js';
+import { error } from '../OCA.js';
+import { CommandRrq } from '../OCP1/commandrrq.js';
 
 import { OcaPropertyChangeType } from '../types/OcaPropertyChangeType.js';
 import { OcaPropertyID } from '../types/OcaPropertyID.js';

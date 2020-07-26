@@ -2,15 +2,16 @@ import {
     warn,
     log,
     error,
-    Connection,
-    Command,
-    CommandRrq,
-    Response,
-    Notification,
-    KeepAlive,
-    encodeMessage,
-    decodeMessage,
   } from './OCA.js';
+
+import { Connection } from './connection.js';
+import { Command } from './OCP1/command.js';
+import { CommandRrq } from './OCP1/commandrrq.js';
+import { Response } from './OCP1/response.js';
+import { Notification } from './OCP1/notification.js';
+import { KeepAlive } from './OCP1/keepalive.js';
+import { encodeMessage } from './OCP1/encode_message.js';
+import { decodeMessage } from './OCP1/decode_message.js';
 
 import {
     ClientConnection,

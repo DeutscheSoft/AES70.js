@@ -1,18 +1,19 @@
 import {
-    Connection,
-    Events,
-    Command,
-    CommandRrq,
-    Response,
-    Notification,
-    KeepAlive,
-    decodeMessage,
-    encodeMessage,
     log,
     warn,
     error,
     tree_to_rolemap
   } from './OCA.js';
+
+import { Events } from './events.js';
+import { Connection } from './connection.js';
+import { Response } from './OCP1/response.js';
+import { CommandRrq } from './OCP1/commandrrq.js';
+import { Command } from './OCP1/command.js';
+import { KeepAlive } from './OCP1/keepalive.js';
+import { Notification } from './OCP1/notification.js';
+import { encodeMessage } from './OCP1/encode_message.js';
+import { decodeMessage } from './OCP1/decode_message.js';
 
 import { Arguments } from './controller/arguments.js';
 
