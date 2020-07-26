@@ -16,7 +16,7 @@ export function RestWithOffset(offset) {
       dst.set(src);
       return pos + length;
     },
-    deocdeFrom: function (dataView, pos) {
+    decodeFrom: function (dataView, pos) {
       const length = dataView.byteLength - pos - offset;
 
       return [

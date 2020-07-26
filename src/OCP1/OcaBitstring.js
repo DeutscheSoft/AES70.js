@@ -62,7 +62,7 @@ export const OcaBitstring = createType({
 
     return encodeBitstring(dataView, pos, value);
   },
-  deocdeFrom: function (dataView, pos) {
+  decodeFrom: function (dataView, pos) {
     const length = dataView.getUint16(pos);
 
     pos += 2;
