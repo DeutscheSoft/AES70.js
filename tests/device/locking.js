@@ -1,6 +1,6 @@
-const ObjectTest = require('./test').ObjectTest;
-const RemoteError = require('../../lib/Controller').RemoteError;
-const OcaStatus = require('../../lib/Types').OcaStatus;
+import { ObjectTest } from './test.js';
+import { RemoteError } from '../../src/Controller.js';
+import { OcaStatus } from '../../src/types/OcaStatus.js';
 
 class Locking extends ObjectTest
 {
@@ -49,4 +49,4 @@ class Locking extends ObjectTest
   }
 }
 
-module.exports = [ Locking ];
+export default [ Locking ];

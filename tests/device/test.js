@@ -1,6 +1,6 @@
-const util = require('util');
+import { format } from 'util';
 
-class Test {
+export class Test {
   constructor(get_device)
   {
     this.get_device = get_device;
@@ -32,7 +32,7 @@ class Test {
 
   fatal(fmt, ...args)
   {
-    throw new Error(util.format(fmt, ...args));
+    throw new Error(format(fmt, ...args));
   }
 
   skip()
@@ -59,7 +59,7 @@ class Test {
   }
 }
 
-class ObjectTest extends Test
+export class ObjectTest extends Test
 {
   async run()
   {
@@ -106,7 +106,7 @@ function pad(str, n)
   return str;
 }
 
-class TestRunner
+export class TestRunner
 {
   constructor(get_device)
   {
@@ -130,7 +130,7 @@ class TestRunner
   {
     if (args.length)
     {
-      fmt = util.format(fmt, ...args);
+      fmt = format(fmt, ...args);
     }
 
     process.stdout.write(fmt);
@@ -176,9 +176,3 @@ class TestRunner
     });
   }
 }
-
-module.exports = {
-  Test: Test,
-  TestRunner: TestRunner,
-  ObjectTest: ObjectTest,
-};

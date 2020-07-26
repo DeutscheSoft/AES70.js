@@ -1,4 +1,5 @@
-const Test = require('./test').Test;
+import { Test } from './test.js';
+import { UDPConnection } from '../../src/controller/udp_connection.js';
 
 function wait(n)
 {
@@ -21,8 +22,6 @@ class IdleTime extends Test {
     this.check(connection.rx_idle_time() < 1500, "RX Idle time too big: %o", connection.rx_idle_time());
   }
 }
-
-const UDPConnection = require('../../lib/controller/UDP').UDPConnection;
 
 class RemoteClose extends Test {
   run()
@@ -48,4 +47,4 @@ class RemoteClose extends Test {
   }
 }
 
-module.exports = [ IdleTime, RemoteClose ];
+export default [ IdleTime, RemoteClose ];

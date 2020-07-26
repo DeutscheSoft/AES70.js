@@ -1,16 +1,21 @@
 import { argv, exit } from 'process';
 import { createServer, Socket } from 'net';
 import { RemoteDevice } from '../src/index.js';
-const TCPConnection = require('../lib/controller/TCP').TCPConnection;
-const UDPConnection = require('../lib/controller/UDP').UDPConnection;
-const WebSocketConnection = require('../lib/controller/WebSocket').WebSocketConnection;
-const test = require('./device/test');
-const url = require('url');
+import { TCPConnection } from '../src/controller/tcp_connection.js';
+import { UDPConnection } from '../src/controller/udp_connection.js';
+import { WebSocketConnection } from '../src/controller/websocket_connection.js';
+import { TestRunner } from './device/test.js';
+import { parse } from 'url';
+
+import CheckTreeTests from './device/check_tree.js';
+import KeepaliveTests from './device/keepalive.js';
+import LockingTests from './device/locking.js';
+import PropertyChangesTests from './device/property_changes.js';
 
 if (argv.length < 3)
 {
   console.log('Usage: node device.js <ip>:<port> ws://<ip>:<port>');
-  return;
+  exit(1);
 }
 
 const delay = 4;
@@ -118,8 +123,8 @@ class FragmentationConnection {
 
 class FragmentationProxy {
   constructor(target) {
-    this.server = net.createServer((connection) => {
-      const socket = new net.Socket();
+    this.server = createServer((connection) => {
+      const socket = new Socket();
       socket.connect(target);
       const fragmenter = new FragmentationConnection(connection, socket);
     });
@@ -153,15 +158,18 @@ class FragmentationProxy {
 
 function get_runner(get_device)
 {
-  const test_runner = new test.TestRunner(get_device);
+  const test_runner = new TestRunner(get_device);
 
-  //test_runner.add(test.Test);
-  const tests = require('./device/check_tree').concat(
-    require('./device/property_changes'),
-    require('./device/locking'),
-    require('./device/keepalive'),
-    require('./device/custom_class')
-    );
+  const tests = [
+    CheckTreeTests,
+    //KeepaliveTests,
+    LockingTests,
+    PropertyChangesTests
+  ].flat();
+
+  // require('./device/property_changes'),
+  // require('./device/locking'),
+  // require('./device/custom_class')
   test_runner.add(...tests);
 
   return test_runner;
@@ -221,7 +229,7 @@ async function run(targets)
         console.log("");
         console.log("Testing device at %o (with packet fragmentation):", remote);
 
-        const target = url.parse(remote);
+        const target = parse(remote);
 
         const fragmentation = new FragmentationProxy({
           host: target.hostname,

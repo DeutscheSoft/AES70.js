@@ -1,8 +1,32 @@
-const ObjectTest = require('./test').ObjectTest;
-const Arguments = require('../../lib/signature_parser').Arguments;
-const RemoteError = require('../../lib/Controller').RemoteError;
-const OcaStatus = require('../../lib/Types').OcaStatus;
-const OcaPropertyChangeType = require('../../lib/Types').OcaPropertyChangeType;
+import { ObjectTest } from './test.js';
+import { Arguments } from '../../src/controller/arguments.js';
+import { RemoteError } from '../../src/Controller.js';
+import { OcaStatus } from '../../src/types/OcaStatus.js';
+import { OcaPropertyChangeType } from '../../src/types/OcaPropertyChangeType.js';
+
+function isEqual(a, b) {
+  if (a === b) return true;
+
+  if (Array.isArray(a)) {
+    if (!Array.isArray(b)) return false;
+    if (a.length !== b.length) return false;
+
+    return a.every((element, i) => isEqual(element, b[i]));
+  }
+
+  if (typeof a === 'object') {
+    if (typeof b !== 'object') return false;
+    if (a.constructor !== b.constructor) return false;
+
+    for (let name in a) {
+      if (a[name] !== b[name]) return false;
+    }
+
+    return true;
+  }
+
+  return false;
+}
 
 class PropertyChanges extends ObjectTest
 {
@@ -28,7 +52,7 @@ class PropertyChanges extends ObjectTest
       try {
         a = await getter();  
       } catch (e) {
-        if (RemoteError.check_status(e, OcaStatus.NotImplemented)) return;
+        if (e instanceof RemoteError && e.status === OcaStatus.NotImplemented) return;
         throw e;
       }
       
@@ -38,7 +62,7 @@ class PropertyChanges extends ObjectTest
       const min = a.item(1);
       const max = a.item(2);
 
-      this.check(sync[name] === val,
+      this.check(isEqual(sync[name], val),
                  "Property Sync value '%s' is not equal to current: %o vs. %o", name, sync[name], val);
 
       const test_set = async (to) => {
@@ -48,7 +72,7 @@ class PropertyChanges extends ObjectTest
           if (!change_type.isEqual(OcaPropertyChangeType.CurrentChanged))
             return;
 
-          this.check(value === to, "Received event for different value change: %o vs. %o", to, value);
+          this.check(isEqual(value, to), "Received event for different value change: %o vs. %o", to, value);
 
           called = true;
         };
@@ -58,7 +82,7 @@ class PropertyChanges extends ObjectTest
         try {
           await setter(to);
         } catch (e) {
-          if (RemoteError.check_status(e, OcaStatus.NotImplemented)) return;
+          if (e instanceof RemoteError && e.status === OcaStatus.NotImplemented) return;
           throw e;
         }
 
@@ -68,9 +92,9 @@ class PropertyChanges extends ObjectTest
 
         this.check(called, "PropertyChanged event was not received for '%s'", name);
 
-        this.check(to === tmp,
+        this.check(isEqual(to, tmp),
                    "Property '%s' set to %o succeeded but get returned %o", name, to, tmp);
-        this.check(to === sync[name],
+        this.check(isEqual(to, sync[name]),
                    "Property '%s' set to %o succeeded but sync contains %o", name, to, sync[name]);
       };
 
@@ -84,4 +108,4 @@ class PropertyChanges extends ObjectTest
   }
 }
 
-module.exports = [ PropertyChanges ];
+export default [ PropertyChanges ];

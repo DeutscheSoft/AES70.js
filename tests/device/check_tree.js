@@ -1,4 +1,4 @@
-const ObjectTest = require('./test').ObjectTest;
+import { ObjectTest } from './test.js';
 
 class CheckTree extends ObjectTest {
   async check_object(o, parent, i) {
@@ -98,4 +98,4 @@ class CheckRoleMap extends ObjectTest {
   }
 }
 
-module.exports = [ CheckTree, CheckPath, CheckRoleMap ];
+export default [ CheckTree, CheckPath, CheckRoleMap ];
