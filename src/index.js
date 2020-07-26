@@ -19,9 +19,9 @@ import {
   } from './Controller.js';
 
 import * as RemoteControlClasses from './controller/ControlClasses.js';
-import { WebSocketConnection } from './controller/WebSocket.js';
-import { TCPConnection } from './controller/TCP.js';
-import { UDPConnection } from './controller/UDP.js';
+import { WebSocketConnection } from './controller/websocket_connection.js';
+import { TCPConnection } from './controller/tcp_connection.js';
+import { UDPConnection } from './controller/udp_connection.js';
 
 const controller = {
   Connection: ClientConnection,

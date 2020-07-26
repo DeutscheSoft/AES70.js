@@ -7,7 +7,7 @@ export function Enum(values) {
 
       for (const name in values) {
         if (!values.hasOwnProperty(name)) continue;
-        names[values[name]] = name;
+        names.set(values[name], name);
       }
     }
 
