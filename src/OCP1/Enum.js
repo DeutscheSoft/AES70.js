@@ -29,10 +29,11 @@ export function Enum(DataType, Base) {
     },
   });
 
-
   for (const name in DataType.values()) {
     Object.defineProperty(type, name, {
-      get: function() { return DataType[name]; },
+      get: function () {
+        return DataType[name];
+      },
       enumerable: false,
       configurable: true,
     });

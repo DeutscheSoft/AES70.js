@@ -15,8 +15,7 @@ export function Enum(values) {
   }
 
   function getValue(name) {
-    if (values.hasOwnProperty(name))
-      return values[name];
+    if (values.hasOwnProperty(name)) return values[name];
   }
 
   let blueprints = null;
@@ -39,7 +38,7 @@ export function Enum(values) {
 
   const result = class {
     constructor(value) {
-      if (typeof(value) === 'string') {
+      if (typeof value === 'string') {
         if (!values.hasOwnProperty(value))
           throw new Error('No such enum value.');
 
@@ -66,8 +65,7 @@ export function Enum(values) {
     static getName(value) {
       const name = getName(value);
 
-      if (name === void 0)
-        throw new Error('No such enum value.');
+      if (name === void 0) throw new Error('No such enum value.');
 
       return name;
     }
@@ -75,8 +73,7 @@ export function Enum(values) {
     static getValue(name) {
       const value = getValue(name);
 
-      if (value === void 0)
-        throw new Error('No such enum value.');
+      if (value === void 0) throw new Error('No such enum value.');
 
       return value;
     }
@@ -89,7 +86,9 @@ export function Enum(values) {
   for (const name in values) {
     if (!values.hasOwnProperty(name)) continue;
     Object.defineProperty(result, name, {
-      get: function() { return new this(values[name]); },
+      get: function () {
+        return new this(values[name]);
+      },
       enumerable: false,
       configurable: true,
     });
