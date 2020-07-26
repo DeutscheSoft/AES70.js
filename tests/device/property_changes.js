@@ -68,8 +68,8 @@ class PropertyChanges extends ObjectTest
       const test_set = async (to) => {
         let called = false;
 
-        const cb = (value, change_type) => {
-          if (!change_type.isEqual(OcaPropertyChangeType.CurrentChanged))
+        const cb = (value, changeType) => {
+          if (changeType !== OcaPropertyChangeType.CurrentChanged)
             return;
 
           this.check(isEqual(value, to), "Received event for different value change: %o vs. %o", to, value);
