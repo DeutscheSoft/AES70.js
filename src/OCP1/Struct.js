@@ -9,14 +9,14 @@ export function Struct(Types, DataType) {
         if (args.length === countTypes) {
           let i = 0;
           for (const name in Types) {
-            if (!Types.hasOwnProperty(name)) continue;
+            if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
 
             this[name] = args[i++];
           }
         } else if (args.length === 1 && typeof args[0] === 'object') {
           const o = args[0];
           for (const name in Types) {
-            if (!Types.hasOwnProperty(name)) continue;
+            if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
 
             this[name] = o[name];
           }
@@ -32,7 +32,7 @@ export function Struct(Types, DataType) {
       let result = 0;
 
       for (const name in Types) {
-        if (!Types.hasOwnProperty(name)) continue;
+        if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
         const Type = Types[name];
 
         result += Type.encodedLength(value[name]);
@@ -42,7 +42,7 @@ export function Struct(Types, DataType) {
     },
     encodeTo: function (dataView, pos, value) {
       for (const name in Types) {
-        if (!Types.hasOwnProperty(name)) continue;
+        if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
         const Type = Types[name];
 
         pos = Type.encodeTo(dataView, pos, value[name]);
@@ -53,7 +53,7 @@ export function Struct(Types, DataType) {
       const args = new Array(Types.length);
       let i = 0;
       for (const name in Types) {
-        if (!Types.hasOwnProperty(name)) continue;
+        if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
         const Type = Types[name];
         let tmp;
 
@@ -65,7 +65,7 @@ export function Struct(Types, DataType) {
     },
     decodeLength: function (dataView, pos) {
       for (const name in Types) {
-        if (!Types.hasOwnProperty(name)) continue;
+        if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
         const Type = Types[name];
 
         pos = Type.decodeLength(dataView, pos);

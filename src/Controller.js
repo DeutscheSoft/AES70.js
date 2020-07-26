@@ -1,5 +1,4 @@
 import {
-    log,
     warn,
     error,
     tree_to_rolemap
@@ -8,12 +7,9 @@ import {
 import { Events } from './events.js';
 import { Connection } from './connection.js';
 import { Response } from './OCP1/response.js';
-import { CommandRrq } from './OCP1/commandrrq.js';
-import { Command } from './OCP1/command.js';
 import { KeepAlive } from './OCP1/keepalive.js';
 import { Notification } from './OCP1/notification.js';
 import { encodeMessage } from './OCP1/encode_message.js';
-import { decodeMessage } from './OCP1/decode_message.js';
 
 import { Arguments } from './controller/arguments.js';
 
@@ -91,22 +87,6 @@ export function define_custom_class(name, level, class_id, class_version, base, 
   }
 
   return make_control_class(name, level, class_id, class_version, base, methods, properties, events);
-}
-
-function timeout(p, time)
-{
-  return new Promise(function(resolve, reject) {
-    const id = setTimeout(function() { reject(new Error("timeout")); }, time);
-    p.then(
-      function(result) {
-        clearTimeout(id);
-        resolve(result);
-      },
-      function(err) {
-        clearTimeout(id);
-        reject(err);
-      });
-  });
 }
 
 function eventToKey(event) {
@@ -202,7 +182,7 @@ export class ClientConnection extends Connection
   get_new_subscriber(callback)
   {
     let id;
-    while (this.subscribers.has(id = 1 + (Math.random()*0xffff)|0)) {}
+    while (this.subscribers.has(id = 1 + (Math.random()*0xffff)|0));
     this.subscribers.set(id, callback);
     return {
       ONo: id,
@@ -467,10 +447,10 @@ export class RemoteDevice extends Events
 
   find_best_class(id)
   {
-    var ret;
     if (typeof(id) === "object" && id.ClassID) id = id.ClassID;
     while (id.length) {
-      if (ret = this.find_class_by_id(id)) return ret;
+      const result = this.find_class_by_id(id);
+      if (result) return result;
       id = id.substr(0, id.length-1);
     }
 
@@ -512,7 +492,7 @@ export class RemoteDevice extends Events
   {
     if (typeof(id) === "object" && id.ClassID) id = id.ClassID;
     const modules = this.modules;
-    for (var i = modules.length - 1; i >= 0; i--) {
+    for (let i = modules.length - 1; i >= 0; i--) {
       const ret = modules[i][id];
       if (ret) return ret;
     }
@@ -522,7 +502,7 @@ export class RemoteDevice extends Events
   allocate(c, ono)
   {
     if (typeof(ono) === "object") ono = ono.valueOf();
-    var objects = this.objects;
+    const objects = this.objects;
     if (!objects.has(ono)) {
       objects.set(ono, new c(ono, this));
     }
@@ -549,7 +529,7 @@ export class RemoteDevice extends Events
   {
     const get_members = (block) => {
       return block.GetMembers().then((a) => {
-        var ret = [];
+        const ret = [];
 
         a = a.map(this.resolve_object, this);
 

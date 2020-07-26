@@ -2,6 +2,8 @@ import {
     StringDecoder
   } from 'string_decoder';
 
+import { Buffer } from 'buffer';
+
 const D = new StringDecoder();
 
 export function buffer_to_utf8(b) {

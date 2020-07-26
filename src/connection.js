@@ -51,12 +51,12 @@ export class Connection extends Events
           for (i = start, len = 0; i < out.length && (!len || len + out[i].byteLength < this.batch); i++)
               len += out[i].byteLength;
 
-          let buf = new ArrayBuffer(len);
-          let tmp = new Uint8Array(buf);
+          const buf = new ArrayBuffer(len);
+          const a8 = new Uint8Array(buf);
 
           for (let j = start, len = 0; j < i; j++)
           {
-            tmp.set(new Uint8Array(out[j]), len);
+            a8.set(new Uint8Array(out[j]), len);
             len += out[j].byteLength;
           }
 

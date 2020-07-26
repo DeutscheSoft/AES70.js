@@ -1,7 +1,3 @@
-import { OcaEvent } from './OCP1/OcaEvent.js';
-
-import { EncodedArguments } from './OCP1/encoded_arguments.js';
-
 export function warn(...args) {
   try {
     console.warn(...args);
@@ -25,7 +21,7 @@ export function tree_to_rolemap(tree, s)
   const roles = new Map();
   if (!s) s = "/";
 
-  let tasks = [];
+  const tasks = [];
 
   const fetch_role = (o) => {
     if (Array.isArray(o))
@@ -73,7 +69,7 @@ export function tree_to_rolemap(tree, s)
           let n = 1;
           for (let i = 0; i < o.length; i++)
           {
-            let nrole = role + n;
+            const nrole = role + n;
             while (local_roles.has(nrole)) { n++; }
             local_roles.set(nrole, o[i]);
             local_roles.set(o[i], nrole);

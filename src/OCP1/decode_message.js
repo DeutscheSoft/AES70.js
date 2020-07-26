@@ -19,7 +19,7 @@ export function decodeMessage(data, pos, ret)
   pos = pos|0;
   if (data.getUint8(pos) != 0x3b) throw new Error("Bad sync value.");
   pos ++;
-  const protocolVersion = data.getUint16(pos);
+  //const protocolVersion = data.getUint16(pos);
   pos += 2;
   const messageSize = data.getUint32(pos);
   pos += 4;

@@ -25,7 +25,6 @@ export class Notification extends PDU
 
   encode_to(dst, pos)
   {
-    var len;
     dst.setUint32(pos, this.encoded_length());
     pos += 4;
     dst.setUint32(pos, this.target);
@@ -36,14 +35,17 @@ export class Notification extends PDU
     pos += 2;
     dst.setUint8(pos, this.param_count);
     pos ++;
-    if (this.context && (len = this.context.byteLength)) {
+    const context = this.context;
+    if (context) {
+      const len = context.byteLength;
+
       dst.setUint16(len);
       pos += 2;
-      new Uint8Array(dst.buffer).set(new Uint8Array(this.context), dst.byteOffset+pos);
-      pos += len;
-    } else {
-      dst.setUint16(pos, 0);
-      pos += 2;
+      if (len > 0)
+      {
+        new Uint8Array(dst.buffer).set(new Uint8Array(this.context), dst.byteOffset+pos);
+        pos += len;
+      }
     }
     dst.setUint32(pos, this.event.EmitterONo);
     pos += 4;
@@ -70,7 +72,7 @@ export class Notification extends PDU
 
   decode_from(data, pos, len)
   {
-    var len = data.getUint32(pos);
+    let len = data.getUint32(pos);
     pos += 4;
     this.target = data.getUint32(pos);
     pos += 4;
@@ -80,7 +82,7 @@ export class Notification extends PDU
     pos += 2;
     this.param_count = data.getUint8(pos);
     pos ++;
-    var context_length = data.getUint16(pos);
+    const context_length = data.getUint16(pos);
     pos += 2;
     if (context_length) {
       this.context = data.buffer.slice(data.byteOffset+pos, data.byteOffset+pos+context_length);

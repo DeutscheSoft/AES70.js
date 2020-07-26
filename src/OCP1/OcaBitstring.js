@@ -27,7 +27,7 @@ function encodeBitstring(dataView, pos, from) {
     byteLength
   );
 
-  for (let i = (j = 0); j < byteLength; j++) {
+  for (let i = 0, j = 0; j < byteLength; j++) {
     let tmp = 0;
 
     for (let k = 0; k < 8 && i < len; k++, i++) {

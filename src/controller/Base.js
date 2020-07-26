@@ -6,7 +6,6 @@ import { OcaPropertyID } from '../types/OcaPropertyID.js';
 import { OcaEvent } from '../types/OcaEvent.js';
 import { OcaEventID } from '../types/OcaEventID.js';
 
-import { OcaPropertyChangeType as OcaPropertyChangeTypeDecoder } from '../OCP1/OcaPropertyChangeType.js';
 import { makeEncoder } from '../OCP1/makeEncoder.js';
 import { Arguments } from './arguments.js';
 import { EncodedArguments } from '../OCP1/encoded_arguments.js';
@@ -50,8 +49,8 @@ export class Property {
    */
   getter(o, no_bind) {
     let name = this.name,
-      i = 0,
-      aliases = this.aliases;
+      i = 0;
+    const aliases = this.aliases;
 
     do {
       if (this.static) {
@@ -90,8 +89,8 @@ export class Property {
     if (this.readonly || this.static) return null;
 
     let name = this.name,
-      i = 0,
-      aliases = this.aliases;
+      i = 0;
+    const aliases = this.aliases;
 
     do {
       const fun = o['Set' + name];
@@ -114,8 +113,8 @@ export class Property {
    */
   event(o) {
     let name = this.name,
-      i = 0,
-      aliases = this.aliases;
+      i = 0;
+    const aliases = this.aliases;
 
     do {
       const event = o['On' + name + 'Changed'];
@@ -142,7 +141,6 @@ export class Property {
   subscribe(o, cb) {
     const event = this.event(o);
     const getter = this.getter(o);
-    const a = [];
 
     if (event) event.subscribe(cb).catch(error);
 
@@ -261,7 +259,7 @@ export class PropertySync {
     if (this.synchronized) return Promise.resolve();
 
     let index = 0;
-    let tasks = [];
+    const tasks = [];
 
     this.o.get_properties().forEach((prop) => {
       const getter = prop.getter(this.o);
@@ -589,10 +587,7 @@ export class PropertyEvent extends BaseEvent {
       if (id.DefLevel !== this.id.DefLevel ||
           id.PropertyIndex !== this.id.PropertyIndex) return;
 
-      let pos = 0;
-      let value;
-
-      [ pos, value ] = propertyType[0].decodeFrom(dataView, 0);
+      const value = propertyType[0].decodeFrom(dataView, 0)[1];
 
       this.handlers.forEach(function (callback) {
         try {

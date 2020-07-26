@@ -13,8 +13,8 @@ export function encodeMessage(a)
     len += tmp.encoded_length();
   }
 
-  var buf = new ArrayBuffer(len);
-  var dst = new DataView(buf);
+  const buf = new ArrayBuffer(len);
+  const dst = new DataView(buf);
 
   let pos = 0;
 

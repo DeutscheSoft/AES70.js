@@ -1,4 +1,5 @@
 import { createSocket } from 'dgram';
+import { Buffer } from 'buffer';
 
 import { lookup } from 'dns';
 
@@ -118,7 +119,7 @@ export class UDPConnection extends ClientConnection {
     this.command_handles.set(id, h);
 
     if (this.retry_interval > 0) {
-      let tid;
+      let tid = -1;
       let retry_count = this.retry_count;
 
       tid = setInterval(() => {

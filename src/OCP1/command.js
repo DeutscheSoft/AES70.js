@@ -54,9 +54,9 @@ export class Command extends PDU
     return 17 + (this.param_count ? this.parameters.byteLength : 0);
   }
 
-  decode_from(data, pos, len)
+  decode_from(data, pos, data_len)
   {
-    var len = data.getUint32(pos);
+    let len = data.getUint32(pos);
     pos += 4;
     this.handle = data.getUint32(pos);
     pos += 4;
@@ -72,7 +72,7 @@ export class Command extends PDU
     if (len < 0) throw new Error("Bad Command Length.");
     if (len > 0) {
       if (!this.param_count)
-            warn("Decoding Command with parameterCount=0 but %o bytes of parameters", len);
+        throw new Error('Expected no parameter bytes.');
       this.parameters = data.buffer.slice(data.byteOffset+pos, data.byteOffset+pos+len);
       pos += len;
     }

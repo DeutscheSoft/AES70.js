@@ -1,4 +1,5 @@
 import { PDU } from './pdu.js';
+import { EncodedArguments } from './encoded_arguments.js';
 
 /**
  * Response packet.
@@ -26,7 +27,7 @@ export class Response extends PDU
 
   decode_from(data, pos, data_len)
   {
-    var len = data.getUint32(pos);
+    let len = data.getUint32(pos);
     pos += 4;
     this.handle = data.getUint32(pos);
     pos += 4;
@@ -38,7 +39,7 @@ export class Response extends PDU
     if (len < 0) throw new Error("Bad Response length.");
     if (len > 0) {
       if (!this.param_count)
-            warn("Decoding response with parameterCount=0 but %o bytes of parameters", len);
+            throw new Error("Decoding response with parameterCount=0 but %o bytes of parameters", len);
       this.parameters = data.buffer.slice(data.byteOffset+pos, data.byteOffset+pos+len);
       pos += len;
     }

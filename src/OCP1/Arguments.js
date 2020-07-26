@@ -1,3 +1,4 @@
+import { isTypedArray } from './is_typed_array.js';
 import { createType } from './createType.js';
 
 export function Arguments(...Types) {
@@ -28,7 +29,7 @@ export function Arguments(...Types) {
       return pos;
     },
     decodeFrom: function (dataView, pos) {
-      let result = new Array(Types.length);
+      const result = new Array(Types.length);
 
       for (let i = 0; i < Types.length; i++) {
         const Type = Types[i];

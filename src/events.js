@@ -24,7 +24,7 @@ export class Events
       try {
         cb.apply(this, args);
       } catch (e) {
-        warn("ERROR when calling %o: %o", cb, e);
+        console.warn("ERROR when calling %o: %o", cb, e);
       }
     });
   }
@@ -59,12 +59,11 @@ export class Events
    */
   removeEventListener(name, cb)
   {
-    let handlers = this.event_handlers.get(name);
+    const handlers = this.event_handlers.get(name);
 
     if (!handlers || !handlers.has(cb))
     {
-      warn("removeEventListeners(): %o not installed.", cb);
-      return;
+      throw new Error('removeEventListeners(): not installed.');
     }
 
     handlers.delete(cb);

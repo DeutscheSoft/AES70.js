@@ -47,7 +47,7 @@ export const OcaString = createType({
 
     pos += 2;
 
-    const length = utf8_codepoint_length(data, pos, codepoints);
+    const length = utf8_codepoint_length(dataView, pos, codepoints);
 
     return pos + length;
   },

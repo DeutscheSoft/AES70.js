@@ -1,5 +1,13 @@
 import { ClientConnection } from '../Controller.js';
 
+function getWebSocket() {
+  if (typeof WebSocket !== 'undefined') {
+    return Promise.resolve(WebSocket);
+  } else {
+    return import('ws').then((module) => module.WebSocket);
+  }
+}
+
 /**
  * {@link ClientConnection} subclass which implements OCP.1 with WebSocket
  * transport.
@@ -32,24 +40,19 @@ export class WebSocketConnection extends ClientConnection {
    * @returns {Promise<WebSocketConnection>} - The connection.
    */
   static connect(options) {
-    return new Promise((resolve, reject) => {
-      let ws;
-      if (typeof WebSocket !== 'undefined') {
-        ws = new WebSocket(options.url);
-      } else {
-        const WebSocket = require('ws');
-        ws = new WebSocket(options.url);
-      }
+    return getWebSocket().then((WebSocket) => {
+      return new Promise((resolve, reject) => {
+        const ws = new WebSocket(options.url);
+        const on_error = function (e) {
+          reject(e);
+        };
 
-      const on_error = function (e) {
-        reject(e);
-      };
-
-      ws.addEventListener('open', () => {
-        ws.removeEventListener('error', on_error);
-        resolve(new this(ws, options));
+        ws.addEventListener('open', () => {
+          ws.removeEventListener('error', on_error);
+          resolve(new this(ws, options));
+        });
+        ws.addEventListener('error', on_error);
       });
-      ws.addEventListener('error', on_error);
     });
   }
 

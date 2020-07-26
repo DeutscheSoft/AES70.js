@@ -1,4 +1,4 @@
-export var utf8_to_buffer, buffer_to_utf8, utf8_encoded_length;
+let utf8_to_buffer, buffer_to_utf8, utf8_encoded_length;
 
 function encode_utf8(s) {
   return unescape(encodeURIComponent(s));
@@ -9,11 +9,11 @@ function decode_utf8(s) {
 }
 
 function buffer_to_string(b) {
-  var a = new Uint8Array(b);
-  var tmp = [];
-  var chunksize = 128;
+  const a = new Uint8Array(b);
+  const tmp = [];
+  const chunksize = 128;
 
-  for (var i = 0; i < a.length; i+= chunksize) {
+  for (let i = 0; i < a.length; i+= chunksize) {
     tmp.push(String.fromCharCode.apply(String, a.subarray(i, i+chunksize)));
   }
 
@@ -21,9 +21,10 @@ function buffer_to_string(b) {
 }
 
 function string_to_buffer(s) {
-  var len = s.length;
-  var buf = new Uint8Array(len);
-  for (var i=0; i < len; i++) {
+  const len = s.length;
+  const buf = new Uint8Array(len);
+
+  for (let i=0; i < len; i++) {
     buf[i] = s.charCodeAt(i);
   }
   return buf.buffer;
@@ -49,8 +50,10 @@ if (typeof window !== 'undefined' && 'TextEncoder' in window && 'TextDecoder' in
   }
 }
 
+export { utf8_to_buffer, buffer_to_utf8, utf8_encoded_length };
+
 export function utf8_codepoint_length(buf, pos, codepoints) {
-  var tmp = pos;
+  const start = pos;
 
   /* From table 3-6 in the Unicode standard 4.0: Well-Formed UTF-8
    * Byte Sequences
@@ -68,7 +71,7 @@ export function utf8_codepoint_length(buf, pos, codepoints) {
    */
 
   while (codepoints--) {
-    var c = buf.getUint8(pos);
+    const c = buf.getUint8(pos);
     pos ++;
     if (c <= 0x7f) continue;
     if (c <  0xc2)
@@ -83,7 +86,7 @@ export function utf8_codepoint_length(buf, pos, codepoints) {
     throw new Error("Invalid UTF8 sequence.");
   }
 
-  return pos - tmp;
+  return pos - start;
 }
 
 export function count_codepoints(s)

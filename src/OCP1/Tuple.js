@@ -27,7 +27,7 @@ export function Tuple(...Types) {
       return pos;
     },
     decodeFrom: function (dataView, pos) {
-      let result = new Array(Length);
+      const result = new Array(Length);
 
       for (let i = 0; i < Length; i++) {
         let tmp;
