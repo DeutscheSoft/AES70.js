@@ -5,6 +5,7 @@ import { OcaPropertyID } from '../types/OcaPropertyID.js';
 import { OcaEvent } from '../types/OcaEvent.js';
 import { OcaEventID } from '../types/OcaEventID.js';
 
+import { OcaPropertyChangeType as OcaPropertyChangeTypeDecoder } from '../OCP1/OcaPropertyChangeType.js';
 import { makeEncoder } from '../OCP1/makeEncoder.js';
 import { Arguments } from './arguments.js';
 import { EncodedArguments } from '../OCP1/encoded_arguments.js';
@@ -268,8 +269,8 @@ export class PropertySync {
 
       const event = prop.event(this.o);
 
-      const change_handler = function (index, value, change_type) {
-        if (!change_type.isEqual(OcaPropertyChangeType.CurrentChanged)) return;
+      const change_handler = function (index, value, changeType) {
+        if (changeType !== OcaPropertyChangeType.CurrentChanged) return;
 
         this.values[index] = value;
       };
@@ -537,11 +538,15 @@ export class Event extends BaseEvent {
     super(object, id, argumentTypes);
     this.callback = (notification) => {
       if (!this.handlers.size) return;
-      throw new Error('FIXME');
-      const args =
-        signature && notification.param_count
-          ? signature.low_decode(new DataView(notification.parameters))
-          : [];
+
+      const args = new Array(argumentTypes.length);
+      const data = new DataView(notification.parameters);
+
+      for (let pos = 0, i = 0; i < argumentTypes.length; i++) {
+        let tmp;
+        [ pos, tmp ] = argumentTypes[i].decodeFrom(data, pos);
+        args[i] = tmp;
+      }
       const object = this.object;
       this.handlers.forEach(function (callback) {
         try {
@@ -577,18 +582,20 @@ export class Event extends BaseEvent {
  * @extends BaseEvent
  */
 export class PropertyEvent extends BaseEvent {
-  constructor(object, id, signature) {
-    super(object, id, signature);
-    this.callback = (id, data) => {
-      if (!id.isEqual(this.id)) return;
-      const change_type = change_type_signature.decode(
-        new DataView(data, data.byteLength - 1)
-      );
-      const value = signature.decode(new DataView(data));
+  constructor(object, id, propertyType) {
+    super(object, id, propertyType);
+    this.callback = (id, dataView, changeType) => {
+      if (id.DefLevel !== this.id.DefLevel ||
+          id.PropertyIndex !== this.id.PropertyIndex) return;
+
+      let pos = 0;
+      let value;
+
+      [ pos, value ] = propertyType[0].decodeFrom(dataView, 0);
 
       this.handlers.forEach(function (callback) {
         try {
-          callback.call(object, value, change_type, id);
+          callback.call(object, value, changeType, id);
         } catch (e) {
           error(e);
         }
