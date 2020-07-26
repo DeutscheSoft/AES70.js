@@ -20,20 +20,20 @@ import {
     make_control_class
   } from './controller/Base.js';
 
-import { OcaDeviceManager } from './controller/OcaDeviceManager.js';
-import { OcaSecurityManager } from './controller/OcaSecurityManager.js';
-import { OcaFirmwareManager } from './controller/OcaFirmwareManager.js';
-import { OcaSubscriptionManager } from './controller/OcaSubscriptionManager.js';
-import { OcaPowerManager } from './controller/OcaPowerManager.js';
-import { OcaNetworkManager } from './controller/OcaNetworkManager.js';
-import { OcaMediaClockManager } from './controller/OcaMediaClockManager.js';
-import { OcaLibraryManager } from './controller/OcaLibraryManager.js';
-import { OcaAudioProcessingManager } from './controller/OcaAudioProcessingManager.js';
-import { OcaDeviceTimeManager } from './controller/OcaDeviceTimeManager.js';
-import { OcaTaskManager } from './controller/OcaTaskManager.js';
-import { OcaCodingManager } from './controller/OcaCodingManager.js';
-import { OcaDiagnosticManager } from './controller/OcaDiagnosticManager.js';
-import { OcaBlock } from './controller/OcaBlock.js';
+import { OcaDeviceManager } from './controller/ControlClasses/OcaDeviceManager.js';
+import { OcaSecurityManager } from './controller/ControlClasses/OcaSecurityManager.js';
+import { OcaFirmwareManager } from './controller/ControlClasses/OcaFirmwareManager.js';
+import { OcaSubscriptionManager } from './controller/ControlClasses/OcaSubscriptionManager.js';
+import { OcaPowerManager } from './controller/ControlClasses/OcaPowerManager.js';
+import { OcaNetworkManager } from './controller/ControlClasses/OcaNetworkManager.js';
+import { OcaMediaClockManager } from './controller/ControlClasses/OcaMediaClockManager.js';
+import { OcaLibraryManager } from './controller/ControlClasses/OcaLibraryManager.js';
+import { OcaAudioProcessingManager } from './controller/ControlClasses/OcaAudioProcessingManager.js';
+import { OcaDeviceTimeManager } from './controller/ControlClasses/OcaDeviceTimeManager.js';
+import { OcaTaskManager } from './controller/ControlClasses/OcaTaskManager.js';
+import { OcaCodingManager } from './controller/ControlClasses/OcaCodingManager.js';
+import { OcaDiagnosticManager } from './controller/ControlClasses/OcaDiagnosticManager.js';
+import { OcaBlock } from './controller/ControlClasses/OcaBlock.js';
 
 import { Classes } from './controller/ControlClasses.js';
 
