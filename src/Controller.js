@@ -38,7 +38,7 @@ import { OcaBlock } from './controller/ControlClasses/OcaBlock.js';
 import { Classes } from './controller/ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from './types/OcaManagerDefaultObjectNumbers.js';
-
+import { OcaNotificationDeliveryMode } from './types/OcaNotificationDeliveryMode.js';
 import { OcaStatus } from './types/OcaStatus.js';
 
 /**
@@ -131,7 +131,7 @@ export class RemoteError
 
   static check_status(error, status)
   {
-    return error instanceof this && error.status.isEqual(status);
+    return error instanceof this && error.status === status;
   }
 
   toString()
@@ -438,9 +438,9 @@ export class RemoteDevice extends Events
     });
 
     return this.SubscriptionManager.AddSubscription(event, method,
-                                                    new ArrayBuffer(0),
+                                                    new Uint8Array(0),
                                                     OcaNotificationDeliveryMode.Reliable,
-                                                    new ArrayBuffer(0));
+                                                    new Uint8Array(0));
   }
 
   remove_subscription(event, callback)
@@ -549,8 +549,6 @@ export class RemoteDevice extends Events
     const get_members = (block) => {
       return block.GetMembers().then((a) => {
         var ret = [];
-
-        console.log(a);
 
         a = a.map(this.resolve_object, this);
 
