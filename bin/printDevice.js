@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const process = require('process');
 const RemoteDevice = require('../lib/Controller').RemoteDevice;
 const TCPConnection = require('../lib/controller/TCP').TCPConnection;
