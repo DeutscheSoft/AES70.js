@@ -15,3 +15,5 @@ export function utf8_to_buffer(s) {
 export function utf8_encoded_length(s) {
   return Buffer.byteLength(s, "utf8");
 }
+
+export { utf8_codepoint_length } from './utf8_codepoint_length.js';
