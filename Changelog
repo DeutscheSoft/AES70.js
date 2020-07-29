@@ -2,6 +2,8 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.1.14] - 2020-07-29
+
 - Fixed utf8 encoder in NodeJS
 
 ## [1.1.13] - 2020-07-13
