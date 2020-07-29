@@ -6,7 +6,7 @@ const OCC = require('../lib/controller/ControlClasses');
 if (process.argv.length < 4)
 {
   console.log('Usage: node print_tree.js <ip> <port>');
-  return;
+  process.exit(1);
 }
 
 const host = process.argv[2];
@@ -28,30 +28,37 @@ function delay(n)
   });
 }
 
-async function printTree(objects)
+async function printTree(objects, prefix)
 {
+  if (!prefix) prefix = [];
+
+  let lastPath;
+
   for (let i = 0; i < objects.length; i++)
   {
     const o = objects[i];
 
     if (Array.isArray(o)) 
     {
-      await printTree(o);
+      await printTree(o, lastPath);
       continue;
     }
 
-    try {
-      console.log("Role:", await o.GetRole());
-    } catch (e) {
-      continue;
-    }
+    const roleName = await o.GetRole();
+
+    const path = prefix.concat([ roleName ]);
+
+    lastPath = path;
+
+    console.log('Path: %s', path.join(' / '));
 
     o.get_properties().forEach(async (p) => {
+      if (p.name === 'Members') return;
       const getter = p.getter(o);
       if (!getter) return;
       try {
         const val = await getter();
-        console.log(" %s: %o ", p.name, val);
+        console.log(" %s: %O ", p.name, val);
       } catch (e) {
         console.log(" %s: n/a ", p.name);
       }
@@ -61,21 +68,26 @@ async function printTree(objects)
 
 async function printDevice(device)
 {
-  await printTree(await device.GetDeviceTree());
-  await printTree([
-    device.DeviceManager,
-    device.SecurityManager,
-    device.FirmwareManager,
-    device.SubscriptionManager,
-    device.PowerManager,
-    device.NetworkManager,
-    device.MediaClockManager,
-    device.LibraryManager,
-    device.AudioProcessingManager,
-    device.DeviceTimeManager,
-    device.TaskManager,
-    device.CodingManager,
-    device.DiagnosticManager
-  ]);
-  process.exit(0);
+  try {
+    await printTree(await device.GetDeviceTree());
+    await printTree([
+      device.DeviceManager,
+      device.SecurityManager,
+      device.FirmwareManager,
+      device.SubscriptionManager,
+      device.PowerManager,
+      device.NetworkManager,
+      device.MediaClockManager,
+      device.LibraryManager,
+      device.AudioProcessingManager,
+      device.DeviceTimeManager,
+      device.TaskManager,
+      device.CodingManager,
+      device.DiagnosticManager
+    ]);
+    process.exit(0);
+  } catch (error) {
+    console.error('Failure: %o', error);
+    process.exit(1);
+  }
 }

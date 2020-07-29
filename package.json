@@ -4,10 +4,11 @@
   "description": "A controller library for the AES70 protocol.",
   "main": "lib/index.js",
   "module": "src/index.js",
-  "browser": "src/index.browser.js",
+  "browser": "lib/AES70.es5.js",
   "browser:module": "src/index.browser.js",
-  "type": "module",
-  "bin": {},
+  "bin": {
+    "printDevice": "bin/printDevice.js"
+  },
   "directories": {
     "lib": "lib"
   },
