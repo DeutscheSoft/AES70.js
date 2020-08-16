@@ -1,57 +1,39 @@
-let utf8_to_buffer, buffer_to_utf8, utf8_encoded_length;
+const E = new TextEncoder();
+const D = new TextDecoder();
 
-function encode_utf8(s) {
-  return unescape(encodeURIComponent(s));
+/**
+ * Decodes a UTF8 encoded string from a Uint8Array.
+ */
+export function buffer_to_utf8(a8) {
+  return D.decode(a8);
 }
 
-function decode_utf8(s) {
-  return decodeURIComponent(escape(s));
+/**
+ * Encodes a string as UTF8.
+ *
+ * @returns {Uint8Array}
+ */
+export function utf8_to_buffer(str) {
+  return E.encode(str);
 }
 
-function buffer_to_string(b) {
-  const a = new Uint8Array(b);
-  const tmp = [];
-  const chunksize = 128;
+/**
+ * Returns the number of bytes of the UTF8 encoding of
+ * a string.
+ */
+export function utf8_encoded_length(str) {
+  return utf8_to_buffer(str).byteLength;
+};
 
-  for (let i = 0; i < a.length; i+= chunksize) {
-    tmp.push(String.fromCharCode.apply(String, a.subarray(i, i+chunksize)));
-  }
-
-  return tmp.join("");
-}
-
-function string_to_buffer(s) {
-  const len = s.length;
-  const buf = new Uint8Array(len);
-
-  for (let i=0; i < len; i++) {
-    buf[i] = s.charCodeAt(i);
-  }
-  return buf.buffer;
-}
-
-if (typeof window !== 'undefined' && 'TextEncoder' in window && 'TextDecoder' in window) {
-  const E = new TextEncoder();
-  const D = new TextDecoder();
-  buffer_to_utf8 = D.decode.bind(D);
-  utf8_to_buffer = E.encode.bind(E);
-  utf8_encoded_length = function(s) {
-    return utf8_to_buffer(s).byteLength;
-  };
-} else {
-  buffer_to_utf8 = function(b) {
-    return decode_utf8(buffer_to_string(b));
-  };
-  utf8_to_buffer = function(s) {
-    return string_to_buffer(encode_utf8(s));
-  };
-  utf8_encoded_length = function(s) {
-    return utf8_to_buffer(s).byteLength;
-  }
-}
-
-export { utf8_to_buffer, buffer_to_utf8, utf8_encoded_length };
-
+/**
+ * Counts the number of bytes occupied by a UTF8 encoded string
+ * of given number of codepoints.
+ *
+ * @param {DataView} buf - The input buffer.
+ * @param {number} pos - The buffer position.
+ * @param {number} codepoints - The number of unicode codepoints in the buffer.
+ * @returns {number} The number of bytes.
+ */
 export function utf8_codepoint_length(buf, pos, codepoints) {
   const start = pos;
 

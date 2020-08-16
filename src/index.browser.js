@@ -1,16 +1,13 @@
-import {
-    warn,
-    log,
-    error,
-    Connection,
-    Command,
-    CommandRrq,
-    Response,
-    Notification,
-    KeepAlive,
-    encodeMessage,
-    decodeMessage,
-  } from './OCA.js';
+import { warn, log, error, } from './OCA.js';
+
+import { Connection } from './connection.js';
+import { Command } from './OCP1/command.js';
+import { CommandRrq } from './OCP1/commandrrq.js';
+import { Response } from './OCP1/response.js';
+import { Notification } from './OCP1/notification.js';
+import { KeepAlive } from './OCP1/keepalive.js';
+import { encodeMessage } from './OCP1/encode_message.js';
+import { decodeMessage } from './OCP1/decode_message.js';
 
 import {
     ClientConnection,
@@ -18,9 +15,9 @@ import {
     define_custom_class
   } from './Controller.js';
 
-import * as Types from './Types.js';
 import * as RemoteControlClasses from './controller/ControlClasses.js';
-import { WebSocketConnection } from './controller/WebSocket.js';
+import * as Types from './Types.js';
+import { WebSocketConnection } from './controller/websocket_connection.js';
 
 const controller = {
   Connection: ClientConnection,
@@ -31,21 +28,20 @@ const controller = {
 };
 
 export {
-  warn,
-  log,
-  error,
   Connection,
+  controller,
   ClientConnection,
   Command,
   CommandRrq,
-  Response,
-  Notification,
-  KeepAlive,
-  Types,
-  RemoteControlClasses,
-  encodeMessage,
   decodeMessage,
-  WebSocketConnection,
+  encodeMessage,
+  error,
+  log,
+  KeepAlive,
+  Notification,
+  Response,
   RemoteDevice,
-  controller,
+  Types,
+  warn,
+  WebSocketConnection,
 };

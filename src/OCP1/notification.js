@@ -70,7 +70,7 @@ export class Notification extends PDU
         + (this.context ? this.context.byteLength : 0);
   }
 
-  decode_from(data, pos, len)
+  decode_from(data, pos, data_len)
   {
     let len = data.getUint32(pos);
     pos += 4;

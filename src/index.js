@@ -1,8 +1,4 @@
-import {
-    warn,
-    log,
-    error,
-  } from './OCA.js';
+import { warn, log, error, } from './OCA.js';
 
 import { Connection } from './connection.js';
 import { Command } from './OCP1/command.js';
@@ -20,7 +16,8 @@ import {
   } from './Controller.js';
 
 import * as RemoteControlClasses from './controller/ControlClasses.js';
-import { WebSocketConnection } from './controller/websocket_connection.js';
+import * as Types from './Types.js';
+import { WebSocketConnection } from './controller/websocket_connection_node.js';
 import { TCPConnection } from './controller/tcp_connection.js';
 import { UDPConnection } from './controller/udp_connection.js';
 
@@ -35,20 +32,20 @@ const controller = {
 };
 
 export {
-  warn,
-  log,
-  error,
   Connection,
+  controller,
   ClientConnection,
   Command,
   CommandRrq,
-  Response,
-  Notification,
-  KeepAlive,
-  RemoteControlClasses,
-  encodeMessage,
   decodeMessage,
-  WebSocketConnection,
+  encodeMessage,
+  error,
+  log,
+  KeepAlive,
+  Notification,
+  Response,
   RemoteDevice,
-  controller,
+  Types,
+  warn,
+  WebSocketConnection,
 };
