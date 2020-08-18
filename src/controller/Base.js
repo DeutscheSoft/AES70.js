@@ -1,6 +1,6 @@
 /*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
 
-import { error } from '../OCA.js';
+import { error } from '../log.js';
 import { CommandRrq } from '../OCP1/commandrrq.js';
 
 import { OcaPropertyChangeType } from '../types/OcaPropertyChangeType.js';

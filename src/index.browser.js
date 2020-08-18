@@ -1,4 +1,4 @@
-import { warn, log, error, } from './OCA.js';
+import { warn, log, error } from './log.js';
 
 import { Connection } from './connection.js';
 import { Command } from './OCP1/command.js';

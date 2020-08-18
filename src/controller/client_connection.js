@@ -7,7 +7,7 @@ import { Notification } from '../OCP1/notification.js';
 import { Arguments } from './arguments.js';
 
 
-import { warn, error } from '../OCA.js';
+import { warn, error } from '../log.js';
 
 /**
  * Connection base class for clients (aka controllers).
