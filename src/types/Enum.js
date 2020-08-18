@@ -1,3 +1,7 @@
+function hasOwnProperty(o, name) {
+  return Object.prototype.hasOwnProperty.call(o, name);
+}
+
 export function Enum(values) {
   let names = null;
 
@@ -6,7 +10,7 @@ export function Enum(values) {
       names = new Map();
 
       for (const name in values) {
-        if (!values.hasOwnProperty(name)) continue;
+        if (!hasOwnProperty(values, name)) continue;
         names.set(values[name], name);
       }
     }
@@ -15,18 +19,10 @@ export function Enum(values) {
   }
 
   function getValue(name) {
-    if (values.hasOwnProperty(name)) return values[name];
+    if (hasOwnProperty(values, name)) return values[name];
   }
 
   let blueprints = null;
-
-  function getBlueprint(value) {
-    if (blueprints === null) {
-      return void 0;
-    }
-
-    return blueprints.get(value);
-  }
 
   function setBlueprint(value, o) {
     if (blueprints === null) {
@@ -39,7 +35,7 @@ export function Enum(values) {
   const result = class {
     constructor(value) {
       if (typeof value === 'string') {
-        if (!values.hasOwnProperty(value))
+        if (!hasOwnProperty(values, value))
           throw new Error('No such enum value.');
 
         return this.constructor[value];
@@ -84,7 +80,7 @@ export function Enum(values) {
   };
 
   for (const name in values) {
-    if (!values.hasOwnProperty(name)) continue;
+    if (!hasOwnProperty(values, name)) continue;
     Object.defineProperty(result, name, {
       get: function () {
         return new this(values[name]);
