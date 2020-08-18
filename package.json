@@ -1,13 +1,14 @@
 {
   "name": "aes70",
-  "version": "1.1.12",
+  "version": "1.1.16",
   "description": "A controller library for the AES70 protocol.",
   "type": "module",
   "module": "src/index.js",
   "browser": "dist/AES70.es5.js",
   "browser:module": "src/index.browser.js",
-  "type" : "module",
-  "bin": {},
+  "bin": {
+    "printDevice": "bin/printDevice.js"
+  },
   "directories": {
     "src": "src"
   },
