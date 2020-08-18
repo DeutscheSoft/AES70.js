@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import * as WebSocket from 'ws';
 
 import { ClientConnection } from './client_connection.js';

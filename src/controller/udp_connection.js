@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import { createSocket } from 'dgram';
 import { Buffer } from 'buffer';
 
@@ -139,7 +141,9 @@ export class UDPConnection extends ClientConnection {
           if (--retry_count < 0) {
             try {
               this.remove_command_handle(id)[2](new Error('Timeout'));
-            } catch (err) {}
+            } catch (err) {
+              // ignore error
+            }
             return;
           }
 

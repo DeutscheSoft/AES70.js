@@ -37,7 +37,11 @@ export class ClientConnection extends Connection
     this.command_handles = null;
     const e = new Error('closed');
     handles.forEach((a, id) => {
-      try { a[2](e); } catch (e) { }
+      try {
+        a[2](e);
+      } catch (e) {
+        // ignore error
+      }
     });
   }
 

@@ -4,7 +4,9 @@ import { decodeMessage } from './OCP1/decode_message.js';
 function now() {
   try {
     return performance.now();
-  } catch (e) {}
+  } catch (e) {
+    // ignore error
+  }
 
   return Date.now();
 }

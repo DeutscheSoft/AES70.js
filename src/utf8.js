@@ -23,7 +23,7 @@ export function utf8_to_buffer(str) {
  */
 export function utf8_encoded_length(str) {
   return utf8_to_buffer(str).byteLength;
-};
+}
 
 /**
  * Counts the number of bytes occupied by a UTF8 encoded string

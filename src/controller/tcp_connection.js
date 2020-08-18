@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 import { Socket } from 'net';
 import { Buffer } from 'buffer';
 
@@ -26,7 +28,9 @@ export class TCPConnection extends ClientConnection {
     super.cleanup();
     try {
       this.socket.destroy();
-    } catch (e) {}
+    } catch (e) {
+      // ignore error
+    }
   }
 
   /**

@@ -1,3 +1,5 @@
+/*eslint no-constant-condition: ["error", { "checkLoops": false }]*/
+
 import { error } from '../OCA.js';
 import { CommandRrq } from '../OCP1/commandrrq.js';
 
@@ -48,8 +50,8 @@ export class Property {
    * @returns {Function} The getter. If none could be found, null is returned.
    */
   getter(o, no_bind) {
-    let name = this.name,
-      i = 0;
+    let name = this.name;
+    let i = 0;
     const aliases = this.aliases;
 
     do {
