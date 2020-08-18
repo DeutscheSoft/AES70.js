@@ -3,7 +3,7 @@ import { Buffer } from 'buffer';
 
 import { lookup } from 'dns';
 
-import { ClientConnection } from '../Controller.js';
+import { ClientConnection } from './client_connection.js';
 
 function is_ip(host) {
   let tmp = host.split('.');
