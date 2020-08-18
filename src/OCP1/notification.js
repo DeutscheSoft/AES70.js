@@ -1,5 +1,6 @@
 import { PDU } from './pdu.js';
 import { OcaEvent } from './OcaEvent.js';
+import { EncodedArguments } from './encoded_arguments.js';
 
 /**
  * Notification packet.
