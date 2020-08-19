@@ -15,7 +15,7 @@
   "scripts": {
     "test": "node tests/signatures.js",
     "prepublishOnly": "make",
-    "docs": "make docs",
+    "docs": "cd esdoc && npm run build",
     "prettier": "cd prettier && npm run prettier",
     "eslint": "./eslint/node_modules/.bin/eslint ."
   },
@@ -43,8 +43,5 @@
     "ws": "^5.2.2",
     "dnssd": "^0.3.3"
   },
-  "devDependencies": {
-    "better-docs": "^1.3.3",
-    "jsdoc": "^3.6.3"
-  }
+  "devDependencies": {}
 }
