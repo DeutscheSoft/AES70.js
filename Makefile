@@ -1,20 +1,6 @@
-TEST_FILES = src/tests/utils.js src/tests/signatures.js src/tests/AES70.test.js
-BIN_DIR = ./node_modules/.bin
-
-BABEL = $(BIN_DIR)/babel
-ROLLUP = $(BIN_DIR)/rollup
-
-SRC = $(filter-out src/index.browser.js, $(wildcard src/*.js))
-SRC += $(wildcard src/controller/*.js)
-LIB = $(SRC:src/%.js=lib/%.js)
+SRC = $(wildcard src/*.js) $(wildcard src/**/*.js)
 
 all: dist/AES70.es5.js
-
-node: $(LIB)
-
-lib/%.js: src/%.js Makefile .babelrc
-	mkdir -p `dirname $@`
-	BABEL_ENV=node $(BABEL) $< -o $@
 
 build/node_modules/.bin/rollup:
 	cd build && npm ci
