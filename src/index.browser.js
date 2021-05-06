@@ -13,7 +13,7 @@ import { ClientConnection } from './controller/client_connection.js';
 import { RemoteDevice } from './controller/remote_device.js';
 import { define_custom_class } from './controller/define_custom_class.js';
 
-import * as RemoteControlClasses from './controller/ControlClasses.js';
+import { ControlClasses as RemoteControlClasses } from './controller/ControlClasses.js';
 import * as Types from './Types.js';
 import { WebSocketConnection } from './controller/websocket_connection.js';
 
@@ -42,4 +42,5 @@ export {
   Types,
   warn,
   WebSocketConnection,
+  RemoteControlClasses,
 };
