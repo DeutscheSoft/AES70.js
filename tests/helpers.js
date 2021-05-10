@@ -75,6 +75,17 @@ export function define(name, run) {
   });
 }
 
+export function encodeDecode(Type, data) {
+  const length = Type.encodedLength(data);
+  const buffer = new ArrayBuffer(length);
+
+  Type.encodeTo(new DataView(buffer), 0, data);
+
+  const [ pos, data2 ] = Type.decodeFrom(new DataView(buffer), 0);
+
+  return data2;
+}
+
 export function defineEncodeDecode(name, Type, data, Length) {
   define(name, () => {
     const length = Type.encodedLength(data);

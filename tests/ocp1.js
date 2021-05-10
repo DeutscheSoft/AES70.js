@@ -1,4 +1,4 @@
-import { define, defineEncodeDecode } from './helpers.js';
+import { define, defineEncodeDecode, encodeDecode, assertEqual } from './helpers.js';
 
 import { OcaBoolean } from '../src/OCP1/OcaBoolean.js';
 import { OcaInt8 } from '../src/OCP1/OcaInt8.js';
@@ -7,6 +7,8 @@ import { OcaInt32 } from '../src/OCP1/OcaInt32.js';
 import { OcaUint8 } from '../src/OCP1/OcaUint8.js';
 import { OcaUint16 } from '../src/OCP1/OcaUint16.js';
 import { OcaUint32 } from '../src/OCP1/OcaUint32.js';
+import { OcaUint64 } from '../src/OCP1/OcaUint64.js';
+import { OcaInt64 } from '../src/OCP1/OcaInt64.js';
 import { OcaFloat32 } from '../src/OCP1/OcaFloat32.js';
 import { OcaFloat64 } from '../src/OCP1/OcaFloat64.js';
 import { OcaString } from '../src/OCP1/OcaString.js';
@@ -37,11 +39,17 @@ defineEncodeDecode('OcaUint16', OcaUint16, 0xffff, 2);
 defineEncodeDecode('OcaInt32', OcaInt32, 0xfffff, 4);
 defineEncodeDecode('OcaInt32', OcaInt32, -0xfffff, 4);
 defineEncodeDecode('OcaUint32', OcaUint32, 0xffffffff, 4);
+defineEncodeDecode('OcaUint64', OcaUint64, 3n ** 40n, 8);
+defineEncodeDecode('OcaUint64', OcaUint64, 3, 8);
+defineEncodeDecode('OcaInt64', OcaInt64, 3n ** 39n, 8);
+defineEncodeDecode('OcaInt64', OcaInt64, -(3n ** 39n), 8);
+defineEncodeDecode('OcaInt64', OcaInt64, 3, 8);
+defineEncodeDecode('OcaInt64', OcaInt64, -3, 8);
 defineEncodeDecode('OcaList<OcaFloat32>', OcaList(OcaFloat32), Array.from(new Float32Array(233).map(() => Math.random())), 2 + 4 * 233);
 defineEncodeDecode('OcaList<OcaFloat64>', OcaList(OcaFloat64), new Array(233).fill(0).map(() => Math.random()), 2 + 8 * 233);
 defineEncodeDecode('OcaString', OcaString, "foobar", 8);
-defineEncodeDecode('OcaaList2D<OcaString>', OcaList2D(OcaString), [ [ "foobar", "bar" ], [ "bar", "foo" ] ]);
-defineEncodeDecode('OcaaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ], [ 0.25, 5 ] ], 4 + 4 * 4);
+defineEncodeDecode('OcaList2D<OcaString>', OcaList2D(OcaString), [ [ "foobar", "bar" ], [ "bar", "foo" ] ]);
+defineEncodeDecode('OcaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ], [ 0.25, 5 ] ], 4 + 4 * 4);
 
 {
   const data = new Map();
@@ -112,4 +120,11 @@ define('OcaSubscriptionManager.AddSubscription', () => {
   const data = new DataView(new ArrayBuffer(encodedArguments.byteLength));
 
   encodedArguments.encodeTo(data);
+});
+
+define('BigInt conversions', () => {
+  assertEqual(encodeDecode(OcaUint64, 3), 3);
+  assertEqual(encodeDecode(OcaUint64, 3n), 3);
+  assertEqual(encodeDecode(OcaInt64, -3), -3);
+  assertEqual(encodeDecode(OcaInt64, -3n), -3);
 });
