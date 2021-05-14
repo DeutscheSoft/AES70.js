@@ -20,6 +20,7 @@ import { Tuple } from '../src/OCP1/Tuple.js';
 import { OcaBlob } from '../src/OCP1/OcaBlob.js';
 import { Arguments } from '../src/OCP1/Arguments.js';
 import { String16 } from '../src/OCP1/String16.js';
+import { OcaBitstring } from '../src/OCP1/OcaBitstring.js';
 
 import { OcaClassicalFilterShape } from '../src/OCP1/OcaClassicalFilterShape.js';
 import { OcaDeviceState } from '../src/OCP1/OcaDeviceState.js';
@@ -50,6 +51,8 @@ defineEncodeDecode('OcaList<OcaFloat64>', OcaList(OcaFloat64), new Array(233).fi
 defineEncodeDecode('OcaString', OcaString, "foobar", 8);
 defineEncodeDecode('OcaList2D<OcaString>', OcaList2D(OcaString), [ [ "foobar", "bar" ], [ "bar", "foo" ] ]);
 defineEncodeDecode('OcaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ], [ 0.25, 5 ] ], 4 + 4 * 4);
+defineEncodeDecode('OcaBitstring', OcaBitstring, [ true, false, false, true ], 3);
+defineEncodeDecode('OcaBitstring', OcaBitstring, [ true, false, false, true, false, true, false, false, true ], 4);
 
 {
   const data = new Map();

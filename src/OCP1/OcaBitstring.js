@@ -52,7 +52,7 @@ export const OcaBitstring = createType({
     if (length > 0xffff)
       throw new Error('Array too long for OcaBlob OCP.1 encoding.');
 
-    return 2 + (length + 7) / 8;
+    return 2 + ((length + 7) >> 3);
   },
   encodeTo: function (dataView, pos, value) {
     const length = value.length;
