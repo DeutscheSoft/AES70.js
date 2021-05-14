@@ -58,6 +58,10 @@ export function Enum(values) {
       return this.value;
     }
 
+    toString() {
+      return this.name;
+    }
+
     static getName(value) {
       const name = getName(value);
 
