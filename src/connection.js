@@ -1,5 +1,7 @@
 import { Events } from './events.js';
 import { decodeMessage } from './OCP1/decode_message.js';
+import { encodeMessage } from './OCP1/encode_message.js';
+import { KeepAlive } from './OCP1/keepalive.js';
 
 function now() {
   try {
@@ -26,6 +28,8 @@ export class Connection extends Events
     this.inpos = 0;
     this.last_rx_time = now();
     this.last_tx_time = now();
+    this.keepalive_interval = -1;
+    this._keepalive_interval_id = null;
     this.outbuf = [];
     const cleanup = () => {
       this.removeEventListener('close', cleanup);
@@ -69,6 +73,8 @@ export class Connection extends Events
       }
 
       out.length = 0;
+
+      this._check_keepalive();
     };
   }
 
@@ -81,7 +87,7 @@ export class Connection extends Events
   {
     if (this.is_closed()) throw new Error("Connection is closed.");
     if (!this.outbuf.length)
-      setTimeout(this.write_cb, 0);
+      Promise.resolve(0).then(this.write_cb);
 
     this.outbuf.push(buf);
   }
@@ -144,6 +150,8 @@ export class Connection extends Events
         this.close();
       }
     }
+
+    this._check_keepalive();
   }
 
   incoming(a)
@@ -173,6 +181,52 @@ export class Connection extends Events
   {
     if (this.is_closed()) throw new Error("cleanup() called twice.");
     this.write_cb = null;
+
+    // disable keepalive
+    this.set_keepalive_interval(0);
+  }
+
+  _check_keepalive()
+  {
+    if (!(this.keepalive_interval > 0))
+      return;
+
+    const t = this.keepalive_interval;
+
+    if (this.rx_idle_time() > t * 3)
+    {
+      this.emit('timeout');
+      this.emit('close');
+      this.close();
+    }
+    else if (this.tx_idle_time() > t)
+    {
+      this.send(encodeMessage(new KeepAlive(t)));
+    }
+  }
+
+  /**
+   * Set the keepalive interval.
+   * @param {number} seconds - Keepalive interval in seconds.
+   */
+  set_keepalive_interval(seconds)
+  {
+    const t = seconds * 1000;
+
+    if (this._keepalive_interval_id !== null) {
+      clearInterval(this._keepalive_interval_id);
+      this._keepalive_interval_id = null;
+    }
+
+    // we check twice as often to make sure we stay within the timers
+    this.keepalive_interval = t;
+
+    if (!(t > 0))
+      return;
+
+    this._keepalive_interval_id = setInterval(() => {
+      this._check_keepalive();
+    }, t / 2);
   }
 }
 

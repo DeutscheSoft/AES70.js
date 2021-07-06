@@ -7,7 +7,7 @@ import { Notification } from '../OCP1/notification.js';
 import { Arguments } from './arguments.js';
 
 
-import { warn, error } from '../log.js';
+import { warn } from '../log.js';
 
 /**
  * Connection base class for clients (aka controllers).
@@ -19,18 +19,10 @@ export class ClientConnection extends Connection
     super(options);
     this.command_handles = new Map();
     this.subscribers = new Map();
-    this.keepalive_interval = null;
   }
 
   cleanup() {
     super.cleanup();
-
-    if (this.keepalive_interval !== null)
-    {
-      clearInterval(this.keepalive_interval);
-      this.keepalive_interval = null;
-    }
-
     this.subscribers = null;
 
     const handles = this.command_handles;
@@ -167,38 +159,6 @@ export class ClientConnection extends Connection
         throw new Error("Unexpected PDU");
       }
     }
-  }
-
-  /**
-   * Set the keepalive interval.
-   * @param {number} seconds - Keepalive interval in seconds.
-   */
-  set_keepalive_interval(seconds)
-  {
-    if (this.keepalive_interval)
-      clearInterval(this.keepalive_interval);
-
-    // we check twice as often to make sure we stay within the timers
-    const t = seconds * 1000;
-
-    // send first keepalive message
-    this.send(encodeMessage(new KeepAlive(t)));
-
-    const send = () => {
-      if (this.rx_idle_time() > t * 3)
-      {
-        error("Connection timed out.");
-        this.emit('timeout');
-        this.emit('close');
-        this.close();
-      }
-      else if (this.tx_idle_time() > t)
-      {
-        this.send(encodeMessage(new KeepAlive(t)));
-      }
-    };
-
-    this.keepalive_interval = setInterval(send, t / 2);
   }
 }
 
