@@ -2,6 +2,13 @@ function hasOwnProperty(o, name) {
   return Object.prototype.hasOwnProperty.call(o, name);
 }
 
+/**
+ * An interface implemented by all AES70 enum types. Each AES70 enum is
+ * implemented by a class which implements this interface. Enum values are
+ * implemented using singletons of this corresponding class.
+ *
+ * @interface Enum
+ */
 export function Enum(values) {
   let names = null;
 
@@ -54,10 +61,18 @@ export function Enum(values) {
       return getName(this.value);
     }
 
+    /**
+     * @function Enum#valueOf
+     * @returns {number} The numeric enum value.
+     */
     valueOf() {
       return this.value;
     }
 
+    /**
+     * @function Enum#toString
+     * @returns {string} The enum entry name.
+     */
     toString() {
       return this.name;
     }
