@@ -24,20 +24,28 @@ export const OcaFloat64Actuator = make_control_class(
 );
 
 /**
- * Gets the value and limits of the <b>Setting </b>property. The return
- * value indicates whether the data was successfully retrieved.
- * @method RemoteControlClasses.OcaFloat64Actuator#GetSetting
- * @returns {Promise<Arguments<OcaFloat64,OcaFloat64,OcaFloat64>>}
- */
-/**
- * Sets the value of the Level property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaFloat64Actuator#SetSetting
- * @param Setting {OcaFloat64}
+ * Gets the value and limits of the  **Setting** property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - Setting of type ``number``
+ * - minSetting of type ``number``
+ * - maxSetting of type ``number``
+ *
+ * @method RemoteControlClasses.OcaFloat64Actuator#GetSetting
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
+ * Sets the value of the Level property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaFloat64Actuator#SetSetting
+ * @param {number} Setting
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Setting changes in the remote object.
+ * The property ``Setting`` is described in the AES70 standard as follows.
  * Float64 value.
- * @member RemoteControlClasses.OcaFloat64Actuator#OnSettingChanged {PropertyEvent<OcaFloat64>} - This event is emitted when Setting changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFloat64Actuator#OnSettingChanged
  */

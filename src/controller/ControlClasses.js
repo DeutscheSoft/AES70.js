@@ -213,6 +213,6 @@ export const ControlClasses = {
 };
 
 /**
- * All classes defined in this module.
+ * All control classes defined in this module.
  */
 export const Classes = Object.values(ControlClasses);

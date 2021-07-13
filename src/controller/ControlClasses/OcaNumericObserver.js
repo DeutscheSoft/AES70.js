@@ -9,39 +9,25 @@ import { OcaProperty } from '../../OCP1/OcaProperty.js';
 import { OcaRelationalOperator } from '../../OCP1/OcaRelationalOperator.js';
 
 /**
- * Observer of a scalar numeric or boolean property ("target property")
- * of a specified object. Does not work for array, list, map, struct, or
- * string properties. <b>OcaNumericObserver</b> emits an <b>Observation
- * </b>event under certain conditions. There are three kinds of
- * conditions: <ol> <li><b>Numeric comparison</b>. The target property
- * value meets a certain comparison condition. A selection of comparison
- * operators is available. Such observations are called "asynchronous
- * observations". </li> <li><b>Timer expiry</b>. The value of the<b>
- * Period</b> property, if nonzero, is a the time interval for the
- * recurrent timed emission of <b>Observation</b> events. Such events
- * ("periodic observations") are emitted regardless of the target
- * property's value. </li> <li><b>Combination of (1) and (2)</b>. If a
- * numeric comparison and a nonzero period are both specified, then the
- * <b>Observation</b> event is emitted when the timer expires <b>and</b>
- * the numeric comparison is true. Such observations are called
- * "conditional-periodic observations".</li> </ol> This is a weakly typed
- * class. Its threshold is specified as an <b>OcaFloat64 </b>number. <ul>
- * <li>For unsigned integer targets, the threshold and target are both
- * coerced to <b>OcaUint64 </b>before comparing. </li> <li>For signed
- * integer targets, the threshold and target are both coerced to
- * <b>OcaInt64 </b>before comparing. </li> <li>For boolean values, the
- * threshold hreshold and target are both coerced to <b>OcaUint8</b>,
- * True is assigned the value One, False is assigned the value Zero.</li>
- * </ul> Note that this coercion may result in rounding errors if the
- * observed datatype is of type OcaUint64 or OcaUint64. An
- * <b>OcaNumericObserver </b>instance and the property it observes are
- * bound at the time the <b>OcaNumericObserver</b> instance is
- * constructed. For static devices, construction will occur during
- * manufacture, or possibly during a subsequent hardware configuration
- * step. For reconfigurable devices, construction might be done by online
- * controllers as part of device configuration sessions. This class is
- * normally used for monitoring readings of sensor readings, but may be
- * used equally well for watching workers' parameter settings.
+ * Observer of a scalar numeric or boolean property ("target property") of a specified object. Does not work for array, list, map, struct, or string properties.  **OcaNumericObserver**  emits an  **Observation** event under certain conditions. There are three kinds of conditions:
+ *
+ *  -  **Numeric comparison** . The target property value meets a certain comparison condition. A selection of comparison operators is available. Such observations are called "asynchronous observations".
+ *
+ *
+ *  -  **Timer expiry** . The value of the **Period**  property, if nonzero, is a the time interval for the recurrent timed emission of  **Observation**  events. Such events ("periodic observations") are emitted regardless of the target property's value.
+ *
+ *
+ *  -  **Combination of (1) and (2)** . If a numeric comparison and a nonzero period are both specified, then the  **Observation**  event is emitted when the timer expires  **and**  the numeric comparison is true. Such observations are called "conditional-periodic observations".
+ *   This is a weakly typed class. Its threshold is specified as an  **OcaFloat64** number.
+ *
+ *  - For unsigned integer targets, the threshold and target are both coerced to  **OcaUint64** before comparing.
+ *
+ *
+ *  - For signed integer targets, the threshold and target are both coerced to  **OcaInt64** before comparing.
+ *
+ *
+ *  - For boolean values, the threshold hreshold and target are both coerced to  **OcaUint8** , True is assigned the value One, False is assigned the value Zero.
+ *   Note that this coercion may result in rounding errors if the observed datatype is of type OcaUint64 or OcaUint64. An  **OcaNumericObserver** instance and the property it observes are bound at the time the  **OcaNumericObserver**  instance is constructed. For static devices, construction will occur during manufacture, or possibly during a subsequent hardware configuration step. For reconfigurable devices, construction might be done by online controllers as part of device configuration sessions. This class is normally used for monitoring readings of sensor readings, but may be used equally well for watching workers' parameter settings.
  * @extends RemoteControlClasses.OcaAgent
  * @class OcaNumericObserver
  * @memberof RemoteControlClasses
@@ -82,131 +68,147 @@ export const OcaNumericObserver = make_control_class(
 );
 
 /**
- * Gets the value of the observed property that was reported by the most
- * recently emitted Observation event. If the numeric observer has never
- * emitted an Observation event, returns the IEEE not-a-number value. The
- * return status indicates whether the value has been successfully
- * returned.
+ * Gets the value of the observed property that was reported by the most recently emitted Observation event. If the numeric observer has never emitted an Observation event, returns the IEEE not-a-number value. The return status indicates whether the value has been successfully returned.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetLastObservation
- * @returns {Promise<OcaFloat64>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the observer's state. The return value indicates whether the
- * state was successfully retrieved.
+ * Gets the observer's state. The return value indicates whether the state was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetState
  * @returns {Promise<OcaObserverState>}
+ *   A promise which resolves to a single value of type :class:`OcaObserverState`.
  */
 /**
- * Gets the identification of the property that the observer observes.
- * The return value indicates whether the identification was successfully
- * retrieved.
+ * Gets the identification of the property that the observer observes. The return value indicates whether the identification was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetObservedProperty
  * @returns {Promise<OcaProperty>}
+ *   A promise which resolves to a single value of type :class:`OcaProperty`.
  */
 /**
- * Sets the identification of the property that the observer observes.
- * The return value indicates whether the identification was successfully
- * set.
+ * Sets the identification of the property that the observer observes. The return value indicates whether the identification was successfully set.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#SetObservedProperty
- * @param property {OcaProperty}
+ * @param {OcaProperty} property
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the <b>Threshold </b>property. The return value
- * indicates whether the threshold value was successfully retrieved.
+ * Gets the value of the  **Threshold** property. The return value indicates whether the threshold value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetThreshold
- * @returns {Promise<OcaFloat64>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the <b>Threshold </b>property. The return value
- * indicates whether the threshold value was successfully set.
- * @method RemoteControlClasses.OcaNumericObserver#SetThreshold
- * @param Threshold {OcaFloat64}
+ * Sets the value of the  **Threshold** property. The return value indicates whether the threshold value was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaNumericObserver#SetThreshold
+ * @param {number} Threshold
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the <b>Operator </b>property. The return value
- * indicates whether the property was successfully retrieved.
+ * Gets the value of the  **Operator** property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetOperator
  * @returns {Promise<OcaRelationalOperator>}
+ *   A promise which resolves to a single value of type :class:`OcaRelationalOperator`.
  */
 /**
- * Sets the value of the <b>Operator </b>property. The return value
- * indicates whether the operator was successfully set.
+ * Sets the value of the  **Operator** property. The return value indicates whether the operator was successfully set.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#SetOperator
- * @param _operator {OcaRelationalOperator}
+ * @param {OcaRelationalOperator} _operator
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the <b>TwoWay </b>property. The return value
- * indicates whether the property was successfully retrieved.
+ * Gets the value of the  **TwoWay** property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetTwoWay
- * @returns {Promise<OcaBoolean>}
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the value of the <b>TwoWay </b>property. The return value
- * indicates whether the property was successfully set.
+ * Sets the value of the  **TwoWay** property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#SetTwoWay
- * @param twoWay {OcaBoolean}
+ * @param {boolean} twoWay
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the <b>Hysteresis </b>property. The return value
- * indicates whether the property was successfully retrieved.
+ * Gets the value of the  **Hysteresis** property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetHysteresis
- * @returns {Promise<OcaFloat64>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the <b>Hysteresis </b>property. The return value
- * indicates whether the property was successfully set.
+ * Sets the value of the  **Hysteresis** property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#SetHysteresis
- * @param hysteresis {OcaFloat64}
+ * @param {number} hysteresis
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the <b>Period </b>property. The return value
- * indicates whether the property was successfully retrieved.
+ * Gets the value of the  **Period** property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNumericObserver#GetPeriod
- * @returns {Promise<OcaTimeInterval>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the <b>Period </b>property. The return value
- * indicates whether the property was successfully set.
- * @method RemoteControlClasses.OcaNumericObserver#SetPeriod
- * @param period {OcaTimeInterval}
+ * Sets the value of the  **Period** property. The return value indicates whether the property was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaNumericObserver#SetPeriod
+ * @param {number} period
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Event emitted to signal an asynchronous, periodic, or
- * conditional-periodic observation.
- * @member RemoteControlClasses.OcaNumericObserver#OnObservation {Event} -
+ * Event emitted to signal an asynchronous, periodic, or conditional-periodic observation.
+ * @member RemoteControlClasses.OcaNumericObserver#OnObservation {Event}
  * Event emitted to signal an asynchronous, periodic, or
  * conditional-periodic observation.
  */
 /**
+ * This event is emitted when the property State changes in the remote object.
+ * The property ``State`` is described in the AES70 standard as follows.
  * State: triggered, not triggered
- * @member RemoteControlClasses.OcaNumericObserver#OnStateChanged {PropertyEvent<OcaObserverState>} - This event is emitted when State changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaObserverState>} RemoteControlClasses.OcaNumericObserver#OnStateChanged
  */
 /**
+ * This event is emitted when the property ObservedProperty changes in the remote object.
+ * The property ``ObservedProperty`` is described in the AES70 standard as follows.
  * Identification of the property being observed.
- * @member RemoteControlClasses.OcaNumericObserver#OnObservedPropertyChanged {PropertyEvent<OcaProperty>} - This event is emitted when ObservedProperty changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaProperty>} RemoteControlClasses.OcaNumericObserver#OnObservedPropertyChanged
  */
 /**
+ * This event is emitted when the property Threshold changes in the remote object.
+ * The property ``Threshold`` is described in the AES70 standard as follows.
  * Comparison value for raising the <b>Triggered </b>event.
- * @member RemoteControlClasses.OcaNumericObserver#OnThresholdChanged {PropertyEvent<OcaFloat64>} - This event is emitted when Threshold changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaNumericObserver#OnThresholdChanged
  */
 /**
+ * This event is emitted when the property Operator changes in the remote object.
+ * The property ``Operator`` is described in the AES70 standard as follows.
  * Relational operator used when comparing the value of the observed
  * property to the threshold value.
- * @member RemoteControlClasses.OcaNumericObserver#OnOperatorChanged {PropertyEvent<OcaRelationalOperator>} - This event is emitted when Operator changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaRelationalOperator>} RemoteControlClasses.OcaNumericObserver#OnOperatorChanged
  */
 /**
+ * This event is emitted when the property TwoWay changes in the remote object.
+ * The property ``TwoWay`` is described in the AES70 standard as follows.
  * True to emit a <b>Triggered </b>event upon crossing the threshold in
  * either direction; false to emit only upon crossing in the primary
  * direction (i.e. rising when <b>Operator </b>is set to
@@ -215,9 +217,12 @@ export const OcaNumericObserver = make_control_class(
  * <u>LessThanOrEqual</u>; equality when <b>Operator </b>is set to
  * <u>Equality</u>; inequality when <b>Operator </b>is set to
  * <u>Inequality</u>).
- * @member RemoteControlClasses.OcaNumericObserver#OnTwoWayChanged {PropertyEvent<OcaBoolean>} - This event is emitted when TwoWay changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaNumericObserver#OnTwoWayChanged
  */
 /**
+ * This event is emitted when the property Hysteresis changes in the remote object.
+ * The property ``Hysteresis`` is described in the AES70 standard as follows.
  * Hysteresis that is used when observing the property value. This
  * indicates which amount must be added/subtracted from the <b>Threshold
  * </b>value to raise or re-enable the <b>Triggered </b>event of this
@@ -225,10 +230,14 @@ export const OcaNumericObserver = make_control_class(
  * upon the configured <b>Operator </b>and <b>TwoWay </b>properties. The
  * <b>Hysteresis </b>property is ignored if the <b>Operator </b>property
  * is 'Inequality'.
- * @member RemoteControlClasses.OcaNumericObserver#OnHysteresisChanged {PropertyEvent<OcaFloat64>} - This event is emitted when Hysteresis changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaNumericObserver#OnHysteresisChanged
  */
 /**
+ * This event is emitted when the property Period changes in the remote object.
+ * The property ``Period`` is described in the AES70 standard as follows.
  * Repetition period or zero. If nonzero, the observer will retrieve the
  * value and emit
- * @member RemoteControlClasses.OcaNumericObserver#OnPeriodChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when Period changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaNumericObserver#OnPeriodChanged
  */

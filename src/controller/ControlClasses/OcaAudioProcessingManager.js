@@ -2,10 +2,13 @@ import { make_control_class } from '../Base.js';
 import { OcaManager } from './OcaManager.js';
 
 /**
- * Placeholder for optional manager that in future versions of the
- * standard will hold various global audio processing parameters. <ul>
- * <li>May be instantiated once in any device. </li> </ul> <ul> <li>If
- * instantiated, object number must be 9.</li> </ul>
+ * Placeholder for optional manager that in future versions of the standard will hold various global audio processing parameters.
+ *
+ *  - May be instantiated once in any device.
+ *
+ *
+ *  - If instantiated, object number must be 9.
+ *
  * @extends RemoteControlClasses.OcaManager
  * @class OcaAudioProcessingManager
  * @memberof RemoteControlClasses

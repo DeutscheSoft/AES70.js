@@ -8,17 +8,13 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * <b>DEPRECATED CLASS</b> <i>Replaced by features of the
- * </i><b><i>OcaMediaSinkConnector </i></b><i>and
- * </i><b><i>OcaMediaSourceConnector </i></b><i>datatypes in version 3 of
- * Connection Management (CM3)</i> Worker that allows connection of one
- * or more internal signal paths to a network signal channel. <ul>
- * <li>For stream-oriented media connection management such as used by
- * AVB, this worker will be linked to an <b>OcaStreamConnector</b> object
- * and to the appropriate <b>OcaStreamNetwork </b>object. </li> <li>For
- * channel-oriented media connection management, such as the Dante
- * name-based routing mechanism, this worker will be linked only to the
- * <b>OcaStreamNetwork </b>object.</li> </ul>
+ *  **DEPRECATED CLASS**   *Replaced by features of the*  **OcaMediaSinkConnector **  *and*  **OcaMediaSourceConnector **  *datatypes in version 3 of Connection Management (CM3)*  Worker that allows connection of one or more internal signal paths to a network signal channel.
+ *
+ *  - For stream-oriented media connection management such as used by AVB, this worker will be linked to an  **OcaStreamConnector**  object and to the appropriate  **OcaStreamNetwork** object.
+ *
+ *
+ *  - For channel-oriented media connection management, such as the Dante name-based routing mechanism, this worker will be linked only to the  **OcaStreamNetwork** object.
+ *
  * @extends RemoteControlClasses.OcaWorker
  * @class OcaNetworkSignalChannel
  * @memberof RemoteControlClasses
@@ -55,93 +51,92 @@ export const OcaNetworkSignalChannel = make_control_class(
 );
 
 /**
- * Adds the object number of the stream connector object to which this
- * media port belongs, and specifies on what index of the stream
- * connector this channel can be found. Return status indicates success
- * of operation.
+ * Adds the object number of the stream connector object to which this media port belongs, and specifies on what index of the stream connector this channel can be found. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#AddToConnector
- * @param Connector {OcaONo}
+ * @param {number} Connector
  *
- * @param Index {OcaStreamConnectorPinIndex}
+ * @param {number} Index
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the object number of the stream connector object to which this
- * media port belongs, if any. If port does not belong to a stream
- * connector, returns zero. Return status indicates success of operation.
+ * Gets the object number of the stream connector object to which this media port belongs, if any. If port does not belong to a stream connector, returns zero. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#GetConnectorPins
- * @returns {Promise<OcaMap>}
+ * @returns {Promise<Map<number, number>>}
+ *   A promise which resolves to a single value of type ``Map<number, number>``.
  */
 /**
- * Gets the value of the IDAdvertised property. Return status indicates
- * success of operation.
+ * Gets the value of the IDAdvertised property. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#GetIDAdvertised
- * @returns {Promise<OcaNetworkSignalChannelID>}
+ * @returns {Promise<Uint8Array>}
+ *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
- * Gets the object number of the stream network object to which this
- * media port belongs. Return status indicates success of operation.
+ * Gets the object number of the stream network object to which this media port belongs. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#GetNetwork
- * @returns {Promise<OcaONo>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the remote channel ID to which this channel is connected. Empty
- * if the channel is not connected (at least not directly to another
- * channel). For stream-oriented connection management this functionality
- * is not used (i.e. the remote channel ID will always be empty).
+ * Gets the remote channel ID to which this channel is connected. Empty if the channel is not connected (at least not directly to another channel). For stream-oriented connection management this functionality is not used (i.e. the remote channel ID will always be empty).
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#GetRemoteChannelID
- * @returns {Promise<OcaNetworkSignalChannelID>}
+ * @returns {Promise<Uint8Array>}
+ *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
- * Gets the value of the SourceOrSink property. Return status indicates
- * success of operation.
+ * Gets the value of the SourceOrSink property. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#GetSourceOrSink
  * @returns {Promise<OcaNetworkMediaSourceOrSink>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkMediaSourceOrSink`.
  */
 /**
- * Gets the value of the Status property. Return status indicates success
- * of operation.
+ * Gets the value of the Status property. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#GetStatus
  * @returns {Promise<OcaNetworkSignalChannelStatus>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkSignalChannelStatus`.
  */
 /**
- * Removes this channel from the passed stream connector. Return status
- * indicates success of operation.
+ * Removes this channel from the passed stream connector. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#RemoveFromConnector
- * @param Connector {OcaONo}
+ * @param {number} Connector
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets the value of the IDAdvertised property. Return status indicates
- * success of operation.
+ * Sets the value of the IDAdvertised property. Return status indicates success of operation.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#SetIDAdvertised
- * @param IDAdvertised {OcaNetworkSignalChannelID}
+ * @param {Uint8Array} IDAdvertised
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets the object number of the stream network object to which this
- * media port belongs. Return status indicates success of operation. Only
- * implemented for reconfigurable devices.
+ * Sets the object number of the stream network object to which this media port belongs. Return status indicates success of operation. Only implemented for reconfigurable devices.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#SetNetwork
- * @param Network {OcaONo}
+ * @param {number} Network
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets the remote channel ID to which this channel must be connected.
- * Only used for channel-oriented connection management. For
- * stream-oriented connection management this method is not used.
- * Clearing the remote channel ID (i.e. tearing down the connection) can
- * be done by passing an empty remote channel ID as parameter.
+ * Sets the remote channel ID to which this channel must be connected. Only used for channel-oriented connection management. For stream-oriented connection management this method is not used. Clearing the remote channel ID (i.e. tearing down the connection) can be done by passing an empty remote channel ID as parameter.
+ *
  * @method RemoteControlClasses.OcaNetworkSignalChannel#SetRemoteChannelID
- * @param RemoteChannelID {OcaNetworkSignalChannelID}
+ * @param {Uint8Array} RemoteChannelID
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property ConnectorPins changes in the remote object.
+ * The property ``ConnectorPins`` is described in the AES70 standard as follows.
  * Map of object numbers of <b>OcaStreamConnector</b> objects to
  * <b>OcaStreamConnectorPinIndex </b>of these connectors. This map
  * identifies which <b>OcaStreamConnector</b> objects contain this
@@ -152,33 +147,49 @@ export const OcaNetworkSignalChannel = make_control_class(
  * more than one entry in the map, else it would implicitly perform
  * mixing. <b>OcaNetworkSignalChannel </b>objects of type <b>Source</b>
  * can have multiple entries in the map.
- * @member RemoteControlClasses.OcaNetworkSignalChannel#OnConnectorPinsChanged {PropertyEvent<OcaMap>} - This event is emitted when ConnectorPins changes in the remote object.
+ *
+ * @member {PropertyEvent<Map<number, number>>} RemoteControlClasses.OcaNetworkSignalChannel#OnConnectorPinsChanged
  */
 /**
+ * This event is emitted when the property IDAdvertised changes in the remote object.
+ * The property ``IDAdvertised`` is described in the AES70 standard as follows.
  * Character name or binary identifier of the port that is advertised on
  * the network to be found by other devices' discovery processes.
  * Depending on the media transport architecture being used, this ID may
  * be globally unique throughout the network, or only unique within the
  * scope of the specific Network instance to which the port is attached.
- * @member RemoteControlClasses.OcaNetworkSignalChannel#OnIDAdvertisedChanged {PropertyEvent<OcaNetworkSignalChannelID>} - This event is emitted when IDAdvertised changes in the remote object.
+ *
+ * @member {PropertyEvent<Uint8Array>} RemoteControlClasses.OcaNetworkSignalChannel#OnIDAdvertisedChanged
  */
 /**
+ * This event is emitted when the property Network changes in the remote object.
+ * The property ``Network`` is described in the AES70 standard as follows.
  * Object number of stream network object (<b>OcaStreamNetwork</b> or one
  * of its subclasses) to which this signal channel belongs.
- * @member RemoteControlClasses.OcaNetworkSignalChannel#OnNetworkChanged {PropertyEvent<OcaONo>} - This event is emitted when Network changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaNetworkSignalChannel#OnNetworkChanged
  */
 /**
+ * This event is emitted when the property RemoteChannelID changes in the remote object.
+ * The property ``RemoteChannelID`` is described in the AES70 standard as follows.
  * External ID of ultimate source or destination of signal.
- * @member RemoteControlClasses.OcaNetworkSignalChannel#OnRemoteChannelIDChanged {PropertyEvent<OcaNetworkSignalChannelID>} - This event is emitted when RemoteChannelID changes in the remote object.
+ *
+ * @member {PropertyEvent<Uint8Array>} RemoteControlClasses.OcaNetworkSignalChannel#OnRemoteChannelIDChanged
  */
 /**
+ * This event is emitted when the property SourceOrSink changes in the remote object.
+ * The property ``SourceOrSink`` is described in the AES70 standard as follows.
  * Describes whether this signal channel is source (emits signals into
  * the network) or sink (receives signals from the network). Sources are
  * sometimes called "talkers", and sinks are sometimes called
  * "listeners".
- * @member RemoteControlClasses.OcaNetworkSignalChannel#OnSourceOrSinkChanged {PropertyEvent<OcaNetworkMediaSourceOrSink>} - This event is emitted when SourceOrSink changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkMediaSourceOrSink>} RemoteControlClasses.OcaNetworkSignalChannel#OnSourceOrSinkChanged
  */
 /**
+ * This event is emitted when the property Status changes in the remote object.
+ * The property ``Status`` is described in the AES70 standard as follows.
  * Status of the port
- * @member RemoteControlClasses.OcaNetworkSignalChannel#OnStatusChanged {PropertyEvent<OcaNetworkSignalChannelStatus>} - This event is emitted when Status changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkSignalChannelStatus>} RemoteControlClasses.OcaNetworkSignalChannel#OnStatusChanged
  */

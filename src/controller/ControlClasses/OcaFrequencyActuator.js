@@ -24,20 +24,28 @@ export const OcaFrequencyActuator = make_control_class(
 );
 
 /**
- * Gets the value of the Frequency property. The return value indicates
- * whether the property was successfully retrieved.
- * @method RemoteControlClasses.OcaFrequencyActuator#GetFrequency
- * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
- */
-/**
- * Sets the value of the Frequency property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaFrequencyActuator#SetFrequency
- * @param Frequency {OcaFrequency}
+ * Gets the value of the Frequency property. The return value indicates whether the property was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - Frequency of type ``number``
+ * - minFrequency of type ``number``
+ * - maxFrequency of type ``number``
+ *
+ * @method RemoteControlClasses.OcaFrequencyActuator#GetFrequency
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
+ * Sets the value of the Frequency property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaFrequencyActuator#SetFrequency
+ * @param {number} Frequency
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Frequency changes in the remote object.
+ * The property ``Frequency`` is described in the AES70 standard as follows.
  * Frequency in Hertz.
- * @member RemoteControlClasses.OcaFrequencyActuator#OnFrequencyChanged {PropertyEvent<OcaFrequency>} - This event is emitted when Frequency changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFrequencyActuator#OnFrequencyChanged
  */

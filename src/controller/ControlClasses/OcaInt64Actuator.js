@@ -24,20 +24,28 @@ export const OcaInt64Actuator = make_control_class(
 );
 
 /**
- * Gets the value and limits of the <b>Setting </b>property. The return
- * value indicates whether the data was successfully retrieved.
- * @method RemoteControlClasses.OcaInt64Actuator#GetSetting
- * @returns {Promise<Arguments<OcaInt64,OcaInt64,OcaInt64>>}
- */
-/**
- * Sets the <b>Setting </b>property. The return value indicates whether
- * the property was successfully set.
- * @method RemoteControlClasses.OcaInt64Actuator#SetSetting
- * @param Value {OcaInt64}
+ * Gets the value and limits of the  **Setting** property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - Setting of type ``number|BigInt``
+ * - minSetting of type ``number|BigInt``
+ * - maxSetting of type ``number|BigInt``
+ *
+ * @method RemoteControlClasses.OcaInt64Actuator#GetSetting
+ * @returns {Promise<Arguments<number|BigInt,number|BigInt,number|BigInt>>}
  */
 /**
+ * Sets the  **Setting** property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaInt64Actuator#SetSetting
+ * @param {number|BigInt} Value
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Setting changes in the remote object.
+ * The property ``Setting`` is described in the AES70 standard as follows.
  * Int64 setting.
- * @member RemoteControlClasses.OcaInt64Actuator#OnSettingChanged {PropertyEvent<OcaInt64>} - This event is emitted when Setting changes in the remote object.
+ *
+ * @member {PropertyEvent<number|BigInt>} RemoteControlClasses.OcaInt64Actuator#OnSettingChanged
  */

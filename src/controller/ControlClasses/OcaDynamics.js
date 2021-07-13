@@ -9,12 +9,7 @@ import { OcaLevelDetectionLaw } from '../../OCP1/OcaLevelDetectionLaw.js';
 import { OcaPresentationUnit } from '../../OCP1/OcaPresentationUnit.js';
 
 /**
- * A multipurpose dynamics processor. Can be configured as compressor,
- * limiter, expander, or gate. This class is expected to handle the
- * majority of the basic cases. More complex devices may be described in
- * a different manner, using one or more <b>OcaDynamicsDetector</b> and
- * <b>OcaDynamicsCurve</b> objects, in conjunction with other Worker
- * objects as needed.
+ * A multipurpose dynamics processor. Can be configured as compressor, limiter, expander, or gate. This class is expected to handle the majority of the basic cases. More complex devices may be described in a different manner, using one or more  **OcaDynamicsDetector**  and  **OcaDynamicsCurve**  objects, in conjunction with other Worker objects as needed.
  * @extends RemoteControlClasses.OcaActuator
  * @class OcaDynamics
  * @memberof RemoteControlClasses
@@ -102,281 +97,367 @@ export const OcaDynamics = make_control_class(
 );
 
 /**
- * Gets the value of the Triggered property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Triggered property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDynamics#GetTriggered
- * @returns {Promise<OcaBoolean>}
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Gets the value of the DynamicGain property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the DynamicGain property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDynamics#GetDynamicGain
- * @returns {Promise<OcaDB>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the Function property. The return value indicates
- * whether the property was successfully retrieved.
+ * Sets the value of the Function property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDynamics#GetFunction
  * @returns {Promise<OcaDynamicsFunction>}
+ *   A promise which resolves to a single value of type :class:`OcaDynamicsFunction`.
  */
 /**
- * Sets the value of the Function property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Function property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetFunction
- * @param Func {OcaDynamicsFunction}
+ * @param {OcaDynamicsFunction} Func
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Ratio property. The return value indicates
- * whether the property was successfully retrieved. GetRatio() is a
- * DEPRECATED method. Please use <b>GetSlope()</b> instead.
+ * Gets the value of the Ratio property. The return value indicates whether the property was successfully retrieved. GetRatio() is a DEPRECATED method. Please use  **GetSlope()**  instead.
+ * The return values of this method are
+ *
+ * - Ratio of type ``number``
+ * - minRatio of type ``number``
+ * - maxRatio of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetRatio
- * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Ratio property. The return value indicates
- * whether the property was successfully set. SetRatio() is a DEPRECATED
- * method. Please use <b>SetSlope()</b> instead.
+ * Sets the value of the Ratio property. The return value indicates whether the property was successfully set. SetRatio() is a DEPRECATED method. Please use  **SetSlope()**  instead.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetRatio
- * @param Ratio {OcaFloat32}
+ * @param {number} Ratio
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Threshold property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value of the Threshold property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Threshold of type :class:`OcaDBr`
+ * - minThreshold of type ``number``
+ * - maxThreshold of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetThreshold
- * @returns {Promise<Arguments<OcaDBr,OcaDBz,OcaDBz>>}
+ * @returns {Promise<Arguments<OcaDBr,number,number>>}
  */
 /**
- * Sets the value of the Threshold property. The return value indicates
- * if the value was successfully set.
- * @method RemoteControlClasses.OcaDynamics#SetThreshold
- * @param threshold {OcaDBr}
+ * Sets the value of the Threshold property. The return value indicates if the value was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDynamics#SetThreshold
+ * @param {OcaDBr} threshold
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ThresholdPresentationUnits property. The return
- * value indicates if the value was successfully retrieved.
+ * Gets the value of the ThresholdPresentationUnits property. The return value indicates if the value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDynamics#GetThresholdPresentationUnits
  * @returns {Promise<OcaPresentationUnit>}
+ *   A promise which resolves to a single value of type :class:`OcaPresentationUnit`.
  */
 /**
- * Sets the value of the ThresholdPresentationUnits property. The return
- * value indicates if the value was successfully set.
- * @method RemoteControlClasses.OcaDynamics#SetThresholdPresentationUnits
- * @param Units {OcaPresentationUnit}
+ * Sets the value of the ThresholdPresentationUnits property. The return value indicates if the value was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDynamics#SetThresholdPresentationUnits
+ * @param {OcaPresentationUnit} Units
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Sets the value of the DetectorLaw property. The return value indicates
- * if the value was successfully set.
+ * Sets the value of the DetectorLaw property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#GetDetectorLaw
  * @returns {Promise<OcaLevelDetectionLaw>}
+ *   A promise which resolves to a single value of type :class:`OcaLevelDetectionLaw`.
  */
 /**
- * Sets the value of the DetectorLaw property. The return value indicates
- * if the value was successfully set.
+ * Sets the value of the DetectorLaw property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetDetectorLaw
- * @param Law {OcaLevelDetectionLaw}
+ * @param {OcaLevelDetectionLaw} Law
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the AttackTime property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value of the AttackTime property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetAttackTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the AttackTime property. The return value indicates
- * if the value was successfully set.
+ * Sets the value of the AttackTime property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetAttackTime
- * @param Time {OcaTimeInterval}
+ * @param {number} Time
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ReleaseTime property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value of the ReleaseTime property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetReleaseTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the ReleaseTime property. The return value indicates
- * if the value was successfully set.
+ * Sets the value of the ReleaseTime property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetReleaseTime
- * @param Time {OcaTimeInterval}
+ * @param {number} Time
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the HoldTime property. The return value indicates if
- * the value was successfully retrieved.
+ * Gets the value of the HoldTime property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetHoldTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the HoldTime property. The return value indicates if
- * the value was successfully set.
+ * Sets the value of the HoldTime property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetHoldTime
- * @param Time {OcaTimeInterval}
+ * @param {number} Time
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the DynamicGainFLoor property. The return value
- * indicates if the value was successfully retrieved.
+ * Gets the value of the DynamicGainFLoor property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Limit of type ``number``
+ * - minLimit of type ``number``
+ * - maxLimit of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetDynamicGainFloor
- * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DynamicGainFloor property. The return value
- * indicates if the value was successfully set.
+ * Sets the value of the DynamicGainFloor property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetDynamicGainFloor
- * @param Limit {OcaDB}
+ * @param {number} Limit
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the DynamicGainCeiling property. The return value
- * indicates if the value was successfully retrieved.
+ * Gets the value of the DynamicGainCeiling property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Limit of type ``number``
+ * - minLimit of type ``number``
+ * - maxLimit of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetDynamicGainCeiling
- * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DynamicGainCeiling property. The return value
- * indicates if the value was successfully set.
+ * Sets the value of the DynamicGainCeiling property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetDynamicGainCeiling
- * @param Limit {OcaDB}
+ * @param {number} Limit
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the KneeParameter property. The return value
- * indicates if the value was successfully retrieved.
+ * Gets the value of the KneeParameter property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Parameter of type ``number``
+ * - minParameter of type ``number``
+ * - maxParameter of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetKneeParameter
- * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the KneeParameter property. The return value
- * indicates if the value was successfully set.
+ * Sets the value of the KneeParameter property. The return value indicates if the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetKneeParameter
- * @param Parameter {OcaFloat32}
+ * @param {number} Parameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Slope property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Slope property. The return value indicates whether the property was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Slope of type ``number``
+ * - minSlope of type ``number``
+ * - maxSlope of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamics#GetSlope
- * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Slope property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Slope property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetSlope
- * @param Slope {OcaFloat32}
+ * @param {number} Slope
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets some or all dynamics parameters. The return value indicates if
- * the parameters were successfully set. The action of this method is
- * atomic - if any of the value changes fails, none of the changes are
- * made.
+ * Sets some or all dynamics parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+ *
  * @method RemoteControlClasses.OcaDynamics#SetMultiple
- * @param Mask {OcaParameterMask}
+ * @param {int} Mask
  *
- * @param Function {OcaDynamicsFunction}
+ * @param {OcaDynamicsFunction} Function
  *
- * @param Threshold {OcaDBr}
+ * @param {OcaDBr} Threshold
  *
- * @param ThresholdPresentationUnits {OcaPresentationUnit}
+ * @param {OcaPresentationUnit} ThresholdPresentationUnits
  *
- * @param DetectorLaw {OcaLevelDetectionLaw}
+ * @param {OcaLevelDetectionLaw} DetectorLaw
  *
- * @param AttackTime {OcaTimeInterval}
+ * @param {number} AttackTime
  *
- * @param ReleaseTime {OcaTimeInterval}
+ * @param {number} ReleaseTime
  *
- * @param HoldTime {OcaTimeInterval}
+ * @param {number} HoldTime
  *
- * @param DynamicGainCeiling {OcaDB}
+ * @param {number} DynamicGainCeiling
  *
- * @param DynamicGainFloor {OcaDB}
+ * @param {number} DynamicGainFloor
  *
- * @param Slope {OcaFloat32}
+ * @param {number} Slope
  *
- * @param KneeParameter {OcaFloat32}
+ * @param {number} KneeParameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Triggered changes in the remote object.
+ * The property ``Triggered`` is described in the AES70 standard as follows.
  * Read-only property that indicates whether the dynamics processor is
  * currently triggered (i.e. the signal level is above upper threshold or
  * below lower threshold). This property can be monitored via a periodic
  * event subscription.
- * @member RemoteControlClasses.OcaDynamics#OnTriggeredChanged {PropertyEvent<OcaBoolean>} - This event is emitted when Triggered changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaDynamics#OnTriggeredChanged
  */
 /**
+ * This event is emitted when the property DynamicGain changes in the remote object.
+ * The property ``DynamicGain`` is described in the AES70 standard as follows.
  * Current instantaneous gain of dynamics object. Readonly.
- * @member RemoteControlClasses.OcaDynamics#OnDynamicGainChanged {PropertyEvent<OcaDB>} - This event is emitted when DynamicGain changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnDynamicGainChanged
  */
 /**
+ * This event is emitted when the property Function changes in the remote object.
+ * The property ``Function`` is described in the AES70 standard as follows.
  * Dynamics element function - compressor, limiter, expander, etc.
- * @member RemoteControlClasses.OcaDynamics#OnFunctionChanged {PropertyEvent<OcaDynamicsFunction>} - This event is emitted when Function changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaDynamicsFunction>} RemoteControlClasses.OcaDynamics#OnFunctionChanged
  */
 /**
+ * This event is emitted when the property Ratio changes in the remote object.
+ * The property ``Ratio`` is described in the AES70 standard as follows.
  * DEPRECATED PROPERTY - please use property <b>Slope </b>instead.
  * Compression or expansion ratio. For Function = Compress or Limit,
  * value is d(input amplitude)/d(output amplitude). For Function = Expand
  * or Gate, value is d(output amplitude)/d(input amplitude).
- * @member RemoteControlClasses.OcaDynamics#OnRatioChanged {PropertyEvent<OcaFloat32>} - This event is emitted when Ratio changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnRatioChanged
  */
 /**
+ * This event is emitted when the property Threshold changes in the remote object.
+ * The property ``Threshold`` is described in the AES70 standard as follows.
  * Compression or expansion threshold.
- * @member RemoteControlClasses.OcaDynamics#OnThresholdChanged {PropertyEvent<OcaDBr>} - This event is emitted when Threshold changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaDBr>} RemoteControlClasses.OcaDynamics#OnThresholdChanged
  */
 /**
+ * This event is emitted when the property ThresholdPresentationUnits changes in the remote object.
+ * The property ``ThresholdPresentationUnits`` is described in the AES70 standard as follows.
  * Compression or expansion threshold presentation units.
- * @member RemoteControlClasses.OcaDynamics#OnThresholdPresentationUnitsChanged {PropertyEvent<OcaPresentationUnit>} - This event is emitted when ThresholdPresentationUnits changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaPresentationUnit>} RemoteControlClasses.OcaDynamics#OnThresholdPresentationUnitsChanged
  */
 /**
- * This was not documented in the OCA standard.
- * @member RemoteControlClasses.OcaDynamics#OnDetectorLawChanged {PropertyEvent<OcaLevelDetectionLaw>} - This event is emitted when DetectorLaw changes in the remote object.
+ * This event is emitted when the property DetectorLaw changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaLevelDetectionLaw>} RemoteControlClasses.OcaDynamics#OnDetectorLawChanged
  */
 /**
+ * This event is emitted when the property AttackTime changes in the remote object.
+ * The property ``AttackTime`` is described in the AES70 standard as follows.
  * Attack time in seconds.
- * @member RemoteControlClasses.OcaDynamics#OnAttackTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when AttackTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnAttackTimeChanged
  */
 /**
+ * This event is emitted when the property ReleaseTime changes in the remote object.
+ * The property ``ReleaseTime`` is described in the AES70 standard as follows.
  * Release time in seconds.
- * @member RemoteControlClasses.OcaDynamics#OnReleaseTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when ReleaseTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnReleaseTimeChanged
  */
 /**
+ * This event is emitted when the property HoldTime changes in the remote object.
+ * The property ``HoldTime`` is described in the AES70 standard as follows.
  * Hold time in seconds.
- * @member RemoteControlClasses.OcaDynamics#OnHoldTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when HoldTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnHoldTimeChanged
  */
 /**
+ * This event is emitted when the property DynamicGainCeiling changes in the remote object.
+ * The property ``DynamicGainCeiling`` is described in the AES70 standard as follows.
  * Upper limit for DynamicGain
- * @member RemoteControlClasses.OcaDynamics#OnDynamicGainCeilingChanged {PropertyEvent<OcaDB>} - This event is emitted when DynamicGainCeiling changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnDynamicGainCeilingChanged
  */
 /**
+ * This event is emitted when the property DynamicGainFloor changes in the remote object.
+ * The property ``DynamicGainFloor`` is described in the AES70 standard as follows.
  * Lower limit for for DynamicGain
- * @member RemoteControlClasses.OcaDynamics#OnDynamicGainFloorChanged {PropertyEvent<OcaDB>} - This event is emitted when DynamicGainFloor changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnDynamicGainFloorChanged
  */
 /**
+ * This event is emitted when the property KneeParameter changes in the remote object.
+ * The property ``KneeParameter`` is described in the AES70 standard as follows.
  * Soft knee parameter. Interpretation is device-dependent.
- * @member RemoteControlClasses.OcaDynamics#OnKneeParameterChanged {PropertyEvent<OcaFloat32>} - This event is emitted when KneeParameter changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnKneeParameterChanged
  */
 /**
+ * This event is emitted when the property Slope changes in the remote object.
+ * The property ``Slope`` is described in the AES70 standard as follows.
  * Slope of transfer function = d(output amplitude) / d(input amplitude).
  * See notes for class OcaDynamicsCurve for further detail. Note that the
  * definition of this value does not depend on the value of property
  * Function.
- * @member RemoteControlClasses.OcaDynamics#OnSlopeChanged {PropertyEvent<OcaFloat32>} - This event is emitted when Slope changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamics#OnSlopeChanged
  */

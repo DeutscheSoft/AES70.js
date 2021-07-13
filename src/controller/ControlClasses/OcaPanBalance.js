@@ -29,40 +29,56 @@ export const OcaPanBalance = make_control_class(
 );
 
 /**
- * Gets the value and limits of the Position property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the Position property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Position of type ``number``
+ * - minPosition of type ``number``
+ * - maxPosition of type ``number``
+ *
  * @method RemoteControlClasses.OcaPanBalance#GetPosition
- * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Position property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Position property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaPanBalance#SetPosition
- * @param Position {OcaFloat32}
+ * @param {number} Position
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value and limits of the MidpointGain property. The return
- * value indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the MidpointGain property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Gain of type ``number``
+ * - minGain of type ``number``
+ * - maxGain of type ``number``
+ *
  * @method RemoteControlClasses.OcaPanBalance#GetMidpointGain
- * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the MidpointGain property. The return value
- * indicates whether the property was successfully set.
- * @method RemoteControlClasses.OcaPanBalance#SetMidpointGain
- * @param Gain {OcaDB}
+ * Sets the value of the MidpointGain property. The return value indicates whether the property was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaPanBalance#SetMidpointGain
+ * @param {number} Gain
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Position changes in the remote object.
+ * The property ``Position`` is described in the AES70 standard as follows.
  * Pan position. Range = -1.0 to +1.0. -1.0 is 100% left, +1.0 is 100%
  * right.
- * @member RemoteControlClasses.OcaPanBalance#OnPositionChanged {PropertyEvent<OcaFloat32>} - This event is emitted when Position changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaPanBalance#OnPositionChanged
  */
 /**
+ * This event is emitted when the property MidpointGain changes in the remote object.
+ * The property ``MidpointGain`` is described in the AES70 standard as follows.
  * Midpoint gain. Normally, max=0dB, min=-6dB. May be readonly for
  * pan/balance objects with fixed midpoint gains.
- * @member RemoteControlClasses.OcaPanBalance#OnMidpointGainChanged {PropertyEvent<OcaDB>} - This event is emitted when MidpointGain changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaPanBalance#OnMidpointGainChanged
  */

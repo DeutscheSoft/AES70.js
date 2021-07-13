@@ -2,10 +2,11 @@
  * This file has been generated.
  */
 
-/**
- * This was not documented in the OCA standard.
- */
 export class OcaClassIdentification {
+  /**
+   * This was not documented in the OCA standard.
+   * @class OcaClassIdentification
+   */
   constructor(ClassID, ClassVersion) {
     /**
      * This was not documented in the OCA standard.

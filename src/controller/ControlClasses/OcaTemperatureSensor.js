@@ -21,12 +21,20 @@ export const OcaTemperatureSensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the <b>Reading </b>property. The return
- * value indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the  **Reading** property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Reading of type ``number``
+ * - minReading of type ``number``
+ * - maxReading of type ``number``
+ *
  * @method RemoteControlClasses.OcaTemperatureSensor#GetReading
- * @returns {Promise<Arguments<OcaTemperature,OcaTemperature,OcaTemperature>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
+ * This event is emitted when the property Reading changes in the remote object.
+ * The property ``Reading`` is described in the AES70 standard as follows.
  * Temperature value (Celsius).
- * @member RemoteControlClasses.OcaTemperatureSensor#OnReadingChanged {PropertyEvent<OcaTemperature>} - This event is emitted when Reading changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaTemperatureSensor#OnReadingChanged
  */

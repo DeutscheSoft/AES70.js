@@ -2,21 +2,20 @@
  * This file has been generated.
  */
 
-/**
- * Descriptor of a system interface used by a network. Format is data
- * network type dependent.
- */
 export class OcaNetworkSystemInterfaceDescriptor {
+  /**
+   * Descriptor of a system interface used by a network. Format is data network type dependent.
+   * @class OcaNetworkSystemInterfaceDescriptor
+   */
   constructor(SystemInterfaceParameters, MyNetworkAddress) {
     /**
-     * Parameters for the operating system interface the network uses to do
-     * I/O.
-     * @member RemoteControlClasses.OcaNetworkSystemInterfaceDescriptor#OnSystemInterfaceParametersChanged {PropertyEvent<string>} - This event is emitted when SystemInterfaceParameters changes in the remote object.
+     * Parameters for the operating system interface the network uses to do I/O.
+     * @type string
      */
     this.SystemInterfaceParameters = SystemInterfaceParameters;
     /**
      * The data network address that corresponds to this system interface.
-     * @member RemoteControlClasses.OcaNetworkSystemInterfaceDescriptor#OnMyNetworkAddressChanged {PropertyEvent<OcaNetworkAddress>} - This event is emitted when MyNetworkAddress changes in the remote object.
+     * @type Uint8Array
      */
     this.MyNetworkAddress = MyNetworkAddress;
   }

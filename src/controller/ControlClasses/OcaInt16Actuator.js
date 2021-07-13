@@ -24,20 +24,28 @@ export const OcaInt16Actuator = make_control_class(
 );
 
 /**
- * Gets the value and limits of the <b>Setting </b>property. The return
- * value indicates whether the data was successfully retrieved.
- * @method RemoteControlClasses.OcaInt16Actuator#GetSetting
- * @returns {Promise<Arguments<OcaInt16,OcaInt16,OcaInt16>>}
- */
-/**
- * Sets the <b>Setting </b>property. The return value indicates whether
- * the property was successfully set.
- * @method RemoteControlClasses.OcaInt16Actuator#SetSetting
- * @param Setting {OcaInt16}
+ * Gets the value and limits of the  **Setting** property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - Setting of type ``number``
+ * - minSetting of type ``number``
+ * - maxSetting of type ``number``
+ *
+ * @method RemoteControlClasses.OcaInt16Actuator#GetSetting
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
+ * Sets the  **Setting** property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaInt16Actuator#SetSetting
+ * @param {number} Setting
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Setting changes in the remote object.
+ * The property ``Setting`` is described in the AES70 standard as follows.
  * Int16 setting.
- * @member RemoteControlClasses.OcaInt16Actuator#OnSettingChanged {PropertyEvent<OcaInt16>} - This event is emitted when Setting changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaInt16Actuator#OnSettingChanged
  */

@@ -24,20 +24,28 @@ export const OcaDelay = make_control_class(
 );
 
 /**
- * Gets the value of the DelayTime property. The return value indicates
- * whether the property was successfully retrieved.
- * @method RemoteControlClasses.OcaDelay#GetDelayTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
- */
-/**
- * Sets the value of the DelayTime property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaDelay#SetDelayTime
- * @param delayTime {OcaTimeInterval}
+ * Gets the value of the DelayTime property. The return value indicates whether the property was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
+ * @method RemoteControlClasses.OcaDelay#GetDelayTime
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
+ * Sets the value of the DelayTime property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaDelay#SetDelayTime
+ * @param {number} delayTime
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property DelayTime changes in the remote object.
+ * The property ``DelayTime`` is described in the AES70 standard as follows.
  * Delay in seconds.
- * @member RemoteControlClasses.OcaDelay#OnDelayTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when DelayTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDelay#OnDelayTimeChanged
  */

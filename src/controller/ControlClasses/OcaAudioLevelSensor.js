@@ -3,9 +3,7 @@ import { OcaLevelSensor } from './OcaLevelSensor.js';
 import { OcaLevelMeterLaw } from '../../OCP1/OcaLevelMeterLaw.js';
 
 /**
- * Child of <b>OcaLevelSensor </b>that returns an audio meter reading in
- * dB relative to a known reference level, and whose value has been
- * calculated by the selected averaging algorithm.
+ * Child of  **OcaLevelSensor** that returns an audio meter reading in dB relative to a known reference level, and whose value has been calculated by the selected averaging algorithm.
  * @extends RemoteControlClasses.OcaLevelSensor
  * @class OcaAudioLevelSensor
  * @memberof RemoteControlClasses
@@ -26,23 +24,26 @@ export const OcaAudioLevelSensor = make_control_class(
 );
 
 /**
- * Gets the value of the Law property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the Law property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaAudioLevelSensor#GetLaw
  * @returns {Promise<OcaLevelMeterLaw>}
+ *   A promise which resolves to a single value of type :class:`OcaLevelMeterLaw`.
  */
 /**
- * Sets the value of the Law property. The return value indicates whether
- * the property was successfully set. Only implemented for objects whose
- * Law property is read/write.
- * @method RemoteControlClasses.OcaAudioLevelSensor#SetLaw
- * @param law {OcaLevelMeterLaw}
+ * Sets the value of the Law property. The return value indicates whether the property was successfully set. Only implemented for objects whose Law property is read/write.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaAudioLevelSensor#SetLaw
+ * @param {OcaLevelMeterLaw} law
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Law changes in the remote object.
+ * The property ``Law`` is described in the AES70 standard as follows.
  * Enum that defines metering algorithm, including averaging
  * characteristics and, in some cases, reference level. Readonly in some
  * objects.
- * @member RemoteControlClasses.OcaAudioLevelSensor#OnLawChanged {PropertyEvent<OcaLevelMeterLaw>} - This event is emitted when Law changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaLevelMeterLaw>} RemoteControlClasses.OcaAudioLevelSensor#OnLawChanged
  */

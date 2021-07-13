@@ -14,7 +14,22 @@ function now() {
 }
 
 /**
- * Connection base class.
+ * Connection base class. It extends :class:`Events` and defines two events:
+ *
+ * - ``close`` is emitted when this connection has been closed. This event has
+ *   no parameters.
+ * - ``error`` is emitted when this connection has been closed with an error.
+ *   This event emits the error object as a single parameter.
+ *
+ * @param {object} options
+ *      The options.
+ * @param {number} [options.batch=65536]
+ *      AES70 messages are batched into single write calls up until this limit.
+ *      This can improve network performance and reduce packet overhead when
+ *      many small commands are send at the same time. This often happens e.g.
+ *      after initially connecting to a device and the device tree is
+ *      enumerated. Defaults to 64 kilobytes by default but is overwritten e.g.
+ *      by :class:`UDPConnection`.
  */
 export class Connection extends Events
 {

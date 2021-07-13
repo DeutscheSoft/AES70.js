@@ -24,20 +24,24 @@ export const OcaMute = make_control_class(
 );
 
 /**
- * Gets the current mute state. The return value indicates whether the
- * state was successfully retrieved.
+ * Gets the current mute state. The return value indicates whether the state was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaMute#GetState
  * @returns {Promise<OcaMuteState>}
+ *   A promise which resolves to a single value of type :class:`OcaMuteState`.
  */
 /**
- * Sets the mute state (i.e. value of the State property). The return
- * value indicates whether the state was successfully set.
- * @method RemoteControlClasses.OcaMute#SetState
- * @param state {OcaMuteState}
+ * Sets the mute state (i.e. value of the State property). The return value indicates whether the state was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaMute#SetState
+ * @param {OcaMuteState} state
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property State changes in the remote object.
+ * The property ``State`` is described in the AES70 standard as follows.
  * Current state of the mute.
- * @member RemoteControlClasses.OcaMute#OnStateChanged {PropertyEvent<OcaMuteState>} - This event is emitted when State changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaMuteState>} RemoteControlClasses.OcaMute#OnStateChanged
  */

@@ -10,8 +10,7 @@ import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * Abstract base class for classes that represent the device's
- * application and support functions.
+ * Abstract base class for classes that represent the device's application and support functions.
  * @extends RemoteControlClasses.OcaRoot
  * @class OcaWorker
  * @memberof RemoteControlClasses
@@ -49,127 +48,153 @@ export const OcaWorker = make_control_class(
 );
 
 /**
- * Gets the value of the Enabled property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Enabled property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaWorker#GetEnabled
- * @returns {Promise<OcaBoolean>}
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the value of the Enabled property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Enabled property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaWorker#SetEnabled
- * @param enabled {OcaBoolean}
+ * @param {boolean} enabled
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Adds an input or output port.. The return value indicates whether the
- * port was successfully added.
- * @method RemoteControlClasses.OcaWorker#AddPort
- * @param Label {OcaString}
+ * Adds an input or output port.. The return value indicates whether the port was successfully added.
  *
- * @param Mode {OcaPortMode}
+ * @method RemoteControlClasses.OcaWorker#AddPort
+ * @param {string} Label
+ *
+ * @param {OcaPortMode} Mode
  *
  * @returns {Promise<OcaPortID>}
+ *   A promise which resolves to a single value of type :class:`OcaPortID`.
  */
 /**
- * Deletes an input or output port.. The return value indicates whether
- * the port was successfully deleted.
+ * Deletes an input or output port.. The return value indicates whether the port was successfully deleted.
+ *
  * @method RemoteControlClasses.OcaWorker#DeletePort
- * @param ID {OcaPortID}
+ * @param {OcaPortID} ID
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the list of ports owned by the Worker object. The return value
- * indicates whether the list was successfully retrieved.
+ * Gets the list of ports owned by the Worker object. The return value indicates whether the list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaWorker#GetPorts
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaPort[]>}
+ *   A promise which resolves to a single value of type ``OcaPort[]``.
  */
 /**
- * Gets the name of the designated port. The return value indicates
- * whether the name was successfully retrieved.
+ * Gets the name of the designated port. The return value indicates whether the name was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaWorker#GetPortName
- * @param PortID {OcaPortID}
+ * @param {OcaPortID} PortID
  *
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the name of the designated port. The return value indicates
- * whether the name was successfully set.
+ * Sets the name of the designated port. The return value indicates whether the name was successfully set.
+ *
  * @method RemoteControlClasses.OcaWorker#SetPortName
- * @param PortID {OcaPortID}
+ * @param {OcaPortID} PortID
  *
- * @param Name {OcaString}
+ * @param {string} Name
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Label property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaWorker#GetLabel
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the Label property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Label property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaWorker#SetLabel
- * @param label {OcaString}
+ * @param {string} label
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Owner property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaWorker#GetOwner
- * @returns {Promise<OcaONo>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the value of the Latency property. The return value indicates
- * whether the property was successfully retrieved.
- * @method RemoteControlClasses.OcaWorker#GetLatency
- * @returns {Promise<OcaTimeInterval>}
- */
-/**
- * Sets the value of the Latency property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaWorker#SetLatency
- * @param latency {OcaTimeInterval}
+ * Gets the value of the Latency property. The return value indicates whether the property was successfully retrieved.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaWorker#GetLatency
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns path from the given object down to root. The return value
- * indicates whether the operation succeeded. Added in version 2.
+ * Sets the value of the Latency property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaWorker#SetLatency
+ * @param {number} latency
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Returns path from the given object down to root. The return value indicates whether the operation succeeded. Added in version 2.
+ * The return values of this method are
+ *
+ * - NamePath of type ``string[]``
+ * - ONoPath of type ``number[]``
+ *
  * @method RemoteControlClasses.OcaWorker#GetPath
- * @returns {Promise<Arguments<OcaNamePath,OcaONoPath>>}
+ * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
+ * This event is emitted when the property Enabled changes in the remote object.
+ * The property ``Enabled`` is described in the AES70 standard as follows.
  * Read/write property that indicates whether the worker object is
  * enabled in the device. If an object is disabled it cannot be used by
  * the application. Note that the behavior of a disabled object depends
  * on the object itself (e.g. a disabled chime generator is silent, a
  * disabled equalizer is flat, etc.).
- * @member RemoteControlClasses.OcaWorker#OnEnabledChanged {PropertyEvent<OcaBoolean>} - This event is emitted when Enabled changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaWorker#OnEnabledChanged
  */
 /**
+ * This event is emitted when the property Ports changes in the remote object.
+ * The property ``Ports`` is described in the AES70 standard as follows.
  * The list of (input and output) OCA ports the worker object has. Note
  * that a worker object can have no ports (in which case the list is
  * empty).
- * @member RemoteControlClasses.OcaWorker#OnPortsChanged {PropertyEvent<OcaList>} - This event is emitted when Ports changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaPort[]>} RemoteControlClasses.OcaWorker#OnPortsChanged
  */
 /**
+ * This event is emitted when the property Label changes in the remote object.
+ * The property ``Label`` is described in the AES70 standard as follows.
  * Specific label of the worker. Can be used to provide human readable
  * information about the worker. The label can be get and set over the
  * network.
- * @member RemoteControlClasses.OcaWorker#OnLabelChanged {PropertyEvent<OcaString>} - This event is emitted when Label changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaWorker#OnLabelChanged
  */
 /**
+ * This event is emitted when the property Owner changes in the remote object.
+ * The property ``Owner`` is described in the AES70 standard as follows.
  * Object number of block that contains this worker.
- * @member RemoteControlClasses.OcaWorker#OnOwnerChanged {PropertyEvent<OcaONo>} - This event is emitted when Owner changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaWorker#OnOwnerChanged
  */
 /**
+ * This event is emitted when the property Latency changes in the remote object.
+ * The property ``Latency`` is described in the AES70 standard as follows.
  * Processing latency of this object. Optional. Readonly or readwrite,
  * depending on implementation.
- * @member RemoteControlClasses.OcaWorker#OnLatencyChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when Latency changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaWorker#OnLatencyChanged
  */

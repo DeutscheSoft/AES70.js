@@ -4,11 +4,13 @@ import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * Optional manager that provides application diagnostic aids. Unlike
- * other manager classes, OcaDiagnosticManager may be subclassed to
- * provide proprietary application diagnostic enhancements. <ul> <li>May
- * be instantiated once in any device. </li> <li>If instantiated, object
- * number must be 13.</li> </ul>
+ * Optional manager that provides application diagnostic aids. Unlike other manager classes, OcaDiagnosticManager may be subclassed to provide proprietary application diagnostic enhancements.
+ *
+ *  - May be instantiated once in any device.
+ *
+ *
+ *  - If instantiated, object number must be 13.
+ *
  * @extends RemoteControlClasses.OcaManager
  * @class OcaDiagnosticManager
  * @memberof RemoteControlClasses
@@ -26,10 +28,11 @@ export const OcaDiagnosticManager = make_control_class(
 );
 
 /**
- * Retrieves a text description of the given object's lock status. Return
- * value indicates success of the retrieval.
- * @method RemoteControlClasses.OcaDiagnosticManager#GetLockStatus
- * @param ONo {OcaONo}
+ * Retrieves a text description of the given object's lock status. Return value indicates success of the retrieval.
  *
- * @returns {Promise<OcaString>}
+ * @method RemoteControlClasses.OcaDiagnosticManager#GetLockStatus
+ * @param {number} ONo
+ *
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */

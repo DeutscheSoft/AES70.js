@@ -5,7 +5,7 @@ import * as WebSocket from 'ws';
 import { ClientConnection } from './client_connection.js';
 
 /**
- * {@link ClientConnection} subclass which implements OCP.1 with WebSocket
+ * :class:`ClientConnection` subclass which implements OCP.1 with WebSocket
  * transport.
  */
 export class WebSocketConnection extends ClientConnection {

@@ -10,8 +10,7 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * Abstract base class from which the application network classes
- * inherit.
+ * Abstract base class from which the application network classes inherit.
  * @extends RemoteControlClasses.OcaRoot
  * @class OcaApplicationNetwork
  * @memberof RemoteControlClasses
@@ -68,112 +67,124 @@ export const OcaApplicationNetwork = make_control_class(
 );
 
 /**
- * Gets the network's user-specified label. Return status indicates
- * whether the operation was successful.
+ * Gets the network's user-specified label. Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#GetLabel
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the network's user-specified label. Return status indicates
- * whether the operation was successful.
+ * Sets the network's user-specified label. Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#SetLabel
- * @param Label {OcaString}
+ * @param {string} Label
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the ONo of this network's containing block. Return status
- * indicates whether the operation was successful.
+ * Gets the ONo of this network's containing block. Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#GetOwner
- * @returns {Promise<OcaONo>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the network's IDAdvertised. Return status indicates whether the
- * operation was successful.
+ * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#GetServiceID
- * @returns {Promise<OcaApplicationNetworkServiceID>}
+ * @returns {Promise<Uint8Array>}
+ *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
- * Sets the network's IDAdvertised. Return status indicates whether the
- * operation was successful.
+ * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#SetServiceID
- * @param Name {OcaApplicationNetworkServiceID}
+ * @param {Uint8Array} Name
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Retrieves the list of this network's system interface descriptor.
- * Return status indicates whether the list was successfully retrieved.
+ * Retrieves the list of this network's system interface descriptor. Return status indicates whether the list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#GetSystemInterfaces
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaNetworkSystemInterfaceDescriptor[]>}
+ *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceDescriptor[]``.
  */
 /**
- * Sets the network's System Interface Descriptor(s). Return status
- * indicates whether the operation was successful. Optional method;
- * System Interface Descriptor may be set at construction time.
- * @method RemoteControlClasses.OcaApplicationNetwork#SetSystemInterfaces
- * @param Descriptors {OcaList}
+ * Sets the network's System Interface Descriptor(s). Return status indicates whether the operation was successful. Optional method; System Interface Descriptor may be set at construction time.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaApplicationNetwork#SetSystemInterfaces
+ * @param {OcaNetworkSystemInterfaceDescriptor[]} Descriptors
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Retrieves the network's state. Return status indicates whether the
- * status was successfully retrieved.
+ * Retrieves the network's state. Return status indicates whether the status was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#GetState
  * @returns {Promise<OcaApplicationNetworkState>}
+ *   A promise which resolves to a single value of type :class:`OcaApplicationNetworkState`.
  */
 /**
- * Retrieves the most recent error code. Return status indicates whether
- * the operation was successful. Note that a second parameter 'Reset' is
- * removed in v02 of this class.
- * @method RemoteControlClasses.OcaApplicationNetwork#GetErrorCode
- * @returns {Promise<OcaUint16>}
- */
-/**
- * Control the application network. Return value indicates success of
- * command execution.
- * @method RemoteControlClasses.OcaApplicationNetwork#Control
- * @param Command {OcaApplicationNetworkCommand}
+ * Retrieves the most recent error code. Return status indicates whether the operation was successful. Note that a second parameter 'Reset' is removed in v02 of this class.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaApplicationNetwork#GetErrorCode
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns path from given object down to root. The return value
- * indicates whether the operation succeeded.
+ * Control the application network. Return value indicates success of command execution.
+ *
+ * @method RemoteControlClasses.OcaApplicationNetwork#Control
+ * @param {OcaApplicationNetworkCommand} Command
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Returns path from given object down to root. The return value indicates whether the operation succeeded.
+ * The return values of this method are
+ *
+ * - NamePath of type ``string[]``
+ * - ONoPath of type ``number[]``
+ *
  * @method RemoteControlClasses.OcaApplicationNetwork#GetPath
- * @returns {Promise<Arguments<OcaNamePath,OcaONoPath>>}
+ * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
- * Specific label of the network. Can be used to provide human readable
- * information about the network. The label can be get and set over any
- * network.
- */
-/**
- * Object number of block that contains this network.
- */
-/**
+ * This event is emitted when the property ServiceID changes in the remote object.
+ * The property ``ServiceID`` is described in the AES70 standard as follows.
  * Name or GUID that this device publishes in the network's
  * directory/discovery system to designate the services offered via this
  * application network object. This may or may not be the same as the
  * device's host name, if any. For data network types that have host
  * names (e.g. IP networks), the authoritative copy of the host name is
  * in the system interface ID.
- * @member RemoteControlClasses.OcaApplicationNetwork#OnServiceIDChanged {PropertyEvent<OcaApplicationNetworkServiceID>} - This event is emitted when ServiceID changes in the remote object.
+ *
+ * @member {PropertyEvent<Uint8Array>} RemoteControlClasses.OcaApplicationNetwork#OnServiceIDChanged
  */
 /**
+ * This event is emitted when the property SystemInterfaces changes in the remote object.
+ * The property ``SystemInterfaces`` is described in the AES70 standard as follows.
  * Collection of identifiers of system interface descriptor(s) used by
  * the network. A "system interface" is the system service through which
  * network traffic passes into and out of the device -- e.g. a socket.
  * The descriptor format is system and network dependent; for OCA
  * purposes, it is maintained as a variable-length blob which the
  * protocol does not inspect.
- * @member RemoteControlClasses.OcaApplicationNetwork#OnSystemInterfacesChanged {PropertyEvent<OcaList>} - This event is emitted when SystemInterfaces changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkSystemInterfaceDescriptor[]>} RemoteControlClasses.OcaApplicationNetwork#OnSystemInterfacesChanged
  */
 /**
+ * This event is emitted when the property State changes in the remote object.
+ * The property ``State`` is described in the AES70 standard as follows.
  * Operational state of the network.
- * @member RemoteControlClasses.OcaApplicationNetwork#OnStateChanged {PropertyEvent<OcaApplicationNetworkState>} - This event is emitted when State changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaApplicationNetworkState>} RemoteControlClasses.OcaApplicationNetwork#OnStateChanged
  */
 /**
+ * This event is emitted when the property ErrorCode changes in the remote object.
+ * The property ``ErrorCode`` is described in the AES70 standard as follows.
  * Most recent error code. 0=no error.
- * @member RemoteControlClasses.OcaApplicationNetwork#OnErrorCodeChanged {PropertyEvent<OcaUint16>} - This event is emitted when ErrorCode changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaApplicationNetwork#OnErrorCodeChanged
  */

@@ -2,10 +2,7 @@ import { make_control_class } from '../Base.js';
 import { OcaSensor } from './OcaSensor.js';
 
 /**
- * Sensor for device identification mechanism. The idea of this mechanism
- * is that there is some kind of control -- a pushbutton, for instance --
- * that the user depresses to send a device identification event to the
- * controller. Such mechanisms aid in the setup of networks.
+ * Sensor for device identification mechanism. The idea of this mechanism is that there is some kind of control -- a pushbutton, for instance -- that the user depresses to send a device identification event to the controller. Such mechanisms aid in the setup of networks.
  * @extends RemoteControlClasses.OcaSensor
  * @class OcaIdentificationSensor
  * @memberof RemoteControlClasses
@@ -23,9 +20,8 @@ export const OcaIdentificationSensor = make_control_class(
 );
 
 /**
- * Event that is emitted when someone actuates the device identification
- * control.
- * @member RemoteControlClasses.OcaIdentificationSensor#OnIdentify {Event} -
+ * Event that is emitted when someone actuates the device identification control.
+ * @member RemoteControlClasses.OcaIdentificationSensor#OnIdentify {Event}
  * Event that is emitted when someone actuates the device identification
  * control.
  */

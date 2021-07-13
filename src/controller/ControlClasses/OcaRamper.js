@@ -10,18 +10,16 @@ import { OcaTimeMode } from '../../OCP1/OcaTimeMode.js';
 import { OcaUint64 } from '../../OCP1/OcaUint64.js';
 
 /**
- * Agent that gradually changes a property setting from one value to
- * another. Works on a scalar numeric or boolean property of a specified
- * object. Does not work for array, list, map, struct, or string
- * properties. Contains timer features to allow ramps to start
- * immediately or at any time in the future. This is a weakly typed
- * class. All ramping parameters are specified as a <b>OcaFloat64
- * </b>numbers. <ul> <li>For unsigned integer targets, the ramping
- * parameters are coerced to <b>OcaUint64 </b>before comparing. </li>
- * <li>For signed integer targets, the ramping parameters are coerced to
- * <b>OcaInt64 </b>before comparing. </li> <li>For boolean values, the
- * the ramping parameters are coerced to <b>OcaUint8. </b>True is
- * assigned the value One, False is assigned the value Zero.</li> </ul>
+ * Agent that gradually changes a property setting from one value to another. Works on a scalar numeric or boolean property of a specified object. Does not work for array, list, map, struct, or string properties. Contains timer features to allow ramps to start immediately or at any time in the future. This is a weakly typed class. All ramping parameters are specified as a  **OcaFloat64** numbers.
+ *
+ *  - For unsigned integer targets, the ramping parameters are coerced to  **OcaUint64** before comparing.
+ *
+ *
+ *  - For signed integer targets, the ramping parameters are coerced to  **OcaInt64** before comparing.
+ *
+ *
+ *  - For boolean values, the the ramping parameters are coerced to  **OcaUint8.** True is assigned the value One, False is assigned the value Zero.
+ *
  * @extends RemoteControlClasses.OcaAgent
  * @class OcaRamper
  * @memberof RemoteControlClasses
@@ -62,132 +60,164 @@ export const OcaRamper = make_control_class(
 );
 
 /**
- * Executes the given ramper command. The return value indicates whether
- * the command was successfully executed.
- * @method RemoteControlClasses.OcaRamper#Control
- * @param Command {OcaRamperCommand}
+ * Executes the given ramper command. The return value indicates whether the command was successfully executed.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaRamper#Control
+ * @param {OcaRamperCommand} Command
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets current state of ramper. The return value indicates whether the
- * state was successfully retrieved.
+ * Gets current state of ramper. The return value indicates whether the state was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaRamper#GetState
  * @returns {Promise<OcaRamperState>}
+ *   A promise which resolves to a single value of type :class:`OcaRamperState`.
  */
 /**
- * Gets definition of ramped property. The return value indicates whether
- * the object number was successfully retrieved.
+ * Gets definition of ramped property. The return value indicates whether the object number was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaRamper#GetRampedProperty
  * @returns {Promise<OcaProperty>}
+ *   A promise which resolves to a single value of type :class:`OcaProperty`.
  */
 /**
- * Defines property to be ramped. The return value indicates whether the
- * definition was successful.
- * @method RemoteControlClasses.OcaRamper#SetRampedProperty
- * @param property {OcaProperty}
+ * Defines property to be ramped. The return value indicates whether the definition was successful.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaRamper#SetRampedProperty
+ * @param {OcaProperty} property
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets ramper time mode (absolute or relative). The return value
- * indicates whether the time mode was successfully retrieved.
+ * Gets ramper time mode (absolute or relative). The return value indicates whether the time mode was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaRamper#GetTimeMode
  * @returns {Promise<OcaTimeMode>}
+ *   A promise which resolves to a single value of type :class:`OcaTimeMode`.
  */
 /**
- * Sets ramper time mode (absolute or relative). The return value
- * indicates whether the time mode was successfully set.
+ * Sets ramper time mode (absolute or relative). The return value indicates whether the time mode was successfully set.
+ *
  * @method RemoteControlClasses.OcaRamper#SetTimeMode
- * @param TimeMode {OcaTimeMode}
+ * @param {OcaTimeMode} TimeMode
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets ramp start time. The return value indicates whether the start
- * time was successfully retrieved.
+ * Gets ramp start time. The return value indicates whether the start time was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaRamper#GetStartTime
- * @returns {Promise<OcaTimeNTP>}
+ * @returns {Promise<number|BigInt>}
+ *   A promise which resolves to a single value of type ``number|BigInt``.
  */
 /**
- * Sets ramper start time. The return value indicates whether the start
- * time was successfully set.
+ * Sets ramper start time. The return value indicates whether the start time was successfully set.
+ *
  * @method RemoteControlClasses.OcaRamper#SetStartTime
- * @param TimeMode {OcaTimeNTP}
+ * @param {number|BigInt} TimeMode
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets ramp duration. The return value indicates whether the duration
- * was successfully retrieved.
+ * Gets ramp duration. The return value indicates whether the duration was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Duration of type ``number``
+ * - miinDuration of type ``number``
+ * - maxDuration of type ``number``
+ *
  * @method RemoteControlClasses.OcaRamper#GetDuration
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets ramp duration. The return value indicates whether the duration
- * was successfully set.
- * @method RemoteControlClasses.OcaRamper#SetDuration
- * @param Duration {OcaTimeInterval}
+ * Sets ramp duration. The return value indicates whether the duration was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaRamper#SetDuration
+ * @param {number} Duration
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Retrieves interpolation law setting. The return value indicates
- * whether the setting was successfully retrieved.
+ * Retrieves interpolation law setting. The return value indicates whether the setting was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaRamper#GetInterpolationLaw
  * @returns {Promise<OcaRamperInterpolationLaw>}
+ *   A promise which resolves to a single value of type :class:`OcaRamperInterpolationLaw`.
  */
 /**
- * Sets ramp interpolation law. The return value indicates whether the
- * law was successfully set.
+ * Sets ramp interpolation law. The return value indicates whether the law was successfully set.
+ *
  * @method RemoteControlClasses.OcaRamper#SetInterpolationLaw
- * @param law {OcaRamperInterpolationLaw}
+ * @param {OcaRamperInterpolationLaw} law
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Retrieves ramp goal value. The return value indicates whether the
- * duration was successfully retrieved.
+ * Retrieves ramp goal value. The return value indicates whether the duration was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaRamper#GetGoal
- * @returns {Promise<OcaFloat64>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets ramp goal value. The return value indicates whether the duration
- * was successfully set.
- * @method RemoteControlClasses.OcaRamper#SetGoal
- * @param goal {OcaFloat64}
+ * Sets ramp goal value. The return value indicates whether the duration was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaRamper#SetGoal
+ * @param {number} goal
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property State changes in the remote object.
+ * The property ``State`` is described in the AES70 standard as follows.
  * {Ready, Ramping, Paused, Completed, Disabled} Readonly.
- * @member RemoteControlClasses.OcaRamper#OnStateChanged {PropertyEvent<OcaRamperState>} - This event is emitted when State changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaRamperState>} RemoteControlClasses.OcaRamper#OnStateChanged
  */
 /**
+ * This event is emitted when the property RampedProperty changes in the remote object.
+ * The property ``RampedProperty`` is described in the AES70 standard as follows.
  * Identification of the property being ramped.
- * @member RemoteControlClasses.OcaRamper#OnRampedPropertyChanged {PropertyEvent<OcaProperty>} - This event is emitted when RampedProperty changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaProperty>} RemoteControlClasses.OcaRamper#OnRampedPropertyChanged
  */
 /**
+ * This event is emitted when the property TimeMode changes in the remote object.
+ * The property ``TimeMode`` is described in the AES70 standard as follows.
  * Absolute or Relative time.
- * @member RemoteControlClasses.OcaRamper#OnTimeModeChanged {PropertyEvent<OcaTimeMode>} - This event is emitted when TimeMode changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaTimeMode>} RemoteControlClasses.OcaRamper#OnTimeModeChanged
  */
 /**
+ * This event is emitted when the property StartTime changes in the remote object.
+ * The property ``StartTime`` is described in the AES70 standard as follows.
  * Time at which to start ramp. If <b>TimeMode=Relative</b>, the actual
  * event start time equals the value of <b>StartTime</b> plus the
  * absolute time that <b>StartTime</b> was most recently set. If
  * <b>TimeMode=Absolute</b>, the actual event start time equals the value
  * of <b>StartTime</b>
- * @member RemoteControlClasses.OcaRamper#OnStartTimeChanged {PropertyEvent<OcaTimeNTP>} - This event is emitted when StartTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number|BigInt>} RemoteControlClasses.OcaRamper#OnStartTimeChanged
  */
 /**
+ * This event is emitted when the property Duration changes in the remote object.
+ * The property ``Duration`` is described in the AES70 standard as follows.
  * Duration of ramp period.
- * @member RemoteControlClasses.OcaRamper#OnDurationChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when Duration changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaRamper#OnDurationChanged
  */
 /**
+ * This event is emitted when the property InterpolationLaw changes in the remote object.
+ * The property ``InterpolationLaw`` is described in the AES70 standard as follows.
  * Ramper interpolation law
- * @member RemoteControlClasses.OcaRamper#OnInterpolationLawChanged {PropertyEvent<OcaRamperInterpolationLaw>} - This event is emitted when InterpolationLaw changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaRamperInterpolationLaw>} RemoteControlClasses.OcaRamper#OnInterpolationLawChanged
  */
 /**
+ * This event is emitted when the property Goal changes in the remote object.
+ * The property ``Goal`` is described in the AES70 standard as follows.
  * Final value of ramp. Datatype is target property's datatype.
- * @member RemoteControlClasses.OcaRamper#OnGoalChanged {PropertyEvent<OcaFloat64>} - This event is emitted when Goal changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaRamper#OnGoalChanged
  */

@@ -2,24 +2,25 @@
  * This file has been generated.
  */
 
-/**
- * Multifield descriptor for a pilot tone detector element.
- */
 export class OcaPilotToneDetectorSpec {
+  /**
+   * Multifield descriptor for a pilot tone detector element.
+   * @class OcaPilotToneDetectorSpec
+   */
   constructor(Threshold, Frequency, PollInterval) {
     /**
      * Tone level threshold in dB.
-     * @member RemoteControlClasses.OcaPilotToneDetectorSpec#OnThresholdChanged {PropertyEvent<OcaDBr>} - This event is emitted when Threshold changes in the remote object.
+     * @type OcaDBr
      */
     this.Threshold = Threshold;
     /**
      * Frequency of the measured tone (in Hz).
-     * @member RemoteControlClasses.OcaPilotToneDetectorSpec#OnFrequencyChanged {PropertyEvent<OcaFrequency>} - This event is emitted when Frequency changes in the remote object.
+     * @type number
      */
     this.Frequency = Frequency;
     /**
      * Poll interval in milliseconds.
-     * @member RemoteControlClasses.OcaPilotToneDetectorSpec#OnPollIntervalChanged {PropertyEvent<OcaPeriod>} - This event is emitted when PollInterval changes in the remote object.
+     * @type number
      */
     this.PollInterval = PollInterval;
   }

@@ -33,50 +33,63 @@ export const OcaFilterFIR = make_control_class(
 );
 
 /**
- * Gets the length of the FIR filter. The return value indicates whether
- * the value was successfully retrieved.
+ * Gets the length of the FIR filter. The return value indicates whether the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Length of type ``number``
+ * - minLength of type ``number``
+ * - maxLength of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterFIR#GetLength
- * @returns {Promise<Arguments<OcaUint32,OcaUint32,OcaUint32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Gets the coefficients of the FIR filter. The return value indicates
- * whether the coefficients were successfully retrieved.
+ * Gets the coefficients of the FIR filter. The return value indicates whether the coefficients were successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaFilterFIR#GetCoefficients
- * @returns {Promise<OcaList>}
+ * @returns {Promise<number[]>}
+ *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Sets the value of the properties of the FIR filter. The return value
- * indicates whether the properties were successfully set.
+ * Sets the value of the properties of the FIR filter. The return value indicates whether the properties were successfully set.
+ *
  * @method RemoteControlClasses.OcaFilterFIR#SetCoefficients
- * @param Coefficients {OcaList}
+ * @param {number[]} Coefficients
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the sample rate of the FIR filter. The return value indicates
- * whether the data was successfully retrieved.
+ * Gets the sample rate of the FIR filter. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Rate of type ``number``
+ * - minRate of type ``number``
+ * - maxRate of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterFIR#GetSampleRate
- * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the sample rate of the FIR filter. The return value indicates
- * whether the rate was successfully set.
- * @method RemoteControlClasses.OcaFilterFIR#SetSampleRate
- * @param Rate {OcaFrequency}
+ * Sets the sample rate of the FIR filter. The return value indicates whether the rate was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaFilterFIR#SetSampleRate
+ * @param {number} Rate
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Length of the filter, in samples. Readonly. Value is set when
- * SetCoefficients(...) method executes.
- */
-/**
+ * This event is emitted when the property Coefficients changes in the remote object.
+ * The property ``Coefficients`` is described in the AES70 standard as follows.
  * Array of FIR Coefficients. The size of the array (number of entries)
  * is equal to the Order property plus 1.
- * @member RemoteControlClasses.OcaFilterFIR#OnCoefficientsChanged {PropertyEvent<OcaList>} - This event is emitted when Coefficients changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaFilterFIR#OnCoefficientsChanged
  */
 /**
+ * This event is emitted when the property SampleRate changes in the remote object.
+ * The property ``SampleRate`` is described in the AES70 standard as follows.
  * Sample rate inside the filter. We can't assume it's the same as the
  * device input or output rate.
- * @member RemoteControlClasses.OcaFilterFIR#OnSampleRateChanged {PropertyEvent<OcaFrequency>} - This event is emitted when SampleRate changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterFIR#OnSampleRateChanged
  */

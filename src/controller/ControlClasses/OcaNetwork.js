@@ -11,13 +11,7 @@ import { OcaNetworkSystemInterfaceID } from '../../OCP1/OcaNetworkSystemInterfac
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * <b>DEPRECATED CLASS</b> <i>Replaced by class
- * </i><b><i>OcaControlNetwork </i></b><i>in version 3 of Connection
- * Management (CM3)</i> Abstract base class for defining network classes
- * to which this device belongs. This class is to be used for control and
- * monitoring networks only. For media transport networks, and for
- * networks that combine media transport and control, the
- * <b>OcaStreamNetwork</b> class should be used instead.
+ *  **DEPRECATED CLASS**   *Replaced by class*  **OcaControlNetwork **  *in version 3 of Connection Management (CM3)*  Abstract base class for defining network classes to which this device belongs. This class is to be used for control and monitoring networks only. For media transport networks, and for networks that combine media transport and control, the  **OcaStreamNetwork**  class should be used instead.
  * @extends RemoteControlClasses.OcaAgent
  * @class OcaNetwork
  * @memberof RemoteControlClasses
@@ -66,93 +60,98 @@ export const OcaNetwork = make_control_class(
 );
 
 /**
- * Gets the network's link type (wired Ethernet, USB, etc.). Return
- * status indicates whether the operation was successful.
+ * Gets the network's link type (wired Ethernet, USB, etc.). Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaNetwork#GetLinkType
  * @returns {Promise<OcaNetworkLinkType>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkLinkType`.
  */
 /**
- * Gets the network's IDAdvertised. Return status indicates whether the
- * operation was successful.
- * @method RemoteControlClasses.OcaNetwork#GetIDAdvertised
- * @returns {Promise<OcaApplicationNetworkServiceID>}
- */
-/**
- * Sets the network's IDAdvertised. Return status indicates whether the
- * operation was successful.
- * @method RemoteControlClasses.OcaNetwork#SetIDAdvertised
- * @param Name {OcaApplicationNetworkServiceID}
+ * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaNetwork#GetIDAdvertised
+ * @returns {Promise<Uint8Array>}
+ *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
- * Gets the network's ControlProtocol property. Return status indicates
- * whether the operation was successful.
+ * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ *
+ * @method RemoteControlClasses.OcaNetwork#SetIDAdvertised
+ * @param {Uint8Array} Name
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Gets the network's ControlProtocol property. Return status indicates whether the operation was successful.
+ *
  * @method RemoteControlClasses.OcaNetwork#GetControlProtocol
  * @returns {Promise<OcaNetworkControlProtocol>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkControlProtocol`.
  */
 /**
- * Gets the network's MediaProtocol property. This is a deprecated method
- * that always returns the value NONE.
+ * Gets the network's MediaProtocol property. This is a deprecated method that always returns the value NONE.
+ *
  * @method RemoteControlClasses.OcaNetwork#GetMediaProtocol
  * @returns {Promise<OcaNetworkMediaProtocol>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkMediaProtocol`.
  */
 /**
- * Retrieves the network's status. Return status indicates whether the
- * status was successfully retrieved.
+ * Retrieves the network's status. Return status indicates whether the status was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNetwork#GetStatus
  * @returns {Promise<OcaNetworkStatus>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkStatus`.
  */
 /**
- * Retrieves network error statistics counter values. Return status
- * indicates whether the values were successfully retrieved.
+ * Retrieves network error statistics counter values. Return status indicates whether the values were successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaNetwork#GetStatistics
  * @returns {Promise<OcaNetworkStatistics>}
+ *   A promise which resolves to a single value of type :class:`OcaNetworkStatistics`.
  */
 /**
- * Resets network error statistics counters. Return status indicates
- * whether the counters were successfully reset.
- * @method RemoteControlClasses.OcaNetwork#ResetStatistics
- * @returns {Promise}
- */
-/**
- * Gets the list of system interface IDs that this network is using.
- * Return status indicates success of the operation.
- * @method RemoteControlClasses.OcaNetwork#GetSystemInterfaces
- * @returns {Promise<OcaList>}
- */
-/**
- * Sets the list of system interface IDs that this network will use.
- * Return status indicates success of the operation. This method is not
- * implemented by all network implementations.
- * @method RemoteControlClasses.OcaNetwork#SetSystemInterfaces
- * @param Interfaces {OcaList}
+ * Resets network error statistics counters. Return status indicates whether the counters were successfully reset.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaNetwork#ResetStatistics
+ * @returns {Promise<void>}
  */
 /**
- * Deprecated method. Always returns status INVALID_REQUEST. Media
- * transport is now managed by the class <b>OcaStreamNetwork.</b>
+ * Gets the list of system interface IDs that this network is using. Return status indicates success of the operation.
+ *
+ * @method RemoteControlClasses.OcaNetwork#GetSystemInterfaces
+ * @returns {Promise<OcaNetworkSystemInterfaceID[]>}
+ *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceID[]``.
+ */
+/**
+ * Sets the list of system interface IDs that this network will use. Return status indicates success of the operation. This method is not implemented by all network implementations.
+ *
+ * @method RemoteControlClasses.OcaNetwork#SetSystemInterfaces
+ * @param {OcaNetworkSystemInterfaceID[]} Interfaces
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Deprecated method. Always returns status INVALID_REQUEST. Media transport is now managed by the class  **OcaStreamNetwork.**
+ *
  * @method RemoteControlClasses.OcaNetwork#GetMediaPorts
- * @returns {Promise<OcaList>}
+ * @returns {Promise<number[]>}
+ *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Start up this network.
+ *
  * @method RemoteControlClasses.OcaNetwork#Startup
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
  * Shut down this network.
+ *
  * @method RemoteControlClasses.OcaNetwork#Shutdown
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Network link type - e.g. wired Ethernet, USB, ... See the
- * OcaNetworkType enum for details. This is a read-only property whose
- * value is fixed to the class that is inherited from OcaNetwork to
- * implement each specific type of network.
- */
-/**
+ * This event is emitted when the property IDAdvertised changes in the remote object.
+ * The property ``IDAdvertised`` is described in the AES70 standard as follows.
  * ID by which this network object is known on the network, i.e. the name
  * or GUID that this network object publishes in the network's
  * directory/discovery system. As of OCA 1.4, this description has been
@@ -160,37 +159,56 @@ export const OcaNetwork = make_control_class(
  * which may or may not be the same as the device's host name, if any.
  * For data network types that have host names (e.g. IP networks), the
  * authoritative copy of the host name is in the system interface ID.
- * @member RemoteControlClasses.OcaNetwork#OnIDAdvertisedChanged {PropertyEvent<OcaApplicationNetworkServiceID>} - This event is emitted when IDAdvertised changes in the remote object.
+ *
+ * @member {PropertyEvent<Uint8Array>} RemoteControlClasses.OcaNetwork#OnIDAdvertisedChanged
  */
 /**
+ * This event is emitted when the property ControlProtocol changes in the remote object.
+ * The property ``ControlProtocol`` is described in the AES70 standard as follows.
  * Type of control protocol used by the network (OCAnn) or NONE if this
  * network is not used for control.
- * @member RemoteControlClasses.OcaNetwork#OnControlProtocolChanged {PropertyEvent<OcaNetworkControlProtocol>} - This event is emitted when ControlProtocol changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkControlProtocol>} RemoteControlClasses.OcaNetwork#OnControlProtocolChanged
  */
 /**
+ * This event is emitted when the property MediaProtocol changes in the remote object.
+ * The property ``MediaProtocol`` is described in the AES70 standard as follows.
  * Deprecated property. Always has value NONE. Media transport is managed
  * by the <b>OcaStreamNetwork</b> class.
- * @member RemoteControlClasses.OcaNetwork#OnMediaProtocolChanged {PropertyEvent<OcaNetworkMediaProtocol>} - This event is emitted when MediaProtocol changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkMediaProtocol>} RemoteControlClasses.OcaNetwork#OnMediaProtocolChanged
  */
 /**
+ * This event is emitted when the property Status changes in the remote object.
+ * The property ``Status`` is described in the AES70 standard as follows.
  * Operational status of the network.
- * @member RemoteControlClasses.OcaNetwork#OnStatusChanged {PropertyEvent<OcaNetworkStatus>} - This event is emitted when Status changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkStatus>} RemoteControlClasses.OcaNetwork#OnStatusChanged
  */
 /**
+ * This event is emitted when the property SystemInterfaces changes in the remote object.
+ * The property ``SystemInterfaces`` is described in the AES70 standard as follows.
  * Collection of identifiers of system interface(s) used by the network.
  * A "system interface" is the system service through which network
  * traffic passes into and out of the device -- e.g. a socket. The
  * identifier format is system and network dependent; for OCA purposes,
  * it is maintained as a variable-length blob which the protocol does not
  * inspect.
- * @member RemoteControlClasses.OcaNetwork#OnSystemInterfacesChanged {PropertyEvent<OcaList>} - This event is emitted when SystemInterfaces changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkSystemInterfaceID[]>} RemoteControlClasses.OcaNetwork#OnSystemInterfacesChanged
  */
 /**
+ * This event is emitted when the property MediaPorts changes in the remote object.
+ * The property ``MediaPorts`` is described in the AES70 standard as follows.
  * Deprecated property. Always is empty. Media transport is now managed
  * by the class <b>OcaStreamNetwork.</b>
- * @member RemoteControlClasses.OcaNetwork#OnMediaPortsChanged {PropertyEvent<OcaList>} - This event is emitted when MediaPorts changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaNetwork#OnMediaPortsChanged
  */
 /**
+ * This event is emitted when the property Statistics changes in the remote object.
+ * The property ``Statistics`` is described in the AES70 standard as follows.
  * Error statistics for this network
- * @member RemoteControlClasses.OcaNetwork#OnStatisticsChanged {PropertyEvent<OcaNetworkStatistics>} - This event is emitted when Statistics changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaNetworkStatistics>} RemoteControlClasses.OcaNetwork#OnStatisticsChanged
  */

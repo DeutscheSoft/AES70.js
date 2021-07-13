@@ -13,9 +13,13 @@ import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
- * Mandatory manager that contains information relevant to the whole
- * device. <ul> <li>Must be instantiated once in every device. </li>
- * <li>Must have object number 1.</li> </ul>
+ * Mandatory manager that contains information relevant to the whole device.
+ *
+ *  - Must be instantiated once in every device.
+ *
+ *
+ *  - Must have object number 1.
+ *
  * @extends RemoteControlClasses.OcaManager
  * @class OcaDeviceManager
  * @memberof RemoteControlClasses
@@ -69,212 +73,249 @@ export const OcaDeviceManager = make_control_class(
 );
 
 /**
- * Gets the value of the OcaVersion property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the OcaVersion property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetOcaVersion
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the model GUID. The return value indicates whether the GUID was
- * successfully retrieved.
+ * Gets the model GUID. The return value indicates whether the GUID was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetModelGUID
  * @returns {Promise<OcaModelGUID>}
+ *   A promise which resolves to a single value of type :class:`OcaModelGUID`.
  */
 /**
- * Gets the value of the SerialNumber property. The return value
- * indicates whether the property was successfully retrieved.
- * @method RemoteControlClasses.OcaDeviceManager#GetSerialNumber
- * @returns {Promise<OcaString>}
- */
-/**
- * Gets the device name. The return value indicates whether the property
- * was successfully retrieved.
- * @method RemoteControlClasses.OcaDeviceManager#GetDeviceName
- * @returns {Promise<OcaString>}
- */
-/**
- * Sets the device name. The return value indicates whether the property
- * was successfully set.
- * @method RemoteControlClasses.OcaDeviceManager#SetDeviceName
- * @param Name {OcaString}
+ * Gets the value of the SerialNumber property. The return value indicates whether the property was successfully retrieved.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDeviceManager#GetSerialNumber
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Gets the model description. The return value indicates whether the
- * description was successfully retrieved.
+ * Gets the device name. The return value indicates whether the property was successfully retrieved.
+ *
+ * @method RemoteControlClasses.OcaDeviceManager#GetDeviceName
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
+ */
+/**
+ * Sets the device name. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaDeviceManager#SetDeviceName
+ * @param {string} Name
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Gets the model description. The return value indicates whether the description was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetModelDescription
  * @returns {Promise<OcaModelDescription>}
+ *   A promise which resolves to a single value of type :class:`OcaModelDescription`.
  */
 /**
- * Gets the value of the Role property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Role property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetDeviceRole
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the Role property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Role property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#SetDeviceRole
- * @param role {OcaString}
+ * @param {string} role
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the UserInventoryCode property. The return value
- * indicates whether the property was successfully retrieved.
+ * Gets the value of the UserInventoryCode property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetUserInventoryCode
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the UserInventoryCode property. The return value
- * indicates whether the property was successfully set.
+ * Sets the value of the UserInventoryCode property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#SetUserInventoryCode
- * @param Code {OcaString}
+ * @param {string} Code
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Enabled property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the Enabled property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetEnabled
- * @returns {Promise<OcaBoolean>}
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the value of the Enabled property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaDeviceManager#SetEnabled
- * @param enabled {OcaBoolean}
+ * Sets the value of the Enabled property. The return value indicates whether the property was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDeviceManager#SetEnabled
+ * @param {boolean} enabled
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the State property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the State property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetState
  * @returns {Promise<OcaDeviceState>}
+ *   A promise which resolves to a single value of type :class:`OcaDeviceState`.
  */
 /**
- * Sets the value of the reset key of the device. The return value
- * indicates whether the property was successfully set. Note that the
- * device manager must inform the CAP gateway of this key (via the host
- * interface), since the CAP gateway will check for and handle the
- * special reset message.
+ * Sets the value of the reset key of the device. The return value indicates whether the property was successfully set. Note that the device manager must inform the CAP gateway of this key (via the host interface), since the CAP gateway will check for and handle the special reset message.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#SetResetKey
- * @param Key {OcaBlobFixedLen}
+ * @param {Uint8Array} Key
  *
- * @param Address {OcaNetworkAddress}
+ * @param {Uint8Array} Address
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ResetCause property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the ResetCause property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetResetCause
  * @returns {Promise<OcaResetCause>}
+ *   A promise which resolves to a single value of type :class:`OcaResetCause`.
  */
 /**
- * Clears the ResetCause property, i.e. resets it to the default value
- * 'PowerOn'. Must be used after the reset cause has been read out to
- * ensure differentation between reconnects due to network loss and
- * reconnects due to external or internal reset. Offered as a separate
- * method (instead of implicitly clearing the cause after it has been
- * read out) to accomodate systems that have multiple controllers. The
- * return value indicates whether the property was successfully
- * retrieved.
- * @method RemoteControlClasses.OcaDeviceManager#ClearResetCause
- * @returns {Promise}
- */
-/**
- * Gets the value of property <b>Message</b>. Return value indicates
- * whether value was successfully retrieved.
- * @method RemoteControlClasses.OcaDeviceManager#GetMessage
- * @returns {Promise<OcaString>}
- */
-/**
- * Set arbitrary text message into <b>Message </b>property. The return
- * value indicates whether the value was successfully set.
- * @method RemoteControlClasses.OcaDeviceManager#SetMessage
- * @param Text {OcaString}
+ * Clears the ResetCause property, i.e. resets it to the default value 'PowerOn'. Must be used after the reset cause has been read out to ensure differentation between reconnects due to network loss and reconnects due to external or internal reset. Offered as a separate method (instead of implicitly clearing the cause after it has been read out) to accomodate systems that have multiple controllers. The return value indicates whether the property was successfully retrieved.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDeviceManager#ClearResetCause
+ * @returns {Promise<void>}
  */
 /**
- * Retrive the list of descriptors of managers instantiated in this
- * device. The return value indicates whether the retrieval was
- * successful.
+ * Gets the value of property  **Message** . Return value indicates whether value was successfully retrieved.
+ *
+ * @method RemoteControlClasses.OcaDeviceManager#GetMessage
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
+ */
+/**
+ * Set arbitrary text message into  **Message** property. The return value indicates whether the value was successfully set.
+ *
+ * @method RemoteControlClasses.OcaDeviceManager#SetMessage
+ * @param {string} Text
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Retrive the list of descriptors of managers instantiated in this device. The return value indicates whether the retrieval was successful.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetManagers
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaManagerDescriptor[]>}
+ *   A promise which resolves to a single value of type ``OcaManagerDescriptor[]``.
  */
 /**
- * Gets the value of property <b>DeviceRevisionID</b>. Return value
- * indicates whether value was successfully retrieved.
+ * Gets the value of property  **DeviceRevisionID** . Return value indicates whether value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceManager#GetDeviceRevisionID
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
+ * This event is emitted when the property ModelGUID changes in the remote object.
+ * The property ``ModelGUID`` is described in the AES70 standard as follows.
  * Read-only property that identifies the model of the device. Note this
  * property is not equivalent to a MAC address, because (a) MAC addresses
  * identify individual devices, not models, and (b) MAC addresses are
  * Ethernet-specific, but an OCA device need not have an Ethernet port.
- * @member RemoteControlClasses.OcaDeviceManager#OnModelGUIDChanged {PropertyEvent<OcaModelGUID>} - This event is emitted when ModelGUID changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaModelGUID>} RemoteControlClasses.OcaDeviceManager#OnModelGUIDChanged
  */
 /**
+ * This event is emitted when the property SerialNumber changes in the remote object.
+ * The property ``SerialNumber`` is described in the AES70 standard as follows.
  * Read-only property that identifies the serial number of the CAP
  * device.
- * @member RemoteControlClasses.OcaDeviceManager#OnSerialNumberChanged {PropertyEvent<OcaString>} - This event is emitted when SerialNumber changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaDeviceManager#OnSerialNumberChanged
  */
 /**
+ * This event is emitted when the property ModelDescription changes in the remote object.
+ * The property ``ModelDescription`` is described in the AES70 standard as follows.
  * Read-only property that contains text names for this model, its
  * manufacturer, and its version.
- * @member RemoteControlClasses.OcaDeviceManager#OnModelDescriptionChanged {PropertyEvent<OcaModelDescription>} - This event is emitted when ModelDescription changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaModelDescription>} RemoteControlClasses.OcaDeviceManager#OnModelDescriptionChanged
  */
 /**
+ * This event is emitted when the property DeviceName changes in the remote object.
+ * The property ``DeviceName`` is described in the AES70 standard as follows.
  * Name of the device. Should be unique manufacturer-qualified
  * identifier.
- * @member RemoteControlClasses.OcaDeviceManager#OnDeviceNameChanged {PropertyEvent<OcaString>} - This event is emitted when DeviceName changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaDeviceManager#OnDeviceNameChanged
  */
 /**
+ * This event is emitted when the property OcaVersion changes in the remote object.
+ * The property ``OcaVersion`` is described in the AES70 standard as follows.
  * Read-only property that indicates the AES70 version number used by the
  * device.
- * @member RemoteControlClasses.OcaDeviceManager#OnOcaVersionChanged {PropertyEvent<OcaUint16>} - This event is emitted when OcaVersion changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDeviceManager#OnOcaVersionChanged
  */
 /**
+ * This event is emitted when the property DeviceRole changes in the remote object.
+ * The property ``DeviceRole`` is described in the AES70 standard as follows.
  * Role of device in application (arbitrary).
- * @member RemoteControlClasses.OcaDeviceManager#OnDeviceRoleChanged {PropertyEvent<OcaString>} - This event is emitted when DeviceRole changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaDeviceManager#OnDeviceRoleChanged
  */
 /**
+ * This event is emitted when the property UserInventoryCode changes in the remote object.
+ * The property ``UserInventoryCode`` is described in the AES70 standard as follows.
  * Code used for equipment tracking.
- * @member RemoteControlClasses.OcaDeviceManager#OnUserInventoryCodeChanged {PropertyEvent<OcaString>} - This event is emitted when UserInventoryCode changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaDeviceManager#OnUserInventoryCodeChanged
  */
 /**
+ * This event is emitted when the property Enabled changes in the remote object.
+ * The property ``Enabled`` is described in the AES70 standard as follows.
  * Indicates whether the device is enabled (and therefore operational).
- * @member RemoteControlClasses.OcaDeviceManager#OnEnabledChanged {PropertyEvent<OcaBoolean>} - This event is emitted when Enabled changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaDeviceManager#OnEnabledChanged
  */
 /**
+ * This event is emitted when the property State changes in the remote object.
+ * The property ``State`` is described in the AES70 standard as follows.
  * Read-only property that indicates the current state of the device.
- * @member RemoteControlClasses.OcaDeviceManager#OnStateChanged {PropertyEvent<OcaDeviceState>} - This event is emitted when State changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaDeviceState>} RemoteControlClasses.OcaDeviceManager#OnStateChanged
  */
 /**
+ * This event is emitted when the property Busy changes in the remote object.
+ * The property ``Busy`` is described in the AES70 standard as follows.
  * True iff device is working on something and is not available for OCA
  * command activity. Readonly.
- * @member RemoteControlClasses.OcaDeviceManager#OnBusyChanged {PropertyEvent<OcaBoolean>} - This event is emitted when Busy changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaDeviceManager#OnBusyChanged
  */
 /**
+ * This event is emitted when the property ResetCause changes in the remote object.
+ * The property ``ResetCause`` is described in the AES70 standard as follows.
  * Read-only attribute that indicates the reset cause of the last reset.
- * @member RemoteControlClasses.OcaDeviceManager#OnResetCauseChanged {PropertyEvent<OcaResetCause>} - This event is emitted when ResetCause changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaResetCause>} RemoteControlClasses.OcaDeviceManager#OnResetCauseChanged
  */
 /**
+ * This event is emitted when the property Message changes in the remote object.
+ * The property ``Message`` is described in the AES70 standard as follows.
  * Arbitrary text message provided by controller. Display and handling of
  * the text is device-dependent and not defined by OCA.
- * @member RemoteControlClasses.OcaDeviceManager#OnMessageChanged {PropertyEvent<OcaString>} - This event is emitted when Message changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaDeviceManager#OnMessageChanged
  */
 /**
+ * This event is emitted when the property Managers changes in the remote object.
+ * The property ``Managers`` is described in the AES70 standard as follows.
  * List of all manager objects instantiated in this device.
- * @member RemoteControlClasses.OcaDeviceManager#OnManagersChanged {PropertyEvent<OcaList>} - This event is emitted when Managers changes in the remote object.
- */
-/**
- * Overall device revision identifier. Format of string is
- * manufacturer-specific. Readonly. May be changed by proprietery
- * functions of firmware upload processes.
+ *
+ * @member {PropertyEvent<OcaManagerDescriptor[]>} RemoteControlClasses.OcaDeviceManager#OnManagersChanged
  */

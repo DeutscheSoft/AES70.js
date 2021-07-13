@@ -24,20 +24,24 @@ export const OcaBooleanActuator = make_control_class(
 );
 
 /**
- * Gets the <b>Setting </b>property. The return value indicates whether
- * the data was successfully retrieved.
- * @method RemoteControlClasses.OcaBooleanActuator#GetSetting
- * @returns {Promise<OcaBoolean>}
- */
-/**
- * Sets the <b>Setting </b>property. The return value indicates whether
- * the property was successfully set.
- * @method RemoteControlClasses.OcaBooleanActuator#SetSetting
- * @param Setting {OcaBoolean}
+ * Gets the  **Setting** property. The return value indicates whether the data was successfully retrieved.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaBooleanActuator#GetSetting
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
+ * Sets the  **Setting** property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaBooleanActuator#SetSetting
+ * @param {boolean} Setting
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Setting changes in the remote object.
+ * The property ``Setting`` is described in the AES70 standard as follows.
  * Boolean setting.
- * @member RemoteControlClasses.OcaBooleanActuator#OnSettingChanged {PropertyEvent<OcaBoolean>} - This event is emitted when Setting changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaBooleanActuator#OnSettingChanged
  */

@@ -5,8 +5,7 @@ import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaUint8 } from '../../OCP1/OcaUint8.js';
 
 /**
- * A generic Z-domain rational polynomial filter section: <u>A(0) + A(1)z
- * + A(2)z^2 + A(3)z^3 + ...</u> B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
+ * A generic Z-domain rational polynomial filter section:  _A(0) + A(1)z + A(2)z^2 + A(3)z^3 + ..._  B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
  * @extends RemoteControlClasses.OcaActuator
  * @class OcaFilterPolynomial
  * @memberof RemoteControlClasses
@@ -36,50 +35,69 @@ export const OcaFilterPolynomial = make_control_class(
 
 /**
  * Returns the polynomial coefficients used.
+ * The return values of this method are
+ *
+ * - A of type ``number[]``
+ * - B of type ``number[]``
+ *
  * @method RemoteControlClasses.OcaFilterPolynomial#GetCoefficients
- * @returns {Promise<Arguments<OcaList,OcaList>>}
+ * @returns {Promise<Arguments<number[],number[]>>}
  */
 /**
  * Sets the polynomial coefficients.
+ *
  * @method RemoteControlClasses.OcaFilterPolynomial#SetCoefficients
- * @param A {OcaList}
+ * @param {number[]} A
  *
- * @param B {OcaList}
+ * @param {number[]} B
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
  * Gets the filter sampling rate.
+ * The return values of this method are
+ *
+ * - Rate of type ``number``
+ * - minRate of type ``number``
+ * - maxRate of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterPolynomial#GetSampleRate
- * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the filter sampling rate.
- * @method RemoteControlClasses.OcaFilterPolynomial#SetSampleRate
- * @param Rate {OcaFrequency}
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaFilterPolynomial#SetSampleRate
+ * @param {number} Rate
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets the maximum allowable order (= max number of array elements in
- * numerator and for denominator arrays)
+ * Gets the maximum allowable order (= max number of array elements in numerator and for denominator arrays)
+ *
  * @method RemoteControlClasses.OcaFilterPolynomial#GetMaxOrder
- * @returns {Promise<OcaUint8>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
+ * This event is emitted when the property A changes in the remote object.
+ * The property ``A`` is described in the AES70 standard as follows.
  * Numerator - "A"
- * @member RemoteControlClasses.OcaFilterPolynomial#OnAChanged {PropertyEvent<OcaList>} - This event is emitted when A changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaFilterPolynomial#OnAChanged
  */
 /**
+ * This event is emitted when the property B changes in the remote object.
+ * The property ``B`` is described in the AES70 standard as follows.
  * Denominator - "B"
- * @member RemoteControlClasses.OcaFilterPolynomial#OnBChanged {PropertyEvent<OcaList>} - This event is emitted when B changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaFilterPolynomial#OnBChanged
  */
 /**
+ * This event is emitted when the property SampleRate changes in the remote object.
+ * The property ``SampleRate`` is described in the AES70 standard as follows.
  * Sample rate inside the filter. We can't assume it's the same as the
  * device input or output rate.
- * @member RemoteControlClasses.OcaFilterPolynomial#OnSampleRateChanged {PropertyEvent<OcaFrequency>} - This event is emitted when SampleRate changes in the remote object.
- */
-/**
- * Maximum order of A[] and B[], i.e. the maximum size of the A[] and B[]
- * arrays. Readonly.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterPolynomial#OnSampleRateChanged
  */

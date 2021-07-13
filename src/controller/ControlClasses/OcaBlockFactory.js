@@ -14,34 +14,7 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { String16 } from '../../OCP1/String16.js';
 
 /**
- * Factory to create custom block instances. Used only in reconfigurable
- * devices. The idea is that you instantiate a factory once, populate it
- * with proto-objects and proto-signal paths, then use it subsequently to
- * instantiate identical blocks. In this context, <b>proto-object</b>
- * means a prototype of a block member. Unbound objects are identified by
- * <b>proto-object numbers (PONo's)</b> instead of actual object numbers.
- * PONos are unique within the factory, and are converted to globally
- * unique object numbers ONos) in all new block instances that the
- * factory builds. Correspondingly, <b>proto-signal path</b> means a
- * signal path expressed in terms of <b>PONos </b>rather than
- * <b>ONos</b>. When the factory constructs a block, it converts all of
- * its unbound signal paths to normal (bound) signal paths by mapping its
- * <b>PONos </b>into <b>ONos</b>. The factory also holds a list of
- * <b>proto-blockports</b> which are <b>OcaPorts </b>that are allocated
- * to new blocks the factory builds. As well, the proto-objects in the
- * factory may contain lists of their own proto-ports. Together, the
- * factory's proto-ports and its members' proto-ports are used to define
- * the factory's set of proto-signal paths. Factories may be predefined
- * at time of device manufacture, or constructed "on the fly" by
- * controllers. To <b>create a factory</b>, the controller calls a
- * block's <b>CreateMember(...) </b>method with the <b>ClassID </b>of
- * this class (<b>OcaBlockFactory</b>). Factories ignore which block
- * creates them, so it makes no difference which block's
- * <b>CreateMember(...) </b>method is used. It will usually make the most
- * sense to use the Root Block's method. To add proto-objects,
- * proto-ports, and proto-signal paths to a block factory, the controller
- * calls the factory's <b>DefineProtoMember(...), DefineProtoPort(...),
- * and DefineProtoSignalPath(...</b>) methods, respectively.
+ * Factory to create custom block instances. Used only in reconfigurable devices. The idea is that you instantiate a factory once, populate it with proto-objects and proto-signal paths, then use it subsequently to instantiate identical blocks. In this context,  **proto-object**  means a prototype of a block member. Unbound objects are identified by  **proto-object numbers (PONo's)**  instead of actual object numbers. PONos are unique within the factory, and are converted to globally unique object numbers ONos) in all new block instances that the factory builds. Correspondingly,  **proto-signal path**  means a signal path expressed in terms of  **PONos** rather than  **ONos** . When the factory constructs a block, it converts all of its unbound signal paths to normal (bound) signal paths by mapping its  **PONos** into  **ONos** . The factory also holds a list of  **proto-blockports**  which are  **OcaPorts** that are allocated to new blocks the factory builds. As well, the proto-objects in the factory may contain lists of their own proto-ports. Together, the factory's proto-ports and its members' proto-ports are used to define the factory's set of proto-signal paths. Factories may be predefined at time of device manufacture, or constructed "on the fly" by controllers. To  **create a factory** , the controller calls a block's  **CreateMember(...)** method with the  **ClassID** of this class ( **OcaBlockFactory** ). Factories ignore which block creates them, so it makes no difference which block's  **CreateMember(...)** method is used. It will usually make the most sense to use the Root Block's method. To add proto-objects, proto-ports, and proto-signal paths to a block factory, the controller calls the factory's  **DefineProtoMember(...), DefineProtoPort(...), and DefineProtoSignalPath(...** ) methods, respectively.
  * @extends RemoteControlClasses.OcaWorker
  * @class OcaBlockFactory
  * @memberof RemoteControlClasses
@@ -93,118 +66,131 @@ export const OcaBlockFactory = make_control_class(
 );
 
 /**
- * Defines a proto-port in the factory. If proto-port already exists, it
- * is replaced with the one from this call. The return value indicates
- * whether the proto-port was successfully added.
- * @method RemoteControlClasses.OcaBlockFactory#DefineProtoPort
- * @param name {OcaString}
+ * Defines a proto-port in the factory. If proto-port already exists, it is replaced with the one from this call. The return value indicates whether the proto-port was successfully added.
  *
- * @param portmode {OcaPortMode}
+ * @method RemoteControlClasses.OcaBlockFactory#DefineProtoPort
+ * @param {string} name
+ *
+ * @param {OcaPortMode} portmode
  *
  * @returns {Promise<OcaProtoPortID>}
+ *   A promise which resolves to a single value of type :class:`OcaProtoPortID`.
  */
 /**
- * Deletes a proto-port from the factory. The return value indicates
- * whether the proto-port was successfully deleted.
+ * Deletes a proto-port from the factory. The return value indicates whether the proto-port was successfully deleted.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#UndefineProtoPort
- * @param ProtoPortID {OcaProtoPortID}
+ * @param {OcaProtoPortID} ProtoPortID
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the factory's list of proto-ports. The return value indicates
- * whether the list was successfully retrieved.
+ * Gets the factory's list of proto-ports. The return value indicates whether the list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#GetProtoPorts
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaProtoPort[]>}
+ *   A promise which resolves to a single value of type ``OcaProtoPort[]``.
  */
 /**
- * Defines a proto-member of the given class in the factory. The most
- * current version of the class is used. The return value indicates
- * whether the proto-member was successfully defined.
+ * Defines a proto-member of the given class in the factory. The most current version of the class is used. The return value indicates whether the proto-member was successfully defined.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#DefineProtoMember
- * @param ClassIdentification {OcaClassID}
+ * @param {OcaClassID} ClassIdentification
  *
- * @param ConstructionParameters {ConstructionParameterDataType}
+ * @param {ConstructionParameterDataType} ConstructionParameters
  *
- * @returns {Promise<OcaProtoONo>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Defines a proto-member which will be instantiated by a specified
- * factory when the block is built. The return value indicates whether
- * the proto-member was successfully defined.
+ * Defines a proto-member which will be instantiated by a specified factory when the block is built. The return value indicates whether the proto-member was successfully defined.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#DefineProtoMemberUsingFactory
- * @param FactoryONo {OcaONo}
+ * @param {number} FactoryONo
  *
- * @returns {Promise<OcaProtoONo>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Deletes a proto-member from the factory. Deletes all proto-signal
- * paths attached to its ports. The return value indicates whether the
- * member was successfully deleted.
+ * Deletes a proto-member from the factory. Deletes all proto-signal paths attached to its ports. The return value indicates whether the member was successfully deleted.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#UndefineProtoMember
- * @param ProtoObjectNumber {OcaProtoONo}
+ * @param {number} ProtoObjectNumber
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the factory's list of proto-members. Does not recurse inner
- * proto-blocks. The return value indicates whether the list was
- * successfully retrieved.
+ * Gets the factory's list of proto-members. Does not recurse inner proto-blocks. The return value indicates whether the list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#GetProtoMembers
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaProtoObjectIdentification[]>}
+ *   A promise which resolves to a single value of type ``OcaProtoObjectIdentification[]``.
  */
 /**
- * Defines a proto-signal path in the factory. The return value indicates
- * whether the proto-signal path was successfully defined.
- * @method RemoteControlClasses.OcaBlockFactory#DefineProtoSignalPath
- * @param Path {OcaProtoSignalPath}
+ * Defines a proto-signal path in the factory. The return value indicates whether the proto-signal path was successfully defined.
  *
- * @returns {Promise<OcaUint16>}
+ * @method RemoteControlClasses.OcaBlockFactory#DefineProtoSignalPath
+ * @param {OcaProtoSignalPath} Path
+ *
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Deletes a proto-signal path from the factory. The return value
- * indicates whether the signal path was successfully added.
+ * Deletes a proto-signal path from the factory. The return value indicates whether the signal path was successfully added.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#UndefineProtoSignalPath
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the factory's list of proto-signal paths. Map key is proto-signal
- * path ID. Does not recurse inner proto-blocks. The return value
- * indicates whether the list was successfully retrieved.
+ * Gets the factory's list of proto-signal paths. Map key is proto-signal path ID. Does not recurse inner proto-blocks. The return value indicates whether the list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaBlockFactory#GetProtoSignalPaths
- * @returns {Promise<OcaMap>}
+ * @returns {Promise<Map<number, OcaProtoSignalPath>>}
+ *   A promise which resolves to a single value of type ``Map<number, OcaProtoSignalPath>``.
  */
 /**
- * Gets the global type identifier for blocks created by this factory.
- * The return value indicates whether the identifier was successfully
- * retrieved. <b>Added in version 2 of this class.</b>
+ * Gets the global type identifier for blocks created by this factory. The return value indicates whether the identifier was successfully retrieved.  **Added in version 2 of this class.**
+ *
  * @method RemoteControlClasses.OcaBlockFactory#GetGlobalType
  * @returns {Promise<OcaGlobalTypeIdentifier>}
+ *   A promise which resolves to a single value of type :class:`OcaGlobalTypeIdentifier`.
  */
 /**
- * Sets the global type identifier for blocks created by this factory.
- * The return value indicates whether the identifier was successfully
- * set. <b>Added in version 2 of this class.</b>
- * @method RemoteControlClasses.OcaBlockFactory#SetGlobalType
- * @param GlobalType {OcaGlobalTypeIdentifier}
+ * Sets the global type identifier for blocks created by this factory. The return value indicates whether the identifier was successfully set.  **Added in version 2 of this class.**
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaBlockFactory#SetGlobalType
+ * @param {OcaGlobalTypeIdentifier} GlobalType
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property ProtoPorts changes in the remote object.
+ * The property ``ProtoPorts`` is described in the AES70 standard as follows.
  * List of proto-ports for built objects. The factory itself has no
  * ports.
- * @member RemoteControlClasses.OcaBlockFactory#OnProtoPortsChanged {PropertyEvent<OcaList>} - This event is emitted when ProtoPorts changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaProtoPort[]>} RemoteControlClasses.OcaBlockFactory#OnProtoPortsChanged
  */
 /**
+ * This event is emitted when the property ProtoMembers changes in the remote object.
+ * The property ``ProtoMembers`` is described in the AES70 standard as follows.
  * List of prot-object identifiers of proto-members in the block.
- * @member RemoteControlClasses.OcaBlockFactory#OnProtoMembersChanged {PropertyEvent<OcaList>} - This event is emitted when ProtoMembers changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaProtoObjectIdentification[]>} RemoteControlClasses.OcaBlockFactory#OnProtoMembersChanged
  */
 /**
+ * This event is emitted when the property ProtoSignalPaths changes in the remote object.
+ * The property ``ProtoSignalPaths`` is described in the AES70 standard as follows.
  * List of proto-signal paths in the block.
- * @member RemoteControlClasses.OcaBlockFactory#OnProtoSignalPathsChanged {PropertyEvent<OcaMap>} - This event is emitted when ProtoSignalPaths changes in the remote object.
+ *
+ * @member {PropertyEvent<Map<number, OcaProtoSignalPath>>} RemoteControlClasses.OcaBlockFactory#OnProtoSignalPathsChanged
  */
 /**
+ * This event is emitted when the property GlobalType changes in the remote object.
+ * The property ``GlobalType`` is described in the AES70 standard as follows.
  * Global block type identifier for reusable blocks. <b>Added in version
  * 2 of this class.</b>
- * @member RemoteControlClasses.OcaBlockFactory#OnGlobalTypeChanged {PropertyEvent<OcaGlobalTypeIdentifier>} - This event is emitted when GlobalType changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaGlobalTypeIdentifier>} RemoteControlClasses.OcaBlockFactory#OnGlobalTypeChanged
  */

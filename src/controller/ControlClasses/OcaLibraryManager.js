@@ -8,9 +8,13 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * Optional manager for handling device presets -- Patch and ParamSet
- * libraries. <ul> <li>May be instantiated once in any device. </li>
- * </ul> <ul> <li>If instantiated, object number must be 8.</li> </ul>
+ * Optional manager for handling device presets -- Patch and ParamSet libraries.
+ *
+ *  - May be instantiated once in any device.
+ *
+ *
+ *  - If instantiated, object number must be 8.
+ *
  * @extends RemoteControlClasses.OcaManager
  * @class OcaLibraryManager
  * @memberof RemoteControlClasses
@@ -38,56 +42,68 @@ export const OcaLibraryManager = make_control_class(
 );
 
 /**
- * Adds a library to the device. Return value indicates whether the
- * library was successfully added.
+ * Adds a library to the device. Return value indicates whether the library was successfully added.
+ *
  * @method RemoteControlClasses.OcaLibraryManager#AddLibrary
- * @param Type {OcaLibVolType}
+ * @param {OcaLibVolType} Type
  *
  * @returns {Promise<OcaLibraryIdentifier>}
+ *   A promise which resolves to a single value of type :class:`OcaLibraryIdentifier`.
  */
 /**
  * Deletes a library from the device.
+ *
  * @method RemoteControlClasses.OcaLibraryManager#DeleteLibrary
- * @param ID {OcaONo}
+ * @param {number} ID
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Returns the number of libraries of the given type that are
- * instantiated in the device..
+ * Returns the number of libraries of the given type that are instantiated in the device..
+ *
  * @method RemoteControlClasses.OcaLibraryManager#GetLibraryCount
- * @param Type {OcaLibVolType}
+ * @param {OcaLibVolType} Type
  *
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns the list of object numbers of libraries of libraries of the
- * given type that are instantiated in the device.
+ * Returns the list of object numbers of libraries of libraries of the given type that are instantiated in the device.
+ *
  * @method RemoteControlClasses.OcaLibraryManager#GetLibraryList
- * @param Type {OcaLibVolType}
+ * @param {OcaLibVolType} Type
  *
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaLibraryIdentifier[]>}
+ *   A promise which resolves to a single value of type ``OcaLibraryIdentifier[]``.
  */
 /**
- * Return the identifier of the most recently applied patch. The return
- * value indicates whether the method succeeded.
+ * Return the identifier of the most recently applied patch. The return value indicates whether the method succeeded.
+ *
  * @method RemoteControlClasses.OcaLibraryManager#GetCurrentPatch
  * @returns {Promise<OcaLibVolIdentifier>}
+ *   A promise which resolves to a single value of type :class:`OcaLibVolIdentifier`.
  */
 /**
  * Apply a patch to the device.
- * @method RemoteControlClasses.OcaLibraryManager#ApplyPatch
- * @param ID {OcaLibVolIdentifier}
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaLibraryManager#ApplyPatch
+ * @param {OcaLibVolIdentifier} ID
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Libraries changes in the remote object.
+ * The property ``Libraries`` is described in the AES70 standard as follows.
  * List of identifiers of all libraries in the device.
- * @member RemoteControlClasses.OcaLibraryManager#OnLibrariesChanged {PropertyEvent<OcaList>} - This event is emitted when Libraries changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaLibraryIdentifier[]>} RemoteControlClasses.OcaLibraryManager#OnLibrariesChanged
  */
 /**
+ * This event is emitted when the property CurrentPatch changes in the remote object.
+ * The property ``CurrentPatch`` is described in the AES70 standard as follows.
  * Library volume identifier of the most-recently applied patch in this
  * device. Changing the value of this property applies the patch
  * represented by the new value.
- * @member RemoteControlClasses.OcaLibraryManager#OnCurrentPatchChanged {PropertyEvent<OcaLibVolIdentifier>} - This event is emitted when CurrentPatch changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaLibVolIdentifier>} RemoteControlClasses.OcaLibraryManager#OnCurrentPatchChanged
  */

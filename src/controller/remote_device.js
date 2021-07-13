@@ -122,26 +122,11 @@ function tree_to_rolemap(tree, s)
  * Can be used to query the available object tree, or interact with the manager
  * classes.
  *
- * @property {OcaDeviceManager} DeviceManager - The device manager object.
- * @property {OcaSecurityManager} SecurityManager - The Security manager object.
- * @property {OcaFirmwareManager} FirmwareManager - The Firmware manager object.
- * @property {OcaSubscriptionManager} SubscriptionManager - The Subscription manager object.
- * @property {OcaPowerManager} PowerManager - The Power manager object.
- * @property {OcaNetworkManager} NetworkManager - The Network manager object.
- * @property {OcaMediaClockManager} MediaClockManager - The MediaClock manager object.
- * @property {OcaLibraryManager} LibraryManager - The Library manager object.
- * @property {OcaAudioProcessingManager} AudioProcessingManager - The AudioProcessing manager object.
- * @property {OcaDeviceTimeManager} DeviceTimeManager - The DeviceTime manager object.
- * @property {OcaTaskManager} TaskManager - The Task manager object.
- * @property {OcaCodingManager} CodingManager - The Coding manager object.
- * @property {OcaDiagnosticManager} DiagnosticManager - The Diagnostic manager object.
- * @property {OcaBlock} Root - The Root object.
- *
+ * @param {ClientConnection} connection
+ *      The connection to use.
  */
-export class RemoteDevice extends Events
-{
-  constructor(connection, ...modules)
-  {
+export class RemoteDevice extends Events {
+  constructor(connection, ...modules) {
     super();
     this.objects = new Map();
     this.connection = connection;
@@ -158,26 +143,109 @@ export class RemoteDevice extends Events
     this.add_control_classes(Classes);
     modules.map((m) => this.add_control_classes(m));
 
-    this.DeviceManager = new OcaDeviceManager(OcaManagerDefaultObjectNumbers.DeviceManager, this);
-    this.SecurityManager = new OcaSecurityManager(OcaManagerDefaultObjectNumbers.SecurityManager, this);
-    this.FirmwareManager = new OcaFirmwareManager(OcaManagerDefaultObjectNumbers.FirmwareManager, this);
-    this.SubscriptionManager = new OcaSubscriptionManager(OcaManagerDefaultObjectNumbers.SubscriptionManager, this);
-    this.PowerManager = new OcaPowerManager(OcaManagerDefaultObjectNumbers.PowerManager, this);
-    this.NetworkManager = new OcaNetworkManager(OcaManagerDefaultObjectNumbers.NetworkManager, this);
-    this.MediaClockManager = new OcaMediaClockManager(OcaManagerDefaultObjectNumbers.MediaClockManager, this);
-    this.LibraryManager = new OcaLibraryManager(OcaManagerDefaultObjectNumbers.LibraryManager, this);
-    this.AudioProcessingManager = new OcaAudioProcessingManager(OcaManagerDefaultObjectNumbers.AudioProcessingManager, this);
-    this.DeviceTimeManager = new OcaDeviceTimeManager(OcaManagerDefaultObjectNumbers.DeviceTimeManager, this);
-    this.TaskManager = new OcaTaskManager(OcaManagerDefaultObjectNumbers.TaskManager, this);
-    this.CodingManager = new OcaCodingManager(OcaManagerDefaultObjectNumbers.CodingManager, this);
-    this.DiagnosticManager = new OcaDiagnosticManager(OcaManagerDefaultObjectNumbers.DiagnosticManager, this);
+    /**
+     * The device manager object. An instance of :class:`OcaDeviceManager`.
+     */
+    this.DeviceManager = new OcaDeviceManager(
+      OcaManagerDefaultObjectNumbers.DeviceManager,
+      this
+    );
+    /**
+     * The Security manager object. An instance of :class:`OcaSecurityManager`
+     */
+    this.SecurityManager = new OcaSecurityManager(
+      OcaManagerDefaultObjectNumbers.SecurityManager,
+      this
+    );
+    /**
+     * The Firmware manager object. An instance of :class:`OcaFirmwareManager`
+     */
+    this.FirmwareManager = new OcaFirmwareManager(
+      OcaManagerDefaultObjectNumbers.FirmwareManager,
+      this
+    );
+    /**
+     * The Subscription manager object. An instance of :class:`OcaSubscriptionManager`
+     */
+    this.SubscriptionManager = new OcaSubscriptionManager(
+      OcaManagerDefaultObjectNumbers.SubscriptionManager,
+      this
+    );
+    /**
+     * The Power manager object. An instance of :class:`OcaPowerManager`
+     */
+    this.PowerManager = new OcaPowerManager(
+      OcaManagerDefaultObjectNumbers.PowerManager,
+      this
+    );
+    /**
+     * The Network manager object. An instance of :class:`OcaNetworkManager`
+     */
+    this.NetworkManager = new OcaNetworkManager(
+      OcaManagerDefaultObjectNumbers.NetworkManager,
+      this
+    );
+    /**
+     * The MediaClock manager object. An instance of :class:`OcaMediaClockManager`
+     */
+    this.MediaClockManager = new OcaMediaClockManager(
+      OcaManagerDefaultObjectNumbers.MediaClockManager,
+      this
+    );
+    /**
+     * The Library manager object. An instance of :class:`OcaLibraryManager`
+     */
+    this.LibraryManager = new OcaLibraryManager(
+      OcaManagerDefaultObjectNumbers.LibraryManager,
+      this
+    );
+    /**
+     * The AudioProcessing manager object. An instance of :class:`OcaAudioProcessingManager`
+     */
+    this.AudioProcessingManager = new OcaAudioProcessingManager(
+      OcaManagerDefaultObjectNumbers.AudioProcessingManager,
+      this
+    );
+    /**
+     * The DeviceTime manager object. An instance of :class:`OcaDeviceTimeManager`
+     */
+    this.DeviceTimeManager = new OcaDeviceTimeManager(
+      OcaManagerDefaultObjectNumbers.DeviceTimeManager,
+      this
+    );
+    /**
+     * The Task manager object. An instance of :class:`OcaTaskManager`
+     */
+    this.TaskManager = new OcaTaskManager(
+      OcaManagerDefaultObjectNumbers.TaskManager,
+      this
+    );
+    /**
+     * The Coding manager object. An instance of :class:`OcaCodingManager`
+     */
+    this.CodingManager = new OcaCodingManager(
+      OcaManagerDefaultObjectNumbers.CodingManager,
+      this
+    );
+    /**
+     * The Diagnostic manager object. An instance of :class:`OcaDiagnosticManager`
+     */
+    this.DiagnosticManager = new OcaDiagnosticManager(
+      OcaManagerDefaultObjectNumbers.DiagnosticManager,
+      this
+    );
+    /**
+     * The Root object. An instance of :class:`OcaBlock`
+     */
     this.Root = new OcaBlock(100, this);
 
     this.subscriptions = new Map();
   }
 
-  close()
-  {
+  /**
+   * Close the associated connection.
+   */
+  close() {
     this.connection.close();
   }
 
@@ -416,7 +484,7 @@ export class RemoteDevice extends Events
    * from the root block. The root block itself will not be part
    * of the resulting list.
    *
-   * @deprecated Use {@link get_device_tree} instead.
+   * @deprecated Use :func:`get_device_tree` instead.
    * @returns {Promise} The object list.
    */
   discover_all()

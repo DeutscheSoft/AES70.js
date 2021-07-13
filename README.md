@@ -167,10 +167,13 @@ AES70 device aside from the manager objects.
 
 # Documentation
 
-The source code contains documentation comments which can be built into a html
-documentation using jsdoc.
+The documentation for this library is built using
+[https://pypi.org/project/sphinx-js/](https://pypi.org/project/sphinx-js/). It
+can be created by installing dependencies and then running
 
-        make docs
+        make html
+
+inside of the `doc` directory.
 
 This generated documentation is also online at
 [http://docs.deuso.de/AES70.js](http://docs.deuso.de/AES70.js).

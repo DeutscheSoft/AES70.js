@@ -44,92 +44,118 @@ export const OcaDynamicsDetector = make_control_class(
 );
 
 /**
- * Gets the value of the Law property. Return status indicates whether
- * the value was successfully retrieved.
+ * Gets the value of the Law property. Return status indicates whether the value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#GetLaw
  * @returns {Promise<OcaLevelDetectionLaw>}
+ *   A promise which resolves to a single value of type :class:`OcaLevelDetectionLaw`.
  */
 /**
- * Sets the value of the Law property. Return status indicates whether
- * the value was successfully set.
+ * Sets the value of the Law property. Return status indicates whether the value was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#SetLaw
- * @param Law {OcaLevelDetectionLaw}
+ * @param {OcaLevelDetectionLaw} Law
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the AttackTime property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value of the AttackTime property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#GetAttackTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the AttackTime property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the AttackTime property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#SetAttackTime
- * @param Time {OcaTimeInterval}
+ * @param {number} Time
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ReleaseTime property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value of the ReleaseTime property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#GetReleaseTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the ReleaseTime property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the ReleaseTime property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#SetReleaseTime
- * @param Time {OcaTimeInterval}
+ * @param {number} Time
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the HoldTime property. The return value indicates if
- * the value was successfully retrieved.
+ * Gets the value of the HoldTime property. The return value indicates if the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Time of type ``number``
+ * - minTime of type ``number``
+ * - maxTime of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#GetHoldTime
- * @returns {Promise<Arguments<OcaTimeInterval,OcaTimeInterval,OcaTimeInterval>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the HoldTime property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the HoldTime property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#SetHoldTime
- * @param Time {OcaTimeInterval}
+ * @param {number} Time
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets some or all detector parameters. The return value indicates if
- * the parameters were successfully set. The action of this method is
- * atomic - if any of the value changes fails, none of the changes are
- * made.
+ * Sets some or all detector parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+ *
  * @method RemoteControlClasses.OcaDynamicsDetector#SetMultiple
- * @param Mask {OcaParameterMask}
+ * @param {int} Mask
  *
- * @param Law {OcaLevelDetectionLaw}
+ * @param {OcaLevelDetectionLaw} Law
  *
- * @param AttackTime {OcaTimeInterval}
+ * @param {number} AttackTime
  *
- * @param ReleaseTime {OcaTimeInterval}
+ * @param {number} ReleaseTime
  *
- * @param HoldTime {OcaTimeInterval}
+ * @param {number} HoldTime
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Law changes in the remote object.
+ * The property ``Law`` is described in the AES70 standard as follows.
  * Level detection law: RMS, Peak, possibly others
- * @member RemoteControlClasses.OcaDynamicsDetector#OnLawChanged {PropertyEvent<OcaLevelDetectionLaw>} - This event is emitted when Law changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaLevelDetectionLaw>} RemoteControlClasses.OcaDynamicsDetector#OnLawChanged
  */
 /**
+ * This event is emitted when the property AttackTime changes in the remote object.
+ * The property ``AttackTime`` is described in the AES70 standard as follows.
  * Detector attack time in seconds.
- * @member RemoteControlClasses.OcaDynamicsDetector#OnAttackTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when AttackTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsDetector#OnAttackTimeChanged
  */
 /**
+ * This event is emitted when the property ReleaseTime changes in the remote object.
+ * The property ``ReleaseTime`` is described in the AES70 standard as follows.
  * Detector release time in seconds.
- * @member RemoteControlClasses.OcaDynamicsDetector#OnReleaseTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when ReleaseTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsDetector#OnReleaseTimeChanged
  */
 /**
+ * This event is emitted when the property HoldTime changes in the remote object.
+ * The property ``HoldTime`` is described in the AES70 standard as follows.
  * Detector hold time in seconds.
- * @member RemoteControlClasses.OcaDynamicsDetector#OnHoldTimeChanged {PropertyEvent<OcaTimeInterval>} - This event is emitted when HoldTime changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsDetector#OnHoldTimeChanged
  */

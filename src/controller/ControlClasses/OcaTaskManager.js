@@ -12,20 +12,22 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
- * Optional manager that collects OcaTask and OcaProgram objects. <ul>
- * <li>May be instantiated once in any device. </li> </ul> <ul> <li>If
- * instantiated, object number must be 11.</li> </ul> Tasks shall be
- * device execution threads that start, execute, and (normally) stop. The
- * action of an <b>OcaTask </b>is defined by an <b>OcaProgram</b>. The
- * idea is that <b>OcaTasks </b>shall execute <b>OcaPrograms</b>.
- * <b>OcaTaskManager </b>offers global control over tasks in the device.
- * <ul> <li>Device task processing state is <b>Enabled </b>by default. In
- * <b>Enabled </b>state, tasks may be running.</li> </ul> <ul> <li>Device
- * task processing state may be <b>Disabled </b>by the <b>OcaTaskManager
- * Disable </b>command. </li> <li>The <b>Disable </b>command will succeed
- * only if no tasks are running. </li> </ul> Tasks may be stopped by:
- * passing the <b>OcaTaskManager </b>a <b>Stop </b>or <b>Abort
- * </b>command, which will stop designated tasks in the device;.
+ * Optional manager that collects OcaTask and OcaProgram objects.
+ *
+ *  - May be instantiated once in any device.
+ *
+ *
+ *  - If instantiated, object number must be 11.
+ *   Tasks shall be device execution threads that start, execute, and (normally) stop. The action of an  **OcaTask** is defined by an  **OcaProgram** . The idea is that  **OcaTasks** shall execute  **OcaPrograms** .  **OcaTaskManager** offers global control over tasks in the device.
+ *
+ *  - Device task processing state is  **Enabled** by default. In  **Enabled** state, tasks may be running.
+ *
+ *
+ *  - Device task processing state may be  **Disabled** by the  **OcaTaskManager Disable** command.
+ *
+ *
+ *  - The  **Disable** command will succeed only if no tasks are running.
+ *   Tasks may be stopped by: passing the  **OcaTaskManager** a  **Stop** or  **Abort** command, which will stop designated tasks in the device;.
  * @extends RemoteControlClasses.OcaManager
  * @class OcaTaskManager
  * @memberof RemoteControlClasses
@@ -59,119 +61,129 @@ export const OcaTaskManager = make_control_class(
 );
 
 /**
- * Enables (parameter =TRUE) or disables (parameter = FALSE) the running
- * of tasks. Changes value of property State from Disabled to Enabled and
- * vice versa. All tasks running when Enable is called with parameter =
- * FALSE are immediately aborted.
+ * Enables (parameter =TRUE) or disables (parameter = FALSE) the running of tasks. Changes value of property State from Disabled to Enabled and vice versa. All tasks running when Enable is called with parameter = FALSE are immediately aborted.
+ *
  * @method RemoteControlClasses.OcaTaskManager#Enable
- * @param Enable {OcaBoolean}
+ * @param {boolean} Enable
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Controls all tasks in device. Return value indicates whether tasks
- * were successfully controlled.
+ * Controls all tasks in device. Return value indicates whether tasks were successfully controlled.
+ *
  * @method RemoteControlClasses.OcaTaskManager#ControlAllTasks
- * @param Command {OcaTaskCommand}
+ * @param {OcaTaskCommand} Command
  *
- * @param ApplicationTaskParameter {OcaBlob}
+ * @param {Uint8Array} ApplicationTaskParameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Controls all tasks in the given group. Return value indicates whether
- * tasks were successfully controlled.
+ * Controls all tasks in the given group. Return value indicates whether tasks were successfully controlled.
+ *
  * @method RemoteControlClasses.OcaTaskManager#ControlTaskGroup
- * @param GroupID {OcaTaskGroupID}
+ * @param {number} GroupID
  *
- * @param Command {OcaTaskCommand}
+ * @param {OcaTaskCommand} Command
  *
- * @param ApplicationTaskParameter {OcaBlob}
+ * @param {Uint8Array} ApplicationTaskParameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Controls a specified task. Return value indicates whether tasks were
- * successfully controlled.
+ * Controls a specified task. Return value indicates whether tasks were successfully controlled.
+ *
  * @method RemoteControlClasses.OcaTaskManager#ControlTask
- * @param TaskID {OcaTaskID}
+ * @param {number} TaskID
  *
- * @param Command {OcaTaskCommand}
+ * @param {OcaTaskCommand} Command
  *
- * @param ApplicationTaskParameter {OcaBlob}
+ * @param {Uint8Array} ApplicationTaskParameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets value of property <b>State</b>. Return value indicates whether
- * value was successfully retrieved.
+ * Gets value of property  **State** . Return value indicates whether value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaTaskManager#GetState
  * @returns {Promise<OcaTaskManagerState>}
+ *   A promise which resolves to a single value of type :class:`OcaTaskManagerState`.
  */
 /**
  * This was not documented in the OCA standard.
+ *
  * @method RemoteControlClasses.OcaTaskManager#GetTaskStatuses
  * @returns {Promise<OcaTaskStatus>}
+ *   A promise which resolves to a single value of type :class:`OcaTaskStatus`.
  */
 /**
  * This was not documented in the OCA standard.
+ *
  * @method RemoteControlClasses.OcaTaskManager#GetTaskStatus
- * @param TaskID {OcaTaskID}
+ * @param {number} TaskID
  *
  * @returns {Promise<OcaTaskStatus>}
+ *   A promise which resolves to a single value of type :class:`OcaTaskStatus`.
  */
 /**
- * Creates a Task. Parameters of the new Task are given in the Task
- * parameter; device returns the same parameter with the new Task ID
- * filled in. Initial task state is set to Disabled. Return value
- * indicates whether Task was successfully created.
+ * Creates a Task. Parameters of the new Task are given in the Task parameter; device returns the same parameter with the new Task ID filled in. Initial task state is set to Disabled. Return value indicates whether Task was successfully created.
+ *
  * @method RemoteControlClasses.OcaTaskManager#AddTask
- * @param Task {OcaTask}
+ * @param {OcaTask} Task
  *
  * @returns {Promise<OcaTask>}
+ *   A promise which resolves to a single value of type :class:`OcaTask`.
  */
 /**
- * Gets map of Tasks in the device. Return value indicates whether map
- * was successfully retrieved.
+ * Gets map of Tasks in the device. Return value indicates whether map was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaTaskManager#GetTasks
- * @returns {Promise<OcaMap>}
+ * @returns {Promise<Map<number, OcaTask>>}
+ *   A promise which resolves to a single value of type ``Map<number, OcaTask>``.
  */
 /**
- * Retrieves a Task. Return value indicates whether Task was successfully
- * retrieved.
+ * Retrieves a Task. Return value indicates whether Task was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaTaskManager#GetTask
- * @param ID {OcaTaskID}
+ * @param {number} ID
  *
  * @returns {Promise<OcaTask>}
+ *   A promise which resolves to a single value of type :class:`OcaTask`.
  */
 /**
- * Updates a Task. Return value indicates whether Task was successfully
- * updated.
+ * Updates a Task. Return value indicates whether Task was successfully updated.
+ *
  * @method RemoteControlClasses.OcaTaskManager#SetTask
- * @param ID {OcaTaskID}
+ * @param {number} ID
  *
- * @param Task {OcaTask}
+ * @param {OcaTask} Task
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Deletes a task. Return value indicates whether task was successfully
- * deleted. Method fails with status=ProcessingFailed if task is running.
- * @method RemoteControlClasses.OcaTaskManager#DeleteTask
- * @param ID {OcaTaskID}
+ * Deletes a task. Return value indicates whether task was successfully deleted. Method fails with status=ProcessingFailed if task is running.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaTaskManager#DeleteTask
+ * @param {number} ID
+ *
+ * @returns {Promise<void>}
  */
 /**
  * This was not documented in the OCA standard.
- * @member RemoteControlClasses.OcaTaskManager#OnTaskStateChanged {Event} -
+ * @member RemoteControlClasses.OcaTaskManager#OnTaskStateChanged {Event}
  */
 /**
+ * This event is emitted when the property State changes in the remote object.
+ * The property ``State`` is described in the AES70 standard as follows.
  * Current state of task processing. State is Disabled after a Disable
  * command has been received, Enabled otherwise.
- * @member RemoteControlClasses.OcaTaskManager#OnStateChanged {PropertyEvent<OcaTaskManagerState>} - This event is emitted when State changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaTaskManagerState>} RemoteControlClasses.OcaTaskManager#OnStateChanged
  */
 /**
+ * This event is emitted when the property Tasks changes in the remote object.
+ * The property ``Tasks`` is described in the AES70 standard as follows.
  * Task collection
- * @member RemoteControlClasses.OcaTaskManager#OnTasksChanged {PropertyEvent<OcaMap>} - This event is emitted when Tasks changes in the remote object.
+ *
+ * @member {PropertyEvent<Map<number, OcaTask>>} RemoteControlClasses.OcaTaskManager#OnTasksChanged
  */

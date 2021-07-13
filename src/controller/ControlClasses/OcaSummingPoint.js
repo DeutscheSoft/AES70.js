@@ -2,8 +2,7 @@ import { make_control_class } from '../Base.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * Actuator with no control parameters, used as a simple node to
- * represent summations in block signal flows.
+ * Actuator with no control parameters, used as a simple node to represent summations in block signal flows.
  * @extends RemoteControlClasses.OcaActuator
  * @class OcaSummingPoint
  * @memberof RemoteControlClasses

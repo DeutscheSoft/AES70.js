@@ -7,8 +7,7 @@ import { OcaMediaClockType } from '../../OCP1/OcaMediaClockType.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
- * <b>DEPRECATED CLASS</b> <i>Replaced by
- * </i><b><i>OcaMediaClock3</i></b> A media clock, internal or external.
+ *  **DEPRECATED CLASS**   *Replaced by*  **OcaMediaClock3**  A media clock, internal or external.
  * @extends RemoteControlClasses.OcaAgent
  * @class OcaMediaClock
  * @memberof RemoteControlClasses
@@ -41,78 +40,96 @@ export const OcaMediaClock = make_control_class(
 );
 
 /**
- * Gets the value of the <b>Type </b>property. The return value indicates
- * whether the value was successfully retrieved.
+ * Gets the value of the  **Type** property. The return value indicates whether the value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaMediaClock#GetType
  * @returns {Promise<OcaMediaClockType>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaClockType`.
  */
 /**
- * Sets the value of the <b>Type </b>property. The return value indicates
- * whether the value was successfully set. Optional method, may not be
- * supported in all implementations.
+ * Sets the value of the  **Type** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+ *
  * @method RemoteControlClasses.OcaMediaClock#SetType
- * @param Type {OcaMediaClockType}
+ * @param {OcaMediaClockType} Type
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the <b>DomainID </b>property. The return value
- * indicates whether the value was successfully retrieved.
+ * Gets the value of the  **DomainID** property. The return value indicates whether the value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaMediaClock#GetDomainID
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the <b>DomainID </b>property. The return value
- * indicates whether the value was successfully set. Optional method, may
- * not be supported in all implementations.
- * @method RemoteControlClasses.OcaMediaClock#SetDomainID
- * @param ID {OcaUint16}
+ * Sets the value of the  **DomainID** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaMediaClock#SetDomainID
+ * @param {number} ID
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets the list of supported sampling rates. The return value indicates
- * whether the list was successfully retrieved.
+ * Gets the list of supported sampling rates. The return value indicates whether the list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaMediaClock#GetSupportedRates
- * @returns {Promise<OcaList>}
+ * @returns {Promise<OcaMediaClockRate[]>}
+ *   A promise which resolves to a single value of type ``OcaMediaClockRate[]``.
  */
 /**
- * Gets the current sampling rate. The return value indicates whether the
- * value was successfully retrieved.
+ * Gets the current sampling rate. The return value indicates whether the value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaMediaClock#GetCurrentRate
  * @returns {Promise<OcaMediaClockRate>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaClockRate`.
  */
 /**
- * Sets the sampling rate. The return value indicates whether the rate
- * was successfully set.
- * @method RemoteControlClasses.OcaMediaClock#SetCurrentRate
- * @param rate {OcaMediaClockRate}
+ * Sets the sampling rate. The return value indicates whether the rate was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaMediaClock#SetCurrentRate
+ * @param {OcaMediaClockRate} rate
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Gets the current media clock lock state. The return value indicates
- * whether the value was successfully retrieved.
+ * Gets the current media clock lock state. The return value indicates whether the value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaMediaClock#GetLockState
  * @returns {Promise<OcaMediaClockLockState>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaClockLockState`.
  */
 /**
+ * This event is emitted when the property Type changes in the remote object.
+ * The property ``Type`` is described in the AES70 standard as follows.
  * Type of clock.
- * @member RemoteControlClasses.OcaMediaClock#OnTypeChanged {PropertyEvent<OcaMediaClockType>} - This event is emitted when Type changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaMediaClockType>} RemoteControlClasses.OcaMediaClock#OnTypeChanged
  */
 /**
+ * This event is emitted when the property DomainID changes in the remote object.
+ * The property ``DomainID`` is described in the AES70 standard as follows.
  * Clock domain ID. Arbitrary value.
- * @member RemoteControlClasses.OcaMediaClock#OnDomainIDChanged {PropertyEvent<OcaUint16>} - This event is emitted when DomainID changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaMediaClock#OnDomainIDChanged
  */
 /**
+ * This event is emitted when the property RatesSupported changes in the remote object.
+ * The property ``RatesSupported`` is described in the AES70 standard as follows.
  * List of supported rates
- * @member RemoteControlClasses.OcaMediaClock#OnRatesSupportedChanged {PropertyEvent<OcaList>} - This event is emitted when RatesSupported changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaMediaClockRate[]>} RemoteControlClasses.OcaMediaClock#OnRatesSupportedChanged
  */
 /**
+ * This event is emitted when the property CurrentRate changes in the remote object.
+ * The property ``CurrentRate`` is described in the AES70 standard as follows.
  * Current clock rate
- * @member RemoteControlClasses.OcaMediaClock#OnCurrentRateChanged {PropertyEvent<OcaMediaClockRate>} - This event is emitted when CurrentRate changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaMediaClockRate>} RemoteControlClasses.OcaMediaClock#OnCurrentRateChanged
  */
 /**
+ * This event is emitted when the property LockState changes in the remote object.
+ * The property ``LockState`` is described in the AES70 standard as follows.
  * Lock state of clock.
- * @member RemoteControlClasses.OcaMediaClock#OnLockStateChanged {PropertyEvent<OcaMediaClockLockState>} - This event is emitted when LockState changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaMediaClockLockState>} RemoteControlClasses.OcaMediaClock#OnLockStateChanged
  */

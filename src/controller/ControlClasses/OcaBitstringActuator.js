@@ -29,44 +29,50 @@ export const OcaBitstringActuator = make_control_class(
 );
 
 /**
- * Gets the number of bits in the string. The return value indicates
- * whether the property was successfully gathered.
+ * Gets the number of bits in the string. The return value indicates whether the property was successfully gathered.
+ *
  * @method RemoteControlClasses.OcaBitstringActuator#GetNrBits
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the bit value of the given bit. The return value indicates
- * whether the property was successfully gathered.
+ * Gets the bit value of the given bit. The return value indicates whether the property was successfully gathered.
+ *
  * @method RemoteControlClasses.OcaBitstringActuator#GetBit
- * @param bitNr {OcaUint16}
+ * @param {number} bitNr
  *
- * @returns {Promise<OcaBoolean>}
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the bit value of the given bit. The return value indicates
- * whether the property was successfully set.
+ * Sets the bit value of the given bit. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaBitstringActuator#SetBit
- * @param bitNr {OcaUint16}
+ * @param {number} bitNr
  *
- * @param Value {OcaBoolean}
+ * @param {boolean} Value
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the entire bitstring.The return value indicates whether the
- * property was successfully gathered.
+ * Gets the entire bitstring.The return value indicates whether the property was successfully gathered.
+ *
  * @method RemoteControlClasses.OcaBitstringActuator#GetBitstring
- * @returns {Promise<OcaBitstring>}
+ * @returns {Promise<boolean[]>}
+ *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
- * Sets the entire bitstring. The return value indicates whether the
- * property was successfully set.
- * @method RemoteControlClasses.OcaBitstringActuator#SetBitstring
- * @param BitString {OcaBitstring}
+ * Sets the entire bitstring. The return value indicates whether the property was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaBitstringActuator#SetBitstring
+ * @param {boolean[]} BitString
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Bitstring changes in the remote object.
+ * The property ``Bitstring`` is described in the AES70 standard as follows.
  * The bitstring data.
- * @member RemoteControlClasses.OcaBitstringActuator#OnBitstringChanged {PropertyEvent<OcaBitstring>} - This event is emitted when Bitstring changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean[]>} RemoteControlClasses.OcaBitstringActuator#OnBitstringChanged
  */

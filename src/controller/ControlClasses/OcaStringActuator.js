@@ -29,28 +29,31 @@ export const OcaStringActuator = make_control_class(
 );
 
 /**
- * Gets the value and max length of the Value property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and max length of the Value property. The return value indicates whether the data was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaStringActuator#GetSetting
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the Value property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaStringActuator#SetSetting
- * @param Value {OcaString}
+ * Sets the value of the Value property. The return value indicates whether the property was successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaStringActuator#SetSetting
+ * @param {string} Value
+ *
+ * @returns {Promise<void>}
  */
 /**
  * Gets the maximum string length that this object can handle.
+ *
  * @method RemoteControlClasses.OcaStringActuator#GetMaxLen
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
+ * This event is emitted when the property Setting changes in the remote object.
+ * The property ``Setting`` is described in the AES70 standard as follows.
  * Value.
- * @member RemoteControlClasses.OcaStringActuator#OnSettingChanged {PropertyEvent<OcaString>} - This event is emitted when Setting changes in the remote object.
- */
-/**
- * Maximum string length that this object can accept.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaStringActuator#OnSettingChanged
  */

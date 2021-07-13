@@ -5,8 +5,7 @@ import { OcaTransferFunction } from '../../OCP1/OcaTransferFunction.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
- * An arbitrary-curve filter, with transfer function specified as
- * amplitude and phase versus frequency.
+ * An arbitrary-curve filter, with transfer function specified as amplitude and phase versus frequency.
  * @extends RemoteControlClasses.OcaActuator
  * @class OcaFilterArbitraryCurve
  * @memberof RemoteControlClasses
@@ -37,54 +36,78 @@ export const OcaFilterArbitraryCurve = make_control_class(
 
 /**
  * Returns the complex transfer function.
+ *
  * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetTransferFunction
  * @returns {Promise<OcaTransferFunction>}
+ *   A promise which resolves to a single value of type :class:`OcaTransferFunction`.
  */
 /**
  * Sets the complex transfer function.
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#SetTransferFunction
- * @param TransferFunction {OcaTransferFunction}
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaFilterArbitraryCurve#SetTransferFunction
+ * @param {OcaTransferFunction} TransferFunction
+ *
+ * @returns {Promise<void>}
  */
 /**
  * Gets the filter sampling rate.
+ * The return values of this method are
+ *
+ * - Rate of type ``number``
+ * - minRate of type ``number``
+ * - maxRate of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetSampleRate
- * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the filter sampling rate.
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#SetSampleRate
- * @param Rate {OcaFrequency}
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaFilterArbitraryCurve#SetSampleRate
+ * @param {number} Rate
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Returns the minimum number of required points in the specified
- * transfer function.
+ * Returns the minimum number of required points in the specified transfer function.
+ *
  * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetTFMinLength
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns the maximum number of allowed points in the specified transfer
- * function.
+ * Returns the maximum number of allowed points in the specified transfer function.
+ *
  * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetTFMaxLength
- * @returns {Promise<OcaUint16>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
+ * This event is emitted when the property TransferFunction changes in the remote object.
+ * The property ``TransferFunction`` is described in the AES70 standard as follows.
  * Transfer function of the filter.
- * @member RemoteControlClasses.OcaFilterArbitraryCurve#OnTransferFunctionChanged {PropertyEvent<OcaTransferFunction>} - This event is emitted when TransferFunction changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaTransferFunction>} RemoteControlClasses.OcaFilterArbitraryCurve#OnTransferFunctionChanged
  */
 /**
+ * This event is emitted when the property SampleRate changes in the remote object.
+ * The property ``SampleRate`` is described in the AES70 standard as follows.
  * Sample rate inside the filter. We can't assume it's the same as the
  * device input or output rate.
- * @member RemoteControlClasses.OcaFilterArbitraryCurve#OnSampleRateChanged {PropertyEvent<OcaFrequency>} - This event is emitted when SampleRate changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterArbitraryCurve#OnSampleRateChanged
  */
 /**
+ * This event is emitted when the property TFMinLength changes in the remote object.
+ * The property ``TFMinLength`` is described in the AES70 standard as follows.
  * Minimum number of points that transfer function must specify
- * @member RemoteControlClasses.OcaFilterArbitraryCurve#OnTFMinLengthChanged {PropertyEvent<OcaUint16>} - This event is emitted when TFMinLength changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterArbitraryCurve#OnTFMinLengthChanged
  */
 /**
+ * This event is emitted when the property TFMaxLength changes in the remote object.
+ * The property ``TFMaxLength`` is described in the AES70 standard as follows.
  * Maximum number of points that transfer function may specify
- * @member RemoteControlClasses.OcaFilterArbitraryCurve#OnTFMaxLengthChanged {PropertyEvent<OcaUint16>} - This event is emitted when TFMaxLength changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterArbitraryCurve#OnTFMaxLengthChanged
  */

@@ -6,19 +6,13 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { OcaUint64 } from '../../OCP1/OcaUint64.js';
 
 /**
- * Manager that allows controlling and monitoring a device's time-of-day
- * clock, and that collects the device's time source objects. <ul>
- * <li>Must be instantiated once in every device that has more than one
- * time source object. In this context, a "time source object" is an
- * instance of <b>OcaTimeSource </b>or a subclass of it. </li> </ul> <ul>
- * <li>If instantiated, object number must be 10.</li> </ul> Note: The
- * clock value is accessible via Get and Set methods, but has not been
- * defined as a public property because its value is volatile and should
- * not cause property-change events. The current value of the
- * <b>OcaTimeSource </b>object designated by the
- * <b>CurrentDeviceTimeSource </b>property of this Manager is known as
- * the <b><i>Device Time</i></b>. The property <b>TimeSources </b>was
- * added in version 2 of this class.
+ * Manager that allows controlling and monitoring a device's time-of-day clock, and that collects the device's time source objects.
+ *
+ *  - Must be instantiated once in every device that has more than one time source object. In this context, a "time source object" is an instance of  **OcaTimeSource** or a subclass of it.
+ *
+ *
+ *  - If instantiated, object number must be 10.
+ *   Note: The clock value is accessible via Get and Set methods, but has not been defined as a public property because its value is volatile and should not cause property-change events. The current value of the  **OcaTimeSource** object designated by the  **CurrentDeviceTimeSource** property of this Manager is known as the  **Device Time** . The property  **TimeSources** was added in version 2 of this class.
  * @extends RemoteControlClasses.OcaManager
  * @class OcaDeviceTimeManager
  * @memberof RemoteControlClasses
@@ -47,64 +41,69 @@ export const OcaDeviceTimeManager = make_control_class(
 );
 
 /**
- * Get current value of device time-of-day clock in NTP format. Return
- * value indicates whether value was successfully retrieved. This method
- * is <u>optional </u>and <u>deprecated</u>.
+ * Get current value of device time-of-day clock in NTP format. Return value indicates whether value was successfully retrieved. This method is  _optional_ and  _deprecated_ .
+ *
  * @method RemoteControlClasses.OcaDeviceTimeManager#GetDeviceTimeNTP
- * @returns {Promise<OcaTimeNTP>}
+ * @returns {Promise<number|BigInt>}
+ *   A promise which resolves to a single value of type ``number|BigInt``.
  */
 /**
- * Sets device time-of-day clock in NTP format. Return value indicates
- * whether value was successfully set. Not available if a time source is
- * identified in property CurrentDeviceTimeSource. This method is
- * <u>optional </u>and <u>deprecated</u>.
+ * Sets device time-of-day clock in NTP format. Return value indicates whether value was successfully set. Not available if a time source is identified in property CurrentDeviceTimeSource. This method is  _optional_ and  _deprecated_ .
+ *
  * @method RemoteControlClasses.OcaDeviceTimeManager#SetDeviceTimeNTP
- * @param DeviceTime {OcaTimeNTP}
+ * @param {number|BigInt} DeviceTime
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Returns list of object numbers of OcaTimeSource instances in this
- * device. Return value indicates whether list was successfully
- * retrieved.
+ * Returns list of object numbers of OcaTimeSource instances in this device. Return value indicates whether list was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceTimeManager#GetTimeSources
- * @returns {Promise<OcaList>}
+ * @returns {Promise<number[]>}
+ *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Retrieves ONo of current time source object, or zero if none. Return
- * value indicates whether value was successfully retrieved.
- * @method RemoteControlClasses.OcaDeviceTimeManager#GetCurrentDeviceTimeSource
- * @returns {Promise<OcaONo>}
- */
-/**
- * Sets ONo of current time source object, or zero if none. Return value
- * indicates whether value was successfully retrieved.
- * @method RemoteControlClasses.OcaDeviceTimeManager#SetCurrentDeviceTimeSource
- * @param TimeSourceONo {OcaONo}
+ * Retrieves ONo of current time source object, or zero if none. Return value indicates whether value was successfully retrieved.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDeviceTimeManager#GetCurrentDeviceTimeSource
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Get current value of device time-of-day clock in PTP format. Return
- * value indicates whether value was successfully retrieved.
+ * Sets ONo of current time source object, or zero if none. Return value indicates whether value was successfully retrieved.
+ *
+ * @method RemoteControlClasses.OcaDeviceTimeManager#SetCurrentDeviceTimeSource
+ * @param {number} TimeSourceONo
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Get current value of device time-of-day clock in PTP format. Return value indicates whether value was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaDeviceTimeManager#GetDeviceTimePTP
  * @returns {Promise<OcaTimePTP>}
+ *   A promise which resolves to a single value of type :class:`OcaTimePTP`.
  */
 /**
- * Sets device time-of-day clock in PTP format. Return value indicates
- * whether value was successfully set. Not available if a time source is
- * identified in property CurrentDeviceTimeSource.
- * @method RemoteControlClasses.OcaDeviceTimeManager#SetDeviceTimePTP
- * @param DeviceTime {OcaTimePTP}
+ * Sets device time-of-day clock in PTP format. Return value indicates whether value was successfully set. Not available if a time source is identified in property CurrentDeviceTimeSource.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaDeviceTimeManager#SetDeviceTimePTP
+ * @param {OcaTimePTP} DeviceTime
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property TimeSources changes in the remote object.
+ * The property ``TimeSources`` is described in the AES70 standard as follows.
  * The list of ONos of OcaTimeSource objects in this device
- * @member RemoteControlClasses.OcaDeviceTimeManager#OnTimeSourcesChanged {PropertyEvent<OcaList>} - This event is emitted when TimeSources changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaDeviceTimeManager#OnTimeSourcesChanged
  */
 /**
+ * This event is emitted when the property CurrentDeviceTimeSource changes in the remote object.
+ * The property ``CurrentDeviceTimeSource`` is described in the AES70 standard as follows.
  * The current time source for this device's device time, or zero if
  * none.
- * @member RemoteControlClasses.OcaDeviceTimeManager#OnCurrentDeviceTimeSourceChanged {PropertyEvent<OcaONo>} - This event is emitted when CurrentDeviceTimeSource changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDeviceTimeManager#OnCurrentDeviceTimeSourceChanged
  */

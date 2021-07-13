@@ -31,36 +31,48 @@ export const OcaAgent = make_control_class(
 );
 
 /**
- * Gets the value of the Label property. The return value indicates
- * whether the property was successfully retrieved.
- * @method RemoteControlClasses.OcaAgent#GetLabel
- * @returns {Promise<OcaString>}
- */
-/**
- * Sets the value of the Label property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaAgent#SetLabel
- * @param Label {OcaString}
+ * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaAgent#GetLabel
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Gets the value of the Owner property. The return value indicates
- * whether the property was successfully retrieved.
+ * Sets the value of the Label property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaAgent#SetLabel
+ * @param {string} Label
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaAgent#GetOwner
- * @returns {Promise<OcaONo>}
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns path from the given object down to root. The return value
- * indicates whether the operation succeeded. Added in version 2.
+ * Returns path from the given object down to root. The return value indicates whether the operation succeeded. Added in version 2.
+ * The return values of this method are
+ *
+ * - NamePath of type ``string[]``
+ * - ONoPath of type ``number[]``
+ *
  * @method RemoteControlClasses.OcaAgent#GetPath
- * @returns {Promise<Arguments<OcaNamePath,OcaONoPath>>}
+ * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
+ * This event is emitted when the property Label changes in the remote object.
+ * The property ``Label`` is described in the AES70 standard as follows.
  * User-specified label.
- * @member RemoteControlClasses.OcaAgent#OnLabelChanged {PropertyEvent<OcaString>} - This event is emitted when Label changes in the remote object.
+ *
+ * @member {PropertyEvent<string>} RemoteControlClasses.OcaAgent#OnLabelChanged
  */
 /**
+ * This event is emitted when the property Owner changes in the remote object.
+ * The property ``Owner`` is described in the AES70 standard as follows.
  * Object number of block that contains this agent.
- * @member RemoteControlClasses.OcaAgent#OnOwnerChanged {PropertyEvent<OcaONo>} - This event is emitted when Owner changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaAgent#OnOwnerChanged
  */

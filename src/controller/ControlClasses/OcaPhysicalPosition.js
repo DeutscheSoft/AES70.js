@@ -5,9 +5,7 @@ import { OcaPositionCoordinateSystem } from '../../OCP1/OcaPositionCoordinateSys
 import { OcaPositionDescriptor } from '../../OCP1/OcaPositionDescriptor.js';
 
 /**
- * Physical position of device or an element of it. AES70 supports a
- * variety of positional coordinate systems. For details, see AES70-1,
- * section 5.5.9.
+ * Physical position of device or an element of it. AES70 supports a variety of positional coordinate systems. For details, see AES70-1, section 5.5.9.
  * @extends RemoteControlClasses.OcaAgent
  * @class OcaPhysicalPosition
  * @memberof RemoteControlClasses
@@ -48,49 +46,43 @@ export const OcaPhysicalPosition = make_control_class(
 );
 
 /**
- * Retrieves value of property <b>CoordinateSystem</b>. Result indicates
- * whether retrieval was successful.
+ * Retrieves value of property  **CoordinateSystem** . Result indicates whether retrieval was successful.
+ *
  * @method RemoteControlClasses.OcaPhysicalPosition#GetCoordinateSystem
  * @returns {Promise<OcaPositionCoordinateSystem>}
+ *   A promise which resolves to a single value of type :class:`OcaPositionCoordinateSystem`.
  */
 /**
- * Retrieves value of property <b>PositionDescriptorFieldFlags</b>.
- * Result indicates whether retrieval was successful.
+ * Retrieves value of property  **PositionDescriptorFieldFlags** . Result indicates whether retrieval was successful.
+ *
  * @method RemoteControlClasses.OcaPhysicalPosition#GetPositionDescriptorFieldFlags
- * @returns {Promise<OcaPositionDescriptorFieldFlags>}
+ * @returns {Promise<int>}
+ *   A promise which resolves to a single value of type ``int``.
  */
 /**
- * Retrieves value of property <b>PositioinDescriptor</b>. Result
- * indicates whether retrieval was successful.
+ * Retrieves value of property  **PositioinDescriptor** . Result indicates whether retrieval was successful.
+ * The return values of this method are
+ *
+ * - PositionDescriptor of type :class:`OcaPositionDescriptor`
+ * - minPositionDescriptor of type :class:`OcaPositionDescriptor`
+ * - maxPositionDescriptor of type :class:`OcaPositionDescriptor`
+ *
  * @method RemoteControlClasses.OcaPhysicalPosition#GetPositionDescriptor
  * @returns {Promise<Arguments<OcaPositionDescriptor,OcaPositionDescriptor,OcaPositionDescriptor>>}
  */
 /**
- * Sets value of property <b>PositionDescriptor</b>. Result indicates
- * whether setting was successful. The <b>ParameterError </b>status is
- * returned if: (a) the <b>FieldFlags </b>field of the given
- * <b>PositionDescriptor </b>value differs from the object's basic
- * position descriptor as given in its <b>PositionDescriptorFieldFlags
- * </b>property, or (b) the given <b>CoordinateSystem </b>value conflicts
- * with the object's basic coordinate system as given in its
- * <b>CoordinateSystem </b>property. This is an optional method, not
- * implemented for read-only position objects.
- * @method RemoteControlClasses.OcaPhysicalPosition#SetPositionDescriptor
- * @param PositionDescriptor {OcaPositionDescriptor}
+ * Sets value of property  **PositionDescriptor** . Result indicates whether setting was successful. The  **ParameterError** status is returned if: (a) the  **FieldFlags** field of the given  **PositionDescriptor** value differs from the object's basic position descriptor as given in its  **PositionDescriptorFieldFlags** property, or (b) the given  **CoordinateSystem** value conflicts with the object's basic coordinate system as given in its  **CoordinateSystem** property. This is an optional method, not implemented for read-only position objects.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaPhysicalPosition#SetPositionDescriptor
+ * @param {OcaPositionDescriptor} PositionDescriptor
+ *
+ * @returns {Promise<void>}
  */
 /**
- * Type of physical coordinate system this object uses. Read-only, set at
- * object construction time.
- */
-/**
- * Position descriptor field flags. Describe which position descriptor
- * fields are used by this object. Read-only, set at object construction
- * time.
- */
-/**
+ * This event is emitted when the property PositionDescriptor changes in the remote object.
+ * The property ``PositionDescriptor`` is described in the AES70 standard as follows.
  * Position coordinates. For details, see AES70-1, section 5.5.9 and the
  * <b>OcaPositionDescriptor </b>datatype definition.
- * @member RemoteControlClasses.OcaPhysicalPosition#OnPositionDescriptorChanged {PropertyEvent<OcaPositionDescriptor>} - This event is emitted when PositionDescriptor changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaPositionDescriptor>} RemoteControlClasses.OcaPhysicalPosition#OnPositionDescriptorChanged
  */

@@ -4,8 +4,8 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enum describing status change types, as used in <b>OcaGrouper's
- * StatusChange </b>event.
+ * Enum describing status change types, as used in  **OcaGrouper's StatusChange** event.
+ * @class OcaGrouperStatusChangeType
  */
 export class OcaGrouperStatusChangeType extends Enum({
   citizenAdded: 1,
@@ -16,3 +16,53 @@ export class OcaGrouperStatusChangeType extends Enum({
   enrollment: 6,
   unEnrollment: 7,
 }) {}
+
+/**
+ * Singleton object corresponding to the entry with value ``1``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member citizenAdded
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``2``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member citizenDeleted
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``3``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member citizenConnectionLost
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``4``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member citizenConnectionReEstablished
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``5``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member citizenError
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``6``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member enrollment
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``7``.
+ * @type {OcaGrouperStatusChangeType}
+ * @member unEnrollment
+ * @memberof OcaGrouperStatusChangeType
+ * @static
+ */

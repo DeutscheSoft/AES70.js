@@ -185,8 +185,8 @@ export class Properties {
   /**
    * Find a property.
    *
-   * @param {String|OcaPropertyID} id - The property identifier. Either a name
-   *                                    or a {@link OcaPropertyID}.
+   * @param {String|OcaPropertyID} id The property identifier. Either a name
+   *    or a :class:`OcaPropertyID`.
    */
   find_property(id) {
     if (id instanceof OcaPropertyID) {
@@ -213,9 +213,11 @@ export class Properties {
   /**
    * Iterate all properties.
    *
-   * @param {Function} callback - Function to be called with each {@link Property}
-   *                              as only argument.
-   * @param {Object} [ctx] - Optional context to call function in.
+   * @param {Function} callback
+   *    Function to be called with each
+   *    :class:`Property` as only argument.
+   * @param {Object} [ctx]
+   *    Optional context to call function in.
    */
   forEach(cb, ctx) {
     const ret = this.parent ? this.parent.forEach(cb, ctx) : [];
@@ -448,7 +450,7 @@ export class ObjectBase {
   }
 
   /**
-   * Returns an instance of {@link Properties} for this remote object.
+   * Returns an instance of :class:`Properties` for this remote object.
    */
   get_properties() {
     return this.constructor.get_properties();
@@ -459,7 +461,7 @@ export class ObjectBase {
   }
 
   /**
-   * Returns an instance of {@link PropertySync} for this remote object.
+   * Returns an instance of :class:`PropertySync` for this remote object.
    */
   GetPropertySync() {
     const p = this.constructor.GetPropertySync();
@@ -577,8 +579,8 @@ export class Event extends BaseEvent {
 /**
  * Class used to represent property changes.
  * When this event fires, event handlers will be called with
- * the new value, the {@link OcaPropertyChangeType} and
- * the {@link OcaPropertyID} of the property.
+ * the new value, the :class:`OcaPropertyChangeType` and
+ * the :class:`OcaPropertyID` of the property.
  *
  * @extends BaseEvent
  */

@@ -6,8 +6,13 @@ import { Buffer } from 'buffer';
 import { ClientConnection } from './client_connection.js';
 
 /**
- * {@link ClientConnection} subclass which implements OCP.1 with TCP
+ * :class:`ClientConnection` subclass which implements OCP.1 with TCP
  * transport.
+ *
+ * @param {net.Socket} socket
+ *    The established tcp socket.
+ * @param {object} options
+ *    Additional options are passed to :class:`ClientConnection`.
  */
 export class TCPConnection extends ClientConnection {
   constructor(socket, options) {
@@ -36,9 +41,12 @@ export class TCPConnection extends ClientConnection {
   /**
    * Connect to the given endpoint.
    *
-   * @param {String} options.host - hostname or ip
-   * @param {number} options.port - port
-   * @returns {Promise<TCPConnection>} - The connection.
+   * @param {String} options.host
+   *    Hostname or ip address.
+   * @param {number} options.port
+   *    Port number.
+   * @returns {Promise<TCPConnection>}
+   *    The connection.
    */
   static connect(options) {
     return new Promise((resolve, reject) => {

@@ -1,0 +1,583 @@
+==================
+Control Data Types
+==================
+
+.. _OcaBaseDataType: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocabasedatatype
+.. _OcaBit: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocabit
+.. _OcaBoolean: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaboolean
+.. _OcaInt8: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint8
+.. _OcaInt16: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint16
+.. _OcaInt32: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint32
+.. _OcaInt64: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint64
+.. _OcaUint8: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint8
+.. _OcaUint16: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint16
+.. _OcaUint32: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint32
+.. _OcaUint64: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint64
+.. _OcaFloat32: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocafloat32
+.. _OcaFloat64: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocafloat64
+.. _OcaString: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocastring
+.. _OcaBitstring: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocabitstring
+.. _OcaBlob: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocablob
+.. _OcaBlobFixedLen: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocablobfixedlen
+.. _OcaList: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocalist
+.. _OcaList2D: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocalist2d
+.. _OcaMapItem: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocamapitem
+.. _OcaMap: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocamap
+.. _OcaMultiMap: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocamultimap
+.. _OcaOrganizationID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaorganizationid
+.. _OcaClassAuthorityID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassauthorityid
+.. _OcaClassIDField: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassidfield
+.. _OcaClassID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassid
+.. _OcaVersion: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaversion
+.. _OcaEnumItem: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaenumitem
+.. _OcaBitSet16: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocabitset16
+.. _OcaEnumItem16: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaenumitem16
+.. _OcaClassIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassidentification
+.. _OcaClassVersionNumber: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassversionnumber
+.. _OcaONo: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaono
+.. _OcaOPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaopath
+.. _OcaNamePath: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocanamepath
+.. _OcaONoPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaonopath
+.. _OcaObjectIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaobjectidentification
+.. _OcaMethodID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocamethodid
+.. _OcaPropertyID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapropertyid
+.. _OcaEventID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaeventid
+.. _OcaPropertyDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapropertydescriptor
+.. _OcaProperty: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaproperty
+.. _OcaStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocastatus
+.. _OcaGlobalTypeIdentifier: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaglobaltypeidentifier
+.. _OcaParameterMask: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaparametermask
+.. _OcaStringComparisonType: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocastringcomparisontype
+.. _OcaPositionDescriptorFieldFlags: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapositiondescriptorfieldflags
+.. _OcaPositionDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapositiondescriptor
+.. _OcaPositionCoordinateSystem: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapositioncoordinatesystem
+.. _OcaManagerDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamanagerdescriptor
+.. _OcaManagerDefaultObjectNumbers: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamanagerdefaultobjectnumbers
+.. _OcaDeviceState: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocadevicestate
+.. _OcaModelGUID: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamodelguid
+.. _OcaModelDescription: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamodeldescription
+.. _OcaResetCause: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocaresetcause
+.. _OcaComponent: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocacomponent
+.. _OcaPowerState: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocapowerstate
+.. _OcaEvent: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaevent
+.. _OcaMethod: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamethod
+.. _OcaEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaeventdata
+.. _OcaLibVolChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocalibvolchangedeventdata
+.. _OcaPropertyChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocapropertychangedeventdata
+.. _OcaPropertyChangeType: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocapropertychangetype
+.. _OcaMediaConnectorElement: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediaconnectorelement
+.. _OcaMediaConnectorStatusChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediaconnectorstatuschangedeventdata
+.. _OcaTaskStateChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocataskstatechangedeventdata
+.. _OcaMediaSourceConnectorChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediasourceconnectorchangedeventdata
+.. _OcaMediaSinkConnectorChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediasinkconnectorchangedeventdata
+.. _OcaObjectListEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaobjectlisteventdata
+.. _OcaObservationEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaobservationeventdata
+.. _OcaObservationListEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaobservationlisteventdata
+.. _OcaGrouperStatusChangeType: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocagrouperstatuschangetype
+.. _OcaGrouperStatusChangeEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocagrouperstatuschangeeventdata
+.. _OcaNotificationDeliveryMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocanotificationdeliverymode
+.. _OcaSubscriptionManagerState: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocasubscriptionmanagerstate
+.. _OcaDB: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadb
+.. _OcaDBr: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbr
+.. _OcaDBV: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbv
+.. _OcaDBu: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbu
+.. _OcaDBFS: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbfs
+.. _OcaDBz: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbz
+.. _OcaVoltage: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocavoltage
+.. _OcaCurrent: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocacurrent
+.. _OcaImpedance: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaimpedance
+.. _OcaMuteState: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocamutestate
+.. _OcaPolarityState: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocapolaritystate
+.. _OcaDelayUnit: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadelayunit
+.. _OcaDelayValue: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadelayvalue
+.. _OcaFrequency: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocafrequency
+.. _OcaFrequencyResponse: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocafrequencyresponse
+.. _OcaTransferFunction: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocatransferfunction
+.. _OcaPeriod: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaperiod
+.. _OcaClassicalFilterShape: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaclassicalfiltershape
+.. _OcaFilterPassband: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocafilterpassband
+.. _OcaParametricEQShape: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaparametriceqshape
+.. _OcaDynamicsFunction: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadynamicsfunction
+.. _OcaPilotToneDetectorSpec: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocapilottonedetectorspec
+.. _OcaWaveformType: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocawaveformtype
+.. _OcaSweepType: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocasweeptype
+.. _OcaUnitOfMeasure: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaunitofmeasure
+.. _OcaPresentationUnit: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocapresentationunit
+.. _OcaTemperature: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocatemperature
+.. _OcaLevelDetectionLaw: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaleveldetectionlaw
+.. _OcaSensorReadingState: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocasensorreadingstate
+.. _OcaLevelMeterLaw: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocalevelmeterlaw
+.. _OcaBlockMember: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocablockmember
+.. _OcaPort: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaport
+.. _OcaPortMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaportmode
+.. _OcaPortID: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaportid
+.. _OcaSignalPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocasignalpath
+.. _OcaProtoMember: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotomember
+.. _OcaProtoONo: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoono
+.. _OcaProtoObjectIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoobjectidentification
+.. _OcaProtoPortID: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoportid
+.. _OcaProtoPort: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoport
+.. _OcaProtoSignalPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotosignalpath
+.. _OcaMatrixCoordinate: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocamatrixcoordinate
+.. _OcaObjectSearchResult: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaobjectsearchresult
+.. _OcaObjectSearchResultFlags: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaobjectsearchresultflags
+.. _OcaGrouperGroup: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagroupergroup
+.. _OcaGrouperCitizen: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagroupercitizen
+.. _OcaGrouperEnrollment: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagrouperenrollment
+.. _OcaGrouperMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagroupermode
+.. _OcaObserverState: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocaobserverstate
+.. _OcaRelationalOperator: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocarelationaloperator
+.. _OcaPowerSupplyType: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocapowersupplytype
+.. _OcaPowerSupplyLocation: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocapowersupplylocation
+.. _OcaPowerSupplyState: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocapowersupplystate
+.. _OcaRamperCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocarampercommand
+.. _OcaRamperState: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocaramperstate
+.. _OcaTaskID: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskid
+.. _OcaTaskGroupID: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskgroupid
+.. _OcaTaskStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskstatus
+.. _OcaTaskState: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskstate
+.. _OcaTask: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocatask
+.. _OcaTaskCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskcommand
+.. _OcaTaskManagerState: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskmanagerstate
+.. _OcaRamperInterpolationLaw: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocaramperinterpolationlaw
+.. _OcaLibVolStandardTypeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolstandardtypeid
+.. _OcaLibVolType: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoltype
+.. _OcaLibraryIdentifier: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibraryidentifier
+.. _OcaLibVolID: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolid
+.. _OcaLibVolIdentifier: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolidentifier
+.. _OcaLibAccess: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibaccess
+.. _OcaLibVolMetadata: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolmetadata
+.. _OcaLibVol: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvol
+.. _OcaLibVolData_ParamSet: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoldata_paramset
+.. _OcaLibParamSetAssignment: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibparamsetassignment
+.. _OcaLibVolData_Patch: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoldata_patch
+.. _OcaLibVolData_Program: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoldata_program
+.. _OcaNetworkAddress: http://docs.deuso.de/AES70-OCC/Data%20Types/Network%20Datatypes.html#ocanetworkaddress
+.. _OcaNetworkHostID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkhostid
+.. _OcaNetworkNodeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworknodeid
+.. _OcaStreamConnectorPinIndex: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectorpinindex
+.. _OcaNetworkSystemInterfaceID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworksysteminterfaceid
+.. _OcaNetworkSignalChannelID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworksignalchannelid
+.. _OcaNetworkStatistics: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkstatistics
+.. _OcaStreamConnectorID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectorid
+.. _OcaStream: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastream
+.. _OcaStreamID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamid
+.. _OcaStreamParameters: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamparameters
+.. _OcaMediaClockLockState: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocamediaclocklockstate
+.. _OcaStreamConnectorIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectoridentification
+.. _OcaStreamIndex: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamindex
+.. _OcaMediaClockType: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocamediaclocktype
+.. _OcaNetworkStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkstatus
+.. _OcaStreamConnectorStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectorstatus
+.. _OcaNetworkSignalChannelStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworksignalchannelstatus
+.. _OcaNetworkMediaSourceOrSink: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkmediasourceorsink
+.. _OcaTimeNTP: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocatimentp
+.. _OcaTimeOfDay: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocatimeofday
+.. _OcaStreamType: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamtype
+.. _OcaStreamStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamstatus
+.. _OcaNetworkLinkType: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworklinktype
+.. _OcaApplicationNetworkServiceID: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkserviceid
+.. _OcaNetworkSystemInterfaceDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworksysteminterfacedescriptor
+.. _OcaApplicationNetworkState: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkstate
+.. _OcaApplicationNetworkCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkcommand
+.. _OcaNetworkMediaProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworkmediaprotocol
+.. _OcaNetworkControlProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworkcontrolprotocol
+.. _OcaMediaSinkConnector: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediasinkconnector
+.. _OcaMediaSourceConnector: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediasourceconnector
+.. _OcaMediaConnectorID: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorid
+.. _OcaMediaConnectorStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorstatus
+.. _OcaMediaConnectorState: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorstate
+.. _OcaMediaConnectorCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorcommand
+.. _OcaMediaConnection: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connection%20Datatypes.html#ocamediaconnection
+.. _OcaMediaStreamCastMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connection%20Datatypes.html#ocamediastreamcastmode
+.. _OcaMediaStreamParameters: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Stream%20Datatypes.html#ocamediastreamparameters
+.. _OcaMediaCoding: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocamediacoding
+.. _OcaMediaCodingSchemeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocamediacodingschemeid
+.. _OcaSDPString: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocasdpstring
+.. _OcaBaseDataType: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocabasedatatype
+.. _OcaBit: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocabit
+.. _OcaBoolean: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaboolean
+.. _OcaInt8: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint8
+.. _OcaInt16: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint16
+.. _OcaInt32: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint32
+.. _OcaInt64: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocaint64
+.. _OcaUint8: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint8
+.. _OcaUint16: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint16
+.. _OcaUint32: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint32
+.. _OcaUint64: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocauint64
+.. _OcaFloat32: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocafloat32
+.. _OcaFloat64: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocafloat64
+.. _OcaString: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocastring
+.. _OcaBitstring: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocabitstring
+.. _OcaBlob: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocablob
+.. _OcaBlobFixedLen: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocablobfixedlen
+.. _OcaList: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocalist
+.. _OcaList2D: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocalist2d
+.. _OcaMapItem: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocamapitem
+.. _OcaMap: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocamap
+.. _OcaMultiMap: http://docs.deuso.de/AES70-OCC/Data%20Types/Base%20Datatypes.html#ocamultimap
+.. _OcaOrganizationID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaorganizationid
+.. _OcaClassAuthorityID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassauthorityid
+.. _OcaClassIDField: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassidfield
+.. _OcaClassID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassid
+.. _OcaVersion: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaversion
+.. _OcaEnumItem: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaenumitem
+.. _OcaBitSet16: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocabitset16
+.. _OcaEnumItem16: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaenumitem16
+.. _OcaClassIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassidentification
+.. _OcaClassVersionNumber: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaclassversionnumber
+.. _OcaONo: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaono
+.. _OcaOPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaopath
+.. _OcaNamePath: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocanamepath
+.. _OcaONoPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaonopath
+.. _OcaObjectIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaobjectidentification
+.. _OcaMethodID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocamethodid
+.. _OcaPropertyID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapropertyid
+.. _OcaEventID: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaeventid
+.. _OcaPropertyDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapropertydescriptor
+.. _OcaProperty: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaproperty
+.. _OcaStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocastatus
+.. _OcaGlobalTypeIdentifier: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaglobaltypeidentifier
+.. _OcaParameterMask: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocaparametermask
+.. _OcaStringComparisonType: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocastringcomparisontype
+.. _OcaPositionDescriptorFieldFlags: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapositiondescriptorfieldflags
+.. _OcaPositionDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapositiondescriptor
+.. _OcaPositionCoordinateSystem: http://docs.deuso.de/AES70-OCC/Data%20Types/Framework%20Datatypes.html#ocapositioncoordinatesystem
+.. _OcaManagerDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamanagerdescriptor
+.. _OcaManagerDefaultObjectNumbers: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamanagerdefaultobjectnumbers
+.. _OcaDeviceState: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocadevicestate
+.. _OcaModelGUID: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamodelguid
+.. _OcaModelDescription: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocamodeldescription
+.. _OcaResetCause: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocaresetcause
+.. _OcaComponent: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocacomponent
+.. _OcaPowerState: http://docs.deuso.de/AES70-OCC/Data%20Types/Management%20Datatypes.html#ocapowerstate
+.. _OcaEvent: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaevent
+.. _OcaMethod: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamethod
+.. _OcaEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaeventdata
+.. _OcaLibVolChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocalibvolchangedeventdata
+.. _OcaPropertyChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocapropertychangedeventdata
+.. _OcaPropertyChangeType: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocapropertychangetype
+.. _OcaMediaConnectorElement: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediaconnectorelement
+.. _OcaMediaConnectorStatusChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediaconnectorstatuschangedeventdata
+.. _OcaTaskStateChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocataskstatechangedeventdata
+.. _OcaMediaSourceConnectorChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediasourceconnectorchangedeventdata
+.. _OcaMediaSinkConnectorChangedEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocamediasinkconnectorchangedeventdata
+.. _OcaObjectListEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaobjectlisteventdata
+.. _OcaObservationEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaobservationeventdata
+.. _OcaObservationListEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocaobservationlisteventdata
+.. _OcaGrouperStatusChangeType: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocagrouperstatuschangetype
+.. _OcaGrouperStatusChangeEventData: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocagrouperstatuschangeeventdata
+.. _OcaNotificationDeliveryMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocanotificationdeliverymode
+.. _OcaSubscriptionManagerState: http://docs.deuso.de/AES70-OCC/Data%20Types/Event%20&%20Subscription%20Datatypes.html#ocasubscriptionmanagerstate
+.. _OcaDB: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadb
+.. _OcaDBr: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbr
+.. _OcaDBV: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbv
+.. _OcaDBu: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbu
+.. _OcaDBFS: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbfs
+.. _OcaDBz: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadbz
+.. _OcaVoltage: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocavoltage
+.. _OcaCurrent: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocacurrent
+.. _OcaImpedance: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaimpedance
+.. _OcaMuteState: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocamutestate
+.. _OcaPolarityState: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocapolaritystate
+.. _OcaDelayUnit: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadelayunit
+.. _OcaDelayValue: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadelayvalue
+.. _OcaFrequency: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocafrequency
+.. _OcaFrequencyResponse: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocafrequencyresponse
+.. _OcaTransferFunction: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocatransferfunction
+.. _OcaPeriod: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaperiod
+.. _OcaClassicalFilterShape: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaclassicalfiltershape
+.. _OcaFilterPassband: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocafilterpassband
+.. _OcaParametricEQShape: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaparametriceqshape
+.. _OcaDynamicsFunction: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocadynamicsfunction
+.. _OcaPilotToneDetectorSpec: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocapilottonedetectorspec
+.. _OcaWaveformType: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocawaveformtype
+.. _OcaSweepType: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocasweeptype
+.. _OcaUnitOfMeasure: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaunitofmeasure
+.. _OcaPresentationUnit: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocapresentationunit
+.. _OcaTemperature: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocatemperature
+.. _OcaLevelDetectionLaw: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocaleveldetectionlaw
+.. _OcaSensorReadingState: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocasensorreadingstate
+.. _OcaLevelMeterLaw: http://docs.deuso.de/AES70-OCC/Data%20Types/Worker%20Datatypes.html#ocalevelmeterlaw
+.. _OcaBlockMember: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocablockmember
+.. _OcaPort: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaport
+.. _OcaPortMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaportmode
+.. _OcaPortID: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaportid
+.. _OcaSignalPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocasignalpath
+.. _OcaProtoMember: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotomember
+.. _OcaProtoONo: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoono
+.. _OcaProtoObjectIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoobjectidentification
+.. _OcaProtoPortID: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoportid
+.. _OcaProtoPort: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotoport
+.. _OcaProtoSignalPath: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaprotosignalpath
+.. _OcaMatrixCoordinate: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocamatrixcoordinate
+.. _OcaObjectSearchResult: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaobjectsearchresult
+.. _OcaObjectSearchResultFlags: http://docs.deuso.de/AES70-OCC/Data%20Types/Block%20and%20Matrix%20Datatypes.html#ocaobjectsearchresultflags
+.. _OcaGrouperGroup: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagroupergroup
+.. _OcaGrouperCitizen: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagroupercitizen
+.. _OcaGrouperEnrollment: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagrouperenrollment
+.. _OcaGrouperMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocagroupermode
+.. _OcaObserverState: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocaobserverstate
+.. _OcaRelationalOperator: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocarelationaloperator
+.. _OcaPowerSupplyType: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocapowersupplytype
+.. _OcaPowerSupplyLocation: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocapowersupplylocation
+.. _OcaPowerSupplyState: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocapowersupplystate
+.. _OcaRamperCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocarampercommand
+.. _OcaRamperState: http://docs.deuso.de/AES70-OCC/Data%20Types/Agent%20Datatypes.html#ocaramperstate
+.. _OcaTaskID: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskid
+.. _OcaTaskGroupID: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskgroupid
+.. _OcaTaskStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskstatus
+.. _OcaTaskState: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskstate
+.. _OcaTask: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocatask
+.. _OcaTaskCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskcommand
+.. _OcaTaskManagerState: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocataskmanagerstate
+.. _OcaRamperInterpolationLaw: http://docs.deuso.de/AES70-OCC/Data%20Types/Task%20Datatypes.html#ocaramperinterpolationlaw
+.. _OcaLibVolStandardTypeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolstandardtypeid
+.. _OcaLibVolType: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoltype
+.. _OcaLibraryIdentifier: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibraryidentifier
+.. _OcaLibVolID: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolid
+.. _OcaLibVolIdentifier: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolidentifier
+.. _OcaLibAccess: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibaccess
+.. _OcaLibVolMetadata: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvolmetadata
+.. _OcaLibVol: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvol
+.. _OcaLibVolData_ParamSet: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoldata_paramset
+.. _OcaLibParamSetAssignment: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibparamsetassignment
+.. _OcaLibVolData_Patch: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoldata_patch
+.. _OcaLibVolData_Program: http://docs.deuso.de/AES70-OCC/Data%20Types/Library%20Datatypes.html#ocalibvoldata_program
+.. _OcaNetworkAddress: http://docs.deuso.de/AES70-OCC/Data%20Types/Network%20Datatypes.html#ocanetworkaddress
+.. _OcaMediaClockAvailability: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocamediaclockavailability
+.. _OcaMediaClockRate: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocamediaclockrate
+.. _OcaTimeReferenceType: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimereferencetype
+.. _OcaTimeProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimeprotocol
+.. _OcaTimeSourceAvailability: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimesourceavailability
+.. _OcaTimeMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimemode
+.. _OcaTimeSourceSyncStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimesourcesyncstatus
+.. _OcaPTPSeconds: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocaptpseconds
+.. _OcaTimePTP: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimeptp
+.. _OcaTimeInterval: http://docs.deuso.de/AES70-OCC/Data%20Types/Time%20Datatypes.html#ocatimeinterval
+.. _OcaNetworkHostID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkhostid
+.. _OcaNetworkNodeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworknodeid
+.. _OcaStreamConnectorPinIndex: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectorpinindex
+.. _OcaNetworkSystemInterfaceID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworksysteminterfaceid
+.. _OcaNetworkSignalChannelID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworksignalchannelid
+.. _OcaNetworkStatistics: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkstatistics
+.. _OcaStreamConnectorID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectorid
+.. _OcaStream: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastream
+.. _OcaStreamID: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamid
+.. _OcaStreamParameters: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamparameters
+.. _OcaMediaClockLockState: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocamediaclocklockstate
+.. _OcaStreamConnectorIdentification: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectoridentification
+.. _OcaStreamIndex: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamindex
+.. _OcaMediaClockType: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocamediaclocktype
+.. _OcaNetworkStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkstatus
+.. _OcaStreamConnectorStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamconnectorstatus
+.. _OcaNetworkSignalChannelStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworksignalchannelstatus
+.. _OcaNetworkMediaSourceOrSink: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocanetworkmediasourceorsink
+.. _OcaTimeNTP: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocatimentp
+.. _OcaTimeOfDay: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocatimeofday
+.. _OcaStreamType: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamtype
+.. _OcaStreamStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Deprecated%20Datatypes.html#ocastreamstatus
+.. _OcaNetworkLinkType: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworklinktype
+.. _OcaApplicationNetworkServiceID: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkserviceid
+.. _OcaNetworkSystemInterfaceDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworksysteminterfacedescriptor
+.. _OcaApplicationNetworkState: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkstate
+.. _OcaApplicationNetworkCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkcommand
+.. _OcaNetworkMediaProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworkmediaprotocol
+.. _OcaNetworkControlProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworkcontrolprotocol
+.. _OcaMediaSinkConnector: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediasinkconnector
+.. _OcaMediaSourceConnector: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediasourceconnector
+.. _OcaMediaConnectorID: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorid
+.. _OcaMediaConnectorStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorstatus
+.. _OcaMediaConnectorState: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorstate
+.. _OcaMediaConnectorCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorcommand
+.. _OcaMediaConnection: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connection%20Datatypes.html#ocamediaconnection
+.. _OcaMediaStreamCastMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connection%20Datatypes.html#ocamediastreamcastmode
+.. _OcaMediaStreamParameters: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Stream%20Datatypes.html#ocamediastreamparameters
+.. _OcaMediaCoding: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocamediacoding
+.. _OcaMediaCodingSchemeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocamediacodingschemeid
+.. _OcaSDPString: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocasdpstring
+.. _OcaNetworkLinkType: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworklinktype
+.. _OcaApplicationNetworkServiceID: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkserviceid
+.. _OcaNetworkSystemInterfaceDescriptor: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworksysteminterfacedescriptor
+.. _OcaApplicationNetworkState: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkstate
+.. _OcaApplicationNetworkCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocaapplicationnetworkcommand
+.. _OcaNetworkMediaProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworkmediaprotocol
+.. _OcaNetworkControlProtocol: http://docs.deuso.de/AES70-OCC/Data%20Types/Application%20Network%20Datatypes.html#ocanetworkcontrolprotocol
+.. _OcaMediaSinkConnector: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediasinkconnector
+.. _OcaMediaSourceConnector: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediasourceconnector
+.. _OcaMediaConnectorID: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorid
+.. _OcaMediaConnectorStatus: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorstatus
+.. _OcaMediaConnectorState: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorstate
+.. _OcaMediaConnectorCommand: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connector%20Datatypes.html#ocamediaconnectorcommand
+.. _OcaMediaConnection: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connection%20Datatypes.html#ocamediaconnection
+.. _OcaMediaStreamCastMode: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Connection%20Datatypes.html#ocamediastreamcastmode
+.. _OcaMediaStreamParameters: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Stream%20Datatypes.html#ocamediastreamparameters
+.. _OcaMediaCoding: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocamediacoding
+.. _OcaMediaCodingSchemeID: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocamediacodingschemeid
+.. _OcaSDPString: http://docs.deuso.de/AES70-OCC/Data%20Types/Media%20Coding%20Datatypes.html#ocasdpstring
+
+The methods and events of control classes defined in AES70 use a series of data
+types. The data types used are both basic integral types, enums as well as structs
+and container types. The basic types are represented as shown in the following table:
+
+==================================  =================================
+        AES70 Type                  JavaScript type
+==================================  =================================
+OcaBoolean_                         ``boolean``
+OcaInt8_                            ``number``
+OcaInt16_                           ``number``
+OcaInt32_                           ``number``
+OcaInt64_                           ``number`` or ``BigInt``
+OcaUint8_                           ``number``
+OcaUint16_                          ``number``
+OcaUint32_                          ``number``
+OcaUint64_                          ``number`` or ``BigInt``
+OcaFloat32_                         ``number``
+OcaFloat64_                         ``number``
+OcaString_                          ``string``
+OcaBitstring_                       ``boolean[]``
+OcaBlob_                            ``Uint8Array``
+OcaList_ <Type>                     ``Type[]``
+OcaMap_ <KeyType, ValueType>        ``Map<KeyType,ValueType>``
+OcaMultiMap_ <KeyType, ValueType>   ``Map<KeyType,ValueType[]>``
+==================================  =================================
+
+Enums are represented as subclasses of :class:`Enum`. Structs are implemented as
+classes and are listed below.
+
+.. toctree::
+  :maxdepth: 3
+
+  Control Data Types/OcaApplicationNetworkCommand
+  Control Data Types/OcaApplicationNetworkState
+  Control Data Types/OcaBaseDataType
+  Control Data Types/OcaBlockMember
+  Control Data Types/OcaClassAuthorityID
+  Control Data Types/OcaClassID
+  Control Data Types/OcaClassIdentification
+  Control Data Types/OcaClassicalFilterShape
+  Control Data Types/OcaComponent
+  Control Data Types/OcaDBr
+  Control Data Types/OcaDelayUnit
+  Control Data Types/OcaDelayValue
+  Control Data Types/OcaDeviceState
+  Control Data Types/OcaDynamicsFunction
+  Control Data Types/OcaEnumItem
+  Control Data Types/OcaEnumItem16
+  Control Data Types/OcaEvent
+  Control Data Types/OcaEventID
+  Control Data Types/OcaFilterPassband
+  Control Data Types/OcaGlobalTypeIdentifier
+  Control Data Types/OcaGrouperCitizen
+  Control Data Types/OcaGrouperEnrollment
+  Control Data Types/OcaGrouperGroup
+  Control Data Types/OcaGrouperMode
+  Control Data Types/OcaGrouperStatusChangeEventData
+  Control Data Types/OcaGrouperStatusChangeType
+  Control Data Types/OcaImpedance
+  Control Data Types/OcaLevelDetectionLaw
+  Control Data Types/OcaLevelMeterLaw
+  Control Data Types/OcaLibAccess
+  Control Data Types/OcaLibParamSetAssignment
+  Control Data Types/OcaLibVol
+  Control Data Types/OcaLibVolChangedEventData
+  Control Data Types/OcaLibVolData_ParamSet
+  Control Data Types/OcaLibVolIdentifier
+  Control Data Types/OcaLibVolMetadata
+  Control Data Types/OcaLibVolStandardTypeID
+  Control Data Types/OcaLibVolType
+  Control Data Types/OcaLibraryIdentifier
+  Control Data Types/OcaManagerDefaultObjectNumbers
+  Control Data Types/OcaManagerDescriptor
+  Control Data Types/OcaMediaClockAvailability
+  Control Data Types/OcaMediaClockLockState
+  Control Data Types/OcaMediaClockRate
+  Control Data Types/OcaMediaClockType
+  Control Data Types/OcaMediaCoding
+  Control Data Types/OcaMediaConnection
+  Control Data Types/OcaMediaConnectorCommand
+  Control Data Types/OcaMediaConnectorElement
+  Control Data Types/OcaMediaConnectorState
+  Control Data Types/OcaMediaConnectorStatus
+  Control Data Types/OcaMediaConnectorStatusChangedEventData
+  Control Data Types/OcaMediaSinkConnector
+  Control Data Types/OcaMediaSinkConnectorChangedEventData
+  Control Data Types/OcaMediaSourceConnector
+  Control Data Types/OcaMediaSourceConnectorChangedEventData
+  Control Data Types/OcaMediaStreamCastMode
+  Control Data Types/OcaMethod
+  Control Data Types/OcaMethodID
+  Control Data Types/OcaModelDescription
+  Control Data Types/OcaModelGUID
+  Control Data Types/OcaMuteState
+  Control Data Types/OcaNetworkControlProtocol
+  Control Data Types/OcaNetworkLinkType
+  Control Data Types/OcaNetworkMediaProtocol
+  Control Data Types/OcaNetworkMediaSourceOrSink
+  Control Data Types/OcaNetworkSignalChannelStatus
+  Control Data Types/OcaNetworkStatistics
+  Control Data Types/OcaNetworkStatus
+  Control Data Types/OcaNetworkSystemInterfaceDescriptor
+  Control Data Types/OcaNetworkSystemInterfaceID
+  Control Data Types/OcaNotificationDeliveryMode
+  Control Data Types/OcaOPath
+  Control Data Types/OcaObjectIdentification
+  Control Data Types/OcaObjectListEventData
+  Control Data Types/OcaObjectSearchResult
+  Control Data Types/OcaObjectSearchResultFlags
+  Control Data Types/OcaObservationEventData
+  Control Data Types/OcaObservationListEventData
+  Control Data Types/OcaObserverState
+  Control Data Types/OcaParametricEQShape
+  Control Data Types/OcaPilotToneDetectorSpec
+  Control Data Types/OcaPolarityState
+  Control Data Types/OcaPort
+  Control Data Types/OcaPortID
+  Control Data Types/OcaPortMode
+  Control Data Types/OcaPositionCoordinateSystem
+  Control Data Types/OcaPositionDescriptor
+  Control Data Types/OcaPowerState
+  Control Data Types/OcaPowerSupplyLocation
+  Control Data Types/OcaPowerSupplyState
+  Control Data Types/OcaPowerSupplyType
+  Control Data Types/OcaPresentationUnit
+  Control Data Types/OcaProperty
+  Control Data Types/OcaPropertyChangeType
+  Control Data Types/OcaPropertyDescriptor
+  Control Data Types/OcaPropertyID
+  Control Data Types/OcaProtoObjectIdentification
+  Control Data Types/OcaProtoPort
+  Control Data Types/OcaProtoPortID
+  Control Data Types/OcaProtoSignalPath
+  Control Data Types/OcaRamperCommand
+  Control Data Types/OcaRamperInterpolationLaw
+  Control Data Types/OcaRamperState
+  Control Data Types/OcaRelationalOperator
+  Control Data Types/OcaResetCause
+  Control Data Types/OcaSensorReadingState
+  Control Data Types/OcaSignalPath
+  Control Data Types/OcaStatus
+  Control Data Types/OcaStream
+  Control Data Types/OcaStreamConnectorIdentification
+  Control Data Types/OcaStreamConnectorStatus
+  Control Data Types/OcaStreamStatus
+  Control Data Types/OcaStreamType
+  Control Data Types/OcaStringComparisonType
+  Control Data Types/OcaSubscriptionManagerState
+  Control Data Types/OcaSweepType
+  Control Data Types/OcaTask
+  Control Data Types/OcaTaskCommand
+  Control Data Types/OcaTaskManagerState
+  Control Data Types/OcaTaskState
+  Control Data Types/OcaTaskStateChangedEventData
+  Control Data Types/OcaTaskStatus
+  Control Data Types/OcaTimeMode
+  Control Data Types/OcaTimePTP
+  Control Data Types/OcaTimeProtocol
+  Control Data Types/OcaTimeReferenceType
+  Control Data Types/OcaTimeSourceAvailability
+  Control Data Types/OcaTimeSourceSyncStatus
+  Control Data Types/OcaTransferFunction
+  Control Data Types/OcaUnitOfMeasure
+  Control Data Types/OcaVersion
+  Control Data Types/OcaWaveformType

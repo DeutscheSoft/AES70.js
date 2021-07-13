@@ -54,114 +54,149 @@ export const OcaFilterParametric = make_control_class(
 );
 
 /**
- * Gets the equalizer frequency setpoint. The return value indicates
- * whether the data was successfully retrieved.
- * @method RemoteControlClasses.OcaFilterParametric#GetFrequency
- * @returns {Promise<Arguments<OcaFrequency,OcaFrequency,OcaFrequency>>}
- */
-/**
- * Sets the equalizer frequency. The return value indicates whether the
- * value was successfully set.
- * @method RemoteControlClasses.OcaFilterParametric#SetFrequency
- * @param Frequency {OcaFrequency}
+ * Gets the equalizer frequency setpoint. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - Frequency of type ``number``
+ * - minFrequency of type ``number``
+ * - maxFrequency of type ``number``
+ *
+ * @method RemoteControlClasses.OcaFilterParametric#GetFrequency
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Gets the curve shape of the equalizer. The return value indicates
- * whether the data was successfully retrieved.
+ * Sets the equalizer frequency. The return value indicates whether the value was successfully set.
+ *
+ * @method RemoteControlClasses.OcaFilterParametric#SetFrequency
+ * @param {number} Frequency
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Gets the curve shape of the equalizer. The return value indicates whether the data was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaFilterParametric#GetShape
  * @returns {Promise<OcaParametricEQShape>}
+ *   A promise which resolves to a single value of type :class:`OcaParametricEQShape`.
  */
 /**
- * Sets the curve shape shape of the equalizer. The return value
- * indicates whether the shape was successfully set.
+ * Sets the curve shape shape of the equalizer. The return value indicates whether the shape was successfully set.
+ *
  * @method RemoteControlClasses.OcaFilterParametric#SetShape
- * @param type {OcaParametricEQShape}
+ * @param {OcaParametricEQShape} type
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the width parameter property of the equalizer. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the width parameter property of the equalizer. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Width of type ``number``
+ * - minWidth of type ``number``
+ * - maxWidth of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterParametric#GetWidthParameter
- * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the width parameter property of the equalizer. The return value
- * indicates whether the Q was successfully set.
+ * Sets the width parameter property of the equalizer. The return value indicates whether the Q was successfully set.
+ *
  * @method RemoteControlClasses.OcaFilterParametric#SetWidthParameter
- * @param Width {OcaFloat32}
+ * @param {number} Width
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Returns the in-band gain of the equalizer. The return value indicates
- * whether the data was successfully retrieved.
+ * Returns the in-band gain of the equalizer. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - gain of type ``number``
+ * - minGain of type ``number``
+ * - maxGain of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterParametric#GetInbandGain
- * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the in-band gain of the equalizer. The return value indicates
- * whether the gain was successfully set.
+ * Sets the in-band gain of the equalizer. The return value indicates whether the gain was successfully set.
+ *
  * @method RemoteControlClasses.OcaFilterParametric#SetInbandGain
- * @param gain {OcaDB}
+ * @param {number} gain
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Returns the shape parameter of the equalizer. The return value
- * indicates whether the data was successfully retrieved.
+ * Returns the shape parameter of the equalizer. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - shape of type ``number``
+ * - minShape of type ``number``
+ * - maxShape of type ``number``
+ *
  * @method RemoteControlClasses.OcaFilterParametric#GetShapeParameter
- * @returns {Promise<Arguments<OcaFloat32,OcaFloat32,OcaFloat32>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the shape parameter of the equalizer. The return value indicates
- * whether the parameter was successfully set.
+ * Sets the shape parameter of the equalizer. The return value indicates whether the parameter was successfully set.
+ *
  * @method RemoteControlClasses.OcaFilterParametric#SetShapeParameter
- * @param shape {OcaFloat32}
+ * @param {number} shape
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets some or all filter parameters. The return value indicates if the
- * parameters were successfully set. The action of this method is atomic
- * - if any of the value changes fails, none of the changes are made.
+ * Sets some or all filter parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+ *
  * @method RemoteControlClasses.OcaFilterParametric#SetMultiple
- * @param Mask {OcaParameterMask}
+ * @param {int} Mask
  *
- * @param Frequency {OcaFrequency}
+ * @param {number} Frequency
  *
- * @param Shape {OcaParametricEQShape}
+ * @param {OcaParametricEQShape} Shape
  *
- * @param WidthParameter {OcaFloat32}
+ * @param {number} WidthParameter
  *
- * @param InBandGain {OcaDB}
+ * @param {number} InBandGain
  *
- * @param ShapeParameter {OcaFloat32}
+ * @param {number} ShapeParameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Frequency changes in the remote object.
+ * The property ``Frequency`` is described in the AES70 standard as follows.
  * The frequency setpoint of the parametric filter.
- * @member RemoteControlClasses.OcaFilterParametric#OnFrequencyChanged {PropertyEvent<OcaFrequency>} - This event is emitted when Frequency changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterParametric#OnFrequencyChanged
  */
 /**
+ * This event is emitted when the property Shape changes in the remote object.
+ * The property ``Shape`` is described in the AES70 standard as follows.
  * The shape of the parametric filter - peak, shelf, etc.
- * @member RemoteControlClasses.OcaFilterParametric#OnShapeChanged {PropertyEvent<OcaParametricEQShape>} - This event is emitted when Shape changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaParametricEQShape>} RemoteControlClasses.OcaFilterParametric#OnShapeChanged
  */
 /**
+ * This event is emitted when the property WidthParameter changes in the remote object.
+ * The property ``WidthParameter`` is described in the AES70 standard as follows.
  * Width parameter. For normal parametric implementations, this is the Q
  * of the filter.
- * @member RemoteControlClasses.OcaFilterParametric#OnWidthParameterChanged {PropertyEvent<OcaFloat32>} - This event is emitted when WidthParameter changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterParametric#OnWidthParameterChanged
  */
 /**
+ * This event is emitted when the property InbandGain changes in the remote object.
+ * The property ``InbandGain`` is described in the AES70 standard as follows.
  * In-band gain of the parametric filter.
- * @member RemoteControlClasses.OcaFilterParametric#OnInbandGainChanged {PropertyEvent<OcaDB>} - This event is emitted when InbandGain changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterParametric#OnInbandGainChanged
  */
 /**
+ * This event is emitted when the property ShapeParameter changes in the remote object.
+ * The property ``ShapeParameter`` is described in the AES70 standard as follows.
  * Width parameter. For certain filter types, this parameter may be used
  * to represent extra information about the shape of the transfer
  * function.
- * @member RemoteControlClasses.OcaFilterParametric#OnShapeParameterChanged {PropertyEvent<OcaFloat32>} - This event is emitted when ShapeParameter changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterParametric#OnShapeParameterChanged
  */

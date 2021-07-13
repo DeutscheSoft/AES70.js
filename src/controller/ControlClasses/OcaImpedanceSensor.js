@@ -21,12 +21,20 @@ export const OcaImpedanceSensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the <b>Reading </b>property. The return
- * value indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the  **Reading** property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Reading of type :class:`OcaImpedance`
+ * - minReading of type :class:`OcaImpedance`
+ * - maxReading of type :class:`OcaImpedance`
+ *
  * @method RemoteControlClasses.OcaImpedanceSensor#GetReading
  * @returns {Promise<Arguments<OcaImpedance,OcaImpedance,OcaImpedance>>}
  */
 /**
+ * This event is emitted when the property Reading changes in the remote object.
+ * The property ``Reading`` is described in the AES70 standard as follows.
  * Impedance value (magnitude and phase).
- * @member RemoteControlClasses.OcaImpedanceSensor#OnReadingChanged {PropertyEvent<OcaImpedance>} - This event is emitted when Reading changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaImpedance>} RemoteControlClasses.OcaImpedanceSensor#OnReadingChanged
  */

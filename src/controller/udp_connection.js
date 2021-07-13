@@ -38,7 +38,7 @@ function lookup_address(options) {
 }
 
 /**
- * {@link ClientConnection} subclass which implements OCP.1 with UDP
+ * :class:`ClientConnection` subclass which implements OCP.1 with UDP
  * transport.
  */
 export class UDPConnection extends ClientConnection {
@@ -92,7 +92,8 @@ export class UDPConnection extends ClientConnection {
    *    in an individual UDP packet. Note that AES70 messages which are larger
    *    than this limit are sent anyway. This only limits how many seperate
    *    messages are batched into a single packet.
-   * @returns {Promise<UDPConnection>} - The connection.
+   * @returns {Promise<UDPConnection>}
+   *    The connection.
    */
   static connect(options) {
     return lookup_address(options).then((options) => {

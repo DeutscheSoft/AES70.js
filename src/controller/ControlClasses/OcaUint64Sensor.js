@@ -21,12 +21,20 @@ export const OcaUint64Sensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the <b>Reading </b>property. The return
- * value indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the  **Reading** property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Reading of type ``number|BigInt``
+ * - minReading of type ``number|BigInt``
+ * - maxReading of type ``number|BigInt``
+ *
  * @method RemoteControlClasses.OcaUint64Sensor#GetReading
- * @returns {Promise<Arguments<OcaUint64,OcaUint64,OcaUint64>>}
+ * @returns {Promise<Arguments<number|BigInt,number|BigInt,number|BigInt>>}
  */
 /**
+ * This event is emitted when the property Reading changes in the remote object.
+ * The property ``Reading`` is described in the AES70 standard as follows.
  * Uint64 reading.
- * @member RemoteControlClasses.OcaUint64Sensor#OnReadingChanged {PropertyEvent<OcaUint64>} - This event is emitted when Reading changes in the remote object.
+ *
+ * @member {PropertyEvent<number|BigInt>} RemoteControlClasses.OcaUint64Sensor#OnReadingChanged
  */

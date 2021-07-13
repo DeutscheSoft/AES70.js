@@ -39,98 +39,115 @@ export const OcaSwitch = make_control_class(
 );
 
 /**
- * Gets the value of the Position property and, optionally, its
- * implementation min and max. The return value indicates whether the
- * data was successfully retrieved.
+ * Gets the value of the Position property and, optionally, its implementation min and max. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - position of type ``number``
+ * - minPosition of type ``number``
+ * - maxPosition of type ``number``
+ *
  * @method RemoteControlClasses.OcaSwitch#GetPosition
- * @returns {Promise<Arguments<OcaUint16,OcaUint16,OcaUint16>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Position property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the Position property. The return value indicates whether the property was successfully set.
+ *
  * @method RemoteControlClasses.OcaSwitch#SetPosition
- * @param position {OcaUint16}
+ * @param {number} position
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the name assigned to a given switch position. The return value
- * indicates whether the name was successfully retrieved.
+ * Gets the name assigned to a given switch position. The return value indicates whether the name was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaSwitch#GetPositionName
- * @param Index {OcaUint16}
+ * @param {number} Index
  *
- * @returns {Promise<OcaString>}
+ * @returns {Promise<string>}
+ *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Assigns a name to a given switch position. The return value indicates
- * whether the name was successfully assigned.
+ * Assigns a name to a given switch position. The return value indicates whether the name was successfully assigned.
+ *
  * @method RemoteControlClasses.OcaSwitch#SetPositionName
- * @param Index {OcaUint16}
+ * @param {number} Index
  *
- * @param Name {OcaString}
+ * @param {string} Name
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets list of names assigned to the switch's positions. The return
- * value indicates whether the names were successfully retrieved.
+ * Gets list of names assigned to the switch's positions. The return value indicates whether the names were successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaSwitch#GetPositionNames
- * @returns {Promise<OcaList>}
+ * @returns {Promise<string[]>}
+ *   A promise which resolves to a single value of type ``string[]``.
  */
 /**
- * Assigns names to the switch's positions. The return value indicates
- * whether the names were successfully assigned.
+ * Assigns names to the switch's positions. The return value indicates whether the names were successfully assigned.
+ *
  * @method RemoteControlClasses.OcaSwitch#SetPositionNames
- * @param Names {OcaList}
+ * @param {string[]} Names
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the Enabled flag assigned to a given switch position. The return
- * value indicates whether the flag was successfully retrieved.
+ * Gets the Enabled flag assigned to a given switch position. The return value indicates whether the flag was successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaSwitch#GetPositionEnabled
- * @param Index {OcaUint16}
+ * @param {number} Index
  *
- * @returns {Promise<OcaBoolean>}
+ * @returns {Promise<boolean>}
+ *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the Enabled flag assigned to a given switch position. The return
- * value indicates whether the flag was successfully set.
+ * Sets the Enabled flag assigned to a given switch position. The return value indicates whether the flag was successfully set.
+ *
  * @method RemoteControlClasses.OcaSwitch#SetPositionEnabled
- * @param Index {OcaUint16}
+ * @param {number} Index
  *
- * @param enabled {OcaBoolean}
+ * @param {boolean} enabled
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets list of Enabled flags assigned to the switch's positions. The
- * return value indicates whether the flags were successfully retrieved.
+ * Gets list of Enabled flags assigned to the switch's positions. The return value indicates whether the flags were successfully retrieved.
+ *
  * @method RemoteControlClasses.OcaSwitch#GetPositionEnableds
- * @returns {Promise<OcaList>}
+ * @returns {Promise<boolean[]>}
+ *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
- * Sets list of Enabled flags for the switch's positions. The return
- * value indicates whether the flags were successfully set.
- * @method RemoteControlClasses.OcaSwitch#SetPositionEnableds
- * @param enableds {OcaList}
+ * Sets list of Enabled flags for the switch's positions. The return value indicates whether the flags were successfully set.
  *
- * @returns {Promise}
+ * @method RemoteControlClasses.OcaSwitch#SetPositionEnableds
+ * @param {boolean[]} enableds
+ *
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property Position changes in the remote object.
+ * The property ``Position`` is described in the AES70 standard as follows.
  * The current position of the switch. Positions shall be numbered from
  * minPosition to (including) maxPosition. If the object does not return
  * the optional parameters minPosition and maxPosition in its GetPosition
  * method the positions shall be numbered from 1 to n.
- * @member RemoteControlClasses.OcaSwitch#OnPositionChanged {PropertyEvent<OcaUint16>} - This event is emitted when Position changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaSwitch#OnPositionChanged
  */
 /**
+ * This event is emitted when the property PositionNames changes in the remote object.
+ * The property ``PositionNames`` is described in the AES70 standard as follows.
  * Vector of switch position names. Supplied by controller.
- * @member RemoteControlClasses.OcaSwitch#OnPositionNamesChanged {PropertyEvent<OcaList>} - This event is emitted when PositionNames changes in the remote object.
+ *
+ * @member {PropertyEvent<string[]>} RemoteControlClasses.OcaSwitch#OnPositionNamesChanged
  */
 /**
+ * This event is emitted when the property PositionEnableds changes in the remote object.
+ * The property ``PositionEnableds`` is described in the AES70 standard as follows.
  * Vector of booleans which enable or disable corresponding switch
  * positions. Default values are a construction parameter. The usual
  * default value is True.
- * @member RemoteControlClasses.OcaSwitch#OnPositionEnabledsChanged {PropertyEvent<OcaList>} - This event is emitted when PositionEnableds changes in the remote object.
+ *
+ * @member {PropertyEvent<boolean[]>} RemoteControlClasses.OcaSwitch#OnPositionEnabledsChanged
  */

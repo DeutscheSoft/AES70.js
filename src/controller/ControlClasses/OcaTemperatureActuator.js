@@ -24,20 +24,28 @@ export const OcaTemperatureActuator = make_control_class(
 );
 
 /**
- * Gets the value of the Temperature property. The return value indicates
- * whether the property was successfully retrieved.
- * @method RemoteControlClasses.OcaTemperatureActuator#GetTemperature
- * @returns {Promise<Arguments<OcaTemperature,OcaTemperature,OcaTemperature>>}
- */
-/**
- * Sets the value of the Temperature property. The return value indicates
- * whether the property was successfully set.
- * @method RemoteControlClasses.OcaTemperatureActuator#SetTemperature
- * @param temperature {OcaTemperature}
+ * Gets the value of the Temperature property. The return value indicates whether the property was successfully retrieved.
+ * The return values of this method are
  *
- * @returns {Promise}
+ * - temperature of type ``number``
+ * - minTemperature of type ``number``
+ * - maxTemperature of type ``number``
+ *
+ * @method RemoteControlClasses.OcaTemperatureActuator#GetTemperature
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
+ * Sets the value of the Temperature property. The return value indicates whether the property was successfully set.
+ *
+ * @method RemoteControlClasses.OcaTemperatureActuator#SetTemperature
+ * @param {number} temperature
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Temperature changes in the remote object.
+ * The property ``Temperature`` is described in the AES70 standard as follows.
  * The temperature.
- * @member RemoteControlClasses.OcaTemperatureActuator#OnTemperatureChanged {PropertyEvent<OcaTemperature>} - This event is emitted when Temperature changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaTemperatureActuator#OnTemperatureChanged
  */

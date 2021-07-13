@@ -2,19 +2,20 @@
  * This file has been generated.
  */
 
-/**
- * Structure that describes a manager instance.
- */
 export class OcaManagerDescriptor {
+  /**
+   * Structure that describes a manager instance.
+   * @class OcaManagerDescriptor
+   */
   constructor(ObjectNumber, Name, ClassID, ClassVersion) {
     /**
      * Object number of this manager instance.
-     * @member RemoteControlClasses.OcaManagerDescriptor#OnObjectNumberChanged {PropertyEvent<OcaONo>} - This event is emitted when ObjectNumber changes in the remote object.
+     * @type number
      */
     this.ObjectNumber = ObjectNumber;
     /**
      * Name of the manager instance.
-     * @member RemoteControlClasses.OcaManagerDescriptor#OnNameChanged {PropertyEvent<string>} - This event is emitted when Name changes in the remote object.
+     * @type string
      */
     this.Name = Name;
     /**

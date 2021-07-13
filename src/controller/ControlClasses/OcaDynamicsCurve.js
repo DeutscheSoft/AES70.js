@@ -7,50 +7,7 @@ import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaUint8 } from '../../OCP1/OcaUint8.js';
 
 /**
- * Dynamic compression / expansion curve. <b>Curve</b> means a function
- * that expresses the relationship of output level to input level. The
- * dependent variable (Y) of the curve is output level; the independent
- * variable (X) is input level. Every curve is composed of <b>(n+1)</b>
- * straight-line <b>segments</b> joined by <b>(n)</b> small fillets
- * called <b>knees</b>. Each knee occurs at a particular input level
- * value called the <b>threshold.</b> Each segment is characterized by
- * its <b>slope.</b> <b> </b> | <b>/</b> | S3 <b>/</b> | S2 <b>/</b> |
- * T1<b>-------------</b>T2 | <b>/</b> | S1 <b>/</b> | <b>/</b> |
- * <b>/</b> +------------------------------------ This "drawing" shows a
- * three-segment curve. The horizontal axis is input level, vertical axis
- * is output level. Algebraically, a curve is a function <b> Out = Curve(
- * In, T[1..n-1], S[1..n], K[1..n-1] )</b> where <b>n</b> is the number
- * of segments, and <b>In </b>is input level in dBr <b>Out </b>is output
- * level in dBr <b>T[1...n-1]</b> is an array of <b>thresholds</b> in dBr
- * <b>S[1...n] </b>is an array of <b>slopes</b> in dBr per dBr, i.e.
- * unitless <b>K[1..n]</b> is the <b>knee parameter</b>, an
- * implementation-dependant parameter that specifies the shape of the
- * curve around the knee. Each segment has a slope that expresses its
- * ratio of output level to input level. Note that this slope is the
- * inverse of what dynamics processors call "ratio". For example, a ratio
- * of 2:1 is represented by a curve segment with slope 1/2 = 0.5. This
- * model can represent familiar audio dynamics elements (we ignore
- * <b>K[]</b> in these examples): - Compressor with ratio of 2:1 and
- * threshold of 10dBr: <b> n = 2</b> <b> T[1] = 10</b> <b> S[1] = 1</b>
- * <b> S[2] = 0.5</b> - Hard limiter with threshold of 18dBr: <b> n =
- * 2</b> T[1] = 18 S[1] = 1 S[2] = 0 - Upward expander with ratio of
- * 1.5:1 and threshold of -12dBr: <b> n = 2</b> T[1] = -12 S[1] = 1 S[2]
- * = 1.5 - Downward expander (gate) with ratio of 50:1 and threshold of
- * -45dBr: <b> n = 2</b> T[1] = -45 S[1] = 50 S[2] = 1 This class,
- * <b>OcaDynamicsCurve,</b> adds two additional parameters to the basic
- * curve mechanism. <b>Out = Curve( In, T[1..n-1], S[1..n], K[1..n-1] ,
- * Floor, Ceiling)</b> where <b>In, T[], and S[], </b>and <b>K[]</b> are
- * as defined above. <b>Floor</b> is the lowest gain (in dBr) that the
- * dynamics element is allowed to produce. <b>Ceiling </b>is the highest
- * gain (in dBr) that the dynamics element is allowed to produce. To show
- * the use of <b>Floor</b> and <b>Ceiling</b>, we revisit some of the
- * examples above (again, <b>K[]</b> is ignored): - Compressor with ratio
- * of 2:1, threshold of 10dBr, and max gain reduction of 20dB: <b> n =
- * 2</b> <b> T[1] = 10</b> <b> S[1] = 1</b> <b> S[2] = 0.5</b> <b> Floor
- * = -20</b> <b> Ceiling = 0</b> - Upward expander with ratio of 1.5:1,
- * threshold of -12dBr, and max gain boost of 4dB: <b> n = 2</b> T[1] =
- * -12 S[1] = 1 S[2] = 1.5 Floor = 0 Ceiling = 4.0 More complex dynamics
- * curves can be modeled by using more segments (<b>n &gt; 2)</b>.
+ * Dynamic compression / expansion curve.  **Curve**  means a function that expresses the relationship of output level to input level. The dependent variable (Y) of the curve is output level; the independent variable (X) is input level. Every curve is composed of  **(n+1)**  straight-line  **segments**  joined by  **(n)**  small fillets called  **knees** . Each knee occurs at a particular input level value called the  **threshold.**  Each segment is characterized by its  **slope.**   |    /    | S3    /    | S2    /    | T1 **-------------** T2 |    /    | S1    /    |    /    |    /    +------------------------------------ This "drawing" shows a three-segment curve. The horizontal axis is input level, vertical axis is output level. Algebraically, a curve is a function  **Out = Curve( In, T[1..n-1], S[1..n], K[1..n-1] )**  where  **n**  is the number of segments, and  **In** is input level in dBr  **Out** is output level in dBr  **T[1...n-1]**  is an array of  **thresholds**  in dBr  **S[1...n]** is an array of  **slopes**  in dBr per dBr, i.e. unitless  **K[1..n]**  is the  **knee parameter** , an implementation-dependant parameter that specifies the shape of the curve around the knee. Each segment has a slope that expresses its ratio of output level to input level. Note that this slope is the inverse of what dynamics processors call "ratio". For example, a ratio of 2:1 is represented by a curve segment with slope 1/2 = 0.5. This model can represent familiar audio dynamics elements (we ignore  **K[]**  in these examples): - Compressor with ratio of 2:1 and threshold of 10dBr:  **n = 2**   **T[1] = 10**   **S[1] = 1**   **S[2] = 0.5**  - Hard limiter with threshold of 18dBr:  **n = 2**  T[1] = 18 S[1] = 1 S[2] = 0 - Upward expander with ratio of 1.5:1 and threshold of -12dBr:  **n = 2**  T[1] = -12 S[1] = 1 S[2] = 1.5 - Downward expander (gate) with ratio of 50:1 and threshold of -45dBr:  **n = 2**  T[1] = -45 S[1] = 50 S[2] = 1 This class,  **OcaDynamicsCurve,**  adds two additional parameters to the basic curve mechanism.  **Out = Curve( In, T[1..n-1], S[1..n], K[1..n-1] , Floor, Ceiling)**  where  **In, T[], and S[],** and  **K[]**  are as defined above.  **Floor**  is the lowest gain (in dBr) that the dynamics element is allowed to produce.  **Ceiling** is the highest gain (in dBr) that the dynamics element is allowed to produce. To show the use of  **Floor**  and  **Ceiling** , we revisit some of the examples above (again,  **K[]**  is ignored): - Compressor with ratio of 2:1, threshold of 10dBr, and max gain reduction of 20dB:  **n = 2**   **T[1] = 10**   **S[1] = 1**   **S[2] = 0.5**   **Floor = -20**   **Ceiling = 0**  - Upward expander with ratio of 1.5:1, threshold of -12dBr, and max gain boost of 4dB:  **n = 2**  T[1] = -12 S[1] = 1 S[2] = 1.5 Floor = 0 Ceiling = 4.0 More complex dynamics curves can be modeled by using more segments ( **n &gt; 2)** .
  * @extends RemoteControlClasses.OcaActuator
  * @class OcaDynamicsCurve
  * @memberof RemoteControlClasses
@@ -115,135 +72,178 @@ export const OcaDynamicsCurve = make_control_class(
 );
 
 /**
- * Gets the number of curve segments. The return value indicates whether
- * the value was successfully retrieved.
+ * Gets the number of curve segments. The return value indicates whether the value was successfully retrieved.
+ * The return values of this method are
+ *
+ * - n of type ``number``
+ * - minN of type ``number``
+ * - maxN of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#GetNSegments
- * @returns {Promise<Arguments<OcaUint8,OcaUint8,OcaUint8>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the number of curve segments. The return value indicates whether
- * the data was successfully set. If this method increases the value of
- * n, the data in properties <b>Threshold</b>, <b>Slope</b>, and
- * <b>KneeParameter </b>of the new segment are by default set to the
- * values of the previous segment.
+ * Sets the number of curve segments. The return value indicates whether the data was successfully set. If this method increases the value of n, the data in properties  **Threshold** ,  **Slope** , and  **KneeParameter** of the new segment are by default set to the values of the previous segment.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetNSegments
- * @param Slope {OcaUint8}
+ * @param {number} Slope
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the list of Threshold values. The return value indicates whether
- * the data was successfully retrieved.
+ * Gets the list of Threshold values. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Threshold of type ``OcaDBr[]``
+ * - minThreshold of type ``number``
+ * - maxThreshold of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#GetThreshold
- * @returns {Promise<Arguments<OcaList,OcaDBz,OcaDBz>>}
+ * @returns {Promise<Arguments<OcaDBr[],number,number>>}
  */
 /**
- * Sets the list of Threshold values. The return value indicates whether
- * the values were successfully set.
+ * Sets the list of Threshold values. The return value indicates whether the values were successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetThreshold
- * @param Threshold {OcaList}
+ * @param {OcaDBr[]} Threshold
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the list of Slope values. The return value indicates whether the
- * list was successfully retrieved.
+ * Gets the list of Slope values. The return value indicates whether the list was successfully retrieved.
+ * The return values of this method are
+ *
+ * - slope of type ``number[]``
+ * - minSlope of type ``number[]``
+ * - maxSlope of type ``number[]``
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#GetSlope
- * @returns {Promise<Arguments<OcaList,OcaList,OcaList>>}
+ * @returns {Promise<Arguments<number[],number[],number[]>>}
  */
 /**
- * Sets the list of Slope values. The return value indicates whether the
- * values were successfully set.
+ * Sets the list of Slope values. The return value indicates whether the values were successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetSlope
- * @param slope {OcaList}
+ * @param {number[]} slope
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the list of KneeParameter valuess. The return value indicates
- * whether the list was successfully retrieved.
+ * Gets the list of KneeParameter valuess. The return value indicates whether the list was successfully retrieved.
+ * The return values of this method are
+ *
+ * - parameter of type ``number[]``
+ * - minParameter of type ``number[]``
+ * - maxParameter of type ``number[]``
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#GetKneeParameter
- * @returns {Promise<Arguments<OcaList,OcaList,OcaList>>}
+ * @returns {Promise<Arguments<number[],number[],number[]>>}
  */
 /**
- * Sets the list of KneeParameter values. The return value indicates
- * whether the values were successfully set.
+ * Sets the list of KneeParameter values. The return value indicates whether the values were successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetKneeParameter
- * @param parameter {OcaList}
+ * @param {number[]} parameter
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the DynamicGainCeiling property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value of the DynamicGainCeiling property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - gain of type ``number``
+ * - minGain of type ``number``
+ * - maxGain of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#GetDynamicGainCeiling
- * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DynamicGainCeiling property. The return value
- * indicates whether the data was successfully set.
+ * Sets the value of the DynamicGainCeiling property. The return value indicates whether the data was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetDynamicGainCeiling
- * @param gain {OcaDB}
+ * @param {number} gain
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Gets the value of the DynamicGainFloor property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value of the DynamicGainFloor property. The return value indicates whether the data was successfully retrieved.
+ * The return values of this method are
+ *
+ * - Gain of type ``number``
+ * - minGain of type ``number``
+ * - maxGain of type ``number``
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#GetDynamicGainFloor
- * @returns {Promise<Arguments<OcaDB,OcaDB,OcaDB>>}
+ * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DynamicGainFloor property. The return value
- * indicates whether the data was successfully set.
+ * Sets the value of the DynamicGainFloor property. The return value indicates whether the data was successfully set.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetDynamicGainFloor
- * @param Gain {OcaDB}
+ * @param {number} Gain
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
- * Sets some or all dynamics curve parameters. The return value indicates
- * if the parameters were successfully set. The action of this method is
- * atomic - if any of the value changes fails, none of the changes are
- * made.
+ * Sets some or all dynamics curve parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+ *
  * @method RemoteControlClasses.OcaDynamicsCurve#SetMultiple
- * @param Mask {OcaParameterMask}
+ * @param {int} Mask
  *
- * @param nSegments {OcaUint8}
+ * @param {number} nSegments
  *
- * @param Threshold {OcaList}
+ * @param {OcaDBr[]} Threshold
  *
- * @param Slope {OcaList}
+ * @param {number[]} Slope
  *
- * @param KneeParameter {OcaList}
+ * @param {number[]} KneeParameter
  *
- * @param DynamicGainFloor {OcaDB}
+ * @param {number} DynamicGainFloor
  *
- * @param DynamicGainCeiling {OcaDB}
+ * @param {number} DynamicGainCeiling
  *
- * @returns {Promise}
+ * @returns {Promise<void>}
  */
 /**
+ * This event is emitted when the property NSegments changes in the remote object.
+ * The property ``NSegments`` is described in the AES70 standard as follows.
  * Number of curve segments.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnNSegmentsChanged {PropertyEvent<OcaUint8>} - This event is emitted when NSegments changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsCurve#OnNSegmentsChanged
  */
 /**
+ * This event is emitted when the property Threshold changes in the remote object.
+ * The property ``Threshold`` is described in the AES70 standard as follows.
  * <b>T[1..n-1]</b>. See class description for details.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnThresholdChanged {PropertyEvent<OcaList>} - This event is emitted when Threshold changes in the remote object.
+ *
+ * @member {PropertyEvent<OcaDBr[]>} RemoteControlClasses.OcaDynamicsCurve#OnThresholdChanged
  */
 /**
+ * This event is emitted when the property Slope changes in the remote object.
+ * The property ``Slope`` is described in the AES70 standard as follows.
  * <b>S[1..n]</b>. See class description for details.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnSlopeChanged {PropertyEvent<OcaList>} - This event is emitted when Slope changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaDynamicsCurve#OnSlopeChanged
  */
 /**
+ * This event is emitted when the property KneeParameter changes in the remote object.
+ * The property ``KneeParameter`` is described in the AES70 standard as follows.
  * <b>K[1..n]</b>. See class description for details.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnKneeParameterChanged {PropertyEvent<OcaList>} - This event is emitted when KneeParameter changes in the remote object.
+ *
+ * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaDynamicsCurve#OnKneeParameterChanged
  */
 /**
+ * This event is emitted when the property DynamicGainFloor changes in the remote object.
+ * The property ``DynamicGainFloor`` is described in the AES70 standard as follows.
  * Lowest allowed dynamic gain value. See class description for details.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnDynamicGainFloorChanged {PropertyEvent<OcaDB>} - This event is emitted when DynamicGainFloor changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsCurve#OnDynamicGainFloorChanged
  */
 /**
+ * This event is emitted when the property DynamicGainCeiling changes in the remote object.
+ * The property ``DynamicGainCeiling`` is described in the AES70 standard as follows.
  * Highest allowed dynamic gain value. See class description for details.
- * @member RemoteControlClasses.OcaDynamicsCurve#OnDynamicGainCeilingChanged {PropertyEvent<OcaDB>} - This event is emitted when DynamicGainCeiling changes in the remote object.
+ *
+ * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsCurve#OnDynamicGainCeilingChanged
  */

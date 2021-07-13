@@ -21,12 +21,9 @@ export const OcaSensor = make_control_class(
 );
 
 /**
- * Gets the current reading state of the sensor. The return value
- * indicates whether the state was successfully retrived.
+ * Gets the current reading state of the sensor. The return value indicates whether the state was successfully retrived.
+ *
  * @method RemoteControlClasses.OcaSensor#GetReadingState
  * @returns {Promise<OcaSensorReadingState>}
- */
-/**
- * Enum that describes whether current reading value is valid and if not,
- * why not. Readonly.
+ *   A promise which resolves to a single value of type :class:`OcaSensorReadingState`.
  */
