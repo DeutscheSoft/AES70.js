@@ -5,10 +5,8 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
  * Text string sensor.
- * @extends RemoteControlClasses.OcaBasicSensor
+ * @extends OcaBasicSensor
  * @class OcaStringSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaStringSensor = make_control_class(
   'OcaStringSensor',
@@ -31,21 +29,21 @@ export const OcaStringSensor = make_control_class(
 /**
  * Gets the entire string. Return status indicates success or failure of the retrieval.
  *
- * @method RemoteControlClasses.OcaStringSensor#GetString
+ * @method OcaStringSensor#GetString
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Gets the maximum number of bytes that may be returned. Returned status indicates success or failure of the retrieval.
  *
- * @method RemoteControlClasses.OcaStringSensor#GetMaxLen
+ * @method OcaStringSensor#GetMaxLen
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Sets the maximum number of bytes that the object may return. Returned status indicates success or failure of the set.
  *
- * @method RemoteControlClasses.OcaStringSensor#SetMaxLen
+ * @method OcaStringSensor#SetMaxLen
  * @param {number} maxLen
  *
  * @returns {Promise<void>}
@@ -55,7 +53,7 @@ export const OcaStringSensor = make_control_class(
  * The property ``String`` is described in the AES70 standard as follows.
  * The string.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaStringSensor#OnStringChanged
+ * @member {PropertyEvent<string>} OcaStringSensor#OnStringChanged
  */
 /**
  * This event is emitted when the property MaxLen changes in the remote object.
@@ -63,5 +61,5 @@ export const OcaStringSensor = make_control_class(
  * Maximum length of the returned string. May be readonly in some
  * implementations.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaStringSensor#OnMaxLenChanged
+ * @member {PropertyEvent<number>} OcaStringSensor#OnMaxLenChanged
  */

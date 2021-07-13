@@ -22,10 +22,8 @@ import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
  *
  *  - et cetera
  *
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaIdentificationActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaIdentificationActuator = make_control_class(
   'OcaIdentificationActuator',
@@ -44,14 +42,14 @@ export const OcaIdentificationActuator = make_control_class(
 /**
  * Gets the current identification indicator activity state. The return value indicates whether the state was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaIdentificationActuator#GetActive
+ * @method OcaIdentificationActuator#GetActive
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Sets the Active state (i.e. value of the Active property). The return value indicates whether the state was successfully set.
  *
- * @method RemoteControlClasses.OcaIdentificationActuator#SetActive
+ * @method OcaIdentificationActuator#SetActive
  * @param {boolean} active
  *
  * @returns {Promise<void>}
@@ -61,5 +59,5 @@ export const OcaIdentificationActuator = make_control_class(
  * The property ``Active`` is described in the AES70 standard as follows.
  * True iff indicator is active.
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaIdentificationActuator#OnActiveChanged
+ * @member {PropertyEvent<boolean>} OcaIdentificationActuator#OnActiveChanged
  */

@@ -15,10 +15,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - If instantiated, object number must be 8.
  *
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaLibraryManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaLibraryManager = make_control_class(
   'OcaLibraryManager',
@@ -44,7 +42,7 @@ export const OcaLibraryManager = make_control_class(
 /**
  * Adds a library to the device. Return value indicates whether the library was successfully added.
  *
- * @method RemoteControlClasses.OcaLibraryManager#AddLibrary
+ * @method OcaLibraryManager#AddLibrary
  * @param {OcaLibVolType} Type
  *
  * @returns {Promise<OcaLibraryIdentifier>}
@@ -53,7 +51,7 @@ export const OcaLibraryManager = make_control_class(
 /**
  * Deletes a library from the device.
  *
- * @method RemoteControlClasses.OcaLibraryManager#DeleteLibrary
+ * @method OcaLibraryManager#DeleteLibrary
  * @param {number} ID
  *
  * @returns {Promise<void>}
@@ -61,7 +59,7 @@ export const OcaLibraryManager = make_control_class(
 /**
  * Returns the number of libraries of the given type that are instantiated in the device..
  *
- * @method RemoteControlClasses.OcaLibraryManager#GetLibraryCount
+ * @method OcaLibraryManager#GetLibraryCount
  * @param {OcaLibVolType} Type
  *
  * @returns {Promise<number>}
@@ -70,7 +68,7 @@ export const OcaLibraryManager = make_control_class(
 /**
  * Returns the list of object numbers of libraries of libraries of the given type that are instantiated in the device.
  *
- * @method RemoteControlClasses.OcaLibraryManager#GetLibraryList
+ * @method OcaLibraryManager#GetLibraryList
  * @param {OcaLibVolType} Type
  *
  * @returns {Promise<OcaLibraryIdentifier[]>}
@@ -79,14 +77,14 @@ export const OcaLibraryManager = make_control_class(
 /**
  * Return the identifier of the most recently applied patch. The return value indicates whether the method succeeded.
  *
- * @method RemoteControlClasses.OcaLibraryManager#GetCurrentPatch
+ * @method OcaLibraryManager#GetCurrentPatch
  * @returns {Promise<OcaLibVolIdentifier>}
  *   A promise which resolves to a single value of type :class:`OcaLibVolIdentifier`.
  */
 /**
  * Apply a patch to the device.
  *
- * @method RemoteControlClasses.OcaLibraryManager#ApplyPatch
+ * @method OcaLibraryManager#ApplyPatch
  * @param {OcaLibVolIdentifier} ID
  *
  * @returns {Promise<void>}
@@ -96,7 +94,7 @@ export const OcaLibraryManager = make_control_class(
  * The property ``Libraries`` is described in the AES70 standard as follows.
  * List of identifiers of all libraries in the device.
  *
- * @member {PropertyEvent<OcaLibraryIdentifier[]>} RemoteControlClasses.OcaLibraryManager#OnLibrariesChanged
+ * @member {PropertyEvent<OcaLibraryIdentifier[]>} OcaLibraryManager#OnLibrariesChanged
  */
 /**
  * This event is emitted when the property CurrentPatch changes in the remote object.
@@ -105,5 +103,5 @@ export const OcaLibraryManager = make_control_class(
  * device. Changing the value of this property applies the patch
  * represented by the new value.
  *
- * @member {PropertyEvent<OcaLibVolIdentifier>} RemoteControlClasses.OcaLibraryManager#OnCurrentPatchChanged
+ * @member {PropertyEvent<OcaLibVolIdentifier>} OcaLibraryManager#OnCurrentPatchChanged
  */

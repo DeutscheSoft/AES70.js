@@ -6,10 +6,8 @@ import { OcaPositionDescriptor } from '../../OCP1/OcaPositionDescriptor.js';
 
 /**
  * Physical position of device or an element of it. AES70 supports a variety of positional coordinate systems. For details, see AES70-1, section 5.5.9.
- * @extends RemoteControlClasses.OcaAgent
+ * @extends OcaAgent
  * @class OcaPhysicalPosition
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaPhysicalPosition = make_control_class(
   'OcaPhysicalPosition',
@@ -48,14 +46,14 @@ export const OcaPhysicalPosition = make_control_class(
 /**
  * Retrieves value of property  **CoordinateSystem** . Result indicates whether retrieval was successful.
  *
- * @method RemoteControlClasses.OcaPhysicalPosition#GetCoordinateSystem
+ * @method OcaPhysicalPosition#GetCoordinateSystem
  * @returns {Promise<OcaPositionCoordinateSystem>}
  *   A promise which resolves to a single value of type :class:`OcaPositionCoordinateSystem`.
  */
 /**
  * Retrieves value of property  **PositionDescriptorFieldFlags** . Result indicates whether retrieval was successful.
  *
- * @method RemoteControlClasses.OcaPhysicalPosition#GetPositionDescriptorFieldFlags
+ * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
  * @returns {Promise<int>}
  *   A promise which resolves to a single value of type ``int``.
  */
@@ -67,13 +65,13 @@ export const OcaPhysicalPosition = make_control_class(
  * - minPositionDescriptor of type :class:`OcaPositionDescriptor`
  * - maxPositionDescriptor of type :class:`OcaPositionDescriptor`
  *
- * @method RemoteControlClasses.OcaPhysicalPosition#GetPositionDescriptor
+ * @method OcaPhysicalPosition#GetPositionDescriptor
  * @returns {Promise<Arguments<OcaPositionDescriptor,OcaPositionDescriptor,OcaPositionDescriptor>>}
  */
 /**
  * Sets value of property  **PositionDescriptor** . Result indicates whether setting was successful. The  **ParameterError** status is returned if: (a) the  **FieldFlags** field of the given  **PositionDescriptor** value differs from the object's basic position descriptor as given in its  **PositionDescriptorFieldFlags** property, or (b) the given  **CoordinateSystem** value conflicts with the object's basic coordinate system as given in its  **CoordinateSystem** property. This is an optional method, not implemented for read-only position objects.
  *
- * @method RemoteControlClasses.OcaPhysicalPosition#SetPositionDescriptor
+ * @method OcaPhysicalPosition#SetPositionDescriptor
  * @param {OcaPositionDescriptor} PositionDescriptor
  *
  * @returns {Promise<void>}
@@ -84,5 +82,5 @@ export const OcaPhysicalPosition = make_control_class(
  * Position coordinates. For details, see AES70-1, section 5.5.9 and the
  * <b>OcaPositionDescriptor </b>datatype definition.
  *
- * @member {PropertyEvent<OcaPositionDescriptor>} RemoteControlClasses.OcaPhysicalPosition#OnPositionDescriptorChanged
+ * @member {PropertyEvent<OcaPositionDescriptor>} OcaPhysicalPosition#OnPositionDescriptorChanged
  */

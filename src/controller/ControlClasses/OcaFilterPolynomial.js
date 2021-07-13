@@ -6,10 +6,8 @@ import { OcaUint8 } from '../../OCP1/OcaUint8.js';
 
 /**
  * A generic Z-domain rational polynomial filter section:  _A(0) + A(1)z + A(2)z^2 + A(3)z^3 + ..._  B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaFilterPolynomial
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaFilterPolynomial = make_control_class(
   'OcaFilterPolynomial',
@@ -40,13 +38,13 @@ export const OcaFilterPolynomial = make_control_class(
  * - A of type ``number[]``
  * - B of type ``number[]``
  *
- * @method RemoteControlClasses.OcaFilterPolynomial#GetCoefficients
+ * @method OcaFilterPolynomial#GetCoefficients
  * @returns {Promise<Arguments<number[],number[]>>}
  */
 /**
  * Sets the polynomial coefficients.
  *
- * @method RemoteControlClasses.OcaFilterPolynomial#SetCoefficients
+ * @method OcaFilterPolynomial#SetCoefficients
  * @param {number[]} A
  *
  * @param {number[]} B
@@ -61,13 +59,13 @@ export const OcaFilterPolynomial = make_control_class(
  * - minRate of type ``number``
  * - maxRate of type ``number``
  *
- * @method RemoteControlClasses.OcaFilterPolynomial#GetSampleRate
+ * @method OcaFilterPolynomial#GetSampleRate
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the filter sampling rate.
  *
- * @method RemoteControlClasses.OcaFilterPolynomial#SetSampleRate
+ * @method OcaFilterPolynomial#SetSampleRate
  * @param {number} Rate
  *
  * @returns {Promise<void>}
@@ -75,7 +73,7 @@ export const OcaFilterPolynomial = make_control_class(
 /**
  * Gets the maximum allowable order (= max number of array elements in numerator and for denominator arrays)
  *
- * @method RemoteControlClasses.OcaFilterPolynomial#GetMaxOrder
+ * @method OcaFilterPolynomial#GetMaxOrder
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
@@ -84,14 +82,14 @@ export const OcaFilterPolynomial = make_control_class(
  * The property ``A`` is described in the AES70 standard as follows.
  * Numerator - "A"
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaFilterPolynomial#OnAChanged
+ * @member {PropertyEvent<number[]>} OcaFilterPolynomial#OnAChanged
  */
 /**
  * This event is emitted when the property B changes in the remote object.
  * The property ``B`` is described in the AES70 standard as follows.
  * Denominator - "B"
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaFilterPolynomial#OnBChanged
+ * @member {PropertyEvent<number[]>} OcaFilterPolynomial#OnBChanged
  */
 /**
  * This event is emitted when the property SampleRate changes in the remote object.
@@ -99,5 +97,5 @@ export const OcaFilterPolynomial = make_control_class(
  * Sample rate inside the filter. We can't assume it's the same as the
  * device input or output rate.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterPolynomial#OnSampleRateChanged
+ * @member {PropertyEvent<number>} OcaFilterPolynomial#OnSampleRateChanged
  */

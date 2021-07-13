@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Basic temperature sensor.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaTemperatureSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaTemperatureSensor = make_control_class(
   'OcaTemperatureSensor',
@@ -28,7 +26,7 @@ export const OcaTemperatureSensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaTemperatureSensor#GetReading
+ * @method OcaTemperatureSensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaTemperatureSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Temperature value (Celsius).
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaTemperatureSensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaTemperatureSensor#OnReadingChanged
  */

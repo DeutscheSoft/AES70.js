@@ -6,10 +6,8 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
  * An arbitrary-curve filter, with transfer function specified as amplitude and phase versus frequency.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaFilterArbitraryCurve
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaFilterArbitraryCurve = make_control_class(
   'OcaFilterArbitraryCurve',
@@ -37,14 +35,14 @@ export const OcaFilterArbitraryCurve = make_control_class(
 /**
  * Returns the complex transfer function.
  *
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetTransferFunction
+ * @method OcaFilterArbitraryCurve#GetTransferFunction
  * @returns {Promise<OcaTransferFunction>}
  *   A promise which resolves to a single value of type :class:`OcaTransferFunction`.
  */
 /**
  * Sets the complex transfer function.
  *
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#SetTransferFunction
+ * @method OcaFilterArbitraryCurve#SetTransferFunction
  * @param {OcaTransferFunction} TransferFunction
  *
  * @returns {Promise<void>}
@@ -57,13 +55,13 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * - minRate of type ``number``
  * - maxRate of type ``number``
  *
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetSampleRate
+ * @method OcaFilterArbitraryCurve#GetSampleRate
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the filter sampling rate.
  *
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#SetSampleRate
+ * @method OcaFilterArbitraryCurve#SetSampleRate
  * @param {number} Rate
  *
  * @returns {Promise<void>}
@@ -71,14 +69,14 @@ export const OcaFilterArbitraryCurve = make_control_class(
 /**
  * Returns the minimum number of required points in the specified transfer function.
  *
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetTFMinLength
+ * @method OcaFilterArbitraryCurve#GetTFMinLength
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Returns the maximum number of allowed points in the specified transfer function.
  *
- * @method RemoteControlClasses.OcaFilterArbitraryCurve#GetTFMaxLength
+ * @method OcaFilterArbitraryCurve#GetTFMaxLength
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
@@ -87,7 +85,7 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * The property ``TransferFunction`` is described in the AES70 standard as follows.
  * Transfer function of the filter.
  *
- * @member {PropertyEvent<OcaTransferFunction>} RemoteControlClasses.OcaFilterArbitraryCurve#OnTransferFunctionChanged
+ * @member {PropertyEvent<OcaTransferFunction>} OcaFilterArbitraryCurve#OnTransferFunctionChanged
  */
 /**
  * This event is emitted when the property SampleRate changes in the remote object.
@@ -95,19 +93,19 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * Sample rate inside the filter. We can't assume it's the same as the
  * device input or output rate.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterArbitraryCurve#OnSampleRateChanged
+ * @member {PropertyEvent<number>} OcaFilterArbitraryCurve#OnSampleRateChanged
  */
 /**
  * This event is emitted when the property TFMinLength changes in the remote object.
  * The property ``TFMinLength`` is described in the AES70 standard as follows.
  * Minimum number of points that transfer function must specify
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterArbitraryCurve#OnTFMinLengthChanged
+ * @member {PropertyEvent<number>} OcaFilterArbitraryCurve#OnTFMinLengthChanged
  */
 /**
  * This event is emitted when the property TFMaxLength changes in the remote object.
  * The property ``TFMaxLength`` is described in the AES70 standard as follows.
  * Maximum number of points that transfer function may specify
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterArbitraryCurve#OnTFMaxLengthChanged
+ * @member {PropertyEvent<number>} OcaFilterArbitraryCurve#OnTFMaxLengthChanged
  */

@@ -11,10 +11,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - If instantiated, must have object number 6.
  *
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaNetworkManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaNetworkManager = make_control_class(
   'OcaNetworkManager',
@@ -40,28 +38,28 @@ export const OcaNetworkManager = make_control_class(
 /**
  * Gets the list of object numbers of  **OcaNetwork** instances in this device. Return value indicates whether the list was successfully retrieved.  **Deprecated as of OCA 1.2**
  *
- * @method RemoteControlClasses.OcaNetworkManager#GetNetworks
+ * @method OcaNetworkManager#GetNetworks
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Gets the list of object numbers of  **OcaStreamNetwork** instances in this device. Return value indicates whether list was successfully retrieved.  **Deprecated as of OCA 1.4.**
  *
- * @method RemoteControlClasses.OcaNetworkManager#GetStreamNetworks
+ * @method OcaNetworkManager#GetStreamNetworks
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Gets the list of object numbers of  **OcaControlNetwork** instances in this device. Return value indicates whether list was successfully retrieved. Introduced in version 1.4.
  *
- * @method RemoteControlClasses.OcaNetworkManager#GetControlNetworks
+ * @method OcaNetworkManager#GetControlNetworks
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Gets the list of object numbers of  **OcaMediaTransportNetwork** instances in this device. Return value indicates whether list was successfully retrieved. Introduced in version 1.4.
  *
- * @method RemoteControlClasses.OcaNetworkManager#GetMediaTransportNetworks
+ * @method OcaNetworkManager#GetMediaTransportNetworks
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
@@ -71,7 +69,7 @@ export const OcaNetworkManager = make_control_class(
  * Object numbers of <b>OcaNetwork </b>objects, one for each network to
  * which this device belongs. <b><u>Deprecated as of OCA 1.2.</u></b>
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaNetworkManager#OnNetworksChanged
+ * @member {PropertyEvent<number[]>} OcaNetworkManager#OnNetworksChanged
  */
 /**
  * This event is emitted when the property StreamNetworks changes in the remote object.
@@ -80,7 +78,7 @@ export const OcaNetworkManager = make_control_class(
  * network to which this device belongs. <b><u>Deprecated as of OCA
  * 1.4.</u></b>
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaNetworkManager#OnStreamNetworksChanged
+ * @member {PropertyEvent<number[]>} OcaNetworkManager#OnStreamNetworksChanged
  */
 /**
  * This event is emitted when the property ControlNetworks changes in the remote object.
@@ -88,7 +86,7 @@ export const OcaNetworkManager = make_control_class(
  * Object numbers of <b>OcaControlNetwork </b>objects, one for each
  * control network to which this device belongs. Added in version 2.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaNetworkManager#OnControlNetworksChanged
+ * @member {PropertyEvent<number[]>} OcaNetworkManager#OnControlNetworksChanged
  */
 /**
  * This event is emitted when the property MediaTransportNetworks changes in the remote object.
@@ -97,5 +95,5 @@ export const OcaNetworkManager = make_control_class(
  * each media transport network to which this device belongs. Added in
  * version 2.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaNetworkManager#OnMediaTransportNetworksChanged
+ * @member {PropertyEvent<number[]>} OcaNetworkManager#OnMediaTransportNetworksChanged
  */

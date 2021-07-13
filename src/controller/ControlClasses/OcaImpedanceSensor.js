@@ -4,10 +4,8 @@ import { OcaImpedance } from '../../OCP1/OcaImpedance.js';
 
 /**
  * Basic impedance sensor. Value is complex (magnitude and phase).
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaImpedanceSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaImpedanceSensor = make_control_class(
   'OcaImpedanceSensor',
@@ -28,7 +26,7 @@ export const OcaImpedanceSensor = make_control_class(
  * - minReading of type :class:`OcaImpedance`
  * - maxReading of type :class:`OcaImpedance`
  *
- * @method RemoteControlClasses.OcaImpedanceSensor#GetReading
+ * @method OcaImpedanceSensor#GetReading
  * @returns {Promise<Arguments<OcaImpedance,OcaImpedance,OcaImpedance>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaImpedanceSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Impedance value (magnitude and phase).
  *
- * @member {PropertyEvent<OcaImpedance>} RemoteControlClasses.OcaImpedanceSensor#OnReadingChanged
+ * @member {PropertyEvent<OcaImpedance>} OcaImpedanceSensor#OnReadingChanged
  */

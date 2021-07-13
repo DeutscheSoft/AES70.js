@@ -11,10 +11,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
  * Abstract base class for classes that represent the device's application and support functions.
- * @extends RemoteControlClasses.OcaRoot
+ * @extends OcaRoot
  * @class OcaWorker
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaWorker = make_control_class(
   'OcaWorker',
@@ -50,14 +48,14 @@ export const OcaWorker = make_control_class(
 /**
  * Gets the value of the Enabled property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaWorker#GetEnabled
+ * @method OcaWorker#GetEnabled
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Sets the value of the Enabled property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaWorker#SetEnabled
+ * @method OcaWorker#SetEnabled
  * @param {boolean} enabled
  *
  * @returns {Promise<void>}
@@ -65,7 +63,7 @@ export const OcaWorker = make_control_class(
 /**
  * Adds an input or output port.. The return value indicates whether the port was successfully added.
  *
- * @method RemoteControlClasses.OcaWorker#AddPort
+ * @method OcaWorker#AddPort
  * @param {string} Label
  *
  * @param {OcaPortMode} Mode
@@ -76,7 +74,7 @@ export const OcaWorker = make_control_class(
 /**
  * Deletes an input or output port.. The return value indicates whether the port was successfully deleted.
  *
- * @method RemoteControlClasses.OcaWorker#DeletePort
+ * @method OcaWorker#DeletePort
  * @param {OcaPortID} ID
  *
  * @returns {Promise<void>}
@@ -84,14 +82,14 @@ export const OcaWorker = make_control_class(
 /**
  * Gets the list of ports owned by the Worker object. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaWorker#GetPorts
+ * @method OcaWorker#GetPorts
  * @returns {Promise<OcaPort[]>}
  *   A promise which resolves to a single value of type ``OcaPort[]``.
  */
 /**
  * Gets the name of the designated port. The return value indicates whether the name was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaWorker#GetPortName
+ * @method OcaWorker#GetPortName
  * @param {OcaPortID} PortID
  *
  * @returns {Promise<string>}
@@ -100,7 +98,7 @@ export const OcaWorker = make_control_class(
 /**
  * Sets the name of the designated port. The return value indicates whether the name was successfully set.
  *
- * @method RemoteControlClasses.OcaWorker#SetPortName
+ * @method OcaWorker#SetPortName
  * @param {OcaPortID} PortID
  *
  * @param {string} Name
@@ -110,14 +108,14 @@ export const OcaWorker = make_control_class(
 /**
  * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaWorker#GetLabel
+ * @method OcaWorker#GetLabel
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Sets the value of the Label property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaWorker#SetLabel
+ * @method OcaWorker#SetLabel
  * @param {string} label
  *
  * @returns {Promise<void>}
@@ -125,21 +123,21 @@ export const OcaWorker = make_control_class(
 /**
  * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaWorker#GetOwner
+ * @method OcaWorker#GetOwner
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the value of the Latency property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaWorker#GetLatency
+ * @method OcaWorker#GetLatency
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Sets the value of the Latency property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaWorker#SetLatency
+ * @method OcaWorker#SetLatency
  * @param {number} latency
  *
  * @returns {Promise<void>}
@@ -151,7 +149,7 @@ export const OcaWorker = make_control_class(
  * - NamePath of type ``string[]``
  * - ONoPath of type ``number[]``
  *
- * @method RemoteControlClasses.OcaWorker#GetPath
+ * @method OcaWorker#GetPath
  * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
@@ -163,7 +161,7 @@ export const OcaWorker = make_control_class(
  * on the object itself (e.g. a disabled chime generator is silent, a
  * disabled equalizer is flat, etc.).
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaWorker#OnEnabledChanged
+ * @member {PropertyEvent<boolean>} OcaWorker#OnEnabledChanged
  */
 /**
  * This event is emitted when the property Ports changes in the remote object.
@@ -172,7 +170,7 @@ export const OcaWorker = make_control_class(
  * that a worker object can have no ports (in which case the list is
  * empty).
  *
- * @member {PropertyEvent<OcaPort[]>} RemoteControlClasses.OcaWorker#OnPortsChanged
+ * @member {PropertyEvent<OcaPort[]>} OcaWorker#OnPortsChanged
  */
 /**
  * This event is emitted when the property Label changes in the remote object.
@@ -181,14 +179,14 @@ export const OcaWorker = make_control_class(
  * information about the worker. The label can be get and set over the
  * network.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaWorker#OnLabelChanged
+ * @member {PropertyEvent<string>} OcaWorker#OnLabelChanged
  */
 /**
  * This event is emitted when the property Owner changes in the remote object.
  * The property ``Owner`` is described in the AES70 standard as follows.
  * Object number of block that contains this worker.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaWorker#OnOwnerChanged
+ * @member {PropertyEvent<number>} OcaWorker#OnOwnerChanged
  */
 /**
  * This event is emitted when the property Latency changes in the remote object.
@@ -196,5 +194,5 @@ export const OcaWorker = make_control_class(
  * Processing latency of this object. Optional. Readonly or readwrite,
  * depending on implementation.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaWorker#OnLatencyChanged
+ * @member {PropertyEvent<number>} OcaWorker#OnLatencyChanged
  */

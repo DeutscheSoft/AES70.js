@@ -7,10 +7,8 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
  * (n)-position single-pole switch.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaSwitch
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaSwitch = make_control_class(
   'OcaSwitch',
@@ -46,13 +44,13 @@ export const OcaSwitch = make_control_class(
  * - minPosition of type ``number``
  * - maxPosition of type ``number``
  *
- * @method RemoteControlClasses.OcaSwitch#GetPosition
+ * @method OcaSwitch#GetPosition
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Position property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSwitch#SetPosition
+ * @method OcaSwitch#SetPosition
  * @param {number} position
  *
  * @returns {Promise<void>}
@@ -60,7 +58,7 @@ export const OcaSwitch = make_control_class(
 /**
  * Gets the name assigned to a given switch position. The return value indicates whether the name was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSwitch#GetPositionName
+ * @method OcaSwitch#GetPositionName
  * @param {number} Index
  *
  * @returns {Promise<string>}
@@ -69,7 +67,7 @@ export const OcaSwitch = make_control_class(
 /**
  * Assigns a name to a given switch position. The return value indicates whether the name was successfully assigned.
  *
- * @method RemoteControlClasses.OcaSwitch#SetPositionName
+ * @method OcaSwitch#SetPositionName
  * @param {number} Index
  *
  * @param {string} Name
@@ -79,14 +77,14 @@ export const OcaSwitch = make_control_class(
 /**
  * Gets list of names assigned to the switch's positions. The return value indicates whether the names were successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSwitch#GetPositionNames
+ * @method OcaSwitch#GetPositionNames
  * @returns {Promise<string[]>}
  *   A promise which resolves to a single value of type ``string[]``.
  */
 /**
  * Assigns names to the switch's positions. The return value indicates whether the names were successfully assigned.
  *
- * @method RemoteControlClasses.OcaSwitch#SetPositionNames
+ * @method OcaSwitch#SetPositionNames
  * @param {string[]} Names
  *
  * @returns {Promise<void>}
@@ -94,7 +92,7 @@ export const OcaSwitch = make_control_class(
 /**
  * Gets the Enabled flag assigned to a given switch position. The return value indicates whether the flag was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSwitch#GetPositionEnabled
+ * @method OcaSwitch#GetPositionEnabled
  * @param {number} Index
  *
  * @returns {Promise<boolean>}
@@ -103,7 +101,7 @@ export const OcaSwitch = make_control_class(
 /**
  * Sets the Enabled flag assigned to a given switch position. The return value indicates whether the flag was successfully set.
  *
- * @method RemoteControlClasses.OcaSwitch#SetPositionEnabled
+ * @method OcaSwitch#SetPositionEnabled
  * @param {number} Index
  *
  * @param {boolean} enabled
@@ -113,14 +111,14 @@ export const OcaSwitch = make_control_class(
 /**
  * Gets list of Enabled flags assigned to the switch's positions. The return value indicates whether the flags were successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSwitch#GetPositionEnableds
+ * @method OcaSwitch#GetPositionEnableds
  * @returns {Promise<boolean[]>}
  *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
  * Sets list of Enabled flags for the switch's positions. The return value indicates whether the flags were successfully set.
  *
- * @method RemoteControlClasses.OcaSwitch#SetPositionEnableds
+ * @method OcaSwitch#SetPositionEnableds
  * @param {boolean[]} enableds
  *
  * @returns {Promise<void>}
@@ -133,14 +131,14 @@ export const OcaSwitch = make_control_class(
  * the optional parameters minPosition and maxPosition in its GetPosition
  * method the positions shall be numbered from 1 to n.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaSwitch#OnPositionChanged
+ * @member {PropertyEvent<number>} OcaSwitch#OnPositionChanged
  */
 /**
  * This event is emitted when the property PositionNames changes in the remote object.
  * The property ``PositionNames`` is described in the AES70 standard as follows.
  * Vector of switch position names. Supplied by controller.
  *
- * @member {PropertyEvent<string[]>} RemoteControlClasses.OcaSwitch#OnPositionNamesChanged
+ * @member {PropertyEvent<string[]>} OcaSwitch#OnPositionNamesChanged
  */
 /**
  * This event is emitted when the property PositionEnableds changes in the remote object.
@@ -149,5 +147,5 @@ export const OcaSwitch = make_control_class(
  * positions. Default values are a construction parameter. The usual
  * default value is True.
  *
- * @member {PropertyEvent<boolean[]>} RemoteControlClasses.OcaSwitch#OnPositionEnabledsChanged
+ * @member {PropertyEvent<boolean[]>} OcaSwitch#OnPositionEnabledsChanged
  */

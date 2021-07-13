@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * A temperature actuator. Works in Celsius.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaTemperatureActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaTemperatureActuator = make_control_class(
   'OcaTemperatureActuator',
@@ -31,13 +29,13 @@ export const OcaTemperatureActuator = make_control_class(
  * - minTemperature of type ``number``
  * - maxTemperature of type ``number``
  *
- * @method RemoteControlClasses.OcaTemperatureActuator#GetTemperature
+ * @method OcaTemperatureActuator#GetTemperature
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Temperature property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaTemperatureActuator#SetTemperature
+ * @method OcaTemperatureActuator#SetTemperature
  * @param {number} temperature
  *
  * @returns {Promise<void>}
@@ -47,5 +45,5 @@ export const OcaTemperatureActuator = make_control_class(
  * The property ``Temperature`` is described in the AES70 standard as follows.
  * The temperature.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaTemperatureActuator#OnTemperatureChanged
+ * @member {PropertyEvent<number>} OcaTemperatureActuator#OnTemperatureChanged
  */

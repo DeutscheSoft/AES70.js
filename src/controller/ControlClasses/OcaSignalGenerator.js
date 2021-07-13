@@ -8,10 +8,8 @@ import { OcaWaveformType } from '../../OCP1/OcaWaveformType.js';
 
 /**
  * Multiwaveform signal generator with optional sweep capability.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaSignalGenerator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaSignalGenerator = make_control_class(
   'OcaSignalGenerator',
@@ -75,13 +73,13 @@ export const OcaSignalGenerator = make_control_class(
  * - minFrequency of type ``number``
  * - maxFrequency of type ``number``
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetFrequency1
+ * @method OcaSignalGenerator#GetFrequency1
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Frequency1 property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetFrequency1
+ * @method OcaSignalGenerator#SetFrequency1
  * @param {number} frequency
  *
  * @returns {Promise<void>}
@@ -94,13 +92,13 @@ export const OcaSignalGenerator = make_control_class(
  * - minFrequency of type ``number``
  * - maxFrequency of type ``number``
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetFrequency2
+ * @method OcaSignalGenerator#GetFrequency2
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Frequency2 property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetFrequency2
+ * @method OcaSignalGenerator#SetFrequency2
  * @param {number} frequency
  *
  * @returns {Promise<void>}
@@ -113,13 +111,13 @@ export const OcaSignalGenerator = make_control_class(
  * - minLevel of type ``number``
  * - maxLevel of type ``number``
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetLevel
+ * @method OcaSignalGenerator#GetLevel
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Level property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetLevel
+ * @method OcaSignalGenerator#SetLevel
  * @param {number} Level
  *
  * @returns {Promise<void>}
@@ -127,14 +125,14 @@ export const OcaSignalGenerator = make_control_class(
 /**
  * Gets the value of the Waveform property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetWaveform
+ * @method OcaSignalGenerator#GetWaveform
  * @returns {Promise<OcaWaveformType>}
  *   A promise which resolves to a single value of type :class:`OcaWaveformType`.
  */
 /**
  * Sets the value of the Waveform property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetWaveform
+ * @method OcaSignalGenerator#SetWaveform
  * @param {OcaWaveformType} waveform
  *
  * @returns {Promise<void>}
@@ -142,14 +140,14 @@ export const OcaSignalGenerator = make_control_class(
 /**
  * Gets the value of the SweepType property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetSweepType
+ * @method OcaSignalGenerator#GetSweepType
  * @returns {Promise<OcaSweepType>}
  *   A promise which resolves to a single value of type :class:`OcaSweepType`.
  */
 /**
  * Sets the value of the SweepType property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetSweepType
+ * @method OcaSignalGenerator#SetSweepType
  * @param {OcaSweepType} sweepType
  *
  * @returns {Promise<void>}
@@ -162,13 +160,13 @@ export const OcaSignalGenerator = make_control_class(
  * - minSweepTime of type ``number``
  * - maxSweepTime of type ``number``
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetSweepTime
+ * @method OcaSignalGenerator#GetSweepTime
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the SweepTime property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetSweepTime
+ * @method OcaSignalGenerator#SetSweepTime
  * @param {number} sweepTime
  *
  * @returns {Promise<void>}
@@ -176,14 +174,14 @@ export const OcaSignalGenerator = make_control_class(
 /**
  * Gets the value of the SweepRepeat property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetSweepRepeat
+ * @method OcaSignalGenerator#GetSweepRepeat
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Sets the value of the SweepRepeat property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetSweepRepeat
+ * @method OcaSignalGenerator#SetSweepRepeat
  * @param {boolean} sweepRepeat
  *
  * @returns {Promise<void>}
@@ -191,26 +189,26 @@ export const OcaSignalGenerator = make_control_class(
 /**
  * Gets the value of the Generating property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#GetGenerating
+ * @method OcaSignalGenerator#GetGenerating
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Starts the signal generator. The return value indicates whether the signal generator was successfully started.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#Start
+ * @method OcaSignalGenerator#Start
  * @returns {Promise<void>}
  */
 /**
  * Stops the signal generator. The return value indicates whether the signal generator was successfully stopped.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#Stop
+ * @method OcaSignalGenerator#Stop
  * @returns {Promise<void>}
  */
 /**
  * Sets some or all signal generation parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
- * @method RemoteControlClasses.OcaSignalGenerator#SetMultiple
+ * @method OcaSignalGenerator#SetMultiple
  * @param {int} Mask
  *
  * @param {number} Frequency1
@@ -234,21 +232,21 @@ export const OcaSignalGenerator = make_control_class(
  * The property ``Frequency1`` is described in the AES70 standard as follows.
  * Center frequency or sweep start frequency.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaSignalGenerator#OnFrequency1Changed
+ * @member {PropertyEvent<number>} OcaSignalGenerator#OnFrequency1Changed
  */
 /**
  * This event is emitted when the property Frequency2 changes in the remote object.
  * The property ``Frequency2`` is described in the AES70 standard as follows.
  * Sweep end frequency.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaSignalGenerator#OnFrequency2Changed
+ * @member {PropertyEvent<number>} OcaSignalGenerator#OnFrequency2Changed
  */
 /**
  * This event is emitted when the property Level changes in the remote object.
  * The property ``Level`` is described in the AES70 standard as follows.
  * Output level in dB relative to device-defined zero level.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaSignalGenerator#OnLevelChanged
+ * @member {PropertyEvent<number>} OcaSignalGenerator#OnLevelChanged
  */
 /**
  * This event is emitted when the property Waveform changes in the remote object.
@@ -256,7 +254,7 @@ export const OcaSignalGenerator = make_control_class(
  * The waveform type this generator generates (e.g. sine, square, noise,
  * etc.).
  *
- * @member {PropertyEvent<OcaWaveformType>} RemoteControlClasses.OcaSignalGenerator#OnWaveformChanged
+ * @member {PropertyEvent<OcaWaveformType>} OcaSignalGenerator#OnWaveformChanged
  */
 /**
  * This event is emitted when the property SweepType changes in the remote object.
@@ -264,21 +262,21 @@ export const OcaSignalGenerator = make_control_class(
  * The sweep type of the signal generator: None for no sweep, linear or
  * logarithmic if sweep is generated.
  *
- * @member {PropertyEvent<OcaSweepType>} RemoteControlClasses.OcaSignalGenerator#OnSweepTypeChanged
+ * @member {PropertyEvent<OcaSweepType>} OcaSignalGenerator#OnSweepTypeChanged
  */
 /**
  * This event is emitted when the property SweepTime changes in the remote object.
  * The property ``SweepTime`` is described in the AES70 standard as follows.
  * Duration of sweep in seconds.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaSignalGenerator#OnSweepTimeChanged
+ * @member {PropertyEvent<number>} OcaSignalGenerator#OnSweepTimeChanged
  */
 /**
  * This event is emitted when the property SweepRepeat changes in the remote object.
  * The property ``SweepRepeat`` is described in the AES70 standard as follows.
  * Indicates whether the sweep is repeated (true) or is one-shot (false).
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaSignalGenerator#OnSweepRepeatChanged
+ * @member {PropertyEvent<boolean>} OcaSignalGenerator#OnSweepRepeatChanged
  */
 /**
  * This event is emitted when the property Generating changes in the remote object.
@@ -286,5 +284,5 @@ export const OcaSignalGenerator = make_control_class(
  * Read-only property that indicates whether the generator is producing
  * output (true) or not (false).
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaSignalGenerator#OnGeneratingChanged
+ * @member {PropertyEvent<boolean>} OcaSignalGenerator#OnGeneratingChanged
  */

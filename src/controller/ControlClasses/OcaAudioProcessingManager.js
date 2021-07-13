@@ -9,10 +9,8 @@ import { OcaManager } from './OcaManager.js';
  *
  *  - If instantiated, object number must be 9.
  *
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaAudioProcessingManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaAudioProcessingManager = make_control_class(
   'OcaAudioProcessingManager',

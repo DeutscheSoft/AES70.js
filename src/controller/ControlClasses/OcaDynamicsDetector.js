@@ -6,10 +6,8 @@ import { OcaLevelDetectionLaw } from '../../OCP1/OcaLevelDetectionLaw.js';
 
 /**
  * Dynamics element : side-chain detector.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaDynamicsDetector
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaDynamicsDetector = make_control_class(
   'OcaDynamicsDetector',
@@ -46,14 +44,14 @@ export const OcaDynamicsDetector = make_control_class(
 /**
  * Gets the value of the Law property. Return status indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#GetLaw
+ * @method OcaDynamicsDetector#GetLaw
  * @returns {Promise<OcaLevelDetectionLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelDetectionLaw`.
  */
 /**
  * Sets the value of the Law property. Return status indicates whether the value was successfully set.
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#SetLaw
+ * @method OcaDynamicsDetector#SetLaw
  * @param {OcaLevelDetectionLaw} Law
  *
  * @returns {Promise<void>}
@@ -66,13 +64,13 @@ export const OcaDynamicsDetector = make_control_class(
  * - minTime of type ``number``
  * - maxTime of type ``number``
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#GetAttackTime
+ * @method OcaDynamicsDetector#GetAttackTime
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the AttackTime property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#SetAttackTime
+ * @method OcaDynamicsDetector#SetAttackTime
  * @param {number} Time
  *
  * @returns {Promise<void>}
@@ -85,13 +83,13 @@ export const OcaDynamicsDetector = make_control_class(
  * - minTime of type ``number``
  * - maxTime of type ``number``
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#GetReleaseTime
+ * @method OcaDynamicsDetector#GetReleaseTime
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the ReleaseTime property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#SetReleaseTime
+ * @method OcaDynamicsDetector#SetReleaseTime
  * @param {number} Time
  *
  * @returns {Promise<void>}
@@ -104,13 +102,13 @@ export const OcaDynamicsDetector = make_control_class(
  * - minTime of type ``number``
  * - maxTime of type ``number``
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#GetHoldTime
+ * @method OcaDynamicsDetector#GetHoldTime
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the HoldTime property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#SetHoldTime
+ * @method OcaDynamicsDetector#SetHoldTime
  * @param {number} Time
  *
  * @returns {Promise<void>}
@@ -118,7 +116,7 @@ export const OcaDynamicsDetector = make_control_class(
 /**
  * Sets some or all detector parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
- * @method RemoteControlClasses.OcaDynamicsDetector#SetMultiple
+ * @method OcaDynamicsDetector#SetMultiple
  * @param {int} Mask
  *
  * @param {OcaLevelDetectionLaw} Law
@@ -136,26 +134,26 @@ export const OcaDynamicsDetector = make_control_class(
  * The property ``Law`` is described in the AES70 standard as follows.
  * Level detection law: RMS, Peak, possibly others
  *
- * @member {PropertyEvent<OcaLevelDetectionLaw>} RemoteControlClasses.OcaDynamicsDetector#OnLawChanged
+ * @member {PropertyEvent<OcaLevelDetectionLaw>} OcaDynamicsDetector#OnLawChanged
  */
 /**
  * This event is emitted when the property AttackTime changes in the remote object.
  * The property ``AttackTime`` is described in the AES70 standard as follows.
  * Detector attack time in seconds.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsDetector#OnAttackTimeChanged
+ * @member {PropertyEvent<number>} OcaDynamicsDetector#OnAttackTimeChanged
  */
 /**
  * This event is emitted when the property ReleaseTime changes in the remote object.
  * The property ``ReleaseTime`` is described in the AES70 standard as follows.
  * Detector release time in seconds.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsDetector#OnReleaseTimeChanged
+ * @member {PropertyEvent<number>} OcaDynamicsDetector#OnReleaseTimeChanged
  */
 /**
  * This event is emitted when the property HoldTime changes in the remote object.
  * The property ``HoldTime`` is described in the AES70 standard as follows.
  * Detector hold time in seconds.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaDynamicsDetector#OnHoldTimeChanged
+ * @member {PropertyEvent<number>} OcaDynamicsDetector#OnHoldTimeChanged
  */

@@ -4,10 +4,8 @@ import { OcaSensorReadingState } from '../../OCP1/OcaSensorReadingState.js';
 
 /**
  * Abstract base class for all sensor classes.
- * @extends RemoteControlClasses.OcaWorker
+ * @extends OcaWorker
  * @class OcaSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaSensor = make_control_class(
   'OcaSensor',
@@ -23,7 +21,7 @@ export const OcaSensor = make_control_class(
 /**
  * Gets the current reading state of the sensor. The return value indicates whether the state was successfully retrived.
  *
- * @method RemoteControlClasses.OcaSensor#GetReadingState
+ * @method OcaSensor#GetReadingState
  * @returns {Promise<OcaSensorReadingState>}
  *   A promise which resolves to a single value of type :class:`OcaSensorReadingState`.
  */

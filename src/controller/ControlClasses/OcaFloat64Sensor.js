@@ -4,10 +4,8 @@ import { OcaFloat64 } from '../../OCP1/OcaFloat64.js';
 
 /**
  * Basic Float64 sensor.
- * @extends RemoteControlClasses.OcaBasicSensor
+ * @extends OcaBasicSensor
  * @class OcaFloat64Sensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaFloat64Sensor = make_control_class(
   'OcaFloat64Sensor',
@@ -28,7 +26,7 @@ export const OcaFloat64Sensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaFloat64Sensor#GetReading
+ * @method OcaFloat64Sensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaFloat64Sensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Uint64 reading.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFloat64Sensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaFloat64Sensor#OnReadingChanged
  */

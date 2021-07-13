@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Gain (or attenuation) element.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaGain
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaGain = make_control_class(
   'OcaGain',
@@ -31,13 +29,13 @@ export const OcaGain = make_control_class(
  * - minGain of type ``number``
  * - maxGain of type ``number``
  *
- * @method RemoteControlClasses.OcaGain#GetGain
+ * @method OcaGain#GetGain
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Gain property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaGain#SetGain
+ * @method OcaGain#SetGain
  * @param {number} Gain
  *
  * @returns {Promise<void>}
@@ -47,5 +45,5 @@ export const OcaGain = make_control_class(
  * The property ``Gain`` is described in the AES70 standard as follows.
  * Gain in dB.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaGain#OnGainChanged
+ * @member {PropertyEvent<number>} OcaGain#OnGainChanged
  */

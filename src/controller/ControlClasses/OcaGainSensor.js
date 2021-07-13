@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Senses a gain value. Typically used to indicate instantaneous gain value of a dynamics element.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaGainSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaGainSensor = make_control_class(
   'OcaGainSensor',
@@ -28,7 +26,7 @@ export const OcaGainSensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaGainSensor#GetReading
+ * @method OcaGainSensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaGainSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Gain in dB
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaGainSensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaGainSensor#OnReadingChanged
  */

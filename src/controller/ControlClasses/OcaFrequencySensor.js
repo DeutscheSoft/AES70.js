@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Frequency sensor.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaFrequencySensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaFrequencySensor = make_control_class(
   'OcaFrequencySensor',
@@ -28,7 +26,7 @@ export const OcaFrequencySensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaFrequencySensor#GetReading
+ * @method OcaFrequencySensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaFrequencySensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Frequency value.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFrequencySensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaFrequencySensor#OnReadingChanged
  */

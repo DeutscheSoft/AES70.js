@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Signal delay - basic version.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaDelay
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaDelay = make_control_class(
   'OcaDelay',
@@ -31,13 +29,13 @@ export const OcaDelay = make_control_class(
  * - minTime of type ``number``
  * - maxTime of type ``number``
  *
- * @method RemoteControlClasses.OcaDelay#GetDelayTime
+ * @method OcaDelay#GetDelayTime
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the DelayTime property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaDelay#SetDelayTime
+ * @method OcaDelay#SetDelayTime
  * @param {number} delayTime
  *
  * @returns {Promise<void>}
@@ -47,5 +45,5 @@ export const OcaDelay = make_control_class(
  * The property ``DelayTime`` is described in the AES70 standard as follows.
  * Delay in seconds.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaDelay#OnDelayTimeChanged
+ * @member {PropertyEvent<number>} OcaDelay#OnDelayTimeChanged
  */

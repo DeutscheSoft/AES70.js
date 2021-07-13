@@ -8,10 +8,8 @@ import { OcaTimeSourceSyncStatus } from '../../OCP1/OcaTimeSourceSyncStatus.js';
 
 /**
  * A time source, internal or external. See RFC 7273 for a detailed discussion of time sources.
- * @extends RemoteControlClasses.OcaAgent
+ * @extends OcaAgent
  * @class OcaTimeSource
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaTimeSource = make_control_class(
   'OcaTimeSource',
@@ -46,21 +44,21 @@ export const OcaTimeSource = make_control_class(
 /**
  * Gets the value of the  **Availability** property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTimeSource#GetAvailability
+ * @method OcaTimeSource#GetAvailability
  * @returns {Promise<OcaTimeSourceAvailability>}
  *   A promise which resolves to a single value of type :class:`OcaTimeSourceAvailability`.
  */
 /**
  * Gets the value of the  **Protocol** property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTimeSource#GetProtocol
+ * @method OcaTimeSource#GetProtocol
  * @returns {Promise<OcaTimeProtocol>}
  *   A promise which resolves to a single value of type :class:`OcaTimeProtocol`.
  */
 /**
  * Sets the value of the  **Protocol** property. The return value indicates whether the value was successfully set.
  *
- * @method RemoteControlClasses.OcaTimeSource#SetProtocol
+ * @method OcaTimeSource#SetProtocol
  * @param {OcaTimeProtocol} Protocol
  *
  * @returns {Promise<void>}
@@ -68,14 +66,14 @@ export const OcaTimeSource = make_control_class(
 /**
  * Gets the value of the  **Parameters** property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTimeSource#GetParameters
+ * @method OcaTimeSource#GetParameters
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Sets the value of the  **Parameters** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
- * @method RemoteControlClasses.OcaTimeSource#SetParameters
+ * @method OcaTimeSource#SetParameters
  * @param {string} Parameters
  *
  * @returns {Promise<void>}
@@ -83,14 +81,14 @@ export const OcaTimeSource = make_control_class(
 /**
  * Gets the time reference type. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTimeSource#GetReferenceType
+ * @method OcaTimeSource#GetReferenceType
  * @returns {Promise<OcaTimeReferenceType>}
  *   A promise which resolves to a single value of type :class:`OcaTimeReferenceType`.
  */
 /**
  * Sets the time reference type. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
- * @method RemoteControlClasses.OcaTimeSource#SetReferenceType
+ * @method OcaTimeSource#SetReferenceType
  * @param {OcaTimeReferenceType} ReferenceType
  *
  * @returns {Promise<void>}
@@ -98,14 +96,14 @@ export const OcaTimeSource = make_control_class(
 /**
  * Gets the timing source ID. The return value indicates whether the value was successfully retrieved. Optional method, not required for all time reference types.
  *
- * @method RemoteControlClasses.OcaTimeSource#GetReferenceID
+ * @method OcaTimeSource#GetReferenceID
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Sets the time reference ID. The return value indicates whether the ID was successfully set. Optional method, not required for all time reference types.
  *
- * @method RemoteControlClasses.OcaTimeSource#SetReferenceID
+ * @method OcaTimeSource#SetReferenceID
  * @param {string} ID
  *
  * @returns {Promise<void>}
@@ -113,14 +111,14 @@ export const OcaTimeSource = make_control_class(
 /**
  * Gets the synchronization status of this time source. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTimeSource#GetSyncStatus
+ * @method OcaTimeSource#GetSyncStatus
  * @returns {Promise<OcaTimeSourceSyncStatus>}
  *   A promise which resolves to a single value of type :class:`OcaTimeSourceSyncStatus`.
  */
 /**
  * Resets this time source. Initiates a new synchronization sequence. The return value indicates whether the reset was successful.
  *
- * @method RemoteControlClasses.OcaTimeSource#Reset
+ * @method OcaTimeSource#Reset
  * @returns {Promise<void>}
  */
 /**
@@ -128,14 +126,14 @@ export const OcaTimeSource = make_control_class(
  * The property ``Availability`` is described in the AES70 standard as follows.
  * Availability of this time source.
  *
- * @member {PropertyEvent<OcaTimeSourceAvailability>} RemoteControlClasses.OcaTimeSource#OnAvailabilityChanged
+ * @member {PropertyEvent<OcaTimeSourceAvailability>} OcaTimeSource#OnAvailabilityChanged
  */
 /**
  * This event is emitted when the property Protocol changes in the remote object.
  * The property ``Protocol`` is described in the AES70 standard as follows.
  * Time transport protocol used by this time source
  *
- * @member {PropertyEvent<OcaTimeProtocol>} RemoteControlClasses.OcaTimeSource#OnProtocolChanged
+ * @member {PropertyEvent<OcaTimeProtocol>} OcaTimeSource#OnProtocolChanged
  */
 /**
  * This event is emitted when the property Parameters changes in the remote object.
@@ -144,14 +142,14 @@ export const OcaTimeSource = make_control_class(
  * Content is an SDP timestamp reference specification as defined in
  * RFC7273, section 4.8.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaTimeSource#OnParametersChanged
+ * @member {PropertyEvent<string>} OcaTimeSource#OnParametersChanged
  */
 /**
  * This event is emitted when the property ReferenceType changes in the remote object.
  * The property ``ReferenceType`` is described in the AES70 standard as follows.
  * Type of time reference to which this time source is synced, if any.
  *
- * @member {PropertyEvent<OcaTimeReferenceType>} RemoteControlClasses.OcaTimeSource#OnReferenceTypeChanged
+ * @member {PropertyEvent<OcaTimeReferenceType>} OcaTimeSource#OnReferenceTypeChanged
  */
 /**
  * This event is emitted when the property ReferenceID changes in the remote object.
@@ -159,12 +157,12 @@ export const OcaTimeSource = make_control_class(
  * Identifier of reference to which this time source is synced, if any.
  * Not needed for all reference types.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaTimeSource#OnReferenceIDChanged
+ * @member {PropertyEvent<string>} OcaTimeSource#OnReferenceIDChanged
  */
 /**
  * This event is emitted when the property SyncStatus changes in the remote object.
  * The property ``SyncStatus`` is described in the AES70 standard as follows.
  * Synchronization status of this time source.
  *
- * @member {PropertyEvent<OcaTimeSourceSyncStatus>} RemoteControlClasses.OcaTimeSource#OnSyncStatusChanged
+ * @member {PropertyEvent<OcaTimeSourceSyncStatus>} OcaTimeSource#OnSyncStatusChanged
  */

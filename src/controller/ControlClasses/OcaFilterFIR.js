@@ -6,10 +6,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
  * A finite impulse response (FIR) filter.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaFilterFIR
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaFilterFIR = make_control_class(
   'OcaFilterFIR',
@@ -40,20 +38,20 @@ export const OcaFilterFIR = make_control_class(
  * - minLength of type ``number``
  * - maxLength of type ``number``
  *
- * @method RemoteControlClasses.OcaFilterFIR#GetLength
+ * @method OcaFilterFIR#GetLength
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Gets the coefficients of the FIR filter. The return value indicates whether the coefficients were successfully retrieved.
  *
- * @method RemoteControlClasses.OcaFilterFIR#GetCoefficients
+ * @method OcaFilterFIR#GetCoefficients
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Sets the value of the properties of the FIR filter. The return value indicates whether the properties were successfully set.
  *
- * @method RemoteControlClasses.OcaFilterFIR#SetCoefficients
+ * @method OcaFilterFIR#SetCoefficients
  * @param {number[]} Coefficients
  *
  * @returns {Promise<void>}
@@ -66,13 +64,13 @@ export const OcaFilterFIR = make_control_class(
  * - minRate of type ``number``
  * - maxRate of type ``number``
  *
- * @method RemoteControlClasses.OcaFilterFIR#GetSampleRate
+ * @method OcaFilterFIR#GetSampleRate
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the sample rate of the FIR filter. The return value indicates whether the rate was successfully set.
  *
- * @method RemoteControlClasses.OcaFilterFIR#SetSampleRate
+ * @method OcaFilterFIR#SetSampleRate
  * @param {number} Rate
  *
  * @returns {Promise<void>}
@@ -83,7 +81,7 @@ export const OcaFilterFIR = make_control_class(
  * Array of FIR Coefficients. The size of the array (number of entries)
  * is equal to the Order property plus 1.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaFilterFIR#OnCoefficientsChanged
+ * @member {PropertyEvent<number[]>} OcaFilterFIR#OnCoefficientsChanged
  */
 /**
  * This event is emitted when the property SampleRate changes in the remote object.
@@ -91,5 +89,5 @@ export const OcaFilterFIR = make_control_class(
  * Sample rate inside the filter. We can't assume it's the same as the
  * device input or output rate.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFilterFIR#OnSampleRateChanged
+ * @member {PropertyEvent<number>} OcaFilterFIR#OnSampleRateChanged
  */

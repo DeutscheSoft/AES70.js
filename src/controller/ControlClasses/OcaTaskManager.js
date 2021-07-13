@@ -28,10 +28,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - The  **Disable** command will succeed only if no tasks are running.
  *   Tasks may be stopped by: passing the  **OcaTaskManager** a  **Stop** or  **Abort** command, which will stop designated tasks in the device;.
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaTaskManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaTaskManager = make_control_class(
   'OcaTaskManager',
@@ -63,7 +61,7 @@ export const OcaTaskManager = make_control_class(
 /**
  * Enables (parameter =TRUE) or disables (parameter = FALSE) the running of tasks. Changes value of property State from Disabled to Enabled and vice versa. All tasks running when Enable is called with parameter = FALSE are immediately aborted.
  *
- * @method RemoteControlClasses.OcaTaskManager#Enable
+ * @method OcaTaskManager#Enable
  * @param {boolean} Enable
  *
  * @returns {Promise<void>}
@@ -71,7 +69,7 @@ export const OcaTaskManager = make_control_class(
 /**
  * Controls all tasks in device. Return value indicates whether tasks were successfully controlled.
  *
- * @method RemoteControlClasses.OcaTaskManager#ControlAllTasks
+ * @method OcaTaskManager#ControlAllTasks
  * @param {OcaTaskCommand} Command
  *
  * @param {Uint8Array} ApplicationTaskParameter
@@ -81,7 +79,7 @@ export const OcaTaskManager = make_control_class(
 /**
  * Controls all tasks in the given group. Return value indicates whether tasks were successfully controlled.
  *
- * @method RemoteControlClasses.OcaTaskManager#ControlTaskGroup
+ * @method OcaTaskManager#ControlTaskGroup
  * @param {number} GroupID
  *
  * @param {OcaTaskCommand} Command
@@ -93,7 +91,7 @@ export const OcaTaskManager = make_control_class(
 /**
  * Controls a specified task. Return value indicates whether tasks were successfully controlled.
  *
- * @method RemoteControlClasses.OcaTaskManager#ControlTask
+ * @method OcaTaskManager#ControlTask
  * @param {number} TaskID
  *
  * @param {OcaTaskCommand} Command
@@ -105,21 +103,21 @@ export const OcaTaskManager = make_control_class(
 /**
  * Gets value of property  **State** . Return value indicates whether value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTaskManager#GetState
+ * @method OcaTaskManager#GetState
  * @returns {Promise<OcaTaskManagerState>}
  *   A promise which resolves to a single value of type :class:`OcaTaskManagerState`.
  */
 /**
  * This was not documented in the OCA standard.
  *
- * @method RemoteControlClasses.OcaTaskManager#GetTaskStatuses
+ * @method OcaTaskManager#GetTaskStatuses
  * @returns {Promise<OcaTaskStatus>}
  *   A promise which resolves to a single value of type :class:`OcaTaskStatus`.
  */
 /**
  * This was not documented in the OCA standard.
  *
- * @method RemoteControlClasses.OcaTaskManager#GetTaskStatus
+ * @method OcaTaskManager#GetTaskStatus
  * @param {number} TaskID
  *
  * @returns {Promise<OcaTaskStatus>}
@@ -128,7 +126,7 @@ export const OcaTaskManager = make_control_class(
 /**
  * Creates a Task. Parameters of the new Task are given in the Task parameter; device returns the same parameter with the new Task ID filled in. Initial task state is set to Disabled. Return value indicates whether Task was successfully created.
  *
- * @method RemoteControlClasses.OcaTaskManager#AddTask
+ * @method OcaTaskManager#AddTask
  * @param {OcaTask} Task
  *
  * @returns {Promise<OcaTask>}
@@ -137,14 +135,14 @@ export const OcaTaskManager = make_control_class(
 /**
  * Gets map of Tasks in the device. Return value indicates whether map was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTaskManager#GetTasks
+ * @method OcaTaskManager#GetTasks
  * @returns {Promise<Map<number, OcaTask>>}
  *   A promise which resolves to a single value of type ``Map<number, OcaTask>``.
  */
 /**
  * Retrieves a Task. Return value indicates whether Task was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaTaskManager#GetTask
+ * @method OcaTaskManager#GetTask
  * @param {number} ID
  *
  * @returns {Promise<OcaTask>}
@@ -153,7 +151,7 @@ export const OcaTaskManager = make_control_class(
 /**
  * Updates a Task. Return value indicates whether Task was successfully updated.
  *
- * @method RemoteControlClasses.OcaTaskManager#SetTask
+ * @method OcaTaskManager#SetTask
  * @param {number} ID
  *
  * @param {OcaTask} Task
@@ -163,14 +161,14 @@ export const OcaTaskManager = make_control_class(
 /**
  * Deletes a task. Return value indicates whether task was successfully deleted. Method fails with status=ProcessingFailed if task is running.
  *
- * @method RemoteControlClasses.OcaTaskManager#DeleteTask
+ * @method OcaTaskManager#DeleteTask
  * @param {number} ID
  *
  * @returns {Promise<void>}
  */
 /**
  * This was not documented in the OCA standard.
- * @member RemoteControlClasses.OcaTaskManager#OnTaskStateChanged {Event}
+ * @member OcaTaskManager#OnTaskStateChanged {Event}
  */
 /**
  * This event is emitted when the property State changes in the remote object.
@@ -178,12 +176,12 @@ export const OcaTaskManager = make_control_class(
  * Current state of task processing. State is Disabled after a Disable
  * command has been received, Enabled otherwise.
  *
- * @member {PropertyEvent<OcaTaskManagerState>} RemoteControlClasses.OcaTaskManager#OnStateChanged
+ * @member {PropertyEvent<OcaTaskManagerState>} OcaTaskManager#OnStateChanged
  */
 /**
  * This event is emitted when the property Tasks changes in the remote object.
  * The property ``Tasks`` is described in the AES70 standard as follows.
  * Task collection
  *
- * @member {PropertyEvent<Map<number, OcaTask>>} RemoteControlClasses.OcaTaskManager#OnTasksChanged
+ * @member {PropertyEvent<Map<number, OcaTask>>} OcaTaskManager#OnTasksChanged
  */

@@ -40,10 +40,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - Error-handling mechanisms (e.g. what happens when a grouper loses its connection to a citizen, and what happens when it later re-attaches)
  *
- * @extends RemoteControlClasses.OcaAgent
+ * @extends OcaAgent
  * @class OcaGrouper
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaGrouper = make_control_class(
   'OcaGrouper',
@@ -101,7 +99,7 @@ export const OcaGrouper = make_control_class(
  * - Index of type ``number``
  * - ProxyONo of type ``number``
  *
- * @method RemoteControlClasses.OcaGrouper#AddGroup
+ * @method OcaGrouper#AddGroup
  * @param {string} Name
  *
  * @returns {Promise<Arguments<number,number>>}
@@ -109,7 +107,7 @@ export const OcaGrouper = make_control_class(
 /**
  * Deletes a group from the grouper. The return value indicates whether the group was successfully deleted. Note: index values of deleted groups are not reused during the lifetime of the grouper instance.
  *
- * @method RemoteControlClasses.OcaGrouper#DeleteGroup
+ * @method OcaGrouper#DeleteGroup
  * @param {number} Index
  *
  * @returns {Promise<void>}
@@ -117,21 +115,21 @@ export const OcaGrouper = make_control_class(
 /**
  * Gets the count of groups owned by this grouper. The return value indicates whether the count was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetGroupCount
+ * @method OcaGrouper#GetGroupCount
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the list of groups owned by this grouper. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetGroupList
+ * @method OcaGrouper#GetGroupList
  * @returns {Promise<OcaGrouperGroup[]>}
  *   A promise which resolves to a single value of type ``OcaGrouperGroup[]``.
  */
 /**
  * Adds a target to the group. The return value indicates whether the target was successfully added. This method does not enroll the new target in any of the grouper's groups -- it merely makes the target available for enrollment. Group membership is controlled by the SetEnrollment method, q.v.
  *
- * @method RemoteControlClasses.OcaGrouper#AddCitizen
+ * @method OcaGrouper#AddCitizen
  * @param {OcaGrouperCitizen} Citizen
  *
  * @returns {Promise<number>}
@@ -140,7 +138,7 @@ export const OcaGrouper = make_control_class(
 /**
  * Delete a citizen from the grouper (and therefore from all of its groups). The return value indicates whether the citizen was successfully deleted. Note: index values of deleted citizens are not reused during the lifetime of the grouper instance.
  *
- * @method RemoteControlClasses.OcaGrouper#DeleteCitizen
+ * @method OcaGrouper#DeleteCitizen
  * @param {number} Index
  *
  * @returns {Promise<void>}
@@ -148,21 +146,21 @@ export const OcaGrouper = make_control_class(
 /**
  * Gets the count of citizens registered in this grouper. The return value indicates whether the count was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetCitizenCount
+ * @method OcaGrouper#GetCitizenCount
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the list of citizens registered in this grouper. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetCitizenList
+ * @method OcaGrouper#GetCitizenList
  * @returns {Promise<OcaGrouperCitizen[]>}
  *   A promise which resolves to a single value of type ``OcaGrouperCitizen[]``.
  */
 /**
  * Gets membership status for given target in given group. The return value indicates whether the status was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetEnrollment
+ * @method OcaGrouper#GetEnrollment
  * @param {OcaGrouperEnrollment} Enrollment
  *
  * @returns {Promise<boolean>}
@@ -171,7 +169,7 @@ export const OcaGrouper = make_control_class(
 /**
  * Sets membership status for given target in given group. The return value indicates whether the status was successfully set.
  *
- * @method RemoteControlClasses.OcaGrouper#SetEnrollment
+ * @method OcaGrouper#SetEnrollment
  * @param {OcaGrouperEnrollment} Enrollment
  *
  * @param {boolean} IsMember
@@ -181,7 +179,7 @@ export const OcaGrouper = make_control_class(
 /**
  * Gets the list of members of the given group. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetGroupMemberList
+ * @method OcaGrouper#GetGroupMemberList
  * @param {number} Index
  *
  * @returns {Promise<OcaGrouperCitizen[]>}
@@ -190,14 +188,14 @@ export const OcaGrouper = make_control_class(
 /**
  * Gets the value of the ActuatorOrSensor property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetActuatorOrSensor
+ * @method OcaGrouper#GetActuatorOrSensor
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Sets the value of the ActuatorOrSensor property. The return value indicates whether the value was successfully set.
  *
- * @method RemoteControlClasses.OcaGrouper#SetActuatorOrSensor
+ * @method OcaGrouper#SetActuatorOrSensor
  * @param {boolean} ActuatorOrSensor
  *
  * @returns {Promise<void>}
@@ -205,14 +203,14 @@ export const OcaGrouper = make_control_class(
 /**
  * Gets the value of the Mode property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaGrouper#GetMode
+ * @method OcaGrouper#GetMode
  * @returns {Promise<OcaGrouperMode>}
  *   A promise which resolves to a single value of type :class:`OcaGrouperMode`.
  */
 /**
  * Sets the value of the Mode property. The return value indicates whether the value was successfully set.
  *
- * @method RemoteControlClasses.OcaGrouper#SetMode
+ * @method OcaGrouper#SetMode
  * @param {OcaGrouperMode} Mode
  *
  * @returns {Promise<void>}
@@ -240,7 +238,7 @@ export const OcaGrouper = make_control_class(
  *
  *  - Citizen de-enrolls from group
  *
- * @member RemoteControlClasses.OcaGrouper#OnStatusChange {Event}
+ * @member OcaGrouper#OnStatusChange {Event}
  * Event that is emitted whenever key aspects of a group's status change.
  * Status events include: <ul> <li>Citizen joins grouper</li> <li>Citizen
  * leaves grouper</li> <li>Citizen fails to execute grouper value change
@@ -253,7 +251,7 @@ export const OcaGrouper = make_control_class(
  * The property ``ActuatorOrSensor`` is described in the AES70 standard as follows.
  * True if Grouper is actuator grouper, false if sensor grouper.
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaGrouper#OnActuatorOrSensorChanged
+ * @member {PropertyEvent<boolean>} OcaGrouper#OnActuatorOrSensorChanged
  */
 /**
  * This event is emitted when the property Groups changes in the remote object.
@@ -261,14 +259,14 @@ export const OcaGrouper = make_control_class(
  * List of groups in the grouper. Groups are added to and deleted from a
  * grouper by the AdGroup and DeleteGroup methods of OcaGrouper.
  *
- * @member {PropertyEvent<OcaGrouperGroup[]>} RemoteControlClasses.OcaGrouper#OnGroupsChanged
+ * @member {PropertyEvent<OcaGrouperGroup[]>} OcaGrouper#OnGroupsChanged
  */
 /**
  * This event is emitted when the property Citizens changes in the remote object.
  * The property ``Citizens`` is described in the AES70 standard as follows.
  * List of citizens defined for this grouper.
  *
- * @member {PropertyEvent<OcaGrouperCitizen[]>} RemoteControlClasses.OcaGrouper#OnCitizensChanged
+ * @member {PropertyEvent<OcaGrouperCitizen[]>} OcaGrouper#OnCitizensChanged
  */
 /**
  * This event is emitted when the property Enrollments changes in the remote object.
@@ -276,7 +274,7 @@ export const OcaGrouper = make_control_class(
  * List of grouper's enrollments, i.e. which citizen(s) belong to which
  * group(s).
  *
- * @member {PropertyEvent<OcaGrouperEnrollment[]>} RemoteControlClasses.OcaGrouper#OnEnrollmentsChanged
+ * @member {PropertyEvent<OcaGrouperEnrollment[]>} OcaGrouper#OnEnrollmentsChanged
  */
 /**
  * This event is emitted when the property Mode changes in the remote object.
@@ -284,5 +282,5 @@ export const OcaGrouper = make_control_class(
  * Switch that determines whether grouper is in master-slave mode or
  * peer-to-peer mode.
  *
- * @member {PropertyEvent<OcaGrouperMode>} RemoteControlClasses.OcaGrouper#OnModeChanged
+ * @member {PropertyEvent<OcaGrouperMode>} OcaGrouper#OnModeChanged
  */

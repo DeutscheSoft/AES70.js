@@ -3,10 +3,8 @@ import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Abstract base class for weakly typed actuators.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaBasicActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaBasicActuator = make_control_class(
   'OcaBasicActuator',

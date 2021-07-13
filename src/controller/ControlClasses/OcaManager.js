@@ -3,10 +3,8 @@ import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class for classes that represent non-audio (i.e. control and monitoring) functions. All concrete manager objects are lockable (the constructor of this class initializes the Root object with property Lockable true).
- * @extends RemoteControlClasses.OcaRoot
+ * @extends OcaRoot
  * @class OcaManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaManager = make_control_class(
   'OcaManager',

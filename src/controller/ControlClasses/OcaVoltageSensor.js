@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Basic voltage sensor.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaVoltageSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaVoltageSensor = make_control_class(
   'OcaVoltageSensor',
@@ -28,7 +26,7 @@ export const OcaVoltageSensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaVoltageSensor#GetReading
+ * @method OcaVoltageSensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaVoltageSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Voltage value (volts).
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaVoltageSensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaVoltageSensor#OnReadingChanged
  */

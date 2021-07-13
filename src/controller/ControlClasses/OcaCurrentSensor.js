@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Basic current sensor.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaCurrentSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaCurrentSensor = make_control_class(
   'OcaCurrentSensor',
@@ -28,7 +26,7 @@ export const OcaCurrentSensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaCurrentSensor#GetReading
+ * @method OcaCurrentSensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaCurrentSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Current value (amperes).
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaCurrentSensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaCurrentSensor#OnReadingChanged
  */

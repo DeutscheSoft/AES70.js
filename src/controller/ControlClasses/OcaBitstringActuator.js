@@ -6,10 +6,8 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
  * Bitstring actuator. Maximum bitstring length is 65,536 bits.
- * @extends RemoteControlClasses.OcaBasicActuator
+ * @extends OcaBasicActuator
  * @class OcaBitstringActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaBitstringActuator = make_control_class(
   'OcaBitstringActuator',
@@ -31,14 +29,14 @@ export const OcaBitstringActuator = make_control_class(
 /**
  * Gets the number of bits in the string. The return value indicates whether the property was successfully gathered.
  *
- * @method RemoteControlClasses.OcaBitstringActuator#GetNrBits
+ * @method OcaBitstringActuator#GetNrBits
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the bit value of the given bit. The return value indicates whether the property was successfully gathered.
  *
- * @method RemoteControlClasses.OcaBitstringActuator#GetBit
+ * @method OcaBitstringActuator#GetBit
  * @param {number} bitNr
  *
  * @returns {Promise<boolean>}
@@ -47,7 +45,7 @@ export const OcaBitstringActuator = make_control_class(
 /**
  * Sets the bit value of the given bit. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaBitstringActuator#SetBit
+ * @method OcaBitstringActuator#SetBit
  * @param {number} bitNr
  *
  * @param {boolean} Value
@@ -57,14 +55,14 @@ export const OcaBitstringActuator = make_control_class(
 /**
  * Gets the entire bitstring.The return value indicates whether the property was successfully gathered.
  *
- * @method RemoteControlClasses.OcaBitstringActuator#GetBitstring
+ * @method OcaBitstringActuator#GetBitstring
  * @returns {Promise<boolean[]>}
  *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
  * Sets the entire bitstring. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaBitstringActuator#SetBitstring
+ * @method OcaBitstringActuator#SetBitstring
  * @param {boolean[]} BitString
  *
  * @returns {Promise<void>}
@@ -74,5 +72,5 @@ export const OcaBitstringActuator = make_control_class(
  * The property ``Bitstring`` is described in the AES70 standard as follows.
  * The bitstring data.
  *
- * @member {PropertyEvent<boolean[]>} RemoteControlClasses.OcaBitstringActuator#OnBitstringChanged
+ * @member {PropertyEvent<boolean[]>} OcaBitstringActuator#OnBitstringChanged
  */

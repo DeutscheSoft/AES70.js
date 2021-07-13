@@ -4,10 +4,8 @@ import { OcaNetworkControlProtocol } from '../../OCP1/OcaNetworkControlProtocol.
 
 /**
  * This was not documented in the OCA standard.
- * @extends RemoteControlClasses.OcaApplicationNetwork
+ * @extends OcaApplicationNetwork
  * @class OcaControlNetwork
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaControlNetwork = make_control_class(
   'OcaControlNetwork',
@@ -33,7 +31,7 @@ export const OcaControlNetwork = make_control_class(
 /**
  * Gets the network's Protocol property. Return status indicates whether the operation was successful.
  *
- * @method RemoteControlClasses.OcaControlNetwork#GetControlProtocol
+ * @method OcaControlNetwork#GetControlProtocol
  * @returns {Promise<OcaNetworkControlProtocol>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkControlProtocol`.
  */
@@ -43,5 +41,5 @@ export const OcaControlNetwork = make_control_class(
  * Type of control protocol used by the network (OCAnn). Read-only
  * property.
  *
- * @member {PropertyEvent<OcaNetworkControlProtocol>} RemoteControlClasses.OcaControlNetwork#OnProtocolChanged
+ * @member {PropertyEvent<OcaNetworkControlProtocol>} OcaControlNetwork#OnProtocolChanged
  */

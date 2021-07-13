@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Pan or Balance control.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaPanBalance
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaPanBalance = make_control_class(
   'OcaPanBalance',
@@ -36,13 +34,13 @@ export const OcaPanBalance = make_control_class(
  * - minPosition of type ``number``
  * - maxPosition of type ``number``
  *
- * @method RemoteControlClasses.OcaPanBalance#GetPosition
+ * @method OcaPanBalance#GetPosition
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Position property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaPanBalance#SetPosition
+ * @method OcaPanBalance#SetPosition
  * @param {number} Position
  *
  * @returns {Promise<void>}
@@ -55,13 +53,13 @@ export const OcaPanBalance = make_control_class(
  * - minGain of type ``number``
  * - maxGain of type ``number``
  *
- * @method RemoteControlClasses.OcaPanBalance#GetMidpointGain
+ * @method OcaPanBalance#GetMidpointGain
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the MidpointGain property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaPanBalance#SetMidpointGain
+ * @method OcaPanBalance#SetMidpointGain
  * @param {number} Gain
  *
  * @returns {Promise<void>}
@@ -72,7 +70,7 @@ export const OcaPanBalance = make_control_class(
  * Pan position. Range = -1.0 to +1.0. -1.0 is 100% left, +1.0 is 100%
  * right.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaPanBalance#OnPositionChanged
+ * @member {PropertyEvent<number>} OcaPanBalance#OnPositionChanged
  */
 /**
  * This event is emitted when the property MidpointGain changes in the remote object.
@@ -80,5 +78,5 @@ export const OcaPanBalance = make_control_class(
  * Midpoint gain. Normally, max=0dB, min=-6dB. May be readonly for
  * pan/balance objects with fixed midpoint gains.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaPanBalance#OnMidpointGainChanged
+ * @member {PropertyEvent<number>} OcaPanBalance#OnMidpointGainChanged
  */

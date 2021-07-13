@@ -4,10 +4,8 @@ import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 
 /**
  * Basic boolean actuator.
- * @extends RemoteControlClasses.OcaBasicActuator
+ * @extends OcaBasicActuator
  * @class OcaBooleanActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaBooleanActuator = make_control_class(
   'OcaBooleanActuator',
@@ -26,14 +24,14 @@ export const OcaBooleanActuator = make_control_class(
 /**
  * Gets the  **Setting** property. The return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaBooleanActuator#GetSetting
+ * @method OcaBooleanActuator#GetSetting
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Sets the  **Setting** property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaBooleanActuator#SetSetting
+ * @method OcaBooleanActuator#SetSetting
  * @param {boolean} Setting
  *
  * @returns {Promise<void>}
@@ -43,5 +41,5 @@ export const OcaBooleanActuator = make_control_class(
  * The property ``Setting`` is described in the AES70 standard as follows.
  * Boolean setting.
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaBooleanActuator#OnSettingChanged
+ * @member {PropertyEvent<boolean>} OcaBooleanActuator#OnSettingChanged
  */

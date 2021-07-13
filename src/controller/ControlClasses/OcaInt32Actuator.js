@@ -4,10 +4,8 @@ import { OcaInt32 } from '../../OCP1/OcaInt32.js';
 
 /**
  * Basic int32 actuator.
- * @extends RemoteControlClasses.OcaBasicActuator
+ * @extends OcaBasicActuator
  * @class OcaInt32Actuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaInt32Actuator = make_control_class(
   'OcaInt32Actuator',
@@ -31,13 +29,13 @@ export const OcaInt32Actuator = make_control_class(
  * - minSetting of type ``number``
  * - maxSetting of type ``number``
  *
- * @method RemoteControlClasses.OcaInt32Actuator#GetSetting
+ * @method OcaInt32Actuator#GetSetting
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the **Setting** property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaInt32Actuator#SetSetting
+ * @method OcaInt32Actuator#SetSetting
  * @param {number} Setting
  *
  * @returns {Promise<void>}
@@ -47,5 +45,5 @@ export const OcaInt32Actuator = make_control_class(
  * The property ``Setting`` is described in the AES70 standard as follows.
  * Int32 setting.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaInt32Actuator#OnSettingChanged
+ * @member {PropertyEvent<number>} OcaInt32Actuator#OnSettingChanged
  */

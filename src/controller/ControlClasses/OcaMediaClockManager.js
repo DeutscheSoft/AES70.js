@@ -12,10 +12,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - If instantiated, object number must be 7.
  *
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaMediaClockManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaMediaClockManager = make_control_class(
   'OcaMediaClockManager',
@@ -47,21 +45,21 @@ export const OcaMediaClockManager = make_control_class(
 /**
  * Gets the list of object numbers of  **OcaMediaClock** instances in this device. Return value indicates whether list was successfully retrieved. Note: In AES70-2017, this method is deprecated.
  *
- * @method RemoteControlClasses.OcaMediaClockManager#GetClocks
+ * @method OcaMediaClockManager#GetClocks
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Gets the list of media clock types supported by  **OcaMediaClock** objects in the device. Return value indicates whether the list was successfully retrieved. Note : In AES70-2017, this method is deprecated.
  *
- * @method RemoteControlClasses.OcaMediaClockManager#GetMediaClockTypesSupported
+ * @method OcaMediaClockManager#GetMediaClockTypesSupported
  * @returns {Promise<OcaMediaClockType[]>}
  *   A promise which resolves to a single value of type ``OcaMediaClockType[]``.
  */
 /**
  * Gets the list of object numbers of  **OcaMediaClock3** instances in this device. Return value indicates whether list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaMediaClockManager#GetClock3s
+ * @method OcaMediaClockManager#GetClock3s
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
@@ -76,7 +74,7 @@ export const OcaMediaClockManager = make_control_class(
  * <b>OcaMediaClock </b>objects in the device is zero, this property is
  * empty.
  *
- * @member {PropertyEvent<OcaMediaClockType[]>} RemoteControlClasses.OcaMediaClockManager#OnClockSourceTypesSupportedChanged
+ * @member {PropertyEvent<OcaMediaClockType[]>} OcaMediaClockManager#OnClockSourceTypesSupportedChanged
  */
 /**
  * This event is emitted when the property Clocks changes in the remote object.
@@ -85,7 +83,7 @@ export const OcaMediaClockManager = make_control_class(
  * which this device uses and/or sources. Note: In AES70-2017, this
  * property is deprecated.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaMediaClockManager#OnClocksChanged
+ * @member {PropertyEvent<number[]>} OcaMediaClockManager#OnClocksChanged
  */
 /**
  * This event is emitted when the property Clock3s changes in the remote object.
@@ -93,5 +91,5 @@ export const OcaMediaClockManager = make_control_class(
  * Object numbers of <b>OcaMediaClock3 </b>objects, one for each clock
  * which this device uses and/or sources.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaMediaClockManager#OnClock3sChanged
+ * @member {PropertyEvent<number[]>} OcaMediaClockManager#OnClock3sChanged
  */

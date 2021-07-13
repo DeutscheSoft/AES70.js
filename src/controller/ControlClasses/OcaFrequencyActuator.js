@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Simple frequency actuator.
- * @extends RemoteControlClasses.OcaActuator
+ * @extends OcaActuator
  * @class OcaFrequencyActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaFrequencyActuator = make_control_class(
   'OcaFrequencyActuator',
@@ -31,13 +29,13 @@ export const OcaFrequencyActuator = make_control_class(
  * - minFrequency of type ``number``
  * - maxFrequency of type ``number``
  *
- * @method RemoteControlClasses.OcaFrequencyActuator#GetFrequency
+ * @method OcaFrequencyActuator#GetFrequency
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
  * Sets the value of the Frequency property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaFrequencyActuator#SetFrequency
+ * @method OcaFrequencyActuator#SetFrequency
  * @param {number} Frequency
  *
  * @returns {Promise<void>}
@@ -47,5 +45,5 @@ export const OcaFrequencyActuator = make_control_class(
  * The property ``Frequency`` is described in the AES70 standard as follows.
  * Frequency in Hertz.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaFrequencyActuator#OnFrequencyChanged
+ * @member {PropertyEvent<number>} OcaFrequencyActuator#OnFrequencyChanged
  */

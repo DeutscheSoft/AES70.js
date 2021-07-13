@@ -4,10 +4,8 @@ import { OcaLevelMeterLaw } from '../../OCP1/OcaLevelMeterLaw.js';
 
 /**
  * Child of  **OcaLevelSensor** that returns an audio meter reading in dB relative to a known reference level, and whose value has been calculated by the selected averaging algorithm.
- * @extends RemoteControlClasses.OcaLevelSensor
+ * @extends OcaLevelSensor
  * @class OcaAudioLevelSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaAudioLevelSensor = make_control_class(
   'OcaAudioLevelSensor',
@@ -26,14 +24,14 @@ export const OcaAudioLevelSensor = make_control_class(
 /**
  * Gets the value of the Law property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaAudioLevelSensor#GetLaw
+ * @method OcaAudioLevelSensor#GetLaw
  * @returns {Promise<OcaLevelMeterLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelMeterLaw`.
  */
 /**
  * Sets the value of the Law property. The return value indicates whether the property was successfully set. Only implemented for objects whose Law property is read/write.
  *
- * @method RemoteControlClasses.OcaAudioLevelSensor#SetLaw
+ * @method OcaAudioLevelSensor#SetLaw
  * @param {OcaLevelMeterLaw} law
  *
  * @returns {Promise<void>}
@@ -45,5 +43,5 @@ export const OcaAudioLevelSensor = make_control_class(
  * characteristics and, in some cases, reference level. Readonly in some
  * objects.
  *
- * @member {PropertyEvent<OcaLevelMeterLaw>} RemoteControlClasses.OcaAudioLevelSensor#OnLawChanged
+ * @member {PropertyEvent<OcaLevelMeterLaw>} OcaAudioLevelSensor#OnLawChanged
  */

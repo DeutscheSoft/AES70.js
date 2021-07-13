@@ -5,10 +5,8 @@ import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
 /**
  * String actuator.
- * @extends RemoteControlClasses.OcaBasicActuator
+ * @extends OcaBasicActuator
  * @class OcaStringActuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaStringActuator = make_control_class(
   'OcaStringActuator',
@@ -31,14 +29,14 @@ export const OcaStringActuator = make_control_class(
 /**
  * Gets the value and max length of the Value property. The return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaStringActuator#GetSetting
+ * @method OcaStringActuator#GetSetting
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Sets the value of the Value property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaStringActuator#SetSetting
+ * @method OcaStringActuator#SetSetting
  * @param {string} Value
  *
  * @returns {Promise<void>}
@@ -46,7 +44,7 @@ export const OcaStringActuator = make_control_class(
 /**
  * Gets the maximum string length that this object can handle.
  *
- * @method RemoteControlClasses.OcaStringActuator#GetMaxLen
+ * @method OcaStringActuator#GetMaxLen
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
@@ -55,5 +53,5 @@ export const OcaStringActuator = make_control_class(
  * The property ``Setting`` is described in the AES70 standard as follows.
  * Value.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaStringActuator#OnSettingChanged
+ * @member {PropertyEvent<string>} OcaStringActuator#OnSettingChanged
  */

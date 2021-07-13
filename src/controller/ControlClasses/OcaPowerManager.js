@@ -13,10 +13,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - If instantiated, object number must be 5.
  *
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaPowerManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaPowerManager = make_control_class(
   'OcaPowerManager',
@@ -45,14 +43,14 @@ export const OcaPowerManager = make_control_class(
 /**
  * Retrieve the value of property  **03p01 State** , the current power state of the device. Return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerManager#GetState
+ * @method OcaPowerManager#GetState
  * @returns {Promise<OcaPowerState>}
  *   A promise which resolves to a single value of type :class:`OcaPowerState`.
  */
 /**
  * Change the device power state. The return value indicates whether the requested change has been successfully made.
  *
- * @method RemoteControlClasses.OcaPowerManager#SetState
+ * @method OcaPowerManager#SetState
  * @param {OcaPowerState} State
  *
  * @returns {Promise<void>}
@@ -60,21 +58,21 @@ export const OcaPowerManager = make_control_class(
 /**
  * Retrieves list of object number(s) of all power supply(ies). Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerManager#GetPowerSupplies
+ * @method OcaPowerManager#GetPowerSupplies
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Retrieves list of object number(s) of active power supply(ies). Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerManager#GetActivePowerSupplies
+ * @method OcaPowerManager#GetActivePowerSupplies
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
  * Deactivate one power supply and activate another. An option switch indicates whether the previously active power supply is to be turned off. If it is not turned off, it will be placed in the  **Unavailable**  state. The return value indicates whether the requested exchange has been successfully made.
  *
- * @method RemoteControlClasses.OcaPowerManager#ExchangePowerSupply
+ * @method OcaPowerManager#ExchangePowerSupply
  * @param {number} oldPsu
  *
  * @param {number} newPsu
@@ -86,7 +84,7 @@ export const OcaPowerManager = make_control_class(
 /**
  * Gets the value of the  **AutoState**  property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerManager#GetAutoState
+ * @method OcaPowerManager#GetAutoState
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
@@ -95,21 +93,21 @@ export const OcaPowerManager = make_control_class(
  * The property ``State`` is described in the AES70 standard as follows.
  * Current power state of device. Readonly.
  *
- * @member {PropertyEvent<OcaPowerState>} RemoteControlClasses.OcaPowerManager#OnStateChanged
+ * @member {PropertyEvent<OcaPowerState>} OcaPowerManager#OnStateChanged
  */
 /**
  * This event is emitted when the property PowerSupplies changes in the remote object.
  * The property ``PowerSupplies`` is described in the AES70 standard as follows.
  * List of object numbers of available power supplies.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaPowerManager#OnPowerSuppliesChanged
+ * @member {PropertyEvent<number[]>} OcaPowerManager#OnPowerSuppliesChanged
  */
 /**
  * This event is emitted when the property ActivePowerSupplies changes in the remote object.
  * The property ``ActivePowerSupplies`` is described in the AES70 standard as follows.
  * Object number(s) of power suppl(ies) currently in use.
  *
- * @member {PropertyEvent<number[]>} RemoteControlClasses.OcaPowerManager#OnActivePowerSuppliesChanged
+ * @member {PropertyEvent<number[]>} OcaPowerManager#OnActivePowerSuppliesChanged
  */
 /**
  * This event is emitted when the property AutoState changes in the remote object.
@@ -117,5 +115,5 @@ export const OcaPowerManager = make_control_class(
  * True if current state was invoked automatically, not by a controller
  * action.
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaPowerManager#OnAutoStateChanged
+ * @member {PropertyEvent<boolean>} OcaPowerManager#OnAutoStateChanged
  */

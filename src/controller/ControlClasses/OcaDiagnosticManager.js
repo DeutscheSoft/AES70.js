@@ -11,10 +11,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - If instantiated, object number must be 13.
  *
- * @extends RemoteControlClasses.OcaManager
+ * @extends OcaManager
  * @class OcaDiagnosticManager
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaDiagnosticManager = make_control_class(
   'OcaDiagnosticManager',
@@ -30,7 +28,7 @@ export const OcaDiagnosticManager = make_control_class(
 /**
  * Retrieves a text description of the given object's lock status. Return value indicates success of the retrieval.
  *
- * @method RemoteControlClasses.OcaDiagnosticManager#GetLockStatus
+ * @method OcaDiagnosticManager#GetLockStatus
  * @param {number} ONo
  *
  * @returns {Promise<string>}

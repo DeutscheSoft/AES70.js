@@ -4,10 +4,8 @@ import { OcaInt64 } from '../../OCP1/OcaInt64.js';
 
 /**
  * Basic int64 actuator.
- * @extends RemoteControlClasses.OcaBasicActuator
+ * @extends OcaBasicActuator
  * @class OcaInt64Actuator
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaInt64Actuator = make_control_class(
   'OcaInt64Actuator',
@@ -31,13 +29,13 @@ export const OcaInt64Actuator = make_control_class(
  * - minSetting of type ``number|BigInt``
  * - maxSetting of type ``number|BigInt``
  *
- * @method RemoteControlClasses.OcaInt64Actuator#GetSetting
+ * @method OcaInt64Actuator#GetSetting
  * @returns {Promise<Arguments<number|BigInt,number|BigInt,number|BigInt>>}
  */
 /**
  * Sets the  **Setting** property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaInt64Actuator#SetSetting
+ * @method OcaInt64Actuator#SetSetting
  * @param {number|BigInt} Value
  *
  * @returns {Promise<void>}
@@ -47,5 +45,5 @@ export const OcaInt64Actuator = make_control_class(
  * The property ``Setting`` is described in the AES70 standard as follows.
  * Int64 setting.
  *
- * @member {PropertyEvent<number|BigInt>} RemoteControlClasses.OcaInt64Actuator#OnSettingChanged
+ * @member {PropertyEvent<number|BigInt>} OcaInt64Actuator#OnSettingChanged
  */

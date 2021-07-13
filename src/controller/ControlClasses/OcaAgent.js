@@ -6,10 +6,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
  * Abstract base class for defining agents.
- * @extends RemoteControlClasses.OcaRoot
+ * @extends OcaRoot
  * @class OcaAgent
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaAgent = make_control_class(
   'OcaAgent',
@@ -33,14 +31,14 @@ export const OcaAgent = make_control_class(
 /**
  * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaAgent#GetLabel
+ * @method OcaAgent#GetLabel
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Sets the value of the Label property. The return value indicates whether the property was successfully set.
  *
- * @method RemoteControlClasses.OcaAgent#SetLabel
+ * @method OcaAgent#SetLabel
  * @param {string} Label
  *
  * @returns {Promise<void>}
@@ -48,7 +46,7 @@ export const OcaAgent = make_control_class(
 /**
  * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaAgent#GetOwner
+ * @method OcaAgent#GetOwner
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
@@ -59,7 +57,7 @@ export const OcaAgent = make_control_class(
  * - NamePath of type ``string[]``
  * - ONoPath of type ``number[]``
  *
- * @method RemoteControlClasses.OcaAgent#GetPath
+ * @method OcaAgent#GetPath
  * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
@@ -67,12 +65,12 @@ export const OcaAgent = make_control_class(
  * The property ``Label`` is described in the AES70 standard as follows.
  * User-specified label.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaAgent#OnLabelChanged
+ * @member {PropertyEvent<string>} OcaAgent#OnLabelChanged
  */
 /**
  * This event is emitted when the property Owner changes in the remote object.
  * The property ``Owner`` is described in the AES70 standard as follows.
  * Object number of block that contains this agent.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaAgent#OnOwnerChanged
+ * @member {PropertyEvent<number>} OcaAgent#OnOwnerChanged
  */

@@ -9,10 +9,8 @@ import { OcaString } from '../../OCP1/OcaString.js';
 
 /**
  * A power supply.
- * @extends RemoteControlClasses.OcaAgent
+ * @extends OcaAgent
  * @class OcaPowerSupply
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaPowerSupply = make_control_class(
   'OcaPowerSupply',
@@ -45,28 +43,28 @@ export const OcaPowerSupply = make_control_class(
 /**
  * Gets the type of the power supply. Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetType
+ * @method OcaPowerSupply#GetType
  * @returns {Promise<OcaPowerSupplyType>}
  *   A promise which resolves to a single value of type :class:`OcaPowerSupplyType`.
  */
 /**
  * Gets the power supply's model information text. Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetModelInfo
+ * @method OcaPowerSupply#GetModelInfo
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
  * Gets the state of the power supply. Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetState
+ * @method OcaPowerSupply#GetState
  * @returns {Promise<OcaPowerSupplyState>}
  *   A promise which resolves to a single value of type :class:`OcaPowerSupplyState`.
  */
 /**
  * Changes the power supply's state. Return value indicates whether the state was successfully changed.
  *
- * @method RemoteControlClasses.OcaPowerSupply#SetState
+ * @method OcaPowerSupply#SetState
  * @param {OcaPowerSupplyState} state
  *
  * @returns {Promise<void>}
@@ -74,28 +72,28 @@ export const OcaPowerSupply = make_control_class(
 /**
  * Gets the value of property  **Charging** . Return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetCharging
+ * @method OcaPowerSupply#GetCharging
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
  * Gets the available load fraction. Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetLoadFractionAvailable
+ * @method OcaPowerSupply#GetLoadFractionAvailable
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the available storage fraction. Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetStorageFractionAvailable
+ * @method OcaPowerSupply#GetStorageFractionAvailable
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the power supply physical location. Return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaPowerSupply#GetLocation
+ * @method OcaPowerSupply#GetLocation
  * @returns {Promise<OcaPowerSupplyLocation>}
  *   A promise which resolves to a single value of type :class:`OcaPowerSupplyLocation`.
  */
@@ -104,7 +102,7 @@ export const OcaPowerSupply = make_control_class(
  * The property ``Type`` is described in the AES70 standard as follows.
  * Type of power supply.
  *
- * @member {PropertyEvent<OcaPowerSupplyType>} RemoteControlClasses.OcaPowerSupply#OnTypeChanged
+ * @member {PropertyEvent<OcaPowerSupplyType>} OcaPowerSupply#OnTypeChanged
  */
 /**
  * This event is emitted when the property ModelInfo changes in the remote object.
@@ -112,19 +110,19 @@ export const OcaPowerSupply = make_control_class(
  * Model information for power supply. Text; content is
  * implementation-dependent.
  *
- * @member {PropertyEvent<string>} RemoteControlClasses.OcaPowerSupply#OnModelInfoChanged
+ * @member {PropertyEvent<string>} OcaPowerSupply#OnModelInfoChanged
  */
 /**
  * This event is emitted when the property State changes in the remote object.
  * The property ``State`` is described in the AES70 standard as follows.
  * State of power supply: off, unavailable, available, active.
  *
- * @member {PropertyEvent<OcaPowerSupplyState>} RemoteControlClasses.OcaPowerSupply#OnStateChanged
+ * @member {PropertyEvent<OcaPowerSupplyState>} OcaPowerSupply#OnStateChanged
  */
 /**
  * This event is emitted when the property Charging changes in the remote object.
  * The property ``Charging`` is described in the AES70 standard as follows.
  * True iff charging. For rechargable supplies (obviously).
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaPowerSupply#OnChargingChanged
+ * @member {PropertyEvent<boolean>} OcaPowerSupply#OnChargingChanged
  */

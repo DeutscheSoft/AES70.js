@@ -16,10 +16,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
  *
  *  - Upon receiving the  **Owner**  property change, the  **OcaStreamConnector** object must register itself with the given stream network object via some internal means.
  *   This class may be subclassed to support various network types.
- * @extends RemoteControlClasses.OcaAgent
+ * @extends OcaAgent
  * @class OcaStreamConnector
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaStreamConnector = make_control_class(
   'OcaStreamConnector',
@@ -54,7 +52,7 @@ export const OcaStreamConnector = make_control_class(
 /**
  * Connects a stream to this connector. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#ConnectStream
+ * @method OcaStreamConnector#ConnectStream
  * @param {OcaStream} Stream
  *
  * @returns {Promise<number>}
@@ -63,7 +61,7 @@ export const OcaStreamConnector = make_control_class(
 /**
  * Disconnects a stream from this connector. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#DisconnectStream
+ * @method OcaStreamConnector#DisconnectStream
  * @param {number} StreamID
  *
  * @returns {Promise<void>}
@@ -71,49 +69,49 @@ export const OcaStreamConnector = make_control_class(
 /**
  * Gets the value of the IDAdvertised property. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#GetIDAdvertised
+ * @method OcaStreamConnector#GetIDAdvertised
  * @returns {Promise<Uint8Array>}
  *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
  * Gets the object number of the  **OcaStreamNetwork** object to which this connector belongs. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#GetOwnerNetwork
+ * @method OcaStreamConnector#GetOwnerNetwork
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Gets the list of object numbers of  **OcaNetworkSignalChannel** objects connected to this connector. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#GetPins
+ * @method OcaStreamConnector#GetPins
  * @returns {Promise<Map<number, number>>}
  *   A promise which resolves to a single value of type ``Map<number, number>``.
  */
 /**
  * Gets the value of the SourceOrSink property. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#GetSourceOrSink
+ * @method OcaStreamConnector#GetSourceOrSink
  * @returns {Promise<OcaNetworkMediaSourceOrSink>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkMediaSourceOrSink`.
  */
 /**
  * Gets the value of the Status property. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#GetStatus
+ * @method OcaStreamConnector#GetStatus
  * @returns {Promise<OcaStreamConnectorStatus>}
  *   A promise which resolves to a single value of type :class:`OcaStreamConnectorStatus`.
  */
 /**
  * Gets the map of OcaStream items connected to this connector. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#GetStreams
+ * @method OcaStreamConnector#GetStreams
  * @returns {Promise<Map<number, OcaStream>>}
  *   A promise which resolves to a single value of type ``Map<number, OcaStream>``.
  */
 /**
  * Sets the value of the IDAdvertised property. Return status indicates success of operation.
  *
- * @method RemoteControlClasses.OcaStreamConnector#SetIDAdvertised
+ * @method OcaStreamConnector#SetIDAdvertised
  * @param {Uint8Array} IDAdvertised
  *
  * @returns {Promise<void>}
@@ -121,7 +119,7 @@ export const OcaStreamConnector = make_control_class(
 /**
  * Sets the object number of the  **OcaStreamNetwork** object to which this connector belongs. Return status indicates success of operation. Only implemented for reconfigurable devices.
  *
- * @method RemoteControlClasses.OcaStreamConnector#SetOwnerNetwork
+ * @method OcaStreamConnector#SetOwnerNetwork
  * @param {number} Network
  *
  * @returns {Promise<void>}
@@ -129,7 +127,7 @@ export const OcaStreamConnector = make_control_class(
 /**
  * Sets the value of the SourceOrSink property. Return status indicates success of operation. Only implemented for reconfigurable devices. Note that this method can only be called when the SignalChannels property is empty, i.e. does not contain any actual channels.
  *
- * @method RemoteControlClasses.OcaStreamConnector#SetSourceOrSink
+ * @method OcaStreamConnector#SetSourceOrSink
  * @param {OcaNetworkMediaSourceOrSink} SourceOrSink
  *
  * @returns {Promise<void>}
@@ -141,7 +139,7 @@ export const OcaStreamConnector = make_control_class(
  * advertised on the network to be found by other devices' discovery
  * processes.
  *
- * @member {PropertyEvent<Uint8Array>} RemoteControlClasses.OcaStreamConnector#OnIDAdvertisedChanged
+ * @member {PropertyEvent<Uint8Array>} OcaStreamConnector#OnIDAdvertisedChanged
  */
 /**
  * This event is emitted when the property OwnerNetwork changes in the remote object.
@@ -154,7 +152,7 @@ export const OcaStreamConnector = make_control_class(
  * <b>Owner</b> property, the terminus object will by internal means
  * register itself with the identified stream network.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaStreamConnector#OnOwnerNetworkChanged
+ * @member {PropertyEvent<number>} OcaStreamConnector#OnOwnerNetworkChanged
  */
 /**
  * This event is emitted when the property Pins changes in the remote object.
@@ -166,7 +164,7 @@ export const OcaStreamConnector = make_control_class(
  * connector is created). If a certain pin in the connector is currently
  * not attached the OcaONo of that index is 0.
  *
- * @member {PropertyEvent<Map<number, number>>} RemoteControlClasses.OcaStreamConnector#OnPinsChanged
+ * @member {PropertyEvent<Map<number, number>>} OcaStreamConnector#OnPinsChanged
  */
 /**
  * This event is emitted when the property SourceOrSink changes in the remote object.
@@ -174,14 +172,14 @@ export const OcaStreamConnector = make_control_class(
  * Specifies whether this connector is for output (source) or input
  * (sink) signal channels.
  *
- * @member {PropertyEvent<OcaNetworkMediaSourceOrSink>} RemoteControlClasses.OcaStreamConnector#OnSourceOrSinkChanged
+ * @member {PropertyEvent<OcaNetworkMediaSourceOrSink>} OcaStreamConnector#OnSourceOrSinkChanged
  */
 /**
  * This event is emitted when the property Status changes in the remote object.
  * The property ``Status`` is described in the AES70 standard as follows.
  * Status of this terminus.
  *
- * @member {PropertyEvent<OcaStreamConnectorStatus>} RemoteControlClasses.OcaStreamConnector#OnStatusChanged
+ * @member {PropertyEvent<OcaStreamConnectorStatus>} OcaStreamConnector#OnStatusChanged
  */
 /**
  * This event is emitted when the property Streams changes in the remote object.
@@ -189,5 +187,5 @@ export const OcaStreamConnector = make_control_class(
  * The list of <b>OcaStream </b>data objects contained in (i.e. connected
  * to) this connector.
  *
- * @member {PropertyEvent<Map<number, OcaStream>>} RemoteControlClasses.OcaStreamConnector#OnStreamsChanged
+ * @member {PropertyEvent<Map<number, OcaStream>>} OcaStreamConnector#OnStreamsChanged
  */

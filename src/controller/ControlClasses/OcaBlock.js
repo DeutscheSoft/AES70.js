@@ -18,10 +18,8 @@ import { String16 } from '../../OCP1/String16.js';
 
 /**
  * A block is an object with three aspects: - It can contain other blocks. - It can contain workers. - It can contain agents. - It can contain data networks. - It can contain application networks. - It has a signal flow topology. We refer to an object inside a block as a  **member**  of that block. We refer to the block which contains an object as the object's  **container.**  **1**  Normally, a block contains a set of members that together function as a processing unit -- for example, a crossover channel or mixer strip.
- * @extends RemoteControlClasses.OcaWorker
+ * @extends OcaWorker
  * @class OcaBlock
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaBlock = make_control_class(
   'OcaBlock',
@@ -120,14 +118,14 @@ export const OcaBlock = make_control_class(
 /**
  * Gets the block type. For statically-defined blocks, the block type is a Uint32 with a value corresponding to the unique configuration of this block. For dynamically-defined blocks, the block type is the object number of the block's factory. For the root block, the value of this property is 1.
  *
- * @method RemoteControlClasses.OcaBlock#GetType
+ * @method OcaBlock#GetType
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Constructs an object according to the given construction specification and adds it to the block. The return value indicates whether the member was successfully created and added.
  *
- * @method RemoteControlClasses.OcaBlock#ConstructMember
+ * @method OcaBlock#ConstructMember
  * @param {OcaClassID} ClassID
  *
  * @param {variant} ConstructionParameters
@@ -138,7 +136,7 @@ export const OcaBlock = make_control_class(
 /**
  * Invokes a factory to construct an instance of the given class, then adds it to the block. The return value indicates whether the member was successfully created and added.
  *
- * @method RemoteControlClasses.OcaBlock#ConstructMemberUsingFactory
+ * @method OcaBlock#ConstructMemberUsingFactory
  * @param {number} FactoryONo
  *
  * @returns {Promise<number>}
@@ -147,7 +145,7 @@ export const OcaBlock = make_control_class(
 /**
  * Removes a member from the block and destroys the object. . Deletes all signal paths attached to its ports. The return value indicates whether the member was successfully removed and destroyed.
  *
- * @method RemoteControlClasses.OcaBlock#DeleteMember
+ * @method OcaBlock#DeleteMember
  * @param {number} ObjectNumber
  *
  * @returns {Promise<void>}
@@ -155,21 +153,21 @@ export const OcaBlock = make_control_class(
 /**
  * Gets the list of block members. Does not recurse inner blocks. Each inner block is included in the returned list as a single object -- its contents are not enumerated. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaBlock#GetMembers
+ * @method OcaBlock#GetMembers
  * @returns {Promise<OcaObjectIdentification[]>}
  *   A promise which resolves to a single value of type ``OcaObjectIdentification[]``.
  */
 /**
  * Gets the list of block members. Recurses inner blocks. Each inner block is included in the returned list as a single object, amd its contents are enumerated. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaBlock#GetMembersRecursive
+ * @method OcaBlock#GetMembersRecursive
  * @returns {Promise<OcaBlockMember[]>}
  *   A promise which resolves to a single value of type ``OcaBlockMember[]``.
  */
 /**
  * Adds a signal path to the block. The return value indicates whether the signal path was successfully added.
  *
- * @method RemoteControlClasses.OcaBlock#AddSignalPath
+ * @method OcaBlock#AddSignalPath
  * @param {OcaSignalPath} Path
  *
  * @returns {Promise<number>}
@@ -178,7 +176,7 @@ export const OcaBlock = make_control_class(
 /**
  * Deletes a signal path from the block. The return value indicates whether the signal path was successfully added.
  *
- * @method RemoteControlClasses.OcaBlock#DeleteSignalPath
+ * @method OcaBlock#DeleteSignalPath
  * @param {number} Index
  *
  * @returns {Promise<void>}
@@ -186,42 +184,42 @@ export const OcaBlock = make_control_class(
 /**
  * Gets the map of signal paths in the block. Does not recurse inner blocks. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaBlock#GetSignalPaths
+ * @method OcaBlock#GetSignalPaths
  * @returns {Promise<Map<number, OcaSignalPath>>}
  *   A promise which resolves to a single value of type ``Map<number, OcaSignalPath>``.
  */
 /**
  * Gets the mapof signal paths in the block. Recurses inner blocks. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaBlock#GetSignalPathsRecursive
+ * @method OcaBlock#GetSignalPathsRecursive
  * @returns {Promise<Map<number, OcaSignalPath>>}
  *   A promise which resolves to a single value of type ``Map<number, OcaSignalPath>``.
  */
 /**
  * Gets the identifier of the paramset most recently applied to this block.
  *
- * @method RemoteControlClasses.OcaBlock#GetMostRecentParamSetIdentifier
+ * @method OcaBlock#GetMostRecentParamSetIdentifier
  * @returns {Promise<OcaLibVolIdentifier>}
  *   A promise which resolves to a single value of type :class:`OcaLibVolIdentifier`.
  */
 /**
  * Applies the referenced paramset to this block, and sets the MostRecentParamSet property. The return value indicates whether the paramset was successfully applied.
  *
- * @method RemoteControlClasses.OcaBlock#ApplyParamSet
+ * @method OcaBlock#ApplyParamSet
  * @returns {Promise<OcaLibVolIdentifier>}
  *   A promise which resolves to a single value of type :class:`OcaLibVolIdentifier`.
  */
 /**
  * Returns a paramset library volume data block which represents the current state of the block -- i.e. a "snapshot".
  *
- * @method RemoteControlClasses.OcaBlock#GetCurrentParamSetData
+ * @method OcaBlock#GetCurrentParamSetData
  * @returns {Promise<OcaLibVolData_ParamSet>}
  *   A promise which resolves to a single value of type :class:`OcaLibVolData_ParamSet`.
  */
 /**
  * Stores a paramset library volume data block which represents the current state of the block ("snapshot") in the given library.  **Replaces** the library volume at the specified LibVolIdentifier.
  *
- * @method RemoteControlClasses.OcaBlock#StoreCurrentParamSetData
+ * @method OcaBlock#StoreCurrentParamSetData
  * @param {OcaLibVolIdentifier} LibVolIdentifier
  *
  * @returns {Promise<void>}
@@ -229,21 +227,21 @@ export const OcaBlock = make_control_class(
 /**
  * Gets the global blocktype. The return value indicates whether the type was successfully retrieved. If this block has no global blocktype, the  **Authority**  field of the returned  **GlobalType**  parameter will be zero.  **Added in version 2 of this class.**
  *
- * @method RemoteControlClasses.OcaBlock#GetGlobalType
+ * @method OcaBlock#GetGlobalType
  * @returns {Promise<OcaGlobalTypeIdentifier>}
  *   A promise which resolves to a single value of type :class:`OcaGlobalTypeIdentifier`.
  */
 /**
  * Gets the block's ONo map. The return value indicates whether the map was successfully retrieved.  **Added in version 2 of this class.**
  *
- * @method RemoteControlClasses.OcaBlock#GetONoMap
+ * @method OcaBlock#GetONoMap
  * @returns {Promise<Map<number, number>>}
  *   A promise which resolves to a single value of type ``Map<number, number>``.
  */
 /**
  * Returns object identifications of all objects in the block that match the given Role search string and Class ID. Return value indicates whether the method succeeded.  **Added in version 2 of this class.**
  *
- * @method RemoteControlClasses.OcaBlock#FindObjectsByRole
+ * @method OcaBlock#FindObjectsByRole
  * @param {string} SearchName
  *
  * @param {OcaStringComparisonType} NameComparisonType
@@ -258,7 +256,7 @@ export const OcaBlock = make_control_class(
 /**
  * Returns block member descriptors of all objects in the block and all contained blocks that match the given Role search string and Class ID.  **Added in version 2 of this class.**
  *
- * @method RemoteControlClasses.OcaBlock#FindObjectsByRoleRecursive
+ * @method OcaBlock#FindObjectsByRoleRecursive
  * @param {string} SearchName
  *
  * @param {OcaStringComparisonType} NameComparisonType
@@ -273,7 +271,7 @@ export const OcaBlock = make_control_class(
 /**
  * Returns object identifications of all objects with the given name path.  **Added in version 2 of this class.**
  *
- * @method RemoteControlClasses.OcaBlock#FindObjectsByPath
+ * @method OcaBlock#FindObjectsByPath
  * @param {string[]} SearchPath
  *
  * @param {OcaObjectSearchResultFlags} ResultFlags
@@ -284,7 +282,7 @@ export const OcaBlock = make_control_class(
 /**
  * Returns block member descriptors of all objects in the block and all contained blocks that match the given Label search string and Class ID.  **Added in version 2 of this class.**
  *
- * @method RemoteControlClasses.OcaBlock#FindObjectsByLabelRecursive
+ * @method OcaBlock#FindObjectsByLabelRecursive
  * @param {string} SearchName
  *
  * @param {OcaStringComparisonType} NameComparisonType
@@ -301,14 +299,14 @@ export const OcaBlock = make_control_class(
  * The property ``Members`` is described in the AES70 standard as follows.
  * List of members in the block.
  *
- * @member {PropertyEvent<OcaObjectIdentification[]>} RemoteControlClasses.OcaBlock#OnMembersChanged
+ * @member {PropertyEvent<OcaObjectIdentification[]>} OcaBlock#OnMembersChanged
  */
 /**
  * This event is emitted when the property SignalPaths changes in the remote object.
  * The property ``SignalPaths`` is described in the AES70 standard as follows.
  * List of signal paths in the block.
  *
- * @member {PropertyEvent<Map<number, OcaSignalPath>>} RemoteControlClasses.OcaBlock#OnSignalPathsChanged
+ * @member {PropertyEvent<Map<number, OcaSignalPath>>} OcaBlock#OnSignalPathsChanged
  */
 /**
  * This event is emitted when the property MostRecentParamSetIdentifier changes in the remote object.
@@ -316,5 +314,5 @@ export const OcaBlock = make_control_class(
  * Library volume identifier of the paramset most recently applied to
  * this block.
  *
- * @member {PropertyEvent<OcaLibVolIdentifier>} RemoteControlClasses.OcaBlock#OnMostRecentParamSetIdentifierChanged
+ * @member {PropertyEvent<OcaLibVolIdentifier>} OcaBlock#OnMostRecentParamSetIdentifierChanged
  */

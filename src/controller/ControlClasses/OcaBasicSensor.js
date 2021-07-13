@@ -3,10 +3,8 @@ import { OcaSensor } from './OcaSensor.js';
 
 /**
  * Abstract base class for weakly typed sensors.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaBasicSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaBasicSensor = make_control_class(
   'OcaBasicSensor',

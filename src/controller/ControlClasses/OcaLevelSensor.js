@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Signal level sensor.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaLevelSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaLevelSensor = make_control_class(
   'OcaLevelSensor',
@@ -28,7 +26,7 @@ export const OcaLevelSensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaLevelSensor#GetReading
+ * @method OcaLevelSensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaLevelSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * dB reading.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaLevelSensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaLevelSensor#OnReadingChanged
  */

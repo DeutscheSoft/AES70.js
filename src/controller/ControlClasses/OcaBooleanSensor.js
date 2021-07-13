@@ -4,10 +4,8 @@ import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 
 /**
  * Basic boolean sensor.
- * @extends RemoteControlClasses.OcaBasicSensor
+ * @extends OcaBasicSensor
  * @class OcaBooleanSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaBooleanSensor = make_control_class(
   'OcaBooleanSensor',
@@ -23,7 +21,7 @@ export const OcaBooleanSensor = make_control_class(
 /**
  * Gets the  **Reading** property. The return value indicates whether the data was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaBooleanSensor#GetReading
+ * @method OcaBooleanSensor#GetReading
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
@@ -32,5 +30,5 @@ export const OcaBooleanSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Boolean reading.
  *
- * @member {PropertyEvent<boolean>} RemoteControlClasses.OcaBooleanSensor#OnReadingChanged
+ * @member {PropertyEvent<boolean>} OcaBooleanSensor#OnReadingChanged
  */

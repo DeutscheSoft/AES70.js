@@ -4,10 +4,8 @@ import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * Time interval sensor.
- * @extends RemoteControlClasses.OcaSensor
+ * @extends OcaSensor
  * @class OcaTimeIntervalSensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaTimeIntervalSensor = make_control_class(
   'OcaTimeIntervalSensor',
@@ -28,7 +26,7 @@ export const OcaTimeIntervalSensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaTimeIntervalSensor#GetReading
+ * @method OcaTimeIntervalSensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaTimeIntervalSensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Time interval reading.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaTimeIntervalSensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaTimeIntervalSensor#OnReadingChanged
  */

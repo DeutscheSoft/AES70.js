@@ -4,10 +4,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
  * Basic uint32 sensor.
- * @extends RemoteControlClasses.OcaBasicSensor
+ * @extends OcaBasicSensor
  * @class OcaUint32Sensor
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaUint32Sensor = make_control_class(
   'OcaUint32Sensor',
@@ -28,7 +26,7 @@ export const OcaUint32Sensor = make_control_class(
  * - minReading of type ``number``
  * - maxReading of type ``number``
  *
- * @method RemoteControlClasses.OcaUint32Sensor#GetReading
+ * @method OcaUint32Sensor#GetReading
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
@@ -36,5 +34,5 @@ export const OcaUint32Sensor = make_control_class(
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Uint32 reading.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaUint32Sensor#OnReadingChanged
+ * @member {PropertyEvent<number>} OcaUint32Sensor#OnReadingChanged
  */

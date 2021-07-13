@@ -9,10 +9,8 @@ import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
  * A media clock, internal or external. OCA Connection Management 3 (OCA-CM3) version.
- * @extends RemoteControlClasses.OcaAgent
+ * @extends OcaAgent
  * @class OcaMediaClock3
- * @memberof RemoteControlClasses
- * @category RemoteControlClasses
  */
 export const OcaMediaClock3 = make_control_class(
   'OcaMediaClock3',
@@ -56,14 +54,14 @@ export const OcaMediaClock3 = make_control_class(
 /**
  * Gets the value of the  **Availability** property. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaMediaClock3#GetAvailability
+ * @method OcaMediaClock3#GetAvailability
  * @returns {Promise<OcaMediaClockAvailability>}
  *   A promise which resolves to a single value of type :class:`OcaMediaClockAvailability`.
  */
 /**
  * Sets the value of the  **Availability** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
- * @method RemoteControlClasses.OcaMediaClock3#SetAvailability
+ * @method OcaMediaClock3#SetAvailability
  * @param {OcaMediaClockAvailability} Availability
  *
  * @returns {Promise<void>}
@@ -75,13 +73,13 @@ export const OcaMediaClock3 = make_control_class(
  * - Rate of type :class:`OcaMediaClockRate`
  * - TimeSourceONo of type ``number``
  *
- * @method RemoteControlClasses.OcaMediaClock3#GetCurrentRate
+ * @method OcaMediaClock3#GetCurrentRate
  * @returns {Promise<Arguments<OcaMediaClockRate,number>>}
  */
 /**
  * Sets the clock rate and the ONo of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
- * @method RemoteControlClasses.OcaMediaClock3#SetCurrentRate
+ * @method OcaMediaClock3#SetCurrentRate
  * @param {OcaMediaClockRate} Rate
  *
  * @param {number} TimeSourceONo
@@ -91,14 +89,14 @@ export const OcaMediaClock3 = make_control_class(
 /**
  * Gets the offset of this media clock's time from that of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaMediaClock3#GetOffset
+ * @method OcaMediaClock3#GetOffset
  * @returns {Promise<OcaTimePTP>}
  *   A promise which resolves to a single value of type :class:`OcaTimePTP`.
  */
 /**
  * Sets the offset of this media clock's time from that of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
- * @method RemoteControlClasses.OcaMediaClock3#SetOffset
+ * @method OcaMediaClock3#SetOffset
  * @param {OcaTimePTP} Offset
  *
  * @returns {Promise<void>}
@@ -106,7 +104,7 @@ export const OcaMediaClock3 = make_control_class(
 /**
  * Gets the list of supported media clock rates for the given time source. The return value indicates whether the list was successfully retrieved.
  *
- * @method RemoteControlClasses.OcaMediaClock3#GetSupportedRates
+ * @method OcaMediaClock3#GetSupportedRates
  * @returns {Promise<Map<number, OcaMediaClockRate[]>>}
  *   A promise which resolves to a single value of type ``Map<number, OcaMediaClockRate[]>``.
  */
@@ -115,14 +113,14 @@ export const OcaMediaClock3 = make_control_class(
  * The property ``Availability`` is described in the AES70 standard as follows.
  * Availability of media clock.
  *
- * @member {PropertyEvent<OcaMediaClockAvailability>} RemoteControlClasses.OcaMediaClock3#OnAvailabilityChanged
+ * @member {PropertyEvent<OcaMediaClockAvailability>} OcaMediaClock3#OnAvailabilityChanged
  */
 /**
  * This event is emitted when the property TimeSourceONo changes in the remote object.
  * The property ``TimeSourceONo`` is described in the AES70 standard as follows.
  * ONo of time source that drives this media clock.
  *
- * @member {PropertyEvent<number>} RemoteControlClasses.OcaMediaClock3#OnTimeSourceONoChanged
+ * @member {PropertyEvent<number>} OcaMediaClock3#OnTimeSourceONoChanged
  */
 /**
  * This event is emitted when the property Offset changes in the remote object.
@@ -131,14 +129,14 @@ export const OcaMediaClock3 = make_control_class(
  * media transport networks, this value is NOT the RTP time offset. RTP
  * time offset is an implementation detail that is out of AES70's scope.
  *
- * @member {PropertyEvent<OcaTimePTP>} RemoteControlClasses.OcaMediaClock3#OnOffsetChanged
+ * @member {PropertyEvent<OcaTimePTP>} OcaMediaClock3#OnOffsetChanged
  */
 /**
  * This event is emitted when the property CurrentRate changes in the remote object.
  * The property ``CurrentRate`` is described in the AES70 standard as follows.
  * Current clock rate
  *
- * @member {PropertyEvent<OcaMediaClockRate>} RemoteControlClasses.OcaMediaClock3#OnCurrentRateChanged
+ * @member {PropertyEvent<OcaMediaClockRate>} OcaMediaClock3#OnCurrentRateChanged
  */
 /**
  * This event is emitted when the property SupportedRates changes in the remote object.
@@ -148,5 +146,5 @@ export const OcaMediaClock3 = make_control_class(
  * for the given time source. Private parameter, does not generate
  * property-change events.
  *
- * @member {PropertyEvent<Map<number, OcaMediaClockRate[]>>} RemoteControlClasses.OcaMediaClock3#OnSupportedRatesChanged
+ * @member {PropertyEvent<Map<number, OcaMediaClockRate[]>>} OcaMediaClock3#OnSupportedRatesChanged
  */
