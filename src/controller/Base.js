@@ -547,7 +547,7 @@ export class Event extends BaseEvent {
 
       for (let pos = 0, i = 0; i < argumentTypes.length; i++) {
         let tmp;
-        [ pos, tmp ] = argumentTypes[i].decodeFrom(data, pos);
+        [pos, tmp] = argumentTypes[i].decodeFrom(data, pos);
         args[i] = tmp;
       }
       const object = this.object;
@@ -588,8 +588,11 @@ export class PropertyEvent extends BaseEvent {
   constructor(object, id, propertyType) {
     super(object, id, propertyType);
     this.callback = (id, dataView, changeType) => {
-      if (id.DefLevel !== this.id.DefLevel ||
-          id.PropertyIndex !== this.id.PropertyIndex) return;
+      if (
+        id.DefLevel !== this.id.DefLevel ||
+        id.PropertyIndex !== this.id.PropertyIndex
+      )
+        return;
 
       const value = propertyType[0].decodeFrom(dataView, 0)[1];
 

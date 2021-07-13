@@ -1,7 +1,5 @@
-export function encodeMessage(a)
-{
-  if (!Array.isArray(a))
-    a = [ a ];
+export function encodeMessage(a) {
+  if (!Array.isArray(a)) a = [a];
 
   // message header
   let len = 10;
@@ -9,7 +7,8 @@ export function encodeMessage(a)
 
   for (let i = 0; i < a.length; i++) {
     const tmp = a[i];
-    if (tmp.messageType != type) throw new Error('Cannot combine different types in one message.');
+    if (tmp.messageType != type)
+      throw new Error('Cannot combine different types in one message.');
     len += tmp.encoded_length();
   }
 
@@ -25,7 +24,7 @@ export function encodeMessage(a)
   dst.setUint32(pos, len - 1);
   pos += 4;
   dst.setUint8(pos, type);
-  pos ++;
+  pos++;
   dst.setUint16(pos, a.length);
   pos += 2;
 
@@ -37,4 +36,3 @@ export function encodeMessage(a)
 
   return buf;
 }
-

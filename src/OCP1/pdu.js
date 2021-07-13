@@ -1,7 +1,5 @@
-export class PDU
-{
-  get messageType()
-  {
+export class PDU {
+  get messageType() {
     return this.constructor.messageType;
   }
 }

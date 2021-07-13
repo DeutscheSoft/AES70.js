@@ -26,34 +26,34 @@ function eventToKey(event) {
   const ono = event.EmitterONo;
   const id = event.EventID;
 
-  return [ ono, id.DefLevel, id.EventIndex ].join(',');
+  return [ono, id.DefLevel, id.EventIndex].join(',');
 }
 
-function tree_to_rolemap(tree, s)
-{
+function tree_to_rolemap(tree, s) {
   const roles = new Map();
-  if (!s) s = "/";
+  if (!s) s = '/';
 
   const tasks = [];
 
   const fetch_role = (o) => {
-    if (Array.isArray(o))
-    {
+    if (Array.isArray(o)) {
       o.forEach(fetch_role);
-    }
-    else
-    {
-      tasks.push(o.GetRole().then((role) => { roles.set(o, role); }));
+    } else {
+      tasks.push(
+        o.GetRole().then((role) => {
+          roles.set(o, role);
+        })
+      );
     }
   };
 
   tree.forEach(fetch_role);
 
-  return Promise.all(tasks).then(function() {
+  return Promise.all(tasks).then(function () {
     const rolemap = new Map();
 
     const build_paths = (a, prefix) => {
-      const p = prefix != null ? prefix + s : "";
+      const p = prefix != null ? prefix + s : '';
       const local_roles = new Map();
 
       a.forEach(function (o, i) {
@@ -61,48 +61,38 @@ function tree_to_rolemap(tree, s)
 
         const role = roles.get(o);
 
-        if (local_roles.has(role))
-        {
+        if (local_roles.has(role)) {
           const tmp = local_roles.get(role);
 
-          if (Array.isArray(tmp))
-            tmp.push(o);
-          else
-            local_roles.set(role, [ tmp, o ]);
-        }
-        else
-        {
+          if (Array.isArray(tmp)) tmp.push(o);
+          else local_roles.set(role, [tmp, o]);
+        } else {
           local_roles.set(role, o);
         }
       });
 
-      local_roles.forEach(function(o, role) {
-        if (Array.isArray(o))
-        {
+      local_roles.forEach(function (o, role) {
+        if (Array.isArray(o)) {
           let n = 1;
-          for (let i = 0; i < o.length; i++)
-          {
+          for (let i = 0; i < o.length; i++) {
             const nrole = role + n;
-            while (local_roles.has(nrole)) { n++; }
+            while (local_roles.has(nrole)) {
+              n++;
+            }
             local_roles.set(nrole, o[i]);
             local_roles.set(o[i], nrole);
           }
 
           local_roles.delete(role);
-        }
-        else
-        {
+        } else {
           local_roles.set(o, role);
         }
       });
 
       a.forEach((o, i) => {
-        if (Array.isArray(o))
-        {
-          build_paths(o, p + local_roles.get(a[i-1]));
-        }
-        else
-        {
+        if (Array.isArray(o)) {
+          build_paths(o, p + local_roles.get(a[i - 1]));
+        } else {
           const path = p + local_roles.get(o);
           rolemap.set(path, o);
         }
@@ -249,13 +239,11 @@ export class RemoteDevice extends Events {
     this.connection.close();
   }
 
-  send_command(cmd, returnType)
-  {
+  send_command(cmd, returnType) {
     return this.connection.send_command(cmd, returnType);
   }
 
-  add_subscription(event, callback)
-  {
+  add_subscription(event, callback) {
     const key = eventToKey(event);
 
     const S = this.subscriptions.get(key);
@@ -270,11 +258,11 @@ export class RemoteDevice extends Events {
     const cb = (o) => {
       const S = this.subscriptions.get(key);
       if (!S) {
-        warn("Subscription lost.\n");
+        warn('Subscription lost.\n');
         return;
       }
       const a = S.callbacks;
-      a.forEach(function(cb) {
+      a.forEach(function (cb) {
         try {
           cb(o);
         } catch (e) {
@@ -286,24 +274,26 @@ export class RemoteDevice extends Events {
     const method = this.connection.get_new_subscriber(cb);
 
     this.subscriptions.set(key, {
-      callbacks: new Set([ callback ]),
+      callbacks: new Set([callback]),
       method: method,
       callback: cb,
     });
 
-    return this.SubscriptionManager.AddSubscription(event, method,
-                                                    new Uint8Array(0),
-                                                    OcaNotificationDeliveryMode.Reliable,
-                                                    new Uint8Array(0));
+    return this.SubscriptionManager.AddSubscription(
+      event,
+      method,
+      new Uint8Array(0),
+      OcaNotificationDeliveryMode.Reliable,
+      new Uint8Array(0)
+    );
   }
 
-  remove_subscription(event, callback)
-  {
+  remove_subscription(event, callback) {
     const key = eventToKey(event);
 
     const S = this.subscriptions.get(key);
 
-    if (!S) return Promise.reject("Callback not registered.");
+    if (!S) return Promise.reject('Callback not registered.');
 
     const a = S.callbacks;
 
@@ -318,13 +308,12 @@ export class RemoteDevice extends Events {
     return Promise.resolve(true);
   }
 
-  find_best_class(id)
-  {
-    if (typeof(id) === "object" && id.ClassID) id = id.ClassID;
+  find_best_class(id) {
+    if (typeof id === 'object' && id.ClassID) id = id.ClassID;
     while (id.length) {
       const result = this.find_class_by_id(id);
       if (result) return result;
-      id = id.substr(0, id.length-1);
+      id = id.substr(0, id.length - 1);
     }
 
     return null;
@@ -340,30 +329,24 @@ export class RemoteDevice extends Events {
    *    object contains the control classes with the classid as key, or
    *    an array of control classes.
    */
-  add_control_classes(module)
-  {
-    if (Array.isArray(module))
-    {
+  add_control_classes(module) {
+    if (Array.isArray(module)) {
       const m = {};
 
-      for (let i = 0; i < module.length; i++)
-      {
+      for (let i = 0; i < module.length; i++) {
         const o = module[i];
         m[o.ClassID] = o;
       }
 
       module = m;
-    }
-    else if (typeof(module) !== 'object')
-    {
-      throw new Error("Unsupported module.");
+    } else if (typeof module !== 'object') {
+      throw new Error('Unsupported module.');
     }
     this.modules.push(module);
   }
 
-  find_class_by_id(id)
-  {
-    if (typeof(id) === "object" && id.ClassID) id = id.ClassID;
+  find_class_by_id(id) {
+    if (typeof id === 'object' && id.ClassID) id = id.ClassID;
     const modules = this.modules;
     for (let i = modules.length - 1; i >= 0; i--) {
       const ret = modules[i][id];
@@ -372,9 +355,8 @@ export class RemoteDevice extends Events {
     return null;
   }
 
-  allocate(c, ono)
-  {
-    if (typeof(ono) === "object") ono = ono.valueOf();
+  allocate(c, ono) {
+    if (typeof ono === 'object') ono = ono.valueOf();
     const objects = this.objects;
     if (!objects.has(ono)) {
       objects.set(ono, new c(ono, this));
@@ -382,8 +364,7 @@ export class RemoteDevice extends Events {
     return objects.get(ono);
   }
 
-  resolve_object(o)
-  {
+  resolve_object(o) {
     // OcaBlockMember
     if ('MemberObjectIdentification' in o)
       return this.resolve_object(o.MemberObjectIdentification);
@@ -393,25 +374,22 @@ export class RemoteDevice extends Events {
       const ono = o.ONo;
       const id = o.ClassIdentification;
       return this.allocate(this.find_best_class(id), ono);
-    } 
+    }
 
     throw new TypeError('Expected OcaObjectIdentification or OcaBlockMember');
   }
 
-  GetDeviceTree()
-  {
+  GetDeviceTree() {
     const get_members = (block) => {
       return block.GetMembers().then((a) => {
         const ret = [];
 
         a = a.map(this.resolve_object, this);
 
-        for (let i = 0; i < a.length; i++)
-        {
+        for (let i = 0; i < a.length; i++) {
           ret.push(Promise.resolve(a[i]));
 
-          if (a[i].ClassID.startsWith(OcaBlock.ClassID))
-          {
+          if (a[i].ClassID.startsWith(OcaBlock.ClassID)) {
             ret.push(get_members(a[i]));
           }
         }
@@ -430,8 +408,7 @@ export class RemoteDevice extends Events {
    * @returns {Promise} The object tree. A recursive tree structure consisting of arrays of objects.
    *                    Each block is followed by an array of it's children.
    */
-  get_device_tree()
-  {
+  get_device_tree() {
     return this.GetDeviceTree();
   }
 
@@ -446,37 +423,29 @@ export class RemoteDevice extends Events {
    * @returns {Promise<Map<string, Object>>} The map of role paths to control
    *                                        objects.
    */
-  get_role_map(separator)
-  {
+  get_role_map(separator) {
     return this.get_device_tree().then(function (tree) {
       return tree_to_rolemap(tree, separator);
     });
   }
 
-  discover_all_fallback()
-  {
-    return this.GetDeviceTree()
-      .then((tree) => {
-        const ret = [];
-        const it = function(a)
-        {
-          for (let i = 0; i < a.length; i++)
-          {
-            if (Array.isArray(a[i]))
-            {
-              it(a[i]);
-            }
-            else
-            {
-              ret.push(a[i]);
-            }
+  discover_all_fallback() {
+    return this.GetDeviceTree().then((tree) => {
+      const ret = [];
+      const it = function (a) {
+        for (let i = 0; i < a.length; i++) {
+          if (Array.isArray(a[i])) {
+            it(a[i]);
+          } else {
+            ret.push(a[i]);
           }
-        };
+        }
+      };
 
-        it(tree);
+      it(tree);
 
-        return ret;
-      });
+      return ret;
+    });
   }
 
   /**
@@ -487,8 +456,7 @@ export class RemoteDevice extends Events {
    * @deprecated Use :func:`get_device_tree` instead.
    * @returns {Promise} The object list.
    */
-  discover_all()
-  {
+  discover_all() {
     return this.Root.GetMembersRecursive()
       .then((res) => res.map(this.resolve_object, this))
       .catch(() => this.discover_all_fallback());
@@ -498,8 +466,7 @@ export class RemoteDevice extends Events {
    * Set the keepalive interval.
    * @param {number} seconds - Keepalive interval in seconds.
    */
-  set_keepalive_interval(seconds)
-  {
+  set_keepalive_interval(seconds) {
     this.connection.set_keepalive_interval(seconds);
   }
 }

@@ -1,6 +1,4 @@
-import {
-    make_control_class
-  } from './Base.js';
+import { make_control_class } from './Base.js';
 
 import { Classes } from './ControlClasses.js';
 
@@ -18,39 +16,51 @@ import { Classes } from './ControlClasses.js';
  * @param {Array} properties - List of properties.
  * @param {Array} events - List of events.
  */
-export function define_custom_class(name, level, class_id, class_version, base, methods, properties, events)
-{
-  class_id = String.fromCharCode.apply(String, class_id.split('.').map((v) => parseInt(v)));
+export function define_custom_class(
+  name,
+  level,
+  class_id,
+  class_version,
+  base,
+  methods,
+  properties,
+  events
+) {
+  class_id = String.fromCharCode.apply(
+    String,
+    class_id.split('.').map((v) => parseInt(v))
+  );
 
-  if (!base)
-  {
+  if (!base) {
     const parent_class_id = class_id.substr(0, class_id.length - 1);
 
-    for (let i = 0; i < Classes.length; i++)
-    {
-      if (Classes[i].ClassID === parent_class_id)
-      {
+    for (let i = 0; i < Classes.length; i++) {
+      if (Classes[i].ClassID === parent_class_id) {
         base = Classes[i];
         break;
       }
     }
-  }
-  else if (typeof(base) === 'string')
-  {
-    for (let i = 0; i < Classes.length; i++)
-    {
-      if (Classes[i].ClassName === base)
-      {
+  } else if (typeof base === 'string') {
+    for (let i = 0; i < Classes.length; i++) {
+      if (Classes[i].ClassName === base) {
         base = Classes[i];
         break;
       }
     }
   }
 
-  if (typeof(base) !== 'function')
-  {
+  if (typeof base !== 'function') {
     throw new Error('Unknown parent class.');
   }
 
-  return make_control_class(name, level, class_id, class_version, base, methods, properties, events);
+  return make_control_class(
+    name,
+    level,
+    class_id,
+    class_version,
+    base,
+    methods,
+    properties,
+    events
+  );
 }

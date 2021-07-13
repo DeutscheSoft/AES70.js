@@ -2,8 +2,7 @@ import { createType } from './createType.js';
 import { HAS_BIGINT, UINT64_MAX } from '../bigint.js';
 
 function assertSupport() {
-  if (!HAS_BIGINT)
-    throw new Error('Missing BigInt support');
+  if (!HAS_BIGINT) throw new Error('Missing BigInt support');
 }
 
 export const OcaUint64 = createType({
@@ -22,6 +21,6 @@ export const OcaUint64 = createType({
     assertSupport();
     const value = dataView.getBigUint64(pos, false);
 
-    return (value <= Number.MAX_SAFE_INTEGER) ? Number(value) : value;
+    return value <= Number.MAX_SAFE_INTEGER ? Number(value) : value;
   },
 });
