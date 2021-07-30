@@ -3,7 +3,6 @@ export * from './types/OcaApplicationNetworkState.js';
 export * from './types/OcaBaseDataType.js';
 export * from './types/OcaBlockMember.js';
 export * from './types/OcaClassAuthorityID.js';
-export * from './types/OcaClassID.js';
 export * from './types/OcaClassIdentification.js';
 export * from './types/OcaClassicalFilterShape.js';
 export * from './types/OcaComponent.js';
