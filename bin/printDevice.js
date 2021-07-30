@@ -64,7 +64,7 @@ async function printDevice(device)
 {
   try {
     await printTree(await device.GetDeviceTree());
-    await printTree([
+    const managers = [
       device.DeviceManager,
       device.SecurityManager,
       device.FirmwareManager,
@@ -78,10 +78,23 @@ async function printDevice(device)
       device.TaskManager,
       device.CodingManager,
       device.DiagnosticManager
-    ]);
+    ];
+    for (let i = 0; i < managers.length; i++) {
+      try {
+        await printTree([ managers[i] ]);
+      } catch (err) {
+        if (err.status != 5) {
+          throw err;
+        }
+      }
+    }
     exit(0);
   } catch (error) {
-    console.error('Failure: %o', error);
+    if (error.status) {
+      console.error('Failure: %s', error.status);
+    } else {
+      console.error('Failure: %o', error);
+    }
     exit(1);
   }
 }
