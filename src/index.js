@@ -46,4 +46,6 @@ export {
   Types,
   warn,
   WebSocketConnection,
+  TCPConnection,
+  UDPConnection,
 };
