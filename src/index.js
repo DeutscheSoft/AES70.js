@@ -14,7 +14,7 @@ import { RemoteDevice } from './controller/remote_device.js';
 import { define_custom_class } from './controller/define_custom_class.js';
 
 import * as RemoteControlClasses from './controller/ControlClasses.js';
-import * as Types from './Types.js';
+import * as Types from './types.js';
 import { WebSocketConnection } from './controller/websocket_connection_node.js';
 import { TCPConnection } from './controller/tcp_connection.js';
 import { UDPConnection } from './controller/udp_connection.js';
