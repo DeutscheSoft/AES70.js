@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaBasicActuator } from './OcaBasicActuator';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 
 /**
  * String actuator.

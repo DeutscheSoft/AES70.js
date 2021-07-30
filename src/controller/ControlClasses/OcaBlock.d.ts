@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaWorker } from './OcaWorker';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';
 import { IOcaObjectSearchResultFlags } from '../../types/OcaObjectSearchResultFlags';
 import { IOcaSignalPath } from '../../types/OcaSignalPath';

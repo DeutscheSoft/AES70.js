@@ -1,8 +1,8 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Event } from '../Base';
+import { Event } from '../event';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaLibAccess } from '../../types/OcaLibAccess';
 import { IOcaLibVol } from '../../types/OcaLibVol';
 import { OcaLibAccess } from '../../types/OcaLibAccess';

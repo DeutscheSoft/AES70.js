@@ -1,8 +1,8 @@
 import { RemoteDevice } from '../remote_device';
-import { ObjectBase } from '../Base';
-import { Event } from '../Base';
+import { ObjectBase } from '../object_base';
+import { Event } from '../event';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { OcaClassIdentification } from '../../types/OcaClassIdentification';
 
 /**

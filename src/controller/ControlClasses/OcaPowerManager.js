@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaList } from '../../OCP1/OcaList.js';

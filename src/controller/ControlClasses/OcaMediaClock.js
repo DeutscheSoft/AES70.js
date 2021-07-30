@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMediaClockLockState } from '../../OCP1/OcaMediaClockLockState.js';

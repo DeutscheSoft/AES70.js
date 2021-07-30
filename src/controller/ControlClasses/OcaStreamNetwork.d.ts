@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaNetworkSystemInterfaceID } from '../../types/OcaNetworkSystemInterfaceID';
 import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
 import { OcaNetworkLinkType } from '../../types/OcaNetworkLinkType';

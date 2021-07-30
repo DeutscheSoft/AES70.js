@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaDelay } from './OcaDelay.js';
 import { OcaDelayUnit } from '../../OCP1/OcaDelayUnit.js';
 import { OcaDelayValue } from '../../OCP1/OcaDelayValue.js';

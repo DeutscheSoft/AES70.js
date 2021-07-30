@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaProperty } from '../../types/OcaProperty';
 import { IOcaRamperCommand } from '../../types/OcaRamperCommand';
 import { IOcaRamperInterpolationLaw } from '../../types/OcaRamperInterpolationLaw';

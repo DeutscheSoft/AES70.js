@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaRoot } from './OcaRoot';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaPortID } from '../../types/OcaPortID';
 import { IOcaPortMode } from '../../types/OcaPortMode';
 import { OcaPort } from '../../types/OcaPort';

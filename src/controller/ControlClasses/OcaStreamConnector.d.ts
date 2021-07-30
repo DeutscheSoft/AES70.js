@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';
 import { IOcaStream } from '../../types/OcaStream';
 import { OcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';

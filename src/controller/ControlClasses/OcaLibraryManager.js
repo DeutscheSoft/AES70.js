@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 import { OcaLibVolIdentifier } from '../../OCP1/OcaLibVolIdentifier.js';
 import { OcaLibVolType } from '../../OCP1/OcaLibVolType.js';

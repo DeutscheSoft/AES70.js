@@ -1,5 +1,5 @@
-import { make_control_class } from '../Base.js';
-import { ObjectBase } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
+import { ObjectBase } from '../object_base.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaClassIdentification } from '../../OCP1/OcaClassIdentification.js';
 import { OcaPropertyChangeType } from '../../OCP1/OcaPropertyChangeType.js';

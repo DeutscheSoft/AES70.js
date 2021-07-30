@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaTimeProtocol } from '../../types/OcaTimeProtocol';
 import { IOcaTimeReferenceType } from '../../types/OcaTimeReferenceType';
 import { OcaTimeProtocol } from '../../types/OcaTimeProtocol';

@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaSweepType } from '../../types/OcaSweepType';
 import { IOcaWaveformType } from '../../types/OcaWaveformType';
 import { OcaSweepType } from '../../types/OcaSweepType';

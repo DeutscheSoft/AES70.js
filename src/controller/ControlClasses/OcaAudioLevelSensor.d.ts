@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaLevelSensor } from './OcaLevelSensor';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaLevelMeterLaw } from '../../types/OcaLevelMeterLaw';
 import { OcaLevelMeterLaw } from '../../types/OcaLevelMeterLaw';
 

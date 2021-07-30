@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';
 import { IOcaLibVolType } from '../../types/OcaLibVolType';
 import { OcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';

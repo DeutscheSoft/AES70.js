@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 
 /**
  * Optional manager that collects all media decoders/encoders (Codecs) which the device owns.

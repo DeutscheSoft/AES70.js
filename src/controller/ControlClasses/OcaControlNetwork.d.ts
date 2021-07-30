@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
 
 /**

@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaRoot } from './OcaRoot';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaApplicationNetworkCommand } from '../../types/OcaApplicationNetworkCommand';
 import { IOcaNetworkSystemInterfaceDescriptor } from '../../types/OcaNetworkSystemInterfaceDescriptor';
 import { OcaApplicationNetworkState } from '../../types/OcaApplicationNetworkState';

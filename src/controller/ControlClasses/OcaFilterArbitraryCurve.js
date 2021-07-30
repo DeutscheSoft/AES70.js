@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaTransferFunction } from '../../OCP1/OcaTransferFunction.js';

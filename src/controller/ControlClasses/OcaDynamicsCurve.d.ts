@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaDBr } from '../../types/OcaDBr';
 import { OcaDBr } from '../../types/OcaDBr';
 

@@ -1,9 +1,9 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork';
-import { Event } from '../Base';
+import { Event } from '../event';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaMediaCoding } from '../../types/OcaMediaCoding';
 import { IOcaMediaConnection } from '../../types/OcaMediaConnection';
 import { IOcaMediaConnectorCommand } from '../../types/OcaMediaConnectorCommand';

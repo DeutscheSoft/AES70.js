@@ -4,7 +4,7 @@
  * AES70-2018.
  */
 
-import { ObjectBase } from '../Base.js';
+import { ObjectBase } from './object_base';
 import { OcaRoot } from './ControlClasses/OcaRoot';
 import { OcaWorker } from './ControlClasses/OcaWorker';
 import { OcaActuator } from './ControlClasses/OcaActuator';

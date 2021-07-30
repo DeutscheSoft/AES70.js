@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaMediaClockRate } from '../../types/OcaMediaClockRate';
 import { IOcaMediaClockType } from '../../types/OcaMediaClockType';
 import { OcaMediaClockLockState } from '../../types/OcaMediaClockLockState';

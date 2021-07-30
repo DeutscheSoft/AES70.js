@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaWorker } from './OcaWorker';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { OcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';
 import { OcaNetworkSignalChannelStatus } from '../../types/OcaNetworkSignalChannelStatus';
 

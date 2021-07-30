@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 
 /**
  * Represents a function that turns on some kind of human-detectable indicator for purposes of device identification during network setup. Physical form of indicator is not defined by OCA, so it could be anything, e.g.

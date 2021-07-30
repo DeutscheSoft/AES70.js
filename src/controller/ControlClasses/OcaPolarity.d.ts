@@ -1,7 +1,7 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaPolarityState } from '../../types/OcaPolarityState';
 import { OcaPolarityState } from '../../types/OcaPolarityState';
 

@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaMediaClockAvailability } from '../../types/OcaMediaClockAvailability';
 import { IOcaMediaClockRate } from '../../types/OcaMediaClockRate';
 import { IOcaTimePTP } from '../../types/OcaTimePTP';

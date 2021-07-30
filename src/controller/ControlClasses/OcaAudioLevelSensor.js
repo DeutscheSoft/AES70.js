@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaLevelSensor } from './OcaLevelSensor.js';
 import { OcaLevelMeterLaw } from '../../OCP1/OcaLevelMeterLaw.js';
 

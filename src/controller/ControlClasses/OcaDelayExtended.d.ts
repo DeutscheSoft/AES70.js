@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaDelay } from './OcaDelay';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaDelayUnit } from '../../types/OcaDelayUnit';
 import { IOcaDelayValue } from '../../types/OcaDelayValue';
 import { OcaDelayValue } from '../../types/OcaDelayValue';

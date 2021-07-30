@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaBasicSensor } from './OcaBasicSensor.js';
 import { OcaBitstring } from '../../OCP1/OcaBitstring.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';

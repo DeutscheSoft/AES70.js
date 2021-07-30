@@ -1,4 +1,4 @@
-import { make_control_class } from '../Base.js';
+import { make_control_class } from '../make_control_class.js';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
 import { OcaNetworkControlProtocol } from '../../OCP1/OcaNetworkControlProtocol.js';
 

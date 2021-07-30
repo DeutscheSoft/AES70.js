@@ -1,6 +1,6 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
-import { Event } from '../Base';
+import { Event } from '../event';
 
 /**
  * Sensor for device identification mechanism. The idea of this mechanism is that there is some kind of control -- a pushbutton, for instance -- that the user depresses to send a device identification event to the controller. Such mechanisms aid in the setup of networks.

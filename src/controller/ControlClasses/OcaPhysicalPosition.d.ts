@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaPositionDescriptor } from '../../types/OcaPositionDescriptor';
 import { OcaPositionCoordinateSystem } from '../../types/OcaPositionCoordinateSystem';
 import { OcaPositionDescriptor } from '../../types/OcaPositionDescriptor';

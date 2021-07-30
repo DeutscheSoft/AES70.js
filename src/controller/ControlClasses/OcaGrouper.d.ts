@@ -1,9 +1,9 @@
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Event } from '../Base';
+import { Event } from '../event';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 import { IOcaGrouperCitizen } from '../../types/OcaGrouperCitizen';
 import { IOcaGrouperEnrollment } from '../../types/OcaGrouperEnrollment';
 import { IOcaGrouperMode } from '../../types/OcaGrouperMode';

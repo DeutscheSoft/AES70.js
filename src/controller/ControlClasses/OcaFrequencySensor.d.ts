@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
 import { Arguments } from '../arguments';
 
-import { PropertyEvent } from '../Base';
+import { PropertyEvent } from '../property_event';
 
 /**
  * Frequency sensor.
