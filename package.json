@@ -3,6 +3,7 @@
   "version": "1.2.0",
   "description": "A controller library for the AES70 protocol.",
   "type": "module",
+  "main": "src/index.js",
   "module": "src/index.js",
   "browser": "dist/AES70.es5.js",
   "browser:module": "src/index.browser.js",
