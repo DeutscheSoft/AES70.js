@@ -1,21 +1,21 @@
 const OCA = require("../lib");
 const utils = require('./utils');
 
-var TestMessage = utils.define_test(
+const TestMessage = utils.define_test(
   function test_msg(a) {
     this.pdu = a;
   },
   {
     test: function() {
-      var buf = OCA.encodeMessage(this.pdu);
-      var ret = [];
+      const buf = OCA.encodeMessage(this.pdu);
+      const ret = [];
 
-      var len = OCA.decodeMessage(new DataView(buf), 0, ret);
+      const len = OCA.decodeMessage(new DataView(buf), 0, ret);
 
       this.check(len === buf.byteLength,
                  "data left: ", len, "<", buf.byteLength);
 
-      var buf2 = OCA.encodeMessage(ret);
+      const buf2 = OCA.encodeMessage(ret);
       this.check(utils.equal(buf, buf2),
                  'Encoding test failed for %o', this.pdu);
     }

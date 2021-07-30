@@ -5,9 +5,9 @@ function get_random_int(N) {
 }
 
 function low_get_random_signature(len, basic) {
-  var args = [];
+  const args = [];
 
-  for (var i = 0; i < len; i++) {
+  for (let i = 0; i < len; i++) {
     switch (get_random_int(basic ? 10 : 15)) {
     case 0: args[i] = SP.BOOLEAN; break;
     case 1: args[i] = SP.UINT8; break;
@@ -33,7 +33,7 @@ function low_get_random_signature(len, basic) {
   return args;
 }
 function get_random_signature(len) {
-  var args = low_get_random_signature(len);
+  const args = low_get_random_signature(len);
 
   try {
     return new SP.signature(...args);
@@ -43,23 +43,23 @@ function get_random_signature(len) {
 }
 
 function get_random_string(len, N) {
-    var a = new Array(len);
-    for (var i = 0; i < len; i++) {
+    const a = new Array(len);
+    for (let i = 0; i < len; i++) {
         a[i] = get_random_int(N);
     }
     return String.fromCharCode.apply(String, a);
 }
 
 function get_random_bitstring(len) {
-    var a = new Array(len);
-    for (var i = 0; i < len; i++) {
+    const a = new Array(len);
+    for (let i = 0; i < len; i++) {
         a[i] = !get_random_int(2);
     }
     return a;
 }
 
 function get_random_list(len) {
-    var v = [];
+    const v = [];
     while (len--) {
         tmp = this.get_random_data();
         v.push(tmp[0]);
@@ -67,7 +67,7 @@ function get_random_list(len) {
     return v;
 }
 
-var PT_BOOLEAN = 0,
+const PT_BOOLEAN = 0,
     PT_UINT8 = 1,
     PT_UINT16 = 2,
     PT_UINT32 = 3,
@@ -93,12 +93,12 @@ var PT_BOOLEAN = 0,
     PT_CUSTOM = 22;
 
 function get_random_data() {
-    var S = this.signature;
-    var C = this.custom;
-    var O = this.signatures;
+    const S = this.signature;
+    const C = this.custom;
+    const O = this.signatures;
     var v, tmp, ret = [];
 
-    for (var i = 0, num_custom = 0; i < S.length; i++) {
+    for (let i = 0, num_custom = 0; i < S.length; i++) {
         switch (S[i]) {
         case PT_BOOLEAN:
             ret[i] = !get_random_int(2);
@@ -177,8 +177,8 @@ function get_random_data() {
             break;
         case PT_LIST2D:
             {
-                var N = get_random_int(10);
-                var M = get_random_int(10);
+                let N = get_random_int(10);
+                const M = get_random_int(10);
                 var v = [];
                 while (N--) {
                     v.push(get_random_list.call(O[num_custom], M));
@@ -199,10 +199,10 @@ SP.signature.prototype.get_random_data = get_random_data;
 
 function memcmp(a, b) {
   if (a.length != b.length) return false;
-  var a8 = new Uint8Array(a);
-  var b8 = new Uint8Array(b);
+  const a8 = new Uint8Array(a);
+  const b8 = new Uint8Array(b);
 
-  for (var i = 0; i < a8.length; i++) {
+  for (let i = 0; i < a8.length; i++) {
     if (a8[i] != b8[i]) return false;
   }
 
@@ -224,15 +224,15 @@ function equal(a, b) {
         return true;
     } else if (a instanceof Map) {
         if (a.size !== b.size) return false;
-        var ka = [];
-        var kb = [];
-        var va = [];
-        var vb = [];
-        for (let e of a) {
+        const ka = [];
+        const kb = [];
+        const va = [];
+        const vb = [];
+        for (const e of a) {
             ka.push(e[0]);
             va.push(e[1]);
         }
-        for (let e of b) {
+        for (const e of b) {
             kb.push(e[0]);
             vb.push(e[1]);
         }
@@ -245,11 +245,11 @@ function equal(a, b) {
 
 }
 
-var all_tests = [];
+const all_tests = [];
 
 function run_all_tests(stop) {
-  var ok = 0, fail = 0, t;
-  for (var i = 0; i < all_tests.length; i++) {
+  let ok = 0, fail = 0, t;
+  for (let i = 0; i < all_tests.length; i++) {
     t = all_tests[i];
     t.run();
     ok += t.nok;
@@ -266,7 +266,7 @@ function Test() {
 }
 Test.prototype = {
   run: function() {
-    for (var key in this) {
+    for (const key in this) {
       if (key.startsWith("test") && typeof(this[key]) === "function") {
         try {
           this[key]();
@@ -293,7 +293,7 @@ Test.prototype = {
 };
 
 function define_test(constr, o) {
-  var ret = function() {
+  const ret = function() {
     constr.apply(this, arguments);
     Test.call(this);
   }

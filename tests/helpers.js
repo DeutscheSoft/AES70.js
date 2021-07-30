@@ -22,7 +22,7 @@ export function deepEqual(a, b) {
 
     return result;
   } else if (typeof a === 'object' && typeof b === 'object' && a.constructor === b.constructor) {
-    for (let name in a) {
+    for (const name in a) {
       if (!deepEqual(a[name], b[name]))
         return false;
     }
@@ -53,7 +53,7 @@ export function assertEqual(a, b) {
 let currentTest = Promise.resolve();
 
 export function define(name, run) {
-  let test = currentTest.then(() => {
+  const test = currentTest.then(() => {
     try {
       const p = run();
 

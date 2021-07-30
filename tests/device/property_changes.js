@@ -18,7 +18,7 @@ function isEqual(a, b) {
     if (typeof b !== 'object') return false;
     if (a.constructor !== b.constructor) return false;
 
-    for (let name in a) {
+    for (const name in a) {
       if (a[name] !== b[name]) return false;
     }
 
@@ -89,7 +89,7 @@ class PropertyChanges extends ObjectTest
           throw e;
         }
 
-        let tmp = (await getter()).item(0);
+        const tmp = (await getter()).item(0);
 
         await event.unsubscribe(cb);
 

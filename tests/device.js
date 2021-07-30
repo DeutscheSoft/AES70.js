@@ -42,7 +42,7 @@ class Throttler {
   write() {
     if (!this.buffer) return;
 
-    let n = Math.max(1, Math.floor(Math.random()*this.buffer.length));
+    const n = Math.max(1, Math.floor(Math.random()*this.buffer.length));
 
     this.socket.write(this.buffer.slice(0, n));
 

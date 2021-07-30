@@ -53,7 +53,7 @@ class CheckPath extends ObjectTest {
 
   async check_object(o, parent, i)
   {
-    let roles = this.get_roles_for(parent);
+    const roles = this.get_roles_for(parent);
 
     const role = await o.GetRole();
 

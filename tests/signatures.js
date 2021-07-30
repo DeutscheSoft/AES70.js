@@ -13,16 +13,16 @@ const TestSignature = utils.define_test(
   },
   {
     test: function() {
-      var signature = this.signature;
-      var args = this.args;
-      var buf = signature.encode.apply(signature, args);
+      const signature = this.signature;
+      const args = this.args;
+      const buf = signature.encode.apply(signature, args);
 
       if (this.encoded)
         this.check(memcmp(buf, this.encoded), 
                    'Encoding test failed for %o.encode(%o)\n%o vs. %o\n',
                    signature, args, new Uint8Array(buf), new Uint8Array(this.encoded));
 
-      var dec = signature.low_decode(new DataView(buf));
+      let dec = signature.low_decode(new DataView(buf));
 
       this.check(equal(args, dec), 
                  'Encoding test failed:', signature, "\nIN:", args, "\nOUT:", dec);
@@ -47,12 +47,12 @@ const TestSignature = utils.define_test(
   });
 
 function test_rand(signature) {
-  for (var i = 0; i < 100; i++)
+  for (let i = 0; i < 100; i++)
     new TestSignature(signature, signature.get_random_data());
 }
 
 function test_enc(signature) {
-  var args = Array.prototype.slice.call(arguments, 1);
+  const args = Array.prototype.slice.call(arguments, 1);
   new TestSignature(signature, args);
   test_rand(signature);
 }
@@ -79,7 +79,7 @@ test_enc(new SP.signature(SP.BLOB), new ArrayBuffer(10));
 test_enc(new SP.signature(SP.MAP(SP.UINT16, SP.STRING)), new Map([ [34, "foo"], [23, "bar"] ]));
 test_enc(new SP.signature(SP.make_encoder(['MAP', 'UINT16', 'STRING' ])), new Map([ [34, "foo"], [23, "bar"] ]));
 
-for (var i = 0; i < 1000; i++) {
+for (let i = 0; i < 1000; i++) {
   test_rand(utils.get_random_signature(utils.get_random_int(5)));
 }
 
