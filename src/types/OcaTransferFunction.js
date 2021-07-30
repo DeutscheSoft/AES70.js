@@ -10,17 +10,17 @@ export class OcaTransferFunction {
   constructor(Frequency, Amplitude, Phase) {
     /**
      * Frequencies
-     * @type array
+     * @type Array
      */
     this.Frequency = Frequency;
     /**
      * Amplitude (not in dB)
-     * @type array
+     * @type Array
      */
     this.Amplitude = Amplitude;
     /**
      * Phase in radians.
-     * @type array
+     * @type Array
      */
     this.Phase = Phase;
   }

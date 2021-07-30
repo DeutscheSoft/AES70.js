@@ -15,7 +15,7 @@ export class OcaObjectListEventData {
     this.Event = Event;
     /**
      * List of object numbers.
-     * @type array
+     * @type Array
      */
     this.objectList = objectList;
   }

@@ -35,7 +35,7 @@ export class OcaMediaSinkConnector {
     this.Connection = Connection;
     /**
      * List of codings available for this connector.
-     * @type array
+     * @type Array
      */
     this.AvailableCodings = AvailableCodings;
     /**

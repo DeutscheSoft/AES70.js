@@ -146,7 +146,7 @@ export const OcaFilterParametric = make_control_class(
  * Sets some or all filter parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaFilterParametric#SetMultiple
- * @param {int} Mask
+ * @param {number} Mask
  *
  * @param {number} Frequency
  *

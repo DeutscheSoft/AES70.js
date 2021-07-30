@@ -15,7 +15,7 @@ export class OcaObservationListEventData {
     this.Event = Event;
     /**
      * The list of observed values that the event is reporting.
-     * @type array
+     * @type Array
      */
     this.Reading = Reading;
   }

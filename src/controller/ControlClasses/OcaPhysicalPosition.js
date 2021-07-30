@@ -54,8 +54,8 @@ export const OcaPhysicalPosition = make_control_class(
  * Retrieves value of property  **PositionDescriptorFieldFlags** . Result indicates whether retrieval was successful.
  *
  * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
- * @returns {Promise<int>}
- *   A promise which resolves to a single value of type ``int``.
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type ``number``.
  */
 /**
  * Retrieves value of property  **PositioinDescriptor** . Result indicates whether retrieval was successful.

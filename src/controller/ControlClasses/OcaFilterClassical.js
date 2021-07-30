@@ -144,7 +144,7 @@ export const OcaFilterClassical = make_control_class(
  * Sets some or all filter parameter. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaFilterClassical#SetMultiple
- * @param {int} Mask
+ * @param {number} Mask
  *
  * @param {number} Frequency
  *
