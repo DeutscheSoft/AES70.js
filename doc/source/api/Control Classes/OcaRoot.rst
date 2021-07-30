@@ -11,7 +11,7 @@ This class defines the properties
 ======================================== ======================================== ========================================
                   Name                               JavaScript Type                             AES70 Type
 ======================================== ======================================== ========================================
-                ClassID                                 OcaClassID                               OcaClassID
+                ClassID                                   string                                 OcaClassID
               ClassVersion                                number                           OcaClassVersionNumber
               ObjectNumber                                number                                   OcaONo
                 Lockable                                 boolean                                 OcaBoolean

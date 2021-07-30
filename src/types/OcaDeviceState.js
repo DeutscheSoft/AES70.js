@@ -16,42 +16,42 @@ export const OcaDeviceState = {
 };
 
 /**
- * Entry with value ``0``.
+ * Entry with value ``1``.
  * @type {number}
  * @member Operational
  * @memberof OcaDeviceState
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``2``.
  * @type {number}
  * @member Disabled
  * @memberof OcaDeviceState
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``4``.
  * @type {number}
  * @member Error
  * @memberof OcaDeviceState
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``8``.
  * @type {number}
  * @member Initializing
  * @memberof OcaDeviceState
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``16``.
  * @type {number}
  * @member Updating
  * @memberof OcaDeviceState
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``32``.
  * @type {number}
  * @member unused
  * @memberof OcaDeviceState

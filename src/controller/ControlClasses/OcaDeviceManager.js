@@ -162,8 +162,8 @@ export const OcaDeviceManager = make_control_class(
  * Gets the value of the State property. The return value indicates whether the property was successfully retrieved.
  *
  * @method OcaDeviceManager#GetState
- * @returns {Promise<OcaDeviceState>}
- *   A promise which resolves to a single value of type :class:`OcaDeviceState`.
+ * @returns {Promise<number>}
+ *   A promise which resolves to a single value of type :class:`number`.
  */
 /**
  * Sets the value of the reset key of the device. The return value indicates whether the property was successfully set. Note that the device manager must inform the CAP gateway of this key (via the host interface), since the CAP gateway will check for and handle the special reset message.
@@ -285,7 +285,7 @@ export const OcaDeviceManager = make_control_class(
  * The property ``State`` is described in the AES70 standard as follows.
  * Read-only property that indicates the current state of the device.
  *
- * @member {PropertyEvent<OcaDeviceState>} OcaDeviceManager#OnStateChanged
+ * @member {PropertyEvent<number>} OcaDeviceManager#OnStateChanged
  */
 /**
  * This event is emitted when the property Busy changes in the remote object.

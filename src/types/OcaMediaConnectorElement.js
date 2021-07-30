@@ -15,35 +15,35 @@ export const OcaMediaConnectorElement = {
 };
 
 /**
- * Entry with value ``0``.
+ * Entry with value ``1``.
  * @type {number}
  * @member PinMap
  * @memberof OcaMediaConnectorElement
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``2``.
  * @type {number}
  * @member Connection
  * @memberof OcaMediaConnectorElement
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``4``.
  * @type {number}
  * @member Coding
  * @memberof OcaMediaConnectorElement
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``8``.
  * @type {number}
  * @member AlignmentLevel
  * @memberof OcaMediaConnectorElement
  * @static
  */
 /**
- * Entry with value ``0``.
+ * Entry with value ``16``.
  * @type {number}
  * @member AlignmentGain
  * @memberof OcaMediaConnectorElement

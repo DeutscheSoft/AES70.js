@@ -19,7 +19,7 @@ This class defines the properties
                DeviceRole                                 string                                 OcaString
            UserInventoryCode                              string                                 OcaString
                 Enabled                                  boolean                                 OcaBoolean
-                 State                                OcaDeviceState                           OcaDeviceState
+                 State                                    number                               OcaDeviceState
                   Busy                                   boolean                                 OcaBoolean
                ResetCause                             OcaResetCause                            OcaResetCause
                 Message                                   string                                 OcaString

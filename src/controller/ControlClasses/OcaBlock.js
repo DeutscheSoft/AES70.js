@@ -126,9 +126,9 @@ export const OcaBlock = make_control_class(
  * Constructs an object according to the given construction specification and adds it to the block. The return value indicates whether the member was successfully created and added.
  *
  * @method OcaBlock#ConstructMember
- * @param {OcaClassID} ClassID
+ * @param {string} ClassID
  *
- * @param {variant} ConstructionParameters
+ * @param {any} ConstructionParameters
  *
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
@@ -246,9 +246,9 @@ export const OcaBlock = make_control_class(
  *
  * @param {OcaStringComparisonType} NameComparisonType
  *
- * @param {OcaClassID} SearchClassID
+ * @param {string} SearchClassID
  *
- * @param {OcaObjectSearchResultFlags} ResultFlags
+ * @param {number} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -261,9 +261,9 @@ export const OcaBlock = make_control_class(
  *
  * @param {OcaStringComparisonType} NameComparisonType
  *
- * @param {OcaClassID} SearchClassID
+ * @param {string} SearchClassID
  *
- * @param {OcaObjectSearchResultFlags} ResultFlags
+ * @param {number} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -274,7 +274,7 @@ export const OcaBlock = make_control_class(
  * @method OcaBlock#FindObjectsByPath
  * @param {string[]} SearchPath
  *
- * @param {OcaObjectSearchResultFlags} ResultFlags
+ * @param {number} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -287,9 +287,9 @@ export const OcaBlock = make_control_class(
  *
  * @param {OcaStringComparisonType} NameComparisonType
  *
- * @param {OcaClassID} SearchClassID
+ * @param {string} SearchClassID
  *
- * @param {OcaObjectSearchResultFlags} ResultFlags
+ * @param {number} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.

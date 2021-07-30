@@ -1,5 +1,5 @@
 /*
- * This namespace contains all control classes generated from the AES70
+ * This module contains all control classes generated from the AES70
  * standards document. It currently contains all classes defined in
  * AES70-2018.
  */

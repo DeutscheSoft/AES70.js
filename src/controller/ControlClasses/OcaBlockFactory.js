@@ -93,7 +93,7 @@ export const OcaBlockFactory = make_control_class(
  * Defines a proto-member of the given class in the factory. The most current version of the class is used. The return value indicates whether the proto-member was successfully defined.
  *
  * @method OcaBlockFactory#DefineProtoMember
- * @param {OcaClassID} ClassIdentification
+ * @param {string} ClassIdentification
  *
  * @param {ConstructionParameterDataType} ConstructionParameters
  *
