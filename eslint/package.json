@@ -2,10 +2,17 @@
   "name": "aes70-eslint",
   "version": "1.0.0",
   "description": "eslint setup for AES70.js.",
-  "scripts": {},
+  "scripts": {
+    "lint:ts": "eslint -c tslintrc.cjs --fix --ext ts ..",
+    "lint:js": "eslint -c eslintrc.cjs --fix --ext js ..",
+    "lint": "npm run lint:ts; npm run lint:js"
+  },
   "author": "Arne Goedeke <arne@deuso.de>",
   "private": "true",
   "dependencies": {
-    "eslint": "^7.2.0"
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "eslint": "^7.31.0",
+    "typescript": "^4.3.5"
   }
 }

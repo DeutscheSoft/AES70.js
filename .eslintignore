@@ -1,7 +1,0 @@
-/eslint/*
-/docs/*
-/prettier/*
-/dist/*
-/tests/*
-/lib/*
-.eslintrc.js
