@@ -22,13 +22,6 @@ TCPConnection.connect({
   })
   .then(printDevice);
 
-function delay(n)
-{
-  return new Promise(function(resolve, reject) {
-    setTimeout(resolve, n);
-  });
-}
-
 async function printTree(objects, prefix)
 {
   if (!prefix) prefix = [];

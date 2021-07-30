@@ -1,7 +1,7 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2015": true
+        "es2017": true,
     },
     "extends": "eslint:recommended",
     "parserOptions": {

@@ -11,6 +11,7 @@ export const OcaUint64 = createType({
     return 8;
   },
   encodeTo: function (dataView, pos, value) {
+    /* global BigInt:false */
     assertSupport();
     if (!(value <= UINT64_MAX && value >= 0))
       throw new TypeError('Uint64 out of range.');

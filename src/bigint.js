@@ -1,3 +1,4 @@
+/* global BigInt:false */
 export const HAS_BIGINT = typeof BigInt !== 'undefined';
 export const UINT64_MAX = HAS_BIGINT && (BigInt(1) << BigInt(64)) - BigInt(1);
 export const INT64_MAX = HAS_BIGINT && UINT64_MAX >> BigInt(1);

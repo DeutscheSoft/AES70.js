@@ -11,6 +11,7 @@ export const OcaInt64 = createType({
     return 8;
   },
   encodeTo: function (dataView, pos, value) {
+    /* global BigInt:false */
     assertSupport();
     if (!(value >= INT64_MIN && value <= INT64_MAX))
       throw new TypeError('Int64 out of range.');
