@@ -7,6 +7,7 @@
   "module": "src/index.js",
   "browser": "dist/AES70.es5.js",
   "browser:module": "src/index.browser.js",
+  "typings": "src/index.d.ts",
   "bin": {
     "printDevice": "bin/printDevice.js"
   },
