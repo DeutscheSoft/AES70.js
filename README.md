@@ -92,14 +92,14 @@ The first step when using AES70.js to control a device is to decide how to
 connect. For web-based controllers the only solution is using WebSockets, for
 NodeJS both TCP and UDP are available in addition to that.
 
-        const connection = await OCA.controller.TCP.connect({
+        const connection = await TCPConnection.connect({
             host: 'example.org',
             port: 65000,
         });
 
 In a web browser using a WebSocket this looks similar.
 
-        const connection = await OCA.controller.WebSocket.connect({
+        const connection = await OCA.WebSocketConnection.connect({
           url: 'ws://example.org',
         });
 
@@ -108,15 +108,15 @@ done using the method `RemoteDevice.get_device_tree()` method.
 
 A full working example:
 
-        const OCA = require('aes70');
+        import { TCPConnection, RemoteDevice } from 'aes70';
 
         async function run()
         {
-          const connection = await OCA.controller.TCP.connect({
+          const connection = await TCPConnection.connect({
               host: 'example.org',
               port: 65000,
           });
-          const device = new OCA.RemoteDevice(connection);
+          const device = new RemoteDevice(connection);
 
           device.set_keepalive_interval(1);
 
