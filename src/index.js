@@ -19,7 +19,7 @@ import { WebSocketConnection } from './controller/websocket_connection_node.js';
 import { TCPConnection } from './controller/tcp_connection.js';
 import { UDPConnection } from './controller/udp_connection.js';
 
-const controller = {
+export const controller = {
   Connection: ClientConnection,
   WebSocket: WebSocketConnection,
   TCP: TCPConnection,
@@ -31,7 +31,6 @@ const controller = {
 
 export {
   Connection,
-  controller,
   ClientConnection,
   Command,
   CommandRrq,
