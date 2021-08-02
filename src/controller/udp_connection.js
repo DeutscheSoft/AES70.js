@@ -126,6 +126,11 @@ export class UDPConnection extends ClientConnection {
       let retry_count = this.retry_count;
 
       tid = setInterval(() => {
+        // connection has been destroyed.
+        if (this.command_handles === null) {
+          clearInterval(tid);
+          return;
+        }
         if (h[4] === 0) {
           // response has been received.
           // mark it for removal but leave a tombstone
