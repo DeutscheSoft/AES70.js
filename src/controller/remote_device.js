@@ -17,7 +17,7 @@ import { OcaCodingManager } from './ControlClasses/OcaCodingManager.js';
 import { OcaDiagnosticManager } from './ControlClasses/OcaDiagnosticManager.js';
 import { OcaBlock } from './ControlClasses/OcaBlock.js';
 
-import { Classes } from './ControlClasses.js';
+import * as RemoteControlClasses from './ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from '../types/OcaManagerDefaultObjectNumbers.js';
 import { OcaNotificationDeliveryMode } from '../types/OcaNotificationDeliveryMode.js';
@@ -130,7 +130,7 @@ export class RemoteDevice extends Events {
     });
 
     this.modules = [];
-    this.add_control_classes(Classes);
+    this.add_control_classes(Object.values(RemoteControlClasses));
     modules.map((m) => this.add_control_classes(m));
 
     /**

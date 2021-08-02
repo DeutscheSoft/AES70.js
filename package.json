@@ -8,6 +8,9 @@
   "browser": "dist/AES70.es5.js",
   "browser:module": "src/index.browser.js",
   "typings": "src/index.d.ts",
+  "exports": {
+    "./RemoteControlClasses": "./src/controller/ControlClasses.js"
+  },
   "bin": {
     "printDevice": "bin/printDevice.js"
   },

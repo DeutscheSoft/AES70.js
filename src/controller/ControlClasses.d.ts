@@ -106,113 +106,105 @@ import { OcaMediaClock } from './ControlClasses/OcaMediaClock';
 import { OcaStreamNetwork } from './ControlClasses/OcaStreamNetwork';
 import { OcaStreamConnector } from './ControlClasses/OcaStreamConnector';
 
-/**
- * All classes defined in this module by their name.
- */
-export declare const ControlClasses: {
-  OcaRoot: OcaRoot;
-  OcaWorker: OcaWorker;
-  OcaActuator: OcaActuator;
-  OcaMute: OcaMute;
-  OcaPolarity: OcaPolarity;
-  OcaSwitch: OcaSwitch;
-  OcaGain: OcaGain;
-  OcaPanBalance: OcaPanBalance;
-  OcaDelay: OcaDelay;
-  OcaDelayExtended: OcaDelayExtended;
-  OcaFrequencyActuator: OcaFrequencyActuator;
-  OcaFilterClassical: OcaFilterClassical;
-  OcaFilterParametric: OcaFilterParametric;
-  OcaFilterPolynomial: OcaFilterPolynomial;
-  OcaFilterFIR: OcaFilterFIR;
-  OcaFilterArbitraryCurve: OcaFilterArbitraryCurve;
-  OcaDynamics: OcaDynamics;
-  OcaDynamicsDetector: OcaDynamicsDetector;
-  OcaDynamicsCurve: OcaDynamicsCurve;
-  OcaSignalGenerator: OcaSignalGenerator;
-  OcaSignalInput: OcaSignalInput;
-  OcaSignalOutput: OcaSignalOutput;
-  OcaTemperatureActuator: OcaTemperatureActuator;
-  OcaIdentificationActuator: OcaIdentificationActuator;
-  OcaSummingPoint: OcaSummingPoint;
-  OcaBasicActuator: OcaBasicActuator;
-  OcaBooleanActuator: OcaBooleanActuator;
-  OcaInt8Actuator: OcaInt8Actuator;
-  OcaInt16Actuator: OcaInt16Actuator;
-  OcaInt32Actuator: OcaInt32Actuator;
-  OcaInt64Actuator: OcaInt64Actuator;
-  OcaUint8Actuator: OcaUint8Actuator;
-  OcaUint16Actuator: OcaUint16Actuator;
-  OcaUint32Actuator: OcaUint32Actuator;
-  OcaUint64Actuator: OcaUint64Actuator;
-  OcaFloat32Actuator: OcaFloat32Actuator;
-  OcaFloat64Actuator: OcaFloat64Actuator;
-  OcaStringActuator: OcaStringActuator;
-  OcaBitstringActuator: OcaBitstringActuator;
-  OcaSensor: OcaSensor;
-  OcaLevelSensor: OcaLevelSensor;
-  OcaAudioLevelSensor: OcaAudioLevelSensor;
-  OcaTimeIntervalSensor: OcaTimeIntervalSensor;
-  OcaFrequencySensor: OcaFrequencySensor;
-  OcaTemperatureSensor: OcaTemperatureSensor;
-  OcaIdentificationSensor: OcaIdentificationSensor;
-  OcaVoltageSensor: OcaVoltageSensor;
-  OcaCurrentSensor: OcaCurrentSensor;
-  OcaImpedanceSensor: OcaImpedanceSensor;
-  OcaGainSensor: OcaGainSensor;
-  OcaBasicSensor: OcaBasicSensor;
-  OcaBooleanSensor: OcaBooleanSensor;
-  OcaInt8Sensor: OcaInt8Sensor;
-  OcaInt16Sensor: OcaInt16Sensor;
-  OcaInt32Sensor: OcaInt32Sensor;
-  OcaInt64Sensor: OcaInt64Sensor;
-  OcaUint8Sensor: OcaUint8Sensor;
-  OcaUint16Sensor: OcaUint16Sensor;
-  OcaUint32Sensor: OcaUint32Sensor;
-  OcaFloat32Sensor: OcaFloat32Sensor;
-  OcaFloat64Sensor: OcaFloat64Sensor;
-  OcaStringSensor: OcaStringSensor;
-  OcaBitstringSensor: OcaBitstringSensor;
-  OcaUint64Sensor: OcaUint64Sensor;
-  OcaBlock: OcaBlock;
-  OcaBlockFactory: OcaBlockFactory;
-  OcaMatrix: OcaMatrix;
-  OcaAgent: OcaAgent;
-  OcaGrouper: OcaGrouper;
-  OcaRamper: OcaRamper;
-  OcaNumericObserver: OcaNumericObserver;
-  OcaLibrary: OcaLibrary;
-  OcaPowerSupply: OcaPowerSupply;
-  OcaEventHandler: OcaEventHandler;
-  OcaNumericObserverList: OcaNumericObserverList;
-  OcaMediaClock3: OcaMediaClock3;
-  OcaTimeSource: OcaTimeSource;
-  OcaPhysicalPosition: OcaPhysicalPosition;
-  OcaApplicationNetwork: OcaApplicationNetwork;
-  OcaControlNetwork: OcaControlNetwork;
-  OcaMediaTransportNetwork: OcaMediaTransportNetwork;
-  OcaManager: OcaManager;
-  OcaDeviceManager: OcaDeviceManager;
-  OcaSecurityManager: OcaSecurityManager;
-  OcaFirmwareManager: OcaFirmwareManager;
-  OcaSubscriptionManager: OcaSubscriptionManager;
-  OcaPowerManager: OcaPowerManager;
-  OcaNetworkManager: OcaNetworkManager;
-  OcaMediaClockManager: OcaMediaClockManager;
-  OcaLibraryManager: OcaLibraryManager;
-  OcaAudioProcessingManager: OcaAudioProcessingManager;
-  OcaDeviceTimeManager: OcaDeviceTimeManager;
-  OcaTaskManager: OcaTaskManager;
-  OcaCodingManager: OcaCodingManager;
-  OcaDiagnosticManager: OcaDiagnosticManager;
-  OcaNetworkSignalChannel: OcaNetworkSignalChannel;
-  OcaNetwork: OcaNetwork;
-  OcaMediaClock: OcaMediaClock;
-  OcaStreamNetwork: OcaStreamNetwork;
-  OcaStreamConnector: OcaStreamConnector;
+export {
+  OcaRoot,
+  OcaWorker,
+  OcaActuator,
+  OcaMute,
+  OcaPolarity,
+  OcaSwitch,
+  OcaGain,
+  OcaPanBalance,
+  OcaDelay,
+  OcaDelayExtended,
+  OcaFrequencyActuator,
+  OcaFilterClassical,
+  OcaFilterParametric,
+  OcaFilterPolynomial,
+  OcaFilterFIR,
+  OcaFilterArbitraryCurve,
+  OcaDynamics,
+  OcaDynamicsDetector,
+  OcaDynamicsCurve,
+  OcaSignalGenerator,
+  OcaSignalInput,
+  OcaSignalOutput,
+  OcaTemperatureActuator,
+  OcaIdentificationActuator,
+  OcaSummingPoint,
+  OcaBasicActuator,
+  OcaBooleanActuator,
+  OcaInt8Actuator,
+  OcaInt16Actuator,
+  OcaInt32Actuator,
+  OcaInt64Actuator,
+  OcaUint8Actuator,
+  OcaUint16Actuator,
+  OcaUint32Actuator,
+  OcaUint64Actuator,
+  OcaFloat32Actuator,
+  OcaFloat64Actuator,
+  OcaStringActuator,
+  OcaBitstringActuator,
+  OcaSensor,
+  OcaLevelSensor,
+  OcaAudioLevelSensor,
+  OcaTimeIntervalSensor,
+  OcaFrequencySensor,
+  OcaTemperatureSensor,
+  OcaIdentificationSensor,
+  OcaVoltageSensor,
+  OcaCurrentSensor,
+  OcaImpedanceSensor,
+  OcaGainSensor,
+  OcaBasicSensor,
+  OcaBooleanSensor,
+  OcaInt8Sensor,
+  OcaInt16Sensor,
+  OcaInt32Sensor,
+  OcaInt64Sensor,
+  OcaUint8Sensor,
+  OcaUint16Sensor,
+  OcaUint32Sensor,
+  OcaFloat32Sensor,
+  OcaFloat64Sensor,
+  OcaStringSensor,
+  OcaBitstringSensor,
+  OcaUint64Sensor,
+  OcaBlock,
+  OcaBlockFactory,
+  OcaMatrix,
+  OcaAgent,
+  OcaGrouper,
+  OcaRamper,
+  OcaNumericObserver,
+  OcaLibrary,
+  OcaPowerSupply,
+  OcaEventHandler,
+  OcaNumericObserverList,
+  OcaMediaClock3,
+  OcaTimeSource,
+  OcaPhysicalPosition,
+  OcaApplicationNetwork,
+  OcaControlNetwork,
+  OcaMediaTransportNetwork,
+  OcaManager,
+  OcaDeviceManager,
+  OcaSecurityManager,
+  OcaFirmwareManager,
+  OcaSubscriptionManager,
+  OcaPowerManager,
+  OcaNetworkManager,
+  OcaMediaClockManager,
+  OcaLibraryManager,
+  OcaAudioProcessingManager,
+  OcaDeviceTimeManager,
+  OcaTaskManager,
+  OcaCodingManager,
+  OcaDiagnosticManager,
+  OcaNetworkSignalChannel,
+  OcaNetwork,
+  OcaMediaClock,
+  OcaStreamNetwork,
+  OcaStreamConnector,
 };
-
-/**
- * All control classes defined in this module.
- */
-export declare const Classes: ObjectBase[];

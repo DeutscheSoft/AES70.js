@@ -105,10 +105,7 @@ import { OcaMediaClock } from './ControlClasses/OcaMediaClock.js';
 import { OcaStreamNetwork } from './ControlClasses/OcaStreamNetwork.js';
 import { OcaStreamConnector } from './ControlClasses/OcaStreamConnector.js';
 
-/**
- * All classes defined in this module by their name.
- */
-export const ControlClasses = {
+export {
   OcaRoot,
   OcaWorker,
   OcaActuator,
@@ -210,8 +207,3 @@ export const ControlClasses = {
   OcaStreamNetwork,
   OcaStreamConnector,
 };
-
-/**
- * All control classes defined in this module.
- */
-export const Classes = Object.values(ControlClasses);
