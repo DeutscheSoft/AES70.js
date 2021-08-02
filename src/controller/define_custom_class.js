@@ -1,6 +1,8 @@
 import { make_control_class } from './make_control_class.js';
 
-import { Classes } from './ControlClasses.js';
+import * as RemoteControlClasses from './ControlClasses.js';
+
+const Classes = Object.values(RemoteControlClasses);
 
 /**
  * Creates a custom control class.
