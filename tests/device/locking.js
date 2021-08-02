@@ -1,5 +1,4 @@
 import { ObjectTest } from './test.js';
-import { RemoteError } from '../../src/Controller.js';
 import { OcaStatus } from '../../src/types/OcaStatus.js';
 
 class Locking extends ObjectTest
@@ -15,7 +14,7 @@ class Locking extends ObjectTest
     try {
       if (!await o.GetLockable()) return;
     } catch (e) {
-      if (RemoteError.check_status(e, OcaStatus.NotImplemented)) return;
+      if (e.status == OcaStatus.NotImplemented) return;
       throw e;
     }
 
@@ -32,7 +31,7 @@ class Locking extends ObjectTest
       await o2.GetRole();
       this.check(false, "Object should be locked for other clients now.");
     } catch (e) {
-      this.check(RemoteError.check_status(e, OcaStatus.Locked),
+      this.check(e.status == OcaStatus.Locked,
                  "Calling methods as a second client should return OcaStatus::Locked."); 
     }
 

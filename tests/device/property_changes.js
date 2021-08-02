@@ -1,6 +1,5 @@
 import { ObjectTest } from './test.js';
 import { Arguments } from '../../src/controller/arguments.js';
-import { RemoteError } from '../../src/Controller.js';
 import { OcaStatus } from '../../src/types/OcaStatus.js';
 import { OcaPropertyChangeType } from '../../src/types/OcaPropertyChangeType.js';
 
@@ -52,7 +51,7 @@ class PropertyChanges extends ObjectTest
       try {
         a = await getter();  
       } catch (e) {
-        if (e instanceof RemoteError && e.status === OcaStatus.NotImplemented) return;
+        if (e.status === OcaStatus.NotImplemented) return;
         throw e;
       }
       

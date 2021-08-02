@@ -1,9 +1,11 @@
 import { argv, exit } from 'process';
 import { createServer, Socket } from 'net';
-import { RemoteDevice } from '../src/index.js';
-import { TCPConnection } from '../src/controller/tcp_connection.js';
-import { UDPConnection } from '../src/controller/udp_connection.js';
-import { WebSocketConnection } from '../src/controller/websocket_connection.js';
+import {
+  RemoteDevice,
+  TCPConnection,
+  UDPConnection,
+  WebSocketConnection,
+} from '../src/index.js';
 import { TestRunner } from './device/test.js';
 import { parse } from 'url';
 
