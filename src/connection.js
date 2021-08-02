@@ -221,8 +221,12 @@ export class Connection extends Events
   }
 
   /**
-   * Set the keepalive interval.
-   * @param {number} seconds - Keepalive interval in seconds.
+   * Set the keepalive interval. Setting the keepalive interval to a
+   * positive number ``N`` will make sure to send some packet (possibly a
+   * keepalive command) at ``N`` seconds.
+   *
+   * @param {number} seconds
+   *    Keepalive interval in seconds.
    */
   set_keepalive_interval(seconds)
   {
