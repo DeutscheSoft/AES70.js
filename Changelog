@@ -2,6 +2,18 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.3.0] - 2021-08-02
+
+- Added TypeScript declaration files
+- Generate documentation using sphinx-js
+
+## [1.2.0] - 2021-06-06
+
+- Added new OCP.1 implementation
+- Fixed encoding of OcaDBr type
+- Added eslint subproject
+- Deprecate non module version of npm module
+
 ## [1.1.15] - 2020-07-29
 
 - Added missing shebang to bin/printDevice.js
