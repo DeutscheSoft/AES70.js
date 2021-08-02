@@ -12,7 +12,7 @@ This class defines the properties
                   Name                               JavaScript Type                             AES70 Type
 ======================================== ======================================== ========================================
             CoordinateSystem                   OcaPositionCoordinateSystem              OcaPositionCoordinateSystem
-      PositionDescriptorFieldFlags                         int                        OcaPositionDescriptorFieldFlags
+      PositionDescriptorFieldFlags                        number                      OcaPositionDescriptorFieldFlags
            PositionDescriptor                     OcaPositionDescriptor                    OcaPositionDescriptor
 ======================================== ======================================== ========================================
 
