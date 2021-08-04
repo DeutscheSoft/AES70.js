@@ -3,7 +3,6 @@ import { decodeMessage } from './OCP1/decode_message.js';
 import { encodeMessage } from './OCP1/encode_message.js';
 import { KeepAlive } from './OCP1/keepalive.js';
 
-
 /**
  * Connection base class. It extends :class:`Events` and defines two events:
  *
@@ -35,6 +34,8 @@ export class Connection extends Events
     this.inpos = 0;
     this.last_rx_time = now;
     this.last_tx_time = now;
+    this.rx_bytes = 0;
+    this.tx_bytes = 0;
     this.keepalive_interval = -1;
     this._keepalive_interval_id = null;
     this.outbuf = [];
@@ -62,7 +63,7 @@ export class Connection extends Events
           let len;
 
           for (i = start, len = 0; i < out.length && (!len || len + out[i].byteLength < this.batch); i++)
-              len += out[i].byteLength;
+            len += out[i].byteLength;
 
           const buf = new ArrayBuffer(len);
           const a8 = new Uint8Array(buf);
@@ -119,6 +120,7 @@ export class Connection extends Events
   }
 
   read(buf) {
+    this.rx_bytes += buf.byteLength;
     this.last_rx_time = this._now();
 
     if (this.inbuf) {
@@ -168,6 +170,7 @@ export class Connection extends Events
   write(buf)
   {
     this.last_tx_time = this._now();
+    this.tx_bytes += buf.byteLength;
   }
 
   is_closed()
@@ -206,7 +209,7 @@ export class Connection extends Events
       this.emit('close');
       this.close();
     }
-    else if (this.tx_idle_time() > t)
+    else if (this.tx_idle_time() > t * 0.75)
     {
       this.send(encodeMessage(new KeepAlive(t)));
     }
@@ -229,12 +232,18 @@ export class Connection extends Events
       this._keepalive_interval_id = null;
     }
 
-    // we check twice as often to make sure we stay within the timers
     this.keepalive_interval = t;
+
+    // Notify the other side about our new keepalive
+    if (this.is_closed())
+      return;
+
+    this.send(new KeepAlive(t));
 
     if (!(t > 0))
       return;
 
+    // we check twice as often to make sure we stay within the timers
     this._keepalive_interval_id = setInterval(() => {
       this._check_keepalive();
     }, t / 2);

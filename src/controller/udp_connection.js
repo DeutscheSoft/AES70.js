@@ -2,10 +2,53 @@
 
 import { createSocket } from 'dgram';
 import { Buffer } from 'buffer';
+import { performance } from 'perf_hooks';
+import { encodeMessage } from '../OCP1/encode_message.js';
+import { decodeMessage } from '../OCP1/decode_message.js';
+import { KeepAlive } from '../OCP1/keepalive.js';
 
 import { lookup } from 'dns';
 
 import { ClientConnection } from './client_connection.js';
+
+function delay(n) {
+  return new Promise((resolve) => setTimeout(resolve, n));
+}
+
+async function waitForKeepalive(socket, options) {
+  const waiter = new Promise((resolve, reject) => {
+    let onMessage;
+
+    onMessage = (data, rinfo) => {
+      const pdus = [];
+      let pos = 0;
+
+      pos = decodeMessage(new DataView(data.buffer), 0, pdus);
+
+      if (pdus.length !== 1)
+        throw new Error('Expected keepalive response.');
+
+      socket.off('message', onMessage);
+      socket.off('error', reject);
+      resolve(true);
+    };
+
+    socket.on('message', onMessage);
+    socket.on('error', reject);
+  });
+
+  const msg = Buffer.from(encodeMessage(new KeepAlive(1000)));
+  const t = 5 * (options.retry_interval || 250);
+
+  for (let i = 0; i < 3; i++) {
+    socket.send(msg);
+
+    if (await Promise.race([ waiter, delay(t) ]))
+      return;
+  }
+
+  throw new Error('Failed to connect.');
+}
 
 function is_ip(host) {
   let tmp = host.split('.');
@@ -55,11 +98,6 @@ export class UDPConnection extends ClientConnection {
     this.retry_count = options.retry_count >= 0 ? options.retry_count : 3;
     this.q = [];
     socket.on('message', (data, rinfo) => {
-      if (
-        rinfo.port !== this.options.port ||
-        rinfo.address !== this.options.address
-      )
-        return;
       try {
         this.read(data.buffer);
       } catch (err) {
@@ -108,8 +146,19 @@ export class UDPConnection extends ClientConnection {
             exclusive: true,
           },
           () => {
-            socket.removeListener('error', onerror);
-            resolve(new this(socket, options));
+            socket.on('connect', async () => {
+              try {
+                await waitForKeepalive(socket, options);
+
+                socket.removeListener('error', onerror);
+
+                const connection = new this(socket, options);
+                resolve(connection);
+              } catch (err) {
+                reject(err);
+              }
+            });
+            socket.connect(options.port, options.host);
           }
         );
       });
@@ -179,15 +228,20 @@ export class UDPConnection extends ClientConnection {
 
   try_write() {
     if (!this.socket) return;
-    const buf = this.q.shift();
-    this.socket.send(Buffer.from(buf), this.options.port, this.options.address);
-    if (this.q.length) setTimeout(this.try_write.bind(this), this.delay);
+    const q = this.q;
+    const buf = q.shift();
+    this.socket.send(Buffer.from(buf));
+    if (q.length) setTimeout(this.try_write.bind(this), this.delay);
     super.write(buf);
   }
 
   write(buf) {
-    if (!this.q.length) setImmediate(this.try_write.bind(this));
-    this.q.push(buf);
+    const q = this.q;
+    if (!q.length)
+      Promise.resolve().then(this.try_write.bind(this));
+    q.push(buf);
+    if (false && this.tx_idle_time() > this.delay)
+      this.try_write();
   }
 
   /**
