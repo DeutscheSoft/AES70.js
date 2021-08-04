@@ -55,4 +55,8 @@ export class WebSocketConnection extends ClientConnection {
   close() {
     this.ws.close();
   }
+
+  _now() {
+    return performance.now();
+  }
 }

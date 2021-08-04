@@ -2,6 +2,7 @@
 
 import { Socket } from 'net';
 import { Buffer } from 'buffer';
+import { performance } from 'perf_hooks';
 
 import { ClientConnection } from './client_connection.js';
 
@@ -77,5 +78,9 @@ export class TCPConnection extends ClientConnection {
     super.close();
     this.socket.destroy();
     this.emit('close');
+  }
+
+  _now() {
+    return performance.now();
   }
 }

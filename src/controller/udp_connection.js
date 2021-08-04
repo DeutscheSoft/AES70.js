@@ -199,4 +199,8 @@ export class UDPConnection extends ClientConnection {
       this.socket = null;
     }
   }
+
+  _now() {
+    return performance.now();
+  }
 }

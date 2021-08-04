@@ -3,15 +3,6 @@ import { decodeMessage } from './OCP1/decode_message.js';
 import { encodeMessage } from './OCP1/encode_message.js';
 import { KeepAlive } from './OCP1/keepalive.js';
 
-function now() {
-  try {
-    return performance.now();
-  } catch (e) {
-    // ignore error
-  }
-
-  return Date.now();
-}
 
 /**
  * Connection base class. It extends :class:`Events` and defines two events:
@@ -37,12 +28,13 @@ export class Connection extends Events
   {
     if (!options) options = {};
     super();
+    const now = this._now();
     this.options = options;
     this.batch = options.batch >= 0 ? options.batch : (64 * 1024);
     this.inbuf = null;
     this.inpos = 0;
-    this.last_rx_time = now();
-    this.last_tx_time = now();
+    this.last_rx_time = now;
+    this.last_tx_time = now;
     this.keepalive_interval = -1;
     this._keepalive_interval_id = null;
     this.outbuf = [];
@@ -118,16 +110,16 @@ export class Connection extends Events
 
   tx_idle_time()
   {
-    return now() - this.last_tx_time;
+    return this._now() - this.last_tx_time;
   }
 
   rx_idle_time()
   {
-    return now() - this.last_tx_time;
+    return this._now() - this.last_tx_time;
   }
 
   read(buf) {
-    this.last_rx_time = now();
+    this.last_rx_time = this._now();
 
     if (this.inbuf) {
       const len = this.inbuf.byteLength - this.inpos;
@@ -175,7 +167,7 @@ export class Connection extends Events
 
   write(buf)
   {
-    this.last_tx_time = now();
+    this.last_tx_time = this._now();
   }
 
   is_closed()
