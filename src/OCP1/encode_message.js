@@ -21,6 +21,11 @@ export function encodeMessageTo(dst, pos, pdus, offset, end) {
   if (!end)
     end = pdus.length;
 
+  const count = end - offset;
+
+  if (!(count <= 0xffff))
+    throw new Error('Too many PDUs.');
+
   dst.setUint8(pos, 0x3b);
   pos += 1;
 

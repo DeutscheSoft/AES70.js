@@ -21,13 +21,17 @@ export function deepEqual(a, b) {
     });
 
     return result;
-  } else if (typeof a === 'object' && typeof b === 'object' && a.constructor === b.constructor) {
-    for (const name in a) {
-      if (!deepEqual(a[name], b[name]))
-        return false;
-    }
+  } else if (typeof a === 'object' && typeof b === 'object') {
+    if (a === null || b === null) {
+      return a === b;
+    } else if (a.constructor === b.constructor) {
+      for (const name in a) {
+        if (!deepEqual(a[name], b[name]))
+          return false;
+      }
 
-    return true;
+      return true;
+    }
   }
 
   return a === b;

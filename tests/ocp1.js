@@ -1,4 +1,4 @@
-import { define, defineEncodeDecode, encodeDecode, assertEqual } from './helpers.js';
+import { define, defineEncodeDecode, encodeDecode, assertEqual, assertDeepEqual } from './helpers.js';
 
 import { OcaBoolean } from '../src/OCP1/OcaBoolean.js';
 import { OcaInt8 } from '../src/OCP1/OcaInt8.js';
@@ -26,6 +26,15 @@ import { OcaClassicalFilterShape } from '../src/OCP1/OcaClassicalFilterShape.js'
 import { OcaDeviceState } from '../src/OCP1/OcaDeviceState.js';
 
 import { EncodedArguments } from '../src/OCP1/encoded_arguments.js';
+
+import { encodeMessage } from '../src/OCP1/encode_message.js';
+import { decodeMessage } from '../src/OCP1/decode_message.js';
+import { MessageGenerator } from '../src/OCP1/message_generator.js';
+import { KeepAlive } from '../src/OCP1/keepalive.js';
+import { Response } from '../src/OCP1/response.js';
+import { Command } from '../src/OCP1/command.js';
+import { Notification } from '../src/OCP1/notification.js';
+import * as  Types from '../src/types.js';
 
 defineEncodeDecode('OcaFloat32', OcaFloat32, 0.5, 4);
 defineEncodeDecode('OcaFloat64', OcaFloat64, 2.4, 8);
@@ -130,4 +139,147 @@ define('BigInt conversions', () => {
   assertEqual(encodeDecode(OcaUint64, 3n), 3);
   assertEqual(encodeDecode(OcaInt64, -3), -3);
   assertEqual(encodeDecode(OcaInt64, -3n), -3);
+});
+
+const examplePDUs = [
+  new Command(1, 2, 3, 0),
+  new Command(1, 2, 3, 5, new ArrayBuffer(10)),
+  new Response(1, 2, 3, new ArrayBuffer(4)),
+  new Notification(1, 2, 3, null, new Types.OcaEvent(1, new Types.OcaEventID(2, 3)), 0),
+  new Notification(1, 2, 3, null, new Types.OcaEvent(1, new Types.OcaEventID(2, 3)), 2, new ArrayBuffer(12)),
+  new KeepAlive(1000),
+];
+
+define('encodeMessage', () => {
+  const encodeMessageWithGenerator = (pdus) => {
+      let buf = 0;
+      const generator = new MessageGenerator(0xFFFF, (_buf) => buf = _buf);
+      pdus.forEach((pdu) => generator.add(pdu));
+      generator.flush();
+      generator.dispose();
+
+      return buf;
+  };
+
+  const testEncodeDecode = (pdus) => {
+    {
+      const buf = encodeMessage(pdus);
+      const a = [];
+
+      const pos = decodeMessage(new DataView(buf), 0, a);
+
+      assertEqual(pos, buf.byteLength);
+      assertDeepEqual(pdus, a);
+    }
+    {
+      const buf = encodeMessageWithGenerator(pdus);
+      const a = [];
+
+      const pos = decodeMessage(new DataView(buf), 0, a);
+
+      assertEqual(pos, buf.byteLength);
+      assertDeepEqual(pdus, a);
+    }
+  };
+
+  const rsp = new Response(1, 2, 0, null);
+
+  testEncodeDecode([ new KeepAlive(1) ]);
+  testEncodeDecode([ rsp ]);
+  testEncodeDecode(new Array(13).fill(rsp));
+});
+
+define('MessageGenerator', () => {
+  let outbuf = [];
+  const resultCallback = (buf) => outbuf.push(buf);
+  const decodeAll = () => {
+    const result = [];
+
+    outbuf.forEach((buf) => {
+      const data = new DataView(buf);
+      let pos = 0;
+      while (pos < buf.byteLength) {
+        const tmp = [];
+
+        pos = decodeMessage(data, pos, tmp);
+
+        result.push(tmp);
+      }
+    });
+    outbuf.length = 0;
+
+    return result;
+  };
+
+  const repeat = (n, element) => new Array(n).fill(element);
+
+  {
+    const g = new MessageGenerator(28, resultCallback);
+
+    const k = new KeepAlive(1);
+
+    g.add(k);
+    g.add(k);
+    g.add(k);
+    g.flush();
+
+    // 2 messages should fit into 24 bytes
+    assertEqual(outbuf.length, 2);
+
+    const messages = decodeAll();
+
+    assertDeepEqual(messages, [ [ k ], [ k ], [ k ] ]);
+
+    g.dispose();
+  }
+
+  {
+    const g = new MessageGenerator(64, resultCallback);
+
+    const rsp = new Response(1, 2, 0, null);
+
+    for (let i = 0; i < 10; i++)
+      g.add(rsp);
+
+    g.flush();
+
+    assertEqual(outbuf.length, 2);
+
+    const messages = decodeAll();
+
+    assertDeepEqual(messages, repeat(2, repeat(5, rsp)));
+
+    g.dispose();
+  }
+
+  examplePDUs.forEach((pdu) => {
+    const g = new MessageGenerator(64, resultCallback);
+
+    for (let i = 0; i < 10; i++)
+      g.add(pdu);
+
+    g.flush();
+    g.dispose();
+
+    const messages = decodeAll().flat();
+
+    assertDeepEqual(messages, repeat(10, pdu));
+  });
+
+  {
+    // Allow arbitrary big messages.
+    const g = new MessageGenerator(0xffffffff, resultCallback);
+
+    const rsp = new Response(1, 2, 0, null);
+
+    for (let i = 0; i < 0xffff + 2; i++)
+      g.add(rsp);
+
+    g.flush();
+    g.dispose();
+
+    const messages = decodeAll();
+
+    assertDeepEqual(messages, [ repeat(0xffff, rsp), repeat(2, rsp) ]);
+  }
 });
