@@ -44,7 +44,7 @@ export class Notification extends PDU {
     if (context) {
       const len = context.byteLength;
 
-      dst.setUint16(len);
+      dst.setUint16(pos, len);
       pos += 2;
       if (len > 0) {
         new Uint8Array(dst.buffer).set(
@@ -53,6 +53,9 @@ export class Notification extends PDU {
         );
         pos += len;
       }
+    } else {
+      dst.setUint16(pos, 0);
+      pos += 2;
     }
     dst.setUint32(pos, this.event.EmitterONo);
     pos += 4;
