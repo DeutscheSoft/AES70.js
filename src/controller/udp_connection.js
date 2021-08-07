@@ -270,10 +270,6 @@ export class UDPConnection extends ClientConnection {
       });
     }
 
-    if (retries.length) {
-      console.log('retrying %d commands.', retries.length);
-    }
-
     retries.forEach(([ handle, pendingCommand ]) => {
       pendingCommands.delete(handle);
       pendingCommands.set(handle, pendingCommand);

@@ -136,7 +136,7 @@ export class ClientConnection extends Connection {
     const pendingCommand = pendingCommands.get(handle);
 
     if (!pendingCommand)
-        throw new Error('Unknown handle.');
+        return null;
 
     pendingCommands.delete(handle);
 
@@ -149,6 +149,15 @@ export class ClientConnection extends Connection {
       //log("INCOMING", o);
       if (o instanceof Response) {
         const pendingCommand = this._removePendingCommand(o.handle);
+
+        if (pendingCommand === null) {
+          if (this.is_reliable) {
+            this.error(new Error('Unknown handle.'));
+            return;
+          } else {
+            continue;
+          }
+        }
 
         pendingCommand.response(o);
       } else if (o instanceof Notification) {
