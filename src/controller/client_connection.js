@@ -8,6 +8,52 @@ import { Arguments } from './arguments.js';
 
 import { warn } from '../log.js';
 
+class PendingCommand {
+  get handle() {
+    return this.command.handle;
+  }
+
+  constructor(resolve, reject, returnTypes, command) {
+    this.resolve = resolve;
+    this.reject = reject;
+    this.returnTypes = returnTypes;
+    this.command = command;
+    this.lastSent = 0;
+    this.retries = 0;
+  }
+
+  response(o) {
+    const { resolve, reject, returnTypes, command } = this;
+
+    if (o.status_code !== 0) {
+      reject(new RemoteError(o.status_code, command));
+    } else if (!returnTypes) {
+      resolve(o);
+    } else {
+      try {
+        const length = Math.min(o.param_count, returnTypes.length);
+
+        if (length === 0) {
+          resolve();
+        } else {
+          const result = new Array(length);
+          const dataView = new DataView(o.parameters);
+
+          for (let i = 0, pos = 0; i < length; i++) {
+            let tmp;
+            [pos, tmp] = returnTypes[i].decodeFrom(dataView, pos);
+            result[i] = tmp;
+          }
+
+          resolve(length === 1 ? result[0] : new Arguments(result));
+        }
+      } catch (err) {
+        reject(err);
+      }
+    }
+  }
+}
+
 /**
  * Connection base class for clients (aka controllers).
  *
@@ -17,7 +63,8 @@ import { warn } from '../log.js';
 export class ClientConnection extends Connection {
   constructor(options) {
     super(options);
-    this.command_handles = new Map();
+    this._pendingCommands = new Map();
+    this._nextCommandHandle = 0;
     this.subscribers = new Map();
   }
 
@@ -25,39 +72,12 @@ export class ClientConnection extends Connection {
     super.cleanup();
     this.subscribers = null;
 
-    const handles = this.command_handles;
-    this.command_handles = null;
+    const pendingCommands = this._pendingCommands;
+    this._pendingCommands = null;
     const e = new Error('closed');
-    handles.forEach((a, id) => {
-      try {
-        a[2](e);
-      } catch (e) {
-        // ignore error
-      }
+    pendingCommands.forEach((pendingCommand, id) => {
+      pendingCommand.reject(e);
     });
-  }
-
-  get_command_handle() {
-    let id;
-    const handles = this.command_handles;
-
-    if (handles === null) {
-      throw new Error('Connection not open.');
-    }
-
-    do {
-      id = (Math.random() * (1 + handles.size) * 2) | 0;
-    } while (handles.has(id));
-
-    handles.set(id, null);
-
-    return id;
-  }
-
-  add_command_handle(id, returnTypes, resolve, reject, cmd) {
-    const h = [returnTypes, resolve, reject, cmd];
-    this.command_handles.set(id, h);
-    return h;
   }
 
   get_new_subscriber(callback) {
@@ -79,25 +99,48 @@ export class ClientConnection extends Connection {
     S.delete(method.ONo);
   }
 
-  send_command(cmd, returnTypes) {
-    return new Promise((resolve, reject) => {
-      const id = this.get_command_handle();
-      cmd.handle = id;
+  _getNextCommandHandle() {
+    let handle;
+    const pendingCommands = this._pendingCommands;
 
-      this.add_command_handle(id, returnTypes, resolve, reject, cmd);
-      this.send(cmd);
+    if (pendingCommands === null) {
+      throw new Error('Connection not open.');
+    }
+
+    do {
+      handle = this._nextCommandHandle;
+      this._nextCommandHandle = (handle + 1)|0;
+    } while (pendingCommands.has(handle));
+
+    return handle;
+  }
+
+  send_command(command, returnTypes) {
+    return new Promise((resolve, reject) => {
+      const handle = this._getNextCommandHandle();
+
+      command.handle = handle
+
+      const pendingCommand = new PendingCommand(
+        resolve, reject, returnTypes, command);
+
+      this._pendingCommands.set(handle, pendingCommand);
+
+      pendingCommand.lastSent = this._now();
+      this.send(command);
     });
   }
 
-  remove_command_handle(id) {
-    const handles = this.command_handles;
-    const h = handles.get(id);
+  _removePendingCommand(handle) {
+    const pendingCommands = this._pendingCommands;
+    const pendingCommand = pendingCommands.get(handle);
 
-    if (!h) throw new Error('Unknown handle in response: ' + id);
+    if (!pendingCommand)
+        throw new Error('Unknown handle.');
 
-    handles.delete(id);
+    pendingCommands.delete(handle);
 
-    return h;
+    return pendingCommand;
   }
 
   incoming(pdus) {
@@ -105,36 +148,9 @@ export class ClientConnection extends Connection {
       const o = pdus[i];
       //log("INCOMING", o);
       if (o instanceof Response) {
-        const [returnTypes, resolve, reject, cmd] = this.remove_command_handle(
-          o.handle
-        );
+        const pendingCommand = this._removePendingCommand(o.handle);
 
-        if (o.status_code !== 0) {
-          reject(new RemoteError(o.status_code, cmd));
-        } else if (!returnTypes) {
-          resolve(o);
-        } else {
-          try {
-            const length = Math.min(o.param_count, returnTypes.length);
-
-            if (length === 0) {
-              resolve();
-            } else {
-              const result = new Array(length);
-              const dataView = new DataView(o.parameters);
-
-              for (let i = 0, pos = 0; i < length; i++) {
-                let tmp;
-                [pos, tmp] = returnTypes[i].decodeFrom(dataView, pos);
-                result[i] = tmp;
-              }
-
-              resolve(length === 1 ? result[0] : new Arguments(result));
-            }
-          } catch (err) {
-            reject(err);
-          }
-        }
+        pendingCommand.response(o);
       } else if (o instanceof Notification) {
         const subscribers = this.subscribers;
         if (!subscribers.has(o.target)) {

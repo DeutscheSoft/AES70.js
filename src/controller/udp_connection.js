@@ -94,13 +94,15 @@ export class UDPConnection extends ClientConnection {
     this.socket = socket;
     this.delay = options.delay >= 0 ? options.delay : 5;
     this.retry_interval =
-      options.retry_interval >= 0 ? options.retry_interval : 500;
+      options.retry_interval >= 0 ? options.retry_interval : 250;
     this.retry_count = options.retry_count >= 0 ? options.retry_count : 3;
     this._write_out_id = -1;
     this._write_out_callback = () => {
       this._write_out_id = -1;
       this._write_out();
     };
+    this._retry_id = (this.retry_interval > 0) ?
+      setInterval(() => this._retryCommands(), this.retry_interval) : -1;
     this.q = [];
     socket.on('message', (data, rinfo) => {
       try {
@@ -170,67 +172,6 @@ export class UDPConnection extends ClientConnection {
     });
   }
 
-  add_command_handle(id, return_signature, resolve, reject, cmd) {
-    const h = [return_signature, resolve, reject, cmd];
-
-    this.command_handles.set(id, h);
-
-    if (this.retry_interval > 0) {
-      let tid = -1;
-      let retry_count = this.retry_count;
-
-      tid = setInterval(() => {
-        // connection has been destroyed.
-        if (this.command_handles === null) {
-          clearInterval(tid);
-          return;
-        }
-        if (h[4] === 0) {
-          // response has been received.
-          // mark it for removal but leave a tombstone
-          // for another interval to reduce possible
-          // race-conditions
-          h[4] = 1;
-          return;
-        } else if (h[4] === 1) {
-          // remove tombstone
-          clearInterval(tid);
-          this.command_handles.delete(id);
-          return;
-        } else {
-          if (--retry_count < 0) {
-            try {
-              this.remove_command_handle(id)[2](new Error('Timeout'));
-            } catch (err) {
-              // ignore error
-            }
-            return;
-          }
-
-          // resending same message
-          this.send(h[3]);
-        }
-      }, this.retry_interval);
-    }
-
-    return h;
-  }
-
-  remove_command_handle(id) {
-    const handles = this.command_handles;
-    const h = handles.get(id);
-
-    if (!h) throw new Error('Unknown handle in response: ' + id);
-
-    if (this.options.retry_interval > 0) {
-      handles.delete(id);
-    } else {
-      h[4] = 0;
-    }
-
-    return h;
-  }
-
   write(buf) {
     this.q.push(buf);
 
@@ -255,6 +196,10 @@ export class UDPConnection extends ClientConnection {
     if (this._write_out_id !== -1) {
       clearTimeout(this._write_out_id);
       this._write_out_id = -1;
+    }
+    if (this._retry_id !== -1) {
+      clearInterval(this._retry_id);
+      this._retry_id = -1;
     }
   }
 
@@ -291,5 +236,50 @@ export class UDPConnection extends ClientConnection {
       return;
 
     this._write_out_id = setTimeout(this._write_out_callback, delay - tx_idle_time);
+  }
+
+  _retryCommands() {
+    const now = this._now();
+    const retryTime = now - this.retry_interval;
+    // This is an estimate for how many commands we would manage to send
+    // off.
+    const max = 5 * (this.retry_interval / this.delay) - this.q.length;
+    const pendingCommands = this._pendingCommands;
+
+    const retries = [];
+    const failed = [];
+
+    for (const entry of pendingCommands) {
+      const [ handle, pendingCommand ] = entry;
+
+      // All later commands are newer than the cutoff.
+      if (pendingCommand.lastSent > retryTime) break;
+      if (pendingCommand.retries >= this.retry_count) {
+        failed.push(entry);
+      } else if (retries.length < max) {
+        retries.push(entry);
+      }
+    }
+
+    if (failed.length) {
+      const timeoutError = new Error('Timeout.');
+
+      failed.forEach(([ handle, pendingCommand ]) => {
+        pendingCommands.delete(handle);
+        pendingCommand.reject(timeoutError);
+      });
+    }
+
+    if (retries.length) {
+      console.log('retrying %d commands.', retries.length);
+    }
+
+    retries.forEach(([ handle, pendingCommand ]) => {
+      pendingCommands.delete(handle);
+      pendingCommands.set(handle, pendingCommand);
+      this.send(pendingCommand.command);
+      pendingCommand.lastSent = now;
+      pendingCommand.retries++;
+    });
   }
 }
