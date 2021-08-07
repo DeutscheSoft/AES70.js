@@ -165,8 +165,8 @@ export class UDPConnection extends ClientConnection {
     });
   }
 
-  add_command_handle(id, return_signature, resolve, reject, cmd, buf) {
-    const h = [return_signature, resolve, reject, cmd, buf];
+  add_command_handle(id, return_signature, resolve, reject, cmd) {
+    const h = [return_signature, resolve, reject, cmd];
 
     this.command_handles.set(id, h);
 
@@ -203,7 +203,7 @@ export class UDPConnection extends ClientConnection {
           }
 
           // resending same message
-          this.send(h[4]);
+          this.send(h[3]);
         }
       }, this.retry_interval);
     }

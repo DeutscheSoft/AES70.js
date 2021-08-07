@@ -1,7 +1,7 @@
 import { Events } from './events.js';
 import { decodeMessage } from './OCP1/decode_message.js';
-import { encodeMessage } from './OCP1/encode_message.js';
 import { KeepAlive } from './OCP1/keepalive.js';
+import { MessageGenerator } from './OCP1/message_generator.js';
 
 /**
  * Connection base class. It extends :class:`Events` and defines two events:
@@ -29,7 +29,8 @@ export class Connection extends Events
     super();
     const now = this._now();
     this.options = options;
-    this.batch = options.batch >= 0 ? options.batch : (64 * 1024);
+    const batchSize = options.batch >= 0 ? options.batch : (64 * 1024);
+    this._message_generator = new MessageGenerator(batchSize, (buf) => this.write(buf));
     this.inbuf = null;
     this.inpos = 0;
     this.last_rx_time = now;
@@ -38,7 +39,6 @@ export class Connection extends Events
     this.tx_bytes = 0;
     this.keepalive_interval = -1;
     this._keepalive_interval_id = null;
-    this.outbuf = [];
     const cleanup = () => {
       this.removeEventListener('close', cleanup);
       this.removeEventListener('error', cleanup);
@@ -46,44 +46,6 @@ export class Connection extends Events
     };
     this.on('close', cleanup);
     this.on('error', cleanup);
-    this.write_cb = () => {
-      if (this.is_closed()) return;
-      const out = this.outbuf;
-
-      if (!out.length) return;
-      if (out.length == 1)
-      {
-        this.write(out[0]);
-      }
-      else
-      {
-        for (let start = 0; start < out.length;)
-        {
-          let i;
-          let len;
-
-          for (i = start, len = 0; i < out.length && (!len || len + out[i].byteLength < this.batch); i++)
-            len += out[i].byteLength;
-
-          const buf = new ArrayBuffer(len);
-          const a8 = new Uint8Array(buf);
-
-          for (let j = start, len = 0; j < i; j++)
-          {
-            a8.set(new Uint8Array(out[j]), len);
-            len += out[j].byteLength;
-          }
-
-          this.write(buf);
-
-          start = i;
-        }
-      }
-
-      out.length = 0;
-
-      this._check_keepalive();
-    };
   }
 
   get is_reliable()
@@ -91,22 +53,10 @@ export class Connection extends Events
     return true;
   }
 
-  send(buf)
+  send(pdu)
   {
     if (this.is_closed()) throw new Error("Connection is closed.");
-    if (!this.outbuf.length)
-      Promise.resolve(0).then(this.write_cb);
-
-    this.outbuf.push(buf);
-  }
-
-  allocate(len)
-  {
-    const buf = new ArrayBuffer(len);
-
-    this.send(buf);
-
-    return buf;
+    this._message_generator.add(pdu);
   }
 
   tx_idle_time()
@@ -175,7 +125,7 @@ export class Connection extends Events
 
   is_closed()
   {
-    return this.write_cb === null;
+    return this._message_generator === null;
   }
 
   /**
@@ -183,17 +133,17 @@ export class Connection extends Events
    */
   close()
   {
-    this.outbuf.length = 0;
     this.emit('close');
   }
 
   cleanup()
   {
     if (this.is_closed()) throw new Error("cleanup() called twice.");
-    this.write_cb = null;
 
     // disable keepalive
     this.set_keepalive_interval(0);
+    this._message_generator.dispose();
+    this._message_generator = null;
   }
 
   _check_keepalive()
@@ -211,8 +161,19 @@ export class Connection extends Events
     }
     else if (this.tx_idle_time() > t * 0.75)
     {
-      this.send(encodeMessage(new KeepAlive(t)));
+      /* Try to flush buffers before actually sending out anything. */
+      this.flush();
+      if (this.tx_idle_time() > t * 0.75)
+        this.send(new KeepAlive(t));
     }
+  }
+
+  /**
+   * Flush write buffers. This are usually PDUs or may also be unwritten
+   * buffers.
+   */
+  flush() {
+    this._message_generator.flush();
   }
 
   /**

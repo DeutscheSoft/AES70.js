@@ -83,10 +83,9 @@ export class ClientConnection extends Connection {
     return new Promise((resolve, reject) => {
       const id = this.get_command_handle();
       cmd.handle = id;
-      const buf = encodeMessage(cmd);
 
-      this.add_command_handle(id, returnTypes, resolve, reject, cmd, buf);
-      this.send(buf);
+      this.add_command_handle(id, returnTypes, resolve, reject, cmd);
+      this.send(cmd);
     });
   }
 
