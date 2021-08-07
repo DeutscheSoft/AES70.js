@@ -101,7 +101,7 @@ export class UDPConnection extends ClientConnection {
       try {
         this.read(data.buffer);
       } catch (err) {
-        console.warning('Failed to parse incoming AES70 packet: %o', err);
+        console.warn('Failed to parse incoming AES70 packet: %o', err);
       }
       if (this.inbuf !== null) this.close();
     });
