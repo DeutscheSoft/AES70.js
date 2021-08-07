@@ -6,8 +6,6 @@ import { KeepAlive } from '../OCP1/keepalive.js';
 import { Notification } from '../OCP1/notification.js';
 import { Arguments } from './arguments.js';
 
-import { warn } from '../log.js';
-
 class PendingCommand {
   get handle() {
     return this.command.handle;
@@ -172,7 +170,6 @@ export class ClientConnection extends Connection {
           throw new Error('Bad keepalive timeout.');
         }
       } else {
-        warn('Unexpected PDU: %o', o);
         throw new Error('Unexpected PDU');
       }
     }
