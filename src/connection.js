@@ -136,6 +136,10 @@ export class Connection extends Events
     this.emit('close');
   }
 
+  error(err) {
+    this.emit('error', err);
+  }
+
   cleanup()
   {
     if (this.is_closed()) throw new Error("cleanup() called twice.");
@@ -156,8 +160,7 @@ export class Connection extends Events
     if (this.rx_idle_time() > t * 3)
     {
       this.emit('timeout');
-      this.emit('close');
-      this.close();
+      this.error(new Error('Keepalive timeout.'));
     }
     else if (this.tx_idle_time() > t * 0.75)
     {

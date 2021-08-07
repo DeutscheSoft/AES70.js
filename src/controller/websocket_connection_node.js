@@ -51,11 +51,12 @@ export class WebSocketConnection extends ClientConnection {
     });
   }
 
-  /**
-   * Close the WebSocket.
-   */
-  close() {
-    this.ws.close();
+  cleanup() {
+    super.cleanup();
+    if (this.ws) {
+      try { this.ws.close(); } catch (err) {}
+      this.ws = null;
+    }
   }
 
   _now() {
