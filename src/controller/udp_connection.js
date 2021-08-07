@@ -248,6 +248,7 @@ export class UDPConnection extends ClientConnection {
    * Closes the udp port.
    */
   close() {
+    super.close();
     if (this.socket) {
       this.socket.close();
       this.socket = null;
