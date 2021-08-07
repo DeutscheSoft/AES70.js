@@ -96,6 +96,11 @@ export class UDPConnection extends ClientConnection {
     this.retry_interval =
       options.retry_interval >= 0 ? options.retry_interval : 500;
     this.retry_count = options.retry_count >= 0 ? options.retry_count : 3;
+    this._write_out_id = -1;
+    this._write_out_callback = () => {
+      this._write_out_id = -1;
+      this._write_out();
+    };
     this.q = [];
     socket.on('message', (data, rinfo) => {
       try {
@@ -226,36 +231,65 @@ export class UDPConnection extends ClientConnection {
     return h;
   }
 
-  try_write() {
-    if (!this.socket) return;
-    const q = this.q;
-    const buf = q.shift();
-    this.socket.send(Buffer.from(buf));
-    if (q.length) setTimeout(this.try_write.bind(this), this.delay);
-    super.write(buf);
-  }
-
   write(buf) {
-    const q = this.q;
-    if (!q.length)
-      Promise.resolve().then(this.try_write.bind(this));
-    q.push(buf);
-    if (false && this.tx_idle_time() > this.delay)
-      this.try_write();
+    this.q.push(buf);
+
+    if (this.tx_idle_time() >= this.delay)
+      this._write_out();
+    else
+      this._schedule_write_out();
   }
 
-  /**
-   * Closes the udp port.
-   */
-  close() {
-    super.close();
+  flush() {
+    super.flush();
+    if (this.tx_idle_time() > this.delay)
+      this._write_out();
+  }
+
+  cleanup() {
+    super.cleanup();
     if (this.socket) {
       this.socket.close();
       this.socket = null;
+    }
+    if (this._write_out_id !== -1) {
+      clearTimeout(this._write_out_id);
+      this._write_out_id = -1;
     }
   }
 
   _now() {
     return performance.now();
+  }
+
+  _write_out() {
+    if (!this.socket) return;
+    const q = this.q;
+
+    if (!q.length) return;
+
+    const buf = q.shift();
+
+    this.socket.send(Buffer.from(buf));
+    super.write(buf);
+
+    if (q.length)
+      this._schedule_write_out();
+  }
+
+  _schedule_write_out() {
+    const tx_idle_time = this.tx_idle_time();
+    const delay = this.delay;
+
+    if (tx_idle_time >= delay) {
+      this._write_out();
+      return;
+    }
+
+    // Already scheduled.
+    if (this._write_out_id !== -1)
+      return;
+
+    this._write_out_id = setTimeout(this._write_out_callback, delay - tx_idle_time);
   }
 }
