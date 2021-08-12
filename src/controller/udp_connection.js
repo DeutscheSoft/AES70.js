@@ -112,6 +112,7 @@ export class UDPConnection extends ClientConnection {
       }
       if (this.inbuf !== null) this.close();
     });
+    socket.on('error', (err) => this.error(err));
     this.set_keepalive_interval(1);
   }
 
