@@ -28,7 +28,10 @@ const default_connect_options = {
 
 function connect_options(o)
 {
-  return Object.assign({}, default_connect_options, o);
+  if (o.host === 'localhost' || o.host === '127.0.0.1')
+    return Object.assign({}, default_connect_options, o);
+
+  return o;
 }
 
 class Throttler {
