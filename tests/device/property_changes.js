@@ -84,7 +84,7 @@ class PropertyChanges extends ObjectTest
         try {
           await setter(to);
         } catch (e) {
-          if (e instanceof RemoteError && e.status === OcaStatus.NotImplemented) return;
+          if (e.status === OcaStatus.NotImplemented) return;
           throw e;
         }
 
