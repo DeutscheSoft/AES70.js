@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-import * as WebSocket from 'ws';
+import WebSocket from 'ws';
 import { performance } from 'perf_hooks';
 
 import { ClientConnection } from './client_connection.js';
@@ -55,6 +55,7 @@ export class WebSocketConnection extends ClientConnection {
     super.cleanup();
     if (this.ws) {
       try { this.ws.close(); } catch (err) {}
+      this.ws.removeAllListeners();
       this.ws = null;
     }
   }
