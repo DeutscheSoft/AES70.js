@@ -143,6 +143,12 @@ export class ClientConnection extends Connection {
 
   incoming(pdus) {
     for (let i = 0; i < pdus.length; i++) {
+      // Connection may have been closed while receiving a command
+      if (this._pendingCommands === null)
+      {
+        return;
+      }
+
       const o = pdus[i];
       //log("INCOMING", o);
       if (o instanceof Response) {
