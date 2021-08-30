@@ -9,6 +9,7 @@
   "browser:module": "src/index.browser.js",
   "typings": "src/index.d.ts",
   "exports": {
+    ".": "./src/index.js",
     "./RemoteControlClasses": "./src/controller/ControlClasses.js"
   },
   "bin": {
