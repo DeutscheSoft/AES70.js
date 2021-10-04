@@ -21,6 +21,7 @@ import * as RemoteControlClasses from './ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from '../types/OcaManagerDefaultObjectNumbers.js';
 import { OcaNotificationDeliveryMode } from '../types/OcaNotificationDeliveryMode.js';
+import { RemoteError } from './remote_error.js';
 
 function eventToKey(event) {
   const ono = event.EmitterONo;
@@ -104,6 +105,22 @@ function tree_to_rolemap(tree, s) {
     return rolemap;
   });
 }
+
+const simpleMethod = {
+  ONo: 0,
+  MethodID: {
+    DefLevel: 0,
+    MethodIndex: 0,
+  },
+};
+
+const fallbackMethod = {
+  ONo: 1055,
+  MethodID: {
+    DefLevel: 1,
+    MethodIndex: 1,
+  },
+};
 
 /**
  * Controller class for a remote OCA device.
@@ -230,6 +247,7 @@ export class RemoteDevice extends Events {
     this.Root = new OcaBlock(100, this);
 
     this.subscriptions = new Map();
+    this._supportsSimpleNotifications = true;
   }
 
   /**
@@ -243,14 +261,27 @@ export class RemoteDevice extends Events {
     return this.connection.send_command(cmd, returnType);
   }
 
-  add_subscription(event, callback) {
+  _doSubscribe(event, method) {
+    return this.SubscriptionManager.AddSubscription(
+      event,
+      method,
+      new Uint8Array(0),
+      OcaNotificationDeliveryMode.Reliable,
+      new Uint8Array(0)
+    );
+  }
+
+  async add_subscription(event, callback) {
     const key = eventToKey(event);
+    const subscriptions = this.subscriptions;
 
-    const S = this.subscriptions.get(key);
+    {
+      const info = subscriptions.get(key);
 
-    if (S) {
-      S.callbacks.add(callback);
-      return Promise.resolve(true);
+      if (info) {
+        info.callbacks.add(callback);
+        return true;
+      }
     }
 
     /* do the actual subscription */
@@ -258,7 +289,7 @@ export class RemoteDevice extends Events {
     const cb = (o) => {
       const S = this.subscriptions.get(key);
       if (!S) {
-        warn('Subscription lost.\n');
+        warn('Subscription lost.');
         return;
       }
       const a = S.callbacks;
@@ -271,38 +302,56 @@ export class RemoteDevice extends Events {
       });
     };
 
-    const method = this.connection.get_new_subscriber(cb);
+    this.connection._addSubscriber(event, cb);
 
-    this.subscriptions.set(key, {
+    const trySimple = this._supportsSimpleNotifications;
+
+    const info = {
       callbacks: new Set([callback]),
-      method: method,
+      method: null,
       callback: cb,
-    });
+    };
 
-    return this.SubscriptionManager.AddSubscription(
-      event,
-      method,
-      new Uint8Array(0),
-      OcaNotificationDeliveryMode.Reliable,
-      new Uint8Array(0)
-    );
+    subscriptions.set(key, info);
+
+    let method;
+
+    try {
+      if (trySimple) {
+        try {
+          await this._doSubscribe(event, method = simpleMethod);
+        } catch (err) {
+          if (!(err instanceof RemoteError))
+            throw err;
+          this._supportsSimpleNotifications = false;
+          await this._doSubscribe(event, method = fallbackMethod);
+        }
+      } else {
+        await this._doSubscribe(event, method = fallbackMethod);
+      }
+    } catch (err) {
+      subscriptions.delete(key);
+      throw err;
+    }
+
+    info.method = method;
   }
 
   remove_subscription(event, callback) {
     const key = eventToKey(event);
 
-    const S = this.subscriptions.get(key);
+    const info = this.subscriptions.get(key);
 
-    if (!S) return Promise.reject('Callback not registered.');
+    if (!info) return Promise.reject('Callback not registered.');
 
-    const a = S.callbacks;
+    const a = info.callbacks;
 
     a.delete(callback);
 
     if (!a.size) {
-      this.connection.remove_subscriber(S.method);
+      this.connection._removeSubscriber(event);
       this.subscriptions.delete(key);
-      return this.SubscriptionManager.RemoveSubscription(event, S.method);
+      return this.SubscriptionManager.RemoveSubscription(event, info.method);
     }
 
     return Promise.resolve(true);

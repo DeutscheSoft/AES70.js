@@ -52,6 +52,13 @@ class PendingCommand {
   }
 }
 
+function eventToKey(event) {
+  const ono = event.EmitterONo;
+  const id = event.EventID;
+
+  return [ono, id.DefLevel, id.EventIndex].join(',');
+}
+
 /**
  * Connection base class for clients (aka controllers).
  *
@@ -63,12 +70,12 @@ export class ClientConnection extends Connection {
     super(options);
     this._pendingCommands = new Map();
     this._nextCommandHandle = 0;
-    this.subscribers = new Map();
+    this._subscribers = new Map();
   }
 
   cleanup() {
     super.cleanup();
-    this.subscribers = null;
+    this._subscribers = null;
 
     const pendingCommands = this._pendingCommands;
     this._pendingCommands = null;
@@ -78,23 +85,24 @@ export class ClientConnection extends Connection {
     });
   }
 
-  get_new_subscriber(callback) {
-    let id;
-    while (this.subscribers.has((id = (1 + Math.random() * 0xffff) | 0)));
-    this.subscribers.set(id, callback);
-    return {
-      ONo: id,
-      MethodID: {
-        DefLevel: 1,
-        MethodIndex: 1,
-      },
-    };
+  _addSubscriber(event, callback) {
+    const key = eventToKey(event);
+    const subscribers = this._subscribers;
+
+    if (subscribers.has(key))
+      throw new Error('Subscriber already exists.');
+
+    subscribers.set(key, callback);
   }
 
-  remove_subscriber(method) {
-    const S = this.subscribers;
-    if (S == null) return;
-    S.delete(method.ONo);
+  _removeSubscriber(event) {
+    const key = eventToKey(event);
+    const subscribers = this._subscribers;
+
+    if (!subscribers.has(key))
+      throw new Error('Unknown subscriber.');
+
+    subscribers.delete(key);
   }
 
   _getNextCommandHandle() {
@@ -165,12 +173,16 @@ export class ClientConnection extends Connection {
 
         pendingCommand.response(o);
       } else if (o instanceof Notification) {
-        const subscribers = this.subscribers;
-        if (!subscribers.has(o.target)) {
+        const subscribers = this._subscribers;
+        const key = eventToKey(o.event);
+
+        const cb = subscribers.get(key);
+
+        if (!cb) {
           // NOTE: this is legal
           continue;
         }
-        subscribers.get(o.target)(o);
+        cb(o);
       } else if (o instanceof KeepAlive) {
         if (!(o.time > 0)) {
           throw new Error('Bad keepalive timeout.');
