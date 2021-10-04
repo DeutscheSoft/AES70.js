@@ -10,7 +10,8 @@
   "typings": "src/index.d.ts",
   "exports": {
     ".": "./src/index.js",
-    "./RemoteControlClasses": "./src/controller/ControlClasses.js"
+    "./RemoteControlClasses": "./src/controller/ControlClasses.js",
+    "./OCP1": "./src/OCP1.js"
   },
   "bin": {
     "printDevice": "bin/printDevice.js"
