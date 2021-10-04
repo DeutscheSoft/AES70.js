@@ -48,6 +48,7 @@ export class Test {
   {
     if (this.device !== null)
     {
+      this.device.connection.emit('test_done');
       this.device.close();
       this.device = null;
     }

@@ -187,11 +187,22 @@ function timeout(n)
 
 async function run_tests(type, target)
 {
+  let onClose = null;
+
+  const close_p = new Promise((resolve, reject) => {
+    onClose = () => setTimeout(() => reject(new Error('Closed.')), 1000);
+  });
+
   const get_device = async () => {
     const connection = await type.connect(connect_options(target));
     const device = new RemoteDevice(connection);
 
     device.set_keepalive_interval(1);
+
+    connection.on('close', onClose);
+    connection.on('test_done', () => {
+      connection.removeEventListener('close', onClose);
+    });
 
     return device;
   };
@@ -203,7 +214,7 @@ async function run_tests(type, target)
     const timeout_p = timeout(60*1000);
     const test_p = test_runner.run();
 
-    await Promise.race([ timeout_p.then(() => { timed_out = true; }), test_p ]);
+    await Promise.race([ timeout_p.then(() => { timed_out = true; }), test_p, close_p ]);
 
     if (timed_out)
     {
