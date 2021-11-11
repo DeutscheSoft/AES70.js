@@ -106,15 +106,7 @@ function tree_to_rolemap(tree, s) {
   });
 }
 
-const simpleMethod = {
-  ONo: 0,
-  MethodID: {
-    DefLevel: 0,
-    MethodIndex: 0,
-  },
-};
-
-const fallbackMethod = {
+const subscriberMethod = {
   ONo: 1055,
   MethodID: {
     DefLevel: 1,
@@ -247,7 +239,6 @@ export class RemoteDevice extends Events {
     this.Root = new OcaBlock(100, this);
 
     this.subscriptions = new Map();
-    this._supportsSimpleNotifications = true;
   }
 
   /**
@@ -261,10 +252,10 @@ export class RemoteDevice extends Events {
     return this.connection.send_command(cmd, returnType);
   }
 
-  _doSubscribe(event, method) {
+  _doSubscribe(event) {
     return this.SubscriptionManager.AddSubscription(
       event,
-      method,
+      subscriberMethod,
       new Uint8Array(0),
       OcaNotificationDeliveryMode.Reliable,
       new Uint8Array(0)
@@ -304,37 +295,19 @@ export class RemoteDevice extends Events {
 
     this.connection._addSubscriber(event, cb);
 
-    const trySimple = this._supportsSimpleNotifications;
-
     const info = {
       callbacks: new Set([callback]),
-      method: null,
       callback: cb,
     };
 
     subscriptions.set(key, info);
 
-    let method;
-
     try {
-      if (trySimple) {
-        try {
-          await this._doSubscribe(event, method = simpleMethod);
-        } catch (err) {
-          if (!(err instanceof RemoteError))
-            throw err;
-          this._supportsSimpleNotifications = false;
-          await this._doSubscribe(event, method = fallbackMethod);
-        }
-      } else {
-        await this._doSubscribe(event, method = fallbackMethod);
-      }
+      await this._doSubscribe(event);
     } catch (err) {
       subscriptions.delete(key);
       throw err;
     }
-
-    info.method = method;
   }
 
   remove_subscription(event, callback) {
@@ -351,7 +324,7 @@ export class RemoteDevice extends Events {
     if (!a.size) {
       this.connection._removeSubscriber(event);
       this.subscriptions.delete(key);
-      return this.SubscriptionManager.RemoveSubscription(event, info.method);
+      return this.SubscriptionManager.RemoveSubscription(event, subscriberMethod);
     }
 
     return Promise.resolve(true);
