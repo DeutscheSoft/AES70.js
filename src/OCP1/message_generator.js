@@ -1,14 +1,10 @@
-import {
-  encodeMessageTo,
-  messageHeaderSize,
-} from './encode_message.js';
+import { encodeMessageTo, messageHeaderSize } from './encode_message.js';
 
 const pduTypeKeepAlive = 4;
 
 export class MessageGenerator {
   constructor(batchSize, resultCallback) {
-    if (!(batchSize <= 0xffffffff))
-      throw new TypeError('Invalid batch size.');
+    if (!(batchSize <= 0xffffffff)) throw new TypeError('Invalid batch size.');
     this._pdus = [];
     this._batchSize = batchSize;
     this._resultCallback = resultCallback;
@@ -19,7 +15,7 @@ export class MessageGenerator {
     this._flushCb = () => {
       this._flushScheduled = false;
       if (this._pdus === null) return;
-      this.flush(); 
+      this.flush();
     };
   }
 
@@ -29,13 +25,13 @@ export class MessageGenerator {
     const messageType = pdu.messageType;
 
     // Can we add to the current message?
-    let combine = this._lastMessageType === messageType &&
-        messageType !== pduTypeKeepAlive &&
-        this._currentCount < 0xffff;
+    let combine =
+      this._lastMessageType === messageType &&
+      messageType !== pduTypeKeepAlive &&
+      this._currentCount < 0xffff;
     let additionalSize = encodedLength;
 
-    if (!combine)
-      additionalSize += messageHeaderSize;
+    if (!combine) additionalSize += messageHeaderSize;
 
     // The resulting buffer would become too large, we flush now.
     if (currentSize && currentSize + additionalSize > this._batchSize) {
@@ -47,7 +43,7 @@ export class MessageGenerator {
     this._currentSize += additionalSize;
 
     if (combine) {
-      this._currentCount ++;
+      this._currentCount++;
     } else {
       this._currentCount = 1;
     }
@@ -65,14 +61,15 @@ export class MessageGenerator {
   scheduleFlush() {
     if (this._flushScheduled) return;
     this._flushScheduled = true;
-    Promise.resolve().then(this._flushCb).catch((err) => {
-      console.error(err);
-    });
+    Promise.resolve()
+      .then(this._flushCb)
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   flush() {
-    if (!this._currentSize)
-      return;
+    if (!this._currentSize) return;
 
     const pdus = this._pdus;
 
@@ -85,9 +82,12 @@ export class MessageGenerator {
       const pdu = pdus[i];
       const messageType = pdu.messageType;
 
-      if (i === (length - 1) || (i + 1 - from) === 0xffff ||
-          messageType === pduTypeKeepAlive ||
-          messageType !== pdus[i+1].messageType) {
+      if (
+        i === length - 1 ||
+        i + 1 - from === 0xffff ||
+        messageType === pduTypeKeepAlive ||
+        messageType !== pdus[i + 1].messageType
+      ) {
         pos = encodeMessageTo(dst, pos, pdus, from, i + 1);
         from = i + 1;
       }

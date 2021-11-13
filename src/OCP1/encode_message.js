@@ -15,16 +15,13 @@ function calculateMessageLength(pdus) {
 }
 
 export function encodeMessageTo(dst, pos, pdus, offset, end) {
-  if (!offset)
-    offset = 0;
+  if (!offset) offset = 0;
 
-  if (!end)
-    end = pdus.length;
+  if (!end) end = pdus.length;
 
   const count = end - offset;
 
-  if (!(count <= 0xffff))
-    throw new Error('Too many PDUs.');
+  if (!(count <= 0xffff)) throw new Error('Too many PDUs.');
 
   dst.setUint8(pos, 0x3b);
   pos += 1;

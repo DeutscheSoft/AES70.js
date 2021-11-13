@@ -52,7 +52,9 @@ export class WebSocketConnection extends ClientConnection {
   cleanup() {
     super.cleanup();
     if (this.ws) {
-      try { this.ws.close(); } catch (err) {}
+      try {
+        this.ws.close();
+      } catch (err) {}
       this.ws = null;
     }
   }

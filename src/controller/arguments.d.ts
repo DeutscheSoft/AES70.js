@@ -7,11 +7,10 @@ export declare class Arguments<ArgumentTypes extends unknown[]> {
    */
   readonly values: ArgumentTypes;
 
-  constructor(values: ArgumentTypes)
+  constructor(values: ArgumentTypes);
 
   /**
    * The number of elements.
    */
   get length(): number;
-
 }

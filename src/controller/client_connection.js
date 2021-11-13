@@ -89,8 +89,7 @@ export class ClientConnection extends Connection {
     const key = eventToKey(event);
     const subscribers = this._subscribers;
 
-    if (subscribers.has(key))
-      throw new Error('Subscriber already exists.');
+    if (subscribers.has(key)) throw new Error('Subscriber already exists.');
 
     subscribers.set(key, callback);
   }
@@ -99,8 +98,7 @@ export class ClientConnection extends Connection {
     const key = eventToKey(event);
     const subscribers = this._subscribers;
 
-    if (!subscribers.has(key))
-      throw new Error('Unknown subscriber.');
+    if (!subscribers.has(key)) throw new Error('Unknown subscriber.');
 
     subscribers.delete(key);
   }
@@ -115,7 +113,7 @@ export class ClientConnection extends Connection {
 
     do {
       handle = this._nextCommandHandle;
-      this._nextCommandHandle = (handle + 1)|0;
+      this._nextCommandHandle = (handle + 1) | 0;
     } while (pendingCommands.has(handle));
 
     return handle;
@@ -125,10 +123,14 @@ export class ClientConnection extends Connection {
     return new Promise((resolve, reject) => {
       const handle = this._getNextCommandHandle();
 
-      command.handle = handle
+      command.handle = handle;
 
       const pendingCommand = new PendingCommand(
-        resolve, reject, returnTypes, command);
+        resolve,
+        reject,
+        returnTypes,
+        command
+      );
 
       this._pendingCommands.set(handle, pendingCommand);
 
@@ -141,8 +143,7 @@ export class ClientConnection extends Connection {
     const pendingCommands = this._pendingCommands;
     const pendingCommand = pendingCommands.get(handle);
 
-    if (!pendingCommand)
-        return null;
+    if (!pendingCommand) return null;
 
     pendingCommands.delete(handle);
 
@@ -152,8 +153,7 @@ export class ClientConnection extends Connection {
   incoming(pdus) {
     for (let i = 0; i < pdus.length; i++) {
       // Connection may have been closed while receiving a command
-      if (this._pendingCommands === null)
-      {
+      if (this._pendingCommands === null) {
         return;
       }
 

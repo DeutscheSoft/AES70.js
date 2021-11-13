@@ -25,8 +25,7 @@ async function waitForKeepalive(socket, options) {
 
       pos = decodeMessage(new DataView(data.buffer), 0, pdus);
 
-      if (pdus.length !== 1)
-        throw new Error('Expected keepalive response.');
+      if (pdus.length !== 1) throw new Error('Expected keepalive response.');
 
       socket.off('message', onMessage);
       socket.off('error', reject);
@@ -43,8 +42,7 @@ async function waitForKeepalive(socket, options) {
   for (let i = 0; i < 3; i++) {
     socket.send(msg);
 
-    if (await Promise.race([ waiter, delay(t) ]))
-      return;
+    if (await Promise.race([waiter, delay(t)])) return;
   }
 
   throw new Error('Failed to connect.');
@@ -101,8 +99,10 @@ export class UDPConnection extends ClientConnection {
       this._write_out_id = -1;
       this._write_out();
     };
-    this._retry_id = (this.retry_interval > 0) ?
-      setInterval(() => this._retryCommands(), this.retry_interval) : -1;
+    this._retry_id =
+      this.retry_interval > 0
+        ? setInterval(() => this._retryCommands(), this.retry_interval)
+        : -1;
     this.q = [];
     socket.on('message', (data, rinfo) => {
       try {
@@ -176,16 +176,13 @@ export class UDPConnection extends ClientConnection {
   write(buf) {
     this.q.push(buf);
 
-    if (this.tx_idle_time() >= this.delay)
-      this._write_out();
-    else
-      this._schedule_write_out();
+    if (this.tx_idle_time() >= this.delay) this._write_out();
+    else this._schedule_write_out();
   }
 
   flush() {
     super.flush();
-    if (this.tx_idle_time() > this.delay)
-      this._write_out();
+    if (this.tx_idle_time() > this.delay) this._write_out();
   }
 
   cleanup() {
@@ -219,8 +216,7 @@ export class UDPConnection extends ClientConnection {
     this.socket.send(Buffer.from(buf));
     super.write(buf);
 
-    if (q.length)
-      this._schedule_write_out();
+    if (q.length) this._schedule_write_out();
   }
 
   _schedule_write_out() {
@@ -233,10 +229,12 @@ export class UDPConnection extends ClientConnection {
     }
 
     // Already scheduled.
-    if (this._write_out_id !== -1)
-      return;
+    if (this._write_out_id !== -1) return;
 
-    this._write_out_id = setTimeout(this._write_out_callback, delay - tx_idle_time);
+    this._write_out_id = setTimeout(
+      this._write_out_callback,
+      delay - tx_idle_time
+    );
   }
 
   _retryCommands() {
@@ -251,7 +249,7 @@ export class UDPConnection extends ClientConnection {
     const failed = [];
 
     for (const entry of pendingCommands) {
-      const [ handle, pendingCommand ] = entry;
+      const [handle, pendingCommand] = entry;
 
       // All later commands are newer than the cutoff.
       if (pendingCommand.lastSent > retryTime) break;
@@ -265,13 +263,13 @@ export class UDPConnection extends ClientConnection {
     if (failed.length) {
       const timeoutError = new Error('Timeout.');
 
-      failed.forEach(([ handle, pendingCommand ]) => {
+      failed.forEach(([handle, pendingCommand]) => {
         pendingCommands.delete(handle);
         pendingCommand.reject(timeoutError);
       });
     }
 
-    retries.forEach(([ handle, pendingCommand ]) => {
+    retries.forEach(([handle, pendingCommand]) => {
       pendingCommands.delete(handle);
       pendingCommands.set(handle, pendingCommand);
       this.send(pendingCommand.command);

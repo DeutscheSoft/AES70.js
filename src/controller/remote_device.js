@@ -324,7 +324,10 @@ export class RemoteDevice extends Events {
     if (!a.size) {
       this.connection._removeSubscriber(event);
       this.subscriptions.delete(key);
-      return this.SubscriptionManager.RemoveSubscription(event, subscriberMethod);
+      return this.SubscriptionManager.RemoveSubscription(
+        event,
+        subscriberMethod
+      );
     }
 
     return Promise.resolve(true);

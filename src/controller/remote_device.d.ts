@@ -47,7 +47,7 @@ export declare class RemoteDevice {
    * The Subscription manager object.
    */
   SubscriptionManager: OcaSubscriptionManager;
-                       
+
   /**
    * The Power manager object.
    */
