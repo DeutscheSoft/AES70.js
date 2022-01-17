@@ -77,10 +77,12 @@ export declare class OcaLibrary extends OcaAgent {
    * Retrieves a library volume. The return value indicates whether the volume was successfully retrieved. Changed in version 2 because the definition of OcaLibVolMetaData, which is part of OcaLibVol, has changed.
    *
    * @method OcaLibrary#GetVolume
+   * @param {number} ID
+   *
    * @returns {Promise<OcaLibVol>}
    *   A promise which resolves to a single value of type :class:`OcaLibVol`.
    */
-  GetVolume(): Promise<OcaLibVol>;
+  GetVolume(ID: number): Promise<OcaLibVol>;
 
   /**
    * Gets the count of volumes in this library. The return value indicates whether the count was successfully retrieved.

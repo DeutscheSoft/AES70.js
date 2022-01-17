@@ -23,7 +23,7 @@ export const OcaLibrary = make_control_class(
     ['AddVolume', 3, 1, [OcaLibVol], [OcaUint32]],
     ['ReplaceVolume', 3, 2, [OcaUint32, OcaLibVol], []],
     ['DeleteVolume', 3, 3, [OcaUint32], []],
-    ['GetVolume', 3, 4, [], [OcaLibVol]],
+    ['GetVolume', 3, 4, [OcaUint32], [OcaLibVol]],
     ['GetVolumeCount', 3, 5, [], [OcaUint16]],
     ['GetVolumes', 3, 6, [], [OcaMap(OcaUint32, OcaLibVol)]],
     ['GetAccess', 3, 7, [], [OcaLibAccess]],
@@ -68,6 +68,8 @@ export const OcaLibrary = make_control_class(
  * Retrieves a library volume. The return value indicates whether the volume was successfully retrieved. Changed in version 2 because the definition of OcaLibVolMetaData, which is part of OcaLibVol, has changed.
  *
  * @method OcaLibrary#GetVolume
+ * @param {number} ID
+ *
  * @returns {Promise<OcaLibVol>}
  *   A promise which resolves to a single value of type :class:`OcaLibVol`.
  */
