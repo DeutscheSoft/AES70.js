@@ -2,6 +2,8 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.3.6] - 2022-03-13
+
 - Add conditional 'exports' entry for NodeJS and
   'default' for browser environments
 - Add wildcard 'exports' entry for files in './src'
