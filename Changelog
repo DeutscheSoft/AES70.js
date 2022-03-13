@@ -2,6 +2,30 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.3.5] - 2022-01-17
+
+- Fix OcaLibrary.GetVolume() signature
+
+## [1.3.4] - 2021-10-04
+
+- Add OCP1 parser to exports as './OCP1'
+
+## [1.3.3] - 2021-08-30
+
+- Fix WebSocket connection under nodejs
+- Add index.js to 'exports' as '.'
+
+## [1.3.2] - 2021-08-12
+
+- Fixed some keepalive and close handling errors in
+  UDPConnection
+- Added new message generator implementation which
+  merges PDUs into larger messages
+- Improve UDP command retry logic to handle situations
+  where many commands are queued in a burst. Previously,
+  command could time out while they were still buffered
+- Add explicit 'exports' to package.json
+
 ## [1.3.0] - 2021-08-02
 
 - Added TypeScript declaration files
