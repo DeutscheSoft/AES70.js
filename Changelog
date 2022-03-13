@@ -2,6 +2,10 @@
 
 All notable changes and version updates will be documented in this file.
 
+- Add conditional 'exports' entry for NodeJS and
+  'default' for browser environments
+- Add wildcard 'exports' entry for files in './src'
+- Add 'exports' entry for AES70.es5.js
 - Fix handling of incoming notifications without
   parameter data. This bug was triggered by the
   OcaIdentificationSensor.Identify event.
