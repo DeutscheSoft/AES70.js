@@ -1,6 +1,8 @@
 import { BaseEvent } from './base_event.js';
 import { error } from '../log.js';
 
+const emptyBuffer = new ArrayBuffer();
+
 /**
  * Class used to represent all events specified by the OCA standard.
  *
@@ -13,7 +15,8 @@ export class Event extends BaseEvent {
       if (!this.handlers.size) return;
 
       const args = new Array(argumentTypes.length);
-      const data = new DataView(notification.parameters);
+      // Events without arguments have parameters = null
+      const data = new DataView(notification.parameters || emptyBuffer);
 
       for (let pos = 0, i = 0; i < argumentTypes.length; i++) {
         let tmp;
