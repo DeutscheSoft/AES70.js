@@ -33,6 +33,16 @@ export declare class OcaPowerSupply extends OcaAgent {
    */
   OnChargingChanged: PropertyEvent<boolean>;
 
+  /**
+   * This event is emitted whenever LoadFractionAvailable changes.
+   */
+  OnLoadFractionAvailableChanged: PropertyEvent<number>;
+
+  /**
+   * This event is emitted whenever StorageFractionAvailable changes.
+   */
+  OnStorageFractionAvailableChanged: PropertyEvent<number>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**

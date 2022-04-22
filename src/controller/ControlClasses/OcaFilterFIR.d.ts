@@ -11,6 +11,11 @@ import { PropertyEvent } from '../property_event';
  */
 export declare class OcaFilterFIR extends OcaActuator {
   /**
+   * This event is emitted whenever Length changes.
+   */
+  OnLengthChanged: PropertyEvent<number>;
+
+  /**
    * This event is emitted whenever Coefficients changes.
    */
   OnCoefficientsChanged: PropertyEvent<number[]>;

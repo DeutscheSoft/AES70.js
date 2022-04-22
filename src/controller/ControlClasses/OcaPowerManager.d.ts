@@ -37,6 +37,11 @@ export declare class OcaPowerManager extends OcaManager {
    */
   OnAutoStateChanged: PropertyEvent<boolean>;
 
+  /**
+   * This event is emitted whenever TargetState changes.
+   */
+  OnTargetStateChanged: PropertyEvent<OcaPowerState>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**

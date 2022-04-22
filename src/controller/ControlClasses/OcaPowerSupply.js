@@ -33,8 +33,8 @@ export const OcaPowerSupply = make_control_class(
     ['ModelInfo', [OcaString], 3, 2, false, false, null],
     ['State', [OcaPowerSupplyState], 3, 3, false, false, null],
     ['Charging', [OcaBoolean], 3, 4, false, false, null],
-    ['LoadFractionAvailable', [OcaFloat32], 3, 5, true, false, null],
-    ['StorageFractionAvailable', [OcaFloat32], 3, 6, true, false, null],
+    ['LoadFractionAvailable', [OcaFloat32], 3, 5, false, false, null],
+    ['StorageFractionAvailable', [OcaFloat32], 3, 6, false, false, null],
     ['Location', [OcaPowerSupplyLocation], 3, 7, true, false, null],
   ],
   []
@@ -125,4 +125,22 @@ export const OcaPowerSupply = make_control_class(
  * True iff charging. For rechargable supplies (obviously).
  *
  * @member {PropertyEvent<boolean>} OcaPowerSupply#OnChargingChanged
+ */
+/**
+ * This event is emitted when the property LoadFractionAvailable changes in the remote object.
+ * The property ``LoadFractionAvailable`` is described in the AES70 standard as follows.
+ * Fraction of power supply's load capacity that is currently not being
+ * used. Readonly. Normal value range 0...1. A negative value indicates
+ * this data is not available.
+ *
+ * @member {PropertyEvent<number>} OcaPowerSupply#OnLoadFractionAvailableChanged
+ */
+/**
+ * This event is emitted when the property StorageFractionAvailable changes in the remote object.
+ * The property ``StorageFractionAvailable`` is described in the AES70 standard as follows.
+ * Fraction of power supply's energy storage that remains available. For
+ * battery supplies. Readonly. Normal value range 0...1. A negative value
+ * indicates this data is not available.
+ *
+ * @member {PropertyEvent<number>} OcaPowerSupply#OnStorageFractionAvailableChanged
  */

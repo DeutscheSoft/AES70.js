@@ -35,7 +35,7 @@ export const OcaPowerManager = make_control_class(
     ['PowerSupplies', [OcaList(OcaUint32)], 3, 2, false, false, null],
     ['ActivePowerSupplies', [OcaList(OcaUint32)], 3, 3, false, false, null],
     ['AutoState', [OcaBoolean], 3, 4, false, false, null],
-    ['TargetState', [OcaPowerState], 3, 5, true, false, null],
+    ['TargetState', [OcaPowerState], 3, 5, false, false, null],
   ],
   []
 );
@@ -116,4 +116,12 @@ export const OcaPowerManager = make_control_class(
  * action.
  *
  * @member {PropertyEvent<boolean>} OcaPowerManager#OnAutoStateChanged
+ */
+/**
+ * This event is emitted when the property TargetState changes in the remote object.
+ * The property ``TargetState`` is described in the AES70 standard as follows.
+ * Power state to which the device is transitioning. If no transition is
+ * in progress, has value None. Readonly.
+ *
+ * @member {PropertyEvent<OcaPowerState>} OcaPowerManager#OnTargetStateChanged
  */

@@ -10,6 +10,11 @@ import { OcaSensorReadingState } from '../../types/OcaSensorReadingState';
  * @class OcaSensor
  */
 export declare class OcaSensor extends OcaWorker {
+  /**
+   * This event is emitted whenever ReadingState changes.
+   */
+  OnReadingStateChanged: PropertyEvent<OcaSensorReadingState>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**

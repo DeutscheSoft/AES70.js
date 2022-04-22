@@ -23,7 +23,7 @@ export const OcaFilterFIR = make_control_class(
     ['SetSampleRate', 4, 5, [OcaFloat32], []],
   ],
   [
-    ['Length', [OcaUint32], 4, 1, true, false, null],
+    ['Length', [OcaUint32], 4, 1, false, false, null],
     ['Coefficients', [OcaList(OcaFloat32)], 4, 2, false, false, null],
     ['SampleRate', [OcaFloat32], 4, 3, false, false, null],
   ],
@@ -74,6 +74,14 @@ export const OcaFilterFIR = make_control_class(
  * @param {number} Rate
  *
  * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property Length changes in the remote object.
+ * The property ``Length`` is described in the AES70 standard as follows.
+ * Length of the filter, in samples. Readonly. Value is set when
+ * SetCoefficients(...) method executes.
+ *
+ * @member {PropertyEvent<number>} OcaFilterFIR#OnLengthChanged
  */
 /**
  * This event is emitted when the property Coefficients changes in the remote object.
