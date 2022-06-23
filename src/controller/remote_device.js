@@ -248,8 +248,8 @@ export class RemoteDevice extends Events {
     this.connection.close();
   }
 
-  send_command(cmd, returnType) {
-    return this.connection.send_command(cmd, returnType);
+  send_command(cmd, returnType, callback) {
+    return this.connection.send_command(cmd, returnType, callback);
   }
 
   _doSubscribe(event) {

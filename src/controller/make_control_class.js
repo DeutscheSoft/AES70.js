@@ -58,15 +58,35 @@ function implement_method(cls, method) {
 
   const [name, level, index, argumentTypes, returnTypes] = method;
 
-  cls.prototype[name] = function () {
+  cls.prototype[name] = function (...args) {
+    const argumentCount = argumentTypes.length;
+    let callback = null;
+
+    // If there are too few arguments, this might mean
+    //
+    // - that some of them use the default encoding (e.g. 0)
+    // - that the method signature has change in the AES70 version
+    //   used
+    //
+    // this is why we do not error here, yet.
+    if (argumentCount < args.length) {
+      if (
+        argumentCount + 1 === args.length &&
+        typeof args[argumentCount] === 'function'
+      ) {
+        callback = args[argumentCount];
+        args.length = argumentCount;
+      }
+    }
+
     const cmd = new CommandRrq(
       this.ono,
       level,
       index,
-      argumentTypes.length,
-      new EncodedArguments(argumentTypes, Array.from(arguments))
+      argumentCount,
+      new EncodedArguments(argumentTypes, args)
     );
-    return this.device.send_command(cmd, returnTypes);
+    return this.device.send_command(cmd, returnTypes, callback);
   };
 }
 

@@ -123,8 +123,8 @@ export class ClientConnection extends Connection {
     return this._now();
   }
 
-  send_command(command, returnTypes) {
-    return new Promise((resolve, reject) => {
+  send_command(command, returnTypes, callback) {
+    const executor = (resolve, reject) => {
       const handle = this._getNextCommandHandle();
 
       command.handle = handle;
@@ -140,7 +140,16 @@ export class ClientConnection extends Connection {
 
       pendingCommand.lastSent = this._estimate_next_tx_time();
       this.send(command);
-    });
+    };
+
+    if (callback) {
+      executor(
+        (result) => callback(true, result),
+        (error) => callback(false, error)
+      );
+    } else {
+      return new Promise(executor);
+    }
   }
 
   _removePendingCommand(handle) {

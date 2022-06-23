@@ -13,6 +13,7 @@ import CheckTreeTests from './device/check_tree.js';
 import KeepaliveTests from './device/keepalive.js';
 import LockingTests from './device/locking.js';
 import PropertyChangesTests from './device/property_changes.js';
+import MethodCallbackTests from './device/method_callback.js';
 
 if (argv.length < 3)
 {
@@ -169,7 +170,8 @@ function get_runner(get_device)
     CheckTreeTests,
     //KeepaliveTests,
     LockingTests,
-    PropertyChangesTests
+    PropertyChangesTests,
+    MethodCallbackTests
   ].flat();
 
   // require('./device/property_changes'),
