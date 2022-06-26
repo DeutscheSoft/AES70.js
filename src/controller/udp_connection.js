@@ -253,7 +253,7 @@ export class UDPConnection extends ClientConnection {
     const failed = [];
 
     for (const entry of pendingCommands) {
-      const [handle, pendingCommand] = entry;
+      const [, pendingCommand] = entry;
 
       // All later commands are newer than the cutoff.
       if (pendingCommand.lastSent > retryTime) break;

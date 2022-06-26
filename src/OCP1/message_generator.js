@@ -25,7 +25,7 @@ export class MessageGenerator {
     const messageType = pdu.messageType;
 
     // Can we add to the current message?
-    let combine =
+    const combine =
       this._lastMessageType === messageType &&
       messageType !== pduTypeKeepAlive &&
       this._currentCount < 0xffff;

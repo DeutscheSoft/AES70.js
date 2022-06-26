@@ -21,7 +21,6 @@ import * as RemoteControlClasses from './ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from '../types/OcaManagerDefaultObjectNumbers.js';
 import { OcaNotificationDeliveryMode } from '../types/OcaNotificationDeliveryMode.js';
-import { RemoteError } from './remote_error.js';
 
 function eventToKey(event) {
   const ono = event.EmitterONo;

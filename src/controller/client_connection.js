@@ -1,7 +1,6 @@
 import { RemoteError } from './remote_error.js';
 import { Connection } from '../connection.js';
 import { Response } from '../OCP1/response.js';
-import { encodeMessage } from '../OCP1/encode_message.js';
 import { KeepAlive } from '../OCP1/keepalive.js';
 import { Notification } from '../OCP1/notification.js';
 import { Arguments } from './arguments.js';
