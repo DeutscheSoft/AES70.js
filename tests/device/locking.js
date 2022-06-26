@@ -44,7 +44,8 @@ class Locking extends ObjectTest
   cleanup()
   {
     super.cleanup();
-    this.other_device.close();
+    this.close_device(this.other_device);
+    this.other_device = null;
   }
 }
 

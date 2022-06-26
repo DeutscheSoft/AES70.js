@@ -44,14 +44,20 @@ export class Test {
   {
   }
 
+  close_device(device)
+  {
+    if (device !== null)
+    {
+      device.connection.emit('test_done');
+      device.close();
+      device = null;
+    }
+  }
+
   cleanup()
   {
-    if (this.device !== null)
-    {
-      this.device.connection.emit('test_done');
-      this.device.close();
-      this.device = null;
-    }
+    this.close_device(this.device);
+    this.device = null;
   }
 
   static focus()
