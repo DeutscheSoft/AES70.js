@@ -119,6 +119,10 @@ export class ClientConnection extends Connection {
     return handle;
   }
 
+  _estimate_next_tx_time() {
+    return this._now();
+  }
+
   send_command(command, returnTypes) {
     return new Promise((resolve, reject) => {
       const handle = this._getNextCommandHandle();
@@ -134,7 +138,7 @@ export class ClientConnection extends Connection {
 
       this._pendingCommands.set(handle, pendingCommand);
 
-      pendingCommand.lastSent = this._now();
+      pendingCommand.lastSent = this._estimate_next_tx_time();
       this.send(command);
     });
   }

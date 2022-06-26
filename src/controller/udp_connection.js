@@ -205,6 +205,10 @@ export class UDPConnection extends ClientConnection {
     return performance.now();
   }
 
+  _estimate_next_tx_time() {
+    return this._now() + (this.delay + 2) * this.q.length;
+  }
+
   _write_out() {
     if (!this.socket) return;
     const q = this.q;
