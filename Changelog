@@ -2,6 +2,18 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.3.7] - 2022-06-26
+
+- Fixed a bug in the testsuite which could lead tests to spuriously fail if they
+  run too long.
+- Introduce an optional callback based variant for all remote methods in control
+  classes.
+- UDPConnection: Improve the estimation of the time a command has been sent.
+  This can prevent commands from failing spuriously in situations in which the
+  send queue is very long.
+- Corrected some control class method attributes which were incorrect in the
+  standards documents.
+
 ## [1.3.6] - 2022-03-13
 
 - Add conditional 'exports' entry for NodeJS and
