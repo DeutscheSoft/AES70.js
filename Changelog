@@ -2,6 +2,11 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.3.8]
+
+- Split UDP Connection into an abstract implementation and a concrete one
+  to be used with NodeJS.
+
 ## [1.3.7] - 2022-06-26
 
 - Fixed a bug in the testsuite which could lead tests to spuriously fail if they
