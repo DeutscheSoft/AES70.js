@@ -18,6 +18,7 @@ import * as Types from './types.js';
 import { WebSocketConnection } from './controller/websocket_connection_node.js';
 import { TCPConnection } from './controller/tcp_connection.js';
 import { UDPConnection } from './controller/udp_connection.js';
+import { AbstractUDPConnection } from './controller/abstract_udp_connection.js';
 
 export const controller = {
   Connection: ClientConnection,
@@ -47,4 +48,5 @@ export {
   WebSocketConnection,
   TCPConnection,
   UDPConnection,
+  AbstractUDPConnection,
 };

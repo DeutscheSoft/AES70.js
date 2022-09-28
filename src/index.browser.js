@@ -16,6 +16,7 @@ import { define_custom_class } from './controller/define_custom_class.js';
 import * as RemoteControlClasses from './controller/ControlClasses.js';
 import * as Types from './types.js';
 import { WebSocketConnection } from './controller/websocket_connection.js';
+import { AbstractUDPConnection } from './controller/abstract_udp_connection.js';
 
 const controller = {
   Connection: ClientConnection,
@@ -43,4 +44,5 @@ export {
   warn,
   WebSocketConnection,
   RemoteControlClasses,
+  AbstractUDPConnection,
 };
