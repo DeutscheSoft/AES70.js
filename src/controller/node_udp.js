@@ -128,7 +128,7 @@ export class NodeUDP {
             exclusive: true,
           },
           () => {
-            socket.on('connect', async () => {
+            socket.on('connect', () => {
               resolve(new this(socket));
               socket.removeListener('error', onerror);
             });
