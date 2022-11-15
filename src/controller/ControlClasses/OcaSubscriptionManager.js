@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaEvent } from '../../OCP1/OcaEvent.js';
 import { OcaMethod } from '../../OCP1/OcaMethod.js';
@@ -9,6 +7,8 @@ import { OcaPropertyID } from '../../OCP1/OcaPropertyID.js';
 import { OcaSubscriptionManagerState } from '../../OCP1/OcaSubscriptionManagerState.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Manager that collects and controls the event subscriptions of the device.

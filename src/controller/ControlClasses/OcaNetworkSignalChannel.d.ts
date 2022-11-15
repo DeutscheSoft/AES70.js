@@ -1,9 +1,8 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
-
-import { PropertyEvent } from '../property_event';
 import { OcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';
 import { OcaNetworkSignalChannelStatus } from '../../types/OcaNetworkSignalChannelStatus';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaWorker } from './OcaWorker';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by features of the*  **OcaMediaSinkConnector **  *and*  **OcaMediaSourceConnector **  *datatypes in version 3 of Connection Management (CM3)*  Worker that allows connection of one or more internal signal paths to a network signal channel.

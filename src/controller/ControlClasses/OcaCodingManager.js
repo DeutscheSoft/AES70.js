@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that collects all media decoders/encoders (Codecs) which the device owns.

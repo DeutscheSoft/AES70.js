@@ -1,9 +1,7 @@
+import { IOcaMuteState, OcaMuteState } from '../../types/OcaMuteState';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaMuteState } from '../../types/OcaMuteState';
-import { OcaMuteState } from '../../types/OcaMuteState';
 
 /**
  * Signal mute.

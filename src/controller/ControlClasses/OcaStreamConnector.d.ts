@@ -1,12 +1,12 @@
+import {
+  IOcaNetworkMediaSourceOrSink,
+  OcaNetworkMediaSourceOrSink,
+} from '../../types/OcaNetworkMediaSourceOrSink';
+import { IOcaStream, OcaStream } from '../../types/OcaStream';
+import { OcaStreamConnectorStatus } from '../../types/OcaStreamConnectorStatus';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';
-import { IOcaStream } from '../../types/OcaStream';
-import { OcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';
-import { OcaStream } from '../../types/OcaStream';
-import { OcaStreamConnectorStatus } from '../../types/OcaStreamConnectorStatus';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by the*  **OcaMediaSinkConnector **  *and*  **OcaMediaSourceConnector **  *datatypes in version 3 of Connection Management (CM3)*  Agent class for objects ("connectors") that allow connection of streams to the device. Streams may be single channels or multichannel groups. A connector is either a  *source*  or a  *sink.*  Sources are sometimes called "talkers". Sinks are sometimes called "listeners". Each connector links to zero or more  **OcaStream**  data objects. Each  **OcaStream**  object represents a signal flow to or from a local connector to a remote connector. The remote connector is usually, but not necessarily, in a different node. Each connector collects zero or more  *signal channels* . A signal channel is an instance of  **OcaNetworkSignalChannel.**  Each signal channel exposes one media channel of the stream to the interior of the device. A signal channel therefore is a Worker that contains exactly one  **OcaPort**  data object. Each  **OcaStreamConnector** object belongs to a particular instance of  **OcaStreamNetwork**  or a subclass of  **OcaStreamNetwork**   **.**  Each  **OcaStreamConnector** is linked to its network through the  **Owner**  property.

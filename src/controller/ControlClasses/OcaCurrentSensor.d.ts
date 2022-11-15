@@ -1,8 +1,7 @@
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
 
 /**
  * Basic current sensor.

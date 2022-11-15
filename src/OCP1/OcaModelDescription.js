@@ -1,8 +1,8 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaString } from './OcaString.js';
+import { Struct } from './Struct.js';
 
 import { OcaModelDescription as type } from '../types/OcaModelDescription.js';
 

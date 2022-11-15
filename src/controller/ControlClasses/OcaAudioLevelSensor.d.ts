@@ -1,9 +1,10 @@
+import {
+  IOcaLevelMeterLaw,
+  OcaLevelMeterLaw,
+} from '../../types/OcaLevelMeterLaw';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaLevelSensor } from './OcaLevelSensor';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaLevelMeterLaw } from '../../types/OcaLevelMeterLaw';
-import { OcaLevelMeterLaw } from '../../types/OcaLevelMeterLaw';
 
 /**
  * Child of  **OcaLevelSensor** that returns an audio meter reading in dB relative to a known reference level, and whose value has been calculated by the selected averaging algorithm.

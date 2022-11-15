@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
-import { OcaBaseDataType, IOcaBaseDataType } from './OcaBaseDataType';
-import { OcaMethodID, IOcaMethodID } from './OcaMethodID';
-import { OcaPropertyID, IOcaPropertyID } from './OcaPropertyID';
+import { IOcaBaseDataType, OcaBaseDataType } from './OcaBaseDataType';
+import { IOcaMethodID, OcaMethodID } from './OcaMethodID';
+import { IOcaPropertyID, OcaPropertyID } from './OcaPropertyID';
 
 export declare interface IOcaPropertyDescriptor {
   /**

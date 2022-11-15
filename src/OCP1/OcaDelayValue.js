@@ -1,9 +1,9 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaDelayUnit } from './OcaDelayUnit.js';
 import { OcaFloat32 } from './OcaFloat32.js';
+import { Struct } from './Struct.js';
 
 import { OcaDelayValue as type } from '../types/OcaDelayValue.js';
 

@@ -1,14 +1,15 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaNetworkSystemInterfaceID } from '../../types/OcaNetworkSystemInterfaceID';
 import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
 import { OcaNetworkLinkType } from '../../types/OcaNetworkLinkType';
 import { OcaNetworkMediaProtocol } from '../../types/OcaNetworkMediaProtocol';
 import { OcaNetworkStatistics } from '../../types/OcaNetworkStatistics';
 import { OcaNetworkStatus } from '../../types/OcaNetworkStatus';
-import { OcaNetworkSystemInterfaceID } from '../../types/OcaNetworkSystemInterfaceID';
+import {
+  IOcaNetworkSystemInterfaceID,
+  OcaNetworkSystemInterfaceID,
+} from '../../types/OcaNetworkSystemInterfaceID';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaAgent } from './OcaAgent';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by class*  **OcaMediaTransportNetwork **  *in version 3 of Connection Management (CM3)*  Abstract base class for defining network classes to which this device belongs. May be a media transport network, a control and monitoring network, or a network that does both. There shall be one OcaStreamNetwork instance for each network to which the device belongs. This class may be subclassed to support networks of various types.

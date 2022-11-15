@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
-import { OcaLibAccess, IOcaLibAccess } from './OcaLibAccess';
-import { OcaLibVolType, IOcaLibVolType } from './OcaLibVolType';
-import { OcaTimePTP, IOcaTimePTP } from './OcaTimePTP';
+import { IOcaLibAccess, OcaLibAccess } from './OcaLibAccess';
+import { IOcaLibVolType, OcaLibVolType } from './OcaLibVolType';
+import { IOcaTimePTP, OcaTimePTP } from './OcaTimePTP';
 
 export declare interface IOcaLibVolMetadata {
   /**

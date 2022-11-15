@@ -1,6 +1,6 @@
+import { OcaMuteState } from '../../OCP1/OcaMuteState.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
-import { OcaMuteState } from '../../OCP1/OcaMuteState.js';
 
 /**
  * Signal mute.

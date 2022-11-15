@@ -1,10 +1,10 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaSweepType } from '../../OCP1/OcaSweepType.js';
 import { OcaWaveformType } from '../../OCP1/OcaWaveformType.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Multiwaveform signal generator with optional sweep capability.

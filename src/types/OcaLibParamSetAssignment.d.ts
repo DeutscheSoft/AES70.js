@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaLibVolIdentifier,
   IOcaLibVolIdentifier,
+  OcaLibVolIdentifier,
 } from './OcaLibVolIdentifier';
 
 export declare interface IOcaLibParamSetAssignment {

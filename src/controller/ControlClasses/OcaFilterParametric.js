@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaParametricEQShape } from '../../OCP1/OcaParametricEQShape.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * A parametric equalizer section with various shape options.

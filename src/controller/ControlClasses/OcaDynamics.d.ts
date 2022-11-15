@@ -1,16 +1,21 @@
+import { IOcaDBr, OcaDBr } from '../../types/OcaDBr';
+import {
+  IOcaDynamicsFunction,
+  OcaDynamicsFunction,
+} from '../../types/OcaDynamicsFunction';
+import {
+  IOcaLevelDetectionLaw,
+  OcaLevelDetectionLaw,
+} from '../../types/OcaLevelDetectionLaw';
+import { IOcaParameterMask } from '../../types/OcaParameterMask';
+import {
+  IOcaPresentationUnit,
+  OcaPresentationUnit,
+} from '../../types/OcaPresentationUnit';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaDBr } from '../../types/OcaDBr';
-import { IOcaDynamicsFunction } from '../../types/OcaDynamicsFunction';
-import { IOcaLevelDetectionLaw } from '../../types/OcaLevelDetectionLaw';
-import { IOcaPresentationUnit } from '../../types/OcaPresentationUnit';
-import { OcaDBr } from '../../types/OcaDBr';
-import { OcaDynamicsFunction } from '../../types/OcaDynamicsFunction';
-import { OcaLevelDetectionLaw } from '../../types/OcaLevelDetectionLaw';
-import { OcaPresentationUnit } from '../../types/OcaPresentationUnit';
 
 /**
  * A multipurpose dynamics processor. Can be configured as compressor, limiter, expander, or gate. This class is expected to handle the majority of the basic cases. More complex devices may be described in a different manner, using one or more  **OcaDynamicsDetector**  and  **OcaDynamicsCurve**  objects, in conjunction with other Worker objects as needed.

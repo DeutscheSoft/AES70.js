@@ -2,8 +2,8 @@
  * This file has been generated.
  */
 import {
-  OcaGrouperStatusChangeType,
   IOcaGrouperStatusChangeType,
+  OcaGrouperStatusChangeType,
 } from './OcaGrouperStatusChangeType';
 
 export declare interface IOcaGrouperStatusChangeEventData {

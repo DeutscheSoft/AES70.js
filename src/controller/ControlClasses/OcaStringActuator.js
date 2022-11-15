@@ -1,7 +1,7 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaBasicActuator } from './OcaBasicActuator.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaBasicActuator } from './OcaBasicActuator.js';
 
 /**
  * String actuator.

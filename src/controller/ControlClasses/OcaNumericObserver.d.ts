@@ -1,13 +1,13 @@
+import { OcaObserverState } from '../../types/OcaObserverState';
+import { IOcaProperty, OcaProperty } from '../../types/OcaProperty';
+import {
+  IOcaRelationalOperator,
+  OcaRelationalOperator,
+} from '../../types/OcaRelationalOperator';
+import { Event } from '../event';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Event } from '../event';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaProperty } from '../../types/OcaProperty';
-import { IOcaRelationalOperator } from '../../types/OcaRelationalOperator';
-import { OcaObserverState } from '../../types/OcaObserverState';
-import { OcaProperty } from '../../types/OcaProperty';
-import { OcaRelationalOperator } from '../../types/OcaRelationalOperator';
 
 /**
  * Observer of a scalar numeric or boolean property ("target property") of a specified object. Does not work for array, list, map, struct, or string properties.  **OcaNumericObserver**  emits an  **Observation** event under certain conditions. There are three kinds of conditions:

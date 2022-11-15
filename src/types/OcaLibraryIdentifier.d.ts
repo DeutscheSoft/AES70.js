@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaLibVolType, IOcaLibVolType } from './OcaLibVolType';
+import { IOcaLibVolType, OcaLibVolType } from './OcaLibVolType';
 
 export declare interface IOcaLibraryIdentifier {
   /**

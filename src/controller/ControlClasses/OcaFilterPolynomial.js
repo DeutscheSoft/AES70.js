@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaUint8 } from '../../OCP1/OcaUint8.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * A generic Z-domain rational polynomial filter section:  _A(0) + A(1)z + A(2)z^2 + A(3)z^3 + ..._  B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...

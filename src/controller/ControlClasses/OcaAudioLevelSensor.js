@@ -1,6 +1,6 @@
+import { OcaLevelMeterLaw } from '../../OCP1/OcaLevelMeterLaw.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaLevelSensor } from './OcaLevelSensor.js';
-import { OcaLevelMeterLaw } from '../../OCP1/OcaLevelMeterLaw.js';
 
 /**
  * Child of  **OcaLevelSensor** that returns an audio meter reading in dB relative to a known reference level, and whose value has been calculated by the selected averaging algorithm.

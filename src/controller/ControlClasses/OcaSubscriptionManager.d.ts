@@ -1,13 +1,12 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
-import { Event } from '../event';
-
-import { PropertyEvent } from '../property_event';
 import { IOcaEvent } from '../../types/OcaEvent';
 import { IOcaMethod } from '../../types/OcaMethod';
 import { IOcaNotificationDeliveryMode } from '../../types/OcaNotificationDeliveryMode';
 import { IOcaPropertyID } from '../../types/OcaPropertyID';
 import { OcaSubscriptionManagerState } from '../../types/OcaSubscriptionManagerState';
+import { Event } from '../event';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaManager } from './OcaManager';
 
 /**
  * Manager that collects and controls the event subscriptions of the device.

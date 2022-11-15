@@ -2,8 +2,8 @@
  * This file has been generated.
  */
 import {
-  OcaMediaConnectorStatus,
   IOcaMediaConnectorStatus,
+  OcaMediaConnectorStatus,
 } from './OcaMediaConnectorStatus';
 
 export declare interface IOcaMediaConnectorStatusChangedEventData {

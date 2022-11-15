@@ -1,6 +1,6 @@
+import { OcaPolarityState } from '../../OCP1/OcaPolarityState.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
-import { OcaPolarityState } from '../../OCP1/OcaPolarityState.js';
 
 /**
  * Signal inverter

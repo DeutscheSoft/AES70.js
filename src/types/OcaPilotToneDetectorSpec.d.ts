@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaDBr, IOcaDBr } from './OcaDBr';
+import { IOcaDBr, OcaDBr } from './OcaDBr';
 
 export declare interface IOcaPilotToneDetectorSpec {
   /**

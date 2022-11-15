@@ -1,8 +1,7 @@
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaBasicActuator } from './OcaBasicActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
 
 /**
  * Basic uint16 actuator.

@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaPositionCoordinateSystem,
   IOcaPositionCoordinateSystem,
+  OcaPositionCoordinateSystem,
 } from './OcaPositionCoordinateSystem';
 
 export declare interface IOcaPositionDescriptor {

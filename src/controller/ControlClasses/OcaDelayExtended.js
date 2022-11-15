@@ -1,7 +1,7 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaDelay } from './OcaDelay.js';
 import { OcaDelayUnit } from '../../OCP1/OcaDelayUnit.js';
 import { OcaDelayValue } from '../../OCP1/OcaDelayValue.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaDelay } from './OcaDelay.js';
 
 /**
  * Signal delay - extended version. Allows setting delay value in various units. Note that the inherited property 04p01 DelayTime is also supported by this class and reflects actual achieved delay in seconds.

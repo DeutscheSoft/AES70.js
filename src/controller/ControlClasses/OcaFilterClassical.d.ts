@@ -1,12 +1,16 @@
+import {
+  IOcaClassicalFilterShape,
+  OcaClassicalFilterShape,
+} from '../../types/OcaClassicalFilterShape';
+import {
+  IOcaFilterPassband,
+  OcaFilterPassband,
+} from '../../types/OcaFilterPassband';
+import { IOcaParameterMask } from '../../types/OcaParameterMask';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaClassicalFilterShape } from '../../types/OcaClassicalFilterShape';
-import { IOcaFilterPassband } from '../../types/OcaFilterPassband';
-import { OcaClassicalFilterShape } from '../../types/OcaClassicalFilterShape';
-import { OcaFilterPassband } from '../../types/OcaFilterPassband';
 
 /**
  * A classical analog-style filter - highpass, lowpass, bandpass, etc., with shape characteristics such as Butterworth, Chebyshev, Bessel, and Linkwitz-Riley. Frequently used in loudspeaker crossover networks.

@@ -1,8 +1,7 @@
+import { OcaSensorReadingState } from '../../types/OcaSensorReadingState';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaWorker } from './OcaWorker';
-
-import { PropertyEvent } from '../property_event';
-import { OcaSensorReadingState } from '../../types/OcaSensorReadingState';
 
 /**
  * Abstract base class for all sensor classes.

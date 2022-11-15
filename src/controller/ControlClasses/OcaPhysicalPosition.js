@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaPositionCoordinateSystem } from '../../OCP1/OcaPositionCoordinateSystem.js';
 import { OcaPositionDescriptor } from '../../OCP1/OcaPositionDescriptor.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Physical position of device or an element of it. AES70 supports a variety of positional coordinate systems. For details, see AES70-1, section 5.5.9.

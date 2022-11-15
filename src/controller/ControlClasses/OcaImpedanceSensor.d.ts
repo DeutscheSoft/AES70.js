@@ -1,9 +1,8 @@
+import { OcaImpedance } from '../../types/OcaImpedance';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { OcaImpedance } from '../../types/OcaImpedance';
 
 /**
  * Basic impedance sensor. Value is complex (magnitude and phase).

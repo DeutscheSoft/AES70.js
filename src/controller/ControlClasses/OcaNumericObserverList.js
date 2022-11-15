@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaFloat64 } from '../../OCP1/OcaFloat64.js';
@@ -8,6 +6,8 @@ import { OcaObservationListEventData } from '../../OCP1/OcaObservationListEventD
 import { OcaObserverState } from '../../OCP1/OcaObserverState.js';
 import { OcaProperty } from '../../OCP1/OcaProperty.js';
 import { OcaRelationalOperator } from '../../OCP1/OcaRelationalOperator.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Observer of a scalar numeric or boolean property ("target property") of a set of specified objects. This class is a subclass of  **OcaNumericObserver** , and differs from that class only in that it observes a set of properties rather than a single property. Does not work for array, list, map, struct, or string properties.  **OcaNumericObserverList**  emits an  **Observation** event under certain conditions. There are three kinds of conditions:

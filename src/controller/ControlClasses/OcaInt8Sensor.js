@@ -1,6 +1,6 @@
+import { OcaInt8 } from '../../OCP1/OcaInt8.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaBasicSensor } from './OcaBasicSensor.js';
-import { OcaInt8 } from '../../OCP1/OcaInt8.js';
 
 /**
  * Basic int8 sensor.

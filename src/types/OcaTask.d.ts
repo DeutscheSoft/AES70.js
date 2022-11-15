@@ -1,13 +1,12 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaLibVolIdentifier,
   IOcaLibVolIdentifier,
+  OcaLibVolIdentifier,
 } from './OcaLibVolIdentifier';
-import { OcaTimeMode, IOcaTimeMode } from './OcaTimeMode';
-import { OcaTimePTP, IOcaTimePTP } from './OcaTimePTP';
+import { IOcaTimeMode, OcaTimeMode } from './OcaTimeMode';
+import { IOcaTimePTP, OcaTimePTP } from './OcaTimePTP';
 
 export declare interface IOcaTask {
   /**

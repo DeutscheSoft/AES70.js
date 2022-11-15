@@ -1,9 +1,9 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaBlobFixedLen } from './OcaBlobFixedLen.js';
 import { OcaUint32 } from './OcaUint32.js';
+import { Struct } from './Struct.js';
 
 import { OcaLibVolType as type } from '../types/OcaLibVolType.js';
 

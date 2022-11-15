@@ -1,8 +1,7 @@
+import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork';
-
-import { PropertyEvent } from '../property_event';
-import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
 
 /**
  * This was not documented in the OCA standard.

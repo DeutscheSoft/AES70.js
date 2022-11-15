@@ -1,6 +1,6 @@
+import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaBasicActuator } from './OcaBasicActuator.js';
-import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
 /**
  * Basic uint32 actuator.

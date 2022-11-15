@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaPropertyDescriptor,
   IOcaPropertyDescriptor,
+  OcaPropertyDescriptor,
 } from './OcaPropertyDescriptor';
 
 export declare interface IOcaProperty {

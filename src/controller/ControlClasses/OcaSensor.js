@@ -1,6 +1,6 @@
+import { OcaSensorReadingState } from '../../OCP1/OcaSensorReadingState.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaWorker } from './OcaWorker.js';
-import { OcaSensorReadingState } from '../../OCP1/OcaSensorReadingState.js';
 
 /**
  * Abstract base class for all sensor classes.

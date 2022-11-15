@@ -1,18 +1,18 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';
-import { IOcaObjectSearchResultFlags } from '../../types/OcaObjectSearchResultFlags';
-import { IOcaSignalPath } from '../../types/OcaSignalPath';
-import { IOcaStringComparisonType } from '../../types/OcaStringComparisonType';
 import { OcaBlockMember } from '../../types/OcaBlockMember';
 import { OcaGlobalTypeIdentifier } from '../../types/OcaGlobalTypeIdentifier';
 import { OcaLibVolData_ParamSet } from '../../types/OcaLibVolData_ParamSet';
-import { OcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';
+import {
+  IOcaLibVolIdentifier,
+  OcaLibVolIdentifier,
+} from '../../types/OcaLibVolIdentifier';
 import { OcaObjectIdentification } from '../../types/OcaObjectIdentification';
 import { OcaObjectSearchResult } from '../../types/OcaObjectSearchResult';
-import { OcaSignalPath } from '../../types/OcaSignalPath';
+import { IOcaObjectSearchResultFlags } from '../../types/OcaObjectSearchResultFlags';
+import { IOcaSignalPath, OcaSignalPath } from '../../types/OcaSignalPath';
+import { IOcaStringComparisonType } from '../../types/OcaStringComparisonType';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaWorker } from './OcaWorker';
 
 /**
  * A block is an object with three aspects: - It can contain other blocks. - It can contain workers. - It can contain agents. - It can contain data networks. - It can contain application networks. - It has a signal flow topology. We refer to an object inside a block as a  **member**  of that block. We refer to the block which contains an object as the object's  **container.**  **1**  Normally, a block contains a set of members that together function as a processing unit -- for example, a crossover channel or mixer strip.

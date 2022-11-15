@@ -1,10 +1,11 @@
+import {
+  IOcaParametricEQShape,
+  OcaParametricEQShape,
+} from '../../types/OcaParametricEQShape';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaParametricEQShape } from '../../types/OcaParametricEQShape';
-import { OcaParametricEQShape } from '../../types/OcaParametricEQShape';
 
 /**
  * A parametric equalizer section with various shape options.

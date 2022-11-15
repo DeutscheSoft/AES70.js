@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaRoot } from './OcaRoot.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaList } from '../../OCP1/OcaList.js';
@@ -8,6 +6,8 @@ import { OcaPortID } from '../../OCP1/OcaPortID.js';
 import { OcaPortMode } from '../../OCP1/OcaPortMode.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class for classes that represent the device's application and support functions.

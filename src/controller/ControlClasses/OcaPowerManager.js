@@ -1,9 +1,9 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaPowerState } from '../../OCP1/OcaPowerState.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that manages power settings and state.

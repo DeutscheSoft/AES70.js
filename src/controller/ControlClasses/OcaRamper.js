@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaFloat64 } from '../../OCP1/OcaFloat64.js';
 import { OcaProperty } from '../../OCP1/OcaProperty.js';
@@ -8,6 +6,8 @@ import { OcaRamperInterpolationLaw } from '../../OCP1/OcaRamperInterpolationLaw.
 import { OcaRamperState } from '../../OCP1/OcaRamperState.js';
 import { OcaTimeMode } from '../../OCP1/OcaTimeMode.js';
 import { OcaUint64 } from '../../OCP1/OcaUint64.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Agent that gradually changes a property setting from one value to another. Works on a scalar numeric or boolean property of a specified object. Does not work for array, list, map, struct, or string properties. Contains timer features to allow ramps to start immediately or at any time in the future. This is a weakly typed class. All ramping parameters are specified as a  **OcaFloat64** numbers.

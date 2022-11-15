@@ -1,12 +1,15 @@
+import { OcaMediaClockLockState } from '../../types/OcaMediaClockLockState';
+import {
+  IOcaMediaClockRate,
+  OcaMediaClockRate,
+} from '../../types/OcaMediaClockRate';
+import {
+  IOcaMediaClockType,
+  OcaMediaClockType,
+} from '../../types/OcaMediaClockType';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaMediaClockRate } from '../../types/OcaMediaClockRate';
-import { IOcaMediaClockType } from '../../types/OcaMediaClockType';
-import { OcaMediaClockLockState } from '../../types/OcaMediaClockLockState';
-import { OcaMediaClockRate } from '../../types/OcaMediaClockRate';
-import { OcaMediaClockType } from '../../types/OcaMediaClockType';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by*  **OcaMediaClock3**  A media clock, internal or external.

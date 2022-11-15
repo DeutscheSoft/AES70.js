@@ -1,11 +1,12 @@
+import { OcaPowerSupplyLocation } from '../../types/OcaPowerSupplyLocation';
+import {
+  IOcaPowerSupplyState,
+  OcaPowerSupplyState,
+} from '../../types/OcaPowerSupplyState';
+import { OcaPowerSupplyType } from '../../types/OcaPowerSupplyType';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaPowerSupplyState } from '../../types/OcaPowerSupplyState';
-import { OcaPowerSupplyLocation } from '../../types/OcaPowerSupplyLocation';
-import { OcaPowerSupplyState } from '../../types/OcaPowerSupplyState';
-import { OcaPowerSupplyType } from '../../types/OcaPowerSupplyType';
 
 /**
  * A power supply.

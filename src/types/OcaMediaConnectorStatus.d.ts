@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaMediaConnectorState,
   IOcaMediaConnectorState,
+  OcaMediaConnectorState,
 } from './OcaMediaConnectorState';
 
 export declare interface IOcaMediaConnectorStatus {

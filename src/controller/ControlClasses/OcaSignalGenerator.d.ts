@@ -1,12 +1,10 @@
+import { IOcaParameterMask } from '../../types/OcaParameterMask';
+import { IOcaSweepType, OcaSweepType } from '../../types/OcaSweepType';
+import { IOcaWaveformType, OcaWaveformType } from '../../types/OcaWaveformType';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaSweepType } from '../../types/OcaSweepType';
-import { IOcaWaveformType } from '../../types/OcaWaveformType';
-import { OcaSweepType } from '../../types/OcaSweepType';
-import { OcaWaveformType } from '../../types/OcaWaveformType';
 
 /**
  * Multiwaveform signal generator with optional sweep capability.

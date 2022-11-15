@@ -1,10 +1,10 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaClassicalFilterShape } from '../../OCP1/OcaClassicalFilterShape.js';
 import { OcaFilterPassband } from '../../OCP1/OcaFilterPassband.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * A classical analog-style filter - highpass, lowpass, bandpass, etc., with shape characteristics such as Butterworth, Chebyshev, Bessel, and Linkwitz-Riley. Frequently used in loudspeaker crossover networks.

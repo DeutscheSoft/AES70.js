@@ -1,9 +1,8 @@
-import { RemoteDevice } from '../remote_device';
-import { ObjectBase } from '../object_base';
-import { Event } from '../event';
-
 import { PropertyEvent } from '../property_event';
 import { OcaClassIdentification } from '../../types/OcaClassIdentification';
+import { Event } from '../event';
+import { ObjectBase } from '../object_base';
+import { RemoteDevice } from '../remote_device';
 
 /**
  * The abstract root class of which all OCA classes derive. It offers basic OCA functionality such as locking an object and generalized data access.

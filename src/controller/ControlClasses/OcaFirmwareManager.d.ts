@@ -1,9 +1,8 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
-
-import { PropertyEvent } from '../property_event';
 import { IOcaComponent } from '../../types/OcaComponent';
 import { OcaVersion } from '../../types/OcaVersion';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaManager } from './OcaManager';
 
 /**
  * Optional manager that manages versions of the different firmware and software images of the device.

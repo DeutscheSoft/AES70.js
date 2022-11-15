@@ -1,13 +1,13 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaTimeProtocol } from '../../types/OcaTimeProtocol';
-import { IOcaTimeReferenceType } from '../../types/OcaTimeReferenceType';
-import { OcaTimeProtocol } from '../../types/OcaTimeProtocol';
-import { OcaTimeReferenceType } from '../../types/OcaTimeReferenceType';
+import { IOcaTimeProtocol, OcaTimeProtocol } from '../../types/OcaTimeProtocol';
+import {
+  IOcaTimeReferenceType,
+  OcaTimeReferenceType,
+} from '../../types/OcaTimeReferenceType';
 import { OcaTimeSourceAvailability } from '../../types/OcaTimeSourceAvailability';
 import { OcaTimeSourceSyncStatus } from '../../types/OcaTimeSourceSyncStatus';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaAgent } from './OcaAgent';
 
 /**
  * A time source, internal or external. See RFC 7273 for a detailed discussion of time sources.

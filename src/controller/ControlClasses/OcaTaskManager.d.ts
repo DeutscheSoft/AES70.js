@@ -1,13 +1,11 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
-import { Event } from '../event';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaTask } from '../../types/OcaTask';
+import { IOcaTask, OcaTask } from '../../types/OcaTask';
 import { IOcaTaskCommand } from '../../types/OcaTaskCommand';
-import { OcaTask } from '../../types/OcaTask';
 import { OcaTaskManagerState } from '../../types/OcaTaskManagerState';
 import { OcaTaskStatus } from '../../types/OcaTaskStatus';
+import { Event } from '../event';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaManager } from './OcaManager';
 
 /**
  * Optional manager that collects OcaTask and OcaProgram objects.

@@ -1,10 +1,11 @@
+import {
+  IOcaTransferFunction,
+  OcaTransferFunction,
+} from '../../types/OcaTransferFunction';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaTransferFunction } from '../../types/OcaTransferFunction';
-import { OcaTransferFunction } from '../../types/OcaTransferFunction';
 
 /**
  * An arbitrary-curve filter, with transfer function specified as amplitude and phase versus frequency.

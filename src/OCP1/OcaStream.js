@@ -1,7 +1,6 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaBlob } from './OcaBlob.js';
 import { OcaBoolean } from './OcaBoolean.js';
 import { OcaStreamConnectorIdentification } from './OcaStreamConnectorIdentification.js';
@@ -10,6 +9,7 @@ import { OcaStreamType } from './OcaStreamType.js';
 import { OcaString } from './OcaString.js';
 import { OcaUint16 } from './OcaUint16.js';
 import { OcaUint32 } from './OcaUint32.js';
+import { Struct } from './Struct.js';
 
 import { OcaStream as type } from '../types/OcaStream.js';
 

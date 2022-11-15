@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { ObjectBase } from '../object_base.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaClassIdentification } from '../../OCP1/OcaClassIdentification.js';
 import { OcaPropertyChangedEventData } from '../../OCP1/OcaPropertyChangedEventData.js';
@@ -7,6 +5,8 @@ import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { String16 } from '../../OCP1/String16.js';
+import { make_control_class } from '../make_control_class.js';
+import { ObjectBase } from '../object_base.js';
 
 /**
  * The abstract root class of which all OCA classes derive. It offers basic OCA functionality such as locking an object and generalized data access.

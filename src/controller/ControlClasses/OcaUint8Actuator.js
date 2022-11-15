@@ -1,6 +1,6 @@
+import { OcaUint8 } from '../../OCP1/OcaUint8.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaBasicActuator } from './OcaBasicActuator.js';
-import { OcaUint8 } from '../../OCP1/OcaUint8.js';
 
 /**
  * Basic uint8 actuator.

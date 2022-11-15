@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaWorker } from './OcaWorker.js';
 import { OcaBlockMember } from '../../OCP1/OcaBlockMember.js';
 import { OcaGlobalTypeIdentifier } from '../../OCP1/OcaGlobalTypeIdentifier.js';
 import { OcaLibVolData_ParamSet } from '../../OCP1/OcaLibVolData_ParamSet.js';
@@ -15,6 +13,8 @@ import { OcaStringComparisonType } from '../../OCP1/OcaStringComparisonType.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { String16 } from '../../OCP1/String16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * A block is an object with three aspects: - It can contain other blocks. - It can contain workers. - It can contain agents. - It can contain data networks. - It can contain application networks. - It has a signal flow topology. We refer to an object inside a block as a  **member**  of that block. We refer to the block which contains an object as the object's  **container.**  **1**  Normally, a block contains a set of members that together function as a processing unit -- for example, a crossover channel or mixer strip.

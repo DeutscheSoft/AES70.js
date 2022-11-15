@@ -1,12 +1,13 @@
+import { IOcaApplicationNetworkCommand } from '../../types/OcaApplicationNetworkCommand';
+import { OcaApplicationNetworkState } from '../../types/OcaApplicationNetworkState';
+import {
+  IOcaNetworkSystemInterfaceDescriptor,
+  OcaNetworkSystemInterfaceDescriptor,
+} from '../../types/OcaNetworkSystemInterfaceDescriptor';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaRoot } from './OcaRoot';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaApplicationNetworkCommand } from '../../types/OcaApplicationNetworkCommand';
-import { IOcaNetworkSystemInterfaceDescriptor } from '../../types/OcaNetworkSystemInterfaceDescriptor';
-import { OcaApplicationNetworkState } from '../../types/OcaApplicationNetworkState';
-import { OcaNetworkSystemInterfaceDescriptor } from '../../types/OcaNetworkSystemInterfaceDescriptor';
 
 /**
  * Abstract base class from which the application network classes inherit.

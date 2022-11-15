@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaLibVolMetadata, IOcaLibVolMetadata } from './OcaLibVolMetadata';
+import { IOcaLibVolMetadata, OcaLibVolMetadata } from './OcaLibVolMetadata';
 
 export declare interface IOcaLibVol {
   /**

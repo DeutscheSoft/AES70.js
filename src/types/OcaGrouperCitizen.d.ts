@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaOPath, IOcaOPath } from './OcaOPath';
+import { IOcaOPath, OcaOPath } from './OcaOPath';
 
 export declare interface IOcaGrouperCitizen {
   /**

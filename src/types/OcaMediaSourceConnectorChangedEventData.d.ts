@@ -2,16 +2,16 @@
  * This file has been generated.
  */
 import {
-  OcaMediaConnectorElement,
   IOcaMediaConnectorElement,
+  OcaMediaConnectorElement,
 } from './OcaMediaConnectorElement';
 import {
-  OcaMediaSourceConnector,
   IOcaMediaSourceConnector,
+  OcaMediaSourceConnector,
 } from './OcaMediaSourceConnector';
 import {
-  OcaPropertyChangeType,
   IOcaPropertyChangeType,
+  OcaPropertyChangeType,
 } from './OcaPropertyChangeType';
 
 export declare interface IOcaMediaSourceConnectorChangedEventData {

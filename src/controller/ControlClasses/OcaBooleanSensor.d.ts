@@ -1,7 +1,6 @@
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaBasicSensor } from './OcaBasicSensor';
-
-import { PropertyEvent } from '../property_event';
 
 /**
  * Basic boolean sensor.

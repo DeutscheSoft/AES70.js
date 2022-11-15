@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaRoot } from './OcaRoot.js';
 import { OcaApplicationNetworkCommand } from '../../OCP1/OcaApplicationNetworkCommand.js';
 import { OcaApplicationNetworkState } from '../../OCP1/OcaApplicationNetworkState.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
@@ -8,6 +6,8 @@ import { OcaNetworkSystemInterfaceDescriptor } from '../../OCP1/OcaNetworkSystem
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class from which the application network classes inherit.

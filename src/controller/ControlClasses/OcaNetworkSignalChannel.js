@@ -1,11 +1,11 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaWorker } from './OcaWorker.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaNetworkMediaSourceOrSink } from '../../OCP1/OcaNetworkMediaSourceOrSink.js';
 import { OcaNetworkSignalChannelStatus } from '../../OCP1/OcaNetworkSignalChannelStatus.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by features of the*  **OcaMediaSinkConnector **  *and*  **OcaMediaSourceConnector **  *datatypes in version 3 of Connection Management (CM3)*  Worker that allows connection of one or more internal signal paths to a network signal channel.

@@ -1,6 +1,6 @@
+import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaBasicActuator } from './OcaBasicActuator.js';
-import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 
 /**
  * Basic boolean actuator.

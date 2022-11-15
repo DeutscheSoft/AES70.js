@@ -1,7 +1,6 @@
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
-
-import { PropertyEvent } from '../property_event';
 
 /**
  * Manager that collects and controls security settings (including security keys).

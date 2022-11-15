@@ -1,12 +1,11 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaLibVolIdentifier,
   IOcaLibVolIdentifier,
+  OcaLibVolIdentifier,
 } from './OcaLibVolIdentifier';
-import { OcaTaskStatus, IOcaTaskStatus } from './OcaTaskStatus';
+import { IOcaTaskStatus, OcaTaskStatus } from './OcaTaskStatus';
 
 export declare interface IOcaTaskStateChangedEventData {
   /**

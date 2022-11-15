@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaClassIdentification,
   IOcaClassIdentification,
+  OcaClassIdentification,
 } from './OcaClassIdentification';
 
 export declare interface IOcaObjectIdentification {

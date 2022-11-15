@@ -1,8 +1,7 @@
+import { OcaMediaClockType } from '../../types/OcaMediaClockType';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
-
-import { PropertyEvent } from '../property_event';
-import { OcaMediaClockType } from '../../types/OcaMediaClockType';
 
 /**
  * Optional manager that collects all media clocks the device uses.

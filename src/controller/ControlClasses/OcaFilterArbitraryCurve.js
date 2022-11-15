@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaTransferFunction } from '../../OCP1/OcaTransferFunction.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * An arbitrary-curve filter, with transfer function specified as amplitude and phase versus frequency.

@@ -1,9 +1,9 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaLibVolIdentifier } from './OcaLibVolIdentifier.js';
 import { OcaUint32 } from './OcaUint32.js';
+import { Struct } from './Struct.js';
 
 import { OcaLibParamSetAssignment as type } from '../types/OcaLibParamSetAssignment.js';
 

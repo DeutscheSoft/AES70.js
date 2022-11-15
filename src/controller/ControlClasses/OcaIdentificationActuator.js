@@ -1,6 +1,6 @@
+import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
-import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 
 /**
  * Represents a function that turns on some kind of human-detectable indicator for purposes of device identification during network setup. Physical form of indicator is not defined by OCA, so it could be anything, e.g.

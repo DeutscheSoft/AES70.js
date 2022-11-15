@@ -1,11 +1,11 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaPowerSupplyLocation } from '../../OCP1/OcaPowerSupplyLocation.js';
 import { OcaPowerSupplyState } from '../../OCP1/OcaPowerSupplyState.js';
 import { OcaPowerSupplyType } from '../../OCP1/OcaPowerSupplyType.js';
 import { OcaString } from '../../OCP1/OcaString.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * A power supply.

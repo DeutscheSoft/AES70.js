@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
@@ -10,6 +8,8 @@ import { OcaTaskStateChangedEventData } from '../../OCP1/OcaTaskStateChangedEven
 import { OcaTaskStatus } from '../../OCP1/OcaTaskStatus.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that collects OcaTask and OcaProgram objects.

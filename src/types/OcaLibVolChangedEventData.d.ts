@@ -2,8 +2,8 @@
  * This file has been generated.
  */
 import {
-  OcaPropertyChangeType,
   IOcaPropertyChangeType,
+  OcaPropertyChangeType,
 } from './OcaPropertyChangeType';
 
 export declare interface IOcaLibVolChangedEventData {

@@ -1,16 +1,18 @@
+import {
+  IOcaGrouperCitizen,
+  OcaGrouperCitizen,
+} from '../../types/OcaGrouperCitizen';
+import {
+  IOcaGrouperEnrollment,
+  OcaGrouperEnrollment,
+} from '../../types/OcaGrouperEnrollment';
+import { OcaGrouperGroup } from '../../types/OcaGrouperGroup';
+import { IOcaGrouperMode, OcaGrouperMode } from '../../types/OcaGrouperMode';
+import { Arguments } from '../arguments';
+import { Event } from '../event';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Event } from '../event';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaGrouperCitizen } from '../../types/OcaGrouperCitizen';
-import { IOcaGrouperEnrollment } from '../../types/OcaGrouperEnrollment';
-import { IOcaGrouperMode } from '../../types/OcaGrouperMode';
-import { OcaGrouperCitizen } from '../../types/OcaGrouperCitizen';
-import { OcaGrouperEnrollment } from '../../types/OcaGrouperEnrollment';
-import { OcaGrouperGroup } from '../../types/OcaGrouperGroup';
-import { OcaGrouperMode } from '../../types/OcaGrouperMode';
 
 /**
  *  **Concept**   ** ** A  **grouper**  is an object responsible for aggregating property values. An  **actuator grouper**  allows control of many actuator objects from a single input value; a  **sensor grouper**  allows observing many sensor objects via a single output value. Actuator groupers are described below; sensor groupers are TBD. In a working media system, many actuator objects (we will call them  **citizens** ) will be members of multiple groups. For example, in a multiway stereo sound reinforcement system, the left woofer power amplifier might be controlled by a master gain group, a left-side gain group, and a woofer gain group. To manage the interactions of these multiple memberships, we need a single entity that manages all three of these groups, anticipating the interactions and taking appropriate action. An actuator grouper is such an entity. The grouper:

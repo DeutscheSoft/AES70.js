@@ -1,14 +1,16 @@
+import {
+  IOcaMediaClockAvailability,
+  OcaMediaClockAvailability,
+} from '../../types/OcaMediaClockAvailability';
+import {
+  IOcaMediaClockRate,
+  OcaMediaClockRate,
+} from '../../types/OcaMediaClockRate';
+import { IOcaTimePTP, OcaTimePTP } from '../../types/OcaTimePTP';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaMediaClockAvailability } from '../../types/OcaMediaClockAvailability';
-import { IOcaMediaClockRate } from '../../types/OcaMediaClockRate';
-import { IOcaTimePTP } from '../../types/OcaTimePTP';
-import { OcaMediaClockAvailability } from '../../types/OcaMediaClockAvailability';
-import { OcaMediaClockRate } from '../../types/OcaMediaClockRate';
-import { OcaTimePTP } from '../../types/OcaTimePTP';
 
 /**
  * A media clock, internal or external. OCA Connection Management 3 (OCA-CM3) version.

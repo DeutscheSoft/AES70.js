@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaMediaStreamCastMode,
   IOcaMediaStreamCastMode,
+  OcaMediaStreamCastMode,
 } from './OcaMediaStreamCastMode';
 
 export declare interface IOcaMediaConnection {

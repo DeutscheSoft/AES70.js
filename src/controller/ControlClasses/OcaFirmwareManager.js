@@ -1,11 +1,11 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaComponent } from '../../OCP1/OcaComponent.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { OcaVersion } from '../../OCP1/OcaVersion.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that manages versions of the different firmware and software images of the device.

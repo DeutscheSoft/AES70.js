@@ -1,13 +1,10 @@
+import { IOcaLibAccess, OcaLibAccess } from '../../types/OcaLibAccess';
+import { IOcaLibVol, OcaLibVol } from '../../types/OcaLibVol';
+import { OcaLibVolType } from '../../types/OcaLibVolType';
+import { Event } from '../event';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Event } from '../event';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaLibAccess } from '../../types/OcaLibAccess';
-import { IOcaLibVol } from '../../types/OcaLibVol';
-import { OcaLibAccess } from '../../types/OcaLibAccess';
-import { OcaLibVol } from '../../types/OcaLibVol';
-import { OcaLibVolType } from '../../types/OcaLibVolType';
 
 /**
  * A  **library**  is an agent that holds a collection of datasets. We refer to each dataset as a  **Volume** . There are two kinds of volumes:  **ParamSet**  (parameter set). A ParamSet is a collection of operating parameter settings that can be applied to a block. Each ParamSet is associated with a specific block type, but not with a specific instance of that type. A ParamSet may be applied to any block instance of the associated type. A block's type is the object number of its factory or, for factory-defined blocks, a unique identifier set at time of manufacture.  **Patch** . A Patch is a collection of ParamSet assignments. A ParamSet assigment is the description of a binding of a ParamSet to a block instance. To "apply" a Patch is to apply all of its assignments. To apply an assignment is to set all of its ParamSet's parameter values into its block. A given library instance can only hold one class of volume. A device that supports libraries can have any number of Patch and ParamSet libraries. If a device implements a Patch library, it must also implement at least one ParamSet library. However, the reverse is not true: a device may implement one or more ParamSet libraries without a Patch library.

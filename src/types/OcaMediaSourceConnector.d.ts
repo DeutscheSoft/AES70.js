@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
-import { OcaMediaCoding, IOcaMediaCoding } from './OcaMediaCoding';
-import { OcaMediaConnection, IOcaMediaConnection } from './OcaMediaConnection';
-import { OcaPortID, IOcaPortID } from './OcaPortID';
+import { IOcaMediaCoding, OcaMediaCoding } from './OcaMediaCoding';
+import { IOcaMediaConnection, OcaMediaConnection } from './OcaMediaConnection';
+import { IOcaPortID, OcaPortID } from './OcaPortID';
 
 export declare interface IOcaMediaSourceConnector {
   /**

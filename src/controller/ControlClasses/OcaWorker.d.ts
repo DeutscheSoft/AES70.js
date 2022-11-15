@@ -1,12 +1,10 @@
+import { OcaPort } from '../../types/OcaPort';
+import { IOcaPortID, OcaPortID } from '../../types/OcaPortID';
+import { IOcaPortMode } from '../../types/OcaPortMode';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaRoot } from './OcaRoot';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaPortID } from '../../types/OcaPortID';
-import { IOcaPortMode } from '../../types/OcaPortMode';
-import { OcaPort } from '../../types/OcaPort';
-import { OcaPortID } from '../../types/OcaPortID';
 
 /**
  * Abstract base class for classes that represent the device's application and support functions.

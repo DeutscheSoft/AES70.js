@@ -1,9 +1,7 @@
+import { IOcaPowerState, OcaPowerState } from '../../types/OcaPowerState';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaPowerState } from '../../types/OcaPowerState';
-import { OcaPowerState } from '../../types/OcaPowerState';
 
 /**
  * Optional manager that manages power settings and state.

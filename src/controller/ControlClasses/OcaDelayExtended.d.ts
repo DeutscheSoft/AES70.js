@@ -1,11 +1,9 @@
+import { IOcaDelayUnit } from '../../types/OcaDelayUnit';
+import { IOcaDelayValue, OcaDelayValue } from '../../types/OcaDelayValue';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaDelay } from './OcaDelay';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaDelayUnit } from '../../types/OcaDelayUnit';
-import { IOcaDelayValue } from '../../types/OcaDelayValue';
-import { OcaDelayValue } from '../../types/OcaDelayValue';
 
 /**
  * Signal delay - extended version. Allows setting delay value in various units. Note that the inherited property 04p01 DelayTime is also supported by this class and reflects actual achieved delay in seconds.

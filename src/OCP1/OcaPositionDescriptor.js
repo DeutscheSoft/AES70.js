@@ -1,10 +1,10 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaBitSet16 } from './OcaBitSet16.js';
 import { OcaFloat32 } from './OcaFloat32.js';
 import { OcaPositionCoordinateSystem } from './OcaPositionCoordinateSystem.js';
+import { Struct } from './Struct.js';
 
 import { OcaPositionDescriptor as type } from '../types/OcaPositionDescriptor.js';
 

@@ -1,9 +1,9 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * (n)-position single-pole switch.

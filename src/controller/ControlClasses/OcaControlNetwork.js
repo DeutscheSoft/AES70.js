@@ -1,6 +1,6 @@
+import { OcaNetworkControlProtocol } from '../../OCP1/OcaNetworkControlProtocol.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
-import { OcaNetworkControlProtocol } from '../../OCP1/OcaNetworkControlProtocol.js';
 
 /**
  * This was not documented in the OCA standard.

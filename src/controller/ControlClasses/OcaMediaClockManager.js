@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMediaClockType } from '../../OCP1/OcaMediaClockType.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that collects all media clocks the device uses.

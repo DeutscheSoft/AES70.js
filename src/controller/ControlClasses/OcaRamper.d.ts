@@ -1,16 +1,15 @@
+import { IOcaProperty, OcaProperty } from '../../types/OcaProperty';
+import { IOcaRamperCommand } from '../../types/OcaRamperCommand';
+import {
+  IOcaRamperInterpolationLaw,
+  OcaRamperInterpolationLaw,
+} from '../../types/OcaRamperInterpolationLaw';
+import { OcaRamperState } from '../../types/OcaRamperState';
+import { IOcaTimeMode, OcaTimeMode } from '../../types/OcaTimeMode';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaProperty } from '../../types/OcaProperty';
-import { IOcaRamperCommand } from '../../types/OcaRamperCommand';
-import { IOcaRamperInterpolationLaw } from '../../types/OcaRamperInterpolationLaw';
-import { IOcaTimeMode } from '../../types/OcaTimeMode';
-import { OcaProperty } from '../../types/OcaProperty';
-import { OcaRamperInterpolationLaw } from '../../types/OcaRamperInterpolationLaw';
-import { OcaRamperState } from '../../types/OcaRamperState';
-import { OcaTimeMode } from '../../types/OcaTimeMode';
 
 /**
  * Agent that gradually changes a property setting from one value to another. Works on a scalar numeric or boolean property of a specified object. Does not work for array, list, map, struct, or string properties. Contains timer features to allow ramps to start immediately or at any time in the future. This is a weakly typed class. All ramping parameters are specified as a  **OcaFloat64** numbers.

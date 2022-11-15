@@ -1,7 +1,6 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaBlob } from './OcaBlob.js';
 import { OcaLibVolIdentifier } from './OcaLibVolIdentifier.js';
 import { OcaString } from './OcaString.js';
@@ -9,6 +8,7 @@ import { OcaTimeMode } from './OcaTimeMode.js';
 import { OcaTimePTP } from './OcaTimePTP.js';
 import { OcaUint16 } from './OcaUint16.js';
 import { OcaUint32 } from './OcaUint32.js';
+import { Struct } from './Struct.js';
 
 import { OcaTask as type } from '../types/OcaTask.js';
 

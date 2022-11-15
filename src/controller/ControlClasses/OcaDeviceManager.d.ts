@@ -1,12 +1,11 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
-
-import { PropertyEvent } from '../property_event';
 import { OcaDeviceState } from '../../types/OcaDeviceState';
 import { OcaManagerDescriptor } from '../../types/OcaManagerDescriptor';
 import { OcaModelDescription } from '../../types/OcaModelDescription';
 import { OcaModelGUID } from '../../types/OcaModelGUID';
 import { OcaResetCause } from '../../types/OcaResetCause';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaManager } from './OcaManager';
 
 /**
  * Mandatory manager that contains information relevant to the whole device.

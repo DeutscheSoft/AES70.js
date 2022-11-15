@@ -1,7 +1,7 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that provides application diagnostic aids. Unlike other manager classes, OcaDiagnosticManager may be subclassed to provide proprietary application diagnostic enhancements.

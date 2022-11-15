@@ -1,13 +1,12 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaStreamConnectorIdentification,
   IOcaStreamConnectorIdentification,
+  OcaStreamConnectorIdentification,
 } from './OcaStreamConnectorIdentification';
-import { OcaStreamStatus, IOcaStreamStatus } from './OcaStreamStatus';
-import { OcaStreamType, IOcaStreamType } from './OcaStreamType';
+import { IOcaStreamStatus, OcaStreamStatus } from './OcaStreamStatus';
+import { IOcaStreamType, OcaStreamType } from './OcaStreamType';
 
 export declare interface IOcaStream {
   /**

@@ -1,8 +1,8 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaBlobFixedLen } from './OcaBlobFixedLen.js';
+import { Struct } from './Struct.js';
 
 import { OcaModelGUID as type } from '../types/OcaModelGUID.js';
 

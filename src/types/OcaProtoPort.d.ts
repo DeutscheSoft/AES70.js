@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaProtoPortID, IOcaProtoPortID } from './OcaProtoPortID';
+import { IOcaProtoPortID, OcaProtoPortID } from './OcaProtoPortID';
 
 export declare interface IOcaProtoPort {
   /**

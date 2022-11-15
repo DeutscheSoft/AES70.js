@@ -1,9 +1,9 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaTimePTP } from '../../OCP1/OcaTimePTP.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { OcaUint64 } from '../../OCP1/OcaUint64.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Manager that allows controlling and monitoring a device's time-of-day clock, and that collects the device's time source objects.

@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaActuator } from './OcaActuator.js';
 import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaDBr } from '../../OCP1/OcaDBr.js';
@@ -7,6 +5,8 @@ import { OcaDynamicsFunction } from '../../OCP1/OcaDynamicsFunction.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaLevelDetectionLaw } from '../../OCP1/OcaLevelDetectionLaw.js';
 import { OcaPresentationUnit } from '../../OCP1/OcaPresentationUnit.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * A multipurpose dynamics processor. Can be configured as compressor, limiter, expander, or gate. This class is expected to handle the majority of the basic cases. More complex devices may be described in a different manner, using one or more  **OcaDynamicsDetector**  and  **OcaDynamicsCurve**  objects, in conjunction with other Worker objects as needed.

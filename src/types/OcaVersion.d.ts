@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaComponent, IOcaComponent } from './OcaComponent';
+import { IOcaComponent, OcaComponent } from './OcaComponent';
 
 export declare interface IOcaVersion {
   /**

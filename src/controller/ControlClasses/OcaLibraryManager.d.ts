@@ -1,11 +1,12 @@
+import {
+  IOcaLibVolIdentifier,
+  OcaLibVolIdentifier,
+} from '../../types/OcaLibVolIdentifier';
+import { IOcaLibVolType } from '../../types/OcaLibVolType';
+import { OcaLibraryIdentifier } from '../../types/OcaLibraryIdentifier';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';
-import { IOcaLibVolType } from '../../types/OcaLibVolType';
-import { OcaLibVolIdentifier } from '../../types/OcaLibVolIdentifier';
-import { OcaLibraryIdentifier } from '../../types/OcaLibraryIdentifier';
 
 /**
  * Optional manager for handling device presets -- Patch and ParamSet libraries.

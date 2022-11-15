@@ -1,10 +1,10 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaTimeProtocol } from '../../OCP1/OcaTimeProtocol.js';
 import { OcaTimeReferenceType } from '../../OCP1/OcaTimeReferenceType.js';
 import { OcaTimeSourceAvailability } from '../../OCP1/OcaTimeSourceAvailability.js';
 import { OcaTimeSourceSyncStatus } from '../../OCP1/OcaTimeSourceSyncStatus.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * A time source, internal or external. See RFC 7273 for a detailed discussion of time sources.

@@ -1,10 +1,12 @@
+import {
+  IOcaLevelDetectionLaw,
+  OcaLevelDetectionLaw,
+} from '../../types/OcaLevelDetectionLaw';
+import { IOcaParameterMask } from '../../types/OcaParameterMask';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaLevelDetectionLaw } from '../../types/OcaLevelDetectionLaw';
-import { OcaLevelDetectionLaw } from '../../types/OcaLevelDetectionLaw';
 
 /**
  * Dynamics element : side-chain detector.

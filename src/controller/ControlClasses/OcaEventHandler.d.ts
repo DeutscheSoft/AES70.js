@@ -1,7 +1,6 @@
+import { IOcaEvent } from '../../types/OcaEvent';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-
-import { IOcaEvent } from '../../types/OcaEvent';
 
 /**
  * Base class for event handler objects. This class applies to controllers that subscribe to events and receive notifications for them. Controller developers can derive from this class and add specific callback methods that perform processing and/or have specific event data structures.

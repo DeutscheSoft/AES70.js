@@ -1,8 +1,7 @@
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaBasicSensor } from './OcaBasicSensor';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
 
 /**
  * Basic Float64 sensor.

@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaBlobFixedLen } from '../../OCP1/OcaBlobFixedLen.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
@@ -11,6 +9,8 @@ import { OcaModelGUID } from '../../OCP1/OcaModelGUID.js';
 import { OcaResetCause } from '../../OCP1/OcaResetCause.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Mandatory manager that contains information relevant to the whole device.

@@ -1,22 +1,27 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaApplicationNetwork } from './OcaApplicationNetwork';
-import { Event } from '../event';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
 import { IOcaMediaCoding } from '../../types/OcaMediaCoding';
 import { IOcaMediaConnection } from '../../types/OcaMediaConnection';
 import { IOcaMediaConnectorCommand } from '../../types/OcaMediaConnectorCommand';
 import { IOcaMediaConnectorState } from '../../types/OcaMediaConnectorState';
-import { IOcaMediaConnectorStatus } from '../../types/OcaMediaConnectorStatus';
-import { IOcaMediaSinkConnector } from '../../types/OcaMediaSinkConnector';
-import { IOcaMediaSourceConnector } from '../../types/OcaMediaSourceConnector';
-import { IOcaPortID } from '../../types/OcaPortID';
-import { OcaMediaConnectorStatus } from '../../types/OcaMediaConnectorStatus';
-import { OcaMediaSinkConnector } from '../../types/OcaMediaSinkConnector';
-import { OcaMediaSourceConnector } from '../../types/OcaMediaSourceConnector';
+import {
+  IOcaMediaConnectorStatus,
+  OcaMediaConnectorStatus,
+} from '../../types/OcaMediaConnectorStatus';
+import {
+  IOcaMediaSinkConnector,
+  OcaMediaSinkConnector,
+} from '../../types/OcaMediaSinkConnector';
+import {
+  IOcaMediaSourceConnector,
+  OcaMediaSourceConnector,
+} from '../../types/OcaMediaSourceConnector';
 import { OcaNetworkMediaProtocol } from '../../types/OcaNetworkMediaProtocol';
 import { OcaPort } from '../../types/OcaPort';
+import { IOcaPortID } from '../../types/OcaPortID';
+import { Arguments } from '../arguments';
+import { Event } from '../event';
+import { PropertyEvent } from '../property_event';
+import { RemoteDevice } from '../remote_device';
+import { OcaApplicationNetwork } from './OcaApplicationNetwork';
 
 /**
  * This was not documented in the OCA standard.

@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaWorker } from './OcaWorker.js';
 import { OcaGlobalTypeIdentifier } from '../../OCP1/OcaGlobalTypeIdentifier.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
@@ -12,6 +10,8 @@ import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { String16 } from '../../OCP1/String16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * Factory to create custom block instances. Used only in reconfigurable devices. The idea is that you instantiate a factory once, populate it with proto-objects and proto-signal paths, then use it subsequently to instantiate identical blocks. In this context,  **proto-object**  means a prototype of a block member. Unbound objects are identified by  **proto-object numbers (PONo's)**  instead of actual object numbers. PONos are unique within the factory, and are converted to globally unique object numbers ONos) in all new block instances that the factory builds. Correspondingly,  **proto-signal path**  means a signal path expressed in terms of  **PONos** rather than  **ONos** . When the factory constructs a block, it converts all of its unbound signal paths to normal (bound) signal paths by mapping its  **PONos** into  **ONos** . The factory also holds a list of  **proto-blockports**  which are  **OcaPorts** that are allocated to new blocks the factory builds. As well, the proto-objects in the factory may contain lists of their own proto-ports. Together, the factory's proto-ports and its members' proto-ports are used to define the factory's set of proto-signal paths. Factories may be predefined at time of device manufacture, or constructed "on the fly" by controllers. To  **create a factory** , the controller calls a block's  **CreateMember(...)** method with the  **ClassID** of this class ( **OcaBlockFactory** ). Factories ignore which block creates them, so it makes no difference which block's  **CreateMember(...)** method is used. It will usually make the most sense to use the Root Block's method. To add proto-objects, proto-ports, and proto-signal paths to a block factory, the controller calls the factory's  **DefineProtoMember(...), DefineProtoPort(...), and DefineProtoSignalPath(...** ) methods, respectively.

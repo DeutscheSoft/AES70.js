@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaGrouperCitizen } from '../../OCP1/OcaGrouperCitizen.js';
 import { OcaGrouperEnrollment } from '../../OCP1/OcaGrouperEnrollment.js';
@@ -10,6 +8,8 @@ import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  *  **Concept**   ** ** A  **grouper**  is an object responsible for aggregating property values. An  **actuator grouper**  allows control of many actuator objects from a single input value; a  **sensor grouper**  allows observing many sensor objects via a single output value. Actuator groupers are described below; sensor groupers are TBD. In a working media system, many actuator objects (we will call them  **citizens** ) will be members of multiple groups. For example, in a multiway stereo sound reinforcement system, the left woofer power amplifier might be controlled by a master gain group, a left-side gain group, and a woofer gain group. To manage the interactions of these multiple memberships, we need a single entity that manages all three of these groups, anticipating the interactions and taking appropriate action. An actuator grouper is such an entity. The grouper:

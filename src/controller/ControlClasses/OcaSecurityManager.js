@@ -1,8 +1,8 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaString } from '../../OCP1/OcaString.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Manager that collects and controls security settings (including security keys).

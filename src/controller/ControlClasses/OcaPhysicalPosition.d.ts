@@ -1,11 +1,12 @@
+import { OcaPositionCoordinateSystem } from '../../types/OcaPositionCoordinateSystem';
+import {
+  IOcaPositionDescriptor,
+  OcaPositionDescriptor,
+} from '../../types/OcaPositionDescriptor';
+import { Arguments } from '../arguments';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
-import { Arguments } from '../arguments';
-
-import { PropertyEvent } from '../property_event';
-import { IOcaPositionDescriptor } from '../../types/OcaPositionDescriptor';
-import { OcaPositionCoordinateSystem } from '../../types/OcaPositionCoordinateSystem';
-import { OcaPositionDescriptor } from '../../types/OcaPositionDescriptor';
 
 /**
  * Physical position of device or an element of it. AES70 supports a variety of positional coordinate systems. For details, see AES70-1, section 5.5.9.

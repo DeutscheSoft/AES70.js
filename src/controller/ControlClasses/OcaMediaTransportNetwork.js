@@ -1,22 +1,24 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaMediaCoding } from '../../OCP1/OcaMediaCoding.js';
 import { OcaMediaConnection } from '../../OCP1/OcaMediaConnection.js';
 import { OcaMediaConnectorCommand } from '../../OCP1/OcaMediaConnectorCommand.js';
-import { OcaMediaConnectorElement } from '../../OCP1/OcaMediaConnectorElement.js';
 import { OcaMediaConnectorState } from '../../OCP1/OcaMediaConnectorState.js';
 import { OcaMediaConnectorStatus } from '../../OCP1/OcaMediaConnectorStatus.js';
+import { OcaMediaConnectorStatusChangedEventData } from '../../OCP1/OcaMediaConnectorStatusChangedEventData.js';
 import { OcaMediaSinkConnector } from '../../OCP1/OcaMediaSinkConnector.js';
+import { OcaMediaSinkConnectorChangedEventData } from '../../OCP1/OcaMediaSinkConnectorChangedEventData.js';
 import { OcaMediaSourceConnector } from '../../OCP1/OcaMediaSourceConnector.js';
+import { OcaMediaSourceConnectorChangedEventData } from '../../OCP1/OcaMediaSourceConnectorChangedEventData.js';
 import { OcaMultiMap } from '../../OCP1/OcaMultiMap.js';
 import { OcaNetworkMediaProtocol } from '../../OCP1/OcaNetworkMediaProtocol.js';
 import { OcaPort } from '../../OCP1/OcaPort.js';
 import { OcaPortID } from '../../OCP1/OcaPortID.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
 
 /**
  * This was not documented in the OCA standard.

@@ -1,8 +1,8 @@
 /*
  * This file has been generated.
  */
-import { Struct } from './Struct.js';
 import { OcaBlob } from './OcaBlob.js';
+import { Struct } from './Struct.js';
 
 import { OcaStreamConnectorIdentification as type } from '../types/OcaStreamConnectorIdentification.js';
 

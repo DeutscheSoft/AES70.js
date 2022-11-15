@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaPort, IOcaPort } from './OcaPort';
+import { IOcaPort, OcaPort } from './OcaPort';
 
 export declare interface IOcaSignalPath {
   /**

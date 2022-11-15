@@ -1,10 +1,9 @@
 /*
  * This file has been generated.
  */
-
 import {
-  OcaObjectIdentification,
   IOcaObjectIdentification,
+  OcaObjectIdentification,
 } from './OcaObjectIdentification';
 
 export declare interface IOcaBlockMember {

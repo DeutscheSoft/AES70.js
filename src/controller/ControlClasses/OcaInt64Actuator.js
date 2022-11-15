@@ -1,6 +1,6 @@
+import { OcaInt64 } from '../../OCP1/OcaInt64.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaBasicActuator } from './OcaBasicActuator.js';
-import { OcaInt64 } from '../../OCP1/OcaInt64.js';
 
 /**
  * Basic int64 actuator.

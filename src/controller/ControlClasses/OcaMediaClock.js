@@ -1,10 +1,10 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMediaClockLockState } from '../../OCP1/OcaMediaClockLockState.js';
 import { OcaMediaClockRate } from '../../OCP1/OcaMediaClockRate.js';
 import { OcaMediaClockType } from '../../OCP1/OcaMediaClockType.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by*  **OcaMediaClock3**  A media clock, internal or external.

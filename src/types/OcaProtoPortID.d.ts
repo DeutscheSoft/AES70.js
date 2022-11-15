@@ -1,8 +1,7 @@
 /*
  * This file has been generated.
  */
-
-import { OcaPortMode, IOcaPortMode } from './OcaPortMode';
+import { IOcaPortMode, OcaPortMode } from './OcaPortMode';
 
 export declare interface IOcaProtoPortID {
   /**

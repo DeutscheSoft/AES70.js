@@ -1,5 +1,3 @@
-import { make_control_class } from '../make_control_class.js';
-import { OcaAgent } from './OcaAgent.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaNetworkControlProtocol } from '../../OCP1/OcaNetworkControlProtocol.js';
@@ -9,6 +7,8 @@ import { OcaNetworkStatistics } from '../../OCP1/OcaNetworkStatistics.js';
 import { OcaNetworkStatus } from '../../OCP1/OcaNetworkStatus.js';
 import { OcaNetworkSystemInterfaceID } from '../../OCP1/OcaNetworkSystemInterfaceID.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
+import { make_control_class } from '../make_control_class.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  *  **DEPRECATED CLASS**   *Replaced by class*  **OcaControlNetwork **  *in version 3 of Connection Management (CM3)*  Abstract base class for defining network classes to which this device belongs. This class is to be used for control and monitoring networks only. For media transport networks, and for networks that combine media transport and control, the  **OcaStreamNetwork**  class should be used instead.

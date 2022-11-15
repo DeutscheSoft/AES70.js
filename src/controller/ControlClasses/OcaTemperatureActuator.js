@@ -1,6 +1,6 @@
+import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
-import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 
 /**
  * A temperature actuator. Works in Celsius.
