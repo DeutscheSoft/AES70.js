@@ -1,3 +1,3 @@
-import { Bitset8 } from './Bitset8.js';
+import { Bitset16 } from './Bitset16.js';
 
-export const OcaMediaConnectorElement = Bitset8;
+export const OcaMediaConnectorElement = Bitset16;
