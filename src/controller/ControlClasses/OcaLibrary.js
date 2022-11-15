@@ -2,9 +2,9 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 import { OcaLibAccess } from '../../OCP1/OcaLibAccess.js';
 import { OcaLibVol } from '../../OCP1/OcaLibVol.js';
+import { OcaLibVolChangedEventData } from '../../OCP1/OcaLibVolChangedEventData.js';
 import { OcaLibVolType } from '../../OCP1/OcaLibVolType.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
-import { OcaPropertyChangeType } from '../../OCP1/OcaPropertyChangeType.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 
@@ -34,7 +34,7 @@ export const OcaLibrary = make_control_class(
     ['Access', [OcaLibAccess], 3, 2, false, false, null],
     ['Volumes', [OcaMap(OcaUint32, OcaLibVol)], 3, 3, false, false, null],
   ],
-  [['OcaLibVolChanged', 3, 1, [OcaUint32, OcaPropertyChangeType]]]
+  [['OcaLibVolChanged', 3, 1, [OcaLibVolChangedEventData]]]
 );
 
 /**

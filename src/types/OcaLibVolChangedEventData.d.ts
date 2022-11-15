@@ -1,20 +1,12 @@
 /*
  * This file has been generated.
  */
-
-import { OcaEvent, IOcaEvent } from './OcaEvent';
 import {
   OcaPropertyChangeType,
   IOcaPropertyChangeType,
 } from './OcaPropertyChangeType';
 
 export declare interface IOcaLibVolChangedEventData {
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: IOcaEvent;
-
   /**
    * ID of library volume that changed.
    * @type number
@@ -34,18 +26,7 @@ export declare class OcaLibVolChangedEventData
    * Event data for the  **OcaLibVolChanged** event, which signals a change in an  **OcaLibrary.Volumes**  property.
    * @class OcaLibVolChangedEventData
    */
-  constructor(
-    Event: OcaEvent,
-    VolumeID: number,
-    ChangeType: OcaPropertyChangeType
-  );
-
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: OcaEvent;
-
+  constructor(VolumeID: number, ChangeType: OcaPropertyChangeType);
   /**
    * ID of library volume that changed.
    * @type number

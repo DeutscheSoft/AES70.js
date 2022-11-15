@@ -1,10 +1,10 @@
 import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
-import { OcaEvent } from '../../OCP1/OcaEvent.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaFloat64 } from '../../OCP1/OcaFloat64.js';
 import { OcaList } from '../../OCP1/OcaList.js';
+import { OcaObservationListEventData } from '../../OCP1/OcaObservationListEventData.js';
 import { OcaObserverState } from '../../OCP1/OcaObserverState.js';
 import { OcaProperty } from '../../OCP1/OcaProperty.js';
 import { OcaRelationalOperator } from '../../OCP1/OcaRelationalOperator.js';
@@ -63,7 +63,7 @@ export const OcaNumericObserverList = make_control_class(
     ['Hysteresis', [OcaFloat64], 3, 6, false, false, null],
     ['Period', [OcaFloat32], 3, 7, false, false, null],
   ],
-  [['Observation', 3, 1, [OcaEvent, OcaList(OcaFloat64)]]]
+  [['Observation', 3, 1, [OcaObservationListEventData]]]
 );
 
 /**

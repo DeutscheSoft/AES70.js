@@ -7,12 +7,7 @@ export class OcaLibVolChangedEventData {
    * Event data for the  **OcaLibVolChanged** event, which signals a change in an  **OcaLibrary.Volumes**  property.
    * @class OcaLibVolChangedEventData
    */
-  constructor(Event, VolumeID, ChangeType) {
-    /**
-     * The event that was raised.
-     * @type OcaEvent
-     */
-    this.Event = Event;
+  constructor(VolumeID, ChangeType) {
     /**
      * ID of library volume that changed.
      * @type number

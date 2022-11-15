@@ -1,20 +1,12 @@
 /*
  * This file has been generated.
  */
-
-import { OcaEvent, IOcaEvent } from './OcaEvent';
 import {
   OcaMediaConnectorStatus,
   IOcaMediaConnectorStatus,
 } from './OcaMediaConnectorStatus';
 
 export declare interface IOcaMediaConnectorStatusChangedEventData {
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: IOcaEvent;
-
   /**
    * The status that has changed.
    * @type OcaMediaConnectorStatus
@@ -28,14 +20,7 @@ export declare class OcaMediaConnectorStatusChangedEventData
    * This was not documented in the OCA standard.
    * @class OcaMediaConnectorStatusChangedEventData
    */
-  constructor(Event: OcaEvent, ConnectorStatus: OcaMediaConnectorStatus);
-
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: OcaEvent;
-
+  constructor(ConnectorStatus: OcaMediaConnectorStatus);
   /**
    * The status that has changed.
    * @type OcaMediaConnectorStatus

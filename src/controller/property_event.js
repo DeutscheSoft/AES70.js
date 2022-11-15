@@ -12,7 +12,7 @@ import { error } from '../log.js';
 export class PropertyEvent extends BaseEvent {
   constructor(object, id, propertyType) {
     super(object, id, propertyType);
-    this.callback = (id, dataView, changeType) => {
+    this.callback = ([ id, dataView, changeType ]) => {
       if (
         id.DefLevel !== this.id.DefLevel ||
         id.PropertyIndex !== this.id.PropertyIndex

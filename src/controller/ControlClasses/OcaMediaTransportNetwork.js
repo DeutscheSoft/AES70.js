@@ -15,7 +15,6 @@ import { OcaMultiMap } from '../../OCP1/OcaMultiMap.js';
 import { OcaNetworkMediaProtocol } from '../../OCP1/OcaNetworkMediaProtocol.js';
 import { OcaPort } from '../../OCP1/OcaPort.js';
 import { OcaPortID } from '../../OCP1/OcaPortID.js';
-import { OcaPropertyChangeType } from '../../OCP1/OcaPropertyChangeType.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 
@@ -101,23 +100,9 @@ export const OcaMediaTransportNetwork = make_control_class(
     ['AlignmentGain', [OcaFloat32], 3, 8, false, false, null],
   ],
   [
-    [
-      'SourceConnectorChanged',
-      3,
-      1,
-      [
-        OcaMediaSourceConnector,
-        OcaPropertyChangeType,
-        OcaMediaConnectorElement,
-      ],
-    ],
-    [
-      'SinkConnectorChanged',
-      3,
-      2,
-      [OcaMediaSinkConnector, OcaPropertyChangeType, OcaMediaConnectorElement],
-    ],
-    ['ConnectorStatusChanged', 3, 3, [OcaMediaConnectorStatus]],
+    ['SourceConnectorChanged', 3, 1, [OcaMediaSourceConnectorChangedEventData]],
+    ['SinkConnectorChanged', 3, 2, [OcaMediaSinkConnectorChangedEventData]],
+    ['ConnectorStatusChanged', 3, 3, [OcaMediaConnectorStatusChangedEventData]],
   ]
 );
 

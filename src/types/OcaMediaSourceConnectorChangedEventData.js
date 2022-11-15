@@ -7,12 +7,7 @@ export class OcaMediaSourceConnectorChangedEventData {
    * This was not documented in the OCA standard.
    * @class OcaMediaSourceConnectorChangedEventData
    */
-  constructor(Event, SourceConnector, ChangeType, ChangedElement) {
-    /**
-     * The event that was raised.
-     * @type OcaEvent
-     */
-    this.Event = Event;
+  constructor(SourceConnector, ChangeType, ChangedElement) {
     /**
      * The media source connector for which the changed event holds (i.e. that is added, deleted or changed).
      * @type OcaMediaSourceConnector

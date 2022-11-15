@@ -2,11 +2,11 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
-import { OcaLibVolIdentifier } from '../../OCP1/OcaLibVolIdentifier.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaTask } from '../../OCP1/OcaTask.js';
 import { OcaTaskCommand } from '../../OCP1/OcaTaskCommand.js';
 import { OcaTaskManagerState } from '../../OCP1/OcaTaskManagerState.js';
+import { OcaTaskStateChangedEventData } from '../../OCP1/OcaTaskStateChangedEventData.js';
 import { OcaTaskStatus } from '../../OCP1/OcaTaskStatus.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
@@ -55,7 +55,7 @@ export const OcaTaskManager = make_control_class(
     ['State', [OcaTaskManagerState], 3, 1, false, false, null],
     ['Tasks', [OcaMap(OcaUint32, OcaTask)], 3, 2, false, false, null],
   ],
-  [['TaskStateChanged', 3, 1, [OcaUint32, OcaLibVolIdentifier, OcaTaskStatus]]]
+  [['TaskStateChanged', 3, 1, [OcaTaskStateChangedEventData]]]
 );
 
 /**

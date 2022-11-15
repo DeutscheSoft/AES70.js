@@ -1,8 +1,6 @@
 /*
  * This file has been generated.
  */
-
-import { OcaEvent, IOcaEvent } from './OcaEvent';
 import {
   OcaMediaConnectorElement,
   IOcaMediaConnectorElement,
@@ -17,12 +15,6 @@ import {
 } from './OcaPropertyChangeType';
 
 export declare interface IOcaMediaSourceConnectorChangedEventData {
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: IOcaEvent;
-
   /**
    * The media source connector for which the changed event holds (i.e. that is added, deleted or changed).
    * @type OcaMediaSourceConnector
@@ -49,18 +41,10 @@ export declare class OcaMediaSourceConnectorChangedEventData
    * @class OcaMediaSourceConnectorChangedEventData
    */
   constructor(
-    Event: OcaEvent,
     SourceConnector: OcaMediaSourceConnector,
     ChangeType: OcaPropertyChangeType,
     ChangedElement: number
   );
-
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: OcaEvent;
-
   /**
    * The media source connector for which the changed event holds (i.e. that is added, deleted or changed).
    * @type OcaMediaSourceConnector

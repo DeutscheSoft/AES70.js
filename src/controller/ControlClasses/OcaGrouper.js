@@ -5,7 +5,7 @@ import { OcaGrouperCitizen } from '../../OCP1/OcaGrouperCitizen.js';
 import { OcaGrouperEnrollment } from '../../OCP1/OcaGrouperEnrollment.js';
 import { OcaGrouperGroup } from '../../OCP1/OcaGrouperGroup.js';
 import { OcaGrouperMode } from '../../OCP1/OcaGrouperMode.js';
-import { OcaGrouperStatusChangeType } from '../../OCP1/OcaGrouperStatusChangeType.js';
+import { OcaGrouperStatusChangeEventData } from '../../OCP1/OcaGrouperStatusChangeEventData.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
@@ -89,7 +89,7 @@ export const OcaGrouper = make_control_class(
     ],
     ['Mode', [OcaGrouperMode], 3, 5, false, false, null],
   ],
-  [['StatusChange', 3, 1, [OcaUint16, OcaUint16, OcaGrouperStatusChangeType]]]
+  [['StatusChange', 3, 1, [OcaGrouperStatusChangeEventData]]]
 );
 
 /**

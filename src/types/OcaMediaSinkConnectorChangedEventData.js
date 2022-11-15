@@ -7,12 +7,7 @@ export class OcaMediaSinkConnectorChangedEventData {
    * This was not documented in the OCA standard.
    * @class OcaMediaSinkConnectorChangedEventData
    */
-  constructor(Event, SinkConnector, ChangeType, ChangedElement) {
-    /**
-     * The event that was raised.
-     * @type OcaEvent
-     */
-    this.Event = Event;
+  constructor(SinkConnector, ChangeType, ChangedElement) {
     /**
      * The media source connector for which the changed event holds (i.e. that is added, deleted or changed).
      * @type OcaMediaSinkConnector

@@ -1,20 +1,12 @@
 /*
  * This file has been generated.
  */
-
-import { OcaEvent, IOcaEvent } from './OcaEvent';
 import {
   OcaGrouperStatusChangeType,
   IOcaGrouperStatusChangeType,
 } from './OcaGrouperStatusChangeType';
 
 export declare interface IOcaGrouperStatusChangeEventData {
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: IOcaEvent;
-
   /**
    * Index of relevant group, or zero if event is non-group-specific.
    * @type number
@@ -41,18 +33,10 @@ export declare class OcaGrouperStatusChangeEventData
    * @class OcaGrouperStatusChangeEventData
    */
   constructor(
-    Event: OcaEvent,
     groupIndex: number,
     citizenIndex: number,
     changeType: OcaGrouperStatusChangeType
   );
-
-  /**
-   * The event that was raised.
-   * @type OcaEvent
-   */
-  Event: OcaEvent;
-
   /**
    * Index of relevant group, or zero if event is non-group-specific.
    * @type number

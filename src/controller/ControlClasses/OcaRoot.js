@@ -2,13 +2,12 @@ import { make_control_class } from '../make_control_class.js';
 import { ObjectBase } from '../object_base.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaClassIdentification } from '../../OCP1/OcaClassIdentification.js';
-import { OcaPropertyChangeType } from '../../OCP1/OcaPropertyChangeType.js';
-import { OcaPropertyID } from '../../OCP1/OcaPropertyID.js';
+import { OcaPropertyChangedEventData } from '../../OCP1/OcaPropertyChangedEventData.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { String16 } from '../../OCP1/String16.js';
-import { RestWithOffset } from '../../OCP1/RestWithOffset.js';
+
 /**
  * The abstract root class of which all OCA classes derive. It offers basic OCA functionality such as locking an object and generalized data access.
  * @extends ObjectBase
@@ -35,14 +34,7 @@ export const OcaRoot = make_control_class(
     ['Lockable', [OcaBoolean], 1, 4, true, false, null],
     ['Role', [OcaString], 1, 5, true, false, null],
   ],
-  [
-    [
-      'PropertyChanged',
-      1,
-      1,
-      [OcaPropertyID, RestWithOffset(1), OcaPropertyChangeType],
-    ],
-  ]
+  [['PropertyChanged', 1, 1, [OcaPropertyChangedEventData]]]
 );
 
 /**

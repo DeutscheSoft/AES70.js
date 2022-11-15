@@ -2,9 +2,9 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaEvent } from '../../OCP1/OcaEvent.js';
-import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMethod } from '../../OCP1/OcaMethod.js';
 import { OcaNotificationDeliveryMode } from '../../OCP1/OcaNotificationDeliveryMode.js';
+import { OcaObjectListEventData } from '../../OCP1/OcaObjectListEventData.js';
 import { OcaPropertyID } from '../../OCP1/OcaPropertyID.js';
 import { OcaSubscriptionManagerState } from '../../OCP1/OcaSubscriptionManagerState.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
@@ -67,7 +67,7 @@ export const OcaSubscriptionManager = make_control_class(
   [['State', [OcaSubscriptionManagerState], 3, 1, false, false, null]],
   [
     ['NotificationsDisabled', 3, 1, []],
-    ['SynchronizeState', 3, 2, [OcaList(OcaUint32)]],
+    ['SynchronizeState', 3, 2, [OcaObjectListEventData]],
   ]
 );
 
