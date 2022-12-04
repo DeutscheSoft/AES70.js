@@ -17,11 +17,13 @@ export declare interface IOcaManagerDescriptor {
 
   /**
    * ClassID of the class from which the manager instance was created.
+   * @type string
    */
   ClassID: string;
 
   /**
    * Version number of the class from which this instance was created.
+   * @type number
    */
   ClassVersion: number;
 }
@@ -52,11 +54,13 @@ export declare class OcaManagerDescriptor implements IOcaManagerDescriptor {
 
   /**
    * ClassID of the class from which the manager instance was created.
+   * @type string
    */
   ClassID: string;
 
   /**
    * Version number of the class from which this instance was created.
+   * @type number
    */
   ClassVersion: number;
 }

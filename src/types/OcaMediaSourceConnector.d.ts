@@ -44,6 +44,7 @@ export declare interface IOcaMediaSourceConnector {
 
   /**
    * Alignment level of the interface. Note that the dBFS value is referenced to the  *interface's* fullscale value, not to device's internal fullscale value.
+   * @type number
    */
   AlignmentLevel: number;
 
@@ -109,6 +110,7 @@ export declare class OcaMediaSourceConnector
 
   /**
    * Alignment level of the interface. Note that the dBFS value is referenced to the  *interface's* fullscale value, not to device's internal fullscale value.
+   * @type number
    */
   AlignmentLevel: number;
 

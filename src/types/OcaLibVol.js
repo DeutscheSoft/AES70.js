@@ -15,7 +15,7 @@ export class OcaLibVol {
     this.Metadata = Metadata;
     /**
      * Contents of library volume. Type depends on template parameter.
-     * @type string
+     * @type Uint8Array
      */
     this.Data = Data;
   }

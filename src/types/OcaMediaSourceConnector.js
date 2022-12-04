@@ -34,7 +34,7 @@ export class OcaMediaSourceConnector {
     this.Connection = Connection;
     /**
      * List of codings available for this connector.
-     * @type Array
+     * @type OcaMediaCoding[]
      */
     this.AvailableCodings = AvailableCodings;
     /**
@@ -44,7 +44,7 @@ export class OcaMediaSourceConnector {
     this.PinCount = PinCount;
     /**
      * Map of stream pins (source channels) to OCA ports (input ports) of the owning  **OcaMediaNetwork** object. This defines what source channels are sent to the network. A pin is identified by an OcaUint16 with value 1..MaxPinCount. Not having a certain pin identifier in this map means that the pin is empty (i.e. not carrying a source channel).
-     * @type Map
+     * @type Map<number, OcaPortID>
      */
     this.ChannelPinMap = ChannelPinMap;
     /**

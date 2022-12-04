@@ -15,7 +15,7 @@ export class OcaLibVolData_ParamSet {
     this.TargetBlockType = TargetBlockType;
     /**
      * ParamSet payload
-     * @type string
+     * @type Uint8Array
      */
     this.ParData = ParData;
   }
