@@ -206,8 +206,7 @@ export declare class OcaBlock extends OcaWorker {
    * @param {OcaStringComparisonType} NameComparisonType
    *
    * @param {string} SearchClassID
-   *
-   * @param {number} ResultFlags
+   * @param {IOcaObjectSearchResultFlags} ResultFlags
    *
    * @returns {Promise<OcaObjectSearchResult[]>}
    *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -216,7 +215,7 @@ export declare class OcaBlock extends OcaWorker {
     SearchName: string,
     NameComparisonType: IOcaStringComparisonType,
     SearchClassID: string,
-    ResultFlags: number
+    ResultFlags: IOcaObjectSearchResultFlags
   ): Promise<OcaObjectSearchResult[]>;
 
   /**
@@ -228,8 +227,7 @@ export declare class OcaBlock extends OcaWorker {
    * @param {OcaStringComparisonType} NameComparisonType
    *
    * @param {string} SearchClassID
-   *
-   * @param {number} ResultFlags
+   * @param {IOcaObjectSearchResultFlags} ResultFlags
    *
    * @returns {Promise<OcaObjectSearchResult[]>}
    *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -238,7 +236,7 @@ export declare class OcaBlock extends OcaWorker {
     SearchName: string,
     NameComparisonType: IOcaStringComparisonType,
     SearchClassID: string,
-    ResultFlags: number
+    ResultFlags: IOcaObjectSearchResultFlags
   ): Promise<OcaObjectSearchResult[]>;
 
   /**
@@ -247,14 +245,14 @@ export declare class OcaBlock extends OcaWorker {
    * @method OcaBlock#FindObjectsByPath
    * @param {string[]} SearchPath
    *
-   * @param {number} ResultFlags
+   * @param {IOcaObjectSearchResultFlags} ResultFlags
    *
    * @returns {Promise<OcaObjectSearchResult[]>}
    *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
    */
   FindObjectsByPath(
     SearchPath: string[],
-    ResultFlags: number
+    ResultFlags: IOcaObjectSearchResultFlags
   ): Promise<OcaObjectSearchResult[]>;
 
   /**
@@ -266,8 +264,7 @@ export declare class OcaBlock extends OcaWorker {
    * @param {OcaStringComparisonType} NameComparisonType
    *
    * @param {string} SearchClassID
-   *
-   * @param {number} ResultFlags
+   * @param {IOcaObjectSearchResultFlags} ResultFlags
    *
    * @returns {Promise<OcaObjectSearchResult[]>}
    *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -276,6 +273,6 @@ export declare class OcaBlock extends OcaWorker {
     SearchName: string,
     NameComparisonType: IOcaStringComparisonType,
     SearchClassID: string,
-    ResultFlags: number
+    ResultFlags: IOcaObjectSearchResultFlags
   ): Promise<OcaObjectSearchResult[]>;
 }

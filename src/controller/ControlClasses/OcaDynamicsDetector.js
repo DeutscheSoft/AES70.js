@@ -1,6 +1,6 @@
-import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaLevelDetectionLaw } from '../../OCP1/OcaLevelDetectionLaw.js';
+import { OcaParameterMask } from '../../OCP1/OcaParameterMask.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
@@ -28,7 +28,13 @@ export const OcaDynamicsDetector = make_control_class(
       'SetMultiple',
       4,
       9,
-      [OcaBitSet16, OcaLevelDetectionLaw, OcaFloat32, OcaFloat32, OcaFloat32],
+      [
+        OcaParameterMask,
+        OcaLevelDetectionLaw,
+        OcaFloat32,
+        OcaFloat32,
+        OcaFloat32,
+      ],
       [],
     ],
   ],
@@ -117,10 +123,8 @@ export const OcaDynamicsDetector = make_control_class(
  * Sets some or all detector parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaDynamicsDetector#SetMultiple
- * @param {number} Mask
- *
- * @param {OcaLevelDetectionLaw} Law
- *
+ * @param {IOcaParameterMask} Mask
+ * @param {IOcaLevelDetectionLaw} Law
  * @param {number} AttackTime
  *
  * @param {number} ReleaseTime

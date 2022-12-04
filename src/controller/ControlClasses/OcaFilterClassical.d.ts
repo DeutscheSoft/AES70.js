@@ -156,8 +156,7 @@ export declare class OcaFilterClassical extends OcaActuator {
    * Sets some or all filter parameter. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
    *
    * @method OcaFilterClassical#SetMultiple
-   * @param {number} Mask
-   *
+   * @param {IOcaParameterMask} Mask
    * @param {number} Frequency
    *
    * @param {OcaFilterPassband} Passband
@@ -171,7 +170,7 @@ export declare class OcaFilterClassical extends OcaActuator {
    * @returns {Promise<void>}
    */
   SetMultiple(
-    Mask: number,
+    Mask: IOcaParameterMask,
     Frequency: number,
     Passband: IOcaFilterPassband,
     Shape: IOcaClassicalFilterShape,

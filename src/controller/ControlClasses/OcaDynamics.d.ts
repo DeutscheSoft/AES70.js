@@ -381,7 +381,7 @@ export declare class OcaDynamics extends OcaActuator {
    * Sets some or all dynamics parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
    *
    * @method OcaDynamics#SetMultiple
-   * @param {number} Mask
+   * @param {IOcaParameterMask} Mask
    *
    * @param {OcaDynamicsFunction} Function
    *
@@ -408,7 +408,7 @@ export declare class OcaDynamics extends OcaActuator {
    * @returns {Promise<void>}
    */
   SetMultiple(
-    Mask: number,
+    Mask: IOcaParameterMask,
     Function: IOcaDynamicsFunction,
     Threshold: IOcaDBr,
     ThresholdPresentationUnits: IOcaPresentationUnit,

@@ -247,8 +247,7 @@ export const OcaBlock = make_control_class(
  * @param {OcaStringComparisonType} NameComparisonType
  *
  * @param {string} SearchClassID
- *
- * @param {number} ResultFlags
+ * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -262,8 +261,7 @@ export const OcaBlock = make_control_class(
  * @param {OcaStringComparisonType} NameComparisonType
  *
  * @param {string} SearchClassID
- *
- * @param {number} ResultFlags
+ * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -273,8 +271,7 @@ export const OcaBlock = make_control_class(
  *
  * @method OcaBlock#FindObjectsByPath
  * @param {string[]} SearchPath
- *
- * @param {number} ResultFlags
+ * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
@@ -288,8 +285,7 @@ export const OcaBlock = make_control_class(
  * @param {OcaStringComparisonType} NameComparisonType
  *
  * @param {string} SearchClassID
- *
- * @param {number} ResultFlags
+ * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
  *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.

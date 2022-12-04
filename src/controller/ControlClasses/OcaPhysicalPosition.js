@@ -1,6 +1,6 @@
-import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaPositionCoordinateSystem } from '../../OCP1/OcaPositionCoordinateSystem.js';
 import { OcaPositionDescriptor } from '../../OCP1/OcaPositionDescriptor.js';
+import { OcaPositionDescriptorFieldFlags } from '../../OCP1/OcaPositionDescriptorFieldFlags.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 
@@ -17,7 +17,13 @@ export const OcaPhysicalPosition = make_control_class(
   OcaAgent,
   [
     ['GetCoordinateSystem', 3, 1, [], [OcaPositionCoordinateSystem]],
-    ['GetPositionDescriptorFieldFlags', 3, 2, [], [OcaBitSet16]],
+    [
+      'GetPositionDescriptorFieldFlags',
+      3,
+      2,
+      [],
+      [OcaPositionDescriptorFieldFlags],
+    ],
     [
       'GetPositionDescriptor',
       3,
@@ -37,7 +43,15 @@ export const OcaPhysicalPosition = make_control_class(
       false,
       null,
     ],
-    ['PositionDescriptorFieldFlags', [OcaBitSet16], 3, 2, true, false, null],
+    [
+      'PositionDescriptorFieldFlags',
+      [OcaPositionDescriptorFieldFlags],
+      3,
+      2,
+      true,
+      false,
+      null,
+    ],
     ['PositionDescriptor', [OcaPositionDescriptor], 3, 3, false, false, null],
   ],
   []
@@ -54,8 +68,8 @@ export const OcaPhysicalPosition = make_control_class(
  * Retrieves value of property  **PositionDescriptorFieldFlags** . Result indicates whether retrieval was successful.
  *
  * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
- * @returns {Promise<number>}
- *   A promise which resolves to a single value of type ``number``.
+ * @returns {Promise<OcaPositionDescriptorFieldFlags>}
+ *   A promise which resolves to a single value of type :class:`OcaPositionDescriptorFieldFlags`.
  */
 /**
  * Retrieves value of property  **PositioinDescriptor** . Result indicates whether retrieval was successful.

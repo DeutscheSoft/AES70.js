@@ -1,5 +1,5 @@
-import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
+import { OcaParameterMask } from '../../OCP1/OcaParameterMask.js';
 import { OcaParametricEQShape } from '../../OCP1/OcaParametricEQShape.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
@@ -31,7 +31,7 @@ export const OcaFilterParametric = make_control_class(
       4,
       11,
       [
-        OcaBitSet16,
+        OcaParameterMask,
         OcaFloat32,
         OcaParametricEQShape,
         OcaFloat32,
@@ -146,12 +146,9 @@ export const OcaFilterParametric = make_control_class(
  * Sets some or all filter parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaFilterParametric#SetMultiple
- * @param {number} Mask
- *
+ * @param {IOcaParameterMask} Mask
  * @param {number} Frequency
- *
- * @param {OcaParametricEQShape} Shape
- *
+ * @param {IOcaParametricEQShape} Shape
  * @param {number} WidthParameter
  *
  * @param {number} InBandGain

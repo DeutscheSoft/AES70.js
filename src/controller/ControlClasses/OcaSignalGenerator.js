@@ -1,6 +1,6 @@
-import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
+import { OcaParameterMask } from '../../OCP1/OcaParameterMask.js';
 import { OcaSweepType } from '../../OCP1/OcaSweepType.js';
 import { OcaWaveformType } from '../../OCP1/OcaWaveformType.js';
 import { make_control_class } from '../make_control_class.js';
@@ -40,7 +40,7 @@ export const OcaSignalGenerator = make_control_class(
       4,
       18,
       [
-        OcaBitSet16,
+        OcaParameterMask,
         OcaFloat32,
         OcaFloat32,
         OcaFloat32,
@@ -209,18 +209,14 @@ export const OcaSignalGenerator = make_control_class(
  * Sets some or all signal generation parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaSignalGenerator#SetMultiple
- * @param {number} Mask
- *
+ * @param {IOcaParameterMask} Mask
  * @param {number} Frequency1
  *
  * @param {number} Frequency2
  *
  * @param {number} Level
- *
- * @param {OcaWaveformType} Waveform
- *
- * @param {OcaSweepType} SweepType
- *
+ * @param {IOcaWaveformType} Waveform
+ * @param {IOcaSweepType} SweepType
  * @param {number} SweepTime
  *
  * @param {boolean} SweepRepeat

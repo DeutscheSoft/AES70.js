@@ -29,9 +29,9 @@ export declare interface IOcaMediaSourceConnectorChangedEventData {
 
   /**
    * Indicates which element(s) of the connector changed. If the connector is added or deleted, all bits in this bitset shall be set.
-   * @type number
+   * @type OcaMediaConnectorElement
    */
-  ChangedElement: number;
+  ChangedElement: IOcaMediaConnectorElement;
 }
 
 export declare class OcaMediaSourceConnectorChangedEventData
@@ -43,7 +43,7 @@ export declare class OcaMediaSourceConnectorChangedEventData
   constructor(
     SourceConnector: OcaMediaSourceConnector,
     ChangeType: OcaPropertyChangeType,
-    ChangedElement: number
+    ChangedElement: OcaMediaConnectorElement
   );
   /**
    * The media source connector for which the changed event holds (i.e. that is added, deleted or changed).
@@ -59,7 +59,7 @@ export declare class OcaMediaSourceConnectorChangedEventData
 
   /**
    * Indicates which element(s) of the connector changed. If the connector is added or deleted, all bits in this bitset shall be set.
-   * @type number
+   * @type OcaMediaConnectorElement
    */
-  ChangedElement: number;
+  ChangedElement: OcaMediaConnectorElement;
 }

@@ -1,7 +1,7 @@
-import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaDBr } from '../../OCP1/OcaDBr.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaList } from '../../OCP1/OcaList.js';
+import { OcaParameterMask } from '../../OCP1/OcaParameterMask.js';
 import { OcaUint8 } from '../../OCP1/OcaUint8.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
@@ -47,7 +47,7 @@ export const OcaDynamicsCurve = make_control_class(
       4,
       13,
       [
-        OcaBitSet16,
+        OcaParameterMask,
         OcaUint8,
         OcaList(OcaDBr),
         OcaList(OcaFloat32),
@@ -187,8 +187,7 @@ export const OcaDynamicsCurve = make_control_class(
  * Sets some or all dynamics curve parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaDynamicsCurve#SetMultiple
- * @param {number} Mask
- *
+ * @param {IOcaParameterMask} Mask
  * @param {number} nSegments
  *
  * @param {OcaDBr[]} Threshold

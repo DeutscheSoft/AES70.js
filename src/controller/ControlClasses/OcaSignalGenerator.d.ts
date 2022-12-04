@@ -232,8 +232,7 @@ export declare class OcaSignalGenerator extends OcaActuator {
    * Sets some or all signal generation parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
    *
    * @method OcaSignalGenerator#SetMultiple
-   * @param {number} Mask
-   *
+   * @param {IOcaParameterMask} Mask
    * @param {number} Frequency1
    *
    * @param {number} Frequency2
@@ -251,7 +250,7 @@ export declare class OcaSignalGenerator extends OcaActuator {
    * @returns {Promise<void>}
    */
   SetMultiple(
-    Mask: number,
+    Mask: IOcaParameterMask,
     Frequency1: number,
     Frequency2: number,
     Level: number,

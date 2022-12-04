@@ -128,7 +128,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
    * Sets some or all detector parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
    *
    * @method OcaDynamicsDetector#SetMultiple
-   * @param {number} Mask
+   * @param {IOcaParameterMask} Mask
    *
    * @param {OcaLevelDetectionLaw} Law
    *
@@ -141,7 +141,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
    * @returns {Promise<void>}
    */
   SetMultiple(
-    Mask: number,
+    Mask: IOcaParameterMask,
     Law: IOcaLevelDetectionLaw,
     AttackTime: number,
     ReleaseTime: number,

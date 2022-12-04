@@ -62,7 +62,7 @@ export declare class OcaDeviceManager extends OcaManager {
   /**
    * This event is emitted whenever State changes.
    */
-  OnStateChanged: PropertyEvent<number>;
+  OnStateChanged: PropertyEvent<OcaDeviceState>;
 
   /**
    * This event is emitted whenever Busy changes.
@@ -202,10 +202,10 @@ export declare class OcaDeviceManager extends OcaManager {
    * Gets the value of the State property. The return value indicates whether the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetState
-   * @returns {Promise<number>}
-   *   A promise which resolves to a single value of type :class:`number`.
+   * @returns {Promise<OcaDeviceState>}
+   *   A promise which resolves to a single value of type :class:`OcaDeviceState`.
    */
-  GetState(): Promise<number>;
+  GetState(): Promise<OcaDeviceState>;
 
   /**
    * Sets the value of the reset key of the device. The return value indicates whether the property was successfully set. Note that the device manager must inform the CAP gateway of this key (via the host interface), since the CAP gateway will check for and handle the special reset message.

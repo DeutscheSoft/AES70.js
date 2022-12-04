@@ -19,8 +19,8 @@ export class OcaMediaSinkConnectorChangedEventData {
      */
     this.ChangeType = ChangeType;
     /**
-     * Indicates which element(s) of the connector changed. If the connector is added or deleted, all bits in this bitset shall be set.
      * @type number
+     * @type OcaMediaConnectorElement
      */
     this.ChangedElement = ChangedElement;
   }

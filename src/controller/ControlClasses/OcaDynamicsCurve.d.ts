@@ -185,8 +185,7 @@ export declare class OcaDynamicsCurve extends OcaActuator {
    * Sets some or all dynamics curve parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
    *
    * @method OcaDynamicsCurve#SetMultiple
-   * @param {number} Mask
-   *
+   * @param {IOcaParameterMask} Mask
    * @param {number} nSegments
    *
    * @param {OcaDBr[]} Threshold
@@ -202,7 +201,7 @@ export declare class OcaDynamicsCurve extends OcaActuator {
    * @returns {Promise<void>}
    */
   SetMultiple(
-    Mask: number,
+    Mask: IOcaParameterMask,
     nSegments: number,
     Threshold: IOcaDBr[],
     Slope: number[],

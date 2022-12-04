@@ -1,9 +1,9 @@
-import { OcaBitSet16 } from '../../OCP1/OcaBitSet16.js';
 import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaDBr } from '../../OCP1/OcaDBr.js';
 import { OcaDynamicsFunction } from '../../OCP1/OcaDynamicsFunction.js';
 import { OcaFloat32 } from '../../OCP1/OcaFloat32.js';
 import { OcaLevelDetectionLaw } from '../../OCP1/OcaLevelDetectionLaw.js';
+import { OcaParameterMask } from '../../OCP1/OcaParameterMask.js';
 import { OcaPresentationUnit } from '../../OCP1/OcaPresentationUnit.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
@@ -51,7 +51,7 @@ export const OcaDynamics = make_control_class(
       4,
       27,
       [
-        OcaBitSet16,
+        OcaParameterMask,
         OcaDynamicsFunction,
         OcaDBr,
         OcaPresentationUnit,
@@ -328,7 +328,7 @@ export const OcaDynamics = make_control_class(
  * Sets some or all dynamics parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaDynamics#SetMultiple
- * @param {number} Mask
+ * @param {IOcaParameterMask} Mask
  *
  * @param {OcaDynamicsFunction} Function
  *

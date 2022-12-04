@@ -3,6 +3,7 @@ import {
   IOcaPositionDescriptor,
   OcaPositionDescriptor,
 } from '../../types/OcaPositionDescriptor';
+import { OcaPositionDescriptorFieldFlags } from '../../types/OcaPositionDescriptorFieldFlags';
 import { Arguments } from '../arguments';
 import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
@@ -34,10 +35,10 @@ export declare class OcaPhysicalPosition extends OcaAgent {
    * Retrieves value of property  **PositionDescriptorFieldFlags** . Result indicates whether retrieval was successful.
    *
    * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
-   * @returns {Promise<number>}
-   *   A promise which resolves to a single value of type ``number``.
+   * @returns {Promise<OcaPositionDescriptorFieldFlags>}
+   *   A promise which resolves to a single value of type :class:`OcaPositionDescriptorFieldFlags`.
    */
-  GetPositionDescriptorFieldFlags(): Promise<number>;
+  GetPositionDescriptorFieldFlags(): Promise<OcaPositionDescriptorFieldFlags>;
 
   /**
    * Retrieves value of property  **PositioinDescriptor** . Result indicates whether retrieval was successful.

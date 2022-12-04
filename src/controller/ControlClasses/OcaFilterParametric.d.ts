@@ -1,3 +1,4 @@
+import { IOcaParameterMask } from '../../types/OcaParameterMask';
 import {
   IOcaParametricEQShape,
   OcaParametricEQShape,
@@ -155,8 +156,7 @@ export declare class OcaFilterParametric extends OcaActuator {
    * Sets some or all filter parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
    *
    * @method OcaFilterParametric#SetMultiple
-   * @param {number} Mask
-   *
+   * @param {IOcaParameterMask} Mask
    * @param {number} Frequency
    *
    * @param {OcaParametricEQShape} Shape
@@ -170,7 +170,7 @@ export declare class OcaFilterParametric extends OcaActuator {
    * @returns {Promise<void>}
    */
   SetMultiple(
-    Mask: number,
+    Mask: IOcaParameterMask,
     Frequency: number,
     Shape: IOcaParametricEQShape,
     WidthParameter: number,
