@@ -32,7 +32,7 @@ export declare class OcaPolarity extends OcaActuator {
    * Sets the inversion state (i.e. value of the State property). The return value indicates whether the state was successfully set.
    *
    * @method OcaPolarity#SetState
-   * @param {OcaPolarityState} state
+   * @param {IOcaPolarityState} state
    *
    * @returns {Promise<void>}
    */

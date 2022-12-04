@@ -59,7 +59,7 @@ export const OcaTimeSource = make_control_class(
  * Sets the value of the  **Protocol** property. The return value indicates whether the value was successfully set.
  *
  * @method OcaTimeSource#SetProtocol
- * @param {OcaTimeProtocol} Protocol
+ * @param {IOcaTimeProtocol} Protocol
  *
  * @returns {Promise<void>}
  */
@@ -89,7 +89,7 @@ export const OcaTimeSource = make_control_class(
  * Sets the time reference type. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
  * @method OcaTimeSource#SetReferenceType
- * @param {OcaTimeReferenceType} ReferenceType
+ * @param {IOcaTimeReferenceType} ReferenceType
  *
  * @returns {Promise<void>}
  */

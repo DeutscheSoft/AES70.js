@@ -91,7 +91,7 @@ export const OcaNumericObserverList = make_control_class(
  * Sets the identifications of the properties that the observer observes. The order of property identifications supplied determines the order of property identifications returned by GetObservedProperties and the order of values returned by GetLastObservation and the Observation event. The return value indicates whether the identifications were successfully set.
  *
  * @method OcaNumericObserverList#SetObservedProperties
- * @param {OcaProperty[]} property
+ * @param {IOcaProperty[]} property
  *
  * @returns {Promise<void>}
  */
@@ -121,7 +121,7 @@ export const OcaNumericObserverList = make_control_class(
  * Sets the value of the  **Operator** property. The return value indicates whether the operator was successfully set.
  *
  * @method OcaNumericObserverList#SetOperator
- * @param {OcaRelationalOperator} _operator
+ * @param {IOcaRelationalOperator} operator
  *
  * @returns {Promise<void>}
  */

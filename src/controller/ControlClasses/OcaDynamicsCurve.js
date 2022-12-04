@@ -92,7 +92,7 @@ export const OcaDynamicsCurve = make_control_class(
  * Gets the list of Threshold values. The return value indicates whether the data was successfully retrieved.
  * The return values of this method are
  *
- * - Threshold of type ``OcaDBr[]``
+ * - Threshold of type ``IOcaDBr[]``
  * - minThreshold of type ``number``
  * - maxThreshold of type ``number``
  *
@@ -103,7 +103,7 @@ export const OcaDynamicsCurve = make_control_class(
  * Sets the list of Threshold values. The return value indicates whether the values were successfully set.
  *
  * @method OcaDynamicsCurve#SetThreshold
- * @param {OcaDBr[]} Threshold
+ * @param {IOcaDBr[]} Threshold
  *
  * @returns {Promise<void>}
  */
@@ -189,9 +189,7 @@ export const OcaDynamicsCurve = make_control_class(
  * @method OcaDynamicsCurve#SetMultiple
  * @param {IOcaParameterMask} Mask
  * @param {number} nSegments
- *
- * @param {OcaDBr[]} Threshold
- *
+ * @param {IOcaDBr[]} Threshold
  * @param {number[]} Slope
  *
  * @param {number[]} KneeParameter

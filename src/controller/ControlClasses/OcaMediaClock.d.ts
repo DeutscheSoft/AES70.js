@@ -57,7 +57,7 @@ export declare class OcaMediaClock extends OcaAgent {
    * Sets the value of the  **Type** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
    *
    * @method OcaMediaClock#SetType
-   * @param {OcaMediaClockType} Type
+   * @param {IOcaMediaClockType} Type
    *
    * @returns {Promise<void>}
    */
@@ -104,7 +104,7 @@ export declare class OcaMediaClock extends OcaAgent {
    * Sets the sampling rate. The return value indicates whether the rate was successfully set.
    *
    * @method OcaMediaClock#SetCurrentRate
-   * @param {OcaMediaClockRate} rate
+   * @param {IOcaMediaClockRate} rate
    *
    * @returns {Promise<void>}
    */

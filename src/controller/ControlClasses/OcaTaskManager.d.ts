@@ -60,8 +60,7 @@ export declare class OcaTaskManager extends OcaManager {
    * Controls all tasks in device. Return value indicates whether tasks were successfully controlled.
    *
    * @method OcaTaskManager#ControlAllTasks
-   * @param {OcaTaskCommand} Command
-   *
+   * @param {IOcaTaskCommand} Command
    * @param {Uint8Array} ApplicationTaskParameter
    *
    * @returns {Promise<void>}
@@ -76,9 +75,7 @@ export declare class OcaTaskManager extends OcaManager {
    *
    * @method OcaTaskManager#ControlTaskGroup
    * @param {number} GroupID
-   *
-   * @param {OcaTaskCommand} Command
-   *
+   * @param {IOcaTaskCommand} Command
    * @param {Uint8Array} ApplicationTaskParameter
    *
    * @returns {Promise<void>}
@@ -94,9 +91,7 @@ export declare class OcaTaskManager extends OcaManager {
    *
    * @method OcaTaskManager#ControlTask
    * @param {number} TaskID
-   *
-   * @param {OcaTaskCommand} Command
-   *
+   * @param {IOcaTaskCommand} Command
    * @param {Uint8Array} ApplicationTaskParameter
    *
    * @returns {Promise<void>}
@@ -140,7 +135,7 @@ export declare class OcaTaskManager extends OcaManager {
    * Creates a Task. Parameters of the new Task are given in the Task parameter; device returns the same parameter with the new Task ID filled in. Initial task state is set to Disabled. Return value indicates whether Task was successfully created.
    *
    * @method OcaTaskManager#AddTask
-   * @param {OcaTask} Task
+   * @param {IOcaTask} Task
    *
    * @returns {Promise<OcaTask>}
    *   A promise which resolves to a single value of type :class:`OcaTask`.
@@ -172,8 +167,7 @@ export declare class OcaTaskManager extends OcaManager {
    *
    * @method OcaTaskManager#SetTask
    * @param {number} ID
-   *
-   * @param {OcaTask} Task
+   * @param {IOcaTask} Task
    *
    * @returns {Promise<void>}
    */

@@ -109,7 +109,7 @@ export declare class OcaNumericObserver extends OcaAgent {
    * Sets the identification of the property that the observer observes. The return value indicates whether the identification was successfully set.
    *
    * @method OcaNumericObserver#SetObservedProperty
-   * @param {OcaProperty} property
+   * @param {IOcaProperty} property
    *
    * @returns {Promise<void>}
    */
@@ -147,11 +147,11 @@ export declare class OcaNumericObserver extends OcaAgent {
    * Sets the value of the  **Operator** property. The return value indicates whether the operator was successfully set.
    *
    * @method OcaNumericObserver#SetOperator
-   * @param {OcaRelationalOperator} _operator
+   * @param {IOcaRelationalOperator} operator
    *
    * @returns {Promise<void>}
    */
-  SetOperator(_operator: IOcaRelationalOperator): Promise<void>;
+  SetOperator(operator: IOcaRelationalOperator): Promise<void>;
 
   /**
    * Gets the value of the  **TwoWay** property. The return value indicates whether the property was successfully retrieved.

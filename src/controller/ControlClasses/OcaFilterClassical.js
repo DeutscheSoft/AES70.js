@@ -83,7 +83,7 @@ export const OcaFilterClassical = make_control_class(
  * Sets the passband specification of the filter object. The return value indicates if the specification was successfully set.
  *
  * @method OcaFilterClassical#SetPassband
- * @param {OcaFilterPassband} Passband
+ * @param {IOcaFilterPassband} Passband
  *
  * @returns {Promise<void>}
  */
@@ -98,7 +98,7 @@ export const OcaFilterClassical = make_control_class(
  * Sets the Shape property of the filter. The return value indicates if the property was successfully set.
  *
  * @method OcaFilterClassical#SetShape
- * @param {OcaClassicalFilterShape} Shape
+ * @param {IOcaClassicalFilterShape} Shape
  *
  * @returns {Promise<void>}
  */

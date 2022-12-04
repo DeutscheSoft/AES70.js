@@ -51,7 +51,7 @@ export const OcaPowerManager = make_control_class(
  * Change the device power state. The return value indicates whether the requested change has been successfully made.
  *
  * @method OcaPowerManager#SetState
- * @param {OcaPowerState} State
+ * @param {IOcaPowerState} State
  *
  * @returns {Promise<void>}
  */

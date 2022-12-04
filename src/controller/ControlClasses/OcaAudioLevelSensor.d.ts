@@ -32,7 +32,7 @@ export declare class OcaAudioLevelSensor extends OcaLevelSensor {
    * Sets the value of the Law property. The return value indicates whether the property was successfully set. Only implemented for objects whose Law property is read/write.
    *
    * @method OcaAudioLevelSensor#SetLaw
-   * @param {OcaLevelMeterLaw} law
+   * @param {IOcaLevelMeterLaw} law
    *
    * @returns {Promise<void>}
    */

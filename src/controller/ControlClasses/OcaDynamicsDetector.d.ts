@@ -49,7 +49,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
    * Sets the value of the Law property. Return status indicates whether the value was successfully set.
    *
    * @method OcaDynamicsDetector#SetLaw
-   * @param {OcaLevelDetectionLaw} Law
+   * @param {IOcaLevelDetectionLaw} Law
    *
    * @returns {Promise<void>}
    */
@@ -129,9 +129,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
    *
    * @method OcaDynamicsDetector#SetMultiple
    * @param {IOcaParameterMask} Mask
-   *
-   * @param {OcaLevelDetectionLaw} Law
-   *
+   * @param {IOcaLevelDetectionLaw} Law
    * @param {number} AttackTime
    *
    * @param {number} ReleaseTime

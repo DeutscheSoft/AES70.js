@@ -90,7 +90,7 @@ export const OcaNumericObserver = make_control_class(
  * Sets the identification of the property that the observer observes. The return value indicates whether the identification was successfully set.
  *
  * @method OcaNumericObserver#SetObservedProperty
- * @param {OcaProperty} property
+ * @param {IOcaProperty} property
  *
  * @returns {Promise<void>}
  */
@@ -120,7 +120,7 @@ export const OcaNumericObserver = make_control_class(
  * Sets the value of the  **Operator** property. The return value indicates whether the operator was successfully set.
  *
  * @method OcaNumericObserver#SetOperator
- * @param {OcaRelationalOperator} _operator
+ * @param {IOcaRelationalOperator} operator
  *
  * @returns {Promise<void>}
  */

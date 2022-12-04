@@ -43,7 +43,7 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * Sets the complex transfer function.
  *
  * @method OcaFilterArbitraryCurve#SetTransferFunction
- * @param {OcaTransferFunction} TransferFunction
+ * @param {IOcaTransferFunction} TransferFunction
  *
  * @returns {Promise<void>}
  */

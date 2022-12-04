@@ -48,7 +48,7 @@ export declare class OcaFilterArbitraryCurve extends OcaActuator {
    * Sets the complex transfer function.
    *
    * @method OcaFilterArbitraryCurve#SetTransferFunction
-   * @param {OcaTransferFunction} TransferFunction
+   * @param {IOcaTransferFunction} TransferFunction
    *
    * @returns {Promise<void>}
    */

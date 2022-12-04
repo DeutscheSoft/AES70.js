@@ -75,9 +75,8 @@ export const OcaSubscriptionManager = make_control_class(
  * Removes all subscriptions to the given event with the given  **OcaMethod** . The return value indicates whether the subscription(s) was (were) successfully removed.
  *
  * @method OcaSubscriptionManager#RemoveSubscription
- * @param {OcaEvent} Event
- *
- * @param {OcaMethod} Subscriber
+ * @param {IOcaEvent} Event
+ * @param {IOcaMethod} Subscriber
  *
  * @returns {Promise<void>}
  */
@@ -85,14 +84,10 @@ export const OcaSubscriptionManager = make_control_class(
  * Adds a subscription to an event. The subscription is added for the session on which the command came in. If a subscription identical to the one being requested already exists, an additional one shall not be added. Two subscriptions are identical if the  **Event, Subscriber, NotificationDeliveryMode** , and  **DestinationInformation** parameters are all identical. The return value indicates whether the subscription succeeded.
  *
  * @method OcaSubscriptionManager#AddSubscription
- * @param {OcaEvent} Event
- *
- * @param {OcaMethod} Subscriber
- *
+ * @param {IOcaEvent} Event
+ * @param {IOcaMethod} Subscriber
  * @param {Uint8Array} SubscriberContext
- *
- * @param {OcaNotificationDeliveryMode} NotificationDeliveryMode
- *
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
  * @param {Uint8Array} DestinationInformation
  *
  * @returns {Promise<void>}
@@ -114,15 +109,10 @@ export const OcaSubscriptionManager = make_control_class(
  *
  * @method OcaSubscriptionManager#AddPropertyChangeSubscription
  * @param {number} Emitter
- *
- * @param {OcaPropertyID} Property
- *
- * @param {OcaMethod} Subscriber
- *
+ * @param {IOcaPropertyID} Property
+ * @param {IOcaMethod} Subscriber
  * @param {Uint8Array} SubscriberContext
- *
- * @param {OcaNotificationDeliveryMode} NotificationDeliveryMode
- *
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
  * @param {Uint8Array} DestinationInformation
  *
  * @returns {Promise<void>}
@@ -132,10 +122,8 @@ export const OcaSubscriptionManager = make_control_class(
  *
  * @method OcaSubscriptionManager#RemovePropertyChangeSubscription
  * @param {number} Emitter
- *
- * @param {OcaPropertyID} Property
- *
- * @param {OcaMethod} Subscriber
+ * @param {IOcaPropertyID} Property
+ * @param {IOcaMethod} Subscriber
  *
  * @returns {Promise<void>}
  */

@@ -112,7 +112,7 @@ export const OcaApplicationNetwork = make_control_class(
  * Sets the network's System Interface Descriptor(s). Return status indicates whether the operation was successful. Optional method; System Interface Descriptor may be set at construction time.
  *
  * @method OcaApplicationNetwork#SetSystemInterfaces
- * @param {OcaNetworkSystemInterfaceDescriptor[]} Descriptors
+ * @param {IOcaNetworkSystemInterfaceDescriptor[]} Descriptors
  *
  * @returns {Promise<void>}
  */
@@ -134,7 +134,7 @@ export const OcaApplicationNetwork = make_control_class(
  * Control the application network. Return value indicates success of command execution.
  *
  * @method OcaApplicationNetwork#Control
- * @param {OcaApplicationNetworkCommand} Command
+ * @param {IOcaApplicationNetworkCommand} Command
  *
  * @returns {Promise<void>}
  */

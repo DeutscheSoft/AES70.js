@@ -53,7 +53,7 @@ export const OcaStreamConnector = make_control_class(
  * Connects a stream to this connector. Return status indicates success of operation.
  *
  * @method OcaStreamConnector#ConnectStream
- * @param {OcaStream} Stream
+ * @param {IOcaStream} Stream
  *
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
@@ -128,7 +128,7 @@ export const OcaStreamConnector = make_control_class(
  * Sets the value of the SourceOrSink property. Return status indicates success of operation. Only implemented for reconfigurable devices. Note that this method can only be called when the SignalChannels property is empty, i.e. does not contain any actual channels.
  *
  * @method OcaStreamConnector#SetSourceOrSink
- * @param {OcaNetworkMediaSourceOrSink} SourceOrSink
+ * @param {IOcaNetworkMediaSourceOrSink} SourceOrSink
  *
  * @returns {Promise<void>}
  */

@@ -32,7 +32,7 @@ export const OcaPolarity = make_control_class(
  * Sets the inversion state (i.e. value of the State property). The return value indicates whether the state was successfully set.
  *
  * @method OcaPolarity#SetState
- * @param {OcaPolarityState} state
+ * @param {IOcaPolarityState} state
  *
  * @returns {Promise<void>}
  */

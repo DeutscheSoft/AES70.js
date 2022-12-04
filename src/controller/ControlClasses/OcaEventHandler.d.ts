@@ -15,8 +15,7 @@ export declare class OcaEventHandler extends OcaAgent {
    *
    * @method OcaEventHandler#OnEvent
    * @param {Uint8Array} Context
-   *
-   * @param {OcaEvent} eventData
+   * @param {IOcaEvent} eventData
    *
    * @returns {Promise<void>}
    */

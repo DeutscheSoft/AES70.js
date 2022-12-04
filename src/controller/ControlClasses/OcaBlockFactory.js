@@ -68,8 +68,7 @@ export const OcaBlockFactory = make_control_class(
  *
  * @method OcaBlockFactory#DefineProtoPort
  * @param {string} name
- *
- * @param {OcaPortMode} portmode
+ * @param {IOcaPortMode} portmode
  *
  * @returns {Promise<OcaProtoPortID>}
  *   A promise which resolves to a single value of type :class:`OcaProtoPortID`.
@@ -78,7 +77,7 @@ export const OcaBlockFactory = make_control_class(
  * Deletes a proto-port from the factory. The return value indicates whether the proto-port was successfully deleted.
  *
  * @method OcaBlockFactory#UndefineProtoPort
- * @param {OcaProtoPortID} ProtoPortID
+ * @param {IOcaProtoPortID} ProtoPortID
  *
  * @returns {Promise<void>}
  */
@@ -128,7 +127,7 @@ export const OcaBlockFactory = make_control_class(
  * Defines a proto-signal path in the factory. The return value indicates whether the proto-signal path was successfully defined.
  *
  * @method OcaBlockFactory#DefineProtoSignalPath
- * @param {OcaProtoSignalPath} Path
+ * @param {IOcaProtoSignalPath} Path
  *
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
@@ -158,7 +157,7 @@ export const OcaBlockFactory = make_control_class(
  * Sets the global type identifier for blocks created by this factory. The return value indicates whether the identifier was successfully set.  **Added in version 2 of this class.**
  *
  * @method OcaBlockFactory#SetGlobalType
- * @param {OcaGlobalTypeIdentifier} GlobalType
+ * @param {IOcaGlobalTypeIdentifier} GlobalType
  *
  * @returns {Promise<void>}
  */

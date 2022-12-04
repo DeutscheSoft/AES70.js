@@ -58,7 +58,7 @@ export const OcaDynamicsDetector = make_control_class(
  * Sets the value of the Law property. Return status indicates whether the value was successfully set.
  *
  * @method OcaDynamicsDetector#SetLaw
- * @param {OcaLevelDetectionLaw} Law
+ * @param {IOcaLevelDetectionLaw} Law
  *
  * @returns {Promise<void>}
  */

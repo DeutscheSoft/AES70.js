@@ -61,7 +61,7 @@ export const OcaFirmwareManager = make_control_class(
  * Starts an active update of a software/firmware image on the device. This generic interface can be used to update any component which can be updated actively, i.e. where the upload tool actively pushes the software/firmware image to the firmware manager. The actual firmware manager implementation may implement separate processes for different components, but in each case the interface is the same. The active interface consists of this method and the methods 03m03 AddImageData, 03m04 VerifyImage and 03m05 EndActiveImageUpdate. The return value indicates if starting the active update succeeded.
  *
  * @method OcaFirmwareManager#BeginActiveImageUpdate
- * @param {OcaComponent} component
+ * @param {IOcaComponent} component
  *
  * @returns {Promise<void>}
  */
@@ -93,8 +93,7 @@ export const OcaFirmwareManager = make_control_class(
  * Begin a passive software/firmware component update. This generic interface can be used for any component that can be passively updated, i.e. where the device requests the actual software/firmware image from an external server. In the function the component type, details of the server and the filename of the file containing the component software/firmware image needs to be passed. The device will try to retrieve the new software/firmware image from the server and update its component using this image. The actual method for retrieving the image (e.g. TFTP) and the underlying update technique (e.g. netflash) depend on the implementation and may differ between components. Just the interface is standardized.
  *
  * @method OcaFirmwareManager#BeginPassiveComponentUpdate
- * @param {OcaComponent} component
- *
+ * @param {IOcaComponent} component
  * @param {Uint8Array} serverAddress
  *
  * @param {string} updateFileName

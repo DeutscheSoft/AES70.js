@@ -36,7 +36,7 @@ export declare class OcaLibraryManager extends OcaManager {
    * Adds a library to the device. Return value indicates whether the library was successfully added.
    *
    * @method OcaLibraryManager#AddLibrary
-   * @param {OcaLibVolType} Type
+   * @param {IOcaLibVolType} Type
    *
    * @returns {Promise<OcaLibraryIdentifier>}
    *   A promise which resolves to a single value of type :class:`OcaLibraryIdentifier`.
@@ -57,7 +57,7 @@ export declare class OcaLibraryManager extends OcaManager {
    * Returns the number of libraries of the given type that are instantiated in the device..
    *
    * @method OcaLibraryManager#GetLibraryCount
-   * @param {OcaLibVolType} Type
+   * @param {IOcaLibVolType} Type
    *
    * @returns {Promise<number>}
    *   A promise which resolves to a single value of type ``number``.
@@ -68,7 +68,7 @@ export declare class OcaLibraryManager extends OcaManager {
    * Returns the list of object numbers of libraries of libraries of the given type that are instantiated in the device.
    *
    * @method OcaLibraryManager#GetLibraryList
-   * @param {OcaLibVolType} Type
+   * @param {IOcaLibVolType} Type
    *
    * @returns {Promise<OcaLibraryIdentifier[]>}
    *   A promise which resolves to a single value of type ``OcaLibraryIdentifier[]``.
@@ -88,7 +88,7 @@ export declare class OcaLibraryManager extends OcaManager {
    * Apply a patch to the device.
    *
    * @method OcaLibraryManager#ApplyPatch
-   * @param {OcaLibVolIdentifier} ID
+   * @param {IOcaLibVolIdentifier} ID
    *
    * @returns {Promise<void>}
    */

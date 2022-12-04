@@ -65,8 +65,7 @@ export const OcaWorker = make_control_class(
  *
  * @method OcaWorker#AddPort
  * @param {string} Label
- *
- * @param {OcaPortMode} Mode
+ * @param {IOcaPortMode} Mode
  *
  * @returns {Promise<OcaPortID>}
  *   A promise which resolves to a single value of type :class:`OcaPortID`.
@@ -75,7 +74,7 @@ export const OcaWorker = make_control_class(
  * Deletes an input or output port.. The return value indicates whether the port was successfully deleted.
  *
  * @method OcaWorker#DeletePort
- * @param {OcaPortID} ID
+ * @param {IOcaPortID} ID
  *
  * @returns {Promise<void>}
  */
@@ -90,7 +89,7 @@ export const OcaWorker = make_control_class(
  * Gets the name of the designated port. The return value indicates whether the name was successfully retrieved.
  *
  * @method OcaWorker#GetPortName
- * @param {OcaPortID} PortID
+ * @param {IOcaPortID} PortID
  *
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
@@ -99,8 +98,7 @@ export const OcaWorker = make_control_class(
  * Sets the name of the designated port. The return value indicates whether the name was successfully set.
  *
  * @method OcaWorker#SetPortName
- * @param {OcaPortID} PortID
- *
+ * @param {IOcaPortID} PortID
  * @param {string} Name
  *
  * @returns {Promise<void>}

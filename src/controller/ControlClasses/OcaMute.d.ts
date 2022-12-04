@@ -29,7 +29,7 @@ export declare class OcaMute extends OcaActuator {
    * Sets the mute state (i.e. value of the State property). The return value indicates whether the state was successfully set.
    *
    * @method OcaMute#SetState
-   * @param {OcaMuteState} state
+   * @param {IOcaMuteState} state
    *
    * @returns {Promise<void>}
    */

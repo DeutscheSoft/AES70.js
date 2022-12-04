@@ -67,7 +67,7 @@ export declare class OcaRamper extends OcaAgent {
    * Executes the given ramper command. The return value indicates whether the command was successfully executed.
    *
    * @method OcaRamper#Control
-   * @param {OcaRamperCommand} Command
+   * @param {IOcaRamperCommand} Command
    *
    * @returns {Promise<void>}
    */
@@ -95,7 +95,7 @@ export declare class OcaRamper extends OcaAgent {
    * Defines property to be ramped. The return value indicates whether the definition was successful.
    *
    * @method OcaRamper#SetRampedProperty
-   * @param {OcaProperty} property
+   * @param {IOcaProperty} property
    *
    * @returns {Promise<void>}
    */
@@ -114,7 +114,7 @@ export declare class OcaRamper extends OcaAgent {
    * Sets ramper time mode (absolute or relative). The return value indicates whether the time mode was successfully set.
    *
    * @method OcaRamper#SetTimeMode
-   * @param {OcaTimeMode} TimeMode
+   * @param {IOcaTimeMode} TimeMode
    *
    * @returns {Promise<void>}
    */
@@ -175,7 +175,7 @@ export declare class OcaRamper extends OcaAgent {
    * Sets ramp interpolation law. The return value indicates whether the law was successfully set.
    *
    * @method OcaRamper#SetInterpolationLaw
-   * @param {OcaRamperInterpolationLaw} law
+   * @param {IOcaRamperInterpolationLaw} law
    *
    * @returns {Promise<void>}
    */

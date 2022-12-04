@@ -62,7 +62,7 @@ export const OcaMediaClock3 = make_control_class(
  * Sets the value of the  **Availability** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
  * @method OcaMediaClock3#SetAvailability
- * @param {OcaMediaClockAvailability} Availability
+ * @param {IOcaMediaClockAvailability} Availability
  *
  * @returns {Promise<void>}
  */
@@ -70,7 +70,7 @@ export const OcaMediaClock3 = make_control_class(
  * Gets the current clock rate and the ONo of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully retrieved.
  * The return values of this method are
  *
- * - Rate of type :class:`OcaMediaClockRate`
+ * - Rate of type :class:`IOcaMediaClockRate`
  * - TimeSourceONo of type ``number``
  *
  * @method OcaMediaClock3#GetCurrentRate
@@ -80,8 +80,7 @@ export const OcaMediaClock3 = make_control_class(
  * Sets the clock rate and the ONo of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
  * @method OcaMediaClock3#SetCurrentRate
- * @param {OcaMediaClockRate} Rate
- *
+ * @param {IOcaMediaClockRate} Rate
  * @param {number} TimeSourceONo
  *
  * @returns {Promise<void>}
@@ -97,7 +96,7 @@ export const OcaMediaClock3 = make_control_class(
  * Sets the offset of this media clock's time from that of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
  *
  * @method OcaMediaClock3#SetOffset
- * @param {OcaTimePTP} Offset
+ * @param {IOcaTimePTP} Offset
  *
  * @returns {Promise<void>}
  */

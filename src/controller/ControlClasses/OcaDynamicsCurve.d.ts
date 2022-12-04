@@ -70,7 +70,7 @@ export declare class OcaDynamicsCurve extends OcaActuator {
    * Gets the list of Threshold values. The return value indicates whether the data was successfully retrieved.
    * The return values of this method are
    *
-   * - Threshold of type ``OcaDBr[]``
+   * - Threshold of type ``IOcaDBr[]``
    * - minThreshold of type ``number``
    * - maxThreshold of type ``number``
    *
@@ -83,7 +83,7 @@ export declare class OcaDynamicsCurve extends OcaActuator {
    * Sets the list of Threshold values. The return value indicates whether the values were successfully set.
    *
    * @method OcaDynamicsCurve#SetThreshold
-   * @param {OcaDBr[]} Threshold
+   * @param {IOcaDBr[]} Threshold
    *
    * @returns {Promise<void>}
    */
@@ -187,9 +187,7 @@ export declare class OcaDynamicsCurve extends OcaActuator {
    * @method OcaDynamicsCurve#SetMultiple
    * @param {IOcaParameterMask} Mask
    * @param {number} nSegments
-   *
-   * @param {OcaDBr[]} Threshold
-   *
+   * @param {IOcaDBr[]} Threshold
    * @param {number[]} Slope
    *
    * @param {number[]} KneeParameter

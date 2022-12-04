@@ -136,7 +136,7 @@ export declare class OcaSignalGenerator extends OcaActuator {
    * Sets the value of the Waveform property. The return value indicates whether the property was successfully set.
    *
    * @method OcaSignalGenerator#SetWaveform
-   * @param {OcaWaveformType} waveform
+   * @param {IOcaWaveformType} waveform
    *
    * @returns {Promise<void>}
    */
@@ -155,7 +155,7 @@ export declare class OcaSignalGenerator extends OcaActuator {
    * Sets the value of the SweepType property. The return value indicates whether the property was successfully set.
    *
    * @method OcaSignalGenerator#SetSweepType
-   * @param {OcaSweepType} sweepType
+   * @param {IOcaSweepType} sweepType
    *
    * @returns {Promise<void>}
    */
@@ -238,11 +238,8 @@ export declare class OcaSignalGenerator extends OcaActuator {
    * @param {number} Frequency2
    *
    * @param {number} Level
-   *
-   * @param {OcaWaveformType} Waveform
-   *
-   * @param {OcaSweepType} SweepType
-   *
+   * @param {IOcaWaveformType} Waveform
+   * @param {IOcaSweepType} SweepType
    * @param {number} SweepTime
    *
    * @param {boolean} SweepRepeat

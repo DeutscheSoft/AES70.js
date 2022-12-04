@@ -153,7 +153,7 @@ export declare class OcaGrouper extends OcaAgent {
    * Adds a target to the group. The return value indicates whether the target was successfully added. This method does not enroll the new target in any of the grouper's groups -- it merely makes the target available for enrollment. Group membership is controlled by the SetEnrollment method, q.v.
    *
    * @method OcaGrouper#AddCitizen
-   * @param {OcaGrouperCitizen} Citizen
+   * @param {IOcaGrouperCitizen} Citizen
    *
    * @returns {Promise<number>}
    *   A promise which resolves to a single value of type ``number``.
@@ -192,7 +192,7 @@ export declare class OcaGrouper extends OcaAgent {
    * Gets membership status for given target in given group. The return value indicates whether the status was successfully retrieved.
    *
    * @method OcaGrouper#GetEnrollment
-   * @param {OcaGrouperEnrollment} Enrollment
+   * @param {IOcaGrouperEnrollment} Enrollment
    *
    * @returns {Promise<boolean>}
    *   A promise which resolves to a single value of type ``boolean``.
@@ -203,8 +203,7 @@ export declare class OcaGrouper extends OcaAgent {
    * Sets membership status for given target in given group. The return value indicates whether the status was successfully set.
    *
    * @method OcaGrouper#SetEnrollment
-   * @param {OcaGrouperEnrollment} Enrollment
-   *
+   * @param {IOcaGrouperEnrollment} Enrollment
    * @param {boolean} IsMember
    *
    * @returns {Promise<void>}
@@ -257,7 +256,7 @@ export declare class OcaGrouper extends OcaAgent {
    * Sets the value of the Mode property. The return value indicates whether the value was successfully set.
    *
    * @method OcaGrouper#SetMode
-   * @param {OcaGrouperMode} Mode
+   * @param {IOcaGrouperMode} Mode
    *
    * @returns {Promise<void>}
    */

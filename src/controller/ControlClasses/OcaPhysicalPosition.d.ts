@@ -44,9 +44,9 @@ export declare class OcaPhysicalPosition extends OcaAgent {
    * Retrieves value of property  **PositioinDescriptor** . Result indicates whether retrieval was successful.
    * The return values of this method are
    *
-   * - PositionDescriptor of type :class:`OcaPositionDescriptor`
-   * - minPositionDescriptor of type :class:`OcaPositionDescriptor`
-   * - maxPositionDescriptor of type :class:`OcaPositionDescriptor`
+   * - PositionDescriptor of type ``IOcaPositionDescriptor``
+   * - minPositionDescriptor of type ``IOcaPositionDescriptor``
+   * - maxPositionDescriptor of type ``IOcaPositionDescriptor``
    *
    * @method OcaPhysicalPosition#GetPositionDescriptor
    * @returns {Promise<Arguments<OcaPositionDescriptor,OcaPositionDescriptor,OcaPositionDescriptor>>}
@@ -61,7 +61,7 @@ export declare class OcaPhysicalPosition extends OcaAgent {
    * Sets value of property  **PositionDescriptor** . Result indicates whether setting was successful. The  **ParameterError** status is returned if: (a) the  **FieldFlags** field of the given  **PositionDescriptor** value differs from the object's basic position descriptor as given in its  **PositionDescriptorFieldFlags** property, or (b) the given  **CoordinateSystem** value conflicts with the object's basic coordinate system as given in its  **CoordinateSystem** property. This is an optional method, not implemented for read-only position objects.
    *
    * @method OcaPhysicalPosition#SetPositionDescriptor
-   * @param {OcaPositionDescriptor} PositionDescriptor
+   * @param {IOcaPositionDescriptor} PositionDescriptor
    *
    * @returns {Promise<void>}
    */

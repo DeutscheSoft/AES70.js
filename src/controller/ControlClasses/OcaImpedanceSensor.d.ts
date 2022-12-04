@@ -21,9 +21,9 @@ export declare class OcaImpedanceSensor extends OcaSensor {
    * Gets the value and limits of the  **Reading** property. The return value indicates whether the data was successfully retrieved.
    * The return values of this method are
    *
-   * - Reading of type :class:`OcaImpedance`
-   * - minReading of type :class:`OcaImpedance`
-   * - maxReading of type :class:`OcaImpedance`
+   * - Reading of type ``IOcaImpedance``
+   * - minReading of type ``IOcaImpedance``
+   * - maxReading of type ``IOcaImpedance``
    *
    * @method OcaImpedanceSensor#GetReading
    * @returns {Promise<Arguments<OcaImpedance,OcaImpedance,OcaImpedance>>}

@@ -41,7 +41,7 @@ export const OcaLibrary = make_control_class(
  * Adds a volume to the library and returns its volume ID. The return value indicates whether the volume was successfully added. Changed in version 2 because the definition of OcaLibVolMetaData, which is part of OcaLibVol, has changed.
  *
  * @method OcaLibrary#AddVolume
- * @param {OcaLibVol} Volume
+ * @param {IOcaLibVol} Volume
  *
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
@@ -51,8 +51,7 @@ export const OcaLibrary = make_control_class(
  *
  * @method OcaLibrary#ReplaceVolume
  * @param {number} ID
- *
- * @param {OcaLibVol} Volume
+ * @param {IOcaLibVol} Volume
  *
  * @returns {Promise<void>}
  */
@@ -98,7 +97,7 @@ export const OcaLibrary = make_control_class(
  * Sets allowed access mode for this library. The return value indicates whether the property was successfully set. Not implemented for static, manufacturer-supplied libraries.
  *
  * @method OcaLibrary#SetAccess
- * @param {OcaLibAccess} Access
+ * @param {IOcaLibAccess} Access
  *
  * @returns {Promise<void>}
  */

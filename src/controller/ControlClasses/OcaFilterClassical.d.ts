@@ -81,7 +81,7 @@ export declare class OcaFilterClassical extends OcaActuator {
    * Sets the passband specification of the filter object. The return value indicates if the specification was successfully set.
    *
    * @method OcaFilterClassical#SetPassband
-   * @param {OcaFilterPassband} Passband
+   * @param {IOcaFilterPassband} Passband
    *
    * @returns {Promise<void>}
    */
@@ -100,7 +100,7 @@ export declare class OcaFilterClassical extends OcaActuator {
    * Sets the Shape property of the filter. The return value indicates if the property was successfully set.
    *
    * @method OcaFilterClassical#SetShape
-   * @param {OcaClassicalFilterShape} Shape
+   * @param {IOcaClassicalFilterShape} Shape
    *
    * @returns {Promise<void>}
    */
@@ -158,11 +158,8 @@ export declare class OcaFilterClassical extends OcaActuator {
    * @method OcaFilterClassical#SetMultiple
    * @param {IOcaParameterMask} Mask
    * @param {number} Frequency
-   *
-   * @param {OcaFilterPassband} Passband
-   *
-   * @param {OcaClassicalFilterShape} Shape
-   *
+   * @param {IOcaFilterPassband} Passband
+   * @param {IOcaClassicalFilterShape} Shape
    * @param {number} Order
    *
    * @param {number} Parameter

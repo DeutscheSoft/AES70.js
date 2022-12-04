@@ -105,7 +105,7 @@ export declare class OcaBlock extends OcaWorker {
    * Adds a signal path to the block. The return value indicates whether the signal path was successfully added.
    *
    * @method OcaBlock#AddSignalPath
-   * @param {OcaSignalPath} Path
+   * @param {IOcaSignalPath} Path
    *
    * @returns {Promise<number>}
    *   A promise which resolves to a single value of type ``number``.
@@ -171,7 +171,7 @@ export declare class OcaBlock extends OcaWorker {
    * Stores a paramset library volume data block which represents the current state of the block ("snapshot") in the given library.  **Replaces** the library volume at the specified LibVolIdentifier.
    *
    * @method OcaBlock#StoreCurrentParamSetData
-   * @param {OcaLibVolIdentifier} LibVolIdentifier
+   * @param {IOcaLibVolIdentifier} LibVolIdentifier
    *
    * @returns {Promise<void>}
    */
@@ -202,9 +202,7 @@ export declare class OcaBlock extends OcaWorker {
    *
    * @method OcaBlock#FindObjectsByRole
    * @param {string} SearchName
-   *
-   * @param {OcaStringComparisonType} NameComparisonType
-   *
+   * @param {IOcaStringComparisonType} NameComparisonType
    * @param {string} SearchClassID
    * @param {IOcaObjectSearchResultFlags} ResultFlags
    *
@@ -223,9 +221,7 @@ export declare class OcaBlock extends OcaWorker {
    *
    * @method OcaBlock#FindObjectsByRoleRecursive
    * @param {string} SearchName
-   *
-   * @param {OcaStringComparisonType} NameComparisonType
-   *
+   * @param {IOcaStringComparisonType} NameComparisonType
    * @param {string} SearchClassID
    * @param {IOcaObjectSearchResultFlags} ResultFlags
    *
@@ -260,9 +256,7 @@ export declare class OcaBlock extends OcaWorker {
    *
    * @method OcaBlock#FindObjectsByLabelRecursive
    * @param {string} SearchName
-   *
-   * @param {OcaStringComparisonType} NameComparisonType
-   *
+   * @param {IOcaStringComparisonType} NameComparisonType
    * @param {string} SearchClassID
    * @param {IOcaObjectSearchResultFlags} ResultFlags
    *

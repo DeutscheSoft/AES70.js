@@ -119,7 +119,7 @@ export const OcaDynamics = make_control_class(
  * Sets the value of the Function property. The return value indicates whether the property was successfully set.
  *
  * @method OcaDynamics#SetFunction
- * @param {OcaDynamicsFunction} Func
+ * @param {IOcaDynamicsFunction} Func
  *
  * @returns {Promise<void>}
  */
@@ -146,7 +146,7 @@ export const OcaDynamics = make_control_class(
  * Gets the value of the Threshold property. The return value indicates if the value was successfully retrieved.
  * The return values of this method are
  *
- * - Threshold of type :class:`OcaDBr`
+ * - Threshold of type :class:`IOcaDBr`
  * - minThreshold of type ``number``
  * - maxThreshold of type ``number``
  *
@@ -157,7 +157,7 @@ export const OcaDynamics = make_control_class(
  * Sets the value of the Threshold property. The return value indicates if the value was successfully set.
  *
  * @method OcaDynamics#SetThreshold
- * @param {OcaDBr} threshold
+ * @param {IOcaDBr} threshold
  *
  * @returns {Promise<void>}
  */
@@ -172,7 +172,7 @@ export const OcaDynamics = make_control_class(
  * Sets the value of the ThresholdPresentationUnits property. The return value indicates if the value was successfully set.
  *
  * @method OcaDynamics#SetThresholdPresentationUnits
- * @param {OcaPresentationUnit} Units
+ * @param {IOcaPresentationUnit} Units
  *
  * @returns {Promise<void>}
  */
@@ -187,7 +187,7 @@ export const OcaDynamics = make_control_class(
  * Sets the value of the DetectorLaw property. The return value indicates if the value was successfully set.
  *
  * @method OcaDynamics#SetDetectorLaw
- * @param {OcaLevelDetectionLaw} Law
+ * @param {IOcaLevelDetectionLaw} Law
  *
  * @returns {Promise<void>}
  */
@@ -329,15 +329,10 @@ export const OcaDynamics = make_control_class(
  *
  * @method OcaDynamics#SetMultiple
  * @param {IOcaParameterMask} Mask
- *
- * @param {OcaDynamicsFunction} Function
- *
- * @param {OcaDBr} Threshold
- *
- * @param {OcaPresentationUnit} ThresholdPresentationUnits
- *
- * @param {OcaLevelDetectionLaw} DetectorLaw
- *
+ * @param {IOcaDynamicsFunction} Function
+ * @param {IOcaDBr} Threshold
+ * @param {IOcaPresentationUnit} ThresholdPresentationUnits
+ * @param {IOcaLevelDetectionLaw} DetectorLaw
  * @param {number} AttackTime
  *
  * @param {number} ReleaseTime

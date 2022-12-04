@@ -168,7 +168,7 @@ export const OcaBlock = make_control_class(
  * Adds a signal path to the block. The return value indicates whether the signal path was successfully added.
  *
  * @method OcaBlock#AddSignalPath
- * @param {OcaSignalPath} Path
+ * @param {IOcaSignalPath} Path
  *
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
@@ -220,7 +220,7 @@ export const OcaBlock = make_control_class(
  * Stores a paramset library volume data block which represents the current state of the block ("snapshot") in the given library.  **Replaces** the library volume at the specified LibVolIdentifier.
  *
  * @method OcaBlock#StoreCurrentParamSetData
- * @param {OcaLibVolIdentifier} LibVolIdentifier
+ * @param {IOcaLibVolIdentifier} LibVolIdentifier
  *
  * @returns {Promise<void>}
  */
@@ -243,9 +243,7 @@ export const OcaBlock = make_control_class(
  *
  * @method OcaBlock#FindObjectsByRole
  * @param {string} SearchName
- *
- * @param {OcaStringComparisonType} NameComparisonType
- *
+ * @param {IOcaStringComparisonType} NameComparisonType
  * @param {string} SearchClassID
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
@@ -257,9 +255,7 @@ export const OcaBlock = make_control_class(
  *
  * @method OcaBlock#FindObjectsByRoleRecursive
  * @param {string} SearchName
- *
- * @param {OcaStringComparisonType} NameComparisonType
- *
+ * @param {IOcaStringComparisonType} NameComparisonType
  * @param {string} SearchClassID
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
@@ -281,9 +277,7 @@ export const OcaBlock = make_control_class(
  *
  * @method OcaBlock#FindObjectsByLabelRecursive
  * @param {string} SearchName
- *
- * @param {OcaStringComparisonType} NameComparisonType
- *
+ * @param {IOcaStringComparisonType} NameComparisonType
  * @param {string} SearchClassID
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *

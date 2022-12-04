@@ -77,7 +77,7 @@ export declare class OcaFilterParametric extends OcaActuator {
    * Sets the curve shape shape of the equalizer. The return value indicates whether the shape was successfully set.
    *
    * @method OcaFilterParametric#SetShape
-   * @param {OcaParametricEQShape} type
+   * @param {IOcaParametricEQShape} type
    *
    * @returns {Promise<void>}
    */
@@ -158,9 +158,7 @@ export declare class OcaFilterParametric extends OcaActuator {
    * @method OcaFilterParametric#SetMultiple
    * @param {IOcaParameterMask} Mask
    * @param {number} Frequency
-   *
-   * @param {OcaParametricEQShape} Shape
-   *
+   * @param {IOcaParametricEQShape} Shape
    * @param {number} WidthParameter
    *
    * @param {number} InBandGain

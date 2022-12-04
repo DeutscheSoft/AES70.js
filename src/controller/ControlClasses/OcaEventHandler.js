@@ -24,8 +24,7 @@ export const OcaEventHandler = make_control_class(
  *
  * @method OcaEventHandler#OnEvent
  * @param {Uint8Array} Context
- *
- * @param {OcaEvent} eventData
+ * @param {IOcaEvent} eventData
  *
  * @returns {Promise<void>}
  */

@@ -77,7 +77,7 @@ export declare class OcaPowerSupply extends OcaAgent {
    * Changes the power supply's state. Return value indicates whether the state was successfully changed.
    *
    * @method OcaPowerSupply#SetState
-   * @param {OcaPowerSupplyState} state
+   * @param {IOcaPowerSupplyState} state
    *
    * @returns {Promise<void>}
    */

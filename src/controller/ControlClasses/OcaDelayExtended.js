@@ -27,9 +27,9 @@ export const OcaDelayExtended = make_control_class(
  * Gets the value of the DelayValue property. The return value indicates whether the property was successfully retrieved.
  * The return values of this method are
  *
- * - Value of type :class:`OcaDelayValue`
- * - minValue of type :class:`OcaDelayValue`
- * - maxValue of type :class:`OcaDelayValue`
+ * - Value of type ``IOcaDelayValue``
+ * - minValue of type ``IOcaDelayValue``
+ * - maxValue of type ``IOcaDelayValue``
  *
  * @method OcaDelayExtended#GetDelayValue
  * @returns {Promise<Arguments<OcaDelayValue,OcaDelayValue,OcaDelayValue>>}
@@ -38,7 +38,7 @@ export const OcaDelayExtended = make_control_class(
  * Sets the value of the DelayValue property. The return value indicates whether the property was successfully set.
  *
  * @method OcaDelayExtended#SetDelayValue
- * @param {OcaDelayValue} Value
+ * @param {IOcaDelayValue} Value
  *
  * @returns {Promise<void>}
  */
@@ -46,7 +46,7 @@ export const OcaDelayExtended = make_control_class(
  * Return current delay setting, converted to given units. The return value indicates whether the method has succeeded.
  *
  * @method OcaDelayExtended#GetDelayValueConverted
- * @param {OcaDelayUnit} UoM
+ * @param {IOcaDelayUnit} UoM
  *
  * @returns {Promise<OcaDelayValue>}
  *   A promise which resolves to a single value of type :class:`OcaDelayValue`.

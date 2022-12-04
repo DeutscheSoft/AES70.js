@@ -81,7 +81,7 @@ export const OcaFilterParametric = make_control_class(
  * Sets the curve shape shape of the equalizer. The return value indicates whether the shape was successfully set.
  *
  * @method OcaFilterParametric#SetShape
- * @param {OcaParametricEQShape} type
+ * @param {IOcaParametricEQShape} type
  *
  * @returns {Promise<void>}
  */

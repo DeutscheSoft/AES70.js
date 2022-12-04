@@ -133,7 +133,7 @@ export const OcaSignalGenerator = make_control_class(
  * Sets the value of the Waveform property. The return value indicates whether the property was successfully set.
  *
  * @method OcaSignalGenerator#SetWaveform
- * @param {OcaWaveformType} waveform
+ * @param {IOcaWaveformType} waveform
  *
  * @returns {Promise<void>}
  */
@@ -148,7 +148,7 @@ export const OcaSignalGenerator = make_control_class(
  * Sets the value of the SweepType property. The return value indicates whether the property was successfully set.
  *
  * @method OcaSignalGenerator#SetSweepType
- * @param {OcaSweepType} sweepType
+ * @param {IOcaSweepType} sweepType
  *
  * @returns {Promise<void>}
  */

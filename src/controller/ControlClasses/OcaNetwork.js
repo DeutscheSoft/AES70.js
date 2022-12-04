@@ -124,7 +124,7 @@ export const OcaNetwork = make_control_class(
  * Sets the list of system interface IDs that this network will use. Return status indicates success of the operation. This method is not implemented by all network implementations.
  *
  * @method OcaNetwork#SetSystemInterfaces
- * @param {OcaNetworkSystemInterfaceID[]} Interfaces
+ * @param {IOcaNetworkSystemInterfaceID[]} Interfaces
  *
  * @returns {Promise<void>}
  */

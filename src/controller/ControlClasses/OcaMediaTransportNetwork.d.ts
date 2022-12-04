@@ -117,7 +117,7 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    * Gets the name of the designated port. The return value indicates whether the name was successfully retrieved.
    *
    * @method OcaMediaTransportNetwork#GetPortName
-   * @param {OcaPortID} PortID
+   * @param {IOcaPortID} PortID
    *
    * @returns {Promise<string>}
    *   A promise which resolves to a single value of type ``string``.
@@ -125,11 +125,11 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
   GetPortName(PortID: IOcaPortID): Promise<string>;
 
   /**
-   * Sets the name of the designated port. The return value indicates whether the name was successfully set.
+   * Sets the name of the designated port. The return value indicates whether
+   * the name was successfully set.
    *
    * @method OcaMediaTransportNetwork#SetPortName
-   * @param {OcaPortID} PortID
-   *
+   * @param {IOcaPortID} PortID
    * @param {string} Name
    *
    * @returns {Promise<void>}
@@ -236,9 +236,8 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    * Adds a source connector to this network. Parameters of the new connector are given in the Connector parameter; device returns the same parameter with the new connector ID filled in. If the new connector's AlignmentLevel property value is given as NaN, the value of this network's AlignmentLevel property will be used. Return status indicates the success of the operation.
    *
    * @method OcaMediaTransportNetwork#AddSourceConnector
-   * @param {OcaMediaSourceConnector} Connector
-   *
-   * @param {OcaMediaConnectorState} InitialStatus
+   * @param {IOcaMediaSourceConnector} Connector
+   * @param {IOcaMediaConnectorState} InitialStatus
    *
    * @returns {Promise<OcaMediaSourceConnector>}
    *   A promise which resolves to a single value of type :class:`OcaMediaSourceConnector`.
@@ -252,9 +251,8 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    * Adds a sinkconnector to this network. Parameters of the new connector are given in the Connector parameter; device returns the same parameter with the new connector ID filled in. If the new connector's AlignmentLevel property value is given as NaN, the value of this network's AlignmentLevel property will be used. If the new connector's AlignmentGain property value is given as NaN, the value of this network's AlignmentGain property will be used. Return status indicates the success of the operation.
    *
    * @method OcaMediaTransportNetwork#AddSinkConnector
-   * @param {OcaMediaConnectorStatus} InitialStatus
-   *
-   * @param {OcaMediaSinkConnector} Connector
+   * @param {IOcaMediaConnectorStatus} InitialStatus
+   * @param {IOcaMediaSinkConnector} Connector
    *
    * @returns {Promise<OcaMediaSinkConnector>}
    *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
@@ -269,8 +267,7 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#ControlConnector
    * @param {number} ConnectorID
-   *
-   * @param {OcaMediaConnectorCommand} Command
+   * @param {IOcaMediaConnectorCommand} Command
    *
    * @returns {Promise<void>}
    */
@@ -284,8 +281,7 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#SetSourceConnectorPinMap
    * @param {number} ConnectorID
-   *
-   * @param {Map<number, OcaPortID>} ChannelPinMap
+   * @param {Map<number, IOcaPortID>} ChannelPinMap
    *
    * @returns {Promise<void>}
    */
@@ -299,8 +295,7 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#SetSinkConnectorPinMap
    * @param {number} ConnectorID
-   *
-   * @param {Map<number, OcaPortID[]>} ChannelPinMap
+   * @param {Map<number, IOcaPortID[]>} ChannelPinMap
    *
    * @returns {Promise<void>}
    */
@@ -314,8 +309,7 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#SetConnectorConnection
    * @param {number} ConnectorID
-   *
-   * @param {OcaMediaConnection} Connection
+   * @param {IOcaMediaConnection} Connection
    *
    * @returns {Promise<void>}
    */
@@ -329,8 +323,7 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#SetConnectorCoding
    * @param {number} ConnectorID
-   *
-   * @param {OcaMediaCoding} Coding
+   * @param {IOcaMediaCoding} Coding
    *
    * @returns {Promise<void>}
    */

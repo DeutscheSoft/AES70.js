@@ -87,7 +87,7 @@ export declare class OcaDeviceTimeManager extends OcaManager {
    * Sets device time-of-day clock in PTP format. Return value indicates whether value was successfully set. Not available if a time source is identified in property CurrentDeviceTimeSource.
    *
    * @method OcaDeviceTimeManager#SetDeviceTimePTP
-   * @param {OcaTimePTP} DeviceTime
+   * @param {IOcaTimePTP} DeviceTime
    *
    * @returns {Promise<void>}
    */
