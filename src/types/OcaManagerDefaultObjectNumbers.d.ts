@@ -1,158 +1,100 @@
 /*
  * This file has been generated.
  */
-
-export declare interface IOcaManagerDefaultObjectNumbers {
+/**
+ * Datatype that defines the fixed object numbers assigned to the various
+ * **OcaManager** objects.
+ */
+export declare const OcaManagerDefaultObjectNumbers: {
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaDeviceManager`.
+   * @type {number}
+   * @member DeviceManager
+   * @static
    */
   DeviceManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaSecurityManager`.
+   * @type {number}
+   * @member SecurityManager
+   * @static
    */
   SecurityManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaFirmwareManager`.
+   * @type {number}
+   * @member FirmwareManager
+   * @static
    */
   FirmwareManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaSubscriptionManager`.
+   * @type {number}
+   * @member SubscriptionManager
+   * @static
    */
   SubscriptionManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaPowerManager`.
+   * @type {number}
+   * @member PowerManager
+   * @static
    */
   PowerManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaNetworkManager`.
+   * @type {number}
+   * @member NetworkManager
+   * @static
    */
   NetworkManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaMediaClockManager`.
+   * @type {number}
+   * @member MediaClockManager
+   * @static
    */
   MediaClockManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaLibraryManager`.
+   * @type {number}
+   * @member LibraryManager
+   * @static
    */
   LibraryManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaAudioProcessingManager`.
+   * @type {number}
+   * @member AudioProcessingManager
+   * @static
    */
   AudioProcessingManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaDeviceTimeManager`.
+   * @type {number}
+   * @member DeviceTimeManager
+   * @static
    */
   DeviceTimeManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaTaskManager`.
+   * @type {number}
+   * @member TaskManager
+   * @static
    */
   TaskManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaCodingManager`.
+   * @type {number}
+   * @member CodingManager
+   * @static
    */
   CodingManager: number;
-
   /**
-   * This was not documented in the OCA standard.
+   * Object number of the :class:`OcaDiagnosticManager`.
+   * @type {number}
+   * @member DiagnosticManager
+   * @static
    */
   DiagnosticManager: number;
-}
-
-export declare class OcaManagerDefaultObjectNumbers
-  implements IOcaManagerDefaultObjectNumbers {
-  /**
-   * Datatype that defines the fixed object numbers assigned to the various  **OcaManager** objects.
-   * @class OcaManagerDefaultObjectNumbers
-   */
-  constructor(
-    DeviceManager: number,
-    SecurityManager: number,
-    FirmwareManager: number,
-    SubscriptionManager: number,
-    PowerManager: number,
-    NetworkManager: number,
-    MediaClockManager: number,
-    LibraryManager: number,
-    AudioProcessingManager: number,
-    DeviceTimeManager: number,
-    TaskManager: number,
-    CodingManager: number,
-    DiagnosticManager: number
-  );
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  DeviceManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  SecurityManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  FirmwareManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  SubscriptionManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  PowerManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  NetworkManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  MediaClockManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  LibraryManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  AudioProcessingManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  DeviceTimeManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  TaskManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  CodingManager: number;
-
-  /**
-   * This was not documented in the OCA standard.
-   */
-  DiagnosticManager: number;
-}
+};
