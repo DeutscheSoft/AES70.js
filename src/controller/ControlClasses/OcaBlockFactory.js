@@ -9,7 +9,6 @@ import { OcaProtoSignalPath } from '../../OCP1/OcaProtoSignalPath.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
-import { String16 } from '../../OCP1/String16.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaWorker } from './OcaWorker.js';
 

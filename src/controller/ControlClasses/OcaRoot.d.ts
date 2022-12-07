@@ -1,4 +1,3 @@
-import { PropertyEvent } from '../property_event';
 import { OcaClassIdentification } from '../../types/OcaClassIdentification';
 import { Event } from '../event';
 import { ObjectBase } from '../object_base';
