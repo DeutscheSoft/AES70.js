@@ -4,7 +4,8 @@
 
 export class OcaProtoObjectIdentification {
   /**
-   * Prototype object identification. Composite of prototype object number and prototype object's class identification. Used in  **OcaBlockFactory** .
+   * Prototype object identification. Composite of prototype object number and
+   * prototype object's class identification. Used in **OcaBlockFactory**.
    * @class OcaProtoObjectIdentification
    */
   constructor(POno, ClassIdentification) {

@@ -4,17 +4,18 @@
 
 export class OcaPropertyDescriptor {
   /**
-   * Description of an OCA property, including property ID, Get and Set method IDs, and datatype.
+   * Description of an OCA property, including property ID, Get and Set method
+   * IDs, and datatype.
    * @class OcaPropertyDescriptor
    */
   constructor(PropertyID, BaseDataType, GetterMethodID, SetterMethodID) {
     /**
-     * This was not documented in the OCA standard.
      * @type OcaPropertyID
      */
     this.PropertyID = PropertyID;
     /**
-     * The base datatype of the property. Chosen from an enum datatype that represents the available set of basedatatypes **.**
+     * The base datatype of the property. Chosen from an enum datatype that
+     * represents the available set of basedatatypes**.**
      * @type OcaBaseDataType
      */
     this.BaseDataType = BaseDataType;

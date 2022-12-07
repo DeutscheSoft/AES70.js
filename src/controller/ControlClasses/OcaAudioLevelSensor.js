@@ -3,7 +3,9 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaLevelSensor } from './OcaLevelSensor.js';
 
 /**
- * Child of  **OcaLevelSensor** that returns an audio meter reading in dB relative to a known reference level, and whose value has been calculated by the selected averaging algorithm.
+ * Child of **OcaLevelSensor** that returns an audio meter reading in dB
+ * relative to a known reference level, and whose value has been calculated by
+ * the selected averaging algorithm.
  * @extends OcaLevelSensor
  * @class OcaAudioLevelSensor
  */
@@ -22,14 +24,17 @@ export const OcaAudioLevelSensor = make_control_class(
 );
 
 /**
- * Gets the value of the Law property. The return value indicates whether the property was successfully retrieved.
+ * Gets the value of the Law property. The return value indicates whether the
+ * property was successfully retrieved.
  *
  * @method OcaAudioLevelSensor#GetLaw
  * @returns {Promise<OcaLevelMeterLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelMeterLaw`.
  */
 /**
- * Sets the value of the Law property. The return value indicates whether the property was successfully set. Only implemented for objects whose Law property is read/write.
+ * Sets the value of the Law property. The return value indicates whether the
+ * property was successfully set. Only implemented for objects whose Law
+ * property is read/write.
  *
  * @method OcaAudioLevelSensor#SetLaw
  * @param {IOcaLevelMeterLaw} law
@@ -37,11 +42,10 @@ export const OcaAudioLevelSensor = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property Law changes in the remote object.
+ * This event is emitted when the property ``Law`` changes in the remote object.
  * The property ``Law`` is described in the AES70 standard as follows.
- * Enum that defines metering algorithm, including averaging
- * characteristics and, in some cases, reference level. Readonly in some
- * objects.
+ * Enum that defines metering algorithm, including averaging characteristics
+ * and, in some cases, reference level. Readonly in some objects.
  *
  * @member {PropertyEvent<OcaLevelMeterLaw>} OcaAudioLevelSensor#OnLawChanged
  */

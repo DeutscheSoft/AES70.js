@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Time mode of  **OcaTask** agent.
+ * Time mode of **OcaTask** agent.
  * @class OcaTimeMode
  */
 export class OcaTimeMode {

@@ -16,7 +16,8 @@ export declare class OcaBooleanSensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the  **Reading** property. The return value indicates whether the data was successfully retrieved.
+   * Gets the **Reading** property. The return value indicates whether the data
+   * was successfully retrieved.
    *
    * @method OcaBooleanSensor#GetReading
    * @returns {Promise<boolean>}

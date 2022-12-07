@@ -7,7 +7,8 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 
 /**
- *  **DEPRECATED CLASS**   *Replaced by*  **OcaMediaClock3**  A media clock, internal or external.
+ * **DEPRECATED CLASS** *Replaced by* **OcaMediaClock3** A media clock, internal
+ * or external.
  * @extends OcaAgent
  * @class OcaMediaClock
  */
@@ -38,14 +39,17 @@ export const OcaMediaClock = make_control_class(
 );
 
 /**
- * Gets the value of the  **Type** property. The return value indicates whether the value was successfully retrieved.
+ * Gets the value of the **Type** property. The return value indicates whether
+ * the value was successfully retrieved.
  *
  * @method OcaMediaClock#GetType
  * @returns {Promise<OcaMediaClockType>}
  *   A promise which resolves to a single value of type :class:`OcaMediaClockType`.
  */
 /**
- * Sets the value of the  **Type** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+ * Sets the value of the **Type** property. The return value indicates whether
+ * the value was successfully set. Optional method, may not be supported in all
+ * implementations.
  *
  * @method OcaMediaClock#SetType
  * @param {IOcaMediaClockType} Type
@@ -53,14 +57,17 @@ export const OcaMediaClock = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the  **DomainID** property. The return value indicates whether the value was successfully retrieved.
+ * Gets the value of the **DomainID** property. The return value indicates
+ * whether the value was successfully retrieved.
  *
  * @method OcaMediaClock#GetDomainID
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the  **DomainID** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+ * Sets the value of the **DomainID** property. The return value indicates
+ * whether the value was successfully set. Optional method, may not be supported
+ * in all implementations.
  *
  * @method OcaMediaClock#SetDomainID
  * @param {number} ID
@@ -68,21 +75,24 @@ export const OcaMediaClock = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of supported sampling rates. The return value indicates whether the list was successfully retrieved.
+ * Gets the list of supported sampling rates. The return value indicates whether
+ * the list was successfully retrieved.
  *
  * @method OcaMediaClock#GetSupportedRates
  * @returns {Promise<OcaMediaClockRate[]>}
- *   A promise which resolves to a single value of type ``OcaMediaClockRate[]``.
+ *   A promise which resolves to a single value of type :class:`OcaMediaClockRate[]`.
  */
 /**
- * Gets the current sampling rate. The return value indicates whether the value was successfully retrieved.
+ * Gets the current sampling rate. The return value indicates whether the value
+ * was successfully retrieved.
  *
  * @method OcaMediaClock#GetCurrentRate
  * @returns {Promise<OcaMediaClockRate>}
  *   A promise which resolves to a single value of type :class:`OcaMediaClockRate`.
  */
 /**
- * Sets the sampling rate. The return value indicates whether the rate was successfully set.
+ * Sets the sampling rate. The return value indicates whether the rate was
+ * successfully set.
  *
  * @method OcaMediaClock#SetCurrentRate
  * @param {IOcaMediaClockRate} rate
@@ -90,42 +100,43 @@ export const OcaMediaClock = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the current media clock lock state. The return value indicates whether the value was successfully retrieved.
+ * Gets the current media clock lock state. The return value indicates whether
+ * the value was successfully retrieved.
  *
  * @method OcaMediaClock#GetLockState
  * @returns {Promise<OcaMediaClockLockState>}
  *   A promise which resolves to a single value of type :class:`OcaMediaClockLockState`.
  */
 /**
- * This event is emitted when the property Type changes in the remote object.
+ * This event is emitted when the property ``Type`` changes in the remote object.
  * The property ``Type`` is described in the AES70 standard as follows.
  * Type of clock.
  *
  * @member {PropertyEvent<OcaMediaClockType>} OcaMediaClock#OnTypeChanged
  */
 /**
- * This event is emitted when the property DomainID changes in the remote object.
+ * This event is emitted when the property ``DomainID`` changes in the remote object.
  * The property ``DomainID`` is described in the AES70 standard as follows.
  * Clock domain ID. Arbitrary value.
  *
  * @member {PropertyEvent<number>} OcaMediaClock#OnDomainIDChanged
  */
 /**
- * This event is emitted when the property RatesSupported changes in the remote object.
+ * This event is emitted when the property ``RatesSupported`` changes in the remote object.
  * The property ``RatesSupported`` is described in the AES70 standard as follows.
  * List of supported rates
  *
  * @member {PropertyEvent<OcaMediaClockRate[]>} OcaMediaClock#OnRatesSupportedChanged
  */
 /**
- * This event is emitted when the property CurrentRate changes in the remote object.
+ * This event is emitted when the property ``CurrentRate`` changes in the remote object.
  * The property ``CurrentRate`` is described in the AES70 standard as follows.
  * Current clock rate
  *
  * @member {PropertyEvent<OcaMediaClockRate>} OcaMediaClock#OnCurrentRateChanged
  */
 /**
- * This event is emitted when the property LockState changes in the remote object.
+ * This event is emitted when the property ``LockState`` changes in the remote object.
  * The property ``LockState`` is described in the AES70 standard as follows.
  * Lock state of clock.
  *

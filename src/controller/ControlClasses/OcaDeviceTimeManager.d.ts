@@ -4,13 +4,22 @@ import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
 
 /**
- * Manager that allows controlling and monitoring a device's time-of-day clock, and that collects the device's time source objects.
+ * Manager that allows controlling and monitoring a device's time-of-day clock,
+ * and that collects the device's time source objects.
  *
- *  - Must be instantiated once in every device that has more than one time source object. In this context, a "time source object" is an instance of  **OcaTimeSource** or a subclass of it.
- *
+ *  - Must be instantiated once in every device that has more than one time
+ *    source object. In this context, a "time source object" is an instance of
+ *    **OcaTimeSource** or a subclass of it.
  *
  *  - If instantiated, object number must be 10.
- *   Note: The clock value is accessible via Get and Set methods, but has not been defined as a public property because its value is volatile and should not cause property-change events. The current value of the  **OcaTimeSource** object designated by the  **CurrentDeviceTimeSource** property of this Manager is known as the  **Device Time** . The property  **TimeSources** was added in version 2 of this class.
+ *
+ *
+ * Note: The clock value is accessible via Get and Set methods, but has not been
+ * defined as a public property because its value is volatile and should not
+ * cause property-change events. The current value of the **OcaTimeSource**
+ * object designated by the **CurrentDeviceTimeSource** property of this Manager
+ * is known as the **Device Time**. The property **TimeSources** was added in
+ * version 2 of this class.
  * @extends OcaManager
  * @class OcaDeviceTimeManager
  */
@@ -28,7 +37,9 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Get current value of device time-of-day clock in NTP format. Return value indicates whether value was successfully retrieved. This method is  _optional_ and  _deprecated_ .
+   * Get current value of device time-of-day clock in NTP format. Return value
+   * indicates whether value was successfully retrieved. This method is optional
+   * and deprecated.
    *
    * @method OcaDeviceTimeManager#GetDeviceTimeNTP
    * @returns {Promise<number|BigInt>}
@@ -37,7 +48,9 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   GetDeviceTimeNTP(): Promise<number | BigInt>;
 
   /**
-   * Sets device time-of-day clock in NTP format. Return value indicates whether value was successfully set. Not available if a time source is identified in property CurrentDeviceTimeSource. This method is  _optional_ and  _deprecated_ .
+   * Sets device time-of-day clock in NTP format. Return value indicates whether
+   * value was successfully set. Not available if a time source is identified in
+   * property CurrentDeviceTimeSource. This method is optional and deprecated.
    *
    * @method OcaDeviceTimeManager#SetDeviceTimeNTP
    * @param {number|BigInt} DeviceTime
@@ -47,7 +60,8 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   SetDeviceTimeNTP(DeviceTime: number | BigInt): Promise<void>;
 
   /**
-   * Returns list of object numbers of OcaTimeSource instances in this device. Return value indicates whether list was successfully retrieved.
+   * Returns list of object numbers of OcaTimeSource instances in this device.
+   * Return value indicates whether list was successfully retrieved.
    *
    * @method OcaDeviceTimeManager#GetTimeSources
    * @returns {Promise<number[]>}
@@ -56,7 +70,8 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   GetTimeSources(): Promise<number[]>;
 
   /**
-   * Retrieves ONo of current time source object, or zero if none. Return value indicates whether value was successfully retrieved.
+   * Retrieves ONo of current time source object, or zero if none. Return value
+   * indicates whether value was successfully retrieved.
    *
    * @method OcaDeviceTimeManager#GetCurrentDeviceTimeSource
    * @returns {Promise<number>}
@@ -65,7 +80,8 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   GetCurrentDeviceTimeSource(): Promise<number>;
 
   /**
-   * Sets ONo of current time source object, or zero if none. Return value indicates whether value was successfully retrieved.
+   * Sets ONo of current time source object, or zero if none. Return value
+   * indicates whether value was successfully retrieved.
    *
    * @method OcaDeviceTimeManager#SetCurrentDeviceTimeSource
    * @param {number} TimeSourceONo
@@ -75,7 +91,8 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   SetCurrentDeviceTimeSource(TimeSourceONo: number): Promise<void>;
 
   /**
-   * Get current value of device time-of-day clock in PTP format. Return value indicates whether value was successfully retrieved.
+   * Get current value of device time-of-day clock in PTP format. Return value
+   * indicates whether value was successfully retrieved.
    *
    * @method OcaDeviceTimeManager#GetDeviceTimePTP
    * @returns {Promise<OcaTimePTP>}
@@ -84,7 +101,9 @@ export declare class OcaDeviceTimeManager extends OcaManager {
   GetDeviceTimePTP(): Promise<OcaTimePTP>;
 
   /**
-   * Sets device time-of-day clock in PTP format. Return value indicates whether value was successfully set. Not available if a time source is identified in property CurrentDeviceTimeSource.
+   * Sets device time-of-day clock in PTP format. Return value indicates whether
+   * value was successfully set. Not available if a time source is identified in
+   * property CurrentDeviceTimeSource.
    *
    * @method OcaDeviceTimeManager#SetDeviceTimePTP
    * @param {IOcaTimePTP} DeviceTime

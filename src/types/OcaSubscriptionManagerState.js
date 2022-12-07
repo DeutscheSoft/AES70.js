@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enum describing  **OcaSubscriptionManager**  states.
+ * Enum describing **OcaSubscriptionManager** states.
  * @class OcaSubscriptionManagerState
  */
 export class OcaSubscriptionManagerState extends Enum({

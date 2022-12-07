@@ -4,7 +4,6 @@
 
 export class OcaMediaConnectorStatusChangedEventData {
   /**
-   * This was not documented in the OCA standard.
    * @class OcaMediaConnectorStatusChangedEventData
    */
   constructor(ConnectorStatus) {

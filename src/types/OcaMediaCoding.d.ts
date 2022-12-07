@@ -16,7 +16,8 @@ export declare interface IOcaMediaCoding {
   CodecParameters: string;
 
   /**
-   * Object number of OcaMediaClock3 object to use for this coding scheme. May be zero if no OcaMediaClock3 object is used.
+   * Object number of OcaMediaClock3 object to use for this coding scheme. May
+   * be zero if no OcaMediaClock3 object is used.
    * @type number
    */
   ClockONo: number;
@@ -46,7 +47,8 @@ export declare class OcaMediaCoding implements IOcaMediaCoding {
   CodecParameters: string;
 
   /**
-   * Object number of OcaMediaClock3 object to use for this coding scheme. May be zero if no OcaMediaClock3 object is used.
+   * Object number of OcaMediaClock3 object to use for this coding scheme. May
+   * be zero if no OcaMediaClock3 object is used.
    * @type number
    */
   ClockONo: number;

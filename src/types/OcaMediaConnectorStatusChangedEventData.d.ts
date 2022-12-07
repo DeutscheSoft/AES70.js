@@ -17,10 +17,10 @@ export declare interface IOcaMediaConnectorStatusChangedEventData {
 export declare class OcaMediaConnectorStatusChangedEventData
   implements IOcaMediaConnectorStatusChangedEventData {
   /**
-   * This was not documented in the OCA standard.
    * @class OcaMediaConnectorStatusChangedEventData
    */
   constructor(ConnectorStatus: OcaMediaConnectorStatus);
+
   /**
    * The status that has changed.
    * @type OcaMediaConnectorStatus

@@ -18,7 +18,9 @@ export declare interface IOcaPropertyID {
 
 export declare class OcaPropertyID implements IOcaPropertyID {
   /**
-   * Representation of an OCA property ID. A class may define at most 255 properties of its own. Additional properties may be inherited, so the total number may exceed 255.
+   * Representation of an OCA property ID. A class may define at most 255
+   * properties of its own. Additional properties may be inherited, so the total
+   * number may exceed 255.
    * @class OcaPropertyID
    */
   constructor(DefLevel: number, PropertyIndex: number);

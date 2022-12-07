@@ -4,7 +4,8 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enum that describes whether an  **OcaSensor** 's current reading value can be trusted, and if not, why not.
+ * Enum that describes whether an **OcaSensor**'s current reading value can be
+ * trusted, and if not, why not.
  * @class OcaSensorReadingState
  */
 export class OcaSensorReadingState extends Enum({

@@ -19,7 +19,8 @@ export declare interface IOcaNetworkSystemInterfaceID {
 export declare class OcaNetworkSystemInterfaceID
   implements IOcaNetworkSystemInterfaceID {
   /**
-   * ID of a system interface used by a network. Format is data network type dependent.
+   * ID of a system interface used by a network. Format is data network type
+   * dependent.
    * @class OcaNetworkSystemInterfaceID
    */
   constructor(SystemInterfaceHandle: Uint8Array, MyNetworkAddress: Uint8Array);

@@ -4,7 +4,10 @@
 
 export class OcaObjectSearchResult {
   /**
-   * Result of object search via the Find...() methods of  **OcaBlock** . Dynamic format, form used depends on type of search and options. The FieldMap parameter of the Find...() methods specifies which optional fields should be returned as nonnull.
+   * Result of object search via the Find...() methods of **OcaBlock**. Dynamic
+   * format, form used depends on type of search and options. The FieldMap
+   * parameter of the Find...() methods specifies which optional fields should
+   * be returned as nonnull.
    * @class OcaObjectSearchResult
    */
   constructor(ONo, ClassIdentification, ContainerPath, Role, Label) {

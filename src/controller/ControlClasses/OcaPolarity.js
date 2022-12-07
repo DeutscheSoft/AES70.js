@@ -22,14 +22,16 @@ export const OcaPolarity = make_control_class(
 );
 
 /**
- * Gets the current inverter state. The return value indicates whether the state was successfully retrieved.
+ * Gets the current inverter state. The return value indicates whether the state
+ * was successfully retrieved.
  *
  * @method OcaPolarity#GetState
  * @returns {Promise<OcaPolarityState>}
  *   A promise which resolves to a single value of type :class:`OcaPolarityState`.
  */
 /**
- * Sets the inversion state (i.e. value of the State property). The return value indicates whether the state was successfully set.
+ * Sets the inversion state (i.e. value of the State property). The return value
+ * indicates whether the state was successfully set.
  *
  * @method OcaPolarity#SetState
  * @param {IOcaPolarityState} state
@@ -37,7 +39,7 @@ export const OcaPolarity = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property State changes in the remote object.
+ * This event is emitted when the property ``State`` changes in the remote object.
  * The property ``State`` is described in the AES70 standard as follows.
  * Current state of the inverter - {noninverted, inverted].
  *

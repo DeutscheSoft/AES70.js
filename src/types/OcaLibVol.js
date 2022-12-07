@@ -4,7 +4,8 @@
 
 export class OcaLibVol {
   /**
-   * Library volume. template. Template parameter is datatype of the volume. See  **03 OcaLibrary**  for explanation.
+   * Library volume. template. Template parameter is datatype of the volume. See
+   * **03 OcaLibrary** for explanation.
    * @class OcaLibVol
    */
   constructor(Metadata, Data) {

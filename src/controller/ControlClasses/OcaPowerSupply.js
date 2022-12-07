@@ -41,28 +41,32 @@ export const OcaPowerSupply = make_control_class(
 );
 
 /**
- * Gets the type of the power supply. Return value indicates whether the data was successfully retrieved.
+ * Gets the type of the power supply. Return value indicates whether the data
+ * was successfully retrieved.
  *
  * @method OcaPowerSupply#GetType
  * @returns {Promise<OcaPowerSupplyType>}
  *   A promise which resolves to a single value of type :class:`OcaPowerSupplyType`.
  */
 /**
- * Gets the power supply's model information text. Return value indicates whether the data was successfully retrieved.
+ * Gets the power supply's model information text. Return value indicates
+ * whether the data was successfully retrieved.
  *
  * @method OcaPowerSupply#GetModelInfo
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Gets the state of the power supply. Return value indicates whether the data was successfully retrieved.
+ * Gets the state of the power supply. Return value indicates whether the data
+ * was successfully retrieved.
  *
  * @method OcaPowerSupply#GetState
  * @returns {Promise<OcaPowerSupplyState>}
  *   A promise which resolves to a single value of type :class:`OcaPowerSupplyState`.
  */
 /**
- * Changes the power supply's state. Return value indicates whether the state was successfully changed.
+ * Changes the power supply's state. Return value indicates whether the state
+ * was successfully changed.
  *
  * @method OcaPowerSupply#SetState
  * @param {IOcaPowerSupplyState} state
@@ -70,42 +74,46 @@ export const OcaPowerSupply = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of property  **Charging** . Return value indicates whether the value was successfully retrieved.
+ * Gets the value of property **Charging**. Return value indicates whether the
+ * value was successfully retrieved.
  *
  * @method OcaPowerSupply#GetCharging
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Gets the available load fraction. Return value indicates whether the data was successfully retrieved.
+ * Gets the available load fraction. Return value indicates whether the data was
+ * successfully retrieved.
  *
  * @method OcaPowerSupply#GetLoadFractionAvailable
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the available storage fraction. Return value indicates whether the data was successfully retrieved.
+ * Gets the available storage fraction. Return value indicates whether the data
+ * was successfully retrieved.
  *
  * @method OcaPowerSupply#GetStorageFractionAvailable
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the power supply physical location. Return value indicates whether the data was successfully retrieved.
+ * Gets the power supply physical location. Return value indicates whether the
+ * data was successfully retrieved.
  *
  * @method OcaPowerSupply#GetLocation
  * @returns {Promise<OcaPowerSupplyLocation>}
  *   A promise which resolves to a single value of type :class:`OcaPowerSupplyLocation`.
  */
 /**
- * This event is emitted when the property Type changes in the remote object.
+ * This event is emitted when the property ``Type`` changes in the remote object.
  * The property ``Type`` is described in the AES70 standard as follows.
  * Type of power supply.
  *
  * @member {PropertyEvent<OcaPowerSupplyType>} OcaPowerSupply#OnTypeChanged
  */
 /**
- * This event is emitted when the property ModelInfo changes in the remote object.
+ * This event is emitted when the property ``ModelInfo`` changes in the remote object.
  * The property ``ModelInfo`` is described in the AES70 standard as follows.
  * Model information for power supply. Text; content is
  * implementation-dependent.
@@ -113,34 +121,34 @@ export const OcaPowerSupply = make_control_class(
  * @member {PropertyEvent<string>} OcaPowerSupply#OnModelInfoChanged
  */
 /**
- * This event is emitted when the property State changes in the remote object.
+ * This event is emitted when the property ``State`` changes in the remote object.
  * The property ``State`` is described in the AES70 standard as follows.
  * State of power supply: off, unavailable, available, active.
  *
  * @member {PropertyEvent<OcaPowerSupplyState>} OcaPowerSupply#OnStateChanged
  */
 /**
- * This event is emitted when the property Charging changes in the remote object.
+ * This event is emitted when the property ``Charging`` changes in the remote object.
  * The property ``Charging`` is described in the AES70 standard as follows.
  * True iff charging. For rechargable supplies (obviously).
  *
  * @member {PropertyEvent<boolean>} OcaPowerSupply#OnChargingChanged
  */
 /**
- * This event is emitted when the property LoadFractionAvailable changes in the remote object.
+ * This event is emitted when the property ``LoadFractionAvailable`` changes in the remote object.
  * The property ``LoadFractionAvailable`` is described in the AES70 standard as follows.
- * Fraction of power supply's load capacity that is currently not being
- * used. Readonly. Normal value range 0...1. A negative value indicates
- * this data is not available.
+ * Fraction of power supply's load capacity that is currently not being used.
+ * Readonly. Normal value range 0...1. A negative value indicates this data is
+ * not available.
  *
  * @member {PropertyEvent<number>} OcaPowerSupply#OnLoadFractionAvailableChanged
  */
 /**
- * This event is emitted when the property StorageFractionAvailable changes in the remote object.
+ * This event is emitted when the property ``StorageFractionAvailable`` changes in the remote object.
  * The property ``StorageFractionAvailable`` is described in the AES70 standard as follows.
- * Fraction of power supply's energy storage that remains available. For
- * battery supplies. Readonly. Normal value range 0...1. A negative value
- * indicates this data is not available.
+ * Fraction of power supply's energy storage that remains available. For battery
+ * supplies. Readonly. Normal value range 0...1. A negative value indicates this
+ * data is not available.
  *
  * @member {PropertyEvent<number>} OcaPowerSupply#OnStorageFractionAvailableChanged
  */

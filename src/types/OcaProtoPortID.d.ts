@@ -19,7 +19,9 @@ export declare interface IOcaProtoPortID {
 
 export declare class OcaProtoPortID implements IOcaProtoPortID {
   /**
-   * Unique identifier of prototype input or output port within a block factory. Prototype port numbers are ordinals starting at 1, and there are separate numbering spaces for input and output ports.
+   * Unique identifier of prototype input or output port within a block factory.
+   * Prototype port numbers are ordinals starting at 1, and there are separate
+   * numbering spaces for input and output ports.
    * @class OcaProtoPortID
    */
   constructor(Mode: OcaPortMode, Index: number);

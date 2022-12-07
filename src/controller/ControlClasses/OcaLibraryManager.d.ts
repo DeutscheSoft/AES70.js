@@ -11,10 +11,11 @@ import { OcaManager } from './OcaManager';
 /**
  * Optional manager for handling device presets -- Patch and ParamSet libraries.
  *
+ *
  *  - May be instantiated once in any device.
  *
- *
  *  - If instantiated, object number must be 8.
+ *
  *
  * @extends OcaManager
  * @class OcaLibraryManager
@@ -33,7 +34,8 @@ export declare class OcaLibraryManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Adds a library to the device. Return value indicates whether the library was successfully added.
+   * Adds a library to the device. Return value indicates whether the library
+   * was successfully added.
    *
    * @method OcaLibraryManager#AddLibrary
    * @param {IOcaLibVolType} Type
@@ -54,7 +56,8 @@ export declare class OcaLibraryManager extends OcaManager {
   DeleteLibrary(ID: number): Promise<void>;
 
   /**
-   * Returns the number of libraries of the given type that are instantiated in the device..
+   * Returns the number of libraries of the given type that are instantiated in
+   * the device..
    *
    * @method OcaLibraryManager#GetLibraryCount
    * @param {IOcaLibVolType} Type
@@ -65,18 +68,20 @@ export declare class OcaLibraryManager extends OcaManager {
   GetLibraryCount(Type: IOcaLibVolType): Promise<number>;
 
   /**
-   * Returns the list of object numbers of libraries of libraries of the given type that are instantiated in the device.
+   * Returns the list of object numbers of libraries of libraries of the given
+   * type that are instantiated in the device.
    *
    * @method OcaLibraryManager#GetLibraryList
    * @param {IOcaLibVolType} Type
    *
    * @returns {Promise<OcaLibraryIdentifier[]>}
-   *   A promise which resolves to a single value of type ``OcaLibraryIdentifier[]``.
+   *   A promise which resolves to a single value of type :class:`OcaLibraryIdentifier[]`.
    */
   GetLibraryList(Type: IOcaLibVolType): Promise<OcaLibraryIdentifier[]>;
 
   /**
-   * Return the identifier of the most recently applied patch. The return value indicates whether the method succeeded.
+   * Return the identifier of the most recently applied patch. The return value
+   * indicates whether the method succeeded.
    *
    * @method OcaLibraryManager#GetCurrentPatch
    * @returns {Promise<OcaLibVolIdentifier>}

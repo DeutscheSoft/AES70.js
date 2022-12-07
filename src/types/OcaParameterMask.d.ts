@@ -9,4 +9,5 @@
  * @readonly
  */
 export declare const OcaParameterMask: {};
+
 export declare type IOcaParameterMask = number;

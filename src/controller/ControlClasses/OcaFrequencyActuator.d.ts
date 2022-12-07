@@ -17,7 +17,8 @@ export declare class OcaFrequencyActuator extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Frequency property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Frequency property. The return value indicates
+   * whether the property was successfully retrieved.
    * The return values of this method are
    *
    * - Frequency of type ``number``
@@ -30,7 +31,8 @@ export declare class OcaFrequencyActuator extends OcaActuator {
   GetFrequency(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Frequency property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Frequency property. The return value indicates
+   * whether the property was successfully set.
    *
    * @method OcaFrequencyActuator#SetFrequency
    * @param {number} Frequency

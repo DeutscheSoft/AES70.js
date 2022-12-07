@@ -2,7 +2,11 @@
  * This file has been generated.
  */
 /**
- * Enumeration of units of measure that can be used in OCA classes. Only SI (base or derived) units are specified, so that internal calculations will not need to convert. If conversion is needed it should only be done in user interfaces. The datatype of a reading expressed in one of these units of measure is FLOAT.
+ * Enumeration of units of measure that can be used in OCA classes. Only SI
+ * (base or derived) units are specified, so that internal calculations will not
+ * need to convert. If conversion is needed it should only be done in user
+ * interfaces. The datatype of a reading expressed in one of these units of
+ * measure is FLOAT.
  * @class OcaUnitOfMeasure
  */
 export class OcaUnitOfMeasure {

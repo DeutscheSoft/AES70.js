@@ -5,7 +5,9 @@ import { IOcaProtoPortID, OcaProtoPortID } from './OcaProtoPortID';
 
 export declare interface IOcaProtoPort {
   /**
-   * Proto-object number of the proto-member that owns the proto-port.  **The value of 0 (zero) is special, and refers to the block itself, rather than to any of its members.**
+   * Proto-object number of the proto-member that owns the proto-port. **The
+   * value of 0 (zero) is special, and refers to the block itself, rather than
+   * to any of its members.**
    * @type number
    */
   Owner: number;
@@ -25,13 +27,16 @@ export declare interface IOcaProtoPort {
 
 export declare class OcaProtoPort implements IOcaProtoPort {
   /**
-   * Representation of an OCA (input or output) proto-port that is used in the proto-signal path representation of an OCA device.
+   * Representation of an OCA (input or output) proto-port that is used in the
+   * proto-signal path representation of an OCA device.
    * @class OcaProtoPort
    */
   constructor(Owner: number, ProtoID: OcaProtoPortID, Name: string);
 
   /**
-   * Proto-object number of the proto-member that owns the proto-port.  **The value of 0 (zero) is special, and refers to the block itself, rather than to any of its members.**
+   * Proto-object number of the proto-member that owns the proto-port. **The
+   * value of 0 (zero) is special, and refers to the block itself, rather than
+   * to any of its members.**
    * @type number
    */
   Owner: number;

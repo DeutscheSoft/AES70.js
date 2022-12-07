@@ -13,34 +13,31 @@ import { OcaManager } from './OcaManager';
  *
  *  - Must be instantiated once in every device that supports subscriptions.
  *
- *
  *  - May be instantiated at most once in any device.
  *
- *
  *  - If instantiated, must have object number 4.
- *   Absence of an  **OcaSubscriptionManager** object signifies that the device does not support event subscriptions.
+ *
+ *
+ * Absence of an **OcaSubscriptionManager** object signifies that the device
+ * does not support event subscriptions.
  * @extends OcaManager
  * @class OcaSubscriptionManager
  */
 export declare class OcaSubscriptionManager extends OcaManager {
   /**
-   * Event that is raised when the value of the  **State** property changes from  **Normal ** to  **EventsDisabled.**
+   * Event that is raised when the value of the **State** property changes from
+   * **Normal **to **EventsDisabled.**
    * @member OcaSubscriptionManager#OnNotificationsDisabled {Event}
-   * Event that is raised when the value of the <b>State </b>property
-   * changes from <b><i>Normal </i></b>to <b><i>EventsDisabled.</i></b>
    */
   OnNotificationsDisabled: Event;
 
   /**
-   * Event that is raised when the value of the  **State** property changes from  **EventsDisabled ** to  **Normal.**  Event data includes a lists of which objects changed state during the period that notifications were disabled.
+   * Event that is raised when the value of the **State** property changes from
+   * **EventsDisabled **to **Normal.** Event data includes a lists of which
+   * objects changed state during the period that notifications were disabled.
    * @member OcaSubscriptionManager#OnSynchronizeState {Event}
-   * Event that is raised when the value of the <b>State </b>property
-   * changes from <b><i>EventsDisabled </i></b>to <b><i>Normal.</i></b>
-   * Event data includes a lists of which objects changed state during the
-   * period that notifications were disabled.
    */
   OnSynchronizeState: Event;
-
   /**
    * This event is emitted whenever State changes.
    */
@@ -49,7 +46,9 @@ export declare class OcaSubscriptionManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Removes all subscriptions to the given event with the given  **OcaMethod** . The return value indicates whether the subscription(s) was (were) successfully removed.
+   * Removes all subscriptions to the given event with the given **OcaMethod**.
+   * The return value indicates whether the subscription(s) was (were)
+   * successfully removed.
    *
    * @method OcaSubscriptionManager#RemoveSubscription
    * @param {IOcaEvent} Event
@@ -60,7 +59,13 @@ export declare class OcaSubscriptionManager extends OcaManager {
   RemoveSubscription(Event: IOcaEvent, Subscriber: IOcaMethod): Promise<void>;
 
   /**
-   * Adds a subscription to an event. The subscription is added for the session on which the command came in. If a subscription identical to the one being requested already exists, an additional one shall not be added. Two subscriptions are identical if the  **Event, Subscriber, NotificationDeliveryMode** , and  **DestinationInformation** parameters are all identical. The return value indicates whether the subscription succeeded.
+   * Adds a subscription to an event. The subscription is added for the session
+   * on which the command came in. If a subscription identical to the one being
+   * requested already exists, an additional one shall not be added. Two
+   * subscriptions are identical if the **Event, Subscriber,
+   * NotificationDeliveryMode**, and **DestinationInformation** parameters are
+   * all identical. The return value indicates whether the subscription
+   * succeeded.
    *
    * @method OcaSubscriptionManager#AddSubscription
    * @param {IOcaEvent} Event
@@ -80,7 +85,17 @@ export declare class OcaSubscriptionManager extends OcaManager {
   ): Promise<void>;
 
   /**
-   * Temporarily disables emitting of event notifications (to all subscribers, not just to the subscriber calling this method). Events from the Subscription Manager itself are not disabled. This method can be used if either a controller or the local device knows that it is going to change the state of the device significantly, which could lead to a notification storm of events. Invoking this method will prevent the notification storm. The event '03e01 EventsDisabled' will be raised to notify all controllers of the fact that events are temporarily disabled. The subscription manager will start collecting the object numbers of the objects that raise events, so that it can pass a list of changed objects once the events are re-enabled. The return value indicates if disabling events succeeded.
+   * Temporarily disables emitting of event notifications (to all subscribers,
+   * not just to the subscriber calling this method). Events from the
+   * Subscription Manager itself are not disabled. This method can be used if
+   * either a controller or the local device knows that it is going to change
+   * the state of the device significantly, which could lead to a notification
+   * storm of events. Invoking this method will prevent the notification storm.
+   * The event '03e01 EventsDisabled' will be raised to notify all controllers
+   * of the fact that events are temporarily disabled. The subscription manager
+   * will start collecting the object numbers of the objects that raise events,
+   * so that it can pass a list of changed objects once the events are
+   * re-enabled. The return value indicates if disabling events succeeded.
    *
    * @method OcaSubscriptionManager#DisableNotifications
    * @returns {Promise<void>}
@@ -88,7 +103,15 @@ export declare class OcaSubscriptionManager extends OcaManager {
   DisableNotifications(): Promise<void>;
 
   /**
-   * Re-enables the sending of event notifications to all subscribers. When events are re-enabled, the subscription manager will raise the  **SynchronizeState** event, passing the list of objects that have changed state. Subsequently, the subscription manager will transmit all notifications as normal. If the connection to the controller that invoked the DisableEvents() is lost, this method will be called automatically to prevent the situation in which the raising of events would never be re-enabled. The return value indicates if re-enabling the event-based events succeeded.
+   * Re-enables the sending of event notifications to all subscribers. When
+   * events are re-enabled, the subscription manager will raise the
+   * **SynchronizeState** event, passing the list of objects that have changed
+   * state. Subsequently, the subscription manager will transmit all
+   * notifications as normal. If the connection to the controller that invoked
+   * the DisableEvents() is lost, this method will be called automatically to
+   * prevent the situation in which the raising of events would never be
+   * re-enabled. The return value indicates if re-enabling the event-based
+   * events succeeded.
    *
    * @method OcaSubscriptionManager#ReEnableNotifications
    * @returns {Promise<void>}
@@ -96,7 +119,15 @@ export declare class OcaSubscriptionManager extends OcaManager {
   ReEnableNotifications(): Promise<void>;
 
   /**
-   * Adds a subscription to the PropertyChanged event in the object Emitter for changes of the property Property. If the NotificationDeliveryMode is Fast, the subscription is added for the session on which the command came in. If a subscription identical to the one being requested already exists, an additional one shall not be added. Two subscriptions are identical if the Emitter, Property, Subscriber, SubsciberContext, NotificationDeliveryMode, and DestinationInformation parameters are all identical. The return value indicates whether the subscription succeeded. Added in v2 of this class, in AES70-2017.
+   * Adds a subscription to the PropertyChanged event in the object Emitter for
+   * changes of the property Property. If the NotificationDeliveryMode is Fast,
+   * the subscription is added for the session on which the command came in. If
+   * a subscription identical to the one being requested already exists, an
+   * additional one shall not be added. Two subscriptions are identical if the
+   * Emitter, Property, Subscriber, SubsciberContext, NotificationDeliveryMode,
+   * and DestinationInformation parameters are all identical. The return value
+   * indicates whether the subscription succeeded. Added in v2 of this class, in
+   * AES70-2017.
    *
    * @method OcaSubscriptionManager#AddPropertyChangeSubscription
    * @param {number} Emitter
@@ -118,7 +149,11 @@ export declare class OcaSubscriptionManager extends OcaManager {
   ): Promise<void>;
 
   /**
-   * Removes any subscription to a PropertyChanged event with the given Emitter, Property, Subscriber, SubscriberContext, NotificationDeliveryMode, and DestinationInformation. The return value indicates whether the subscription(s) was (were) successfully removed. Added in v2 of this class, in AES70-2017.
+   * Removes any subscription to a PropertyChanged event with the given Emitter,
+   * Property, Subscriber, SubscriberContext, NotificationDeliveryMode, and
+   * DestinationInformation. The return value indicates whether the
+   * subscription(s) was (were) successfully removed. Added in v2 of this class,
+   * in AES70-2017.
    *
    * @method OcaSubscriptionManager#RemovePropertyChangeSubscription
    * @param {number} Emitter
@@ -134,7 +169,12 @@ export declare class OcaSubscriptionManager extends OcaManager {
   ): Promise<void>;
 
   /**
-   * Returns maximum byte length of payload of subscriber context parameter that this device supports. This returned value shall be either zero or four. If the returned payload length is not zero, it shall be four. No other values shall be allowed, and the returned value shall not change once the device has initialized. NOTE: In AES70-2015, arbitrary subscriber context lengths were allowed; this is no longer true.
+   * Returns maximum byte length of payload of subscriber context parameter that
+   * this device supports. This returned value shall be either zero or four. If
+   * the returned payload length is not zero, it shall be four. No other values
+   * shall be allowed, and the returned value shall not change once the device
+   * has initialized. NOTE: In AES70-2015, arbitrary subscriber context lengths
+   * were allowed; this is no longer true.
    *
    * @method OcaSubscriptionManager#GetMaximumSubscriberContextLength
    * @returns {Promise<number>}

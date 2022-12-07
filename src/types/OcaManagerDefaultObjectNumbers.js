@@ -2,8 +2,8 @@
  * This file has been generated.
  */
 /**
- * Datatype that defines the fixed object numbers assigned to the various  **OcaManager** objects.
- * @class OcaManagerDefaultObjectNumbers
+ * Datatype that defines the fixed object numbers assigned to the various
+ * **OcaManager** objects.
  */
 export const OcaManagerDefaultObjectNumbers = {
   /**

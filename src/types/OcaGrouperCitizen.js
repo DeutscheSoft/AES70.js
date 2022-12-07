@@ -4,7 +4,8 @@
 
 export class OcaGrouperCitizen {
   /**
-   * Describes a citizen of a grouper. Refers to a specific worker object somewhere in the media network.
+   * Describes a citizen of a grouper. Refers to a specific worker object
+   * somewhere in the media network.
    * @class OcaGrouperCitizen
    */
   constructor(Index, ObjectPath, Online) {
@@ -14,7 +15,8 @@ export class OcaGrouperCitizen {
      */
     this.Index = Index;
     /**
-     * Object path (= hostname + object number) of the worker object that is the citizen of the grouper.
+     * Object path (= hostname + object number) of the worker object that is the
+     * citizen of the grouper.
      * @type OcaOPath
      */
     this.ObjectPath = ObjectPath;

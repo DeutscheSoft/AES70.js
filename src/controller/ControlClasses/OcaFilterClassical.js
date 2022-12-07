@@ -7,7 +7,9 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * A classical analog-style filter - highpass, lowpass, bandpass, etc., with shape characteristics such as Butterworth, Chebyshev, Bessel, and Linkwitz-Riley. Frequently used in loudspeaker crossover networks.
+ * A classical analog-style filter - highpass, lowpass, bandpass, etc., with
+ * shape characteristics such as Butterworth, Chebyshev, Bessel, and
+ * Linkwitz-Riley. Frequently used in loudspeaker crossover networks.
  * @extends OcaActuator
  * @class OcaFilterClassical
  */
@@ -54,7 +56,8 @@ export const OcaFilterClassical = make_control_class(
 );
 
 /**
- * Gets the value of the Frequency property. The return value indicates if the property was successfully retrieved.
+ * Gets the value of the Frequency property. The return value indicates if the
+ * property was successfully retrieved.
  * The return values of this method are
  *
  * - Frequency of type ``number``
@@ -65,7 +68,8 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Frequency property. The return value indicates if the property was successfully set.
+ * Sets the value of the Frequency property. The return value indicates if the
+ * property was successfully set.
  *
  * @method OcaFilterClassical#SetFrequency
  * @param {number} frequency
@@ -73,14 +77,16 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the passband specification of the filter object. The return value indicates if the specification was successfully retrieved.
+ * Returns the passband specification of the filter object. The return value
+ * indicates if the specification was successfully retrieved.
  *
  * @method OcaFilterClassical#GetPassband
  * @returns {Promise<OcaFilterPassband>}
  *   A promise which resolves to a single value of type :class:`OcaFilterPassband`.
  */
 /**
- * Sets the passband specification of the filter object. The return value indicates if the specification was successfully set.
+ * Sets the passband specification of the filter object. The return value
+ * indicates if the specification was successfully set.
  *
  * @method OcaFilterClassical#SetPassband
  * @param {IOcaFilterPassband} Passband
@@ -88,14 +94,16 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the Shape property of the filter. The return value indicates if the property was successfully retrieved.
+ * Returns the Shape property of the filter. The return value indicates if the
+ * property was successfully retrieved.
  *
  * @method OcaFilterClassical#GetShape
  * @returns {Promise<OcaClassicalFilterShape>}
  *   A promise which resolves to a single value of type :class:`OcaClassicalFilterShape`.
  */
 /**
- * Sets the Shape property of the filter. The return value indicates if the property was successfully set.
+ * Sets the Shape property of the filter. The return value indicates if the
+ * property was successfully set.
  *
  * @method OcaFilterClassical#SetShape
  * @param {IOcaClassicalFilterShape} Shape
@@ -103,7 +111,8 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the order of the filter. The return value indicates if the property was successfully retrieved.
+ * Returns the order of the filter. The return value indicates if the property
+ * was successfully retrieved.
  * The return values of this method are
  *
  * - Order of type ``number``
@@ -114,7 +123,8 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the order of the filter. The return value indicates if the property was successfully set.
+ * Sets the order of the filter. The return value indicates if the property was
+ * successfully set.
  *
  * @method OcaFilterClassical#SetOrder
  * @param {number} Order
@@ -122,7 +132,8 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the filter parameter. The return value indicates if the property was successfully retrieved.
+ * Returns the filter parameter. The return value indicates if the property was
+ * successfully retrieved.
  * The return values of this method are
  *
  * - Parameter of type ``number``
@@ -133,7 +144,8 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the filter parameter. The return value indicates if the parameter was successfully set.
+ * Sets the filter parameter. The return value indicates if the parameter was
+ * successfully set.
  *
  * @method OcaFilterClassical#SetParameter
  * @param {number} Parameter
@@ -141,7 +153,9 @@ export const OcaFilterClassical = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets some or all filter parameter. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+ * Sets some or all filter parameter. The return value indicates if the
+ * parameters were successfully set. The action of this method is atomic - if
+ * any of the value changes fails, none of the changes are made.
  *
  * @method OcaFilterClassical#SetMultiple
  * @param {IOcaParameterMask} Mask
@@ -149,41 +163,40 @@ export const OcaFilterClassical = make_control_class(
  * @param {IOcaFilterPassband} Passband
  * @param {IOcaClassicalFilterShape} Shape
  * @param {number} Order
- *
  * @param {number} Parameter
  *
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property Frequency changes in the remote object.
+ * This event is emitted when the property ``Frequency`` changes in the remote object.
  * The property ``Frequency`` is described in the AES70 standard as follows.
  * The frequency of the filter.
  *
  * @member {PropertyEvent<number>} OcaFilterClassical#OnFrequencyChanged
  */
 /**
- * This event is emitted when the property Passband changes in the remote object.
+ * This event is emitted when the property ``Passband`` changes in the remote object.
  * The property ``Passband`` is described in the AES70 standard as follows.
  * Lowpass, highpass, bandpass, bandreject
  *
  * @member {PropertyEvent<OcaFilterPassband>} OcaFilterClassical#OnPassbandChanged
  */
 /**
- * This event is emitted when the property Shape changes in the remote object.
+ * This event is emitted when the property ``Shape`` changes in the remote object.
  * The property ``Shape`` is described in the AES70 standard as follows.
  * Shape family - Butterworth, Bessell, etc.
  *
  * @member {PropertyEvent<OcaClassicalFilterShape>} OcaFilterClassical#OnShapeChanged
  */
 /**
- * This event is emitted when the property Order changes in the remote object.
+ * This event is emitted when the property ``Order`` changes in the remote object.
  * The property ``Order`` is described in the AES70 standard as follows.
  * Filter order
  *
  * @member {PropertyEvent<number>} OcaFilterClassical#OnOrderChanged
  */
 /**
- * This event is emitted when the property Parameter changes in the remote object.
+ * This event is emitted when the property ``Parameter`` changes in the remote object.
  * The property ``Parameter`` is described in the AES70 standard as follows.
  * Ripple or other filter parameter, depending on shape. Not used by some
  * shapes.

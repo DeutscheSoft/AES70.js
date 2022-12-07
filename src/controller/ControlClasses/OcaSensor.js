@@ -19,17 +19,18 @@ export const OcaSensor = make_control_class(
 );
 
 /**
- * Gets the current reading state of the sensor. The return value indicates whether the state was successfully retrived.
+ * Gets the current reading state of the sensor. The return value indicates
+ * whether the state was successfully retrived.
  *
  * @method OcaSensor#GetReadingState
  * @returns {Promise<OcaSensorReadingState>}
  *   A promise which resolves to a single value of type :class:`OcaSensorReadingState`.
  */
 /**
- * This event is emitted when the property ReadingState changes in the remote object.
+ * This event is emitted when the property ``ReadingState`` changes in the remote object.
  * The property ``ReadingState`` is described in the AES70 standard as follows.
- * Enum that describes whether current reading value is valid and if not,
- * why not. Readonly.
+ * Enum that describes whether current reading value is valid and if not, why
+ * not. Readonly.
  *
  * @member {PropertyEvent<OcaSensorReadingState>} OcaSensor#OnReadingStateChanged
  */

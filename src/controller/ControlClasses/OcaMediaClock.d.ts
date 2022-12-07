@@ -12,7 +12,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- *  **DEPRECATED CLASS**   *Replaced by*  **OcaMediaClock3**  A media clock, internal or external.
+ * **DEPRECATED CLASS** *Replaced by* **OcaMediaClock3** A media clock, internal
+ * or external.
  * @extends OcaAgent
  * @class OcaMediaClock
  */
@@ -45,7 +46,8 @@ export declare class OcaMediaClock extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the  **Type** property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **Type** property. The return value indicates whether
+   * the value was successfully retrieved.
    *
    * @method OcaMediaClock#GetType
    * @returns {Promise<OcaMediaClockType>}
@@ -54,7 +56,9 @@ export declare class OcaMediaClock extends OcaAgent {
   GetType(): Promise<OcaMediaClockType>;
 
   /**
-   * Sets the value of the  **Type** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the value of the **Type** property. The return value indicates whether
+   * the value was successfully set. Optional method, may not be supported in
+   * all implementations.
    *
    * @method OcaMediaClock#SetType
    * @param {IOcaMediaClockType} Type
@@ -64,7 +68,8 @@ export declare class OcaMediaClock extends OcaAgent {
   SetType(Type: IOcaMediaClockType): Promise<void>;
 
   /**
-   * Gets the value of the  **DomainID** property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **DomainID** property. The return value indicates
+   * whether the value was successfully retrieved.
    *
    * @method OcaMediaClock#GetDomainID
    * @returns {Promise<number>}
@@ -73,7 +78,9 @@ export declare class OcaMediaClock extends OcaAgent {
   GetDomainID(): Promise<number>;
 
   /**
-   * Sets the value of the  **DomainID** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the value of the **DomainID** property. The return value indicates
+   * whether the value was successfully set. Optional method, may not be
+   * supported in all implementations.
    *
    * @method OcaMediaClock#SetDomainID
    * @param {number} ID
@@ -83,16 +90,18 @@ export declare class OcaMediaClock extends OcaAgent {
   SetDomainID(ID: number): Promise<void>;
 
   /**
-   * Gets the list of supported sampling rates. The return value indicates whether the list was successfully retrieved.
+   * Gets the list of supported sampling rates. The return value indicates
+   * whether the list was successfully retrieved.
    *
    * @method OcaMediaClock#GetSupportedRates
    * @returns {Promise<OcaMediaClockRate[]>}
-   *   A promise which resolves to a single value of type ``OcaMediaClockRate[]``.
+   *   A promise which resolves to a single value of type :class:`OcaMediaClockRate[]`.
    */
   GetSupportedRates(): Promise<OcaMediaClockRate[]>;
 
   /**
-   * Gets the current sampling rate. The return value indicates whether the value was successfully retrieved.
+   * Gets the current sampling rate. The return value indicates whether the
+   * value was successfully retrieved.
    *
    * @method OcaMediaClock#GetCurrentRate
    * @returns {Promise<OcaMediaClockRate>}
@@ -101,7 +110,8 @@ export declare class OcaMediaClock extends OcaAgent {
   GetCurrentRate(): Promise<OcaMediaClockRate>;
 
   /**
-   * Sets the sampling rate. The return value indicates whether the rate was successfully set.
+   * Sets the sampling rate. The return value indicates whether the rate was
+   * successfully set.
    *
    * @method OcaMediaClock#SetCurrentRate
    * @param {IOcaMediaClockRate} rate
@@ -111,7 +121,8 @@ export declare class OcaMediaClock extends OcaAgent {
   SetCurrentRate(rate: IOcaMediaClockRate): Promise<void>;
 
   /**
-   * Gets the current media clock lock state. The return value indicates whether the value was successfully retrieved.
+   * Gets the current media clock lock state. The return value indicates whether
+   * the value was successfully retrieved.
    *
    * @method OcaMediaClock#GetLockState
    * @returns {Promise<OcaMediaClockLockState>}

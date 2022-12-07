@@ -4,7 +4,9 @@
 import { Enum } from './Enum.js';
 
 /**
- * States of OcaTask object. State values change as a result of the object's having received a comment or encountering processing events (e.g. completion).
+ * States of OcaTask object. State values change as a result of the object's
+ * having received a comment or encountering processing events (e.g.
+ * completion).
  * @class OcaTaskState
  */
 export class OcaTaskState extends Enum({

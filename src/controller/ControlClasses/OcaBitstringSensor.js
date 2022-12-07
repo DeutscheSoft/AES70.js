@@ -25,14 +25,16 @@ export const OcaBitstringSensor = make_control_class(
 );
 
 /**
- * Gets the number of bits of the bitmask data. Returned status indicates success or failure of the retrieval.
+ * Gets the number of bits of the bitmask data. Returned status indicates
+ * success or failure of the retrieval.
  *
  * @method OcaBitstringSensor#GetNrBits
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the value of the given bit. Return status indicates success or failure of the retrieval.
+ * Gets the value of the given bit. Return status indicates success or failure
+ * of the retrieval.
  *
  * @method OcaBitstringSensor#GetBit
  * @param {number} bitNr
@@ -41,14 +43,15 @@ export const OcaBitstringSensor = make_control_class(
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the entire bitstring. Return status indicates success or failure of the retrieval.
+ * Gets the entire bitstring. Return status indicates success or failure of the
+ * retrieval.
  *
  * @method OcaBitstringSensor#GetBitString
  * @returns {Promise<boolean[]>}
  *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
- * This event is emitted when the property BitString changes in the remote object.
+ * This event is emitted when the property ``BitString`` changes in the remote object.
  * The property ``BitString`` is described in the AES70 standard as follows.
  * The bitstring.
  *

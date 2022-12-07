@@ -23,7 +23,8 @@ export declare interface IOcaObjectIdentification {
 export declare class OcaObjectIdentification
   implements IOcaObjectIdentification {
   /**
-   * Object identification. Composite of object number and object's class. Used mainly in discovery processes.
+   * Object identification. Composite of object number and object's class. Used
+   * mainly in discovery processes.
    * @class OcaObjectIdentification
    */
   constructor(ONo: number, ClassIdentification: OcaClassIdentification);

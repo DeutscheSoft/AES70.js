@@ -20,7 +20,8 @@ export declare class OcaPolarity extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the current inverter state. The return value indicates whether the state was successfully retrieved.
+   * Gets the current inverter state. The return value indicates whether the
+   * state was successfully retrieved.
    *
    * @method OcaPolarity#GetState
    * @returns {Promise<OcaPolarityState>}
@@ -29,7 +30,8 @@ export declare class OcaPolarity extends OcaActuator {
   GetState(): Promise<OcaPolarityState>;
 
   /**
-   * Sets the inversion state (i.e. value of the State property). The return value indicates whether the state was successfully set.
+   * Sets the inversion state (i.e. value of the State property). The return
+   * value indicates whether the state was successfully set.
    *
    * @method OcaPolarity#SetState
    * @param {IOcaPolarityState} state

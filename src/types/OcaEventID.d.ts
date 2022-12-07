@@ -18,7 +18,9 @@ export declare interface IOcaEventID {
 
 export declare class OcaEventID implements IOcaEventID {
   /**
-   * Representation of an OCA event ID. A class may define at most 255 events of its own. Additional events may be inherited, so the total number may exceed 255.
+   * Representation of an OCA event ID. A class may define at most 255 events of
+   * its own. Additional events may be inherited, so the total number may exceed
+   * 255.
    * @class OcaEventID
    */
   constructor(DefLevel: number, EventIndex: number);

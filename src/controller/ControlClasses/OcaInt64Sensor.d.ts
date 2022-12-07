@@ -17,7 +17,8 @@ export declare class OcaInt64Sensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the  **Reading** property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Reading** property. The return value
+   * indicates whether the data was successfully retrieved.
    * The return values of this method are
    *
    * - Reading of type ``number|BigInt``

@@ -16,7 +16,8 @@ export declare class OcaStringActuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and max length of the Value property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and max length of the Value property. The return value
+   * indicates whether the data was successfully retrieved.
    *
    * @method OcaStringActuator#GetSetting
    * @returns {Promise<string>}
@@ -25,7 +26,8 @@ export declare class OcaStringActuator extends OcaBasicActuator {
   GetSetting(): Promise<string>;
 
   /**
-   * Sets the value of the Value property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Value property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaStringActuator#SetSetting
    * @param {string} Value

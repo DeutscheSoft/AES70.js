@@ -4,7 +4,7 @@
 
 export class OcaLibVolMetadata {
   /**
-   * Descriptor of a library volume. See  **03 OcaLibrary**  for explanation.
+   * Descriptor of a library volume. See **03 OcaLibrary** for explanation.
    * @class OcaLibVolMetadata
    */
   constructor(Name, VolType, Access, Version, Creator, UpDate) {

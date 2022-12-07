@@ -17,7 +17,8 @@ export declare class OcaUint64Actuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the Gain property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the Gain property. The return value indicates
+   * whether the data was successfully retrieved.
    * The return values of this method are
    *
    * - Setting of type ``number|BigInt``
@@ -32,7 +33,8 @@ export declare class OcaUint64Actuator extends OcaBasicActuator {
   >;
 
   /**
-   * Sets the value of the Level property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Level property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaUint64Actuator#SetSetting
    * @param {number|BigInt} Setting

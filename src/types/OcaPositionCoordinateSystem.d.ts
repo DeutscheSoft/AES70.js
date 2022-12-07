@@ -2,7 +2,8 @@
  * This file has been generated.
  */
 /**
- * Enumeration that designates the type of position coordinate system used. For details, see the AES70-1 description of the  **OcaPhysicalPosition** class.
+ * Enumeration that designates the type of position coordinate system used. For
+ * details, see the AES70-1 description of the **OcaPhysicalPosition** class.
  * @class OcaPositionCoordinateSystem
  */
 export class OcaPositionCoordinateSystem {

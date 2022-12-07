@@ -6,7 +6,48 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaWorker } from './OcaWorker.js';
 
 /**
- * A matrix is a rectangular array of identical objects (" **members** ") that is coordinate addressable and has sets of common input and output ports. The matrix host does not instantiate these objects, but instead mediates the coordinate addressing, implements the common input and output ports, and provdes certain other aggregate functions. Matrix members may be workers (including blocks), or agents. All members of a matrix must be of the same class. No object may belong to more than one matrix at a time. No object may appear more than once in a given matrix. The complete model of an OCA matrix consists of: 1. One instance of  **OcaMatrix.**  2.  **(N x M) members** , where each member is an instance of a worker or agent class. For any given matrix, this class must be the same for all members, and is referred to as the  **member class.**  Members are sometimes referred to as  **cells**  of the matrix. 3. One additional instance of the member class, called the  **matrix proxy.**  Thus, the  **OcaMatrix**  instance is a container for the two-dimensional collection of its members. Once a matrix is set up, the controller may get and set member properties by the following procedures:  **Get**  To get a property value of member (x1, y1): 1. Controller calls  **OcaMatrix.SetXY(x1, y1)** . This action: - locks the  **OcaMatrix**  instance, and - posts x1 and y1 as coordinates of the object whose property value is to be retrieved. 2. Controller calls the matrix proxy's  **Get**  method for the property value desired. This action causes the  **OcaMatrix**  instance to: - decode the posted x1 and y1 values into a member ONo. - call the given  **Get**  method for the object identified by the decoded ONo. - aggregate the  **OcaResult**  from each  **Get**  call into a consolidated  **OcaResult** . - unlock the  **OcaMatrix**  instance. - return the consolidated  **OcaResult**  to the controller.  **Set**  To set a property value of member (x1, y1), or of row (0, y1) or column (x1, 0) or whole matrix (0,0) 1. Controller calls  **OcaMatrix.SetXY(x1, y1)** . This action: - locks the  **OcaMatrix**  instance, and - posts x1 and y1 as coordinates of the object whose property value is to be changed. 2. Controller calls the matrix proxy's  **Set**  method for the target property. This action causes the  **OcaMatrix**  instance to: - decode the posted x1 and y1 values into a list of target member ONos, as follows: If x1 :raw:html:`&gt;` 0 and y1 :raw:html:`&gt;` 0, the list will be the single ONo of the addressed cell. If x1 = 0 and y1 :raw:html:`&gt;` 0, the list will be the list of ONos of the cells in row y1 . If x1 :raw:html:`&gt;` 0 and y1 = 0, the list will be the list of ONos of the cells in column x1. If x1 = 0 and y1 = 0, the list will be the list of ONos of all cells of the matrix. - call the given  **Set**  method for each target member in the ONo list. - aggregate the  **OcaResult**  from each  **Set**  call into a consolidated  **OcaResult** . - unlock the  **OcaMatrix**  instance.
+ * A matrix is a rectangular array of identical objects ("**members**") that is
+ * coordinate addressable and has sets of common input and output ports. The
+ * matrix host does not instantiate these objects, but instead mediates the
+ * coordinate addressing, implements the common input and output ports, and
+ * provdes certain other aggregate functions. Matrix members may be workers
+ * (including blocks), or agents. All members of a matrix must be of the same
+ * class. No object may belong to more than one matrix at a time. No object may
+ * appear more than once in a given matrix. The complete model of an OCA matrix
+ * consists of: 1. One instance of **OcaMatrix.** 2. **(N x M) members**, where
+ * each member is an instance of a worker or agent class. For any given matrix,
+ * this class must be the same for all members, and is referred to as the
+ * **member class.** Members are sometimes referred to as **cells** of the
+ * matrix. 3. One additional instance of the member class, called the **matrix
+ * proxy.** Thus, the **OcaMatrix** instance is a container for the
+ * two-dimensional collection of its members. Once a matrix is set up, the
+ * controller may get and set member properties by the following procedures:
+ * **Get** To get a property value of member (x :sub:`1`, y :sub:`1`): 1.
+ * Controller calls **OcaMatrix.SetXY(x1, y1)**. This action: - locks the
+ * **OcaMatrix** instance, and - posts x :sub:`1` and y :sub:`1` as coordinates
+ * of the object whose property value is to be retrieved. 2. Controller calls
+ * the matrix proxy's **Get** method for the property value desired. This action
+ * causes the **OcaMatrix** instance to: - decode the posted x :sub:`1` and y
+ * :sub:`1` values into a member ONo. - call the given **Get** method for the
+ * object identified by the decoded ONo. - aggregate the **OcaResult** from each
+ * **Get** call into a consolidated **OcaResult**. - unlock the **OcaMatrix**
+ * instance. - return the consolidated **OcaResult** to the controller. **Set**
+ * ** **To set a property value of member (x :sub:`1`, y :sub:`1`), or of row
+ * (0, y :sub:`1`) or column (x :sub:`1`, 0) or whole matrix (0,0) 1. Controller
+ * calls **OcaMatrix.SetXY(x1, y1)**. This action: - locks the **OcaMatrix**
+ * instance, and - posts x :sub:`1` and y :sub:`1` as coordinates of the object
+ * whose property value is to be changed. 2. Controller calls the matrix proxy's
+ * **Set** method for the target property. This action causes the **OcaMatrix**
+ * instance to: - decode the posted x :sub:`1` and y :sub:`1` values into a list
+ * of target member ONos, as follows: If x :sub:`1` > 0 and y :sub:`1` > 0, the
+ * list will be the single ONo of the addressed cell. If x :sub:`1` = 0 and y
+ * :sub:`1` > 0, the list will be the list of ONos of the cells in row y
+ * :sub:`1` . If x :sub:`1` > 0 and y :sub:`1` = 0, the list will be the list of
+ * ONos of the cells in column x :sub:`1`. If x :sub:`1` = 0 and y :sub:`1` = 0,
+ * the list will be the list of ONos of all cells of the matrix. - call the
+ * given **Set** method for each target member in the ONo list. - aggregate the
+ * **OcaResult** from each **Set** call into a consolidated **OcaResult**. -
+ * unlock the **OcaMatrix** instance.
  * @extends OcaWorker
  * @class OcaMatrix
  */
@@ -54,7 +95,8 @@ export const OcaMatrix = make_control_class(
 );
 
 /**
- * Gets coordinates of the currently active area (cell, row, column, or whole matrix). The returned status indicates whether the operation was successful.
+ * Gets coordinates of the currently active area (cell, row, column, or whole
+ * matrix). The returned status indicates whether the operation was successful.
  * The return values of this method are
  *
  * - x of type ``number``
@@ -64,17 +106,18 @@ export const OcaMatrix = make_control_class(
  * @returns {Promise<Arguments<number,number>>}
  */
 /**
- * Sets the currently active area (cell, row, column, or whole matrix). The returned status indicates whether the operation was successful.
+ * Sets the currently active area (cell, row, column, or whole matrix). The
+ * returned status indicates whether the operation was successful.
  *
  * @method OcaMatrix#SetCurrentXY
  * @param {number} x
- *
  * @param {number} y
  *
  * @returns {Promise<void>}
  */
 /**
- * Gets the matrix size. The returned status indicates whether the operation was successful.
+ * Gets the matrix size. The returned status indicates whether the operation was
+ * successful.
  * The return values of this method are
  *
  * - xSize of type ``number``
@@ -88,24 +131,26 @@ export const OcaMatrix = make_control_class(
  * @returns {Promise<Arguments<number,number,number,number,number,number>>}
  */
 /**
- * Sets the matrix size. The returned status indicates whether the operation was successful. This method will not be available for fixed-size matrices.
+ * Sets the matrix size. The returned status indicates whether the operation was
+ * successful. This method will not be available for fixed-size matrices.
  *
  * @method OcaMatrix#SetSize
  * @param {number} xSize
- *
  * @param {number} ySize
  *
  * @returns {Promise<void>}
  */
 /**
- * Retrieves the 2D array of member object numbers. Cells for which no member has been defined will return Zero as the object number.
+ * Retrieves the 2D array of member object numbers. Cells for which no member
+ * has been defined will return Zero as the object number.
  *
  * @method OcaMatrix#GetMembers
  * @returns {Promise<number[][]>}
  *   A promise which resolves to a single value of type ``number[][]``.
  */
 /**
- * Sets the entire 2D array of member object numbers. Row and column size of the  **members**  parameter must be equal to the current size of the matrix.
+ * Sets the entire 2D array of member object numbers. Row and column size of the
+ * **members** parameter must be equal to the current size of the matrix.
  *
  * @method OcaMatrix#SetMembers
  * @param {number[][]} members
@@ -113,24 +158,23 @@ export const OcaMatrix = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Retrieves the object number of the member at position (x,y). If no member is defined at this position, returns an object number value of Zero.
+ * Retrieves the object number of the member at position (x,y). If no member is
+ * defined at this position, returns an object number value of Zero.
  *
  * @method OcaMatrix#GetMember
  * @param {number} x
- *
  * @param {number} y
  *
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Installs a particular object as a member at position (x,y). If another object was at this position, it is removed.
+ * Installs a particular object as a member at position (x,y). If another object
+ * was at this position, it is removed.
  *
  * @method OcaMatrix#SetMember
  * @param {number} x
- *
  * @param {number} y
- *
  * @param {number} memberONo
  *
  * @returns {Promise<void>}
@@ -181,81 +225,85 @@ export const OcaMatrix = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets the currently active area (cell, row, column, or whole matrix) and locks it. Fails if the referenced members cannot all be locked. The returned status indicates whether the operation was successful.
+ * Sets the currently active area (cell, row, column, or whole matrix) and locks
+ * it. Fails if the referenced members cannot all be locked. The returned status
+ * indicates whether the operation was successful.
  *
  * @method OcaMatrix#SetCurrentXYLock
  * @param {number} x
- *
  * @param {number} y
  *
  * @returns {Promise<void>}
  */
 /**
- * Unlocks the currently active area of the matrix. Fails if all the members of the currently active area cannot be unlocked. Failure is  _not_ triggered if one or more members of the currently active area are already unlocked at the time Unlock() is called. The returned status indicates whether the operation was successful.
+ * Unlocks the currently active area of the matrix. Fails if all the members of
+ * the currently active area cannot be unlocked. Failure is not triggered if one
+ * or more members of the currently active area are already unlocked at the time
+ * Unlock() is called. The returned status indicates whether the operation was
+ * successful.
  *
  * @method OcaMatrix#UnlockCurrent
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property X changes in the remote object.
+ * This event is emitted when the property ``X`` changes in the remote object.
  * The property ``X`` is described in the AES70 standard as follows.
- * Active column index. The active column is the column to which matrix
- * proxy method calls will be reflected. Value is zero-relative, i.e. the
- * first column is number zero. A value of 65535 means all columns in the
- * matrix.
+ * Active column index. The active column is the column to which matrix proxy
+ * method calls will be reflected. Value is zero-relative, i.e. the first column
+ * is number zero. A value of 65535 means all columns in the matrix.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnXChanged
  */
 /**
- * This event is emitted when the property Y changes in the remote object.
+ * This event is emitted when the property ``Y`` changes in the remote object.
  * The property ``Y`` is described in the AES70 standard as follows.
- * Active row index. The active row is the row to which matrix proxy
- * changes will be reflected. Value is zero-relative, i.e. the first row
- * is number zero. A value of 65535 means all rows in the matrix.
+ * Active row index. The active row is the row to which matrix proxy changes
+ * will be reflected. Value is zero-relative, i.e. the first row is number zero.
+ * A value of 65535 means all rows in the matrix.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnYChanged
  */
 /**
- * This event is emitted when the property xSize changes in the remote object.
+ * This event is emitted when the property ``xSize`` changes in the remote object.
  * The property ``xSize`` is described in the AES70 standard as follows.
  * Number of columns in the matrix. Readonly in some cases.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnxSizeChanged
  */
 /**
- * This event is emitted when the property ySize changes in the remote object.
+ * This event is emitted when the property ``ySize`` changes in the remote object.
  * The property ``ySize`` is described in the AES70 standard as follows.
  * Number of rows in the matrix. Readonly in some cases.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnySizeChanged
  */
 /**
- * This event is emitted when the property Members changes in the remote object.
+ * This event is emitted when the property ``Members`` changes in the remote object.
  * The property ``Members`` is described in the AES70 standard as follows.
  * 2D array of member object numbers.
  *
  * @member {PropertyEvent<number[][]>} OcaMatrix#OnMembersChanged
  */
 /**
- * This event is emitted when the property Proxy changes in the remote object.
+ * This event is emitted when the property ``Proxy`` changes in the remote object.
  * The property ``Proxy`` is described in the AES70 standard as follows.
  * Object number of the matrix proxy.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnProxyChanged
  */
 /**
- * This event is emitted when the property PortsPerRow changes in the remote object.
+ * This event is emitted when the property ``PortsPerRow`` changes in the remote object.
  * The property ``PortsPerRow`` is described in the AES70 standard as follows.
- * Number of input ports per row- e.g. for a stereo matrix, the value
- * would be 2.
+ * Number of input ports per row- e.g. for a stereo matrix, the value would be
+ * 2.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnPortsPerRowChanged
  */
 /**
- * This event is emitted when the property PortsPerColumn changes in the remote object.
+ * This event is emitted when the property ``PortsPerColumn`` changes in the remote object.
  * The property ``PortsPerColumn`` is described in the AES70 standard as follows.
- * Number of output ports per column - e.g. for a stereo matrix, the
- * value would be 2.
+ * Number of output ports per column - e.g. for a stereo matrix, the value would
+ * be 2.
  *
  * @member {PropertyEvent<number>} OcaMatrix#OnPortsPerColumnChanged
  */

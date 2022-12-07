@@ -16,7 +16,8 @@ export declare class OcaBitstringSensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the number of bits of the bitmask data. Returned status indicates success or failure of the retrieval.
+   * Gets the number of bits of the bitmask data. Returned status indicates
+   * success or failure of the retrieval.
    *
    * @method OcaBitstringSensor#GetNrBits
    * @returns {Promise<number>}
@@ -25,7 +26,8 @@ export declare class OcaBitstringSensor extends OcaBasicSensor {
   GetNrBits(): Promise<number>;
 
   /**
-   * Gets the value of the given bit. Return status indicates success or failure of the retrieval.
+   * Gets the value of the given bit. Return status indicates success or failure
+   * of the retrieval.
    *
    * @method OcaBitstringSensor#GetBit
    * @param {number} bitNr
@@ -36,7 +38,8 @@ export declare class OcaBitstringSensor extends OcaBasicSensor {
   GetBit(bitNr: number): Promise<number>;
 
   /**
-   * Gets the entire bitstring. Return status indicates success or failure of the retrieval.
+   * Gets the entire bitstring. Return status indicates success or failure of
+   * the retrieval.
    *
    * @method OcaBitstringSensor#GetBitString
    * @returns {Promise<boolean[]>}

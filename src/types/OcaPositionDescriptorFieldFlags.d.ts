@@ -9,4 +9,5 @@
  * @readonly
  */
 export declare const OcaPositionDescriptorFieldFlags: {};
+
 export declare type IOcaPositionDescriptorFieldFlags = number;

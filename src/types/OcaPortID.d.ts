@@ -19,7 +19,9 @@ export declare interface IOcaPortID {
 
 export declare class OcaPortID implements IOcaPortID {
   /**
-   * Unique identifier of input or output port within a given worker or block class. Port numbers are ordinals starting at 1, and there are separate numbering spaces for input and output ports.
+   * Unique identifier of input or output port within a given worker or block
+   * class. Port numbers are ordinals starting at 1, and there are separate
+   * numbering spaces for input and output ports.
    * @class OcaPortID
    */
   constructor(Mode: OcaPortMode, Index: number);

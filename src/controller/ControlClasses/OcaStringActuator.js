@@ -27,14 +27,16 @@ export const OcaStringActuator = make_control_class(
 );
 
 /**
- * Gets the value and max length of the Value property. The return value indicates whether the data was successfully retrieved.
+ * Gets the value and max length of the Value property. The return value
+ * indicates whether the data was successfully retrieved.
  *
  * @method OcaStringActuator#GetSetting
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the Value property. The return value indicates whether the property was successfully set.
+ * Sets the value of the Value property. The return value indicates whether the
+ * property was successfully set.
  *
  * @method OcaStringActuator#SetSetting
  * @param {string} Value
@@ -49,7 +51,7 @@ export const OcaStringActuator = make_control_class(
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * This event is emitted when the property Setting changes in the remote object.
+ * This event is emitted when the property ``Setting`` changes in the remote object.
  * The property ``Setting`` is described in the AES70 standard as follows.
  * Value.
  *

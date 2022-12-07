@@ -21,7 +21,8 @@ export declare class OcaStringSensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the entire string. Return status indicates success or failure of the retrieval.
+   * Gets the entire string. Return status indicates success or failure of the
+   * retrieval.
    *
    * @method OcaStringSensor#GetString
    * @returns {Promise<string>}
@@ -30,7 +31,8 @@ export declare class OcaStringSensor extends OcaBasicSensor {
   GetString(): Promise<string>;
 
   /**
-   * Gets the maximum number of bytes that may be returned. Returned status indicates success or failure of the retrieval.
+   * Gets the maximum number of bytes that may be returned. Returned status
+   * indicates success or failure of the retrieval.
    *
    * @method OcaStringSensor#GetMaxLen
    * @returns {Promise<number>}
@@ -39,7 +41,8 @@ export declare class OcaStringSensor extends OcaBasicSensor {
   GetMaxLen(): Promise<number>;
 
   /**
-   * Sets the maximum number of bytes that the object may return. Returned status indicates success or failure of the set.
+   * Sets the maximum number of bytes that the object may return. Returned
+   * status indicates success or failure of the set.
    *
    * @method OcaStringSensor#SetMaxLen
    * @param {number} maxLen

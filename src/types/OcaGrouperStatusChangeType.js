@@ -4,7 +4,8 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enum describing status change types, as used in  **OcaGrouper's StatusChange** event.
+ * Enum describing status change types, as used in **OcaGrouper's StatusChange**
+ * event.
  * @class OcaGrouperStatusChangeType
  */
 export class OcaGrouperStatusChangeType extends Enum({

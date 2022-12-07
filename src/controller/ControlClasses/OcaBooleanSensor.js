@@ -19,14 +19,15 @@ export const OcaBooleanSensor = make_control_class(
 );
 
 /**
- * Gets the  **Reading** property. The return value indicates whether the data was successfully retrieved.
+ * Gets the **Reading** property. The return value indicates whether the data
+ * was successfully retrieved.
  *
  * @method OcaBooleanSensor#GetReading
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * This event is emitted when the property Reading changes in the remote object.
+ * This event is emitted when the property ``Reading`` changes in the remote object.
  * The property ``Reading`` is described in the AES70 standard as follows.
  * Boolean reading.
  *

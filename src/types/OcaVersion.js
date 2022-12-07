@@ -4,7 +4,8 @@
 
 export class OcaVersion {
   /**
-   * Representation of a version number of a (hardware/software) component of a device in the form of Major.Minor.Build (e.g. 1.0.123).
+   * Representation of a version number of a (hardware/software) component of a
+   * device in the form of Major.Minor.Build (e.g. 1.0.123).
    * @class OcaVersion
    */
   constructor(Major, Minor, Build, Component) {
@@ -19,7 +20,8 @@ export class OcaVersion {
      */
     this.Minor = Minor;
     /**
-     * The build number. May be 0 if it is not used (e.g. for a hardware component).
+     * The build number. May be 0 if it is not used (e.g. for a hardware
+     * component).
      * @type number
      */
     this.Build = Build;

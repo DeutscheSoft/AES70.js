@@ -11,7 +11,12 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 
 /**
- *  **DEPRECATED CLASS**   *Replaced by class*  **OcaMediaTransportNetwork **  *in version 3 of Connection Management (CM3)*  Abstract base class for defining network classes to which this device belongs. May be a media transport network, a control and monitoring network, or a network that does both. There shall be one OcaStreamNetwork instance for each network to which the device belongs. This class may be subclassed to support networks of various types.
+ * **DEPRECATED CLASS** *Replaced by class* **OcaMediaTransportNetwork ***in
+ * version 3 of Connection Management (CM3)* Abstract base class for defining
+ * network classes to which this device belongs. May be a media transport
+ * network, a control and monitoring network, or a network that does both. There
+ * shall be one OcaStreamNetwork instance for each network to which the device
+ * belongs. This class may be subclassed to support networks of various types.
  * @extends OcaAgent
  * @class OcaStreamNetwork
  */
@@ -68,21 +73,24 @@ export const OcaStreamNetwork = make_control_class(
 );
 
 /**
- * Gets the network's link type (wired Ethernet, USB, etc.). Return status indicates whether the operation was successful.
+ * Gets the network's link type (wired Ethernet, USB, etc.). Return status
+ * indicates whether the operation was successful.
  *
  * @method OcaStreamNetwork#GetLinkType
  * @returns {Promise<OcaNetworkLinkType>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkLinkType`.
  */
 /**
- * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ * Gets the network's IDAdvertised. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaStreamNetwork#GetIDAdvertised
  * @returns {Promise<Uint8Array>}
  *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
- * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ * Sets the network's IDAdvertised. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaStreamNetwork#SetIDAdvertised
  * @param {Uint8Array} Name
@@ -90,48 +98,56 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the network's ControlProtocol property. Return status indicates whether the operation was successful.
+ * Gets the network's ControlProtocol property. Return status indicates whether
+ * the operation was successful.
  *
  * @method OcaStreamNetwork#GetControlProtocol
  * @returns {Promise<OcaNetworkControlProtocol>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkControlProtocol`.
  */
 /**
- * Gets the network's MediaProtocol property. Return status indicates whether the operation was successful.
+ * Gets the network's MediaProtocol property. Return status indicates whether
+ * the operation was successful.
  *
  * @method OcaStreamNetwork#GetMediaProtocol
  * @returns {Promise<OcaNetworkMediaProtocol>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkMediaProtocol`.
  */
 /**
- * Retrieves the network's status. Return status indicates whether the status was successfully retrieved.
+ * Retrieves the network's status. Return status indicates whether the status
+ * was successfully retrieved.
  *
  * @method OcaStreamNetwork#GetStatus
  * @returns {Promise<OcaNetworkStatus>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkStatus`.
  */
 /**
- * Retrieves network error statistics counter values. Return status indicates whether the values were successfully retrieved.
+ * Retrieves network error statistics counter values. Return status indicates
+ * whether the values were successfully retrieved.
  *
  * @method OcaStreamNetwork#GetStatistics
  * @returns {Promise<OcaNetworkStatistics>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkStatistics`.
  */
 /**
- * Resets network error statistics counters. Return status indicates whether the counters were successfully reset.
+ * Resets network error statistics counters. Return status indicates whether the
+ * counters were successfully reset.
  *
  * @method OcaStreamNetwork#ResetStatistics
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of system interface IDs that this network is using. Return status indicates success of the operation.
+ * Gets the list of system interface IDs that this network is using. Return
+ * status indicates success of the operation.
  *
  * @method OcaStreamNetwork#GetSystemInterfaces
  * @returns {Promise<OcaNetworkSystemInterfaceID[]>}
- *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceID[]``.
+ *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceID[]`.
  */
 /**
- * Sets the list of system interface IDs that this network will use. Return status indicates success of the operation. This method is not implemented by all network implementations.
+ * Sets the list of system interface IDs that this network will use. Return
+ * status indicates success of the operation. This method is not implemented by
+ * all network implementations.
  *
  * @method OcaStreamNetwork#SetSystemInterfaces
  * @param {IOcaNetworkSystemInterfaceID[]} Interfaces
@@ -139,14 +155,28 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of object numbers of Source  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector** objects'  **Owner**  properties are updated, or when  **OcaStreamConnector**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Gets the list of object numbers of Source **OcaStreamConnector** objects
+ * owned by this network. Return status indicates success of the operation. If
+ * the value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaStreamConnector** objects' **Owner** properties are
+ * updated, or when **OcaStreamConnector** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#GetStreamConnectorsSource
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Sets the list of object numbers of Source  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector** objects'  **Owner**  properties are updated, or when  **OcaStreamConnector**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Sets the list of object numbers of Source **OcaStreamConnector** objects
+ * owned by this network. Return status indicates success of the operation. If
+ * the value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaStreamConnector** objects' **Owner** properties are
+ * updated, or when **OcaStreamConnector** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#SetStreamConnectorsSource
  * @param {number[]} StreamConnectors
@@ -154,14 +184,28 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of object numbers of Sink  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector**  objects'  **Owner**  properties are updated, or when  **OcaStreamConnector** objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Gets the list of object numbers of Sink **OcaStreamConnector** objects owned
+ * by this network. Return status indicates success of the operation. If the
+ * value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaStreamConnector** objects' **Owner** properties are
+ * updated, or when **OcaStreamConnector** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#GetStreamConnectorsSink
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Sets the list of object numbers of Sink  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector**  objects'  **Owner**  properties are updated, or when  **OcaStreamConnector**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Sets the list of object numbers of Sink **OcaStreamConnector** objects owned
+ * by this network. Return status indicates success of the operation. If the
+ * value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaStreamConnector** objects' **Owner** properties are
+ * updated, or when **OcaStreamConnector** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#SetStreamConnectorsSink
  * @param {number[]} StreamConnectors
@@ -169,14 +213,28 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of object numbers of Source  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Gets the list of object numbers of Source **OcaNetworkSignalChannel** objects
+ * owned by this network. Return status indicates success of the operation. If
+ * the value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaNetworkSignalChannel** objects' **Owner** properties are
+ * updated, or when **OcaNetworkSignalChannel** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#GetSignalChannelsSource
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Sets the list of object numbers of Source  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Sets the list of object numbers of Source **OcaNetworkSignalChannel** objects
+ * owned by this network. Return status indicates success of the operation. If
+ * the value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaNetworkSignalChannel** objects' **Owner** properties are
+ * updated, or when **OcaNetworkSignalChannel** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#SetSignalChannelsSource
  * @param {number[]} SignalChannels
@@ -184,14 +242,28 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of object numbers of Sink  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Gets the list of object numbers of Sink **OcaNetworkSignalChannel** objects
+ * owned by this network. Return status indicates success of the operation. If
+ * the value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaNetworkSignalChannel** objects' **Owner** properties are
+ * updated, or when **OcaNetworkSignalChannel** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#GetSignalChannelsSink
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Sets the list of object numbers of Sink  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+ * Sets the list of object numbers of Sink **OcaNetworkSignalChannel** objects
+ * owned by this network. Return status indicates success of the operation. If
+ * the value of the network's MediaProtocol property is NONE, this method will
+ * return the status value InvalidRequest. Members are added to and deleted from
+ * this list when **OcaNetworkSignalChannel** objects' **Owner** properties are
+ * updated, or when **OcaNetworkSignalChannel** objects are deleted. For
+ * reconfigurable devices, such changes may be initiated by controllers during
+ * device operation.
  *
  * @method OcaStreamNetwork#SetSignalChannelsSink
  * @param {number[]} SignalChannels
@@ -211,85 +283,83 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property ControlProtocol changes in the remote object.
+ * This event is emitted when the property ``ControlProtocol`` changes in the remote object.
  * The property ``ControlProtocol`` is described in the AES70 standard as follows.
- * Type of control protocol used by the network (OCAnn) or NONE if this
- * network is not used for control.
+ * Type of control protocol used by the network (OCAnn) or NONE if this network
+ * is not used for control.
  *
  * @member {PropertyEvent<OcaNetworkControlProtocol>} OcaStreamNetwork#OnControlProtocolChanged
  */
 /**
- * This event is emitted when the property IDAdvertised changes in the remote object.
+ * This event is emitted when the property ``IDAdvertised`` changes in the remote object.
  * The property ``IDAdvertised`` is described in the AES70 standard as follows.
- * ID by which this device is known on the network, i.e. the host name or
- * GUID that this device publishes in the network's directory/discovery
- * system.
+ * ID by which this device is known on the network, i.e. the host name or GUID
+ * that this device publishes in the network's directory/discovery system.
  *
  * @member {PropertyEvent<Uint8Array>} OcaStreamNetwork#OnIDAdvertisedChanged
  */
 /**
- * This event is emitted when the property MediaProtocol changes in the remote object.
+ * This event is emitted when the property ``MediaProtocol`` changes in the remote object.
  * The property ``MediaProtocol`` is described in the AES70 standard as follows.
- * Type of media transport protocol used by the network, or NONE if this
- * network is not used for media transport.
+ * Type of media transport protocol used by the network, or NONE if this network
+ * is not used for media transport.
  *
  * @member {PropertyEvent<OcaNetworkMediaProtocol>} OcaStreamNetwork#OnMediaProtocolChanged
  */
 /**
- * This event is emitted when the property SignalChannelsSink changes in the remote object.
+ * This event is emitted when the property ``SignalChannelsSink`` changes in the remote object.
  * The property ``SignalChannelsSink`` is described in the AES70 standard as follows.
- * List of object numbers of <u>sink </u><b>OcaNetworkSignalChannel
- * </b>objects collected by this network.
+ * List of object numbers of sink **OcaNetworkSignalChannel** objects collected
+ * by this network.
  *
  * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnSignalChannelsSinkChanged
  */
 /**
- * This event is emitted when the property SignalChannelsSource changes in the remote object.
+ * This event is emitted when the property ``SignalChannelsSource`` changes in the remote object.
  * The property ``SignalChannelsSource`` is described in the AES70 standard as follows.
- * List of object numbers of <u>source </u><b>OcaNetworkSignalChannel
- * </b>objects collected by this network.
+ * List of object numbers of source **OcaNetworkSignalChannel** objects
+ * collected by this network.
  *
  * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnSignalChannelsSourceChanged
  */
 /**
- * This event is emitted when the property Statistics changes in the remote object.
+ * This event is emitted when the property ``Statistics`` changes in the remote object.
  * The property ``Statistics`` is described in the AES70 standard as follows.
  * Error statistics for this network
  *
  * @member {PropertyEvent<OcaNetworkStatistics>} OcaStreamNetwork#OnStatisticsChanged
  */
 /**
- * This event is emitted when the property Status changes in the remote object.
+ * This event is emitted when the property ``Status`` changes in the remote object.
  * The property ``Status`` is described in the AES70 standard as follows.
  * Operational status of the network.
  *
  * @member {PropertyEvent<OcaNetworkStatus>} OcaStreamNetwork#OnStatusChanged
  */
 /**
- * This event is emitted when the property StreamConnectorsSink changes in the remote object.
+ * This event is emitted when the property ``StreamConnectorsSink`` changes in the remote object.
  * The property ``StreamConnectorsSink`` is described in the AES70 standard as follows.
- * List of object numbers of <u>sink </u><b>OcaStreamConnector
- * </b>objects collected by this network.
+ * List of object numbers of sink **OcaStreamConnector** objects collected by
+ * this network.
  *
  * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnStreamConnectorsSinkChanged
  */
 /**
- * This event is emitted when the property StreamConnectorsSource changes in the remote object.
+ * This event is emitted when the property ``StreamConnectorsSource`` changes in the remote object.
  * The property ``StreamConnectorsSource`` is described in the AES70 standard as follows.
- * List of object numbers of <u>source </u><b>OcaStreamConnector
- * </b>objects collected by this network.
+ * List of object numbers of source **OcaStreamConnector** objects collected by
+ * this network.
  *
  * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnStreamConnectorsSourceChanged
  */
 /**
- * This event is emitted when the property SystemInterfaces changes in the remote object.
+ * This event is emitted when the property ``SystemInterfaces`` changes in the remote object.
  * The property ``SystemInterfaces`` is described in the AES70 standard as follows.
- * Collection of identifiers of system interface(s) used by the network.
- * A "system interface" is the system service through which network
- * traffic passes into and out of the device -- e.g. a socket. The
- * identifier format is system and network dependent; for OCA purposes,
- * it is maintained as a variable-length blob which the protocol does not
- * inspect.
+ * Collection of identifiers of system interface(s) used by the network. A
+ * "system interface" is the system service through which network traffic passes
+ * into and out of the device -- e.g. a socket. The identifier format is system
+ * and network dependent; for OCA purposes, it is maintained as a
+ * variable-length blob which the protocol does not inspect.
  *
  * @member {PropertyEvent<OcaNetworkSystemInterfaceID[]>} OcaStreamNetwork#OnSystemInterfacesChanged
  */

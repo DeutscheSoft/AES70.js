@@ -8,8 +8,8 @@ import { OcaManager } from './OcaManager';
  *
  *  - May be instantiated once in any device.
  *
- *
  *  - If instantiated, object number must be 5.
+ *
  *
  * @extends OcaManager
  * @class OcaPowerManager
@@ -43,7 +43,9 @@ export declare class OcaPowerManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Retrieve the value of property  **03p01 State** , the current power state of the device. Return value indicates whether the value was successfully retrieved.
+   * Retrieve the value of property **03p01 State**, the current power state of
+   * the device. Return value indicates whether the value was successfully
+   * retrieved.
    *
    * @method OcaPowerManager#GetState
    * @returns {Promise<OcaPowerState>}
@@ -52,7 +54,8 @@ export declare class OcaPowerManager extends OcaManager {
   GetState(): Promise<OcaPowerState>;
 
   /**
-   * Change the device power state. The return value indicates whether the requested change has been successfully made.
+   * Change the device power state. The return value indicates whether the
+   * requested change has been successfully made.
    *
    * @method OcaPowerManager#SetState
    * @param {IOcaPowerState} State
@@ -62,7 +65,8 @@ export declare class OcaPowerManager extends OcaManager {
   SetState(State: IOcaPowerState): Promise<void>;
 
   /**
-   * Retrieves list of object number(s) of all power supply(ies). Return value indicates whether the data was successfully retrieved.
+   * Retrieves list of object number(s) of all power supply(ies). Return value
+   * indicates whether the data was successfully retrieved.
    *
    * @method OcaPowerManager#GetPowerSupplies
    * @returns {Promise<number[]>}
@@ -71,7 +75,8 @@ export declare class OcaPowerManager extends OcaManager {
   GetPowerSupplies(): Promise<number[]>;
 
   /**
-   * Retrieves list of object number(s) of active power supply(ies). Return value indicates whether the data was successfully retrieved.
+   * Retrieves list of object number(s) of active power supply(ies). Return
+   * value indicates whether the data was successfully retrieved.
    *
    * @method OcaPowerManager#GetActivePowerSupplies
    * @returns {Promise<number[]>}
@@ -80,13 +85,15 @@ export declare class OcaPowerManager extends OcaManager {
   GetActivePowerSupplies(): Promise<number[]>;
 
   /**
-   * Deactivate one power supply and activate another. An option switch indicates whether the previously active power supply is to be turned off. If it is not turned off, it will be placed in the  **Unavailable**  state. The return value indicates whether the requested exchange has been successfully made.
+   * Deactivate one power supply and activate another. An option switch
+   * indicates whether the previously active power supply is to be turned off.
+   * If it is not turned off, it will be placed in the **Unavailable** state.
+   * The return value indicates whether the requested exchange has been
+   * successfully made.
    *
    * @method OcaPowerManager#ExchangePowerSupply
    * @param {number} oldPsu
-   *
    * @param {number} newPsu
-   *
    * @param {boolean} powerOffOld
    *
    * @returns {Promise<void>}
@@ -98,7 +105,8 @@ export declare class OcaPowerManager extends OcaManager {
   ): Promise<void>;
 
   /**
-   * Gets the value of the  **AutoState**  property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **AutoState** property. The return value indicates
+   * whether the value was successfully retrieved.
    *
    * @method OcaPowerManager#GetAutoState
    * @returns {Promise<boolean>}

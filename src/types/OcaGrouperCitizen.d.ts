@@ -11,7 +11,8 @@ export declare interface IOcaGrouperCitizen {
   Index: number;
 
   /**
-   * Object path (= hostname + object number) of the worker object that is the citizen of the grouper.
+   * Object path (= hostname + object number) of the worker object that is the
+   * citizen of the grouper.
    * @type OcaOPath
    */
   ObjectPath: IOcaOPath;
@@ -25,7 +26,8 @@ export declare interface IOcaGrouperCitizen {
 
 export declare class OcaGrouperCitizen implements IOcaGrouperCitizen {
   /**
-   * Describes a citizen of a grouper. Refers to a specific worker object somewhere in the media network.
+   * Describes a citizen of a grouper. Refers to a specific worker object
+   * somewhere in the media network.
    * @class OcaGrouperCitizen
    */
   constructor(Index: number, ObjectPath: OcaOPath, Online: boolean);
@@ -37,7 +39,8 @@ export declare class OcaGrouperCitizen implements IOcaGrouperCitizen {
   Index: number;
 
   /**
-   * Object path (= hostname + object number) of the worker object that is the citizen of the grouper.
+   * Object path (= hostname + object number) of the worker object that is the
+   * citizen of the grouper.
    * @type OcaOPath
    */
   ObjectPath: OcaOPath;

@@ -19,7 +19,8 @@ export declare interface IOcaNetworkSystemInterfaceDescriptor {
 export declare class OcaNetworkSystemInterfaceDescriptor
   implements IOcaNetworkSystemInterfaceDescriptor {
   /**
-   * Descriptor of a system interface used by a network. Format is data network type dependent.
+   * Descriptor of a system interface used by a network. Format is data network
+   * type dependent.
    * @class OcaNetworkSystemInterfaceDescriptor
    */
   constructor(

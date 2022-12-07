@@ -15,7 +15,8 @@ export declare interface IOcaTaskStateChangedEventData {
   TaskID: number;
 
   /**
-   * Library volume identifier of Program running in the task at the time of the change, or null
+   * Library volume identifier of Program running in the task at the time of the
+   * change, or null
    * @type OcaLibVolIdentifier
    */
   ProgramID: IOcaLibVolIdentifier;
@@ -30,7 +31,6 @@ export declare interface IOcaTaskStateChangedEventData {
 export declare class OcaTaskStateChangedEventData
   implements IOcaTaskStateChangedEventData {
   /**
-   * This was not documented in the OCA standard.
    * @class OcaTaskStateChangedEventData
    */
   constructor(
@@ -46,7 +46,8 @@ export declare class OcaTaskStateChangedEventData
   TaskID: number;
 
   /**
-   * Library volume identifier of Program running in the task at the time of the change, or null
+   * Library volume identifier of Program running in the task at the time of the
+   * change, or null
    * @type OcaLibVolIdentifier
    */
   ProgramID: OcaLibVolIdentifier;

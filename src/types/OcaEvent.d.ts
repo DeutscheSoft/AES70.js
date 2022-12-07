@@ -19,7 +19,8 @@ export declare interface IOcaEvent {
 
 export declare class OcaEvent implements IOcaEvent {
   /**
-   * Representation of an OCA event, i.e. the unique combination of emitter ONo and the EventID.
+   * Representation of an OCA event, i.e. the unique combination of emitter ONo
+   * and the EventID.
    * @class OcaEvent
    */
   constructor(EmitterONo: number, EventID: OcaEventID);

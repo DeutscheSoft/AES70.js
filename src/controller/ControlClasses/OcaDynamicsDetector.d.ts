@@ -37,7 +37,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Law property. Return status indicates whether the value was successfully retrieved.
+   * Gets the value of the Law property. Return status indicates whether the
+   * value was successfully retrieved.
    *
    * @method OcaDynamicsDetector#GetLaw
    * @returns {Promise<OcaLevelDetectionLaw>}
@@ -46,7 +47,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetLaw(): Promise<OcaLevelDetectionLaw>;
 
   /**
-   * Sets the value of the Law property. Return status indicates whether the value was successfully set.
+   * Sets the value of the Law property. Return status indicates whether the
+   * value was successfully set.
    *
    * @method OcaDynamicsDetector#SetLaw
    * @param {IOcaLevelDetectionLaw} Law
@@ -56,7 +58,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetLaw(Law: IOcaLevelDetectionLaw): Promise<void>;
 
   /**
-   * Gets the value of the AttackTime property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the AttackTime property. The return value indicates if
+   * the value was successfully retrieved.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -69,7 +72,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetAttackTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the AttackTime property. The return value indicates whether the property was successfully set.
+   * Sets the value of the AttackTime property. The return value indicates
+   * whether the property was successfully set.
    *
    * @method OcaDynamicsDetector#SetAttackTime
    * @param {number} Time
@@ -79,7 +83,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetAttackTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the ReleaseTime property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the ReleaseTime property. The return value indicates if
+   * the value was successfully retrieved.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -92,7 +97,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetReleaseTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the ReleaseTime property. The return value indicates whether the property was successfully set.
+   * Sets the value of the ReleaseTime property. The return value indicates
+   * whether the property was successfully set.
    *
    * @method OcaDynamicsDetector#SetReleaseTime
    * @param {number} Time
@@ -102,7 +108,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetReleaseTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the HoldTime property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the HoldTime property. The return value indicates if the
+   * value was successfully retrieved.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -115,7 +122,8 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetHoldTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the HoldTime property. The return value indicates whether the property was successfully set.
+   * Sets the value of the HoldTime property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaDynamicsDetector#SetHoldTime
    * @param {number} Time
@@ -125,15 +133,15 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetHoldTime(Time: number): Promise<void>;
 
   /**
-   * Sets some or all detector parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+   * Sets some or all detector parameters. The return value indicates if the
+   * parameters were successfully set. The action of this method is atomic - if
+   * any of the value changes fails, none of the changes are made.
    *
    * @method OcaDynamicsDetector#SetMultiple
    * @param {IOcaParameterMask} Mask
    * @param {IOcaLevelDetectionLaw} Law
    * @param {number} AttackTime
-   *
    * @param {number} ReleaseTime
-   *
    * @param {number} HoldTime
    *
    * @returns {Promise<void>}

@@ -27,21 +27,24 @@ export const OcaStringSensor = make_control_class(
 );
 
 /**
- * Gets the entire string. Return status indicates success or failure of the retrieval.
+ * Gets the entire string. Return status indicates success or failure of the
+ * retrieval.
  *
  * @method OcaStringSensor#GetString
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Gets the maximum number of bytes that may be returned. Returned status indicates success or failure of the retrieval.
+ * Gets the maximum number of bytes that may be returned. Returned status
+ * indicates success or failure of the retrieval.
  *
  * @method OcaStringSensor#GetMaxLen
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the maximum number of bytes that the object may return. Returned status indicates success or failure of the set.
+ * Sets the maximum number of bytes that the object may return. Returned status
+ * indicates success or failure of the set.
  *
  * @method OcaStringSensor#SetMaxLen
  * @param {number} maxLen
@@ -49,14 +52,14 @@ export const OcaStringSensor = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property String changes in the remote object.
+ * This event is emitted when the property ``String`` changes in the remote object.
  * The property ``String`` is described in the AES70 standard as follows.
  * The string.
  *
  * @member {PropertyEvent<string>} OcaStringSensor#OnStringChanged
  */
 /**
- * This event is emitted when the property MaxLen changes in the remote object.
+ * This event is emitted when the property ``MaxLen`` changes in the remote object.
  * The property ``MaxLen`` is described in the AES70 standard as follows.
  * Maximum length of the returned string. May be readonly in some
  * implementations.

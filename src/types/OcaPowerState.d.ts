@@ -2,7 +2,8 @@
  * This file has been generated.
  */
 /**
- * Enumeration defining the power states that OCA devices can be in. The state is returned by the device's Power Manager on request.
+ * Enumeration defining the power states that OCA devices can be in. The state
+ * is returned by the device's Power Manager on request.
  * @class OcaPowerState
  */
 export class OcaPowerState {

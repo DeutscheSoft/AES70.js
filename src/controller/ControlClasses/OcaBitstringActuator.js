@@ -27,14 +27,16 @@ export const OcaBitstringActuator = make_control_class(
 );
 
 /**
- * Gets the number of bits in the string. The return value indicates whether the property was successfully gathered.
+ * Gets the number of bits in the string. The return value indicates whether the
+ * property was successfully gathered.
  *
  * @method OcaBitstringActuator#GetNrBits
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the bit value of the given bit. The return value indicates whether the property was successfully gathered.
+ * Gets the bit value of the given bit. The return value indicates whether the
+ * property was successfully gathered.
  *
  * @method OcaBitstringActuator#GetBit
  * @param {number} bitNr
@@ -43,24 +45,26 @@ export const OcaBitstringActuator = make_control_class(
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the bit value of the given bit. The return value indicates whether the property was successfully set.
+ * Sets the bit value of the given bit. The return value indicates whether the
+ * property was successfully set.
  *
  * @method OcaBitstringActuator#SetBit
  * @param {number} bitNr
- *
  * @param {boolean} Value
  *
  * @returns {Promise<void>}
  */
 /**
- * Gets the entire bitstring.The return value indicates whether the property was successfully gathered.
+ * Gets the entire bitstring.The return value indicates whether the property was
+ * successfully gathered.
  *
  * @method OcaBitstringActuator#GetBitstring
  * @returns {Promise<boolean[]>}
  *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
- * Sets the entire bitstring. The return value indicates whether the property was successfully set.
+ * Sets the entire bitstring. The return value indicates whether the property
+ * was successfully set.
  *
  * @method OcaBitstringActuator#SetBitstring
  * @param {boolean[]} BitString
@@ -68,7 +72,7 @@ export const OcaBitstringActuator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property Bitstring changes in the remote object.
+ * This event is emitted when the property ``Bitstring`` changes in the remote object.
  * The property ``Bitstring`` is described in the AES70 standard as follows.
  * The bitstring data.
  *

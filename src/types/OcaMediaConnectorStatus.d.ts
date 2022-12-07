@@ -20,7 +20,8 @@ export declare interface IOcaMediaConnectorStatus {
   State: IOcaMediaConnectorState;
 
   /**
-   * Indicates what type of error the connector is in (only relevant if the State is Fault).
+   * Indicates what type of error the connector is in (only relevant if the
+   * State is Fault).
    * @type number
    */
   ErrorCode: number;
@@ -51,7 +52,8 @@ export declare class OcaMediaConnectorStatus
   State: OcaMediaConnectorState;
 
   /**
-   * Indicates what type of error the connector is in (only relevant if the State is Fault).
+   * Indicates what type of error the connector is in (only relevant if the
+   * State is Fault).
    * @type number
    */
   ErrorCode: number;

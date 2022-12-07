@@ -4,7 +4,8 @@
 
 export class OcaGrouperStatusChangeEventData {
   /**
-   * Class that defines the event data parameter for the  **StatusChange** event defined in  **OcaGrouper** .
+   * Class that defines the event data parameter for the **StatusChange** event
+   * defined in **OcaGrouper**.
    * @class OcaGrouperStatusChangeEventData
    */
   constructor(groupIndex, citizenIndex, changeType) {
@@ -14,7 +15,8 @@ export class OcaGrouperStatusChangeEventData {
      */
     this.groupIndex = groupIndex;
     /**
-     * Index of citizen within given grouper, or zero if event is non-citizen-specific.
+     * Index of citizen within given grouper, or zero if event is
+     * non-citizen-specific.
      * @type number
      */
     this.citizenIndex = citizenIndex;

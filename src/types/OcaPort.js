@@ -4,7 +4,8 @@
 
 export class OcaPort {
   /**
-   * Representation of an OCA (input or output) port that is used in the signal path representation of an OCA device.
+   * Representation of an OCA (input or output) port that is used in the signal
+   * path representation of an OCA device.
    * @class OcaPort
    */
   constructor(Owner, ID, Name) {

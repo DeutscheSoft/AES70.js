@@ -4,7 +4,8 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enumeration that designates the type of position coordinate system used. For details, see the AES70-1 description of the  **OcaPhysicalPosition** class.
+ * Enumeration that designates the type of position coordinate system used. For
+ * details, see the AES70-1 description of the **OcaPhysicalPosition** class.
  * @class OcaPositionCoordinateSystem
  */
 export class OcaPositionCoordinateSystem extends Enum({

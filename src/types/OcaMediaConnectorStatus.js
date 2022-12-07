@@ -19,7 +19,8 @@ export class OcaMediaConnectorStatus {
      */
     this.State = State;
     /**
-     * Indicates what type of error the connector is in (only relevant if the State is Fault).
+     * Indicates what type of error the connector is in (only relevant if the
+     * State is Fault).
      * @type number
      */
     this.ErrorCode = ErrorCode;

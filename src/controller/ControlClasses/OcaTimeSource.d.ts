@@ -10,7 +10,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- * A time source, internal or external. See RFC 7273 for a detailed discussion of time sources.
+ * A time source, internal or external. See RFC 7273 for a detailed discussion
+ * of time sources.
  * @extends OcaAgent
  * @class OcaTimeSource
  */
@@ -48,7 +49,8 @@ export declare class OcaTimeSource extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the  **Availability** property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **Availability** property. The return value indicates
+   * whether the value was successfully retrieved.
    *
    * @method OcaTimeSource#GetAvailability
    * @returns {Promise<OcaTimeSourceAvailability>}
@@ -57,7 +59,8 @@ export declare class OcaTimeSource extends OcaAgent {
   GetAvailability(): Promise<OcaTimeSourceAvailability>;
 
   /**
-   * Gets the value of the  **Protocol** property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **Protocol** property. The return value indicates
+   * whether the value was successfully retrieved.
    *
    * @method OcaTimeSource#GetProtocol
    * @returns {Promise<OcaTimeProtocol>}
@@ -66,7 +69,8 @@ export declare class OcaTimeSource extends OcaAgent {
   GetProtocol(): Promise<OcaTimeProtocol>;
 
   /**
-   * Sets the value of the  **Protocol** property. The return value indicates whether the value was successfully set.
+   * Sets the value of the **Protocol** property. The return value indicates
+   * whether the value was successfully set.
    *
    * @method OcaTimeSource#SetProtocol
    * @param {IOcaTimeProtocol} Protocol
@@ -76,7 +80,8 @@ export declare class OcaTimeSource extends OcaAgent {
   SetProtocol(Protocol: IOcaTimeProtocol): Promise<void>;
 
   /**
-   * Gets the value of the  **Parameters** property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **Parameters** property. The return value indicates
+   * whether the value was successfully retrieved.
    *
    * @method OcaTimeSource#GetParameters
    * @returns {Promise<string>}
@@ -85,7 +90,9 @@ export declare class OcaTimeSource extends OcaAgent {
   GetParameters(): Promise<string>;
 
   /**
-   * Sets the value of the  **Parameters** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the value of the **Parameters** property. The return value indicates
+   * whether the value was successfully set. Optional method, may not be
+   * supported in all implementations.
    *
    * @method OcaTimeSource#SetParameters
    * @param {string} Parameters
@@ -95,7 +102,8 @@ export declare class OcaTimeSource extends OcaAgent {
   SetParameters(Parameters: string): Promise<void>;
 
   /**
-   * Gets the time reference type. The return value indicates whether the value was successfully retrieved.
+   * Gets the time reference type. The return value indicates whether the value
+   * was successfully retrieved.
    *
    * @method OcaTimeSource#GetReferenceType
    * @returns {Promise<OcaTimeReferenceType>}
@@ -104,7 +112,9 @@ export declare class OcaTimeSource extends OcaAgent {
   GetReferenceType(): Promise<OcaTimeReferenceType>;
 
   /**
-   * Sets the time reference type. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the time reference type. The return value indicates whether the value
+   * was successfully set. Optional method, may not be supported in all
+   * implementations.
    *
    * @method OcaTimeSource#SetReferenceType
    * @param {IOcaTimeReferenceType} ReferenceType
@@ -114,7 +124,9 @@ export declare class OcaTimeSource extends OcaAgent {
   SetReferenceType(ReferenceType: IOcaTimeReferenceType): Promise<void>;
 
   /**
-   * Gets the timing source ID. The return value indicates whether the value was successfully retrieved. Optional method, not required for all time reference types.
+   * Gets the timing source ID. The return value indicates whether the value was
+   * successfully retrieved. Optional method, not required for all time
+   * reference types.
    *
    * @method OcaTimeSource#GetReferenceID
    * @returns {Promise<string>}
@@ -123,7 +135,9 @@ export declare class OcaTimeSource extends OcaAgent {
   GetReferenceID(): Promise<string>;
 
   /**
-   * Sets the time reference ID. The return value indicates whether the ID was successfully set. Optional method, not required for all time reference types.
+   * Sets the time reference ID. The return value indicates whether the ID was
+   * successfully set. Optional method, not required for all time reference
+   * types.
    *
    * @method OcaTimeSource#SetReferenceID
    * @param {string} ID
@@ -133,7 +147,8 @@ export declare class OcaTimeSource extends OcaAgent {
   SetReferenceID(ID: string): Promise<void>;
 
   /**
-   * Gets the synchronization status of this time source. The return value indicates whether the value was successfully retrieved.
+   * Gets the synchronization status of this time source. The return value
+   * indicates whether the value was successfully retrieved.
    *
    * @method OcaTimeSource#GetSyncStatus
    * @returns {Promise<OcaTimeSourceSyncStatus>}
@@ -142,7 +157,8 @@ export declare class OcaTimeSource extends OcaAgent {
   GetSyncStatus(): Promise<OcaTimeSourceSyncStatus>;
 
   /**
-   * Resets this time source. Initiates a new synchronization sequence. The return value indicates whether the reset was successful.
+   * Resets this time source. Initiates a new synchronization sequence. The
+   * return value indicates whether the reset was successful.
    *
    * @method OcaTimeSource#Reset
    * @returns {Promise<void>}

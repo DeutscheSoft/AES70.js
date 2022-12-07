@@ -13,7 +13,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- * A media clock, internal or external. OCA Connection Management 3 (OCA-CM3) version.
+ * A media clock, internal or external. OCA Connection Management 3 (OCA-CM3)
+ * version.
  * @extends OcaAgent
  * @class OcaMediaClock3
  */
@@ -46,7 +47,8 @@ export declare class OcaMediaClock3 extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the  **Availability** property. The return value indicates whether the value was successfully retrieved.
+   * Gets the value of the **Availability** property. The return value indicates
+   * whether the value was successfully retrieved.
    *
    * @method OcaMediaClock3#GetAvailability
    * @returns {Promise<OcaMediaClockAvailability>}
@@ -55,7 +57,9 @@ export declare class OcaMediaClock3 extends OcaAgent {
   GetAvailability(): Promise<OcaMediaClockAvailability>;
 
   /**
-   * Sets the value of the  **Availability** property. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the value of the **Availability** property. The return value indicates
+   * whether the value was successfully set. Optional method, may not be
+   * supported in all implementations.
    *
    * @method OcaMediaClock3#SetAvailability
    * @param {IOcaMediaClockAvailability} Availability
@@ -65,10 +69,12 @@ export declare class OcaMediaClock3 extends OcaAgent {
   SetAvailability(Availability: IOcaMediaClockAvailability): Promise<void>;
 
   /**
-   * Gets the current clock rate and the ONo of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully retrieved.
+   * Gets the current clock rate and the ONo of the associated **OcaTimeSource**
+   * object. The return value indicates whether the value was successfully
+   * retrieved.
    * The return values of this method are
    *
-   * - Rate of type :class:`IOcaMediaClockRate`
+   * - Rate of type ``IOcaMediaClockRate``
    * - TimeSourceONo of type ``number``
    *
    * @method OcaMediaClock3#GetCurrentRate
@@ -77,7 +83,9 @@ export declare class OcaMediaClock3 extends OcaAgent {
   GetCurrentRate(): Promise<Arguments<[OcaMediaClockRate, number]>>;
 
   /**
-   * Sets the clock rate and the ONo of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the clock rate and the ONo of the associated **OcaTimeSource** object.
+   * The return value indicates whether the value was successfully set. Optional
+   * method, may not be supported in all implementations.
    *
    * @method OcaMediaClock3#SetCurrentRate
    * @param {IOcaMediaClockRate} Rate
@@ -91,7 +99,9 @@ export declare class OcaMediaClock3 extends OcaAgent {
   ): Promise<void>;
 
   /**
-   * Gets the offset of this media clock's time from that of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully retrieved.
+   * Gets the offset of this media clock's time from that of the associated
+   * **OcaTimeSource** object. The return value indicates whether the value was
+   * successfully retrieved.
    *
    * @method OcaMediaClock3#GetOffset
    * @returns {Promise<OcaTimePTP>}
@@ -100,7 +110,10 @@ export declare class OcaMediaClock3 extends OcaAgent {
   GetOffset(): Promise<OcaTimePTP>;
 
   /**
-   * Sets the offset of this media clock's time from that of the associated  **OcaTimeSource** object. The return value indicates whether the value was successfully set. Optional method, may not be supported in all implementations.
+   * Sets the offset of this media clock's time from that of the associated
+   * **OcaTimeSource** object. The return value indicates whether the value was
+   * successfully set. Optional method, may not be supported in all
+   * implementations.
    *
    * @method OcaMediaClock3#SetOffset
    * @param {IOcaTimePTP} Offset
@@ -110,7 +123,8 @@ export declare class OcaMediaClock3 extends OcaAgent {
   SetOffset(Offset: IOcaTimePTP): Promise<void>;
 
   /**
-   * Gets the list of supported media clock rates for the given time source. The return value indicates whether the list was successfully retrieved.
+   * Gets the list of supported media clock rates for the given time source. The
+   * return value indicates whether the list was successfully retrieved.
    *
    * @method OcaMediaClock3#GetSupportedRates
    * @returns {Promise<Map<number, OcaMediaClockRate[]>>}

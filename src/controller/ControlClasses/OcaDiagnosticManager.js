@@ -4,12 +4,14 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 
 /**
- * Optional manager that provides application diagnostic aids. Unlike other manager classes, OcaDiagnosticManager may be subclassed to provide proprietary application diagnostic enhancements.
+ * Optional manager that provides application diagnostic aids. Unlike other
+ * manager classes, OcaDiagnosticManager may be subclassed to provide
+ * proprietary application diagnostic enhancements.
  *
  *  - May be instantiated once in any device.
  *
- *
  *  - If instantiated, object number must be 13.
+ *
  *
  * @extends OcaManager
  * @class OcaDiagnosticManager
@@ -26,7 +28,8 @@ export const OcaDiagnosticManager = make_control_class(
 );
 
 /**
- * Retrieves a text description of the given object's lock status. Return value indicates success of the retrieval.
+ * Retrieves a text description of the given object's lock status. Return value
+ * indicates success of the retrieval.
  *
  * @method OcaDiagnosticManager#GetLockStatus
  * @param {number} ONo

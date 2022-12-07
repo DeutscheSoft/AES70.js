@@ -11,7 +11,8 @@ export declare interface IOcaMethod {
   ONo: number;
 
   /**
-   * The method ID. For Null Method Identifier, value of all subfields shall be zero.
+   * The method ID. For Null Method Identifier, value of all subfields shall be
+   * zero.
    * @type OcaMethodID
    */
   MethodID: IOcaMethodID;
@@ -19,7 +20,9 @@ export declare interface IOcaMethod {
 
 export declare class OcaMethod implements IOcaMethod {
   /**
-   * Representation of an OCA method, i.e. the unique combination of an ONo and a MethodID. To denote the absence of a method, all field values shall be zero. Such a value is called the  *Null Method Identifier* .
+   * Representation of an OCA method, i.e. the unique combination of an ONo and
+   * a MethodID. To denote the absence of a method, all field values shall be
+   * zero. Such a value is called the *Null Method Identifier*.
    * @class OcaMethod
    */
   constructor(ONo: number, MethodID: OcaMethodID);
@@ -31,7 +34,8 @@ export declare class OcaMethod implements IOcaMethod {
   ONo: number;
 
   /**
-   * The method ID. For Null Method Identifier, value of all subfields shall be zero.
+   * The method ID. For Null Method Identifier, value of all subfields shall be
+   * zero.
    * @type OcaMethodID
    */
   MethodID: OcaMethodID;

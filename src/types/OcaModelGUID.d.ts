@@ -16,7 +16,8 @@ export declare interface IOcaModelGUID {
   MfrCode: Uint8Array;
 
   /**
-   * Model code. Unique within the given manufacturer's products. May be set freely by the manufacturer.
+   * Model code. Unique within the given manufacturer's products. May be set
+   * freely by the manufacturer.
    * @type Uint8Array
    */
   ModelCode: Uint8Array;
@@ -42,7 +43,8 @@ export declare class OcaModelGUID implements IOcaModelGUID {
   MfrCode: Uint8Array;
 
   /**
-   * Model code. Unique within the given manufacturer's products. May be set freely by the manufacturer.
+   * Model code. Unique within the given manufacturer's products. May be set
+   * freely by the manufacturer.
    * @type Uint8Array
    */
   ModelCode: Uint8Array;

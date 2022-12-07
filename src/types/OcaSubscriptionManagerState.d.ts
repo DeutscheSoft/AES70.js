@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Enum describing  **OcaSubscriptionManager**  states.
+ * Enum describing **OcaSubscriptionManager** states.
  * @class OcaSubscriptionManagerState
  */
 export class OcaSubscriptionManagerState {

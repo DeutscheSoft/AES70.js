@@ -4,13 +4,14 @@
 
 export class OcaNetworkSystemInterfaceID {
   /**
-   * ID of a system interface used by a network. Format is data network type dependent.
+   * ID of a system interface used by a network. Format is data network type
+   * dependent.
    * @class OcaNetworkSystemInterfaceID
    */
   constructor(SystemInterfaceHandle, MyNetworkAddress) {
     /**
      * Operating system handle for the interface the network uses to do I/O.
-     * @type string
+     * @type Uint8Array
      */
     this.SystemInterfaceHandle = SystemInterfaceHandle;
     /**

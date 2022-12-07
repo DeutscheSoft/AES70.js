@@ -22,7 +22,8 @@ export const OcaFrequencyActuator = make_control_class(
 );
 
 /**
- * Gets the value of the Frequency property. The return value indicates whether the property was successfully retrieved.
+ * Gets the value of the Frequency property. The return value indicates whether
+ * the property was successfully retrieved.
  * The return values of this method are
  *
  * - Frequency of type ``number``
@@ -33,7 +34,8 @@ export const OcaFrequencyActuator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Frequency property. The return value indicates whether the property was successfully set.
+ * Sets the value of the Frequency property. The return value indicates whether
+ * the property was successfully set.
  *
  * @method OcaFrequencyActuator#SetFrequency
  * @param {number} Frequency
@@ -41,7 +43,7 @@ export const OcaFrequencyActuator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property Frequency changes in the remote object.
+ * This event is emitted when the property ``Frequency`` changes in the remote object.
  * The property ``Frequency`` is described in the AES70 standard as follows.
  * Frequency in Hertz.
  *

@@ -4,7 +4,8 @@
 
 export class OcaTask {
   /**
-   * An execution thread that runs an AES70 Program. Programs are OcaLibrary volumes that contain application-specific execution instructions.
+   * An execution thread that runs an AES70 Program. Programs are OcaLibrary
+   * volumes that contain application-specific execution instructions.
    * @class OcaTask
    */
   constructor(
@@ -24,7 +25,6 @@ export class OcaTask {
      */
     this.ID = ID;
     /**
-     * This was not documented in the OCA standard.
      * @type string
      */
     this.Label = Label;
@@ -44,23 +44,31 @@ export class OcaTask {
      */
     this.TimeMode = TimeMode;
     /**
-     * ONo of relevant  **OcaTimeSource** object or zero to use device time (see  **OcaDeviceTimeManager** ).
+     * ONo of relevant **OcaTimeSource** object or zero to use device time (see
+     * **OcaDeviceTimeManager**).
      * @type number
      */
     this.TimeSourceONo = TimeSourceONo;
     /**
-     * Time at which to start task, or zero if task will be manually started. If  **TimeMode=Relative** , the actual event start time equals the value of  **StartTime**  plus the absolute time that  **StartTime**  was most recently set. Datatype shall depend on value of  **TimeUnits** : - If  **TimeUnits** is seconds, datatype shall be  **OcaTimePTP;**  - If TimeUnits is samples, datatype shall be  **OcaUint64** . If  **TimeMode=Absolute** , the actual event start time equals the value of  **StartTime**
+     * Time at which to start task, or zero if task will be manually started. If
+     * **TimeMode=Relative**, the actual event start time equals the value of
+     * **StartTime** plus the absolute time that **StartTime** was most recently
+     * set. Datatype shall depend on value of **TimeUnits**: - If **TimeUnits**
+     * is seconds, datatype shall be **OcaTimePTP;** - If TimeUnits is samples,
+     * datatype shall be **OcaUint64**. If **TimeMode=Absolute**, the actual
+     * event start time equals the value of **StartTime**
      * @type OcaTimePTP
      */
     this.StartTime = StartTime;
     /**
-     * Duration of task execution, or zero to run until complete or explicitly stopped.
+     * Duration of task execution, or zero to run until complete or explicitly
+     * stopped.
      * @type OcaTimePTP
      */
     this.Duration = Duration;
     /**
      * Arbitrary application-specific parameters for the Task and its Program.
-     * @type string
+     * @type Uint8Array
      */
     this.ApplicationSpecificParameters = ApplicationSpecificParameters;
   }

@@ -23,7 +23,8 @@ export declare interface IOcaLibParamSetAssignment {
 export declare class OcaLibParamSetAssignment
   implements IOcaLibParamSetAssignment {
   /**
-   * A ParamSet assigment is the description of a binding of a ParamSet to a block instance.
+   * A ParamSet assigment is the description of a binding of a ParamSet to a
+   * block instance.
    * @class OcaLibParamSetAssignment
    */
   constructor(ParamSetIdentifier: OcaLibVolIdentifier, TargetBlockONo: number);

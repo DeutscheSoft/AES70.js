@@ -12,7 +12,12 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- *  **DEPRECATED CLASS**   *Replaced by class*  **OcaControlNetwork **  *in version 3 of Connection Management (CM3)*  Abstract base class for defining network classes to which this device belongs. This class is to be used for control and monitoring networks only. For media transport networks, and for networks that combine media transport and control, the  **OcaStreamNetwork**  class should be used instead.
+ * **DEPRECATED CLASS** *Replaced by class* **OcaControlNetwork ***in version 3
+ * of Connection Management (CM3)* Abstract base class for defining network
+ * classes to which this device belongs. This class is to be used for control
+ * and monitoring networks only. For media transport networks, and for networks
+ * that combine media transport and control, the **OcaStreamNetwork** class
+ * should be used instead.
  * @extends OcaAgent
  * @class OcaNetwork
  */
@@ -55,7 +60,8 @@ export declare class OcaNetwork extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the network's link type (wired Ethernet, USB, etc.). Return status indicates whether the operation was successful.
+   * Gets the network's link type (wired Ethernet, USB, etc.). Return status
+   * indicates whether the operation was successful.
    *
    * @method OcaNetwork#GetLinkType
    * @returns {Promise<OcaNetworkLinkType>}
@@ -64,7 +70,8 @@ export declare class OcaNetwork extends OcaAgent {
   GetLinkType(): Promise<OcaNetworkLinkType>;
 
   /**
-   * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
+   * Gets the network's IDAdvertised. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaNetwork#GetIDAdvertised
    * @returns {Promise<Uint8Array>}
@@ -73,7 +80,8 @@ export declare class OcaNetwork extends OcaAgent {
   GetIDAdvertised(): Promise<Uint8Array>;
 
   /**
-   * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+   * Sets the network's IDAdvertised. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaNetwork#SetIDAdvertised
    * @param {Uint8Array} Name
@@ -83,7 +91,8 @@ export declare class OcaNetwork extends OcaAgent {
   SetIDAdvertised(Name: Uint8Array): Promise<void>;
 
   /**
-   * Gets the network's ControlProtocol property. Return status indicates whether the operation was successful.
+   * Gets the network's ControlProtocol property. Return status indicates
+   * whether the operation was successful.
    *
    * @method OcaNetwork#GetControlProtocol
    * @returns {Promise<OcaNetworkControlProtocol>}
@@ -92,7 +101,8 @@ export declare class OcaNetwork extends OcaAgent {
   GetControlProtocol(): Promise<OcaNetworkControlProtocol>;
 
   /**
-   * Gets the network's MediaProtocol property. This is a deprecated method that always returns the value NONE.
+   * Gets the network's MediaProtocol property. This is a deprecated method that
+   * always returns the value NONE.
    *
    * @method OcaNetwork#GetMediaProtocol
    * @returns {Promise<OcaNetworkMediaProtocol>}
@@ -101,7 +111,8 @@ export declare class OcaNetwork extends OcaAgent {
   GetMediaProtocol(): Promise<OcaNetworkMediaProtocol>;
 
   /**
-   * Retrieves the network's status. Return status indicates whether the status was successfully retrieved.
+   * Retrieves the network's status. Return status indicates whether the status
+   * was successfully retrieved.
    *
    * @method OcaNetwork#GetStatus
    * @returns {Promise<OcaNetworkStatus>}
@@ -110,7 +121,8 @@ export declare class OcaNetwork extends OcaAgent {
   GetStatus(): Promise<OcaNetworkStatus>;
 
   /**
-   * Retrieves network error statistics counter values. Return status indicates whether the values were successfully retrieved.
+   * Retrieves network error statistics counter values. Return status indicates
+   * whether the values were successfully retrieved.
    *
    * @method OcaNetwork#GetStatistics
    * @returns {Promise<OcaNetworkStatistics>}
@@ -119,7 +131,8 @@ export declare class OcaNetwork extends OcaAgent {
   GetStatistics(): Promise<OcaNetworkStatistics>;
 
   /**
-   * Resets network error statistics counters. Return status indicates whether the counters were successfully reset.
+   * Resets network error statistics counters. Return status indicates whether
+   * the counters were successfully reset.
    *
    * @method OcaNetwork#ResetStatistics
    * @returns {Promise<void>}
@@ -127,16 +140,19 @@ export declare class OcaNetwork extends OcaAgent {
   ResetStatistics(): Promise<void>;
 
   /**
-   * Gets the list of system interface IDs that this network is using. Return status indicates success of the operation.
+   * Gets the list of system interface IDs that this network is using. Return
+   * status indicates success of the operation.
    *
    * @method OcaNetwork#GetSystemInterfaces
    * @returns {Promise<OcaNetworkSystemInterfaceID[]>}
-   *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceID[]``.
+   *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceID[]`.
    */
   GetSystemInterfaces(): Promise<OcaNetworkSystemInterfaceID[]>;
 
   /**
-   * Sets the list of system interface IDs that this network will use. Return status indicates success of the operation. This method is not implemented by all network implementations.
+   * Sets the list of system interface IDs that this network will use. Return
+   * status indicates success of the operation. This method is not implemented
+   * by all network implementations.
    *
    * @method OcaNetwork#SetSystemInterfaces
    * @param {IOcaNetworkSystemInterfaceID[]} Interfaces
@@ -148,7 +164,8 @@ export declare class OcaNetwork extends OcaAgent {
   ): Promise<void>;
 
   /**
-   * Deprecated method. Always returns status INVALID_REQUEST. Media transport is now managed by the class  **OcaStreamNetwork.**
+   * Deprecated method. Always returns status INVALID_REQUEST. Media transport
+   * is now managed by the class **OcaStreamNetwork.**
    *
    * @method OcaNetwork#GetMediaPorts
    * @returns {Promise<number[]>}

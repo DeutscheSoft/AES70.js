@@ -40,7 +40,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the network's user-specified label. Return status indicates whether the operation was successful.
+   * Gets the network's user-specified label. Return status indicates whether
+   * the operation was successful.
    *
    * @method OcaApplicationNetwork#GetLabel
    * @returns {Promise<string>}
@@ -49,7 +50,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   GetLabel(): Promise<string>;
 
   /**
-   * Sets the network's user-specified label. Return status indicates whether the operation was successful.
+   * Sets the network's user-specified label. Return status indicates whether
+   * the operation was successful.
    *
    * @method OcaApplicationNetwork#SetLabel
    * @param {string} Label
@@ -59,7 +61,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   SetLabel(Label: string): Promise<void>;
 
   /**
-   * Gets the ONo of this network's containing block. Return status indicates whether the operation was successful.
+   * Gets the ONo of this network's containing block. Return status indicates
+   * whether the operation was successful.
    *
    * @method OcaApplicationNetwork#GetOwner
    * @returns {Promise<number>}
@@ -68,7 +71,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   GetOwner(): Promise<number>;
 
   /**
-   * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
+   * Gets the network's IDAdvertised. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaApplicationNetwork#GetServiceID
    * @returns {Promise<Uint8Array>}
@@ -77,7 +81,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   GetServiceID(): Promise<Uint8Array>;
 
   /**
-   * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+   * Sets the network's IDAdvertised. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaApplicationNetwork#SetServiceID
    * @param {Uint8Array} Name
@@ -87,16 +92,19 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   SetServiceID(Name: Uint8Array): Promise<void>;
 
   /**
-   * Retrieves the list of this network's system interface descriptor. Return status indicates whether the list was successfully retrieved.
+   * Retrieves the list of this network's system interface descriptor. Return
+   * status indicates whether the list was successfully retrieved.
    *
    * @method OcaApplicationNetwork#GetSystemInterfaces
    * @returns {Promise<OcaNetworkSystemInterfaceDescriptor[]>}
-   *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceDescriptor[]``.
+   *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceDescriptor[]`.
    */
   GetSystemInterfaces(): Promise<OcaNetworkSystemInterfaceDescriptor[]>;
 
   /**
-   * Sets the network's System Interface Descriptor(s). Return status indicates whether the operation was successful. Optional method; System Interface Descriptor may be set at construction time.
+   * Sets the network's System Interface Descriptor(s). Return status indicates
+   * whether the operation was successful. Optional method; System Interface
+   * Descriptor may be set at construction time.
    *
    * @method OcaApplicationNetwork#SetSystemInterfaces
    * @param {IOcaNetworkSystemInterfaceDescriptor[]} Descriptors
@@ -108,7 +116,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   ): Promise<void>;
 
   /**
-   * Retrieves the network's state. Return status indicates whether the status was successfully retrieved.
+   * Retrieves the network's state. Return status indicates whether the status
+   * was successfully retrieved.
    *
    * @method OcaApplicationNetwork#GetState
    * @returns {Promise<OcaApplicationNetworkState>}
@@ -117,7 +126,9 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   GetState(): Promise<OcaApplicationNetworkState>;
 
   /**
-   * Retrieves the most recent error code. Return status indicates whether the operation was successful. Note that a second parameter 'Reset' is removed in v02 of this class.
+   * Retrieves the most recent error code. Return status indicates whether the
+   * operation was successful. Note that a second parameter 'Reset' is removed
+   * in v02 of this class.
    *
    * @method OcaApplicationNetwork#GetErrorCode
    * @returns {Promise<number>}
@@ -126,7 +137,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   GetErrorCode(): Promise<number>;
 
   /**
-   * Control the application network. Return value indicates success of command execution.
+   * Control the application network. Return value indicates success of command
+   * execution.
    *
    * @method OcaApplicationNetwork#Control
    * @param {IOcaApplicationNetworkCommand} Command
@@ -136,7 +148,8 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   Control(Command: IOcaApplicationNetworkCommand): Promise<void>;
 
   /**
-   * Returns path from given object down to root. The return value indicates whether the operation succeeded.
+   * Returns path from given object down to root. The return value indicates
+   * whether the operation succeeded.
    * The return values of this method are
    *
    * - NamePath of type ``string[]``

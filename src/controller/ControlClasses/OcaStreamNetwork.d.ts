@@ -12,7 +12,12 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- *  **DEPRECATED CLASS**   *Replaced by class*  **OcaMediaTransportNetwork **  *in version 3 of Connection Management (CM3)*  Abstract base class for defining network classes to which this device belongs. May be a media transport network, a control and monitoring network, or a network that does both. There shall be one OcaStreamNetwork instance for each network to which the device belongs. This class may be subclassed to support networks of various types.
+ * **DEPRECATED CLASS** *Replaced by class* **OcaMediaTransportNetwork ***in
+ * version 3 of Connection Management (CM3)* Abstract base class for defining
+ * network classes to which this device belongs. May be a media transport
+ * network, a control and monitoring network, or a network that does both. There
+ * shall be one OcaStreamNetwork instance for each network to which the device
+ * belongs. This class may be subclassed to support networks of various types.
  * @extends OcaAgent
  * @class OcaStreamNetwork
  */
@@ -70,7 +75,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the network's link type (wired Ethernet, USB, etc.). Return status indicates whether the operation was successful.
+   * Gets the network's link type (wired Ethernet, USB, etc.). Return status
+   * indicates whether the operation was successful.
    *
    * @method OcaStreamNetwork#GetLinkType
    * @returns {Promise<OcaNetworkLinkType>}
@@ -79,7 +85,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetLinkType(): Promise<OcaNetworkLinkType>;
 
   /**
-   * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
+   * Gets the network's IDAdvertised. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaStreamNetwork#GetIDAdvertised
    * @returns {Promise<Uint8Array>}
@@ -88,7 +95,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetIDAdvertised(): Promise<Uint8Array>;
 
   /**
-   * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+   * Sets the network's IDAdvertised. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaStreamNetwork#SetIDAdvertised
    * @param {Uint8Array} Name
@@ -98,7 +106,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   SetIDAdvertised(Name: Uint8Array): Promise<void>;
 
   /**
-   * Gets the network's ControlProtocol property. Return status indicates whether the operation was successful.
+   * Gets the network's ControlProtocol property. Return status indicates
+   * whether the operation was successful.
    *
    * @method OcaStreamNetwork#GetControlProtocol
    * @returns {Promise<OcaNetworkControlProtocol>}
@@ -107,7 +116,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetControlProtocol(): Promise<OcaNetworkControlProtocol>;
 
   /**
-   * Gets the network's MediaProtocol property. Return status indicates whether the operation was successful.
+   * Gets the network's MediaProtocol property. Return status indicates whether
+   * the operation was successful.
    *
    * @method OcaStreamNetwork#GetMediaProtocol
    * @returns {Promise<OcaNetworkMediaProtocol>}
@@ -116,7 +126,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetMediaProtocol(): Promise<OcaNetworkMediaProtocol>;
 
   /**
-   * Retrieves the network's status. Return status indicates whether the status was successfully retrieved.
+   * Retrieves the network's status. Return status indicates whether the status
+   * was successfully retrieved.
    *
    * @method OcaStreamNetwork#GetStatus
    * @returns {Promise<OcaNetworkStatus>}
@@ -125,7 +136,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetStatus(): Promise<OcaNetworkStatus>;
 
   /**
-   * Retrieves network error statistics counter values. Return status indicates whether the values were successfully retrieved.
+   * Retrieves network error statistics counter values. Return status indicates
+   * whether the values were successfully retrieved.
    *
    * @method OcaStreamNetwork#GetStatistics
    * @returns {Promise<OcaNetworkStatistics>}
@@ -134,7 +146,8 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetStatistics(): Promise<OcaNetworkStatistics>;
 
   /**
-   * Resets network error statistics counters. Return status indicates whether the counters were successfully reset.
+   * Resets network error statistics counters. Return status indicates whether
+   * the counters were successfully reset.
    *
    * @method OcaStreamNetwork#ResetStatistics
    * @returns {Promise<void>}
@@ -142,16 +155,19 @@ export declare class OcaStreamNetwork extends OcaAgent {
   ResetStatistics(): Promise<void>;
 
   /**
-   * Gets the list of system interface IDs that this network is using. Return status indicates success of the operation.
+   * Gets the list of system interface IDs that this network is using. Return
+   * status indicates success of the operation.
    *
    * @method OcaStreamNetwork#GetSystemInterfaces
    * @returns {Promise<OcaNetworkSystemInterfaceID[]>}
-   *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceID[]``.
+   *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceID[]`.
    */
   GetSystemInterfaces(): Promise<OcaNetworkSystemInterfaceID[]>;
 
   /**
-   * Sets the list of system interface IDs that this network will use. Return status indicates success of the operation. This method is not implemented by all network implementations.
+   * Sets the list of system interface IDs that this network will use. Return
+   * status indicates success of the operation. This method is not implemented
+   * by all network implementations.
    *
    * @method OcaStreamNetwork#SetSystemInterfaces
    * @param {IOcaNetworkSystemInterfaceID[]} Interfaces
@@ -163,7 +179,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   ): Promise<void>;
 
   /**
-   * Gets the list of object numbers of Source  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector** objects'  **Owner**  properties are updated, or when  **OcaStreamConnector**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Gets the list of object numbers of Source **OcaStreamConnector** objects
+   * owned by this network. Return status indicates success of the operation. If
+   * the value of the network's MediaProtocol property is NONE, this method will
+   * return the status value InvalidRequest. Members are added to and deleted
+   * from this list when **OcaStreamConnector** objects' **Owner** properties
+   * are updated, or when **OcaStreamConnector** objects are deleted. For
+   * reconfigurable devices, such changes may be initiated by controllers during
+   * device operation.
    *
    * @method OcaStreamNetwork#GetStreamConnectorsSource
    * @returns {Promise<number[]>}
@@ -172,7 +195,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetStreamConnectorsSource(): Promise<number[]>;
 
   /**
-   * Sets the list of object numbers of Source  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector** objects'  **Owner**  properties are updated, or when  **OcaStreamConnector**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Sets the list of object numbers of Source **OcaStreamConnector** objects
+   * owned by this network. Return status indicates success of the operation. If
+   * the value of the network's MediaProtocol property is NONE, this method will
+   * return the status value InvalidRequest. Members are added to and deleted
+   * from this list when **OcaStreamConnector** objects' **Owner** properties
+   * are updated, or when **OcaStreamConnector** objects are deleted. For
+   * reconfigurable devices, such changes may be initiated by controllers during
+   * device operation.
    *
    * @method OcaStreamNetwork#SetStreamConnectorsSource
    * @param {number[]} StreamConnectors
@@ -182,7 +212,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   SetStreamConnectorsSource(StreamConnectors: number[]): Promise<void>;
 
   /**
-   * Gets the list of object numbers of Sink  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector**  objects'  **Owner**  properties are updated, or when  **OcaStreamConnector** objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Gets the list of object numbers of Sink **OcaStreamConnector** objects
+   * owned by this network. Return status indicates success of the operation. If
+   * the value of the network's MediaProtocol property is NONE, this method will
+   * return the status value InvalidRequest. Members are added to and deleted
+   * from this list when **OcaStreamConnector** objects' **Owner** properties
+   * are updated, or when **OcaStreamConnector** objects are deleted. For
+   * reconfigurable devices, such changes may be initiated by controllers during
+   * device operation.
    *
    * @method OcaStreamNetwork#GetStreamConnectorsSink
    * @returns {Promise<number[]>}
@@ -191,7 +228,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetStreamConnectorsSink(): Promise<number[]>;
 
   /**
-   * Sets the list of object numbers of Sink  **OcaStreamConnector** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaStreamConnector**  objects'  **Owner**  properties are updated, or when  **OcaStreamConnector**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Sets the list of object numbers of Sink **OcaStreamConnector** objects
+   * owned by this network. Return status indicates success of the operation. If
+   * the value of the network's MediaProtocol property is NONE, this method will
+   * return the status value InvalidRequest. Members are added to and deleted
+   * from this list when **OcaStreamConnector** objects' **Owner** properties
+   * are updated, or when **OcaStreamConnector** objects are deleted. For
+   * reconfigurable devices, such changes may be initiated by controllers during
+   * device operation.
    *
    * @method OcaStreamNetwork#SetStreamConnectorsSink
    * @param {number[]} StreamConnectors
@@ -201,7 +245,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   SetStreamConnectorsSink(StreamConnectors: number[]): Promise<void>;
 
   /**
-   * Gets the list of object numbers of Source  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Gets the list of object numbers of Source **OcaNetworkSignalChannel**
+   * objects owned by this network. Return status indicates success of the
+   * operation. If the value of the network's MediaProtocol property is NONE,
+   * this method will return the status value InvalidRequest. Members are added
+   * to and deleted from this list when **OcaNetworkSignalChannel** objects'
+   * **Owner** properties are updated, or when **OcaNetworkSignalChannel**
+   * objects are deleted. For reconfigurable devices, such changes may be
+   * initiated by controllers during device operation.
    *
    * @method OcaStreamNetwork#GetSignalChannelsSource
    * @returns {Promise<number[]>}
@@ -210,7 +261,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetSignalChannelsSource(): Promise<number[]>;
 
   /**
-   * Sets the list of object numbers of Source  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Sets the list of object numbers of Source **OcaNetworkSignalChannel**
+   * objects owned by this network. Return status indicates success of the
+   * operation. If the value of the network's MediaProtocol property is NONE,
+   * this method will return the status value InvalidRequest. Members are added
+   * to and deleted from this list when **OcaNetworkSignalChannel** objects'
+   * **Owner** properties are updated, or when **OcaNetworkSignalChannel**
+   * objects are deleted. For reconfigurable devices, such changes may be
+   * initiated by controllers during device operation.
    *
    * @method OcaStreamNetwork#SetSignalChannelsSource
    * @param {number[]} SignalChannels
@@ -220,7 +278,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   SetSignalChannelsSource(SignalChannels: number[]): Promise<void>;
 
   /**
-   * Gets the list of object numbers of Sink  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Gets the list of object numbers of Sink **OcaNetworkSignalChannel** objects
+   * owned by this network. Return status indicates success of the operation. If
+   * the value of the network's MediaProtocol property is NONE, this method will
+   * return the status value InvalidRequest. Members are added to and deleted
+   * from this list when **OcaNetworkSignalChannel** objects' **Owner**
+   * properties are updated, or when **OcaNetworkSignalChannel** objects are
+   * deleted. For reconfigurable devices, such changes may be initiated by
+   * controllers during device operation.
    *
    * @method OcaStreamNetwork#GetSignalChannelsSink
    * @returns {Promise<number[]>}
@@ -229,7 +294,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   GetSignalChannelsSink(): Promise<number[]>;
 
   /**
-   * Sets the list of object numbers of Sink  **OcaNetworkSignalChannel** objects owned by this network. Return status indicates success of the operation. If the value of the network's MediaProtocol property is NONE, this method will return the status value InvalidRequest. Members are added to and deleted from this list when  **OcaNetworkSignalChannel**  objects'  **Owner**  properties are updated, or when  **OcaNetworkSignalChannel**  objects are deleted. For reconfigurable devices, such changes may be initiated by controllers during device operation.
+   * Sets the list of object numbers of Sink **OcaNetworkSignalChannel** objects
+   * owned by this network. Return status indicates success of the operation. If
+   * the value of the network's MediaProtocol property is NONE, this method will
+   * return the status value InvalidRequest. Members are added to and deleted
+   * from this list when **OcaNetworkSignalChannel** objects' **Owner**
+   * properties are updated, or when **OcaNetworkSignalChannel** objects are
+   * deleted. For reconfigurable devices, such changes may be initiated by
+   * controllers during device operation.
    *
    * @method OcaStreamNetwork#SetSignalChannelsSink
    * @param {number[]} SignalChannels

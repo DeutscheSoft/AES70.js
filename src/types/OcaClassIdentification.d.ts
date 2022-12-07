@@ -4,7 +4,6 @@
 
 export declare interface IOcaClassIdentification {
   /**
-   * This was not documented in the OCA standard.
    * @type string
    */
   ClassID: string;
@@ -18,13 +17,11 @@ export declare interface IOcaClassIdentification {
 
 export declare class OcaClassIdentification implements IOcaClassIdentification {
   /**
-   * This was not documented in the OCA standard.
    * @class OcaClassIdentification
    */
   constructor(ClassID: string, ClassVersion: number);
 
   /**
-   * This was not documented in the OCA standard.
    * @type string
    */
   ClassID: string;

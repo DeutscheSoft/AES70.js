@@ -2,7 +2,8 @@
  * This file has been generated.
  */
 /**
- * Enumeration of the types of dynamics functions available from class OcaDynamics.
+ * Enumeration of the types of dynamics functions available from class
+ * OcaDynamics.
  * @class OcaDynamicsFunction
  */
 export class OcaDynamicsFunction {

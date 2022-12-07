@@ -4,7 +4,8 @@
 
 export class OcaLibraryIdentifier {
   /**
-   * Full identifier (type + object number) of Library (i.e. of an  **OcaLibrary** instance)
+   * Full identifier (type + object number) of Library (i.e. of an
+   * **OcaLibrary** instance)
    * @class OcaLibraryIdentifier
    */
   constructor(Type, ONo) {

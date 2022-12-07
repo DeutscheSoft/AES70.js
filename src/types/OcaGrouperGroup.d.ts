@@ -16,7 +16,8 @@ export declare interface IOcaGrouperGroup {
   Name: string;
 
   /**
-   * Object number of the group's proxy. The proxy's class is the same as the Grouper's citizen class.
+   * Object number of the group's proxy. The proxy's class is the same as the
+   * Grouper's citizen class.
    * @type number
    */
   ProxyONo: number;
@@ -42,7 +43,8 @@ export declare class OcaGrouperGroup implements IOcaGrouperGroup {
   Name: string;
 
   /**
-   * Object number of the group's proxy. The proxy's class is the same as the Grouper's citizen class.
+   * Object number of the group's proxy. The proxy's class is the same as the
+   * Grouper's citizen class.
    * @type number
    */
   ProxyONo: number;

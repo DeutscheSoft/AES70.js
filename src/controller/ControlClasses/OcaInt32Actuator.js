@@ -22,7 +22,8 @@ export const OcaInt32Actuator = make_control_class(
 );
 
 /**
- * Gets the value and limits of the  **Setting** property. The return value indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Setting** property. The return value
+ * indicates whether the data was successfully retrieved.
  * The return values of this method are
  *
  * - Setting of type ``number``
@@ -33,7 +34,8 @@ export const OcaInt32Actuator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the **Setting** property. The return value indicates whether the property was successfully set.
+ * Sets the** Setting** property. The return value indicates whether the
+ * property was successfully set.
  *
  * @method OcaInt32Actuator#SetSetting
  * @param {number} Setting
@@ -41,7 +43,7 @@ export const OcaInt32Actuator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property Setting changes in the remote object.
+ * This event is emitted when the property ``Setting`` changes in the remote object.
  * The property ``Setting`` is described in the AES70 standard as follows.
  * Int32 setting.
  *

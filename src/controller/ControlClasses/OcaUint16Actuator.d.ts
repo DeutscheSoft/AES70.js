@@ -17,7 +17,8 @@ export declare class OcaUint16Actuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the Setting property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the Setting property. The return value
+   * indicates whether the data was successfully retrieved.
    * The return values of this method are
    *
    * - Setting of type ``number``
@@ -30,7 +31,8 @@ export declare class OcaUint16Actuator extends OcaBasicActuator {
   GetSetting(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the  **Setting** property. The return value indicates whether the property was successfully set.
+   * Sets the value of the **Setting** property. The return value indicates
+   * whether the property was successfully set.
    *
    * @method OcaUint16Actuator#SetSetting
    * @param {number} Setting

@@ -29,14 +29,16 @@ export const OcaAgent = make_control_class(
 );
 
 /**
- * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
+ * Gets the value of the Label property. The return value indicates whether the
+ * property was successfully retrieved.
  *
  * @method OcaAgent#GetLabel
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the Label property. The return value indicates whether the property was successfully set.
+ * Sets the value of the Label property. The return value indicates whether the
+ * property was successfully set.
  *
  * @method OcaAgent#SetLabel
  * @param {string} Label
@@ -44,14 +46,16 @@ export const OcaAgent = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
+ * Gets the value of the Owner property. The return value indicates whether the
+ * property was successfully retrieved.
  *
  * @method OcaAgent#GetOwner
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns path from the given object down to root. The return value indicates whether the operation succeeded. Added in version 2.
+ * Returns path from the given object down to root. The return value indicates
+ * whether the operation succeeded. Added in version 2.
  * The return values of this method are
  *
  * - NamePath of type ``string[]``
@@ -61,14 +65,14 @@ export const OcaAgent = make_control_class(
  * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
- * This event is emitted when the property Label changes in the remote object.
+ * This event is emitted when the property ``Label`` changes in the remote object.
  * The property ``Label`` is described in the AES70 standard as follows.
  * User-specified label.
  *
  * @member {PropertyEvent<string>} OcaAgent#OnLabelChanged
  */
 /**
- * This event is emitted when the property Owner changes in the remote object.
+ * This event is emitted when the property ``Owner`` changes in the remote object.
  * The property ``Owner`` is described in the AES70 standard as follows.
  * Object number of block that contains this agent.
  *

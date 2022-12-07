@@ -5,15 +5,16 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 
 /**
- * Manager that collects and controls security settings (including security keys).
+ * Manager that collects and controls security settings (including security
+ * keys).
  *
- *  - Must be instantiated in every device that supports secure control and monitoring; otherwise, is optional.
- *
+ *  - Must be instantiated in every device that supports secure control and
+ *    monitoring; otherwise, is optional.
  *
  *  - May be instantiated at most once in any device.
  *
- *
  *  - If instantiated, object number must be 2.
+ *
  *
  * @extends OcaManager
  * @class OcaSecurityManager
@@ -36,27 +37,37 @@ export const OcaSecurityManager = make_control_class(
 );
 
 /**
- * Adds a pre-shared key (identified by the passed identity) to the device. By having multiple PSKs the device is able to participate in multiple secure systems. Note that adding a PSK over the network will only work if the controller has a secure connection to the device and control security has been turned on. If this is not the case the method will return DeviceError.
+ * Adds a pre-shared key (identified by the passed identity) to the device. By
+ * having multiple PSKs the device is able to participate in multiple secure
+ * systems. Note that adding a PSK over the network will only work if the
+ * controller has a secure connection to the device and control security has
+ * been turned on. If this is not the case the method will return DeviceError.
  *
  * @method OcaSecurityManager#AddPreSharedKey
  * @param {string} identity
- *
  * @param {Uint8Array} key
  *
  * @returns {Promise<void>}
  */
 /**
- * Changes the pre-shared key identified by the passed identity. Note that changing a PSK over the network will only work if the controller has a secure connection to the device and control security has been turned on. If this is not the case the method will return DeviceError.
+ * Changes the pre-shared key identified by the passed identity. Note that
+ * changing a PSK over the network will only work if the controller has a secure
+ * connection to the device and control security has been turned on. If this is
+ * not the case the method will return DeviceError.
  *
  * @method OcaSecurityManager#ChangePreSharedKey
  * @param {string} identity
- *
  * @param {Uint8Array} newKey
  *
  * @returns {Promise<void>}
  */
 /**
- * Deletes a pre-shared key (identified by the passed identity) on the device. After deleting the pre-shared key the device will no longer be able to participate in the secure system that uses the PSK. Note that deleting a PSK over the network will only work if the controller has a secure connection to the device and control security has been turned on. If this is not the case the method will return DeviceError.
+ * Deletes a pre-shared key (identified by the passed identity) on the device.
+ * After deleting the pre-shared key the device will no longer be able to
+ * participate in the secure system that uses the PSK. Note that deleting a PSK
+ * over the network will only work if the controller has a secure connection to
+ * the device and control security has been turned on. If this is not the case
+ * the method will return DeviceError.
  *
  * @method OcaSecurityManager#DeletePreSharedKey
  * @param {string} identity
@@ -64,19 +75,25 @@ export const OcaSecurityManager = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Disables security of control data (OCA messages). After calling this method all OCA messages can be sent and received both on insecure and secure connections. The return value indicates whether the operation succeeded. If the operation fails security is not disabled.
+ * Disables security of control data (OCA messages). After calling this method
+ * all OCA messages can be sent and received both on insecure and secure
+ * connections. The return value indicates whether the operation succeeded. If
+ * the operation fails security is not disabled.
  *
  * @method OcaSecurityManager#DisableControlSecurity
  * @returns {Promise<void>}
  */
 /**
- * Enables security of control data (OCA messages). After calling this method all OCA messages are sent and received using a secure connection. The return value indicates whether the operation succeeded. If the operation fails security is not enabled.
+ * Enables security of control data (OCA messages). After calling this method
+ * all OCA messages are sent and received using a secure connection. The return
+ * value indicates whether the operation succeeded. If the operation fails
+ * security is not enabled.
  *
  * @method OcaSecurityManager#EnableControlSecurity
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property secureControlData changes in the remote object.
+ * This event is emitted when the property ``secureControlData`` changes in the remote object.
  * The property ``secureControlData`` is described in the AES70 standard as follows.
  * Indicates whether the OCA control data in the system is secured.
  *

@@ -4,7 +4,8 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enumeration of the types of level detector characteristics. Used in dynamics classes and for sensors.
+ * Enumeration of the types of level detector characteristics. Used in dynamics
+ * classes and for sensors.
  * @class OcaLevelDetectionLaw
  */
 export class OcaLevelDetectionLaw extends Enum({

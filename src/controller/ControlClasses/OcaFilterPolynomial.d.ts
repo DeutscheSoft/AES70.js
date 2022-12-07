@@ -4,7 +4,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * A generic Z-domain rational polynomial filter section:  _A(0) + A(1)z + A(2)z^2 + A(3)z^3 + ..._  B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
+ * A generic Z-domain rational polynomial filter section: A(0) + A(1)z + A(2)z^2
+ * + A(3)z^3 + ... B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
  * @extends OcaActuator
  * @class OcaFilterPolynomial
  */
@@ -43,7 +44,6 @@ export declare class OcaFilterPolynomial extends OcaActuator {
    *
    * @method OcaFilterPolynomial#SetCoefficients
    * @param {number[]} A
-   *
    * @param {number[]} B
    *
    * @returns {Promise<void>}
@@ -74,7 +74,8 @@ export declare class OcaFilterPolynomial extends OcaActuator {
   SetSampleRate(Rate: number): Promise<void>;
 
   /**
-   * Gets the maximum allowable order (= max number of array elements in numerator and for denominator arrays)
+   * Gets the maximum allowable order (= max number of array elements in
+   * numerator and for denominator arrays)
    *
    * @method OcaFilterPolynomial#GetMaxOrder
    * @returns {Promise<number>}

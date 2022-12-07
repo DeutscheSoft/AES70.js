@@ -21,7 +21,6 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
 
 /**
- * This was not documented in the OCA standard.
  * @extends OcaApplicationNetwork
  * @class OcaMediaTransportNetwork
  */
@@ -109,21 +108,25 @@ export const OcaMediaTransportNetwork = make_control_class(
 );
 
 /**
- * Gets the network's Protocol property. Return status indicates whether the operation was successful.
+ * Gets the network's Protocol property. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaMediaTransportNetwork#GetMediaProtocol
  * @returns {Promise<OcaNetworkMediaProtocol>}
  *   A promise which resolves to a single value of type :class:`OcaNetworkMediaProtocol`.
  */
 /**
- * Gets the list of ports owned by the MediaTransportNetwork object (representing the source and sink network channels). The return value indicates whether the list was successfully retrieved.
+ * Gets the list of ports owned by the MediaTransportNetwork object
+ * (representing the source and sink network channels). The return value
+ * indicates whether the list was successfully retrieved.
  *
  * @method OcaMediaTransportNetwork#GetPorts
  * @returns {Promise<OcaPort[]>}
- *   A promise which resolves to a single value of type ``OcaPort[]``.
+ *   A promise which resolves to a single value of type :class:`OcaPort[]`.
  */
 /**
- * Gets the name of the designated port. The return value indicates whether the name was successfully retrieved.
+ * Gets the name of the designated port. The return value indicates whether the
+ * name was successfully retrieved.
  *
  * @method OcaMediaTransportNetwork#GetPortName
  * @param {IOcaPortID} PortID
@@ -132,7 +135,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the name of the designated port. The return value indicates whether the name was successfully set.
+ * Sets the name of the designated port. The return value indicates whether the
+ * name was successfully set.
  *
  * @method OcaMediaTransportNetwork#SetPortName
  * @param {IOcaPortID} PortID
@@ -141,42 +145,48 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the maximum number of source connectors this media transport network supports.
+ * Gets the maximum number of source connectors this media transport network
+ * supports.
  *
  * @method OcaMediaTransportNetwork#GetMaxSourceConnectors
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the maximum number of source connectors this media transport network supports.
+ * Gets the maximum number of source connectors this media transport network
+ * supports.
  *
  * @method OcaMediaTransportNetwork#GetMaxSinkConnectors
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the maximum number of ports per pin this media transport network supports.
+ * Gets the maximum number of ports per pin this media transport network
+ * supports.
  *
  * @method OcaMediaTransportNetwork#GetMaxPinsPerConnector
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the maximum number of pins (channels) per connector this media transport network supports.
+ * Gets the maximum number of pins (channels) per connector this media transport
+ * network supports.
  *
  * @method OcaMediaTransportNetwork#GetMaxPortsPerPin
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the descriptors of all the source (output) connectors collected by this network object. Return status indicates success of the operation.
+ * Gets the descriptors of all the source (output) connectors collected by this
+ * network object. Return status indicates success of the operation.
  *
  * @method OcaMediaTransportNetwork#GetSourceConnectors
  * @returns {Promise<OcaMediaSourceConnector[]>}
- *   A promise which resolves to a single value of type ``OcaMediaSourceConnector[]``.
+ *   A promise which resolves to a single value of type :class:`OcaMediaSourceConnector[]`.
  */
 /**
- * Retrieves the descriptor of a given source connector. Return status indicates the success of the operation.
+ * Retrieves the descriptor of a given source connector. Return status indicates
+ * the success of the operation.
  *
  * @method OcaMediaTransportNetwork#GetSourceConnector
  * @param {number} ID
@@ -185,14 +195,16 @@ export const OcaMediaTransportNetwork = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaMediaSourceConnector`.
  */
 /**
- * Gets the descriptors of all the sink (output) connectors collected by this network object. Return status indicates success of the operation.
+ * Gets the descriptors of all the sink (output) connectors collected by this
+ * network object. Return status indicates success of the operation.
  *
  * @method OcaMediaTransportNetwork#GetSinkConnectors
  * @returns {Promise<OcaMediaSinkConnector[]>}
- *   A promise which resolves to a single value of type ``OcaMediaSinkConnector[]``.
+ *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector[]`.
  */
 /**
- * Retrieves the descriptor of a given sink connector. Return status indicates the success of the operation.
+ * Retrieves the descriptor of a given sink connector. Return status indicates
+ * the success of the operation.
  *
  * @method OcaMediaTransportNetwork#GetSinkConnector
  * @param {number} ID
@@ -201,14 +213,16 @@ export const OcaMediaTransportNetwork = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
  */
 /**
- * Gets the status of all the source and sink connectors collected by this network object. Return status indicates success of the operation.
+ * Gets the status of all the source and sink connectors collected by this
+ * network object. Return status indicates success of the operation.
  *
  * @method OcaMediaTransportNetwork#GetConnectorsStatuses
  * @returns {Promise<OcaMediaConnectorStatus[]>}
- *   A promise which resolves to a single value of type ``OcaMediaConnectorStatus[]``.
+ *   A promise which resolves to a single value of type :class:`OcaMediaConnectorStatus[]`.
  */
 /**
- * Gets the status of a single connector. Return status indicates success of the operation.
+ * Gets the status of a single connector. Return status indicates success of the
+ * operation.
  *
  * @method OcaMediaTransportNetwork#GetConnectorStatus
  * @param {number} ConnectorID
@@ -217,7 +231,11 @@ export const OcaMediaTransportNetwork = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaMediaConnectorStatus`.
  */
 /**
- * Adds a source connector to this network. Parameters of the new connector are given in the Connector parameter; device returns the same parameter with the new connector ID filled in. If the new connector's AlignmentLevel property value is given as NaN, the value of this network's AlignmentLevel property will be used. Return status indicates the success of the operation.
+ * Adds a source connector to this network. Parameters of the new connector are
+ * given in the Connector parameter; device returns the same parameter with the
+ * new connector ID filled in. If the new connector's AlignmentLevel property
+ * value is given as NaN, the value of this network's AlignmentLevel property
+ * will be used. Return status indicates the success of the operation.
  *
  * @method OcaMediaTransportNetwork#AddSourceConnector
  * @param {IOcaMediaSourceConnector} Connector
@@ -227,7 +245,13 @@ export const OcaMediaTransportNetwork = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaMediaSourceConnector`.
  */
 /**
- * Adds a sinkconnector to this network. Parameters of the new connector are given in the Connector parameter; device returns the same parameter with the new connector ID filled in. If the new connector's AlignmentLevel property value is given as NaN, the value of this network's AlignmentLevel property will be used. If the new connector's AlignmentGain property value is given as NaN, the value of this network's AlignmentGain property will be used. Return status indicates the success of the operation.
+ * Adds a sinkconnector to this network. Parameters of the new connector are
+ * given in the Connector parameter; device returns the same parameter with the
+ * new connector ID filled in. If the new connector's AlignmentLevel property
+ * value is given as NaN, the value of this network's AlignmentLevel property
+ * will be used. If the new connector's AlignmentGain property value is given as
+ * NaN, the value of this network's AlignmentGain property will be used. Return
+ * status indicates the success of the operation.
  *
  * @method OcaMediaTransportNetwork#AddSinkConnector
  * @param {IOcaMediaConnectorStatus} InitialStatus
@@ -237,7 +261,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
  */
 /**
- * Change the state of a given connector. Return status indicates the success of the operation.
+ * Change the state of a given connector. Return status indicates the success of
+ * the operation.
  *
  * @method OcaMediaTransportNetwork#ControlConnector
  * @param {number} ConnectorID
@@ -246,7 +271,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets a source connector's channel pin map. Return status indicates the success of the operation.
+ * Sets a source connector's channel pin map. Return status indicates the
+ * success of the operation.
  *
  * @method OcaMediaTransportNetwork#SetSourceConnectorPinMap
  * @param {number} ConnectorID
@@ -255,7 +281,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets a sink connector's channel pin map. Return status indicates the success of the operation.
+ * Sets a sink connector's channel pin map. Return status indicates the success
+ * of the operation.
  *
  * @method OcaMediaTransportNetwork#SetSinkConnectorPinMap
  * @param {number} ConnectorID
@@ -264,7 +291,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets a connector's  **Connection** property. Return status indicates the success of the operation.
+ * Sets a connector's **Connection** property. Return status indicates the
+ * success of the operation.
  *
  * @method OcaMediaTransportNetwork#SetConnectorConnection
  * @param {number} ConnectorID
@@ -273,7 +301,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets the Coding field of the connection descriptor of the referenced connector. Return status indicates the success of the operation.
+ * Sets the Coding field of the connection descriptor of the referenced
+ * connector. Return status indicates the success of the operation.
  *
  * @method OcaMediaTransportNetwork#SetConnectorCoding
  * @param {number} ConnectorID
@@ -282,27 +311,33 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets the Alignment Level field of a connector. Value must be between the min and max values of the AlignmentLevel property of this network. A value of NaN will cause the current value of this network's AlignmentLevel property to be used. Return status indicates the success of the operation.
+ * Sets the Alignment Level field of a connector. Value must be between the min
+ * and max values of the AlignmentLevel property of this network. A value of NaN
+ * will cause the current value of this network's AlignmentLevel property to be
+ * used. Return status indicates the success of the operation.
  *
  * @method OcaMediaTransportNetwork#SetConnectorAlignmentLevel
  * @param {number} ConnectorID
- *
  * @param {number} Level
  *
  * @returns {Promise<void>}
  */
 /**
- * For OcaMediaSinkConnectors only (not source). Sets the Alignment Gain field of the connection descriptor of the referenced connector. Value must be between the min and max values of the AlignmentGain property of this network. A value of NaN will cause the current value of the network's AlignmentGain property to be used. Return status indicates the success of the operation.
+ * For OcaMediaSinkConnectors only (not source). Sets the Alignment Gain field
+ * of the connection descriptor of the referenced connector. Value must be
+ * between the min and max values of the AlignmentGain property of this network.
+ * A value of NaN will cause the current value of the network's AlignmentGain
+ * property to be used. Return status indicates the success of the operation.
  *
  * @method OcaMediaTransportNetwork#SetConnectorAlignmentGain
  * @param {number} ConnectorID
- *
  * @param {number} Gain
  *
  * @returns {Promise<void>}
  */
 /**
- * Deletes a connector from this network. Return status indicates the success of the operation.
+ * Deletes a connector from this network. Return status indicates the success of
+ * the operation.
  *
  * @method OcaMediaTransportNetwork#DeleteConnector
  * @param {number} ID
@@ -310,7 +345,9 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the default, min, and max alignment levels for OcaMedia{Source|Sink}Connectors attached to this network. Return status indicates success of the operation.
+ * Gets the default, min, and max alignment levels for
+ * OcaMedia{Source|Sink}Connectors attached to this network. Return status
+ * indicates success of the operation.
  * The return values of this method are
  *
  * - Level of type ``number``
@@ -321,7 +358,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Gets the default, min, and max alignment gains for OcaMediaSinkConnectors attached to this network. Return status indicates success of the operation.
+ * Gets the default, min, and max alignment gains for OcaMediaSinkConnectors
+ * attached to this network. Return status indicates success of the operation.
  * The return values of this method are
  *
  * - Gain of type ``number``
@@ -332,93 +370,86 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Event indicating that a media source connector has changed. The change type indicates if the connector was added, deleted or changed.
+ * Event indicating that a media source connector has changed. The change type
+ * indicates if the connector was added, deleted or changed.
  * @member OcaMediaTransportNetwork#OnSourceConnectorChanged {Event}
- * Event indicating that a media source connector has changed. The change
- * type indicates if the connector was added, deleted or changed.
  */
 /**
- * Event indicating that a media sink connector has changed. The change type indicates if the connector was added, deleted or changed.
+ * Event indicating that a media sink connector has changed. The change type
+ * indicates if the connector was added, deleted or changed.
  * @member OcaMediaTransportNetwork#OnSinkConnectorChanged {Event}
- * Event indicating that a media sink connector has changed. The change
- * type indicates if the connector was added, deleted or changed.
  */
 /**
  * Event indicating that the status of a source or sink connector has changed.
  * @member OcaMediaTransportNetwork#OnConnectorStatusChanged {Event}
- * Event indicating that the status of a source or sink connector has
- * changed.
  */
 /**
- * This event is emitted when the property Protocol changes in the remote object.
+ * This event is emitted when the property ``Protocol`` changes in the remote object.
  * The property ``Protocol`` is described in the AES70 standard as follows.
  * Type of media transport protocol used by the network.
  *
  * @member {PropertyEvent<OcaNetworkMediaProtocol>} OcaMediaTransportNetwork#OnProtocolChanged
  */
 /**
- * This event is emitted when the property Ports changes in the remote object.
+ * This event is emitted when the property ``Ports`` changes in the remote object.
  * The property ``Ports`` is described in the AES70 standard as follows.
  * The list of ports this network has. Note that these represent network
- * channels of the media transport network. Each input port represents a
- * source (transmit) network channel, each output port represents a sink
- * (receive) network channel. Such network channels are directly linked
- * to the ports, so the first input port represents the first source
- * network channel, etc.
+ * channels of the media transport network. Each input port represents a source
+ * (transmit) network channel, each output port represents a sink (receive)
+ * network channel. Such network channels are directly linked to the ports, so
+ * the first input port represents the first source network channel, etc.
  *
  * @member {PropertyEvent<OcaPort[]>} OcaMediaTransportNetwork#OnPortsChanged
  */
 /**
- * This event is emitted when the property MaxSourceConnectors changes in the remote object.
+ * This event is emitted when the property ``MaxSourceConnectors`` changes in the remote object.
  * The property ``MaxSourceConnectors`` is described in the AES70 standard as follows.
- * The maximum number of source connectors this media transport network
- * can have (read-only property).
+ * The maximum number of source connectors this media transport network can have
+ * (read-only property).
  *
  * @member {PropertyEvent<number>} OcaMediaTransportNetwork#OnMaxSourceConnectorsChanged
  */
 /**
- * This event is emitted when the property MaxSinkConnectors changes in the remote object.
+ * This event is emitted when the property ``MaxSinkConnectors`` changes in the remote object.
  * The property ``MaxSinkConnectors`` is described in the AES70 standard as follows.
- * The maximum number of sink connectors this media transport network can
- * have (read-only property).
+ * The maximum number of sink connectors this media transport network can have
+ * (read-only property).
  *
  * @member {PropertyEvent<number>} OcaMediaTransportNetwork#OnMaxSinkConnectorsChanged
  */
 /**
- * This event is emitted when the property MaxPinsPerConnector changes in the remote object.
+ * This event is emitted when the property ``MaxPinsPerConnector`` changes in the remote object.
  * The property ``MaxPinsPerConnector`` is described in the AES70 standard as follows.
- * The maximum number of pins (channels) in a connector that this network
- * will support.
+ * The maximum number of pins (channels) in a connector that this network will
+ * support.
  *
  * @member {PropertyEvent<number>} OcaMediaTransportNetwork#OnMaxPinsPerConnectorChanged
  */
 /**
- * This event is emitted when the property MaxPortsPerPin changes in the remote object.
+ * This event is emitted when the property ``MaxPortsPerPin`` changes in the remote object.
  * The property ``MaxPortsPerPin`` is described in the AES70 standard as follows.
- * The maximum number of ports per pin that this network will support.
- * Value of zero indicates there is no specific limit.
+ * The maximum number of ports per pin that this network will support. Value of
+ * zero indicates there is no specific limit.
  *
  * @member {PropertyEvent<number>} OcaMediaTransportNetwork#OnMaxPortsPerPinChanged
  */
 /**
- * This event is emitted when the property AlignmentLevel changes in the remote object.
+ * This event is emitted when the property ``AlignmentLevel`` changes in the remote object.
  * The property ``AlignmentLevel`` is described in the AES70 standard as follows.
  * Default alignment level value for newly-created
- * <b>OcaMedia{Source|Sink}Connector </b>elements. The min and max values
- * of this property define respectively the lowest and highest alignment
- * level values that may be specified when adding connectors to this
- * network.
+ * **OcaMedia{Source|Sink}Connector** elements. The min and max values of this
+ * property define respectively the lowest and highest alignment level values
+ * that may be specified when adding connectors to this network.
  *
  * @member {PropertyEvent<number>} OcaMediaTransportNetwork#OnAlignmentLevelChanged
  */
 /**
- * This event is emitted when the property AlignmentGain changes in the remote object.
+ * This event is emitted when the property ``AlignmentGain`` changes in the remote object.
  * The property ``AlignmentGain`` is described in the AES70 standard as follows.
- * Default value of AlignmentGain for newly-created
- * OcaMediaSinkConnectors attached to this network. The min and max
- * values of this property define respectively the lowest and highest
- * alignment level values that may be specified when adding sink
- * connectors to this network.
+ * Default value of AlignmentGain for newly-created OcaMediaSinkConnectors
+ * attached to this network. The min and max values of this property define
+ * respectively the lowest and highest alignment level values that may be
+ * specified when adding sink connectors to this network.
  *
  * @member {PropertyEvent<number>} OcaMediaTransportNetwork#OnAlignmentGainChanged
  */

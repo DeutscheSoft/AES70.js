@@ -17,7 +17,8 @@ export declare class OcaTemperatureActuator extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Temperature property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Temperature property. The return value indicates
+   * whether the property was successfully retrieved.
    * The return values of this method are
    *
    * - temperature of type ``number``
@@ -30,7 +31,8 @@ export declare class OcaTemperatureActuator extends OcaActuator {
   GetTemperature(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Temperature property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Temperature property. The return value indicates
+   * whether the property was successfully set.
    *
    * @method OcaTemperatureActuator#SetTemperature
    * @param {number} temperature

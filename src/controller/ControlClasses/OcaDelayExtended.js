@@ -4,7 +4,9 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaDelay } from './OcaDelay.js';
 
 /**
- * Signal delay - extended version. Allows setting delay value in various units. Note that the inherited property 04p01 DelayTime is also supported by this class and reflects actual achieved delay in seconds.
+ * Signal delay - extended version. Allows setting delay value in various units.
+ * Note that the inherited property 04p01 DelayTime is also supported by this
+ * class and reflects actual achieved delay in seconds.
  * @extends OcaDelay
  * @class OcaDelayExtended
  */
@@ -24,7 +26,8 @@ export const OcaDelayExtended = make_control_class(
 );
 
 /**
- * Gets the value of the DelayValue property. The return value indicates whether the property was successfully retrieved.
+ * Gets the value of the DelayValue property. The return value indicates whether
+ * the property was successfully retrieved.
  * The return values of this method are
  *
  * - Value of type ``IOcaDelayValue``
@@ -35,7 +38,8 @@ export const OcaDelayExtended = make_control_class(
  * @returns {Promise<Arguments<OcaDelayValue,OcaDelayValue,OcaDelayValue>>}
  */
 /**
- * Sets the value of the DelayValue property. The return value indicates whether the property was successfully set.
+ * Sets the value of the DelayValue property. The return value indicates whether
+ * the property was successfully set.
  *
  * @method OcaDelayExtended#SetDelayValue
  * @param {IOcaDelayValue} Value
@@ -43,7 +47,8 @@ export const OcaDelayExtended = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Return current delay setting, converted to given units. The return value indicates whether the method has succeeded.
+ * Return current delay setting, converted to given units. The return value
+ * indicates whether the method has succeeded.
  *
  * @method OcaDelayExtended#GetDelayValueConverted
  * @param {IOcaDelayUnit} UoM
@@ -52,7 +57,7 @@ export const OcaDelayExtended = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaDelayValue`.
  */
 /**
- * This event is emitted when the property DelayValue changes in the remote object.
+ * This event is emitted when the property ``DelayValue`` changes in the remote object.
  * The property ``DelayValue`` is described in the AES70 standard as follows.
  * Delay value.
  *

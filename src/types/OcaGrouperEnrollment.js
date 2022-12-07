@@ -9,12 +9,14 @@ export class OcaGrouperEnrollment {
    */
   constructor(GroupIndex, CitizenIndex) {
     /**
-     * Grouper's index of group in which the citizen identified by CitizenIndex is enrolled.
+     * Grouper's index of group in which the citizen identified by CitizenIndex
+     * is enrolled.
      * @type number
      */
     this.GroupIndex = GroupIndex;
     /**
-     * Grouper's index of a citizen enrolled in the group identified by GroupIndex.
+     * Grouper's index of a citizen enrolled in the group identified by
+     * GroupIndex.
      * @type number
      */
     this.CitizenIndex = CitizenIndex;

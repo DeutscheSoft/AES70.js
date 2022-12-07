@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Select mode of  **OcaGrouper** : master-slave or peer-to-peer
+ * Select mode of **OcaGrouper**: master-slave or peer-to-peer
  * @class OcaGrouperMode
  */
 export class OcaGrouperMode {

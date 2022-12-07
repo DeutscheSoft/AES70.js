@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Bitset that describes the contents of an  **OcaSearchResult**
+ * Bitset that describes the contents of an **OcaSearchResult**
  * @enum {number}
  * @readonly
  */

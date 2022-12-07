@@ -27,7 +27,9 @@ export declare class OcaSwitch extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Position property and, optionally, its implementation min and max. The return value indicates whether the data was successfully retrieved.
+   * Gets the value of the Position property and, optionally, its implementation
+   * min and max. The return value indicates whether the data was successfully
+   * retrieved.
    * The return values of this method are
    *
    * - position of type ``number``
@@ -40,7 +42,8 @@ export declare class OcaSwitch extends OcaActuator {
   GetPosition(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Position property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Position property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaSwitch#SetPosition
    * @param {number} position
@@ -50,7 +53,8 @@ export declare class OcaSwitch extends OcaActuator {
   SetPosition(position: number): Promise<void>;
 
   /**
-   * Gets the name assigned to a given switch position. The return value indicates whether the name was successfully retrieved.
+   * Gets the name assigned to a given switch position. The return value
+   * indicates whether the name was successfully retrieved.
    *
    * @method OcaSwitch#GetPositionName
    * @param {number} Index
@@ -61,11 +65,11 @@ export declare class OcaSwitch extends OcaActuator {
   GetPositionName(Index: number): Promise<string>;
 
   /**
-   * Assigns a name to a given switch position. The return value indicates whether the name was successfully assigned.
+   * Assigns a name to a given switch position. The return value indicates
+   * whether the name was successfully assigned.
    *
    * @method OcaSwitch#SetPositionName
    * @param {number} Index
-   *
    * @param {string} Name
    *
    * @returns {Promise<void>}
@@ -73,7 +77,8 @@ export declare class OcaSwitch extends OcaActuator {
   SetPositionName(Index: number, Name: string): Promise<void>;
 
   /**
-   * Gets list of names assigned to the switch's positions. The return value indicates whether the names were successfully retrieved.
+   * Gets list of names assigned to the switch's positions. The return value
+   * indicates whether the names were successfully retrieved.
    *
    * @method OcaSwitch#GetPositionNames
    * @returns {Promise<string[]>}
@@ -82,7 +87,8 @@ export declare class OcaSwitch extends OcaActuator {
   GetPositionNames(): Promise<string[]>;
 
   /**
-   * Assigns names to the switch's positions. The return value indicates whether the names were successfully assigned.
+   * Assigns names to the switch's positions. The return value indicates whether
+   * the names were successfully assigned.
    *
    * @method OcaSwitch#SetPositionNames
    * @param {string[]} Names
@@ -92,7 +98,8 @@ export declare class OcaSwitch extends OcaActuator {
   SetPositionNames(Names: string[]): Promise<void>;
 
   /**
-   * Gets the Enabled flag assigned to a given switch position. The return value indicates whether the flag was successfully retrieved.
+   * Gets the Enabled flag assigned to a given switch position. The return value
+   * indicates whether the flag was successfully retrieved.
    *
    * @method OcaSwitch#GetPositionEnabled
    * @param {number} Index
@@ -103,11 +110,11 @@ export declare class OcaSwitch extends OcaActuator {
   GetPositionEnabled(Index: number): Promise<boolean>;
 
   /**
-   * Sets the Enabled flag assigned to a given switch position. The return value indicates whether the flag was successfully set.
+   * Sets the Enabled flag assigned to a given switch position. The return value
+   * indicates whether the flag was successfully set.
    *
    * @method OcaSwitch#SetPositionEnabled
    * @param {number} Index
-   *
    * @param {boolean} enabled
    *
    * @returns {Promise<void>}
@@ -115,7 +122,8 @@ export declare class OcaSwitch extends OcaActuator {
   SetPositionEnabled(Index: number, enabled: boolean): Promise<void>;
 
   /**
-   * Gets list of Enabled flags assigned to the switch's positions. The return value indicates whether the flags were successfully retrieved.
+   * Gets list of Enabled flags assigned to the switch's positions. The return
+   * value indicates whether the flags were successfully retrieved.
    *
    * @method OcaSwitch#GetPositionEnableds
    * @returns {Promise<boolean[]>}
@@ -124,7 +132,8 @@ export declare class OcaSwitch extends OcaActuator {
   GetPositionEnableds(): Promise<boolean[]>;
 
   /**
-   * Sets list of Enabled flags for the switch's positions. The return value indicates whether the flags were successfully set.
+   * Sets list of Enabled flags for the switch's positions. The return value
+   * indicates whether the flags were successfully set.
    *
    * @method OcaSwitch#SetPositionEnableds
    * @param {boolean[]} enableds

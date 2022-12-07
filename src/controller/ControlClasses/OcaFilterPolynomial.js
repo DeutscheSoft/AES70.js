@@ -5,7 +5,8 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * A generic Z-domain rational polynomial filter section:  _A(0) + A(1)z + A(2)z^2 + A(3)z^3 + ..._  B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
+ * A generic Z-domain rational polynomial filter section: A(0) + A(1)z + A(2)z^2
+ * + A(3)z^3 + ... B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
  * @extends OcaActuator
  * @class OcaFilterPolynomial
  */
@@ -46,7 +47,6 @@ export const OcaFilterPolynomial = make_control_class(
  *
  * @method OcaFilterPolynomial#SetCoefficients
  * @param {number[]} A
- *
  * @param {number[]} B
  *
  * @returns {Promise<void>}
@@ -71,31 +71,32 @@ export const OcaFilterPolynomial = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the maximum allowable order (= max number of array elements in numerator and for denominator arrays)
+ * Gets the maximum allowable order (= max number of array elements in numerator
+ * and for denominator arrays)
  *
  * @method OcaFilterPolynomial#GetMaxOrder
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * This event is emitted when the property A changes in the remote object.
+ * This event is emitted when the property ``A`` changes in the remote object.
  * The property ``A`` is described in the AES70 standard as follows.
  * Numerator - "A"
  *
  * @member {PropertyEvent<number[]>} OcaFilterPolynomial#OnAChanged
  */
 /**
- * This event is emitted when the property B changes in the remote object.
+ * This event is emitted when the property ``B`` changes in the remote object.
  * The property ``B`` is described in the AES70 standard as follows.
  * Denominator - "B"
  *
  * @member {PropertyEvent<number[]>} OcaFilterPolynomial#OnBChanged
  */
 /**
- * This event is emitted when the property SampleRate changes in the remote object.
+ * This event is emitted when the property ``SampleRate`` changes in the remote object.
  * The property ``SampleRate`` is described in the AES70 standard as follows.
- * Sample rate inside the filter. We can't assume it's the same as the
- * device input or output rate.
+ * Sample rate inside the filter. We can't assume it's the same as the device
+ * input or output rate.
  *
  * @member {PropertyEvent<number>} OcaFilterPolynomial#OnSampleRateChanged
  */

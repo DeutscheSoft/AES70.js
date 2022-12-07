@@ -22,7 +22,8 @@ export declare class OcaAgent extends OcaRoot {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Label property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaAgent#GetLabel
    * @returns {Promise<string>}
@@ -31,7 +32,8 @@ export declare class OcaAgent extends OcaRoot {
   GetLabel(): Promise<string>;
 
   /**
-   * Sets the value of the Label property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Label property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaAgent#SetLabel
    * @param {string} Label
@@ -41,7 +43,8 @@ export declare class OcaAgent extends OcaRoot {
   SetLabel(Label: string): Promise<void>;
 
   /**
-   * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Owner property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaAgent#GetOwner
    * @returns {Promise<number>}
@@ -50,7 +53,8 @@ export declare class OcaAgent extends OcaRoot {
   GetOwner(): Promise<number>;
 
   /**
-   * Returns path from the given object down to root. The return value indicates whether the operation succeeded. Added in version 2.
+   * Returns path from the given object down to root. The return value indicates
+   * whether the operation succeeded. Added in version 2.
    * The return values of this method are
    *
    * - NamePath of type ``string[]``

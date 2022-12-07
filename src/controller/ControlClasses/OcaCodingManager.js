@@ -5,12 +5,14 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 
 /**
- * Optional manager that collects all media decoders/encoders (Codecs) which the device owns.
+ * Optional manager that collects all media decoders/encoders (Codecs) which the
+ * device owns.
  *
- *  - Must be instantiated in every device that implements more than one media encoding scheme and/or more than one media decoding scheme.
- *
+ *  - Must be instantiated in every device that implements more than one media
+ *    encoding scheme and/or more than one media decoding scheme.
  *
  *  - If instantiated, object number must be 12.
+ *
  *
  * @extends OcaManager
  * @class OcaCodingManager
@@ -49,32 +51,34 @@ export const OcaCodingManager = make_control_class(
 );
 
 /**
- * Retrieves the map of available encoding schemes, indexed by scheme ID. Return value indicates success of the retrieval.
+ * Retrieves the map of available encoding schemes, indexed by scheme ID. Return
+ * value indicates success of the retrieval.
  *
  * @method OcaCodingManager#GetAvailableEncodingSchemes
  * @returns {Promise<Map<number, string>>}
  *   A promise which resolves to a single value of type ``Map<number, string>``.
  */
 /**
- * Retrieves the map of available decoding schemes, indexed by scheme ID. Return value indicates success of the retrieval.
+ * Retrieves the map of available decoding schemes, indexed by scheme ID. Return
+ * value indicates success of the retrieval.
  *
  * @method OcaCodingManager#GetAvailableDecodingSchemes
  * @returns {Promise<Map<number, string>>}
  *   A promise which resolves to a single value of type ``Map<number, string>``.
  */
 /**
- * This event is emitted when the property AvailableEncodingSchemes changes in the remote object.
+ * This event is emitted when the property ``AvailableEncodingSchemes`` changes in the remote object.
  * The property ``AvailableEncodingSchemes`` is described in the AES70 standard as follows.
- * Map of names of media encoding schemes the device supports, indexed by
- * scheme ID.
+ * Map of names of media encoding schemes the device supports, indexed by scheme
+ * ID.
  *
  * @member {PropertyEvent<Map<number, string>>} OcaCodingManager#OnAvailableEncodingSchemesChanged
  */
 /**
- * This event is emitted when the property AvailableDecodingSchemes changes in the remote object.
+ * This event is emitted when the property ``AvailableDecodingSchemes`` changes in the remote object.
  * The property ``AvailableDecodingSchemes`` is described in the AES70 standard as follows.
- * Map of names of media decoding schemes the device supports, indexed by
- * scheme ID.
+ * Map of names of media decoding schemes the device supports, indexed by scheme
+ * ID.
  *
  * @member {PropertyEvent<Map<number, string>>} OcaCodingManager#OnAvailableDecodingSchemesChanged
  */

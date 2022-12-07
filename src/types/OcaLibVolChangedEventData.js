@@ -4,7 +4,8 @@
 
 export class OcaLibVolChangedEventData {
   /**
-   * Event data for the  **OcaLibVolChanged** event, which signals a change in an  **OcaLibrary.Volumes**  property.
+   * Event data for the **OcaLibVolChanged** event, which signals a change in an
+   * **OcaLibrary.Volumes** property.
    * @class OcaLibVolChangedEventData
    */
   constructor(VolumeID, ChangeType) {

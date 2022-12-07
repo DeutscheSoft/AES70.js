@@ -19,7 +19,8 @@ export class OcaGrouperGroup {
      */
     this.Name = Name;
     /**
-     * Object number of the group's proxy. The proxy's class is the same as the Grouper's citizen class.
+     * Object number of the group's proxy. The proxy's class is the same as the
+     * Grouper's citizen class.
      * @type number
      */
     this.ProxyONo = ProxyONo;

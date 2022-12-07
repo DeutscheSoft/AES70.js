@@ -12,8 +12,8 @@ import { OcaManager } from './OcaManager';
  *
  *  - Must be instantiated once in every device.
  *
- *
  *  - Must have object number 1.
+ *
  *
  * @extends OcaManager
  * @class OcaDeviceManager
@@ -87,7 +87,8 @@ export declare class OcaDeviceManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the OcaVersion property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the OcaVersion property. The return value indicates
+   * whether the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetOcaVersion
    * @returns {Promise<number>}
@@ -96,7 +97,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetOcaVersion(): Promise<number>;
 
   /**
-   * Gets the model GUID. The return value indicates whether the GUID was successfully retrieved.
+   * Gets the model GUID. The return value indicates whether the GUID was
+   * successfully retrieved.
    *
    * @method OcaDeviceManager#GetModelGUID
    * @returns {Promise<OcaModelGUID>}
@@ -105,7 +107,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetModelGUID(): Promise<OcaModelGUID>;
 
   /**
-   * Gets the value of the SerialNumber property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the SerialNumber property. The return value indicates
+   * whether the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetSerialNumber
    * @returns {Promise<string>}
@@ -114,7 +117,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetSerialNumber(): Promise<string>;
 
   /**
-   * Gets the device name. The return value indicates whether the property was successfully retrieved.
+   * Gets the device name. The return value indicates whether the property was
+   * successfully retrieved.
    *
    * @method OcaDeviceManager#GetDeviceName
    * @returns {Promise<string>}
@@ -123,7 +127,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetDeviceName(): Promise<string>;
 
   /**
-   * Sets the device name. The return value indicates whether the property was successfully set.
+   * Sets the device name. The return value indicates whether the property was
+   * successfully set.
    *
    * @method OcaDeviceManager#SetDeviceName
    * @param {string} Name
@@ -133,7 +138,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetDeviceName(Name: string): Promise<void>;
 
   /**
-   * Gets the model description. The return value indicates whether the description was successfully retrieved.
+   * Gets the model description. The return value indicates whether the
+   * description was successfully retrieved.
    *
    * @method OcaDeviceManager#GetModelDescription
    * @returns {Promise<OcaModelDescription>}
@@ -142,7 +148,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetModelDescription(): Promise<OcaModelDescription>;
 
   /**
-   * Gets the value of the Role property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Role property. The return value indicates whether the
+   * property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetDeviceRole
    * @returns {Promise<string>}
@@ -151,7 +158,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetDeviceRole(): Promise<string>;
 
   /**
-   * Sets the value of the Role property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Role property. The return value indicates whether the
+   * property was successfully set.
    *
    * @method OcaDeviceManager#SetDeviceRole
    * @param {string} role
@@ -161,7 +169,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetDeviceRole(role: string): Promise<void>;
 
   /**
-   * Gets the value of the UserInventoryCode property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the UserInventoryCode property. The return value
+   * indicates whether the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetUserInventoryCode
    * @returns {Promise<string>}
@@ -170,7 +179,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetUserInventoryCode(): Promise<string>;
 
   /**
-   * Sets the value of the UserInventoryCode property. The return value indicates whether the property was successfully set.
+   * Sets the value of the UserInventoryCode property. The return value
+   * indicates whether the property was successfully set.
    *
    * @method OcaDeviceManager#SetUserInventoryCode
    * @param {string} Code
@@ -180,7 +190,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetUserInventoryCode(Code: string): Promise<void>;
 
   /**
-   * Gets the value of the Enabled property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Enabled property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetEnabled
    * @returns {Promise<boolean>}
@@ -189,7 +200,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetEnabled(): Promise<boolean>;
 
   /**
-   * Sets the value of the Enabled property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Enabled property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaDeviceManager#SetEnabled
    * @param {boolean} enabled
@@ -199,7 +211,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetEnabled(enabled: boolean): Promise<void>;
 
   /**
-   * Gets the value of the State property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the State property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetState
    * @returns {Promise<OcaDeviceState>}
@@ -208,11 +221,13 @@ export declare class OcaDeviceManager extends OcaManager {
   GetState(): Promise<OcaDeviceState>;
 
   /**
-   * Sets the value of the reset key of the device. The return value indicates whether the property was successfully set. Note that the device manager must inform the CAP gateway of this key (via the host interface), since the CAP gateway will check for and handle the special reset message.
+   * Sets the value of the reset key of the device. The return value indicates
+   * whether the property was successfully set. Note that the device manager
+   * must inform the CAP gateway of this key (via the host interface), since the
+   * CAP gateway will check for and handle the special reset message.
    *
    * @method OcaDeviceManager#SetResetKey
    * @param {Uint8Array} Key
-   *
    * @param {Uint8Array} Address
    *
    * @returns {Promise<void>}
@@ -220,7 +235,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetResetKey(Key: Uint8Array, Address: Uint8Array): Promise<void>;
 
   /**
-   * Gets the value of the ResetCause property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the ResetCause property. The return value indicates
+   * whether the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetResetCause
    * @returns {Promise<OcaResetCause>}
@@ -229,7 +245,13 @@ export declare class OcaDeviceManager extends OcaManager {
   GetResetCause(): Promise<OcaResetCause>;
 
   /**
-   * Clears the ResetCause property, i.e. resets it to the default value 'PowerOn'. Must be used after the reset cause has been read out to ensure differentation between reconnects due to network loss and reconnects due to external or internal reset. Offered as a separate method (instead of implicitly clearing the cause after it has been read out) to accomodate systems that have multiple controllers. The return value indicates whether the property was successfully retrieved.
+   * Clears the ResetCause property, i.e. resets it to the default value
+   * 'PowerOn'. Must be used after the reset cause has been read out to ensure
+   * differentation between reconnects due to network loss and reconnects due to
+   * external or internal reset. Offered as a separate method (instead of
+   * implicitly clearing the cause after it has been read out) to accomodate
+   * systems that have multiple controllers. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaDeviceManager#ClearResetCause
    * @returns {Promise<void>}
@@ -237,7 +259,8 @@ export declare class OcaDeviceManager extends OcaManager {
   ClearResetCause(): Promise<void>;
 
   /**
-   * Gets the value of property  **Message** . Return value indicates whether value was successfully retrieved.
+   * Gets the value of property **Message**. Return value indicates whether
+   * value was successfully retrieved.
    *
    * @method OcaDeviceManager#GetMessage
    * @returns {Promise<string>}
@@ -246,7 +269,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetMessage(): Promise<string>;
 
   /**
-   * Set arbitrary text message into  **Message** property. The return value indicates whether the value was successfully set.
+   * Set arbitrary text message into **Message** property. The return value
+   * indicates whether the value was successfully set.
    *
    * @method OcaDeviceManager#SetMessage
    * @param {string} Text
@@ -256,16 +280,18 @@ export declare class OcaDeviceManager extends OcaManager {
   SetMessage(Text: string): Promise<void>;
 
   /**
-   * Retrive the list of descriptors of managers instantiated in this device. The return value indicates whether the retrieval was successful.
+   * Retrive the list of descriptors of managers instantiated in this device.
+   * The return value indicates whether the retrieval was successful.
    *
    * @method OcaDeviceManager#GetManagers
    * @returns {Promise<OcaManagerDescriptor[]>}
-   *   A promise which resolves to a single value of type ``OcaManagerDescriptor[]``.
+   *   A promise which resolves to a single value of type :class:`OcaManagerDescriptor[]`.
    */
   GetManagers(): Promise<OcaManagerDescriptor[]>;
 
   /**
-   * Gets the value of property  **DeviceRevisionID** . Return value indicates whether value was successfully retrieved.
+   * Gets the value of property **DeviceRevisionID**. Return value indicates
+   * whether value was successfully retrieved.
    *
    * @method OcaDeviceManager#GetDeviceRevisionID
    * @returns {Promise<string>}

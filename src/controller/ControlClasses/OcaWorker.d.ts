@@ -7,7 +7,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaRoot } from './OcaRoot';
 
 /**
- * Abstract base class for classes that represent the device's application and support functions.
+ * Abstract base class for classes that represent the device's application and
+ * support functions.
  * @extends OcaRoot
  * @class OcaWorker
  */
@@ -40,7 +41,8 @@ export declare class OcaWorker extends OcaRoot {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Enabled property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Enabled property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaWorker#GetEnabled
    * @returns {Promise<boolean>}
@@ -49,7 +51,8 @@ export declare class OcaWorker extends OcaRoot {
   GetEnabled(): Promise<boolean>;
 
   /**
-   * Sets the value of the Enabled property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Enabled property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaWorker#SetEnabled
    * @param {boolean} enabled
@@ -59,7 +62,8 @@ export declare class OcaWorker extends OcaRoot {
   SetEnabled(enabled: boolean): Promise<void>;
 
   /**
-   * Adds an input or output port.. The return value indicates whether the port was successfully added.
+   * Adds an input or output port.. The return value indicates whether the port
+   * was successfully added.
    *
    * @method OcaWorker#AddPort
    * @param {string} Label
@@ -71,7 +75,8 @@ export declare class OcaWorker extends OcaRoot {
   AddPort(Label: string, Mode: IOcaPortMode): Promise<OcaPortID>;
 
   /**
-   * Deletes an input or output port.. The return value indicates whether the port was successfully deleted.
+   * Deletes an input or output port.. The return value indicates whether the
+   * port was successfully deleted.
    *
    * @method OcaWorker#DeletePort
    * @param {IOcaPortID} ID
@@ -81,16 +86,18 @@ export declare class OcaWorker extends OcaRoot {
   DeletePort(ID: IOcaPortID): Promise<void>;
 
   /**
-   * Gets the list of ports owned by the Worker object. The return value indicates whether the list was successfully retrieved.
+   * Gets the list of ports owned by the Worker object. The return value
+   * indicates whether the list was successfully retrieved.
    *
    * @method OcaWorker#GetPorts
    * @returns {Promise<OcaPort[]>}
-   *   A promise which resolves to a single value of type ``OcaPort[]``.
+   *   A promise which resolves to a single value of type :class:`OcaPort[]`.
    */
   GetPorts(): Promise<OcaPort[]>;
 
   /**
-   * Gets the name of the designated port. The return value indicates whether the name was successfully retrieved.
+   * Gets the name of the designated port. The return value indicates whether
+   * the name was successfully retrieved.
    *
    * @method OcaWorker#GetPortName
    * @param {IOcaPortID} PortID
@@ -101,7 +108,8 @@ export declare class OcaWorker extends OcaRoot {
   GetPortName(PortID: IOcaPortID): Promise<string>;
 
   /**
-   * Sets the name of the designated port. The return value indicates whether the name was successfully set.
+   * Sets the name of the designated port. The return value indicates whether
+   * the name was successfully set.
    *
    * @method OcaWorker#SetPortName
    * @param {IOcaPortID} PortID
@@ -112,7 +120,8 @@ export declare class OcaWorker extends OcaRoot {
   SetPortName(PortID: IOcaPortID, Name: string): Promise<void>;
 
   /**
-   * Gets the value of the Label property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Label property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaWorker#GetLabel
    * @returns {Promise<string>}
@@ -121,7 +130,8 @@ export declare class OcaWorker extends OcaRoot {
   GetLabel(): Promise<string>;
 
   /**
-   * Sets the value of the Label property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Label property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaWorker#SetLabel
    * @param {string} label
@@ -131,7 +141,8 @@ export declare class OcaWorker extends OcaRoot {
   SetLabel(label: string): Promise<void>;
 
   /**
-   * Gets the value of the Owner property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Owner property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaWorker#GetOwner
    * @returns {Promise<number>}
@@ -140,7 +151,8 @@ export declare class OcaWorker extends OcaRoot {
   GetOwner(): Promise<number>;
 
   /**
-   * Gets the value of the Latency property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Latency property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaWorker#GetLatency
    * @returns {Promise<number>}
@@ -149,7 +161,8 @@ export declare class OcaWorker extends OcaRoot {
   GetLatency(): Promise<number>;
 
   /**
-   * Sets the value of the Latency property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Latency property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaWorker#SetLatency
    * @param {number} latency
@@ -159,7 +172,8 @@ export declare class OcaWorker extends OcaRoot {
   SetLatency(latency: number): Promise<void>;
 
   /**
-   * Returns path from the given object down to root. The return value indicates whether the operation succeeded. Added in version 2.
+   * Returns path from the given object down to root. The return value indicates
+   * whether the operation succeeded. Added in version 2.
    * The return values of this method are
    *
    * - NamePath of type ``string[]``

@@ -48,14 +48,16 @@ export const OcaDynamicsDetector = make_control_class(
 );
 
 /**
- * Gets the value of the Law property. Return status indicates whether the value was successfully retrieved.
+ * Gets the value of the Law property. Return status indicates whether the value
+ * was successfully retrieved.
  *
  * @method OcaDynamicsDetector#GetLaw
  * @returns {Promise<OcaLevelDetectionLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelDetectionLaw`.
  */
 /**
- * Sets the value of the Law property. Return status indicates whether the value was successfully set.
+ * Sets the value of the Law property. Return status indicates whether the value
+ * was successfully set.
  *
  * @method OcaDynamicsDetector#SetLaw
  * @param {IOcaLevelDetectionLaw} Law
@@ -63,7 +65,8 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the AttackTime property. The return value indicates if the value was successfully retrieved.
+ * Gets the value of the AttackTime property. The return value indicates if the
+ * value was successfully retrieved.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -74,7 +77,8 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the AttackTime property. The return value indicates whether the property was successfully set.
+ * Sets the value of the AttackTime property. The return value indicates whether
+ * the property was successfully set.
  *
  * @method OcaDynamicsDetector#SetAttackTime
  * @param {number} Time
@@ -82,7 +86,8 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ReleaseTime property. The return value indicates if the value was successfully retrieved.
+ * Gets the value of the ReleaseTime property. The return value indicates if the
+ * value was successfully retrieved.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -93,7 +98,8 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the ReleaseTime property. The return value indicates whether the property was successfully set.
+ * Sets the value of the ReleaseTime property. The return value indicates
+ * whether the property was successfully set.
  *
  * @method OcaDynamicsDetector#SetReleaseTime
  * @param {number} Time
@@ -101,7 +107,8 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the HoldTime property. The return value indicates if the value was successfully retrieved.
+ * Gets the value of the HoldTime property. The return value indicates if the
+ * value was successfully retrieved.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -112,7 +119,8 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the HoldTime property. The return value indicates whether the property was successfully set.
+ * Sets the value of the HoldTime property. The return value indicates whether
+ * the property was successfully set.
  *
  * @method OcaDynamicsDetector#SetHoldTime
  * @param {number} Time
@@ -120,42 +128,42 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets some or all detector parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+ * Sets some or all detector parameters. The return value indicates if the
+ * parameters were successfully set. The action of this method is atomic - if
+ * any of the value changes fails, none of the changes are made.
  *
  * @method OcaDynamicsDetector#SetMultiple
  * @param {IOcaParameterMask} Mask
  * @param {IOcaLevelDetectionLaw} Law
  * @param {number} AttackTime
- *
  * @param {number} ReleaseTime
- *
  * @param {number} HoldTime
  *
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property Law changes in the remote object.
+ * This event is emitted when the property ``Law`` changes in the remote object.
  * The property ``Law`` is described in the AES70 standard as follows.
  * Level detection law: RMS, Peak, possibly others
  *
  * @member {PropertyEvent<OcaLevelDetectionLaw>} OcaDynamicsDetector#OnLawChanged
  */
 /**
- * This event is emitted when the property AttackTime changes in the remote object.
+ * This event is emitted when the property ``AttackTime`` changes in the remote object.
  * The property ``AttackTime`` is described in the AES70 standard as follows.
  * Detector attack time in seconds.
  *
  * @member {PropertyEvent<number>} OcaDynamicsDetector#OnAttackTimeChanged
  */
 /**
- * This event is emitted when the property ReleaseTime changes in the remote object.
+ * This event is emitted when the property ``ReleaseTime`` changes in the remote object.
  * The property ``ReleaseTime`` is described in the AES70 standard as follows.
  * Detector release time in seconds.
  *
  * @member {PropertyEvent<number>} OcaDynamicsDetector#OnReleaseTimeChanged
  */
 /**
- * This event is emitted when the property HoldTime changes in the remote object.
+ * This event is emitted when the property ``HoldTime`` changes in the remote object.
  * The property ``HoldTime`` is described in the AES70 standard as follows.
  * Detector hold time in seconds.
  *

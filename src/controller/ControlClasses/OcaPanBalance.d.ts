@@ -22,7 +22,8 @@ export declare class OcaPanBalance extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the Position property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the Position property. The return value
+   * indicates whether the data was successfully retrieved.
    * The return values of this method are
    *
    * - Position of type ``number``
@@ -35,7 +36,8 @@ export declare class OcaPanBalance extends OcaActuator {
   GetPosition(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Position property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Position property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaPanBalance#SetPosition
    * @param {number} Position
@@ -45,7 +47,8 @@ export declare class OcaPanBalance extends OcaActuator {
   SetPosition(Position: number): Promise<void>;
 
   /**
-   * Gets the value and limits of the MidpointGain property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the MidpointGain property. The return value
+   * indicates whether the data was successfully retrieved.
    * The return values of this method are
    *
    * - Gain of type ``number``
@@ -58,7 +61,8 @@ export declare class OcaPanBalance extends OcaActuator {
   GetMidpointGain(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the MidpointGain property. The return value indicates whether the property was successfully set.
+   * Sets the value of the MidpointGain property. The return value indicates
+   * whether the property was successfully set.
    *
    * @method OcaPanBalance#SetMidpointGain
    * @param {number} Gain

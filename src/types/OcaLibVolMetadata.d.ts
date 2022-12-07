@@ -45,7 +45,7 @@ export declare interface IOcaLibVolMetadata {
 
 export declare class OcaLibVolMetadata implements IOcaLibVolMetadata {
   /**
-   * Descriptor of a library volume. See  **03 OcaLibrary**  for explanation.
+   * Descriptor of a library volume. See **03 OcaLibrary** for explanation.
    * @class OcaLibVolMetadata
    */
   constructor(

@@ -23,10 +23,12 @@ export declare interface IOcaLibVolChangedEventData {
 export declare class OcaLibVolChangedEventData
   implements IOcaLibVolChangedEventData {
   /**
-   * Event data for the  **OcaLibVolChanged** event, which signals a change in an  **OcaLibrary.Volumes**  property.
+   * Event data for the **OcaLibVolChanged** event, which signals a change in an
+   * **OcaLibrary.Volumes** property.
    * @class OcaLibVolChangedEventData
    */
   constructor(VolumeID: number, ChangeType: OcaPropertyChangeType);
+
   /**
    * ID of library volume that changed.
    * @type number

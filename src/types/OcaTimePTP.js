@@ -4,12 +4,16 @@
 
 export class OcaTimePTP {
   /**
-   * An absolute or relative PTP time. Format is standard PTP format: - 48 bit integer seconds - 32 bit integer nanoseconds PLUS a boolean sign (positive=TRUE) field. Absolute times are always positive. Relative times may be positive or negative.
+   * An absolute or relative PTP time. Format is standard PTP format: - 48 bit
+   * integer seconds - 32 bit integer nanoseconds PLUS a boolean sign
+   * (positive=TRUE) field. Absolute times are always positive. Relative times
+   * may be positive or negative.
    * @class OcaTimePTP
    */
   constructor(Negative, Seconds, Nanoseconds) {
     /**
-     * TRUE if and only if time value is negative. Absolute times are always positive.
+     * TRUE if and only if time value is negative. Absolute times are always
+     * positive.
      * @type boolean
      */
     this.Negative = Negative;

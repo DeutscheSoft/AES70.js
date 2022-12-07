@@ -2,7 +2,8 @@
  * This file has been generated.
  */
 /**
- * enum that describes whether a port is a source (= sends program into the network; "talker") or sink (=receives program from the network; "listener")
+ * enum that describes whether a port is a source (= sends program into the
+ * network; "talker") or sink (=receives program from the network; "listener")
  * @class OcaNetworkMediaSourceOrSink
  */
 export class OcaNetworkMediaSourceOrSink {

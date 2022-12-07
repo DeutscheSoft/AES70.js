@@ -17,7 +17,8 @@ export declare class OcaGain extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the Gain property. The return value indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the Gain property. The return value indicates
+   * whether the data was successfully retrieved.
    * The return values of this method are
    *
    * - Gain of type ``number``
@@ -30,7 +31,8 @@ export declare class OcaGain extends OcaActuator {
   GetGain(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Gain property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Gain property. The return value indicates whether the
+   * property was successfully set.
    *
    * @method OcaGain#SetGain
    * @param {number} Gain

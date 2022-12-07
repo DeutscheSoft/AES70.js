@@ -16,7 +16,8 @@ export declare class OcaBitstringActuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the number of bits in the string. The return value indicates whether the property was successfully gathered.
+   * Gets the number of bits in the string. The return value indicates whether
+   * the property was successfully gathered.
    *
    * @method OcaBitstringActuator#GetNrBits
    * @returns {Promise<number>}
@@ -25,7 +26,8 @@ export declare class OcaBitstringActuator extends OcaBasicActuator {
   GetNrBits(): Promise<number>;
 
   /**
-   * Gets the bit value of the given bit. The return value indicates whether the property was successfully gathered.
+   * Gets the bit value of the given bit. The return value indicates whether the
+   * property was successfully gathered.
    *
    * @method OcaBitstringActuator#GetBit
    * @param {number} bitNr
@@ -36,11 +38,11 @@ export declare class OcaBitstringActuator extends OcaBasicActuator {
   GetBit(bitNr: number): Promise<boolean>;
 
   /**
-   * Sets the bit value of the given bit. The return value indicates whether the property was successfully set.
+   * Sets the bit value of the given bit. The return value indicates whether the
+   * property was successfully set.
    *
    * @method OcaBitstringActuator#SetBit
    * @param {number} bitNr
-   *
    * @param {boolean} Value
    *
    * @returns {Promise<void>}
@@ -48,7 +50,8 @@ export declare class OcaBitstringActuator extends OcaBasicActuator {
   SetBit(bitNr: number, Value: boolean): Promise<void>;
 
   /**
-   * Gets the entire bitstring.The return value indicates whether the property was successfully gathered.
+   * Gets the entire bitstring.The return value indicates whether the property
+   * was successfully gathered.
    *
    * @method OcaBitstringActuator#GetBitstring
    * @returns {Promise<boolean[]>}
@@ -57,7 +60,8 @@ export declare class OcaBitstringActuator extends OcaBasicActuator {
   GetBitstring(): Promise<boolean[]>;
 
   /**
-   * Sets the entire bitstring. The return value indicates whether the property was successfully set.
+   * Sets the entire bitstring. The return value indicates whether the property
+   * was successfully set.
    *
    * @method OcaBitstringActuator#SetBitstring
    * @param {boolean[]} BitString

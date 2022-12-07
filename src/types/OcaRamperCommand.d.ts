@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Command repertoire of OcaRamper's  **Control** method.
+ * Command repertoire of OcaRamper's **Control** method.
  * @class OcaRamperCommand
  */
 export class OcaRamperCommand {

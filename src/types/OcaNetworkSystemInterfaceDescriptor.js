@@ -4,13 +4,14 @@
 
 export class OcaNetworkSystemInterfaceDescriptor {
   /**
-   * Descriptor of a system interface used by a network. Format is data network type dependent.
+   * Descriptor of a system interface used by a network. Format is data network
+   * type dependent.
    * @class OcaNetworkSystemInterfaceDescriptor
    */
   constructor(SystemInterfaceParameters, MyNetworkAddress) {
     /**
      * Parameters for the operating system interface the network uses to do I/O.
-     * @type string
+     * @type Uint8Array
      */
     this.SystemInterfaceParameters = SystemInterfaceParameters;
     /**

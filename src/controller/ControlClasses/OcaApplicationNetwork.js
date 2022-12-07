@@ -65,14 +65,16 @@ export const OcaApplicationNetwork = make_control_class(
 );
 
 /**
- * Gets the network's user-specified label. Return status indicates whether the operation was successful.
+ * Gets the network's user-specified label. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaApplicationNetwork#GetLabel
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the network's user-specified label. Return status indicates whether the operation was successful.
+ * Sets the network's user-specified label. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaApplicationNetwork#SetLabel
  * @param {string} Label
@@ -80,21 +82,24 @@ export const OcaApplicationNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the ONo of this network's containing block. Return status indicates whether the operation was successful.
+ * Gets the ONo of this network's containing block. Return status indicates
+ * whether the operation was successful.
  *
  * @method OcaApplicationNetwork#GetOwner
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ * Gets the network's IDAdvertised. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaApplicationNetwork#GetServiceID
  * @returns {Promise<Uint8Array>}
  *   A promise which resolves to a single value of type ``Uint8Array``.
  */
 /**
- * Sets the network's IDAdvertised. Return status indicates whether the operation was successful.
+ * Sets the network's IDAdvertised. Return status indicates whether the
+ * operation was successful.
  *
  * @method OcaApplicationNetwork#SetServiceID
  * @param {Uint8Array} Name
@@ -102,14 +107,17 @@ export const OcaApplicationNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Retrieves the list of this network's system interface descriptor. Return status indicates whether the list was successfully retrieved.
+ * Retrieves the list of this network's system interface descriptor. Return
+ * status indicates whether the list was successfully retrieved.
  *
  * @method OcaApplicationNetwork#GetSystemInterfaces
  * @returns {Promise<OcaNetworkSystemInterfaceDescriptor[]>}
- *   A promise which resolves to a single value of type ``OcaNetworkSystemInterfaceDescriptor[]``.
+ *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceDescriptor[]`.
  */
 /**
- * Sets the network's System Interface Descriptor(s). Return status indicates whether the operation was successful. Optional method; System Interface Descriptor may be set at construction time.
+ * Sets the network's System Interface Descriptor(s). Return status indicates
+ * whether the operation was successful. Optional method; System Interface
+ * Descriptor may be set at construction time.
  *
  * @method OcaApplicationNetwork#SetSystemInterfaces
  * @param {IOcaNetworkSystemInterfaceDescriptor[]} Descriptors
@@ -117,21 +125,25 @@ export const OcaApplicationNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Retrieves the network's state. Return status indicates whether the status was successfully retrieved.
+ * Retrieves the network's state. Return status indicates whether the status was
+ * successfully retrieved.
  *
  * @method OcaApplicationNetwork#GetState
  * @returns {Promise<OcaApplicationNetworkState>}
  *   A promise which resolves to a single value of type :class:`OcaApplicationNetworkState`.
  */
 /**
- * Retrieves the most recent error code. Return status indicates whether the operation was successful. Note that a second parameter 'Reset' is removed in v02 of this class.
+ * Retrieves the most recent error code. Return status indicates whether the
+ * operation was successful. Note that a second parameter 'Reset' is removed in
+ * v02 of this class.
  *
  * @method OcaApplicationNetwork#GetErrorCode
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Control the application network. Return value indicates success of command execution.
+ * Control the application network. Return value indicates success of command
+ * execution.
  *
  * @method OcaApplicationNetwork#Control
  * @param {IOcaApplicationNetworkCommand} Command
@@ -139,7 +151,8 @@ export const OcaApplicationNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns path from given object down to root. The return value indicates whether the operation succeeded.
+ * Returns path from given object down to root. The return value indicates
+ * whether the operation succeeded.
  * The return values of this method are
  *
  * - NamePath of type ``string[]``
@@ -149,38 +162,36 @@ export const OcaApplicationNetwork = make_control_class(
  * @returns {Promise<Arguments<string[],number[]>>}
  */
 /**
- * This event is emitted when the property ServiceID changes in the remote object.
+ * This event is emitted when the property ``ServiceID`` changes in the remote object.
  * The property ``ServiceID`` is described in the AES70 standard as follows.
- * Name or GUID that this device publishes in the network's
- * directory/discovery system to designate the services offered via this
- * application network object. This may or may not be the same as the
- * device's host name, if any. For data network types that have host
- * names (e.g. IP networks), the authoritative copy of the host name is
- * in the system interface ID.
+ * Name or GUID that this device publishes in the network's directory/discovery
+ * system to designate the services offered via this application network object.
+ * This may or may not be the same as the device's host name, if any. For data
+ * network types that have host names (e.g. IP networks), the authoritative copy
+ * of the host name is in the system interface ID.
  *
  * @member {PropertyEvent<Uint8Array>} OcaApplicationNetwork#OnServiceIDChanged
  */
 /**
- * This event is emitted when the property SystemInterfaces changes in the remote object.
+ * This event is emitted when the property ``SystemInterfaces`` changes in the remote object.
  * The property ``SystemInterfaces`` is described in the AES70 standard as follows.
- * Collection of identifiers of system interface descriptor(s) used by
- * the network. A "system interface" is the system service through which
- * network traffic passes into and out of the device -- e.g. a socket.
- * The descriptor format is system and network dependent; for OCA
- * purposes, it is maintained as a variable-length blob which the
- * protocol does not inspect.
+ * Collection of identifiers of system interface descriptor(s) used by the
+ * network. A "system interface" is the system service through which network
+ * traffic passes into and out of the device -- e.g. a socket. The descriptor
+ * format is system and network dependent; for OCA purposes, it is maintained as
+ * a variable-length blob which the protocol does not inspect.
  *
  * @member {PropertyEvent<OcaNetworkSystemInterfaceDescriptor[]>} OcaApplicationNetwork#OnSystemInterfacesChanged
  */
 /**
- * This event is emitted when the property State changes in the remote object.
+ * This event is emitted when the property ``State`` changes in the remote object.
  * The property ``State`` is described in the AES70 standard as follows.
  * Operational state of the network.
  *
  * @member {PropertyEvent<OcaApplicationNetworkState>} OcaApplicationNetwork#OnStateChanged
  */
 /**
- * This event is emitted when the property ErrorCode changes in the remote object.
+ * This event is emitted when the property ``ErrorCode`` changes in the remote object.
  * The property ``ErrorCode`` is described in the AES70 standard as follows.
  * Most recent error code. 0=no error.
  *

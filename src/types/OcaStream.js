@@ -4,13 +4,23 @@
 
 export class OcaStream {
   /**
-   * A single-channel or multichannel signal flow between a local stream connector (i.e.  **OcaStreamConnector** instance) of an  **OcaStreamNetwork** object in this node and another ("remote") stream connector. Normally, the remote stream connector is in another node. Each stream is unidirectional. With respect to the  **OcaStreamNetwork** object in question, a stream is either:
+   * A single-channel or multichannel signal flow between a local stream
+   * connector (i.e. **OcaStreamConnector** instance) of an **OcaStreamNetwork**
+   * object in this node and another ("remote") stream connector. Normally, the
+   * remote stream connector is in another node. Each stream is unidirectional.
+   * With respect to the **OcaStreamNetwork** object in question, a stream is
+   * either:
    *
-   *  -  *Outbound:* A signal flow from an output connector port in the  **OcaStreamNetwork** object to an external destination; or
+   *  - *Outbound: * A signal flow from an output connector port in the
+   *    **OcaStreamNetwork** object to an external destination; or
+   *
+   *  - *Inbound: * A signal flow from an external source to an *input*
+   *    connector in the **OcaStreamNetwork** object.
    *
    *
-   *  -  *Inbound:* A signal flow from an external source to an  *input* connector in the  **OcaStreamNetwork** object.
-   *   An  **OcaStream** object may represent either a unicast or a multicast stream. Any given  **OcaStreamConnector** object may support multiple outbound flows, but not multiple inbound flows.
+   * An **OcaStream** object may represent either a unicast or a multicast
+   * stream. Any given **OcaStreamConnector** object may support multiple
+   * outbound flows, but not multiple inbound flows.
    * @class OcaStream
    */
   constructor(
@@ -47,7 +57,9 @@ export class OcaStream {
      */
     this.Label = Label;
     /**
-     * Object number of  **OcaStreamConnector** object to which this stream is connected. A value of zero means the stream is not connected to any connector in this device.
+     * Object number of **OcaStreamConnector** object to which this stream is
+     * connected. A value of zero means the stream is not connected to any
+     * connector in this device.
      * @type number
      */
     this.LocalConnectorONo = LocalConnectorONo;

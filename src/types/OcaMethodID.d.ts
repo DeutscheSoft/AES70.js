@@ -18,7 +18,9 @@ export declare interface IOcaMethodID {
 
 export declare class OcaMethodID implements IOcaMethodID {
   /**
-   * Representation of an OCA method ID. A class may define at most 255 methods of its own. Additional methods may be inherited, so the total number may exceed 255.
+   * Representation of an OCA method ID. A class may define at most 255 methods
+   * of its own. Additional methods may be inherited, so the total number may
+   * exceed 255.
    * @class OcaMethodID
    */
   constructor(DefLevel: number, MethodIndex: number);

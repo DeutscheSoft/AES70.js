@@ -27,7 +27,8 @@ export declare class OcaFilterFIR extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the length of the FIR filter. The return value indicates whether the value was successfully retrieved.
+   * Gets the length of the FIR filter. The return value indicates whether the
+   * value was successfully retrieved.
    * The return values of this method are
    *
    * - Length of type ``number``
@@ -40,7 +41,8 @@ export declare class OcaFilterFIR extends OcaActuator {
   GetLength(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Gets the coefficients of the FIR filter. The return value indicates whether the coefficients were successfully retrieved.
+   * Gets the coefficients of the FIR filter. The return value indicates whether
+   * the coefficients were successfully retrieved.
    *
    * @method OcaFilterFIR#GetCoefficients
    * @returns {Promise<number[]>}
@@ -49,7 +51,8 @@ export declare class OcaFilterFIR extends OcaActuator {
   GetCoefficients(): Promise<number[]>;
 
   /**
-   * Sets the value of the properties of the FIR filter. The return value indicates whether the properties were successfully set.
+   * Sets the value of the properties of the FIR filter. The return value
+   * indicates whether the properties were successfully set.
    *
    * @method OcaFilterFIR#SetCoefficients
    * @param {number[]} Coefficients
@@ -59,7 +62,8 @@ export declare class OcaFilterFIR extends OcaActuator {
   SetCoefficients(Coefficients: number[]): Promise<void>;
 
   /**
-   * Gets the sample rate of the FIR filter. The return value indicates whether the data was successfully retrieved.
+   * Gets the sample rate of the FIR filter. The return value indicates whether
+   * the data was successfully retrieved.
    * The return values of this method are
    *
    * - Rate of type ``number``
@@ -72,7 +76,8 @@ export declare class OcaFilterFIR extends OcaActuator {
   GetSampleRate(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the sample rate of the FIR filter. The return value indicates whether the rate was successfully set.
+   * Sets the sample rate of the FIR filter. The return value indicates whether
+   * the rate was successfully set.
    *
    * @method OcaFilterFIR#SetSampleRate
    * @param {number} Rate

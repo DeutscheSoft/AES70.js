@@ -19,7 +19,8 @@ export declare interface IOcaLibraryIdentifier {
 
 export declare class OcaLibraryIdentifier implements IOcaLibraryIdentifier {
   /**
-   * Full identifier (type + object number) of Library (i.e. of an  **OcaLibrary** instance)
+   * Full identifier (type + object number) of Library (i.e. of an
+   * **OcaLibrary** instance)
    * @class OcaLibraryIdentifier
    */
   constructor(Type: OcaLibVolType, ONo: number);

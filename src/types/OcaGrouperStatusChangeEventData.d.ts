@@ -14,7 +14,8 @@ export declare interface IOcaGrouperStatusChangeEventData {
   groupIndex: number;
 
   /**
-   * Index of citizen within given grouper, or zero if event is non-citizen-specific.
+   * Index of citizen within given grouper, or zero if event is
+   * non-citizen-specific.
    * @type number
    */
   citizenIndex: number;
@@ -29,7 +30,8 @@ export declare interface IOcaGrouperStatusChangeEventData {
 export declare class OcaGrouperStatusChangeEventData
   implements IOcaGrouperStatusChangeEventData {
   /**
-   * Class that defines the event data parameter for the  **StatusChange** event defined in  **OcaGrouper** .
+   * Class that defines the event data parameter for the **StatusChange** event
+   * defined in **OcaGrouper**.
    * @class OcaGrouperStatusChangeEventData
    */
   constructor(
@@ -37,6 +39,7 @@ export declare class OcaGrouperStatusChangeEventData
     citizenIndex: number,
     changeType: OcaGrouperStatusChangeType
   );
+
   /**
    * Index of relevant group, or zero if event is non-group-specific.
    * @type number
@@ -44,7 +47,8 @@ export declare class OcaGrouperStatusChangeEventData
   groupIndex: number;
 
   /**
-   * Index of citizen within given grouper, or zero if event is non-citizen-specific.
+   * Index of citizen within given grouper, or zero if event is
+   * non-citizen-specific.
    * @type number
    */
   citizenIndex: number;

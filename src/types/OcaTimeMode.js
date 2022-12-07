@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Time mode of  **OcaTask** agent.
+ * Time mode of **OcaTask** agent.
  * @class OcaTimeMode
  */
 export class OcaTimeMode extends Enum({

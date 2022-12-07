@@ -18,7 +18,11 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * A multipurpose dynamics processor. Can be configured as compressor, limiter, expander, or gate. This class is expected to handle the majority of the basic cases. More complex devices may be described in a different manner, using one or more  **OcaDynamicsDetector**  and  **OcaDynamicsCurve**  objects, in conjunction with other Worker objects as needed.
+ * A multipurpose dynamics processor. Can be configured as compressor, limiter,
+ * expander, or gate. This class is expected to handle the majority of the basic
+ * cases. More complex devices may be described in a different manner, using one
+ * or more **OcaDynamicsDetector** and **OcaDynamicsCurve** objects, in
+ * conjunction with other Worker objects as needed.
  * @extends OcaActuator
  * @class OcaDynamics
  */
@@ -96,7 +100,8 @@ export declare class OcaDynamics extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Triggered property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Triggered property. The return value indicates
+   * whether the property was successfully retrieved.
    *
    * @method OcaDynamics#GetTriggered
    * @returns {Promise<boolean>}
@@ -105,7 +110,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetTriggered(): Promise<boolean>;
 
   /**
-   * Gets the value of the DynamicGain property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the DynamicGain property. The return value indicates
+   * whether the property was successfully retrieved.
    *
    * @method OcaDynamics#GetDynamicGain
    * @returns {Promise<number>}
@@ -114,7 +120,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetDynamicGain(): Promise<number>;
 
   /**
-   * Sets the value of the Function property. The return value indicates whether the property was successfully retrieved.
+   * Sets the value of the Function property. The return value indicates whether
+   * the property was successfully retrieved.
    *
    * @method OcaDynamics#GetFunction
    * @returns {Promise<OcaDynamicsFunction>}
@@ -123,7 +130,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetFunction(): Promise<OcaDynamicsFunction>;
 
   /**
-   * Sets the value of the Function property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Function property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaDynamics#SetFunction
    * @param {IOcaDynamicsFunction} Func
@@ -133,7 +141,9 @@ export declare class OcaDynamics extends OcaActuator {
   SetFunction(Func: IOcaDynamicsFunction): Promise<void>;
 
   /**
-   * Gets the value of the Ratio property. The return value indicates whether the property was successfully retrieved. GetRatio() is a DEPRECATED method. Please use  **GetSlope()**  instead.
+   * Gets the value of the Ratio property. The return value indicates whether
+   * the property was successfully retrieved. GetRatio() is a DEPRECATED method.
+   * Please use **GetSlope()** instead.
    * The return values of this method are
    *
    * - Ratio of type ``number``
@@ -146,7 +156,9 @@ export declare class OcaDynamics extends OcaActuator {
   GetRatio(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Ratio property. The return value indicates whether the property was successfully set. SetRatio() is a DEPRECATED method. Please use  **SetSlope()**  instead.
+   * Sets the value of the Ratio property. The return value indicates whether
+   * the property was successfully set. SetRatio() is a DEPRECATED method.
+   * Please use **SetSlope()** instead.
    *
    * @method OcaDynamics#SetRatio
    * @param {number} Ratio
@@ -156,10 +168,11 @@ export declare class OcaDynamics extends OcaActuator {
   SetRatio(Ratio: number): Promise<void>;
 
   /**
-   * Gets the value of the Threshold property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the Threshold property. The return value indicates if the
+   * value was successfully retrieved.
    * The return values of this method are
    *
-   * - Threshold of type :class:`IOcaDBr`
+   * - Threshold of type ``IOcaDBr``
    * - minThreshold of type ``number``
    * - maxThreshold of type ``number``
    *
@@ -169,7 +182,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetThreshold(): Promise<Arguments<[OcaDBr, number, number]>>;
 
   /**
-   * Sets the value of the Threshold property. The return value indicates if the value was successfully set.
+   * Sets the value of the Threshold property. The return value indicates if the
+   * value was successfully set.
    *
    * @method OcaDynamics#SetThreshold
    * @param {IOcaDBr} threshold
@@ -179,7 +193,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetThreshold(threshold: IOcaDBr): Promise<void>;
 
   /**
-   * Gets the value of the ThresholdPresentationUnits property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the ThresholdPresentationUnits property. The return value
+   * indicates if the value was successfully retrieved.
    *
    * @method OcaDynamics#GetThresholdPresentationUnits
    * @returns {Promise<OcaPresentationUnit>}
@@ -188,7 +203,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetThresholdPresentationUnits(): Promise<OcaPresentationUnit>;
 
   /**
-   * Sets the value of the ThresholdPresentationUnits property. The return value indicates if the value was successfully set.
+   * Sets the value of the ThresholdPresentationUnits property. The return value
+   * indicates if the value was successfully set.
    *
    * @method OcaDynamics#SetThresholdPresentationUnits
    * @param {IOcaPresentationUnit} Units
@@ -198,7 +214,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetThresholdPresentationUnits(Units: IOcaPresentationUnit): Promise<void>;
 
   /**
-   * Sets the value of the DetectorLaw property. The return value indicates if the value was successfully set.
+   * Sets the value of the DetectorLaw property. The return value indicates if
+   * the value was successfully set.
    *
    * @method OcaDynamics#GetDetectorLaw
    * @returns {Promise<OcaLevelDetectionLaw>}
@@ -207,7 +224,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetDetectorLaw(): Promise<OcaLevelDetectionLaw>;
 
   /**
-   * Sets the value of the DetectorLaw property. The return value indicates if the value was successfully set.
+   * Sets the value of the DetectorLaw property. The return value indicates if
+   * the value was successfully set.
    *
    * @method OcaDynamics#SetDetectorLaw
    * @param {IOcaLevelDetectionLaw} Law
@@ -217,7 +235,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetDetectorLaw(Law: IOcaLevelDetectionLaw): Promise<void>;
 
   /**
-   * Gets the value of the AttackTime property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the AttackTime property. The return value indicates if
+   * the value was successfully retrieved.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -230,7 +249,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetAttackTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the AttackTime property. The return value indicates if the value was successfully set.
+   * Sets the value of the AttackTime property. The return value indicates if
+   * the value was successfully set.
    *
    * @method OcaDynamics#SetAttackTime
    * @param {number} Time
@@ -240,7 +260,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetAttackTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the ReleaseTime property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the ReleaseTime property. The return value indicates if
+   * the value was successfully retrieved.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -253,7 +274,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetReleaseTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the ReleaseTime property. The return value indicates if the value was successfully set.
+   * Sets the value of the ReleaseTime property. The return value indicates if
+   * the value was successfully set.
    *
    * @method OcaDynamics#SetReleaseTime
    * @param {number} Time
@@ -263,7 +285,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetReleaseTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the HoldTime property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the HoldTime property. The return value indicates if the
+   * value was successfully retrieved.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -276,7 +299,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetHoldTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the HoldTime property. The return value indicates if the value was successfully set.
+   * Sets the value of the HoldTime property. The return value indicates if the
+   * value was successfully set.
    *
    * @method OcaDynamics#SetHoldTime
    * @param {number} Time
@@ -286,7 +310,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetHoldTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the DynamicGainFLoor property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the DynamicGainFLoor property. The return value indicates
+   * if the value was successfully retrieved.
    * The return values of this method are
    *
    * - Limit of type ``number``
@@ -299,7 +324,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetDynamicGainFloor(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the DynamicGainFloor property. The return value indicates if the value was successfully set.
+   * Sets the value of the DynamicGainFloor property. The return value indicates
+   * if the value was successfully set.
    *
    * @method OcaDynamics#SetDynamicGainFloor
    * @param {number} Limit
@@ -309,7 +335,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetDynamicGainFloor(Limit: number): Promise<void>;
 
   /**
-   * Gets the value of the DynamicGainCeiling property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the DynamicGainCeiling property. The return value
+   * indicates if the value was successfully retrieved.
    * The return values of this method are
    *
    * - Limit of type ``number``
@@ -322,7 +349,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetDynamicGainCeiling(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the DynamicGainCeiling property. The return value indicates if the value was successfully set.
+   * Sets the value of the DynamicGainCeiling property. The return value
+   * indicates if the value was successfully set.
    *
    * @method OcaDynamics#SetDynamicGainCeiling
    * @param {number} Limit
@@ -332,7 +360,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetDynamicGainCeiling(Limit: number): Promise<void>;
 
   /**
-   * Gets the value of the KneeParameter property. The return value indicates if the value was successfully retrieved.
+   * Gets the value of the KneeParameter property. The return value indicates if
+   * the value was successfully retrieved.
    * The return values of this method are
    *
    * - Parameter of type ``number``
@@ -345,7 +374,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetKneeParameter(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the KneeParameter property. The return value indicates if the value was successfully set.
+   * Sets the value of the KneeParameter property. The return value indicates if
+   * the value was successfully set.
    *
    * @method OcaDynamics#SetKneeParameter
    * @param {number} Parameter
@@ -355,7 +385,8 @@ export declare class OcaDynamics extends OcaActuator {
   SetKneeParameter(Parameter: number): Promise<void>;
 
   /**
-   * Gets the value of the Slope property. The return value indicates whether the property was successfully retrieved.
+   * Gets the value of the Slope property. The return value indicates whether
+   * the property was successfully retrieved.
    * The return values of this method are
    *
    * - Slope of type ``number``
@@ -368,7 +399,8 @@ export declare class OcaDynamics extends OcaActuator {
   GetSlope(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Slope property. The return value indicates whether the property was successfully set.
+   * Sets the value of the Slope property. The return value indicates whether
+   * the property was successfully set.
    *
    * @method OcaDynamics#SetSlope
    * @param {number} Slope
@@ -378,7 +410,9 @@ export declare class OcaDynamics extends OcaActuator {
   SetSlope(Slope: number): Promise<void>;
 
   /**
-   * Sets some or all dynamics parameters. The return value indicates if the parameters were successfully set. The action of this method is atomic - if any of the value changes fails, none of the changes are made.
+   * Sets some or all dynamics parameters. The return value indicates if the
+   * parameters were successfully set. The action of this method is atomic - if
+   * any of the value changes fails, none of the changes are made.
    *
    * @method OcaDynamics#SetMultiple
    * @param {IOcaParameterMask} Mask
@@ -387,17 +421,11 @@ export declare class OcaDynamics extends OcaActuator {
    * @param {IOcaPresentationUnit} ThresholdPresentationUnits
    * @param {IOcaLevelDetectionLaw} DetectorLaw
    * @param {number} AttackTime
-   *
    * @param {number} ReleaseTime
-   *
    * @param {number} HoldTime
-   *
    * @param {number} DynamicGainCeiling
-   *
    * @param {number} DynamicGainFloor
-   *
    * @param {number} Slope
-   *
    * @param {number} KneeParameter
    *
    * @returns {Promise<void>}

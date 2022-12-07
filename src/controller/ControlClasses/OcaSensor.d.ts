@@ -17,7 +17,8 @@ export declare class OcaSensor extends OcaWorker {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the current reading state of the sensor. The return value indicates whether the state was successfully retrived.
+   * Gets the current reading state of the sensor. The return value indicates
+   * whether the state was successfully retrived.
    *
    * @method OcaSensor#GetReadingState
    * @returns {Promise<OcaSensorReadingState>}

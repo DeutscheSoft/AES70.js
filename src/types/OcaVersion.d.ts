@@ -17,7 +17,8 @@ export declare interface IOcaVersion {
   Minor: number;
 
   /**
-   * The build number. May be 0 if it is not used (e.g. for a hardware component).
+   * The build number. May be 0 if it is not used (e.g. for a hardware
+   * component).
    * @type number
    */
   Build: number;
@@ -31,7 +32,8 @@ export declare interface IOcaVersion {
 
 export declare class OcaVersion implements IOcaVersion {
   /**
-   * Representation of a version number of a (hardware/software) component of a device in the form of Major.Minor.Build (e.g. 1.0.123).
+   * Representation of a version number of a (hardware/software) component of a
+   * device in the form of Major.Minor.Build (e.g. 1.0.123).
    * @class OcaVersion
    */
   constructor(
@@ -54,7 +56,8 @@ export declare class OcaVersion implements IOcaVersion {
   Minor: number;
 
   /**
-   * The build number. May be 0 if it is not used (e.g. for a hardware component).
+   * The build number. May be 0 if it is not used (e.g. for a hardware
+   * component).
    * @type number
    */
   Build: number;

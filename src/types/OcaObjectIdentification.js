@@ -4,7 +4,8 @@
 
 export class OcaObjectIdentification {
   /**
-   * Object identification. Composite of object number and object's class. Used mainly in discovery processes.
+   * Object identification. Composite of object number and object's class. Used
+   * mainly in discovery processes.
    * @class OcaObjectIdentification
    */
   constructor(ONo, ClassIdentification) {

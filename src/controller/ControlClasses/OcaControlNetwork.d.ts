@@ -4,7 +4,6 @@ import { RemoteDevice } from '../remote_device';
 import { OcaApplicationNetwork } from './OcaApplicationNetwork';
 
 /**
- * This was not documented in the OCA standard.
  * @extends OcaApplicationNetwork
  * @class OcaControlNetwork
  */
@@ -17,7 +16,8 @@ export declare class OcaControlNetwork extends OcaApplicationNetwork {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the network's Protocol property. Return status indicates whether the operation was successful.
+   * Gets the network's Protocol property. Return status indicates whether the
+   * operation was successful.
    *
    * @method OcaControlNetwork#GetControlProtocol
    * @returns {Promise<OcaNetworkControlProtocol>}

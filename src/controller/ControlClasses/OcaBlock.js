@@ -17,7 +17,13 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaWorker } from './OcaWorker.js';
 
 /**
- * A block is an object with three aspects: - It can contain other blocks. - It can contain workers. - It can contain agents. - It can contain data networks. - It can contain application networks. - It has a signal flow topology. We refer to an object inside a block as a  **member**  of that block. We refer to the block which contains an object as the object's  **container.**  **1**  Normally, a block contains a set of members that together function as a processing unit -- for example, a crossover channel or mixer strip.
+ * A block is an object with three aspects: - It can contain other blocks. - It
+ * can contain workers. - It can contain agents. - It can contain data networks.
+ * - It can contain application networks. - It has a signal flow topology. We
+ * refer to an object inside a block as a **member** of that block. We refer to
+ * the block which contains an object as the object's **container.****1**
+ * Normally, a block contains a set of members that together function as a
+ * processing unit -- for example, a crossover channel or mixer strip.
  * @extends OcaWorker
  * @class OcaBlock
  */
@@ -29,7 +35,6 @@ export const OcaBlock = make_control_class(
   OcaWorker,
   [
     ['GetType', 3, 1, [], [OcaUint32]],
-    ,
     ['ConstructMemberUsingFactory', 3, 3, [OcaUint32], [OcaUint32]],
     ['DeleteMember', 3, 4, [OcaUint32], []],
     ['GetMembers', 3, 5, [], [OcaList(OcaObjectIdentification)]],
@@ -116,25 +121,19 @@ export const OcaBlock = make_control_class(
 );
 
 /**
- * Gets the block type. For statically-defined blocks, the block type is a Uint32 with a value corresponding to the unique configuration of this block. For dynamically-defined blocks, the block type is the object number of the block's factory. For the root block, the value of this property is 1.
+ * Gets the block type. For statically-defined blocks, the block type is a
+ * Uint32 with a value corresponding to the unique configuration of this block.
+ * For dynamically-defined blocks, the block type is the object number of the
+ * block's factory. For the root block, the value of this property is 1.
  *
  * @method OcaBlock#GetType
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Constructs an object according to the given construction specification and adds it to the block. The return value indicates whether the member was successfully created and added.
- *
- * @method OcaBlock#ConstructMember
- * @param {string} ClassID
- *
- * @param {any} ConstructionParameters
- *
- * @returns {Promise<number>}
- *   A promise which resolves to a single value of type ``number``.
- */
-/**
- * Invokes a factory to construct an instance of the given class, then adds it to the block. The return value indicates whether the member was successfully created and added.
+ * Invokes a factory to construct an instance of the given class, then adds it
+ * to the block. The return value indicates whether the member was successfully
+ * created and added.
  *
  * @method OcaBlock#ConstructMemberUsingFactory
  * @param {number} FactoryONo
@@ -143,7 +142,9 @@ export const OcaBlock = make_control_class(
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Removes a member from the block and destroys the object. . Deletes all signal paths attached to its ports. The return value indicates whether the member was successfully removed and destroyed.
+ * Removes a member from the block and destroys the object. . Deletes all signal
+ * paths attached to its ports. The return value indicates whether the member
+ * was successfully removed and destroyed.
  *
  * @method OcaBlock#DeleteMember
  * @param {number} ObjectNumber
@@ -151,21 +152,28 @@ export const OcaBlock = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of block members. Does not recurse inner blocks. Each inner block is included in the returned list as a single object -- its contents are not enumerated. The return value indicates whether the list was successfully retrieved.
+ * Gets the list of block members. Does not recurse inner blocks. Each inner
+ * block is included in the returned list as a single object -- its contents are
+ * not enumerated. The return value indicates whether the list was successfully
+ * retrieved.
  *
  * @method OcaBlock#GetMembers
  * @returns {Promise<OcaObjectIdentification[]>}
- *   A promise which resolves to a single value of type ``OcaObjectIdentification[]``.
+ *   A promise which resolves to a single value of type :class:`OcaObjectIdentification[]`.
  */
 /**
- * Gets the list of block members. Recurses inner blocks. Each inner block is included in the returned list as a single object, amd its contents are enumerated. The return value indicates whether the list was successfully retrieved.
+ * Gets the list of block members. Recurses inner blocks. Each inner block is
+ * included in the returned list as a single object, amd its contents are
+ * enumerated. The return value indicates whether the list was successfully
+ * retrieved.
  *
  * @method OcaBlock#GetMembersRecursive
  * @returns {Promise<OcaBlockMember[]>}
- *   A promise which resolves to a single value of type ``OcaBlockMember[]``.
+ *   A promise which resolves to a single value of type :class:`OcaBlockMember[]`.
  */
 /**
- * Adds a signal path to the block. The return value indicates whether the signal path was successfully added.
+ * Adds a signal path to the block. The return value indicates whether the
+ * signal path was successfully added.
  *
  * @method OcaBlock#AddSignalPath
  * @param {IOcaSignalPath} Path
@@ -174,7 +182,8 @@ export const OcaBlock = make_control_class(
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Deletes a signal path from the block. The return value indicates whether the signal path was successfully added.
+ * Deletes a signal path from the block. The return value indicates whether the
+ * signal path was successfully added.
  *
  * @method OcaBlock#DeleteSignalPath
  * @param {number} Index
@@ -182,14 +191,16 @@ export const OcaBlock = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the map of signal paths in the block. Does not recurse inner blocks. The return value indicates whether the list was successfully retrieved.
+ * Gets the map of signal paths in the block. Does not recurse inner blocks. The
+ * return value indicates whether the list was successfully retrieved.
  *
  * @method OcaBlock#GetSignalPaths
  * @returns {Promise<Map<number, OcaSignalPath>>}
  *   A promise which resolves to a single value of type ``Map<number, OcaSignalPath>``.
  */
 /**
- * Gets the mapof signal paths in the block. Recurses inner blocks. The return value indicates whether the list was successfully retrieved.
+ * Gets the mapof signal paths in the block. Recurses inner blocks. The return
+ * value indicates whether the list was successfully retrieved.
  *
  * @method OcaBlock#GetSignalPathsRecursive
  * @returns {Promise<Map<number, OcaSignalPath>>}
@@ -203,21 +214,26 @@ export const OcaBlock = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaLibVolIdentifier`.
  */
 /**
- * Applies the referenced paramset to this block, and sets the MostRecentParamSet property. The return value indicates whether the paramset was successfully applied.
+ * Applies the referenced paramset to this block, and sets the
+ * MostRecentParamSet property. The return value indicates whether the paramset
+ * was successfully applied.
  *
  * @method OcaBlock#ApplyParamSet
  * @returns {Promise<OcaLibVolIdentifier>}
  *   A promise which resolves to a single value of type :class:`OcaLibVolIdentifier`.
  */
 /**
- * Returns a paramset library volume data block which represents the current state of the block -- i.e. a "snapshot".
+ * Returns a paramset library volume data block which represents the current
+ * state of the block -- i.e. a "snapshot".
  *
  * @method OcaBlock#GetCurrentParamSetData
  * @returns {Promise<OcaLibVolData_ParamSet>}
  *   A promise which resolves to a single value of type :class:`OcaLibVolData_ParamSet`.
  */
 /**
- * Stores a paramset library volume data block which represents the current state of the block ("snapshot") in the given library.  **Replaces** the library volume at the specified LibVolIdentifier.
+ * Stores a paramset library volume data block which represents the current
+ * state of the block ("snapshot") in the given library. **Replaces** the
+ * library volume at the specified LibVolIdentifier.
  *
  * @method OcaBlock#StoreCurrentParamSetData
  * @param {IOcaLibVolIdentifier} LibVolIdentifier
@@ -225,21 +241,27 @@ export const OcaBlock = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the global blocktype. The return value indicates whether the type was successfully retrieved. If this block has no global blocktype, the  **Authority**  field of the returned  **GlobalType**  parameter will be zero.  **Added in version 2 of this class.**
+ * Gets the global blocktype. The return value indicates whether the type was
+ * successfully retrieved. If this block has no global blocktype, the
+ * **Authority** field of the returned **GlobalType** parameter will be zero.
+ * **Added in version 2 of this class.**
  *
  * @method OcaBlock#GetGlobalType
  * @returns {Promise<OcaGlobalTypeIdentifier>}
  *   A promise which resolves to a single value of type :class:`OcaGlobalTypeIdentifier`.
  */
 /**
- * Gets the block's ONo map. The return value indicates whether the map was successfully retrieved.  **Added in version 2 of this class.**
+ * Gets the block's ONo map. The return value indicates whether the map was
+ * successfully retrieved. **Added in version 2 of this class.**
  *
  * @method OcaBlock#GetONoMap
  * @returns {Promise<Map<number, number>>}
  *   A promise which resolves to a single value of type ``Map<number, number>``.
  */
 /**
- * Returns object identifications of all objects in the block that match the given Role search string and Class ID. Return value indicates whether the method succeeded.  **Added in version 2 of this class.**
+ * Returns object identifications of all objects in the block that match the
+ * given Role search string and Class ID. Return value indicates whether the
+ * method succeeded. **Added in version 2 of this class.**
  *
  * @method OcaBlock#FindObjectsByRole
  * @param {string} SearchName
@@ -248,10 +270,12 @@ export const OcaBlock = make_control_class(
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
- *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
+ *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
  */
 /**
- * Returns block member descriptors of all objects in the block and all contained blocks that match the given Role search string and Class ID.  **Added in version 2 of this class.**
+ * Returns block member descriptors of all objects in the block and all
+ * contained blocks that match the given Role search string and Class ID.
+ * **Added in version 2 of this class.**
  *
  * @method OcaBlock#FindObjectsByRoleRecursive
  * @param {string} SearchName
@@ -260,20 +284,23 @@ export const OcaBlock = make_control_class(
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
- *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
+ *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
  */
 /**
- * Returns object identifications of all objects with the given name path.  **Added in version 2 of this class.**
+ * Returns object identifications of all objects with the given name path.
+ * **Added in version 2 of this class.**
  *
  * @method OcaBlock#FindObjectsByPath
  * @param {string[]} SearchPath
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
- *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
+ *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
  */
 /**
- * Returns block member descriptors of all objects in the block and all contained blocks that match the given Label search string and Class ID.  **Added in version 2 of this class.**
+ * Returns block member descriptors of all objects in the block and all
+ * contained blocks that match the given Label search string and Class ID.
+ * **Added in version 2 of this class.**
  *
  * @method OcaBlock#FindObjectsByLabelRecursive
  * @param {string} SearchName
@@ -282,27 +309,27 @@ export const OcaBlock = make_control_class(
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}
- *   A promise which resolves to a single value of type ``OcaObjectSearchResult[]``.
+ *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
  */
 /**
- * This event is emitted when the property Members changes in the remote object.
+ * This event is emitted when the property ``Members`` changes in the remote object.
  * The property ``Members`` is described in the AES70 standard as follows.
  * List of members in the block.
  *
  * @member {PropertyEvent<OcaObjectIdentification[]>} OcaBlock#OnMembersChanged
  */
 /**
- * This event is emitted when the property SignalPaths changes in the remote object.
+ * This event is emitted when the property ``SignalPaths`` changes in the remote object.
  * The property ``SignalPaths`` is described in the AES70 standard as follows.
  * List of signal paths in the block.
  *
  * @member {PropertyEvent<Map<number, OcaSignalPath>>} OcaBlock#OnSignalPathsChanged
  */
 /**
- * This event is emitted when the property MostRecentParamSetIdentifier changes in the remote object.
+ * This event is emitted when the property ``MostRecentParamSetIdentifier`` changes in the remote object.
  * The property ``MostRecentParamSetIdentifier`` is described in the AES70 standard as follows.
- * Library volume identifier of the paramset most recently applied to
- * this block.
+ * Library volume identifier of the paramset most recently applied to this
+ * block.
  *
  * @member {PropertyEvent<OcaLibVolIdentifier>} OcaBlock#OnMostRecentParamSetIdentifierChanged
  */

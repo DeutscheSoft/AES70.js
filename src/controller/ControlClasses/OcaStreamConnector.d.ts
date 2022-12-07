@@ -9,13 +9,34 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- *  **DEPRECATED CLASS**   *Replaced by the*  **OcaMediaSinkConnector **  *and*  **OcaMediaSourceConnector **  *datatypes in version 3 of Connection Management (CM3)*  Agent class for objects ("connectors") that allow connection of streams to the device. Streams may be single channels or multichannel groups. A connector is either a  *source*  or a  *sink.*  Sources are sometimes called "talkers". Sinks are sometimes called "listeners". Each connector links to zero or more  **OcaStream**  data objects. Each  **OcaStream**  object represents a signal flow to or from a local connector to a remote connector. The remote connector is usually, but not necessarily, in a different node. Each connector collects zero or more  *signal channels* . A signal channel is an instance of  **OcaNetworkSignalChannel.**  Each signal channel exposes one media channel of the stream to the interior of the device. A signal channel therefore is a Worker that contains exactly one  **OcaPort**  data object. Each  **OcaStreamConnector** object belongs to a particular instance of  **OcaStreamNetwork**  or a subclass of  **OcaStreamNetwork**   **.**  Each  **OcaStreamConnector** is linked to its network through the  **Owner**  property.
+ * **DEPRECATED CLASS** *Replaced by the* **OcaMediaSinkConnector ***and*
+ * **OcaMediaSourceConnector ***datatypes in version 3 of Connection Management
+ * (CM3)* Agent class for objects ("connectors") that allow connection of
+ * streams to the device. Streams may be single channels or multichannel groups.
+ * A connector is either a *source* or a *sink.* Sources are sometimes called
+ * "talkers". Sinks are sometimes called "listeners". Each connector links to
+ * zero or more **OcaStream** data objects. Each **OcaStream** object represents
+ * a signal flow to or from a local connector to a remote connector. The remote
+ * connector is usually, but not necessarily, in a different node. Each
+ * connector collects zero or more *signal channels*. A signal channel is an
+ * instance of **OcaNetworkSignalChannel.** Each signal channel exposes one
+ * media channel of the stream to the interior of the device. A signal channel
+ * therefore is a Worker that contains exactly one **OcaPort** data object. Each
+ * **OcaStreamConnector** object belongs to a particular instance of
+ * **OcaStreamNetwork** or a subclass of **OcaStreamNetwork** **.** Each
+ * **OcaStreamConnector** is linked to its network through the **Owner**
+ * property.
  *
- *  - When a controller creates an  **OcaStreamConnector** object dynamically, the controller must store the Object Number of the corresponding  **OcaStreamNetwork** object in the  **Owner**  property.
+ *  - When a controller creates an **OcaStreamConnector** object dynamically,
+ *    the controller must store the Object Number of the corresponding
+ *    **OcaStreamNetwork** object in the **Owner** property.
+ *
+ *  - Upon receiving the **Owner** property change, the **OcaStreamConnector**
+ *    object must register itself with the given stream network object via some
+ *    internal means.
  *
  *
- *  - Upon receiving the  **Owner**  property change, the  **OcaStreamConnector** object must register itself with the given stream network object via some internal means.
- *   This class may be subclassed to support various network types.
+ * This class may be subclassed to support various network types. ** **
  * @extends OcaAgent
  * @class OcaStreamConnector
  */
@@ -53,7 +74,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Connects a stream to this connector. Return status indicates success of operation.
+   * Connects a stream to this connector. Return status indicates success of
+   * operation.
    *
    * @method OcaStreamConnector#ConnectStream
    * @param {IOcaStream} Stream
@@ -64,7 +86,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   ConnectStream(Stream: IOcaStream): Promise<number>;
 
   /**
-   * Disconnects a stream from this connector. Return status indicates success of operation.
+   * Disconnects a stream from this connector. Return status indicates success
+   * of operation.
    *
    * @method OcaStreamConnector#DisconnectStream
    * @param {number} StreamID
@@ -74,7 +97,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   DisconnectStream(StreamID: number): Promise<void>;
 
   /**
-   * Gets the value of the IDAdvertised property. Return status indicates success of operation.
+   * Gets the value of the IDAdvertised property. Return status indicates
+   * success of operation.
    *
    * @method OcaStreamConnector#GetIDAdvertised
    * @returns {Promise<Uint8Array>}
@@ -83,7 +107,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetIDAdvertised(): Promise<Uint8Array>;
 
   /**
-   * Gets the object number of the  **OcaStreamNetwork** object to which this connector belongs. Return status indicates success of operation.
+   * Gets the object number of the **OcaStreamNetwork** object to which this
+   * connector belongs. Return status indicates success of operation.
    *
    * @method OcaStreamConnector#GetOwnerNetwork
    * @returns {Promise<number>}
@@ -92,7 +117,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetOwnerNetwork(): Promise<number>;
 
   /**
-   * Gets the list of object numbers of  **OcaNetworkSignalChannel** objects connected to this connector. Return status indicates success of operation.
+   * Gets the list of object numbers of **OcaNetworkSignalChannel** objects
+   * connected to this connector. Return status indicates success of operation.
    *
    * @method OcaStreamConnector#GetPins
    * @returns {Promise<Map<number, number>>}
@@ -101,7 +127,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetPins(): Promise<Map<number, number>>;
 
   /**
-   * Gets the value of the SourceOrSink property. Return status indicates success of operation.
+   * Gets the value of the SourceOrSink property. Return status indicates
+   * success of operation.
    *
    * @method OcaStreamConnector#GetSourceOrSink
    * @returns {Promise<OcaNetworkMediaSourceOrSink>}
@@ -110,7 +137,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetSourceOrSink(): Promise<OcaNetworkMediaSourceOrSink>;
 
   /**
-   * Gets the value of the Status property. Return status indicates success of operation.
+   * Gets the value of the Status property. Return status indicates success of
+   * operation.
    *
    * @method OcaStreamConnector#GetStatus
    * @returns {Promise<OcaStreamConnectorStatus>}
@@ -119,7 +147,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetStatus(): Promise<OcaStreamConnectorStatus>;
 
   /**
-   * Gets the map of OcaStream items connected to this connector. Return status indicates success of operation.
+   * Gets the map of OcaStream items connected to this connector. Return status
+   * indicates success of operation.
    *
    * @method OcaStreamConnector#GetStreams
    * @returns {Promise<Map<number, OcaStream>>}
@@ -128,7 +157,8 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetStreams(): Promise<Map<number, OcaStream>>;
 
   /**
-   * Sets the value of the IDAdvertised property. Return status indicates success of operation.
+   * Sets the value of the IDAdvertised property. Return status indicates
+   * success of operation.
    *
    * @method OcaStreamConnector#SetIDAdvertised
    * @param {Uint8Array} IDAdvertised
@@ -138,7 +168,9 @@ export declare class OcaStreamConnector extends OcaAgent {
   SetIDAdvertised(IDAdvertised: Uint8Array): Promise<void>;
 
   /**
-   * Sets the object number of the  **OcaStreamNetwork** object to which this connector belongs. Return status indicates success of operation. Only implemented for reconfigurable devices.
+   * Sets the object number of the **OcaStreamNetwork** object to which this
+   * connector belongs. Return status indicates success of operation. Only
+   * implemented for reconfigurable devices.
    *
    * @method OcaStreamConnector#SetOwnerNetwork
    * @param {number} Network
@@ -148,7 +180,10 @@ export declare class OcaStreamConnector extends OcaAgent {
   SetOwnerNetwork(Network: number): Promise<void>;
 
   /**
-   * Sets the value of the SourceOrSink property. Return status indicates success of operation. Only implemented for reconfigurable devices. Note that this method can only be called when the SignalChannels property is empty, i.e. does not contain any actual channels.
+   * Sets the value of the SourceOrSink property. Return status indicates
+   * success of operation. Only implemented for reconfigurable devices. Note
+   * that this method can only be called when the SignalChannels property is
+   * empty, i.e. does not contain any actual channels.
    *
    * @method OcaStreamConnector#SetSourceOrSink
    * @param {IOcaNetworkMediaSourceOrSink} SourceOrSink

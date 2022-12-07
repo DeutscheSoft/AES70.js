@@ -47,7 +47,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the type of the power supply. Return value indicates whether the data was successfully retrieved.
+   * Gets the type of the power supply. Return value indicates whether the data
+   * was successfully retrieved.
    *
    * @method OcaPowerSupply#GetType
    * @returns {Promise<OcaPowerSupplyType>}
@@ -56,7 +57,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   GetType(): Promise<OcaPowerSupplyType>;
 
   /**
-   * Gets the power supply's model information text. Return value indicates whether the data was successfully retrieved.
+   * Gets the power supply's model information text. Return value indicates
+   * whether the data was successfully retrieved.
    *
    * @method OcaPowerSupply#GetModelInfo
    * @returns {Promise<string>}
@@ -65,7 +67,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   GetModelInfo(): Promise<string>;
 
   /**
-   * Gets the state of the power supply. Return value indicates whether the data was successfully retrieved.
+   * Gets the state of the power supply. Return value indicates whether the data
+   * was successfully retrieved.
    *
    * @method OcaPowerSupply#GetState
    * @returns {Promise<OcaPowerSupplyState>}
@@ -74,7 +77,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   GetState(): Promise<OcaPowerSupplyState>;
 
   /**
-   * Changes the power supply's state. Return value indicates whether the state was successfully changed.
+   * Changes the power supply's state. Return value indicates whether the state
+   * was successfully changed.
    *
    * @method OcaPowerSupply#SetState
    * @param {IOcaPowerSupplyState} state
@@ -84,7 +88,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   SetState(state: IOcaPowerSupplyState): Promise<void>;
 
   /**
-   * Gets the value of property  **Charging** . Return value indicates whether the value was successfully retrieved.
+   * Gets the value of property **Charging**. Return value indicates whether the
+   * value was successfully retrieved.
    *
    * @method OcaPowerSupply#GetCharging
    * @returns {Promise<boolean>}
@@ -93,7 +98,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   GetCharging(): Promise<boolean>;
 
   /**
-   * Gets the available load fraction. Return value indicates whether the data was successfully retrieved.
+   * Gets the available load fraction. Return value indicates whether the data
+   * was successfully retrieved.
    *
    * @method OcaPowerSupply#GetLoadFractionAvailable
    * @returns {Promise<number>}
@@ -102,7 +108,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   GetLoadFractionAvailable(): Promise<number>;
 
   /**
-   * Gets the available storage fraction. Return value indicates whether the data was successfully retrieved.
+   * Gets the available storage fraction. Return value indicates whether the
+   * data was successfully retrieved.
    *
    * @method OcaPowerSupply#GetStorageFractionAvailable
    * @returns {Promise<number>}
@@ -111,7 +118,8 @@ export declare class OcaPowerSupply extends OcaAgent {
   GetStorageFractionAvailable(): Promise<number>;
 
   /**
-   * Gets the power supply physical location. Return value indicates whether the data was successfully retrieved.
+   * Gets the power supply physical location. Return value indicates whether the
+   * data was successfully retrieved.
    *
    * @method OcaPowerSupply#GetLocation
    * @returns {Promise<OcaPowerSupplyLocation>}

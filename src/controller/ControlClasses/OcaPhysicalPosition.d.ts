@@ -10,7 +10,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- * Physical position of device or an element of it. AES70 supports a variety of positional coordinate systems. For details, see AES70-1, section 5.5.9.
+ * Physical position of device or an element of it. AES70 supports a variety of
+ * positional coordinate systems. For details, see AES70-1, section 5.5.9.
  * @extends OcaAgent
  * @class OcaPhysicalPosition
  */
@@ -23,7 +24,8 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Retrieves value of property  **CoordinateSystem** . Result indicates whether retrieval was successful.
+   * Retrieves value of property **CoordinateSystem**. Result indicates whether
+   * retrieval was successful.
    *
    * @method OcaPhysicalPosition#GetCoordinateSystem
    * @returns {Promise<OcaPositionCoordinateSystem>}
@@ -32,7 +34,8 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   GetCoordinateSystem(): Promise<OcaPositionCoordinateSystem>;
 
   /**
-   * Retrieves value of property  **PositionDescriptorFieldFlags** . Result indicates whether retrieval was successful.
+   * Retrieves value of property **PositionDescriptorFieldFlags**. Result
+   * indicates whether retrieval was successful.
    *
    * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
    * @returns {Promise<OcaPositionDescriptorFieldFlags>}
@@ -41,7 +44,8 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   GetPositionDescriptorFieldFlags(): Promise<OcaPositionDescriptorFieldFlags>;
 
   /**
-   * Retrieves value of property  **PositioinDescriptor** . Result indicates whether retrieval was successful.
+   * Retrieves value of property **PositioinDescriptor**. Result indicates
+   * whether retrieval was successful.
    * The return values of this method are
    *
    * - PositionDescriptor of type ``IOcaPositionDescriptor``
@@ -58,7 +62,14 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   >;
 
   /**
-   * Sets value of property  **PositionDescriptor** . Result indicates whether setting was successful. The  **ParameterError** status is returned if: (a) the  **FieldFlags** field of the given  **PositionDescriptor** value differs from the object's basic position descriptor as given in its  **PositionDescriptorFieldFlags** property, or (b) the given  **CoordinateSystem** value conflicts with the object's basic coordinate system as given in its  **CoordinateSystem** property. This is an optional method, not implemented for read-only position objects.
+   * Sets value of property **PositionDescriptor**. Result indicates whether
+   * setting was successful. The **ParameterError** status is returned if: (a)
+   * the **FieldFlags** field of the given **PositionDescriptor** value differs
+   * from the object's basic position descriptor as given in its
+   * **PositionDescriptorFieldFlags** property, or (b) the given
+   * **CoordinateSystem** value conflicts with the object's basic coordinate
+   * system as given in its **CoordinateSystem** property. This is an optional
+   * method, not implemented for read-only position objects.
    *
    * @method OcaPhysicalPosition#SetPositionDescriptor
    * @param {IOcaPositionDescriptor} PositionDescriptor

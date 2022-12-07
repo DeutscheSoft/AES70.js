@@ -17,7 +17,8 @@ export declare class OcaMute extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the current mute state. The return value indicates whether the state was successfully retrieved.
+   * Gets the current mute state. The return value indicates whether the state
+   * was successfully retrieved.
    *
    * @method OcaMute#GetState
    * @returns {Promise<OcaMuteState>}
@@ -26,7 +27,8 @@ export declare class OcaMute extends OcaActuator {
   GetState(): Promise<OcaMuteState>;
 
   /**
-   * Sets the mute state (i.e. value of the State property). The return value indicates whether the state was successfully set.
+   * Sets the mute state (i.e. value of the State property). The return value
+   * indicates whether the state was successfully set.
    *
    * @method OcaMute#SetState
    * @param {IOcaMuteState} state

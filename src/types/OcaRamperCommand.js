@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Command repertoire of OcaRamper's  **Control** method.
+ * Command repertoire of OcaRamper's **Control** method.
  * @class OcaRamperCommand
  */
 export class OcaRamperCommand extends Enum({

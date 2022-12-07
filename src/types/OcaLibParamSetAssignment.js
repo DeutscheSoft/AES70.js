@@ -4,7 +4,8 @@
 
 export class OcaLibParamSetAssignment {
   /**
-   * A ParamSet assigment is the description of a binding of a ParamSet to a block instance.
+   * A ParamSet assigment is the description of a binding of a ParamSet to a
+   * block instance.
    * @class OcaLibParamSetAssignment
    */
   constructor(ParamSetIdentifier, TargetBlockONo) {

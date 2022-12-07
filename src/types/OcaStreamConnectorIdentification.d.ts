@@ -16,7 +16,8 @@ export declare interface IOcaStreamConnectorIdentification {
   NetworkAddress: Uint8Array;
 
   /**
-   * Public name or binary ID of node within the host to which this connector belongs.
+   * Public name or binary ID of node within the host to which this connector
+   * belongs.
    * @type Uint8Array
    */
   NodeID: Uint8Array;
@@ -31,15 +32,23 @@ export declare interface IOcaStreamConnectorIdentification {
 export declare class OcaStreamConnectorIdentification
   implements IOcaStreamConnectorIdentification {
   /**
-   * A signal source or sink connector at the far end of a stream - normally, in another device. Not all of the fields of this datatype need be used. The fields used will depend on remote device type, media transport network type, and media transport implementation. Normal usage scenarios are:
+   * A signal source or sink connector at the far end of a stream - normally, in
+   * another device. Not all of the fields of this datatype need be used. The
+   * fields used will depend on remote device type, media transport network
+   * type, and media transport implementation. Normal usage scenarios are:
    *
-   *  -  **Unicast input or output** : The  **OcaStream** object is instantiated in an  **OcaStreamConnector** object in the local device, and it links to an  **OcaStreamConnector** object in a remote device.
+   *  - **Unicast input or output**: The **OcaStream** object is instantiated in
+   *    an **OcaStreamConnector** object in the local device, and it links to an
+   *    **OcaStreamConnector** object in a remote device.
    *
+   *  - **Multicast input**: The **OcaStream** object is instantiated in an
+   *    **OcaStreamConnector** object in the local device, and, it may or may
+   *    not link to an **OcaStreamConnector** object in a remote device.
    *
-   *  -  **Multicast input**  _:_  The  **OcaStream** object is instantiated in an  **OcaStreamConnector** object in the local device, and, it may or may not link to an  **OcaStreamConnector** object in a remote device.
+   *  - **Multicast output**: The **OcaStream** object is instantiated in an
+   *    **OcaStreamConnector** object in the local device, but in this case does
+   *    not link to any specific remote connector object.
    *
-   *
-   *  -  **Multicast output**  _:_  The  **OcaStream** object is instantiated in an  **OcaStreamConnector** object in the local device, but in this case does  _not_ link to any specific remote connector object.
    *
    * @class OcaStreamConnectorIdentification
    */
@@ -63,7 +72,8 @@ export declare class OcaStreamConnectorIdentification
   NetworkAddress: Uint8Array;
 
   /**
-   * Public name or binary ID of node within the host to which this connector belongs.
+   * Public name or binary ID of node within the host to which this connector
+   * belongs.
    * @type Uint8Array
    */
   NodeID: Uint8Array;

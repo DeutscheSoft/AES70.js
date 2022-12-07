@@ -4,7 +4,8 @@
 
 export class OcaOPath {
   /**
-   * Object address. Composite of network address in which object resides, and object number.
+   * Object address. Composite of network address in which object resides, and
+   * object number.
    * @class OcaOPath
    */
   constructor(HostID, ONo) {

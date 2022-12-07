@@ -4,7 +4,8 @@
 
 export class OcaEvent {
   /**
-   * Representation of an OCA event, i.e. the unique combination of emitter ONo and the EventID.
+   * Representation of an OCA event, i.e. the unique combination of emitter ONo
+   * and the EventID.
    * @class OcaEvent
    */
   constructor(EmitterONo, EventID) {
