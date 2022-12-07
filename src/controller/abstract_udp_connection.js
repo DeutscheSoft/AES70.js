@@ -11,15 +11,15 @@ function delay(n) {
 
 async function waitForKeepalive(socket, options) {
   const waiter = socket.receiveMessage().then((buffer) => {
-      const pdus = [];
-      let pos = 0;
+    const pdus = [];
+    let pos = 0;
 
-      pos = decodeMessage(new DataView(buffer), 0, pdus);
+    pos = decodeMessage(new DataView(buffer), 0, pdus);
 
-      if (pdus.length !== 1) throw new Error('Expected keepalive response.');
+    if (pdus.length !== 1) throw new Error('Expected keepalive response.');
 
-      return true;
-    });
+    return true;
+  });
 
   const msg = encodeMessage(new KeepAlive(1000));
   const t = 5 * (options.retry_interval || 250);
@@ -97,7 +97,11 @@ export class AbstractUDPConnection extends ClientConnection {
    *    The connection.
    */
   static async connect(udpApi, options) {
-    const socket = await udpApi.connect(options.host, options.port, options.type);
+    const socket = await udpApi.connect(
+      options.host,
+      options.port,
+      options.type
+    );
 
     await waitForKeepalive(socket, options);
 

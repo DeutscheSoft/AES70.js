@@ -5,8 +5,7 @@ import { isIPv4, isIPv6 } from 'net';
 import { lookup } from 'dns';
 
 function lookup_address(host) {
-  if (isIPv4(host))
-    return Promise.resolve(host);
+  if (isIPv4(host)) return Promise.resolve(host);
 
   return new Promise((resolve, reject) => {
     lookup(host, { family: 4 }, (err, address) => {
@@ -69,7 +68,7 @@ export class NodeUDP {
 
     onerror(error);
   }
-  
+
   send(buf) {
     this.socket.send(Buffer.from(buf));
   }
