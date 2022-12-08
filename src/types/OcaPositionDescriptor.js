@@ -54,7 +54,7 @@ export class OcaPositionDescriptor {
     this.FieldFlags = FieldFlags;
     /**
      * The coordinates
-     * @type number
+     * @type number[]
      */
     this.Values = Values;
   }

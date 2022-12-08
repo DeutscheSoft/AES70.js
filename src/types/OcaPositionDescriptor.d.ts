@@ -25,9 +25,9 @@ export declare interface IOcaPositionDescriptor {
 
   /**
    * The coordinates
-   * @type number
+   * @type number[]
    */
-  Values: number;
+  Values: number[];
 }
 
 export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
@@ -72,7 +72,7 @@ export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
   constructor(
     CoordinateSystem: OcaPositionCoordinateSystem,
     FieldFlags: OcaPositionDescriptorFieldFlags,
-    Values: number
+    Values: number[]
   );
 
   /**
@@ -89,7 +89,7 @@ export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
 
   /**
    * The coordinates
-   * @type number
+   * @type number[]
    */
-  Values: number;
+  Values: number[];
 }
