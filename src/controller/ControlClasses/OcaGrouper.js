@@ -94,11 +94,11 @@ import { OcaAgent } from './OcaAgent.js';
  *    which aggregate values are computed.
  *
  *
- * ** ****Scope of the OcaGrouper Class** Many aspects of groupers will vary
- * from product to product. **OcaGrouper** is an abstract class that defines
- * common concepts and terms for groupers, a canonical control interface, and
- * most aspects of membership management . However it but stops short of
- * specifying actual semantics. Implementations will need to define (at least):
+ * ** Scope of the OcaGrouper Class** Many aspects of groupers will vary from
+ * product to product. **OcaGrouper** is an abstract class that defines common
+ * concepts and terms for groupers, a canonical control interface, and most
+ * aspects of membership management . However it but stops short of specifying
+ * actual semantics. Implementations will need to define (at least):
  *
  *  - Saturation rules
  *

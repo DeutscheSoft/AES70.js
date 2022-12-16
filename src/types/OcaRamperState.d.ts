@@ -10,9 +10,9 @@
  *    AND ** TargetProperty** has been set to a valid value; AND ** Goal** has
  *    been set; AND ** Duration** has been set.
  *
- *  - A ramper becomes **Scheduled** when It is **Initialized**; AND
- *    **T****start** and **TimeMode** have been set; AND (T :sub:`start` +
- *    **Duration**) is in the future.
+ *  - A ramper becomes **Scheduled** when It is **Initialized**; AND **Tstart**
+ *    and **TimeMode** have been set; AND (T :sub:`start` + **Duration**) is in
+ *    the future.
  *
  *  - A ramper becomes **Enabled** when it is **Scheduled** AND receives an
  *    *Enable* command.

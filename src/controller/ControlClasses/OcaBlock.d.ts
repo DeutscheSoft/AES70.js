@@ -19,9 +19,9 @@ import { OcaWorker } from './OcaWorker';
  * can contain workers. - It can contain agents. - It can contain data networks.
  * - It can contain application networks. - It has a signal flow topology. We
  * refer to an object inside a block as a **member** of that block. We refer to
- * the block which contains an object as the object's **container.****1**
- * Normally, a block contains a set of members that together function as a
- * processing unit -- for example, a crossover channel or mixer strip.
+ * the block which contains an object as the object's **container.1** Normally,
+ * a block contains a set of members that together function as a processing unit
+ * -- for example, a crossover channel or mixer strip.
  * @extends OcaWorker
  * @class OcaBlock
  */
