@@ -34,11 +34,6 @@ export declare const OcaDeviceState: {
    * Entry with value ``16``.
    */
   Updating: number;
-
-  /**
-   * Entry with value ``32``.
-   */
-  unused: number;
 };
 
 export declare type IOcaDeviceState = number;

@@ -31,11 +31,6 @@ export declare const OcaObjectSearchResultFlags: {
    * Entry with value ``16``.
    */
   Label: number;
-
-  /**
-   * Entry with value ``32``.
-   */
-  unused: number;
 };
 
 export declare type IOcaObjectSearchResultFlags = number;

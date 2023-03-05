@@ -12,7 +12,6 @@ export const OcaObjectSearchResultFlags = {
   ContainerPath: 4,
   Role: 8,
   Label: 16,
-  unused: 32,
 };
 
 /**
@@ -47,13 +46,6 @@ export const OcaObjectSearchResultFlags = {
  * Entry with value ``16``.
  * @type {number}
  * @member Label
- * @memberof OcaObjectSearchResultFlags
- * @static
- */
-/**
- * Entry with value ``32``.
- * @type {number}
- * @member unused
  * @memberof OcaObjectSearchResultFlags
  * @static
  */

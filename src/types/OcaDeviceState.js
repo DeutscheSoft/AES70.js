@@ -15,7 +15,6 @@ export const OcaDeviceState = {
   Error: 4,
   Initializing: 8,
   Updating: 16,
-  unused: 32,
 };
 
 /**
@@ -50,13 +49,6 @@ export const OcaDeviceState = {
  * Entry with value ``16``.
  * @type {number}
  * @member Updating
- * @memberof OcaDeviceState
- * @static
- */
-/**
- * Entry with value ``32``.
- * @type {number}
- * @member unused
  * @memberof OcaDeviceState
  * @static
  */
