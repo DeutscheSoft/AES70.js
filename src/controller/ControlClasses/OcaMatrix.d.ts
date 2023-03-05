@@ -37,15 +37,15 @@ import { OcaWorker } from './OcaWorker';
  * whose property value is to be changed. 2. Controller calls the matrix proxy's
  * **Set** method for the target property. This action causes the **OcaMatrix**
  * instance to: - decode the posted x :sub:`1` and y :sub:`1` values into a list
- * of target member ONos, as follows: If x :sub:`1` > 0 and y :sub:`1` > 0, the
- * list will be the single ONo of the addressed cell. If x :sub:`1` = 0 and y
- * :sub:`1` > 0, the list will be the list of ONos of the cells in row y
- * :sub:`1` . If x :sub:`1` > 0 and y :sub:`1` = 0, the list will be the list of
- * ONos of the cells in column x :sub:`1`. If x :sub:`1` = 0 and y :sub:`1` = 0,
- * the list will be the list of ONos of all cells of the matrix. - call the
- * given **Set** method for each target member in the ONo list. - aggregate the
- * **OcaResult** from each **Set** call into a consolidated **OcaResult**. -
- * unlock the **OcaMatrix** instance.
+ * of target member ONos, as follows: If x :sub:`1` ``>`` 0 and y :sub:`1` ``>``
+ * 0, the list will be the single ONo of the addressed cell. If x :sub:`1` = 0
+ * and y :sub:`1` ``>`` 0, the list will be the list of ONos of the cells in row
+ * y :sub:`1` . If x :sub:`1` ``>`` 0 and y :sub:`1` = 0, the list will be the
+ * list of ONos of the cells in column x :sub:`1`. If x :sub:`1` = 0 and y
+ * :sub:`1` = 0, the list will be the list of ONos of all cells of the matrix. -
+ * call the given **Set** method for each target member in the ONo list. -
+ * aggregate the **OcaResult** from each **Set** call into a consolidated
+ * **OcaResult**. - unlock the **OcaMatrix** instance.
  * @extends OcaWorker
  * @class OcaMatrix
  */
