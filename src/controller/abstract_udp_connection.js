@@ -12,11 +12,11 @@ function delay(n) {
 async function waitForKeepalive(socket, options) {
   const waiter = socket.receiveMessage().then((buffer) => {
     const pdus = [];
-    let pos = 0;
-
-    pos = decodeMessage(new DataView(buffer), 0, pdus);
+    const pos = decodeMessage(new DataView(buffer), 0, pdus);
 
     if (pdus.length !== 1) throw new Error('Expected keepalive response.');
+    if (pos !== buffer.byteLength)
+      throw new Error('Trailing data in initial keepalive pdu.');
 
     return true;
   });
