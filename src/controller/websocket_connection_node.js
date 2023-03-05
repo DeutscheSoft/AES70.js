@@ -20,8 +20,8 @@ export class WebSocketConnection extends ClientConnection {
     ws.addEventListener('close', () => {
       this.emit('close');
     });
-    ws.addEventListener('error', () => {
-      this.emit('error');
+    ws.addEventListener('error', (e) => {
+      this.emit('error', e);
     });
   }
 
