@@ -1,11 +1,11 @@
 /* eslint-env node */
 
 import { createSocket } from 'dgram';
-import { isIPv4, isIPv6 } from 'net';
+import { isIP } from 'net';
 import { lookup } from 'dns';
 
 function lookup_address(host) {
-  if (isIPv4(host)) return Promise.resolve(host);
+  if (isIP(host)) return Promise.resolve(host);
 
   return new Promise((resolve, reject) => {
     lookup(host, { family: 4 }, (err, address) => {
