@@ -102,11 +102,13 @@ export class Connection extends Events
         this.incoming(ret);
       } while (pos < buf.byteLength);
     } catch (e) {
-      console.error(e);
-      if (this.is_reliable)
-      {
-        console.error("Error when handling incoming data. Closing connection.");
-        this.close();
+      // If this is a reliably connection we close it. If not,
+      // we print decoding errors and throw away the packet.
+      if (this.is_reliable) {
+        this.emit('error', e);
+        return;
+      } else {
+        console.error(e);
       }
     }
 
