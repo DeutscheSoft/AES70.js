@@ -2,6 +2,18 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.4.1] - 2022-03-05
+
+- Add typescript declarations for WebSocketConnection
+
+- Raise an 'error' event on AES70 parsing errors in non-udp connections.
+
+- Hand the error object from 'errors' events in WebSocketConnections to the
+  application
+
+- Fixed the type of Values in OcaPositionDescriptors. It was previously
+  implemented as a Float32, while it should be Float32[6].
+
 ## [1.4] - 2022-12-07
 
 - Change the signature of events: Events are now emitted as specified in the
