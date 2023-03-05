@@ -2,68 +2,20 @@
 
 import WebSocket from 'ws';
 import { performance } from 'perf_hooks';
-
-import { ClientConnection } from './client_connection.js';
+import { WebSocketConnectionBase } from './websocket_connection_base.js';
 
 /**
- * :class:`ClientConnection` subclass which implements OCP.1 with WebSocket
- * transport.
+ * Connection which implements OCP.1 with WebSocket transport.
  */
-export class WebSocketConnection extends ClientConnection {
-  constructor(ws, options) {
-    super(options);
-    this.ws = ws;
-    ws.binaryType = 'arraybuffer';
-    ws.addEventListener('message', (ev) => {
-      try {
-        this.read(ev.data);
-      } catch (e) {
-        this.emit('error', e);
-      }
-    });
-    ws.addEventListener('close', () => {
-      this.emit('close');
-    });
-    ws.addEventListener('error', (e) => {
-      this.emit('error', e);
-    });
-  }
-
-  write(buf) {
-    this.ws.send(buf);
-    super.write(buf);
-  }
-
+export class WebSocketConnection extends WebSocketConnectionBase {
   /**
    * Connect to the given endpoint.
    *
    * @param {String} options.url - Endpoint WebSocket url.
    * @returns {Promise<WebSocketConnection>} - The connection.
    */
-  static connect(options) {
-    return new Promise((resolve, reject) => {
-      const ws = new WebSocket(options.url);
-      const on_error = function (e) {
-        reject(e);
-      };
-
-      ws.addEventListener('open', () => {
-        ws.removeEventListener('error', on_error);
-        resolve(new this(ws, options));
-      });
-      ws.addEventListener('error', on_error);
-    });
-  }
-
-  cleanup() {
-    super.cleanup();
-    if (this.ws) {
-      try {
-        this.ws.close();
-      } catch (err) {}
-      this.ws.removeAllListeners();
-      this.ws = null;
-    }
+  static async connect(options) {
+    return super.connect(WebSocket, options);
   }
 
   _now() {
