@@ -10,7 +10,11 @@ export class WebSocketConnection extends ClientConnection {
     this.ws = ws;
     ws.binaryType = 'arraybuffer';
     ws.addEventListener('message', (ev) => {
-      this.read(ev.data);
+      try {
+        this.read(ev.data);
+      } catch (e) {
+        this.emit('error', e);
+      }
     });
     ws.addEventListener('close', () => {
       this.emit('close');
