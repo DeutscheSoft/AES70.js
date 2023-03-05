@@ -8,6 +8,6 @@
  * @enum {number}
  * @readonly
  */
-export declare const OcaParameterMask: {};
+export declare const OcaParameterMask: Record<string, never>;
 
 export declare type IOcaParameterMask = number;

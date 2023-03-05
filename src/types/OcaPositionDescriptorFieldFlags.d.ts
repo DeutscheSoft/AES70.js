@@ -8,6 +8,6 @@
  * @enum {number}
  * @readonly
  */
-export declare const OcaPositionDescriptorFieldFlags: {};
+export declare const OcaPositionDescriptorFieldFlags: Record<string, never>;
 
 export declare type IOcaPositionDescriptorFieldFlags = number;
