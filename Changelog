@@ -2,6 +2,17 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.5.0] - 2022-03-07
+
+- Changed the export structure and removed explicit export definitions
+  from package.json.
+
+- Added correct typescript declarations for the browser export. This export
+  can be imported using `aes70/src/index.browser`.
+
+- Improved some error handling and recovery when connections are being
+  closed.
+
 ## [1.4.1] - 2022-03-05
 
 - Add typescript declarations for WebSocketConnection
