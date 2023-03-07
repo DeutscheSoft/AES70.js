@@ -61,6 +61,12 @@ export declare class Connection {
   close(): void;
 
   /**
+   * Receive and handle some incoming data. This is usually called
+   * internally when data is received on e.g. a tcp socket.
+   */
+  read(data: ArrayBuffer): void;
+
+  /**
    * Set the keepalive interval. Setting the keepalive interval to a
    * positive number ``N`` will make sure to send some packet (possibly a
    * keepalive command) at ``N`` seconds.
