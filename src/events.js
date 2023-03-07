@@ -68,5 +68,10 @@ export class Events
 
     handlers.delete(cb);
   }
+
+  removeAllEventListeners()
+  {
+    this.event_handlers.clear();
+  }
 }
 
