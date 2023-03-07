@@ -135,10 +135,14 @@ export class Connection extends Events
    */
   close()
   {
+    if (this.is_closed())
+      return;
     this.emit('close');
   }
 
   error(err) {
+    if (this.is_closed())
+      return;
     this.emit('error', err);
   }
 
@@ -150,6 +154,7 @@ export class Connection extends Events
     this.set_keepalive_interval(0);
     this._message_generator.dispose();
     this._message_generator = null;
+    this.removeAllEventListeners();
   }
 
   _check_keepalive()
