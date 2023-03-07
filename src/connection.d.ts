@@ -1,3 +1,4 @@
+import { Events } from './events';
 
 /**
  * Possible options for a connection.
@@ -35,7 +36,7 @@ export interface IConnectionOptions {
 /**
  * A base class for all AES70 connections.
  */
-export declare class Connection {
+export declare class Connection extends Events {
   constructor(options: IConnectionOptions);
 
   /**

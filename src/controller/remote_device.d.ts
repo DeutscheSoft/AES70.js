@@ -1,4 +1,5 @@
 import { ClientConnection } from './client_connection';
+import { Events } from '../events';
 
 import { ObjectBase } from './object_base';
 
@@ -27,7 +28,7 @@ type DeviceTree = DeviceTreeNode[];
  * Can be used to query the available object tree, or interact with the manager
  * classes.
  */
-export declare class RemoteDevice {
+export declare class RemoteDevice extends Events {
   /**
    * The device manager object.
    */
