@@ -9,20 +9,23 @@ export class WebSocketConnectionBase extends ClientConnection {
   constructor(ws, options) {
     super(options);
     this.ws = ws;
-    ws.binaryType = 'arraybuffer';
-    ws.addEventListener('message', (ev) => {
+    this._onmessage = (ev) => {
       try {
         this.read(ev.data);
       } catch (e) {
         this.emit('error', e);
       }
-    });
-    ws.addEventListener('close', () => {
+    };
+    this._onclose = () => {
       this.emit('close');
-    });
-    ws.addEventListener('error', (e) => {
+    };
+    this._onerror = (e) => {
       this.emit('error', e);
-    });
+    };
+    ws.binaryType = 'arraybuffer';
+    ws.addEventListener('message', this._onmessage);
+    ws.addEventListener('close', this._onclose);
+    ws.addEventListener('error', this._onerror);
   }
 
   write(buf) {
@@ -58,13 +61,17 @@ export class WebSocketConnectionBase extends ClientConnection {
 
   cleanup() {
     super.cleanup();
-    if (this.ws) {
+    const ws = this.ws;
+    if (ws) {
+      this.ws = null;
       try {
-        this.ws.close();
+        ws.removeEventListener('message', this._onmessage);
+        ws.removeEventListener('close', this._onclose);
+        ws.removeEventListener('error', this._onerror);
+        ws.close();
       } catch (err) {
         // ignore error
       }
-      this.ws = null;
     }
   }
 }
