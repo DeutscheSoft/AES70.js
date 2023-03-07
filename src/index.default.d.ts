@@ -14,5 +14,7 @@ export * from './controller/remote_device';
 export * from './controller/define_custom_class';
 export * from './controller/abstract_udp_connection';
 
-export * as RemoteControlClasses from './controller/ControlClasses';
-export * as Types from './types';
+import * as RemoteControlClasses from './controller/ControlClasses';
+import * as Types from './types';
+
+export { RemoteControlClasses, Types };
