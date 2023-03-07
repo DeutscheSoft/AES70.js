@@ -262,6 +262,8 @@ export class RemoteDevice extends Events {
   }
 
   async add_subscription(event, callback) {
+    if (this.connection.is_closed()) throw new Error('Connection was closed.');
+
     const key = eventToKey(event);
     const subscriptions = this.subscriptions;
 
