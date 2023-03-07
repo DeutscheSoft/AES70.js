@@ -4,7 +4,7 @@ import {
 } from './websocket_connection_base';
 import WebSocket from 'ws';
 
-export type WebSocketConnectionOptions = IWebSocketConnectionBaseOptions;
+export type IWebSocketConnectionOptions = IWebSocketConnectionBaseOptions;
 
 export class WebSocketConnection extends WebSocketConnectionBase {
   constructor(ws: WebSocket, options: WebSocketConnectionOptions);
