@@ -1,7 +1,0 @@
-{
-  "name": "aes70/RemoteControlClasses",
-  "types": "../src/controller/ControlClasses.d.ts",
-  "main": "../src/controller/ControlClasses.js",
-  "module": "../src/controller/ControlClasses.js",
-  "sideEffects": false
-}
