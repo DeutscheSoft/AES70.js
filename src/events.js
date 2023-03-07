@@ -30,7 +30,7 @@ export class Events
   }
 
   /**
-   * Register for an event.
+   * Subscribe to an event.
    *
    * @param {String} name - Name of the event.
    * @param {Function} cb - Callback function.
@@ -69,6 +69,9 @@ export class Events
     handlers.delete(cb);
   }
 
+  /**
+   * Removes all event listeners.
+   */
   removeAllEventListeners()
   {
     this.event_handlers.clear();
