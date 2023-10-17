@@ -11,3 +11,4 @@ lib
 Makefile
 !dist/AES70.es5.js
 !bin/printDevices.js
+tests/
