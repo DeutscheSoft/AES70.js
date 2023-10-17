@@ -2,6 +2,11 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.5.2] - 2023-10-17
+
+- Fixed an error in how duplicate role names were handled in get_role_map()
+  which could lead to an infinite loop.
+
 ## [1.5.1] - 2022-03-07
 
 - Fixed a small error in the typescript exports.
