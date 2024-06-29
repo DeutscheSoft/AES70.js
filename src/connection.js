@@ -62,7 +62,7 @@ export class Connection extends Events {
   }
 
   rx_idle_time() {
-    return this._now() - this.last_tx_time;
+    return this._now() - this.last_rx_time;
   }
 
   read(buf) {
