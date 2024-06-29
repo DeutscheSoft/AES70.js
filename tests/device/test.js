@@ -1,88 +1,68 @@
 import { format } from 'util';
 
 export class Test {
-  constructor(get_device)
-  {
+  constructor(get_device) {
     this.get_device = get_device;
     this.device = null;
   }
 
-  describe()
-  {
+  describe() {
     return this.constructor.name;
   }
 
-  async prepare()
-  {
+  async prepare() {
     this.device = await this.get_device();
   }
 
-  check(cond, fmt, ...args)
-  {
-    if (!cond)
-    {
+  check(cond, fmt, ...args) {
+    if (!cond) {
       this.fail(fmt, ...args);
     }
   }
 
-  fail(fmt, ...args)
-  {
+  fail(fmt, ...args) {
     console.log(fmt, ...args);
   }
 
-  fatal(fmt, ...args)
-  {
+  fatal(fmt, ...args) {
     throw new Error(format(fmt, ...args));
   }
 
-  skip()
-  {
+  skip() {
     return false;
   }
 
-  run()
-  {
-  }
+  run() {}
 
-  close_device(device)
-  {
-    if (device !== null)
-    {
+  close_device(device) {
+    if (device !== null) {
       device.connection.emit('test_done');
       device.close();
       device = null;
     }
   }
 
-  cleanup()
-  {
+  cleanup() {
     this.close_device(this.device);
     this.device = null;
   }
 
-  static focus()
-  {
+  static focus() {
     return false;
   }
 }
 
-export class ObjectTest extends Test
-{
-  async run()
-  {
+export class ObjectTest extends Test {
+  async run() {
     const tree = await this.device.GetDeviceTree();
     const tasks = [];
 
     const check_children = (parent, children) => {
-      for (let i = 0; i < children.length; i++)
-      {
+      for (let i = 0; i < children.length; i++) {
         const o = children[i];
-        if (Array.isArray(o))
-        {
-          check_children(children[i-1], o);
-        }
-        else
-        {
+        if (Array.isArray(o)) {
+          check_children(children[i - 1], o);
+        } else {
           try {
             tasks.push(this.check_object(o, parent, i));
           } catch (e) {
@@ -97,89 +77,74 @@ export class ObjectTest extends Test
     await Promise.all(tasks);
   }
 
-  check_object(o)
-  {
-  }
+  check_object(o) {}
 }
 
-function pad(str, n)
-{
+function pad(str, n) {
   // this is slow
-  while (str.length < n)
-  {
-    str += " ";
+  while (str.length < n) {
+    str += ' ';
   }
 
   return str;
 }
 
-export class TestRunner
-{
-  constructor(get_device)
-  {
+export class TestRunner {
+  constructor(get_device) {
     this.tests = [];
     this.get_device = get_device;
   }
 
-  add(...tests)
-  {
+  add(...tests) {
     const focused = tests.filter((t) => t.focus());
 
     if (focused.length) tests = focused;
 
-    for (let i = 0; i < tests.length; i++)
-    {
+    for (let i = 0; i < tests.length; i++) {
       this.tests.push(new tests[i](this.get_device));
     }
   }
 
-  log(fmt, ...args)
-  {
-    if (args.length)
-    {
+  log(fmt, ...args) {
+    if (args.length) {
       fmt = format(fmt, ...args);
     }
 
     process.stdout.write(fmt);
   }
 
-  async run()
-  {
-    for (let i = 0; i < this.tests.length; i++)
-    {
+  async run() {
+    for (let i = 0; i < this.tests.length; i++) {
       const test = this.tests[i];
       let t1, t2;
 
-      this.log("  " + pad(test.describe(), 30) + "\t");
+      this.log('  ' + pad(test.describe(), 30) + '\t');
 
       try {
         await test.prepare();
         t1 = Date.now();
         await test.run();
         t2 = Date.now();
-        await test.cleanup(); 
+        await test.cleanup();
       } catch (e) {
-        this.log("failed\n");
-        this.log("ERROR: %o\n", e);
+        this.log('failed\n');
+        this.log('ERROR: %o\n', e);
         try {
-          await test.cleanup(); 
+          await test.cleanup();
         } catch (e) {
-          this.log("Test cleanup() method failed: %o\n", e);
+          this.log('Test cleanup() method failed: %o\n', e);
         }
         continue;
       }
-      this.log("OK (%d ms)\n", t2 - t1);
+      this.log('OK (%d ms)\n', t2 - t1);
     }
   }
 
-  cleanup()
-  {
+  cleanup() {
     this.tests.forEach((t) => {
-      try
-      {
+      try {
         t.cleanup();
-      }
-      catch (er) {}
+      } catch (er) {}
     });
   }
 }

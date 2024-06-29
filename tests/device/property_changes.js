@@ -27,87 +27,115 @@ function isEqual(a, b) {
   return false;
 }
 
-class PropertyChanges extends ObjectTest
-{
-  async check_object(o)
-  {
+class PropertyChanges extends ObjectTest {
+  async check_object(o) {
     const sync = o.GetPropertySync();
     await sync.sync();
 
     sync.forEach((value, name) => {
-      this.check(sync[name] === value, "PropertySync Getters are broken: %o vs. %o", sync[name], value);
+      this.check(
+        sync[name] === value,
+        'PropertySync Getters are broken: %o vs. %o',
+        sync[name],
+        value
+      );
     });
 
-    await Promise.all(o.get_properties().forEach(async (prop) => {
-      const name = prop.name;
-      const setter = prop.setter(o);
-      const getter = prop.getter(o);
-      const event = prop.event(o);
+    await Promise.all(
+      o.get_properties().forEach(async (prop) => {
+        const name = prop.name;
+        const setter = prop.setter(o);
+        const getter = prop.getter(o);
+        const event = prop.event(o);
 
-      if (!setter || !getter) return;
+        if (!setter || !getter) return;
 
-      let a;
-
-      try {
-        a = await getter();  
-      } catch (e) {
-        if (e.status === OcaStatus.NotImplemented) return;
-        throw e;
-      }
-      
-      if (!(a instanceof Arguments)) return;
-
-      const val = a.item(0);
-      const min = a.item(1);
-      const max = a.item(2);
-
-      // this happens with GetThreshold() in OcaDynamics
-      if (typeof val !== typeof min || typeof val !== typeof max) return;
-
-      this.check(isEqual(sync[name], val),
-                 "Property Sync value '%s' is not equal to current: %o vs. %o", name, sync[name], val);
-
-      const test_set = async (to) => {
-        let called = false;
-
-        const cb = (value, changeType) => {
-          if (changeType !== OcaPropertyChangeType.CurrentChanged)
-            return;
-
-          this.check(isEqual(value, to), "Received event for different value change: %o vs. %o", to, value);
-
-          called = true;
-        };
-
-        await event.subscribe(cb);
+        let a;
 
         try {
-          await setter(to);
+          a = await getter();
         } catch (e) {
           if (e.status === OcaStatus.NotImplemented) return;
           throw e;
         }
 
-        const tmp = (await getter()).item(0);
+        if (!(a instanceof Arguments)) return;
 
-        await event.unsubscribe(cb);
+        const val = a.item(0);
+        const min = a.item(1);
+        const max = a.item(2);
 
-        this.check(called, "PropertyChanged event was not received for '%s'", name);
+        // this happens with GetThreshold() in OcaDynamics
+        if (typeof val !== typeof min || typeof val !== typeof max) return;
 
-        this.check(isEqual(to, tmp),
-                   "Property '%s' set to %o succeeded but get returned %o", name, to, tmp);
-        this.check(isEqual(to, sync[name]),
-                   "Property '%s' set to %o succeeded but sync contains %o", name, to, sync[name]);
-      };
+        this.check(
+          isEqual(sync[name], val),
+          "Property Sync value '%s' is not equal to current: %o vs. %o",
+          name,
+          sync[name],
+          val
+        );
 
-      // set to min first
-      await test_set(min);
-      await test_set(max);
-      await test_set(val);
-    }));
+        const test_set = async (to) => {
+          let called = false;
+
+          const cb = (value, changeType) => {
+            if (changeType !== OcaPropertyChangeType.CurrentChanged) return;
+
+            this.check(
+              isEqual(value, to),
+              'Received event for different value change: %o vs. %o',
+              to,
+              value
+            );
+
+            called = true;
+          };
+
+          await event.subscribe(cb);
+
+          try {
+            await setter(to);
+          } catch (e) {
+            if (e.status === OcaStatus.NotImplemented) return;
+            throw e;
+          }
+
+          const tmp = (await getter()).item(0);
+
+          await event.unsubscribe(cb);
+
+          this.check(
+            called,
+            "PropertyChanged event was not received for '%s'",
+            name
+          );
+
+          this.check(
+            isEqual(to, tmp),
+            "Property '%s' set to %o succeeded but get returned %o",
+            name,
+            to,
+            tmp
+          );
+          this.check(
+            isEqual(to, sync[name]),
+            "Property '%s' set to %o succeeded but sync contains %o",
+            name,
+            to,
+            sync[name]
+          );
+        };
+
+        // set to min first
+        await test_set(min);
+        await test_set(max);
+        await test_set(val);
+      })
+    );
 
     sync.Dispose();
   }
 }
 
-export default [ PropertyChanges ];
+export default [PropertyChanges];

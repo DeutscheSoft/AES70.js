@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Internal project for running prettier on aes70.js.",
   "scripts": {
-    "prettier": "prettier --write --single-quote --jsx-bracket-same-line ../src/**/*"
+    "prettier": "prettier --write --single-quote --jsx-bracket-same-line ../src ../bin ../tests"
   },
   "author": "Arne Goedeke",
   "private": true,

@@ -15,8 +15,7 @@ import LockingTests from './device/locking.js';
 import PropertyChangesTests from './device/property_changes.js';
 import MethodCallbackTests from './device/method_callback.js';
 
-if (argv.length < 3)
-{
+if (argv.length < 3) {
   console.log('Usage: node device.js <ip>:<port> ws://<ip>:<port>');
   exit(1);
 }
@@ -24,11 +23,10 @@ if (argv.length < 3)
 const delay = 4;
 
 const default_connect_options = {
-  batch: 2048
+  batch: 2048,
 };
 
-function connect_options(o)
-{
+function connect_options(o) {
   if (o.host === 'localhost' || o.host === '127.0.0.1')
     return Object.assign({}, default_connect_options, o);
 
@@ -48,12 +46,11 @@ class Throttler {
   write() {
     if (!this.buffer) return;
 
-    const n = Math.max(1, Math.floor(Math.random()*this.buffer.length));
+    const n = Math.max(1, Math.floor(Math.random() * this.buffer.length));
 
     this.socket.write(this.buffer.slice(0, n));
 
-    if (n === this.buffer.length)
-    {
+    if (n === this.buffer.length) {
       this.buffer = null;
       this.interval = null;
       this.sending = false;
@@ -92,8 +89,7 @@ class Throttler {
   }
 
   close() {
-    if (this.interval !== null)
-      clearTimeout(this.interval);
+    if (this.interval !== null) clearTimeout(this.interval);
     this.socket.end();
   }
 }
@@ -122,8 +118,16 @@ class FragmentationConnection {
   }
 
   close() {
-    try { this.a.close(); } catch (e) { console.error(e); }
-    try { this.b.close(); } catch (e) { console.error(e); }
+    try {
+      this.a.close();
+    } catch (e) {
+      console.error(e);
+    }
+    try {
+      this.b.close();
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
 
@@ -141,7 +145,7 @@ class FragmentationProxy {
   ready() {
     if (this.server.listening) return Promise.resolve(true);
     return new Promise((resolve, reject) => {
-      this.server.on('listening', function() {
+      this.server.on('listening', function () {
         this.removeListener('error', reject);
         resolve(true);
       });
@@ -162,8 +166,7 @@ class FragmentationProxy {
   }
 }
 
-function get_runner(get_device)
-{
+function get_runner(get_device) {
   const test_runner = new TestRunner(get_device);
 
   const tests = [
@@ -171,7 +174,7 @@ function get_runner(get_device)
     //KeepaliveTests,
     LockingTests,
     PropertyChangesTests,
-    MethodCallbackTests
+    MethodCallbackTests,
   ].flat();
 
   // require('./device/property_changes'),
@@ -182,13 +185,11 @@ function get_runner(get_device)
   return test_runner;
 }
 
-function timeout(n)
-{
+function timeout(n) {
   return new Promise((resolve, reject) => setTimeout(resolve, n));
 }
 
-async function run_tests(type, target)
-{
+async function run_tests(type, target) {
   let onClose = null;
 
   const close_p = new Promise((resolve, reject) => {
@@ -213,39 +214,44 @@ async function run_tests(type, target)
 
   try {
     let timed_out = false;
-    const timeout_p = timeout(60*1000);
+    const timeout_p = timeout(60 * 1000);
     const test_p = test_runner.run();
 
-    await Promise.race([ timeout_p.then(() => { timed_out = true; }), test_p, close_p ]);
+    await Promise.race([
+      timeout_p.then(() => {
+        timed_out = true;
+      }),
+      test_p,
+      close_p,
+    ]);
 
-    if (timed_out)
-    {
+    if (timed_out) {
       test_runner.cleanup();
       test_p.catch((err) => {});
-      console.error("Test times out.\n");
+      console.error('Test times out.\n');
     }
   } catch (e) {
     throw e;
   }
 }
 
-async function run(targets)
-{
-  for (let i = 2; i < targets.length; i++)
-  {
+async function run(targets) {
+  for (let i = 2; i < targets.length; i++) {
     const remote = targets[i];
 
-    console.log("Testing device at %o:", remote);
+    console.log('Testing device at %o:', remote);
 
     let connection;
 
     try {
-      if (remote.startsWith("ws://"))
-      {
+      if (remote.startsWith('ws://')) {
         await run_tests(WebSocketConnection, { url: remote });
 
-        console.log("");
-        console.log("Testing device at %o (with packet fragmentation):", remote);
+        console.log('');
+        console.log(
+          'Testing device at %o (with packet fragmentation):',
+          remote
+        );
 
         const target = parse(remote);
 
@@ -256,58 +262,62 @@ async function run(targets)
 
         await fragmentation.ready();
 
-        await run_tests(WebSocketConnection, { url: fragmentation.get_websocket_url() });
+        await run_tests(WebSocketConnection, {
+          url: fragmentation.get_websocket_url(),
+        });
         fragmentation.close();
-      }
-      else
-      {
-        const tmp = remote.split(":");
+      } else {
+        const tmp = remote.split(':');
 
-        if (tmp.length == 2)
-          tmp.unshift("tcp");
+        if (tmp.length == 2) tmp.unshift('tcp');
 
-        switch (tmp[0])
-        {
-        case "tcp":
-          {
-            const target = { host: tmp[1], port: parseInt(tmp[2]) };
-            await run_tests(TCPConnection, target);
+        switch (tmp[0]) {
+          case 'tcp':
+            {
+              const target = { host: tmp[1], port: parseInt(tmp[2]) };
+              await run_tests(TCPConnection, target);
 
-            console.log("");
-            console.log("Testing device at %o (with packet fragmentation):", remote);
+              console.log('');
+              console.log(
+                'Testing device at %o (with packet fragmentation):',
+                remote
+              );
 
-            const fragmentation = new FragmentationProxy(target);
+              const fragmentation = new FragmentationProxy(target);
 
-            await fragmentation.ready();
+              await fragmentation.ready();
 
-            await run_tests(TCPConnection, fragmentation.address());
-            fragmentation.close();
-          }
-          break;
-        case "udp":
-          await run_tests(UDPConnection, { host: tmp[1], port: parseInt(tmp[2]) });
-          break;
-        default:
-          throw new Error("Unsupported connection type: "+remote);
+              await run_tests(TCPConnection, fragmentation.address());
+              fragmentation.close();
+            }
+            break;
+          case 'udp':
+            await run_tests(UDPConnection, {
+              host: tmp[1],
+              port: parseInt(tmp[2]),
+            });
+            break;
+          default:
+            throw new Error('Unsupported connection type: ' + remote);
         }
       }
     } catch (e) {
-      console.log("Failed to connect to %o", remote);
+      console.log('Failed to connect to %o', remote);
       console.error(e);
       continue;
     }
 
-    console.log("");
+    console.log('');
   }
 }
 
 run(argv).then(
-    function() {
-      console.log("DONE.");
-      exit(0);
-    },
-    function(e) {
-      console.error(e);
-      exit(1);
-    });
-
+  function () {
+    console.log('DONE.');
+    exit(0);
+  },
+  function (e) {
+    console.error(e);
+    exit(1);
+  }
+);

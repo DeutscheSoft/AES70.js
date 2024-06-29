@@ -54,39 +54,35 @@ export function utf8_codepoint_length(buf, pos, codepoints) {
 
   while (codepoints--) {
     const c = buf.getUint8(pos);
-    pos ++;
+    pos++;
     if (c <= 0x7f) continue;
-    if (c <  0xc2)
-      throw new Error("Invalid UTF8 sequence.");
-    pos ++;
+    if (c < 0xc2) throw new Error('Invalid UTF8 sequence.');
+    pos++;
     if (c <= 0xdf) continue;
-    pos ++;
+    pos++;
     if (c <= 0xef) continue;
-    pos ++;
+    pos++;
     if (c <= 0xf4) continue;
 
-    throw new Error("Invalid UTF8 sequence.");
+    throw new Error('Invalid UTF8 sequence.');
   }
 
   return pos - start;
 }
 
-export function count_codepoints(s)
-{
+export function count_codepoints(s) {
   let n = 0;
 
-  for (let i = 0; i < s.length; i++, n++)
-  {
+  for (let i = 0; i < s.length; i++, n++) {
     const c = s.charCodeAt(i);
 
-    if (c >= 0xd800 && c <= 0xdbff)
-    {
+    if (c >= 0xd800 && c <= 0xdbff) {
       i++;
 
       const c = s.charCodeAt(i);
 
-      if (c < 0xDC00 || c > 0xDFFF)
-        throw new TypeError("Expected valid unicode string.");
+      if (c < 0xdc00 || c > 0xdfff)
+        throw new TypeError('Expected valid unicode string.');
     }
   }
 

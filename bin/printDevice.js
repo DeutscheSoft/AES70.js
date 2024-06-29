@@ -4,8 +4,7 @@ import { argv, exit } from 'process';
 import { RemoteDevice } from '../src/controller/remote_device.js';
 import { TCPConnection } from '../src/controller/tcp_connection.js';
 
-if (argv.length < 4)
-{
+if (argv.length < 4) {
   console.log('Usage: node print_tree.js <ip> <port>');
   exit(1);
 }
@@ -14,33 +13,30 @@ const host = argv[2];
 const port = parseInt(argv[3]);
 
 TCPConnection.connect({
-    host: host,
-    port: port,
-  })
-  .then(function(connection) {
+  host: host,
+  port: port,
+})
+  .then(function (connection) {
     return new RemoteDevice(connection);
   })
   .then(printDevice);
 
-async function printTree(objects, prefix)
-{
+async function printTree(objects, prefix) {
   if (!prefix) prefix = [];
 
   let lastPath;
 
-  for (let i = 0; i < objects.length; i++)
-  {
+  for (let i = 0; i < objects.length; i++) {
     const o = objects[i];
 
-    if (Array.isArray(o)) 
-    {
+    if (Array.isArray(o)) {
       await printTree(o, lastPath);
       continue;
     }
 
     const roleName = await o.GetRole();
 
-    const path = prefix.concat([ roleName ]);
+    const path = prefix.concat([roleName]);
 
     lastPath = path;
 
@@ -52,16 +48,15 @@ async function printTree(objects, prefix)
       if (!getter) return;
       try {
         const val = await getter();
-        console.log(" %s: %O ", p.name, val);
+        console.log(' %s: %O ', p.name, val);
       } catch (e) {
-        console.log(" %s: n/a ", p.name);
+        console.log(' %s: n/a ', p.name);
       }
     });
   }
 }
 
-async function printDevice(device)
-{
+async function printDevice(device) {
   try {
     await printTree(await device.GetDeviceTree());
     const managers = [
@@ -77,11 +72,11 @@ async function printDevice(device)
       device.DeviceTimeManager,
       device.TaskManager,
       device.CodingManager,
-      device.DiagnosticManager
+      device.DiagnosticManager,
     ];
     for (let i = 0; i < managers.length; i++) {
       try {
-        await printTree([ managers[i] ]);
+        await printTree([managers[i]]);
       } catch (err) {
         if (err.status != 5) {
           throw err;

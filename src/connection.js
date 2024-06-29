@@ -21,16 +21,16 @@ import { MessageGenerator } from './OCP1/message_generator.js';
  *      enumerated. Defaults to 64 kilobytes by default but is overwritten e.g.
  *      by :class:`UDPConnection`.
  */
-export class Connection extends Events
-{
-  constructor(options)
-  {
+export class Connection extends Events {
+  constructor(options) {
     if (!options) options = {};
     super();
     const now = this._now();
     this.options = options;
-    const batchSize = options.batch >= 0 ? options.batch : (64 * 1024);
-    this._message_generator = new MessageGenerator(batchSize, (buf) => this.write(buf));
+    const batchSize = options.batch >= 0 ? options.batch : 64 * 1024;
+    this._message_generator = new MessageGenerator(batchSize, (buf) =>
+      this.write(buf)
+    );
     this.inbuf = null;
     this.inpos = 0;
     this.last_rx_time = now;
@@ -48,24 +48,20 @@ export class Connection extends Events
     this.on('error', cleanup);
   }
 
-  get is_reliable()
-  {
+  get is_reliable() {
     return true;
   }
 
-  send(pdu)
-  {
-    if (this.is_closed()) throw new Error("Connection is closed.");
+  send(pdu) {
+    if (this.is_closed()) throw new Error('Connection is closed.');
     this._message_generator.add(pdu);
   }
 
-  tx_idle_time()
-  {
+  tx_idle_time() {
     return this._now() - this.last_tx_time;
   }
 
-  rx_idle_time()
-  {
+  rx_idle_time() {
     return this._now() - this.last_tx_time;
   }
 
@@ -115,40 +111,32 @@ export class Connection extends Events
     this._check_keepalive();
   }
 
-  incoming(a)
-  {
-  }
+  incoming(a) {}
 
-  write(buf)
-  {
+  write(buf) {
     this.last_tx_time = this._now();
     this.tx_bytes += buf.byteLength;
   }
 
-  is_closed()
-  {
+  is_closed() {
     return this._message_generator === null;
   }
 
   /**
    * Closes the connection. Overloaded by connection subclasses.
    */
-  close()
-  {
-    if (this.is_closed())
-      return;
+  close() {
+    if (this.is_closed()) return;
     this.emit('close');
   }
 
   error(err) {
-    if (this.is_closed())
-      return;
+    if (this.is_closed()) return;
     this.emit('error', err);
   }
 
-  cleanup()
-  {
-    if (this.is_closed()) throw new Error("cleanup() called twice.");
+  cleanup() {
+    if (this.is_closed()) throw new Error('cleanup() called twice.');
 
     // disable keepalive
     this.set_keepalive_interval(0);
@@ -157,24 +145,18 @@ export class Connection extends Events
     this.removeAllEventListeners();
   }
 
-  _check_keepalive()
-  {
-    if (!(this.keepalive_interval > 0))
-      return;
+  _check_keepalive() {
+    if (!(this.keepalive_interval > 0)) return;
 
     const t = this.keepalive_interval;
 
-    if (this.rx_idle_time() > t * 3)
-    {
+    if (this.rx_idle_time() > t * 3) {
       this.emit('timeout');
       this.error(new Error('Keepalive timeout.'));
-    }
-    else if (this.tx_idle_time() > t * 0.75)
-    {
+    } else if (this.tx_idle_time() > t * 0.75) {
       /* Try to flush buffers before actually sending out anything. */
       this.flush();
-      if (this.tx_idle_time() > t * 0.75)
-        this.send(new KeepAlive(t));
+      if (this.tx_idle_time() > t * 0.75) this.send(new KeepAlive(t));
     }
   }
 
@@ -194,8 +176,7 @@ export class Connection extends Events
    * @param {number} seconds
    *    Keepalive interval in seconds.
    */
-  set_keepalive_interval(seconds)
-  {
+  set_keepalive_interval(seconds) {
     const t = seconds * 1000;
 
     if (this._keepalive_interval_id !== null) {
@@ -206,13 +187,11 @@ export class Connection extends Events
     this.keepalive_interval = t;
 
     // Notify the other side about our new keepalive
-    if (this.is_closed())
-      return;
+    if (this.is_closed()) return;
 
     this.send(new KeepAlive(t));
 
-    if (!(t > 0))
-      return;
+    if (!(t > 0)) return;
 
     // we check twice as often to make sure we stay within the timers
     this._keepalive_interval_id = setInterval(() => {
@@ -220,4 +199,3 @@ export class Connection extends Events
     }, t / 2);
   }
 }
-

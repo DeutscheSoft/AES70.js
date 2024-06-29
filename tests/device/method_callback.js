@@ -16,9 +16,8 @@ class CheckCallbackMethod extends Test {
       }
     });
 
-    if (result.length !== result2.length)
-      throw new Error('Result mismatch.');
+    if (result.length !== result2.length) throw new Error('Result mismatch.');
   }
 }
 
-export default [ CheckCallbackMethod ];
+export default [CheckCallbackMethod];

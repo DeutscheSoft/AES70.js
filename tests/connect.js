@@ -3,8 +3,7 @@ const RemoteDevice = require('../lib/Controller').RemoteDevice;
 const TCPConnection = require('../lib/controller/TCP').TCPConnection;
 const OCC = require('../lib/controller/ControlClasses');
 
-if (process.argv.length < 4)
-{
+if (process.argv.length < 4) {
   console.log('Usage: node connect.js <ip> <port>');
   return;
 }
@@ -13,33 +12,28 @@ const host = process.argv[2];
 const port = parseInt(process.argv[3]);
 
 TCPConnection.connect({
-    host: host,
-    port: port,
-  })
-  .then(function(connection) {
+  host: host,
+  port: port,
+})
+  .then(function (connection) {
     return new RemoteDevice(connection);
   })
   .then(printDeviceTree);
 
-function delay(n)
-{
-  return new Promise(function(resolve, reject) {
+function delay(n) {
+  return new Promise(function (resolve, reject) {
     setTimeout(resolve, n);
   });
 }
 
-async function microblink(objects)
-{
+async function microblink(objects) {
   let found = false;
 
-  do
-  {
-    for (let i = 0; i < objects.length; i++)
-    {
+  do {
+    for (let i = 0; i < objects.length; i++) {
       const o = objects[i];
 
-      if (o instanceof OCC.OcaBitstringActuator)
-      {
+      if (o instanceof OCC.OcaBitstringActuator) {
         const N = await o.GetNrBits();
 
         const n = 0 | (Math.random() * N);
@@ -56,9 +50,8 @@ async function microblink(objects)
   process.exit(0);
 }
 
-function printDeviceTree(device)
-{
-  var print = function(objects, i) {
+function printDeviceTree(device) {
+  var print = function (objects, i) {
     var o = objects[i];
     var a = [];
 
@@ -67,27 +60,28 @@ function printDeviceTree(device)
       return;
     }
 
-    a.push(o.GetRole().then((role) => console.log("Role:", role)));
+    a.push(o.GetRole().then((role) => console.log('Role:', role)));
     o.get_properties().forEach((p) => {
       const getter = p.getter(o);
       if (!getter) return;
-      a.push(getter().then((val) => console.log(" %s: %o ", p.name, val)));
+      a.push(getter().then((val) => console.log(' %s: %o ', p.name, val)));
     });
 
-    Promise.all(a)
-      .then(
-        () => print(objects, i+1),
-        (err) => {
-          console.error(err);
-          print(objects, i+1)
-        });
+    Promise.all(a).then(
+      () => print(objects, i + 1),
+      (err) => {
+        console.error(err);
+        print(objects, i + 1);
+      }
+    );
   };
 
   device.discover_all().then(
-    function(o) {
+    function (o) {
       print(o, 0);
     },
-    function(err) {
+    function (err) {
       console.error(err);
-    });
+    }
+  );
 }

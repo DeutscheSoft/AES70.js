@@ -35,11 +35,11 @@ import { KeepAlive } from '../src/OCP1/keepalive.js';
 import { Response } from '../src/OCP1/response.js';
 import { Command } from '../src/OCP1/command.js';
 import { Notification } from '../src/OCP1/notification.js';
-import * as  Types from '../src/types.js';
+import * as Types from '../src/types.js';
 
 import { OcaEvent } from '../src/OCP1/OcaEvent.js';
 import { OcaMethod } from '../src/OCP1/OcaMethod.js';
-import { OcaNotificationDeliveryMode, } from '../src/OCP1/OcaNotificationDeliveryMode.js';
+import { OcaNotificationDeliveryMode } from '../src/OCP1/OcaNotificationDeliveryMode.js';
 
 function encodeDecode(Type, data) {
   const length = Type.encodedLength(data);
@@ -47,26 +47,25 @@ function encodeDecode(Type, data) {
 
   Type.encodeTo(new DataView(buffer), 0, data);
 
-  const [ pos, data2 ] = Type.decodeFrom(new DataView(buffer), 0);
+  const [pos, data2] = Type.decodeFrom(new DataView(buffer), 0);
 
   return data2;
 }
 
 function testEncodeDecode(name, Type, data, Length) {
-    it(name, () => {
-      const length = Type.encodedLength(data);
-      const buffer = new ArrayBuffer(length);
+  it(name, () => {
+    const length = Type.encodedLength(data);
+    const buffer = new ArrayBuffer(length);
 
-      Type.encodeTo(new DataView(buffer), 0, data);
+    Type.encodeTo(new DataView(buffer), 0, data);
 
-      const [ pos, data2 ] = Type.decodeFrom(new DataView(buffer), 0);
+    const [pos, data2] = Type.decodeFrom(new DataView(buffer), 0);
 
-      strictEqual(pos, length);
-      if (Length !== void 0)
-        strictEqual(length, Length);
+    strictEqual(pos, length);
+    if (Length !== void 0) strictEqual(length, Length);
 
-      deepEqual(data, data2);
-    });
+    deepEqual(data, data2);
+  });
 }
 
 describe('ocp1', () => {
@@ -89,20 +88,50 @@ describe('ocp1', () => {
   testEncodeDecode('OcaInt64', OcaInt64, -(3n ** 39n), 8);
   testEncodeDecode('OcaInt64', OcaInt64, 3, 8);
   testEncodeDecode('OcaInt64', OcaInt64, -3, 8);
-  testEncodeDecode('OcaList<OcaFloat32>', OcaList(OcaFloat32), Array.from(new Float32Array(233).map(() => Math.random())), 2 + 4 * 233);
-  testEncodeDecode('OcaList<OcaFloat64>', OcaList(OcaFloat64), new Array(233).fill(0).map(() => Math.random()), 2 + 8 * 233);
-  testEncodeDecode('OcaString', OcaString, "foobar", 8);
-  testEncodeDecode('OcaList2D<OcaString>', OcaList2D(OcaString), [ [ "foobar", "bar" ], [ "bar", "foo" ] ]);
-  testEncodeDecode('OcaList2D<OcaFloat32>', OcaList2D(OcaFloat32), [ [ 0.5, 1 ], [ 0.25, 5 ] ], 4 + 4 * 4);
-  testEncodeDecode('OcaBitstring', OcaBitstring, [ true, false, false, true ], 3);
-  testEncodeDecode('OcaBitstring', OcaBitstring, [ true, false, false, true, false, true, false, false, true ], 4);
+  testEncodeDecode(
+    'OcaList<OcaFloat32>',
+    OcaList(OcaFloat32),
+    Array.from(new Float32Array(233).map(() => Math.random())),
+    2 + 4 * 233
+  );
+  testEncodeDecode(
+    'OcaList<OcaFloat64>',
+    OcaList(OcaFloat64),
+    new Array(233).fill(0).map(() => Math.random()),
+    2 + 8 * 233
+  );
+  testEncodeDecode('OcaString', OcaString, 'foobar', 8);
+  testEncodeDecode('OcaList2D<OcaString>', OcaList2D(OcaString), [
+    ['foobar', 'bar'],
+    ['bar', 'foo'],
+  ]);
+  testEncodeDecode(
+    'OcaList2D<OcaFloat32>',
+    OcaList2D(OcaFloat32),
+    [
+      [0.5, 1],
+      [0.25, 5],
+    ],
+    4 + 4 * 4
+  );
+  testEncodeDecode('OcaBitstring', OcaBitstring, [true, false, false, true], 3);
+  testEncodeDecode(
+    'OcaBitstring',
+    OcaBitstring,
+    [true, false, false, true, false, true, false, false, true],
+    4
+  );
 
   {
     const data = new Map();
-    data.set("foo", 34);
-    data.set("bar", 23);
-    data.set("foobar", 42);
-    testEncodeDecode('OcaMap<OcaString,OcaInt8>', OcaMap(OcaString, OcaInt8), data);
+    data.set('foo', 34);
+    data.set('bar', 23);
+    data.set('foobar', 42);
+    testEncodeDecode(
+      'OcaMap<OcaString,OcaInt8>',
+      OcaMap(OcaString, OcaInt8),
+      data
+    );
   }
 
   {
@@ -113,15 +142,15 @@ describe('ocp1', () => {
     });
     const data = new Type.type({
       size: 1.0,
-      name: "foo",
-      categories: [ "bar", "flu" ],
+      name: 'foo',
+      categories: ['bar', 'flu'],
     });
     testEncodeDecode('OcaStruct<...>', Type, data);
   }
 
   {
     const Type = Arguments(OcaFloat32, OcaString);
-    const data = [ 0.5, "foobar" ];
+    const data = [0.5, 'foobar'];
     testEncodeDecode('Arguments<OcaFloat32, OcaString>', Type, data);
   }
 
@@ -139,23 +168,23 @@ describe('ocp1', () => {
 
   {
     const Type = Tuple(OcaUint32, OcaString);
-    testEncodeDecode('Tuple(OcaUint32, OcaString)', Type, [ 23, 'foobar' ], 12);
+    testEncodeDecode('Tuple(OcaUint32, OcaString)', Type, [23, 'foobar'], 12);
   }
 
   {
-    const Type = String16
+    const Type = String16;
     testEncodeDecode('String16', Type, 'foobar', 2 + 2 * 6);
   }
 
   it('OcaSubscriptionManager.AddSubscription', () => {
     const encodedArguments = new EncodedArguments(
-      [ OcaEvent, OcaMethod, OcaBlob, OcaNotificationDeliveryMode, OcaBlob],
+      [OcaEvent, OcaMethod, OcaBlob, OcaNotificationDeliveryMode, OcaBlob],
       [
         { EmitterONo: 1, EventID: { DefLevel: 1, EventIndex: 3 } },
         { ONo: 1, MethodID: { DefLevel: 1, MethodIndex: 5 } },
         new ArrayBuffer(0),
         1,
-        new ArrayBuffer(0)
+        new ArrayBuffer(0),
       ]
     );
 
@@ -175,20 +204,35 @@ describe('ocp1', () => {
     new Command(1, 2, 3, 0),
     new Command(1, 2, 3, 5, new ArrayBuffer(10)),
     new Response(1, 2, 3, new ArrayBuffer(4)),
-    new Notification(1, 2, 3, null, new Types.OcaEvent(1, new Types.OcaEventID(2, 3)), 0),
-    new Notification(1, 2, 3, null, new Types.OcaEvent(1, new Types.OcaEventID(2, 3)), 2, new ArrayBuffer(12)),
+    new Notification(
+      1,
+      2,
+      3,
+      null,
+      new Types.OcaEvent(1, new Types.OcaEventID(2, 3)),
+      0
+    ),
+    new Notification(
+      1,
+      2,
+      3,
+      null,
+      new Types.OcaEvent(1, new Types.OcaEventID(2, 3)),
+      2,
+      new ArrayBuffer(12)
+    ),
     new KeepAlive(1000),
   ];
 
   it('encodeMessage', () => {
     const encodeMessageWithGenerator = (pdus) => {
-        let buf = 0;
-        const generator = new MessageGenerator(0xFFFF, (_buf) => buf = _buf);
-        pdus.forEach((pdu) => generator.add(pdu));
-        generator.flush();
-        generator.dispose();
+      let buf = 0;
+      const generator = new MessageGenerator(0xffff, (_buf) => (buf = _buf));
+      pdus.forEach((pdu) => generator.add(pdu));
+      generator.flush();
+      generator.dispose();
 
-        return buf;
+      return buf;
     };
 
     const testEncodeDecode = (pdus) => {
@@ -214,8 +258,8 @@ describe('ocp1', () => {
 
     const rsp = new Response(1, 2, 0, null);
 
-    testEncodeDecode([ new KeepAlive(1) ]);
-    testEncodeDecode([ rsp ]);
+    testEncodeDecode([new KeepAlive(1)]);
+    testEncodeDecode([rsp]);
     testEncodeDecode(new Array(13).fill(rsp));
   });
 
@@ -258,7 +302,7 @@ describe('ocp1', () => {
 
       const messages = decodeAll();
 
-      deepEqual(messages, [ [ k ], [ k ], [ k ] ]);
+      deepEqual(messages, [[k], [k], [k]]);
 
       g.dispose();
     }
@@ -268,8 +312,7 @@ describe('ocp1', () => {
 
       const rsp = new Response(1, 2, 0, null);
 
-      for (let i = 0; i < 10; i++)
-        g.add(rsp);
+      for (let i = 0; i < 10; i++) g.add(rsp);
 
       g.flush();
 
@@ -285,8 +328,7 @@ describe('ocp1', () => {
     examplePDUs.forEach((pdu) => {
       const g = new MessageGenerator(64, resultCallback);
 
-      for (let i = 0; i < 10; i++)
-        g.add(pdu);
+      for (let i = 0; i < 10; i++) g.add(pdu);
 
       g.flush();
       g.dispose();
@@ -302,15 +344,14 @@ describe('ocp1', () => {
 
       const rsp = new Response(1, 2, 0, null);
 
-      for (let i = 0; i < 0xffff + 2; i++)
-        g.add(rsp);
+      for (let i = 0; i < 0xffff + 2; i++) g.add(rsp);
 
       g.flush();
       g.dispose();
 
       const messages = decodeAll();
 
-      deepEqual(messages, [ repeat(0xffff, rsp), repeat(2, rsp) ]);
+      deepEqual(messages, [repeat(0xffff, rsp), repeat(2, rsp)]);
     }
   });
 });
