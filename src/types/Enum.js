@@ -40,6 +40,10 @@ export function Enum(values) {
   }
 
   const result = class {
+    get isEnum() {
+      return true;
+    }
+
     constructor(value) {
       if (typeof value === 'string') {
         if (!hasOwnProperty(values, value))
