@@ -13,3 +13,4 @@ Makefile
 !bin/printDevices.js
 tests/
 ts-tests/
+.vscode/
