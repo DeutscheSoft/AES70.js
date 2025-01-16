@@ -9,11 +9,11 @@ be used to build AES70 devices.
 
 # Contents
 
-* [AES70](#aes70)
-* [Basics](#basics)
-* [Installation](#installation)
-* [Getting started](#getting-started)
-* [License](#license)
+- [AES70](#aes70)
+- [Basics](#basics)
+- [Installation](#installation)
+- [Getting started](#getting-started)
+- [License](#license)
 
 # AES70
 
@@ -68,7 +68,7 @@ file `dist/AES70.es5.js`. To build this file run
         npm ci
         make dist/AES70.es5.js
 
-Alternatively, the version of AES70 published to NPM already contains the 
+Alternatively, the version of AES70 published to NPM already contains the
 generated source file. After installing `aes70` using NPM a version of AES70.js
 for the browser will be at `node_modules/aes70/dist/AES70.es5.js`.
 
@@ -163,7 +163,7 @@ A full working example:
 
 The tree returned by `RemoteDevice.get_device_tree` returns all objects of the
 device below the root block. They represent all objects defined inside of the
-AES70 device aside from the manager objects. 
+AES70 device aside from the manager objects.
 
 # Documentation
 
