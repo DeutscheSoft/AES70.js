@@ -36,7 +36,24 @@ const port = parseInt(rest[1]);
 
 if (!(port > 0 && port <= 0xffff)) badArguments();
 
-function formatPropertyValue(name, value) {
+function formatValue(value) {
+  if (typeof value === 'object') {
+    if (value instanceof Uint8Array) {
+      return Array.from(value);
+    } else if (value !== null && value.isEnum) {
+      return value.name;
+    } else {
+      for (const name in value) {
+        value[name] = formatValue(value[name]);
+      }
+      return value;
+    }
+  } else {
+    return value;
+  }
+}
+
+function formatReturnValue(name, value) {
   if (typeof value === 'object') {
     if (value instanceof Arguments) {
       return {
@@ -44,8 +61,8 @@ function formatPropertyValue(name, value) {
         ['min' + name]: value.item(1),
         ['max' + name]: value.item(2),
       };
-    } else if (value !== null && value.isEnum) {
-      value = value.name;
+    } else {
+      value = formatValue(value);
     }
   }
 
@@ -66,6 +83,7 @@ TCPConnection.connect({
 async function fetchObjectInfo(o) {
   const info = {
     type: o.ClassName,
+    ono: o.ObjectNumber,
   };
 
   const classIdentification = await o.GetClassIdentification();
@@ -75,14 +93,15 @@ async function fetchObjectInfo(o) {
   await Promise.all(
     o.get_properties().forEach(async (p) => {
       const { name } = p;
-      if (name === 'ClassID' || name === 'ClassVersion') return;
+      if (name === 'ClassID' || name === 'ClassVersion' || name === 'Owner')
+        return;
       if (o instanceof OcaBlock && name === 'Members') return;
       const getter = p.getter(o);
       if (!getter) return;
       try {
         const currentValue = await getter();
 
-        Object.assign(info, formatPropertyValue(name, currentValue));
+        Object.assign(info, formatReturnValue(name, currentValue));
       } catch (err) {
         if (err.status != 8)
           console.error(
