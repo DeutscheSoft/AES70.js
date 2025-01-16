@@ -2,5 +2,4 @@
 *package-lock.json
 *node_modules
 *Makefile
-../.git
-../prettier
+.git
