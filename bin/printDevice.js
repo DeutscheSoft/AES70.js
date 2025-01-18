@@ -3,15 +3,17 @@
 import { argv, exit } from 'process';
 import { RemoteDevice } from '../src/controller/remote_device.js';
 import { TCPConnection } from '../src/controller/tcp_connection.js';
+import { UDPConnection } from '../src/controller/udp_connection.js';
 import { OcaBlock } from '../src/controller/ControlClasses/OcaBlock.js';
 import { Arguments } from '../src/controller/arguments.js';
 
 function badArguments() {
-  console.log('Usage: node print_tree.js [--json] <ip> <port>');
+  console.log('Usage: node print_tree.js [--json] [--udp] <ip> <port>');
   exit(1);
 }
 
 let jsonMode = false;
+let useUdp = false;
 const rest = [];
 
 argv.slice(2).forEach((option) => {
@@ -22,6 +24,9 @@ argv.slice(2).forEach((option) => {
     case '-h':
     case '--help':
       badArguments();
+      break;
+    case '--udp':
+      useUdp = true;
       break;
     default:
       rest.push(option);
@@ -71,7 +76,9 @@ function formatReturnValue(name, value) {
   };
 }
 
-TCPConnection.connect({
+const Connection = useUdp ? UDPConnection : TCPConnection;
+
+Connection.connect({
   host: host,
   port: port,
 })
