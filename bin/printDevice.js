@@ -58,6 +58,17 @@ function formatValue(value) {
   }
 }
 
+function formatClassIdentification(classIdentification) {
+  const { ClassVersion, ClassID } = classIdentification;
+
+  return {
+    ClassVersion,
+    ClassID: ClassID.split('')
+      .map((entry) => entry.charCodeAt(0))
+      .join('.'),
+  };
+}
+
 function formatReturnValue(name, value) {
   if (typeof value === 'object') {
     if (value instanceof Arguments) {
@@ -95,7 +106,7 @@ async function fetchObjectInfo(o) {
 
   const classIdentification = await o.GetClassIdentification();
 
-  Object.assign(info, classIdentification);
+  Object.assign(info, formatClassIdentification(classIdentification));
 
   await Promise.all(
     o.get_properties().forEach(async (p) => {
