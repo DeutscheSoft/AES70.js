@@ -20,4 +20,8 @@ export class Arguments {
   get length() {
     return this.values.length;
   }
+
+  [Symbol.iterator]() {
+    return this.values[Symbol.iterator]();
+  }
 }
