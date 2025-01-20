@@ -8,7 +8,16 @@ import { error } from '../log.js';
  * and listening to property changes.
  */
 export class Property {
-  constructor(name, type, level, index, readonly, is_static, aliases) {
+  constructor(
+    name,
+    type,
+    level,
+    index,
+    readonly,
+    is_static,
+    aliases,
+    accessors
+  ) {
     this.name = name;
     this.type = type;
     this.level = level;
@@ -16,6 +25,12 @@ export class Property {
     this.readonly = readonly;
     this.static = is_static;
     this.aliases = aliases;
+
+    if (!aliases && !accessors && !is_static) {
+      accessors = { get: 'Get' + name };
+    }
+
+    this.accessors = accessors;
   }
 
   /**
@@ -44,6 +59,35 @@ export class Property {
     let name = this.name;
     let i = 0;
     const aliases = this.aliases;
+    const accessors = this.accessors;
+
+    if (accessors) {
+      const get = accessors.get;
+
+      if (!get) return null;
+
+      let fun;
+
+      if (typeof get === 'string') {
+        fun = o[get];
+      } else if (typeof get === 'object') {
+        const { name, index } = get;
+
+        if (index >= 0) {
+          fun = async function () {
+            const result = await this[name]();
+
+            return result.item(index);
+          };
+        } else {
+          fun = o[name];
+        }
+      } else {
+        throw new Error(`Unexpected accessor.`);
+      }
+
+      return no_bind ? fun : fun.bind(o);
+    }
 
     do {
       if (this.static) {
