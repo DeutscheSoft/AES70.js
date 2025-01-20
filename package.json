@@ -14,7 +14,7 @@
     "src": "src"
   },
   "scripts": {
-    "test": "node --test tests/*.test.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
     "prepublishOnly": "make",
     "docs": "cd esdoc && npm run build",
     "prettier": "npx prettier@2.0.5 --write .",

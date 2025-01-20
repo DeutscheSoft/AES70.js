@@ -13,6 +13,8 @@ export * from './controller/client_connection.js';
 export * from './controller/remote_device.js';
 export * from './controller/define_custom_class.js';
 export * from './controller/abstract_udp_connection.js';
+export * from './controller/observeProperty.js';
+export * from './controller/PropertyObserver.js';
 
 import * as RemoteControlClasses from './controller/ControlClasses.js';
 import * as Types from './types.js';
