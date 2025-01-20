@@ -339,7 +339,7 @@ describe('ocp1', () => {
     });
 
     {
-      // Allow arbitrary big messages.
+      // Allow arbitrarily big messages.
       const g = new MessageGenerator(0xffffffff, resultCallback);
 
       const rsp = new Response(1, 2, 0, null);
