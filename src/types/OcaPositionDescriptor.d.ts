@@ -5,10 +5,7 @@ import {
   IOcaPositionCoordinateSystem,
   OcaPositionCoordinateSystem,
 } from './OcaPositionCoordinateSystem';
-import {
-  IOcaPositionDescriptorFieldFlags,
-  OcaPositionDescriptorFieldFlags,
-} from './OcaPositionDescriptorFieldFlags';
+import { IOcaPositionDescriptorFieldFlags } from './OcaPositionDescriptorFieldFlags';
 
 export declare interface IOcaPositionDescriptor {
   /**
@@ -19,7 +16,7 @@ export declare interface IOcaPositionDescriptor {
 
   /**
    * Which fields of the Values[] array contain valid values.
-   * @type OcaPositionDescriptorFieldFlags
+   * @type IOcaPositionDescriptorFieldFlags
    */
   FieldFlags: IOcaPositionDescriptorFieldFlags;
 
@@ -71,7 +68,7 @@ export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
    */
   constructor(
     CoordinateSystem: OcaPositionCoordinateSystem,
-    FieldFlags: OcaPositionDescriptorFieldFlags,
+    FieldFlags: IOcaPositionDescriptorFieldFlags,
     Values: number[]
   );
 
@@ -83,9 +80,9 @@ export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
 
   /**
    * Which fields of the Values[] array contain valid values.
-   * @type OcaPositionDescriptorFieldFlags
+   * @type IOcaPositionDescriptorFieldFlags
    */
-  FieldFlags: OcaPositionDescriptorFieldFlags;
+  FieldFlags: IOcaPositionDescriptorFieldFlags;
 
   /**
    * The coordinates

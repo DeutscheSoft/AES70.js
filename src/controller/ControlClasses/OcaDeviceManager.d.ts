@@ -1,4 +1,4 @@
-import { OcaDeviceState } from '../../types/OcaDeviceState';
+import { IOcaDeviceState } from '../../types/OcaDeviceState';
 import { OcaManagerDescriptor } from '../../types/OcaManagerDescriptor';
 import { OcaModelDescription } from '../../types/OcaModelDescription';
 import { OcaModelGUID } from '../../types/OcaModelGUID';
@@ -62,7 +62,7 @@ export declare class OcaDeviceManager extends OcaManager {
   /**
    * This event is emitted whenever State changes.
    */
-  OnStateChanged: PropertyEvent<OcaDeviceState>;
+  OnStateChanged: PropertyEvent<IOcaDeviceState>;
 
   /**
    * This event is emitted whenever Busy changes.
@@ -215,10 +215,10 @@ export declare class OcaDeviceManager extends OcaManager {
    * the property was successfully retrieved.
    *
    * @method OcaDeviceManager#GetState
-   * @returns {Promise<OcaDeviceState>}
-   *   A promise which resolves to a single value of type :class:`OcaDeviceState`.
+   * @returns {Promise<IOcaDeviceState>}
+   *   A promise which resolves to a single value of type ``IOcaDeviceState``.
    */
-  GetState(): Promise<OcaDeviceState>;
+  GetState(): Promise<IOcaDeviceState>;
 
   /**
    * Sets the value of the reset key of the device. The return value indicates

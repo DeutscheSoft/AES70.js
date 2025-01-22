@@ -49,7 +49,7 @@ export class OcaPositionDescriptor {
     this.CoordinateSystem = CoordinateSystem;
     /**
      * Which fields of the Values[] array contain valid values.
-     * @type OcaPositionDescriptorFieldFlags
+     * @type IOcaPositionDescriptorFieldFlags
      */
     this.FieldFlags = FieldFlags;
     /**

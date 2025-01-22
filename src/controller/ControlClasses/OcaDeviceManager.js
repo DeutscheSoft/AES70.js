@@ -175,8 +175,8 @@ export const OcaDeviceManager = make_control_class(
  * property was successfully retrieved.
  *
  * @method OcaDeviceManager#GetState
- * @returns {Promise<OcaDeviceState>}
- *   A promise which resolves to a single value of type :class:`OcaDeviceState`.
+ * @returns {Promise<IOcaDeviceState>}
+ *   A promise which resolves to a single value of type ``IOcaDeviceState``.
  */
 /**
  * Sets the value of the reset key of the device. The return value indicates
@@ -309,7 +309,7 @@ export const OcaDeviceManager = make_control_class(
  * The property ``State`` is described in the AES70 standard as follows.
  * Read-only property that indicates the current state of the device.
  *
- * @member {PropertyEvent<OcaDeviceState>} OcaDeviceManager#OnStateChanged
+ * @member {PropertyEvent<IOcaDeviceState>} OcaDeviceManager#OnStateChanged
  */
 /**
  * This event is emitted when the property ``Busy`` changes in the remote object.

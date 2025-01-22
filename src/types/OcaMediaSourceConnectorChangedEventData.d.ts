@@ -1,10 +1,7 @@
 /*
  * This file has been generated.
  */
-import {
-  IOcaMediaConnectorElement,
-  OcaMediaConnectorElement,
-} from './OcaMediaConnectorElement';
+import { IOcaMediaConnectorElement } from './OcaMediaConnectorElement';
 import {
   IOcaMediaSourceConnector,
   OcaMediaSourceConnector,
@@ -32,7 +29,7 @@ export declare interface IOcaMediaSourceConnectorChangedEventData {
   /**
    * Indicates which element(s) of the connector changed. If the connector is
    * added or deleted, all bits in this bitset shall be set.
-   * @type OcaMediaConnectorElement
+   * @type IOcaMediaConnectorElement
    */
   ChangedElement: IOcaMediaConnectorElement;
 }
@@ -45,7 +42,7 @@ export declare class OcaMediaSourceConnectorChangedEventData
   constructor(
     SourceConnector: OcaMediaSourceConnector,
     ChangeType: OcaPropertyChangeType,
-    ChangedElement: OcaMediaConnectorElement
+    ChangedElement: IOcaMediaConnectorElement
   );
 
   /**
@@ -65,7 +62,7 @@ export declare class OcaMediaSourceConnectorChangedEventData
   /**
    * Indicates which element(s) of the connector changed. If the connector is
    * added or deleted, all bits in this bitset shall be set.
-   * @type OcaMediaConnectorElement
+   * @type IOcaMediaConnectorElement
    */
-  ChangedElement: OcaMediaConnectorElement;
+  ChangedElement: IOcaMediaConnectorElement;
 }

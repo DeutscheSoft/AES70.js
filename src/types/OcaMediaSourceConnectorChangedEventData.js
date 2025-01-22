@@ -22,7 +22,7 @@ export class OcaMediaSourceConnectorChangedEventData {
     /**
      * Indicates which element(s) of the connector changed. If the connector is
      * added or deleted, all bits in this bitset shall be set.
-     * @type OcaMediaConnectorElement
+     * @type IOcaMediaConnectorElement
      */
     this.ChangedElement = ChangedElement;
   }
