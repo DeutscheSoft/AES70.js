@@ -74,10 +74,18 @@ export class Property {
         const { name, index } = get;
 
         if (index >= 0) {
-          fun = async function () {
-            const result = await this[name]();
+          fun = function (callback) {
+            if (typeof callback === 'function') {
+              this[name]((ok, result) => {
+                if (ok) {
+                  result = result.item(index);
+                }
 
-            return result.item(index);
+                callback(ok, result);
+              });
+            } else {
+              return this[name]().then((result) => result.item(index));
+            }
           };
         } else {
           fun = o[name];
