@@ -2,7 +2,7 @@ import { env, exit } from 'node:process';
 import { TCPConnection } from '../src/controller/tcp_connection.js';
 import { after, before, describe, it } from 'node:test';
 import { RemoteDevice } from '../src/controller/remote_device.js';
-import assert, { equal } from 'node:assert';
+import assert, { equal, deepEqual } from 'node:assert';
 import { OcaGain } from '../src/controller/ControlClasses.js';
 import { delay } from './delay.js';
 import { PropertyObserver } from '../src/controller/PropertyObserver.js';
@@ -163,6 +163,36 @@ describe('PropertyObserver', async () => {
       observations.push({ ok, value });
     });
     equal(observations.length, 1);
+    unsub();
+  });
+
+  it.only('OcaFilterPolynomial/A', async () => {
+    const filter = objectTree.get('MyActuators/MyFilterPolynomial');
+
+    if (!filter) {
+      console.log('Skipping OcaFilterPolynomial test.');
+      return;
+    }
+
+    filter.SetCoefficients([], []);
+
+    const observations = [];
+    const observer = new PropertyObserver(filter, 'A');
+    let unsub = observer.subscribeValue((ok, value) => {
+      observations.push({ ok, value });
+    });
+    await filter.GetClassIdentification();
+
+    equal(observations.length, 1);
+    assert(observations[0].ok);
+    deepEqual(observations[0].value, []);
+
+    await filter.SetCoefficients([1, 2, 3], [4, 5, 6]);
+    await filter.GetClassIdentification();
+    equal(observations.length, 2);
+    assert(observations[1].ok);
+    deepEqual(observations[1].value, [1, 2, 3]);
+
     unsub();
   });
 });
