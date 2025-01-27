@@ -4,8 +4,7 @@ import { argv, exit } from 'process';
 import { RemoteDevice } from '../src/controller/remote_device.js';
 import { TCPConnection } from '../src/controller/tcp_connection.js';
 import { UDPConnection } from '../src/controller/udp_connection.js';
-import { OcaBlock } from '../src/controller/ControlClasses/OcaBlock.js';
-import { Arguments } from '../src/controller/arguments.js';
+import { fetchDeviceContent } from '../src/controller/fetch_device_content.js';
 
 function badArguments() {
   console.log('Usage: node print_tree.js [--json] [--udp] <ip> <port>');
@@ -41,52 +40,6 @@ const port = parseInt(rest[1]);
 
 if (!(port > 0 && port <= 0xffff)) badArguments();
 
-function formatValue(value) {
-  if (typeof value === 'object') {
-    if (value instanceof Uint8Array) {
-      return Array.from(value);
-    } else if (value !== null && value.isEnum) {
-      return value.name;
-    } else {
-      for (const name in value) {
-        value[name] = formatValue(value[name]);
-      }
-      return value;
-    }
-  } else {
-    return value;
-  }
-}
-
-function formatClassIdentification(classIdentification) {
-  const { ClassVersion, ClassID } = classIdentification;
-
-  return {
-    ClassVersion,
-    ClassID: ClassID.split('')
-      .map((entry) => entry.charCodeAt(0))
-      .join('.'),
-  };
-}
-
-function formatReturnValue(name, value) {
-  if (typeof value === 'object') {
-    if (value instanceof Arguments) {
-      return {
-        [name]: value.item(0),
-        ['min' + name]: value.item(1),
-        ['max' + name]: value.item(2),
-      };
-    } else {
-      value = formatValue(value);
-    }
-  }
-
-  return {
-    [name]: value,
-  };
-}
-
 const Connection = useUdp ? UDPConnection : TCPConnection;
 
 Connection.connect({
@@ -98,150 +51,39 @@ Connection.connect({
   })
   .then(printDevice);
 
-async function fetchObjectInfo(o) {
-  const info = {
-    type: o.ClassName,
-    ono: o.ObjectNumber,
-  };
-
-  const classIdentification = await o.GetClassIdentification();
-
-  Object.assign(info, formatClassIdentification(classIdentification));
-
-  await Promise.all(
-    o.get_properties().forEach(async (p) => {
-      const { name } = p;
-      if (name === 'ClassID' || name === 'ClassVersion' || name === 'Owner')
-        return;
-      if (o instanceof OcaBlock && name === 'Members') return;
-      const getter = p.getter(o);
-      if (!getter) return;
-      try {
-        const currentValue = await getter();
-
-        Object.assign(info, formatReturnValue(name, currentValue));
-      } catch (err) {
-        if (err.status != 8)
-          console.error(
-            'Fetching property',
-            o.ClassName,
-            p.name,
-            'failed:',
-            err
-          );
-      }
-    })
-  );
-
-  return info;
-}
-
-async function printTree(objects, prefix) {
+async function printTree(content, prefix) {
   if (!prefix) prefix = [];
 
-  let lastPath;
-
-  for (let i = 0; i < objects.length; i++) {
-    const o = objects[i];
-
-    if (Array.isArray(o)) {
-      await printTree(o, lastPath);
-      continue;
-    }
-
-    const roleName = await o.GetRole();
-
-    const path = prefix.concat([roleName]);
-
-    lastPath = path;
+  for (const info of content) {
+    const { Role, type, Members, ...Rest } = info;
+    const path = prefix.concat([Role]);
 
     console.log('Path: %s', path.join('/'));
 
-    const info = await fetchObjectInfo(o);
+    for (const name in Rest) {
+      console.log(' %s: %O ', name, Rest[name]);
+    }
 
-    for (const name in info) {
-      console.log(' %s: %O ', name, info[name]);
+    if (Members) {
+      printTree(Members, path);
     }
   }
 }
 
-async function managerExists(manager) {
-  try {
-    await manager.GetClassIdentification();
-    return true;
-  } catch (err) {
-    if (err.status != 5) {
-      throw err;
-    }
-
-    return false;
-  }
-}
-
-async function generateJson(objects) {
-  const result = [];
-
-  for (let i = 0; i < objects.length; i++) {
-    const o = objects[i];
-
-    if (Array.isArray(o)) {
-      await printTreeJson(o, lastPath);
-      continue;
-    }
-
-    const info = await fetchObjectInfo(o);
-
-    if (o instanceof OcaBlock) {
-      const members = objects[i + 1];
-      if (!Array.isArray(members)) {
-        throw new Error('Member missing for OcaBlock.');
-      }
-      info.Members = await generateJson(members);
-      i++;
-    }
-
-    result.push(info);
-  }
-
-  return result;
-}
-
-async function printTreeJson(objects) {
-  console.log(JSON.stringify(await generateJson(objects), undefined, 2));
+function printTreeJson(content) {
+  console.log(JSON.stringify(content, undefined, 2));
 }
 
 async function printDevice(device) {
-  const print = jsonMode ? printTreeJson : printTree;
   try {
-    const objects = await device.GetDeviceTree();
-    const managers = [
-      device.DeviceManager,
-      device.SecurityManager,
-      device.FirmwareManager,
-      device.SubscriptionManager,
-      device.PowerManager,
-      device.NetworkManager,
-      device.MediaClockManager,
-      device.LibraryManager,
-      device.AudioProcessingManager,
-      device.DeviceTimeManager,
-      device.TaskManager,
-      device.CodingManager,
-      device.DiagnosticManager,
-    ];
+    const content = await fetchDeviceContent(device);
 
-    for (const manager of managers) {
-      if (await managerExists(manager)) objects.push(manager);
-    }
-
-    await print(objects);
-    exit(0);
-  } catch (error) {
-    if (error.status) {
-      console.error('Failure: %s', error.status);
+    if (jsonMode) {
+      printTreeJson(content);
     } else {
-      console.error('Failure: %o', error);
+      printTree(content);
     }
-    exit(1);
+  } finally {
+    device.close();
   }
 }

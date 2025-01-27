@@ -15,6 +15,7 @@ export * from './controller/define_custom_class.js';
 export * from './controller/abstract_udp_connection.js';
 export * from './controller/observeProperty.js';
 export * from './controller/PropertyObserver.js';
+export * from './controller/fetch_device_content.js';
 
 import * as RemoteControlClasses from './controller/ControlClasses.js';
 import * as Types from './types.js';

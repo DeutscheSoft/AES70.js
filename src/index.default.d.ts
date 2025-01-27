@@ -13,6 +13,7 @@ export * from './controller/client_connection';
 export * from './controller/remote_device';
 export * from './controller/define_custom_class';
 export * from './controller/abstract_udp_connection';
+export * from './controller/fetch_device_content';
 
 import * as RemoteControlClasses from './controller/ControlClasses';
 import * as Types from './types';
