@@ -94,6 +94,8 @@ export class Property {
         throw new Error(`Unexpected accessor.`);
       }
 
+      if (!fun) return null;
+
       return no_bind ? fun : fun.bind(o);
     }
 
