@@ -53,6 +53,7 @@ export class RemoteDevice extends Events {
     super();
     this.objects = new Map();
     this.connection = connection;
+    this._stackDebug = false;
 
     connection.on('error', (e) => {
       this.emit('error', e);
@@ -173,7 +174,8 @@ export class RemoteDevice extends Events {
   }
 
   send_command(cmd, returnType, callback) {
-    return this.connection.send_command(cmd, returnType, callback);
+    const stack = this._stackDebug ? new Error().stack : null;
+    return this.connection.send_command(cmd, returnType, callback, stack);
   }
 
   _doSubscribe(event) {
@@ -419,5 +421,13 @@ export class RemoteDevice extends Events {
    */
   set_keepalive_interval(seconds) {
     this.connection.set_keepalive_interval(seconds);
+  }
+
+  /**
+   * Enable or disable stack debug.
+   *
+   */
+  enable_stack_debug(enable) {
+    this._stackDebug = !!enable;
   }
 }

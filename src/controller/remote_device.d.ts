@@ -126,4 +126,9 @@ export declare class RemoteDevice extends Events {
    * Set the keepalive interval.
    */
   set_keepalive_interval(seconds: number): void;
+
+  /**
+   * Enable or disable stack debug.
+   */
+  enable_stack_debug(enable: boolean): void;
 }

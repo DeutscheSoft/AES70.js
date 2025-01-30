@@ -4,17 +4,19 @@ import { Response } from '../OCP1/response.js';
 import { KeepAlive } from '../OCP1/keepalive.js';
 import { Notification } from '../OCP1/notification.js';
 import { Arguments } from './arguments.js';
+import { OcaStatus } from '../types/OcaStatus.js';
 
 class PendingCommand {
   get handle() {
     return this.command.handle;
   }
 
-  constructor(resolve, reject, returnTypes, command) {
+  constructor(resolve, reject, returnTypes, command, stack) {
     this.resolve = resolve;
     this.reject = reject;
     this.returnTypes = returnTypes;
     this.command = command;
+    this.stack = stack;
     this.lastSent = 0;
     this.retries = 0;
   }
@@ -23,7 +25,9 @@ class PendingCommand {
     const { resolve, reject, returnTypes, command } = this;
 
     if (o.status_code !== 0) {
-      reject(new RemoteError(o.status_code, command));
+      const error = new RemoteError(new OcaStatus(o.status_code), command);
+      if (this.stack) error.stack = this.stack;
+      reject(error);
     } else if (!returnTypes) {
       resolve(o);
     } else {
@@ -122,7 +126,7 @@ export class ClientConnection extends Connection {
     return this._now();
   }
 
-  send_command(command, returnTypes, callback) {
+  send_command(command, returnTypes, callback, stack) {
     const executor = (resolve, reject) => {
       const handle = this._getNextCommandHandle();
 
@@ -132,7 +136,8 @@ export class ClientConnection extends Connection {
         resolve,
         reject,
         returnTypes,
-        command
+        command,
+        stack
       );
 
       this._pendingCommands.set(handle, pendingCommand);
