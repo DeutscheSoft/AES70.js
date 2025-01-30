@@ -17,7 +17,7 @@ const [host, portStr] = AES70_TEST_DEVICE_ALL_CLASSES.split(':');
 
 const port = parseInt(portStr);
 
-describe('PropertyObserver', async () => {
+describe('PropertyObserver', () => {
   let device, objectTree;
 
   before(async () => {
@@ -166,7 +166,7 @@ describe('PropertyObserver', async () => {
     unsub();
   });
 
-  it.only('OcaFilterPolynomial/A', async () => {
+  it('OcaFilterPolynomial/A', async () => {
     const filter = objectTree.get('MyActuators/MyFilterPolynomial');
 
     if (!filter) {
