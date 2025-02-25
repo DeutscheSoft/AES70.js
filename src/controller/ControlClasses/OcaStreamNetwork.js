@@ -49,16 +49,11 @@ export const OcaStreamNetwork = make_control_class(
     ['Shutdown', 3, 20, [], []],
   ],
   [
-    ['ControlProtocol', [OcaNetworkControlProtocol], 3, 3, false, false, null],
-    ['IDAdvertised', [OcaBlob], 3, 2, false, false, null],
     ['LinkType', [OcaNetworkLinkType], 3, 1, true, false, null],
+    ['IDAdvertised', [OcaBlob], 3, 2, false, false, null],
+    ['ControlProtocol', [OcaNetworkControlProtocol], 3, 3, false, false, null],
     ['MediaProtocol', [OcaNetworkMediaProtocol], 3, 4, false, false, null],
-    ['SignalChannelsSink', [OcaList(OcaUint32)], 3, 10, false, false, null],
-    ['SignalChannelsSource', [OcaList(OcaUint32)], 3, 9, false, false, null],
-    ['Statistics', [OcaNetworkStatistics], 3, 11, false, false, null],
     ['Status', [OcaNetworkStatus], 3, 5, false, false, null],
-    ['StreamConnectorsSink', [OcaList(OcaUint32)], 3, 8, false, false, null],
-    ['StreamConnectorsSource', [OcaList(OcaUint32)], 3, 7, false, false, null],
     [
       'SystemInterfaces',
       [OcaList(OcaNetworkSystemInterfaceID)],
@@ -68,6 +63,11 @@ export const OcaStreamNetwork = make_control_class(
       false,
       null,
     ],
+    ['StreamConnectorsSource', [OcaList(OcaUint32)], 3, 7, false, false, null],
+    ['StreamConnectorsSink', [OcaList(OcaUint32)], 3, 8, false, false, null],
+    ['SignalChannelsSource', [OcaList(OcaUint32)], 3, 9, false, false, null],
+    ['SignalChannelsSink', [OcaList(OcaUint32)], 3, 10, false, false, null],
+    ['Statistics', [OcaNetworkStatistics], 3, 11, false, false, null],
   ],
   []
 );
@@ -283,20 +283,20 @@ export const OcaStreamNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property ``ControlProtocol`` changes in the remote object.
- * The property ``ControlProtocol`` is described in the AES70 standard as follows.
- * Type of control protocol used by the network (OCAnn) or NONE if this network
- * is not used for control.
- *
- * @member {PropertyEvent<OcaNetworkControlProtocol>} OcaStreamNetwork#OnControlProtocolChanged
- */
-/**
  * This event is emitted when the property ``IDAdvertised`` changes in the remote object.
  * The property ``IDAdvertised`` is described in the AES70 standard as follows.
  * ID by which this device is known on the network, i.e. the host name or GUID
  * that this device publishes in the network's directory/discovery system.
  *
  * @member {PropertyEvent<Uint8Array>} OcaStreamNetwork#OnIDAdvertisedChanged
+ */
+/**
+ * This event is emitted when the property ``ControlProtocol`` changes in the remote object.
+ * The property ``ControlProtocol`` is described in the AES70 standard as follows.
+ * Type of control protocol used by the network (OCAnn) or NONE if this network
+ * is not used for control.
+ *
+ * @member {PropertyEvent<OcaNetworkControlProtocol>} OcaStreamNetwork#OnControlProtocolChanged
  */
 /**
  * This event is emitted when the property ``MediaProtocol`` changes in the remote object.
@@ -307,50 +307,11 @@ export const OcaStreamNetwork = make_control_class(
  * @member {PropertyEvent<OcaNetworkMediaProtocol>} OcaStreamNetwork#OnMediaProtocolChanged
  */
 /**
- * This event is emitted when the property ``SignalChannelsSink`` changes in the remote object.
- * The property ``SignalChannelsSink`` is described in the AES70 standard as follows.
- * List of object numbers of sink **OcaNetworkSignalChannel** objects collected
- * by this network.
- *
- * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnSignalChannelsSinkChanged
- */
-/**
- * This event is emitted when the property ``SignalChannelsSource`` changes in the remote object.
- * The property ``SignalChannelsSource`` is described in the AES70 standard as follows.
- * List of object numbers of source **OcaNetworkSignalChannel** objects
- * collected by this network.
- *
- * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnSignalChannelsSourceChanged
- */
-/**
- * This event is emitted when the property ``Statistics`` changes in the remote object.
- * The property ``Statistics`` is described in the AES70 standard as follows.
- * Error statistics for this network
- *
- * @member {PropertyEvent<OcaNetworkStatistics>} OcaStreamNetwork#OnStatisticsChanged
- */
-/**
  * This event is emitted when the property ``Status`` changes in the remote object.
  * The property ``Status`` is described in the AES70 standard as follows.
  * Operational status of the network.
  *
  * @member {PropertyEvent<OcaNetworkStatus>} OcaStreamNetwork#OnStatusChanged
- */
-/**
- * This event is emitted when the property ``StreamConnectorsSink`` changes in the remote object.
- * The property ``StreamConnectorsSink`` is described in the AES70 standard as follows.
- * List of object numbers of sink **OcaStreamConnector** objects collected by
- * this network.
- *
- * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnStreamConnectorsSinkChanged
- */
-/**
- * This event is emitted when the property ``StreamConnectorsSource`` changes in the remote object.
- * The property ``StreamConnectorsSource`` is described in the AES70 standard as follows.
- * List of object numbers of source **OcaStreamConnector** objects collected by
- * this network.
- *
- * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnStreamConnectorsSourceChanged
  */
 /**
  * This event is emitted when the property ``SystemInterfaces`` changes in the remote object.
@@ -362,4 +323,43 @@ export const OcaStreamNetwork = make_control_class(
  * variable-length blob which the protocol does not inspect.
  *
  * @member {PropertyEvent<OcaNetworkSystemInterfaceID[]>} OcaStreamNetwork#OnSystemInterfacesChanged
+ */
+/**
+ * This event is emitted when the property ``StreamConnectorsSource`` changes in the remote object.
+ * The property ``StreamConnectorsSource`` is described in the AES70 standard as follows.
+ * List of object numbers of source **OcaStreamConnector** objects collected by
+ * this network.
+ *
+ * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnStreamConnectorsSourceChanged
+ */
+/**
+ * This event is emitted when the property ``StreamConnectorsSink`` changes in the remote object.
+ * The property ``StreamConnectorsSink`` is described in the AES70 standard as follows.
+ * List of object numbers of sink **OcaStreamConnector** objects collected by
+ * this network.
+ *
+ * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnStreamConnectorsSinkChanged
+ */
+/**
+ * This event is emitted when the property ``SignalChannelsSource`` changes in the remote object.
+ * The property ``SignalChannelsSource`` is described in the AES70 standard as follows.
+ * List of object numbers of source **OcaNetworkSignalChannel** objects
+ * collected by this network.
+ *
+ * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnSignalChannelsSourceChanged
+ */
+/**
+ * This event is emitted when the property ``SignalChannelsSink`` changes in the remote object.
+ * The property ``SignalChannelsSink`` is described in the AES70 standard as follows.
+ * List of object numbers of sink **OcaNetworkSignalChannel** objects collected
+ * by this network.
+ *
+ * @member {PropertyEvent<number[]>} OcaStreamNetwork#OnSignalChannelsSinkChanged
+ */
+/**
+ * This event is emitted when the property ``Statistics`` changes in the remote object.
+ * The property ``Statistics`` is described in the AES70 standard as follows.
+ * Error statistics for this network
+ *
+ * @member {PropertyEvent<OcaNetworkStatistics>} OcaStreamNetwork#OnStatisticsChanged
  */

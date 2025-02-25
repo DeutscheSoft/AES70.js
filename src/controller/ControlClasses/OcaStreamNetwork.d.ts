@@ -23,14 +23,14 @@ import { OcaAgent } from './OcaAgent';
  */
 export declare class OcaStreamNetwork extends OcaAgent {
   /**
-   * This event is emitted whenever ControlProtocol changes.
-   */
-  OnControlProtocolChanged: PropertyEvent<OcaNetworkControlProtocol>;
-
-  /**
    * This event is emitted whenever IDAdvertised changes.
    */
   OnIDAdvertisedChanged: PropertyEvent<Uint8Array>;
+
+  /**
+   * This event is emitted whenever ControlProtocol changes.
+   */
+  OnControlProtocolChanged: PropertyEvent<OcaNetworkControlProtocol>;
 
   /**
    * This event is emitted whenever MediaProtocol changes.
@@ -38,29 +38,14 @@ export declare class OcaStreamNetwork extends OcaAgent {
   OnMediaProtocolChanged: PropertyEvent<OcaNetworkMediaProtocol>;
 
   /**
-   * This event is emitted whenever SignalChannelsSink changes.
-   */
-  OnSignalChannelsSinkChanged: PropertyEvent<number[]>;
-
-  /**
-   * This event is emitted whenever SignalChannelsSource changes.
-   */
-  OnSignalChannelsSourceChanged: PropertyEvent<number[]>;
-
-  /**
-   * This event is emitted whenever Statistics changes.
-   */
-  OnStatisticsChanged: PropertyEvent<OcaNetworkStatistics>;
-
-  /**
    * This event is emitted whenever Status changes.
    */
   OnStatusChanged: PropertyEvent<OcaNetworkStatus>;
 
   /**
-   * This event is emitted whenever StreamConnectorsSink changes.
+   * This event is emitted whenever SystemInterfaces changes.
    */
-  OnStreamConnectorsSinkChanged: PropertyEvent<number[]>;
+  OnSystemInterfacesChanged: PropertyEvent<OcaNetworkSystemInterfaceID[]>;
 
   /**
    * This event is emitted whenever StreamConnectorsSource changes.
@@ -68,9 +53,24 @@ export declare class OcaStreamNetwork extends OcaAgent {
   OnStreamConnectorsSourceChanged: PropertyEvent<number[]>;
 
   /**
-   * This event is emitted whenever SystemInterfaces changes.
+   * This event is emitted whenever StreamConnectorsSink changes.
    */
-  OnSystemInterfacesChanged: PropertyEvent<OcaNetworkSystemInterfaceID[]>;
+  OnStreamConnectorsSinkChanged: PropertyEvent<number[]>;
+
+  /**
+   * This event is emitted whenever SignalChannelsSource changes.
+   */
+  OnSignalChannelsSourceChanged: PropertyEvent<number[]>;
+
+  /**
+   * This event is emitted whenever SignalChannelsSink changes.
+   */
+  OnSignalChannelsSinkChanged: PropertyEvent<number[]>;
+
+  /**
+   * This event is emitted whenever Statistics changes.
+   */
+  OnStatisticsChanged: PropertyEvent<OcaNetworkStatistics>;
 
   constructor(objectNumber: number, device: RemoteDevice);
 

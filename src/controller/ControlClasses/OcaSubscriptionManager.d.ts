@@ -46,19 +46,6 @@ export declare class OcaSubscriptionManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Removes all subscriptions to the given event with the given **OcaMethod**.
-   * The return value indicates whether the subscription(s) was (were)
-   * successfully removed.
-   *
-   * @method OcaSubscriptionManager#RemoveSubscription
-   * @param {IOcaEvent} Event
-   * @param {IOcaMethod} Subscriber
-   *
-   * @returns {Promise<void>}
-   */
-  RemoveSubscription(Event: IOcaEvent, Subscriber: IOcaMethod): Promise<void>;
-
-  /**
    * Adds a subscription to an event. The subscription is added for the session
    * on which the command came in. If a subscription identical to the one being
    * requested already exists, an additional one shall not be added. Two
@@ -83,6 +70,19 @@ export declare class OcaSubscriptionManager extends OcaManager {
     NotificationDeliveryMode: IOcaNotificationDeliveryMode,
     DestinationInformation: Uint8Array
   ): Promise<void>;
+
+  /**
+   * Removes all subscriptions to the given event with the given **OcaMethod**.
+   * The return value indicates whether the subscription(s) was (were)
+   * successfully removed.
+   *
+   * @method OcaSubscriptionManager#RemoveSubscription
+   * @param {IOcaEvent} Event
+   * @param {IOcaMethod} Subscriber
+   *
+   * @returns {Promise<void>}
+   */
+  RemoveSubscription(Event: IOcaEvent, Subscriber: IOcaMethod): Promise<void>;
 
   /**
    * Temporarily disables emitting of event notifications (to all subscribers,

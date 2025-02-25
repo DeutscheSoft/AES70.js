@@ -32,7 +32,6 @@ export const OcaSubscriptionManager = make_control_class(
   2,
   OcaManager,
   [
-    ['RemoveSubscription', 3, 2, [OcaEvent, OcaMethod], []],
     [
       'AddSubscription',
       3,
@@ -40,6 +39,7 @@ export const OcaSubscriptionManager = make_control_class(
       [OcaEvent, OcaMethod, OcaBlob, OcaNotificationDeliveryMode, OcaBlob],
       [],
     ],
+    ['RemoveSubscription', 3, 2, [OcaEvent, OcaMethod], []],
     ['DisableNotifications', 3, 3, [], []],
     ['ReEnableNotifications', 3, 4, [], []],
     [
@@ -73,17 +73,6 @@ export const OcaSubscriptionManager = make_control_class(
 );
 
 /**
- * Removes all subscriptions to the given event with the given **OcaMethod**.
- * The return value indicates whether the subscription(s) was (were)
- * successfully removed.
- *
- * @method OcaSubscriptionManager#RemoveSubscription
- * @param {IOcaEvent} Event
- * @param {IOcaMethod} Subscriber
- *
- * @returns {Promise<void>}
- */
-/**
  * Adds a subscription to an event. The subscription is added for the session on
  * which the command came in. If a subscription identical to the one being
  * requested already exists, an additional one shall not be added. Two
@@ -97,6 +86,17 @@ export const OcaSubscriptionManager = make_control_class(
  * @param {Uint8Array} SubscriberContext
  * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
  * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Removes all subscriptions to the given event with the given **OcaMethod**.
+ * The return value indicates whether the subscription(s) was (were)
+ * successfully removed.
+ *
+ * @method OcaSubscriptionManager#RemoveSubscription
+ * @param {IOcaEvent} Event
+ * @param {IOcaMethod} Subscriber
  *
  * @returns {Promise<void>}
  */

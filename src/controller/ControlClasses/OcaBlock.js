@@ -74,13 +74,6 @@ export const OcaBlock = make_control_class(
       [OcaList(OcaObjectSearchResult)],
     ],
     [
-      'FindObjectsByPath',
-      3,
-      20,
-      [OcaList(OcaString), OcaObjectSearchResultFlags],
-      [OcaList(OcaObjectSearchResult)],
-    ],
-    [
       'FindObjectsByLabelRecursive',
       3,
       19,
@@ -90,6 +83,13 @@ export const OcaBlock = make_control_class(
         String16,
         OcaObjectSearchResultFlags,
       ],
+      [OcaList(OcaObjectSearchResult)],
+    ],
+    [
+      'FindObjectsByPath',
+      3,
+      20,
+      [OcaList(OcaString), OcaObjectSearchResultFlags],
       [OcaList(OcaObjectSearchResult)],
     ],
   ],
@@ -287,17 +287,6 @@ export const OcaBlock = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
  */
 /**
- * Returns object identifications of all objects with the given name path.
- * **Added in version 2 of this class.**
- *
- * @method OcaBlock#FindObjectsByPath
- * @param {string[]} SearchPath
- * @param {IOcaObjectSearchResultFlags} ResultFlags
- *
- * @returns {Promise<OcaObjectSearchResult[]>}
- *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
- */
-/**
  * Returns block member descriptors of all objects in the block and all
  * contained blocks that match the given Label search string and Class ID.
  * **Added in version 2 of this class.**
@@ -306,6 +295,17 @@ export const OcaBlock = make_control_class(
  * @param {string} SearchName
  * @param {IOcaStringComparisonType} NameComparisonType
  * @param {string} SearchClassID
+ * @param {IOcaObjectSearchResultFlags} ResultFlags
+ *
+ * @returns {Promise<OcaObjectSearchResult[]>}
+ *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
+ */
+/**
+ * Returns object identifications of all objects with the given name path.
+ * **Added in version 2 of this class.**
+ *
+ * @method OcaBlock#FindObjectsByPath
+ * @param {string[]} SearchPath
  * @param {IOcaObjectSearchResultFlags} ResultFlags
  *
  * @returns {Promise<OcaObjectSearchResult[]>}

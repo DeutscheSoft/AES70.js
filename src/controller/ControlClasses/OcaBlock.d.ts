@@ -257,22 +257,6 @@ export declare class OcaBlock extends OcaWorker {
   ): Promise<OcaObjectSearchResult[]>;
 
   /**
-   * Returns object identifications of all objects with the given name path.
-   * **Added in version 2 of this class.**
-   *
-   * @method OcaBlock#FindObjectsByPath
-   * @param {string[]} SearchPath
-   * @param {IOcaObjectSearchResultFlags} ResultFlags
-   *
-   * @returns {Promise<OcaObjectSearchResult[]>}
-   *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
-   */
-  FindObjectsByPath(
-    SearchPath: string[],
-    ResultFlags: IOcaObjectSearchResultFlags
-  ): Promise<OcaObjectSearchResult[]>;
-
-  /**
    * Returns block member descriptors of all objects in the block and all
    * contained blocks that match the given Label search string and Class ID.
    * **Added in version 2 of this class.**
@@ -290,6 +274,22 @@ export declare class OcaBlock extends OcaWorker {
     SearchName: string,
     NameComparisonType: IOcaStringComparisonType,
     SearchClassID: string,
+    ResultFlags: IOcaObjectSearchResultFlags
+  ): Promise<OcaObjectSearchResult[]>;
+
+  /**
+   * Returns object identifications of all objects with the given name path.
+   * **Added in version 2 of this class.**
+   *
+   * @method OcaBlock#FindObjectsByPath
+   * @param {string[]} SearchPath
+   * @param {IOcaObjectSearchResultFlags} ResultFlags
+   *
+   * @returns {Promise<OcaObjectSearchResult[]>}
+   *   A promise which resolves to a single value of type :class:`OcaObjectSearchResult[]`.
+   */
+  FindObjectsByPath(
+    SearchPath: string[],
     ResultFlags: IOcaObjectSearchResultFlags
   ): Promise<OcaObjectSearchResult[]>;
 }

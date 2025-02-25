@@ -42,19 +42,14 @@ import { OcaAgent } from './OcaAgent';
  */
 export declare class OcaStreamConnector extends OcaAgent {
   /**
-   * This event is emitted whenever IDAdvertised changes.
-   */
-  OnIDAdvertisedChanged: PropertyEvent<Uint8Array>;
-
-  /**
    * This event is emitted whenever OwnerNetwork changes.
    */
   OnOwnerNetworkChanged: PropertyEvent<number>;
 
   /**
-   * This event is emitted whenever Pins changes.
+   * This event is emitted whenever IDAdvertised changes.
    */
-  OnPinsChanged: PropertyEvent<Map<number, number>>;
+  OnIDAdvertisedChanged: PropertyEvent<Uint8Array>;
 
   /**
    * This event is emitted whenever SourceOrSink changes.
@@ -62,16 +57,87 @@ export declare class OcaStreamConnector extends OcaAgent {
   OnSourceOrSinkChanged: PropertyEvent<OcaNetworkMediaSourceOrSink>;
 
   /**
-   * This event is emitted whenever Status changes.
-   */
-  OnStatusChanged: PropertyEvent<OcaStreamConnectorStatus>;
-
-  /**
    * This event is emitted whenever Streams changes.
    */
   OnStreamsChanged: PropertyEvent<Map<number, OcaStream>>;
 
+  /**
+   * This event is emitted whenever Pins changes.
+   */
+  OnPinsChanged: PropertyEvent<Map<number, number>>;
+
+  /**
+   * This event is emitted whenever Status changes.
+   */
+  OnStatusChanged: PropertyEvent<OcaStreamConnectorStatus>;
+
   constructor(objectNumber: number, device: RemoteDevice);
+
+  /**
+   * Gets the object number of the **OcaStreamNetwork** object to which this
+   * connector belongs. Return status indicates success of operation.
+   *
+   * @method OcaStreamConnector#GetOwnerNetwork
+   * @returns {Promise<number>}
+   *   A promise which resolves to a single value of type ``number``.
+   */
+  GetOwnerNetwork(): Promise<number>;
+
+  /**
+   * Sets the object number of the **OcaStreamNetwork** object to which this
+   * connector belongs. Return status indicates success of operation. Only
+   * implemented for reconfigurable devices.
+   *
+   * @method OcaStreamConnector#SetOwnerNetwork
+   * @param {number} Network
+   *
+   * @returns {Promise<void>}
+   */
+  SetOwnerNetwork(Network: number): Promise<void>;
+
+  /**
+   * Gets the value of the IDAdvertised property. Return status indicates
+   * success of operation.
+   *
+   * @method OcaStreamConnector#GetIDAdvertised
+   * @returns {Promise<Uint8Array>}
+   *   A promise which resolves to a single value of type ``Uint8Array``.
+   */
+  GetIDAdvertised(): Promise<Uint8Array>;
+
+  /**
+   * Sets the value of the IDAdvertised property. Return status indicates
+   * success of operation.
+   *
+   * @method OcaStreamConnector#SetIDAdvertised
+   * @param {Uint8Array} IDAdvertised
+   *
+   * @returns {Promise<void>}
+   */
+  SetIDAdvertised(IDAdvertised: Uint8Array): Promise<void>;
+
+  /**
+   * Gets the value of the SourceOrSink property. Return status indicates
+   * success of operation.
+   *
+   * @method OcaStreamConnector#GetSourceOrSink
+   * @returns {Promise<OcaNetworkMediaSourceOrSink>}
+   *   A promise which resolves to a single value of type :class:`OcaNetworkMediaSourceOrSink`.
+   */
+  GetSourceOrSink(): Promise<OcaNetworkMediaSourceOrSink>;
+
+  /**
+   * Sets the value of the SourceOrSink property. Return status indicates
+   * success of operation. Only implemented for reconfigurable devices. Note
+   * that this method can only be called when the SignalChannels property is
+   * empty, i.e. does not contain any actual channels.
+   *
+   * @method OcaStreamConnector#SetSourceOrSink
+   * @param {IOcaNetworkMediaSourceOrSink} SourceOrSink
+   *
+   * @returns {Promise<void>}
+   */
+  SetSourceOrSink(SourceOrSink: IOcaNetworkMediaSourceOrSink): Promise<void>;
 
   /**
    * Connects a stream to this connector. Return status indicates success of
@@ -97,24 +163,14 @@ export declare class OcaStreamConnector extends OcaAgent {
   DisconnectStream(StreamID: number): Promise<void>;
 
   /**
-   * Gets the value of the IDAdvertised property. Return status indicates
-   * success of operation.
+   * Gets the map of OcaStream items connected to this connector. Return status
+   * indicates success of operation.
    *
-   * @method OcaStreamConnector#GetIDAdvertised
-   * @returns {Promise<Uint8Array>}
-   *   A promise which resolves to a single value of type ``Uint8Array``.
+   * @method OcaStreamConnector#GetStreams
+   * @returns {Promise<Map<number, OcaStream>>}
+   *   A promise which resolves to a single value of type ``Map<number, OcaStream>``.
    */
-  GetIDAdvertised(): Promise<Uint8Array>;
-
-  /**
-   * Gets the object number of the **OcaStreamNetwork** object to which this
-   * connector belongs. Return status indicates success of operation.
-   *
-   * @method OcaStreamConnector#GetOwnerNetwork
-   * @returns {Promise<number>}
-   *   A promise which resolves to a single value of type ``number``.
-   */
-  GetOwnerNetwork(): Promise<number>;
+  GetStreams(): Promise<Map<number, OcaStream>>;
 
   /**
    * Gets the list of object numbers of **OcaNetworkSignalChannel** objects
@@ -127,16 +183,6 @@ export declare class OcaStreamConnector extends OcaAgent {
   GetPins(): Promise<Map<number, number>>;
 
   /**
-   * Gets the value of the SourceOrSink property. Return status indicates
-   * success of operation.
-   *
-   * @method OcaStreamConnector#GetSourceOrSink
-   * @returns {Promise<OcaNetworkMediaSourceOrSink>}
-   *   A promise which resolves to a single value of type :class:`OcaNetworkMediaSourceOrSink`.
-   */
-  GetSourceOrSink(): Promise<OcaNetworkMediaSourceOrSink>;
-
-  /**
    * Gets the value of the Status property. Return status indicates success of
    * operation.
    *
@@ -145,50 +191,4 @@ export declare class OcaStreamConnector extends OcaAgent {
    *   A promise which resolves to a single value of type :class:`OcaStreamConnectorStatus`.
    */
   GetStatus(): Promise<OcaStreamConnectorStatus>;
-
-  /**
-   * Gets the map of OcaStream items connected to this connector. Return status
-   * indicates success of operation.
-   *
-   * @method OcaStreamConnector#GetStreams
-   * @returns {Promise<Map<number, OcaStream>>}
-   *   A promise which resolves to a single value of type ``Map<number, OcaStream>``.
-   */
-  GetStreams(): Promise<Map<number, OcaStream>>;
-
-  /**
-   * Sets the value of the IDAdvertised property. Return status indicates
-   * success of operation.
-   *
-   * @method OcaStreamConnector#SetIDAdvertised
-   * @param {Uint8Array} IDAdvertised
-   *
-   * @returns {Promise<void>}
-   */
-  SetIDAdvertised(IDAdvertised: Uint8Array): Promise<void>;
-
-  /**
-   * Sets the object number of the **OcaStreamNetwork** object to which this
-   * connector belongs. Return status indicates success of operation. Only
-   * implemented for reconfigurable devices.
-   *
-   * @method OcaStreamConnector#SetOwnerNetwork
-   * @param {number} Network
-   *
-   * @returns {Promise<void>}
-   */
-  SetOwnerNetwork(Network: number): Promise<void>;
-
-  /**
-   * Sets the value of the SourceOrSink property. Return status indicates
-   * success of operation. Only implemented for reconfigurable devices. Note
-   * that this method can only be called when the SignalChannels property is
-   * empty, i.e. does not contain any actual channels.
-   *
-   * @method OcaStreamConnector#SetSourceOrSink
-   * @param {IOcaNetworkMediaSourceOrSink} SourceOrSink
-   *
-   * @returns {Promise<void>}
-   */
-  SetSourceOrSink(SourceOrSink: IOcaNetworkMediaSourceOrSink): Promise<void>;
 }

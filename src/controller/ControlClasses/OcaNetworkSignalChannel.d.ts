@@ -24,11 +24,6 @@ import { OcaWorker } from './OcaWorker';
  */
 export declare class OcaNetworkSignalChannel extends OcaWorker {
   /**
-   * This event is emitted whenever ConnectorPins changes.
-   */
-  OnConnectorPinsChanged: PropertyEvent<Map<number, number>>;
-
-  /**
    * This event is emitted whenever IDAdvertised changes.
    */
   OnIDAdvertisedChanged: PropertyEvent<Uint8Array>;
@@ -37,6 +32,11 @@ export declare class OcaNetworkSignalChannel extends OcaWorker {
    * This event is emitted whenever Network changes.
    */
   OnNetworkChanged: PropertyEvent<number>;
+
+  /**
+   * This event is emitted whenever ConnectorPins changes.
+   */
+  OnConnectorPinsChanged: PropertyEvent<Map<number, number>>;
 
   /**
    * This event is emitted whenever RemoteChannelID changes.
@@ -56,17 +56,47 @@ export declare class OcaNetworkSignalChannel extends OcaWorker {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Adds the object number of the stream connector object to which this media
-   * port belongs, and specifies on what index of the stream connector this
-   * channel can be found. Return status indicates success of operation.
+   * Gets the value of the IDAdvertised property. Return status indicates
+   * success of operation.
    *
-   * @method OcaNetworkSignalChannel#AddToConnector
-   * @param {number} Connector
-   * @param {number} Index
+   * @method OcaNetworkSignalChannel#GetIDAdvertised
+   * @returns {Promise<Uint8Array>}
+   *   A promise which resolves to a single value of type ``Uint8Array``.
+   */
+  GetIDAdvertised(): Promise<Uint8Array>;
+
+  /**
+   * Sets the value of the IDAdvertised property. Return status indicates
+   * success of operation.
+   *
+   * @method OcaNetworkSignalChannel#SetIDAdvertised
+   * @param {Uint8Array} IDAdvertised
    *
    * @returns {Promise<void>}
    */
-  AddToConnector(Connector: number, Index: number): Promise<void>;
+  SetIDAdvertised(IDAdvertised: Uint8Array): Promise<void>;
+
+  /**
+   * Gets the object number of the stream network object to which this media
+   * port belongs. Return status indicates success of operation.
+   *
+   * @method OcaNetworkSignalChannel#GetNetwork
+   * @returns {Promise<number>}
+   *   A promise which resolves to a single value of type ``number``.
+   */
+  GetNetwork(): Promise<number>;
+
+  /**
+   * Sets the object number of the stream network object to which this media
+   * port belongs. Return status indicates success of operation. Only
+   * implemented for reconfigurable devices.
+   *
+   * @method OcaNetworkSignalChannel#SetNetwork
+   * @param {number} Network
+   *
+   * @returns {Promise<void>}
+   */
+  SetNetwork(Network: number): Promise<void>;
 
   /**
    * Gets the object number of the stream connector object to which this media
@@ -80,24 +110,28 @@ export declare class OcaNetworkSignalChannel extends OcaWorker {
   GetConnectorPins(): Promise<Map<number, number>>;
 
   /**
-   * Gets the value of the IDAdvertised property. Return status indicates
-   * success of operation.
+   * Adds the object number of the stream connector object to which this media
+   * port belongs, and specifies on what index of the stream connector this
+   * channel can be found. Return status indicates success of operation.
    *
-   * @method OcaNetworkSignalChannel#GetIDAdvertised
-   * @returns {Promise<Uint8Array>}
-   *   A promise which resolves to a single value of type ``Uint8Array``.
+   * @method OcaNetworkSignalChannel#AddToConnector
+   * @param {number} Connector
+   * @param {number} Index
+   *
+   * @returns {Promise<void>}
    */
-  GetIDAdvertised(): Promise<Uint8Array>;
+  AddToConnector(Connector: number, Index: number): Promise<void>;
 
   /**
-   * Gets the object number of the stream network object to which this media
-   * port belongs. Return status indicates success of operation.
+   * Removes this channel from the passed stream connector. Return status
+   * indicates success of operation.
    *
-   * @method OcaNetworkSignalChannel#GetNetwork
-   * @returns {Promise<number>}
-   *   A promise which resolves to a single value of type ``number``.
+   * @method OcaNetworkSignalChannel#RemoveFromConnector
+   * @param {number} Connector
+   *
+   * @returns {Promise<void>}
    */
-  GetNetwork(): Promise<number>;
+  RemoveFromConnector(Connector: number): Promise<void>;
 
   /**
    * Gets the remote channel ID to which this channel is connected. Empty if the
@@ -110,6 +144,20 @@ export declare class OcaNetworkSignalChannel extends OcaWorker {
    *   A promise which resolves to a single value of type ``Uint8Array``.
    */
   GetRemoteChannelID(): Promise<Uint8Array>;
+
+  /**
+   * Sets the remote channel ID to which this channel must be connected. Only
+   * used for channel-oriented connection management. For stream-oriented
+   * connection management this method is not used. Clearing the remote channel
+   * ID (i.e. tearing down the connection) can be done by passing an empty
+   * remote channel ID as parameter.
+   *
+   * @method OcaNetworkSignalChannel#SetRemoteChannelID
+   * @param {Uint8Array} RemoteChannelID
+   *
+   * @returns {Promise<void>}
+   */
+  SetRemoteChannelID(RemoteChannelID: Uint8Array): Promise<void>;
 
   /**
    * Gets the value of the SourceOrSink property. Return status indicates
@@ -130,52 +178,4 @@ export declare class OcaNetworkSignalChannel extends OcaWorker {
    *   A promise which resolves to a single value of type :class:`OcaNetworkSignalChannelStatus`.
    */
   GetStatus(): Promise<OcaNetworkSignalChannelStatus>;
-
-  /**
-   * Removes this channel from the passed stream connector. Return status
-   * indicates success of operation.
-   *
-   * @method OcaNetworkSignalChannel#RemoveFromConnector
-   * @param {number} Connector
-   *
-   * @returns {Promise<void>}
-   */
-  RemoveFromConnector(Connector: number): Promise<void>;
-
-  /**
-   * Sets the value of the IDAdvertised property. Return status indicates
-   * success of operation.
-   *
-   * @method OcaNetworkSignalChannel#SetIDAdvertised
-   * @param {Uint8Array} IDAdvertised
-   *
-   * @returns {Promise<void>}
-   */
-  SetIDAdvertised(IDAdvertised: Uint8Array): Promise<void>;
-
-  /**
-   * Sets the object number of the stream network object to which this media
-   * port belongs. Return status indicates success of operation. Only
-   * implemented for reconfigurable devices.
-   *
-   * @method OcaNetworkSignalChannel#SetNetwork
-   * @param {number} Network
-   *
-   * @returns {Promise<void>}
-   */
-  SetNetwork(Network: number): Promise<void>;
-
-  /**
-   * Sets the remote channel ID to which this channel must be connected. Only
-   * used for channel-oriented connection management. For stream-oriented
-   * connection management this method is not used. Clearing the remote channel
-   * ID (i.e. tearing down the connection) can be done by passing an empty
-   * remote channel ID as parameter.
-   *
-   * @method OcaNetworkSignalChannel#SetRemoteChannelID
-   * @param {Uint8Array} RemoteChannelID
-   *
-   * @returns {Promise<void>}
-   */
-  SetRemoteChannelID(RemoteChannelID: Uint8Array): Promise<void>;
 }
