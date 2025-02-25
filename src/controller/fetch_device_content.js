@@ -34,8 +34,8 @@ function formatReturnValue(name, value) {
     if (value instanceof Arguments) {
       return {
         [name]: value.item(0),
-        ['min' + name]: value.item(1),
-        ['max' + name]: value.item(2),
+        ['Min' + name]: value.item(1),
+        ['Max' + name]: value.item(2),
       };
     } else {
       value = formatValue(value);
