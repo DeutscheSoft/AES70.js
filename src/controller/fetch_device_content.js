@@ -60,7 +60,7 @@ async function fetchObjectInfo(o) {
   await Promise.all(
     o.get_properties().forEach(async (p) => {
       const { name } = p;
-      if (name === 'ClassID' || name === 'ClassVersion' || name === 'Owner')
+      if (name === 'ClassID' || name === 'ClassVersion' || name === 'Owner' || name === 'ObjectNumber')
         return;
       if (o instanceof OcaBlock && name === 'Members') return;
       const getter = p.getter(o);
