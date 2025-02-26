@@ -148,15 +148,27 @@ export declare class OcaGrouper extends OcaAgent {
   OnGroupsChanged: PropertyEvent<OcaGrouperGroup[]>;
 
   /**
+   * An alias for OnGroupsChanged
+   */
+  OnGroupListChanged: PropertyEvent<OcaGrouperGroup[]>;
+  /**
    * This event is emitted whenever Citizens changes.
    */
   OnCitizensChanged: PropertyEvent<OcaGrouperCitizen[]>;
 
   /**
+   * An alias for OnCitizensChanged
+   */
+  OnCitizenListChanged: PropertyEvent<OcaGrouperCitizen[]>;
+  /**
    * This event is emitted whenever Enrollments changes.
    */
   OnEnrollmentsChanged: PropertyEvent<OcaGrouperEnrollment[]>;
 
+  /**
+   * An alias for OnEnrollmentsChanged
+   */
+  OnEnrollmentListChanged: PropertyEvent<OcaGrouperEnrollment[]>;
   /**
    * This event is emitted whenever Mode changes.
    */

@@ -83,6 +83,11 @@ export const OcaMediaClockManager = make_control_class(
  * @member {PropertyEvent<OcaMediaClockType[]>} OcaMediaClockManager#OnClockSourceTypesSupportedChanged
  */
 /**
+ * An alias for OnClockSourceTypesSupportedChanged
+ *
+ * @member {PropertyEvent<OcaMediaClockType[]>} OcaMediaClockManager#OnMediaClockTypesSupportedChanged
+ */
+/**
  * This event is emitted when the property ``Clocks`` changes in the remote object.
  * The property ``Clocks`` is described in the AES70 standard as follows.
  * Object numbers of **OcaMediaClock** objects, one for each clock which this

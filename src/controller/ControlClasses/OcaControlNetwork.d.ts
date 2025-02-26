@@ -13,6 +13,11 @@ export declare class OcaControlNetwork extends OcaApplicationNetwork {
    */
   OnProtocolChanged: PropertyEvent<OcaNetworkControlProtocol>;
 
+  /**
+   * An alias for OnProtocolChanged
+   */
+  OnControlProtocolChanged: PropertyEvent<OcaNetworkControlProtocol>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**

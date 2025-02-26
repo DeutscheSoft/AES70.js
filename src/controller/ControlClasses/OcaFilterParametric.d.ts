@@ -30,6 +30,10 @@ export declare class OcaFilterParametric extends OcaActuator {
   OnWidthParameterChanged: PropertyEvent<number>;
 
   /**
+   * An alias for OnWidthParameterChanged
+   */
+  OnQChanged: PropertyEvent<number>;
+  /**
    * This event is emitted whenever InbandGain changes.
    */
   OnInbandGainChanged: PropertyEvent<number>;

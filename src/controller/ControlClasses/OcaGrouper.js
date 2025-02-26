@@ -340,11 +340,21 @@ export const OcaGrouper = make_control_class(
  * @member {PropertyEvent<OcaGrouperGroup[]>} OcaGrouper#OnGroupsChanged
  */
 /**
+ * An alias for OnGroupsChanged
+ *
+ * @member {PropertyEvent<OcaGrouperGroup[]>} OcaGrouper#OnGroupListChanged
+ */
+/**
  * This event is emitted when the property ``Citizens`` changes in the remote object.
  * The property ``Citizens`` is described in the AES70 standard as follows.
  * List of citizens defined for this grouper.
  *
  * @member {PropertyEvent<OcaGrouperCitizen[]>} OcaGrouper#OnCitizensChanged
+ */
+/**
+ * An alias for OnCitizensChanged
+ *
+ * @member {PropertyEvent<OcaGrouperCitizen[]>} OcaGrouper#OnCitizenListChanged
  */
 /**
  * This event is emitted when the property ``Enrollments`` changes in the remote object.
@@ -353,6 +363,11 @@ export const OcaGrouper = make_control_class(
  * group(s).
  *
  * @member {PropertyEvent<OcaGrouperEnrollment[]>} OcaGrouper#OnEnrollmentsChanged
+ */
+/**
+ * An alias for OnEnrollmentsChanged
+ *
+ * @member {PropertyEvent<OcaGrouperEnrollment[]>} OcaGrouper#OnEnrollmentListChanged
  */
 /**
  * This event is emitted when the property ``Mode`` changes in the remote object.

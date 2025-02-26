@@ -42,3 +42,8 @@ export const OcaControlNetwork = make_control_class(
  *
  * @member {PropertyEvent<OcaNetworkControlProtocol>} OcaControlNetwork#OnProtocolChanged
  */
+/**
+ * An alias for OnProtocolChanged
+ *
+ * @member {PropertyEvent<OcaNetworkControlProtocol>} OcaControlNetwork#OnControlProtocolChanged
+ */

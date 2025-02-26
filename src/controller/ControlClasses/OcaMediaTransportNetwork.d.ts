@@ -53,6 +53,10 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
   OnProtocolChanged: PropertyEvent<OcaNetworkMediaProtocol>;
 
   /**
+   * An alias for OnProtocolChanged
+   */
+  OnMediaProtocolChanged: PropertyEvent<OcaNetworkMediaProtocol>;
+  /**
    * This event is emitted whenever Ports changes.
    */
   OnPortsChanged: PropertyEvent<OcaPort[]>;

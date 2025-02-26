@@ -190,6 +190,11 @@ export const OcaFilterParametric = make_control_class(
  * @member {PropertyEvent<number>} OcaFilterParametric#OnWidthParameterChanged
  */
 /**
+ * An alias for OnWidthParameterChanged
+ *
+ * @member {PropertyEvent<number>} OcaFilterParametric#OnQChanged
+ */
+/**
  * This event is emitted when the property ``InbandGain`` changes in the remote object.
  * The property ``InbandGain`` is described in the AES70 standard as follows.
  * In-band gain of the parametric filter.

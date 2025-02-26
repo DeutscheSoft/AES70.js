@@ -110,13 +110,19 @@ function implement_event(cls, event) {
   });
 }
 
+function property_event_name(propertyName) {
+  return 'On' + propertyName + 'Changed';
+}
+
 function implement_property_event(cls, property) {
   if (property.static) return;
   if (property.name === 'ObjectNumber') return;
 
-  Object.defineProperty(cls.prototype, 'On' + property.name + 'Changed', {
+  const event_name = property_event_name(property.name);
+
+  Object.defineProperty(cls.prototype, event_name, {
     get: function () {
-      const ev_name = '_On' + property.name + 'Changed';
+      const ev_name = '_' + event_name;
       const event = this[ev_name];
 
       if (event) return event;
@@ -128,6 +134,18 @@ function implement_property_event(cls, property) {
       ));
     },
   });
+
+  if (property.aliases) {
+    property.aliases.forEach((alias) => {
+      const ev_name = property_event_name(alias);
+      if (cls.prototype[ev_name]) return;
+      Object.defineProperty(cls.prototype, ev_name, {
+        get: function () {
+          return this[event_name];
+        },
+      });
+    });
+  }
 }
 
 function make_property(o) {

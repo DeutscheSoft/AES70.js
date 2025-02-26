@@ -23,6 +23,10 @@ export declare class OcaMediaClockManager extends OcaManager {
   OnClockSourceTypesSupportedChanged: PropertyEvent<OcaMediaClockType[]>;
 
   /**
+   * An alias for OnClockSourceTypesSupportedChanged
+   */
+  OnMediaClockTypesSupportedChanged: PropertyEvent<OcaMediaClockType[]>;
+  /**
    * This event is emitted whenever Clocks changes.
    */
   OnClocksChanged: PropertyEvent<number[]>;
