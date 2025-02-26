@@ -19,6 +19,7 @@ import { OcaMap } from '../src/OCP1/OcaMap.js';
 import { Struct } from '../src/OCP1/Struct.js';
 import { Tuple } from '../src/OCP1/Tuple.js';
 import { OcaBlob } from '../src/OCP1/OcaBlob.js';
+import { OcaLongBlob } from '../src/OCP1/OcaLongBlob.js';
 import { Arguments } from '../src/OCP1/Arguments.js';
 import { String16 } from '../src/OCP1/String16.js';
 import { OcaBitstring } from '../src/OCP1/OcaBitstring.js';
@@ -193,6 +194,20 @@ describe('ocp1', () => {
   {
     const Type = OcaVariant(OcaInt8, OcaUint8);
     testEncodeDecode('OcaVariant(OcaInt8, OcaUint8)', Type, 13, 2);
+  }
+
+  {
+    const Type = OcaBlob;
+    const data = new Uint8Array(10);
+
+    testEncodeDecode('OcaBlob', Type, data, 2+data.length);
+  }
+
+  {
+    const Type = OcaLongBlob;
+    const data = new Uint8Array(10);
+
+    testEncodeDecode('OcaBlob', Type, data, 4+data.length);
   }
 
   it('OcaSubscriptionManager.AddSubscription', () => {
