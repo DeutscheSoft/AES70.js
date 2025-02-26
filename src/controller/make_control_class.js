@@ -52,11 +52,11 @@ function createPropertySync(control_class) {
   return constructor;
 }
 
-// method = [ name, level, index, argumentTypes, returnTypes ]
+// method = [ name, level, index, argumentTypes, returnTypes, aliases ]
 function implement_method(cls, method) {
   if (!method || !method.length) return;
 
-  const [name, level, index, argumentTypes, returnTypes] = method;
+  const [name, level, index, argumentTypes, returnTypes, aliases] = method;
 
   cls.prototype[name] = function (...args) {
     const argumentCount = argumentTypes.length;
@@ -88,6 +88,14 @@ function implement_method(cls, method) {
     );
     return this.device.send_command(cmd, returnTypes, callback);
   };
+
+  if (aliases) {
+    aliases.forEach((alias) => {
+      cls.prototype[alias] = function (...args) {
+        return this[name](...args);
+      };
+    });
+  }
 }
 
 // event = [ name, level, index, argumentTypes ]
