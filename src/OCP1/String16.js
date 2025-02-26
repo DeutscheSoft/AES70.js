@@ -2,6 +2,9 @@ import { createType } from './createType.js';
 
 export const String16 = createType({
   isConstantLength: false,
+  canEncode: function (value) {
+    return typeof value === 'string';
+  },
   encodedLength: function (value) {
     // TODO: we could support more than strings
     if (typeof value !== 'string') throw new TypeError('Expected string.');

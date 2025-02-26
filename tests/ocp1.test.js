@@ -1,4 +1,4 @@
-import { deepEqual, strictEqual } from 'node:assert';
+import assert, { deepEqual, strictEqual } from 'node:assert';
 import { describe, it } from 'node:test';
 
 import { OcaBoolean } from '../src/OCP1/OcaBoolean.js';
@@ -56,6 +56,8 @@ function testEncodeDecode(name, Type, data, Length) {
   it(name, () => {
     const length = Type.encodedLength(data);
     const buffer = new ArrayBuffer(length);
+
+    assert(Type.canEncode(data));
 
     Type.encodeTo(new DataView(buffer), 0, data);
 

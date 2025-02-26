@@ -89,12 +89,20 @@ export function Enum(values) {
       return name;
     }
 
+    static hasValue(value) {
+      return getName(value) !== void 0;
+    }
+
     static getValue(name) {
       const value = getValue(name);
 
       if (value === void 0) throw new Error('No such enum value.');
 
       return value;
+    }
+
+    static hasName(name) {
+      return getValue(name) !== void 0;
     }
 
     static values() {

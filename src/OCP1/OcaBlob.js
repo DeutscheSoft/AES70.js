@@ -2,6 +2,15 @@ import { createType } from './createType.js';
 
 export const OcaBlob = createType({
   isConstantLength: false,
+  canEncode: function (value) {
+    if (typeof value !== 'object') return false;
+
+    return (
+      value instanceof ArrayBuffer ||
+      value instanceof Uint8Array ||
+      Array.isArray(value)
+    );
+  },
   encodedLength: function (value) {
     if (value instanceof ArrayBuffer) value = new Uint8Array(value);
     if (!Array.isArray(value) && !(value instanceof Uint8Array))

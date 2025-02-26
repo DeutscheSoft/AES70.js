@@ -44,6 +44,9 @@ function encodeBitstring(dataView, pos, from) {
 
 export const OcaBitstring = createType({
   isConstantLength: false,
+  canEncode: function (value) {
+    return Array.isArray(value);
+  },
   encodedLength: function (value) {
     if (!Array.isArray(value)) throw new TypeError('Expected Array.');
 

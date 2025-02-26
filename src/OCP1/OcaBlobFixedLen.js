@@ -3,6 +3,14 @@ import { createType } from './createType.js';
 export function OcaBlobFixedLen(Length) {
   return createType({
     isConstantLength: true,
+    canEncode: function (value) {
+      if (typeof value !== 'object') return false;
+
+      return (
+        (value instanceof Uint8Array || Array.isArray(value)) &&
+        value.length === Length
+      );
+    },
     encodedLength: function (value) {
       return Length;
     },

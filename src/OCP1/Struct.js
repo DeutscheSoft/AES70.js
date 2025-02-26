@@ -28,6 +28,18 @@ export function Struct(Types, DataType) {
   return createType({
     type: DataType,
     isConstantLength: false,
+    canEncode: function (value) {
+      if (typeof value !== 'object') return false;
+
+      for (const name in Types) {
+        if (!Object.prototype.hasOwnProperty.call(Types, name)) continue;
+        const Type = Types[name];
+
+        if (!Type.canEncode(value[name])) return false;
+      }
+
+      return true;
+    },
     encodedLength: function (value) {
       let result = 0;
 

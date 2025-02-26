@@ -7,6 +7,14 @@ export function Enum(DataType, Base) {
   const type = createType({
     isConstantLength: true,
     encodedLength: Base.encodedLength,
+    canEncode: function (value) {
+      const type = typeof value;
+      return (
+        (type === 'object' && value instanceof DataType) ||
+        (type === 'string' && DataType.hasName(value)) ||
+        (type === 'number' && DataType.hasValue(value))
+      );
+    },
     encodeTo: function (dataView, pos, value) {
       if (typeof value === 'object' && value instanceof DataType) {
         value = value.value;

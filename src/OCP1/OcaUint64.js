@@ -7,6 +7,9 @@ function assertSupport() {
 
 export const OcaUint64 = createType({
   isConstantLength: true,
+  canEncode: function (value) {
+    return typeof value === 'number' || typeof value === 'bigint';
+  },
   encodedLength: function (value) {
     return 8;
   },

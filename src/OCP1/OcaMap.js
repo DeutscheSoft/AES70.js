@@ -13,6 +13,9 @@ export function OcaMap(KeyType, ValueType) {
 
   return createType({
     isConstantLength: false,
+    canEncode: function (value) {
+      return value instanceof Map || value instanceof WeakMap;
+    },
     encodedLength: function (value) {
       if (!(value instanceof Map || value instanceof WeakMap))
         throw new TypeError('Expected Map or WeakMap');

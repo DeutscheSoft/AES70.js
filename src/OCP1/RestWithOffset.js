@@ -3,6 +3,9 @@ import { createType } from './createType.js';
 export function RestWithOffset(offset) {
   return createType({
     isConstantLength: false,
+    canEncode: function (value) {
+      return typeof value === 'object' && value instanceof DataView;
+    },
     encodedLength: function (value) {
       if (!(typeof value === 'object' && value instanceof DataView))
         throw new TypeError('Expected DataView.');

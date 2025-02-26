@@ -10,6 +10,9 @@ export const OcaInt64 = createType({
   encodedLength: function (value) {
     return 8;
   },
+  canEncode: function (value) {
+    return typeof value === 'number' || typeof value === 'bigint';
+  },
   encodeTo: function (dataView, pos, value) {
     /* global BigInt:false */
     assertSupport();

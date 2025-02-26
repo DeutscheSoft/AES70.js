@@ -2,6 +2,9 @@ import { createType } from './createType.js';
 
 export const OcaBoolean = createType({
   isConstantLength: true,
+  canEncode: function (value) {
+    return typeof value === 'boolean' || typeof value === 'number';
+  },
   encodedLength: function (value) {
     return 1;
   },

@@ -7,6 +7,7 @@ export function createType(Type) {
 
   return {
     isConstantLength: true,
+    canEncode: Type.canEncode,
     encodedLength: Type.encodedLength,
     encodeTo: encodeTo,
     decode: decode,

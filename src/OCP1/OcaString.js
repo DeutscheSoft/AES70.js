@@ -9,6 +9,9 @@ import {
 
 export const OcaString = createType({
   isConstantLength: false,
+  canEncode: function (value) {
+    return typeof value === 'string';
+  },
   encodedLength: function (value) {
     if (typeof value !== 'string') throw new TypeError('Expected string.');
 

@@ -8,6 +8,9 @@ function OcaListConstantLength(Type) {
 
   return createType({
     isConstantLength: false,
+    canEncode: function (value) {
+      return Array.isArray(value) || isTypedArray(value);
+    },
     encodedLength: function (value) {
       if (!(Array.isArray(value) || isTypedArray(value)))
         throw new TypeError('Expected array.');
@@ -63,6 +66,9 @@ function OcaListDynamicLength(Type) {
 
   return createType({
     isConstantLength: false,
+    canEncode: function (value) {
+      return Array.isArray(value) || isTypedArray(value);
+    },
     encodedLength: function (value) {
       if (!(Array.isArray(value) || isTypedArray(value)))
         throw new TypeError('Expected array.');
