@@ -22,6 +22,7 @@ import { OcaBlob } from '../src/OCP1/OcaBlob.js';
 import { Arguments } from '../src/OCP1/Arguments.js';
 import { String16 } from '../src/OCP1/String16.js';
 import { OcaBitstring } from '../src/OCP1/OcaBitstring.js';
+import { OcaVariant } from '../src/OCP1/OcaVariant.js';
 
 import { OcaClassicalFilterShape } from '../src/OCP1/OcaClassicalFilterShape.js';
 import { OcaDeviceState } from '../src/OCP1/OcaDeviceState.js';
@@ -176,6 +177,22 @@ describe('ocp1', () => {
   {
     const Type = String16;
     testEncodeDecode('String16', Type, 'foobar', 2 + 2 * 6);
+  }
+
+  {
+    const Type = OcaVariant(OcaString, OcaUint8);
+    testEncodeDecode(
+      'OcaVariant(OcaString, OcaUint8)',
+      Type,
+      'foobar',
+      2 + 6 + 1
+    );
+    testEncodeDecode('OcaVariant(OcaString, OcaUint8)', Type, 8, 2);
+  }
+
+  {
+    const Type = OcaVariant(OcaInt8, OcaUint8);
+    testEncodeDecode('OcaVariant(OcaInt8, OcaUint8)', Type, 13, 2);
   }
 
   it('OcaSubscriptionManager.AddSubscription', () => {

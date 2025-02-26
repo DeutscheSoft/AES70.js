@@ -4,6 +4,7 @@ export function createType(Type) {
   const encodedLength = Type.encodedLength();
   const decode = Type.decode;
   const encodeTo = Type.encodeTo;
+  const decodeFrom = Type.decodeFrom;
 
   return {
     isConstantLength: true,
@@ -11,11 +12,13 @@ export function createType(Type) {
     encodedLength: Type.encodedLength,
     encodeTo: encodeTo,
     decode: decode,
-    decodeFrom: function (dataView, pos) {
-      const result = decode(dataView, pos);
+    decodeFrom: decode
+      ? function (dataView, pos) {
+          const result = decode(dataView, pos);
 
-      return [pos + encodedLength, result];
-    },
+          return [pos + encodedLength, result];
+        }
+      : decodeFrom,
     decodeLength: function (dataView, pos) {
       return pos + encodedLength;
     },
