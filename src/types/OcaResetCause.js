@@ -12,6 +12,7 @@ export class OcaResetCause extends Enum({
   InternalError: 1,
   Upgrade: 2,
   ExternalRequest: 3,
+  Unknown: 255,
 }) {}
 
 /**
@@ -39,6 +40,13 @@ export class OcaResetCause extends Enum({
  * Singleton object corresponding to the entry with value ``3``.
  * @type {OcaResetCause}
  * @member ExternalRequest
+ * @memberof OcaResetCause
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``255``.
+ * @type {OcaResetCause}
+ * @member Unknown
  * @memberof OcaResetCause
  * @static
  */

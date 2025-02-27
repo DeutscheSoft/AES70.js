@@ -4,8 +4,9 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * A generic Z-domain rational polynomial filter section: A(0) + A(1)z + A(2)z^2
- * + A(3)z^3 + ... B(0) + B(1)z + B(2)z^2 + B(3)z^3 + ...
+ * Generic Z-domain rational polynomial filter section with transfer function
+ * expression of the form: A(0) + A(1)z + A(2)z^2 + A(3)z^3 + ... B(0) + B(1)z +
+ * B(2)z^2 + B(3)z^3 + ...
  * @extends OcaActuator
  * @class OcaFilterPolynomial
  */
@@ -28,7 +29,7 @@ export declare class OcaFilterPolynomial extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Returns the polynomial coefficients used.
+   * Gets the polynomial coefficients.
    * The return values of this method are
    *
    * - A of type ``number[]``
@@ -51,7 +52,7 @@ export declare class OcaFilterPolynomial extends OcaActuator {
   SetCoefficients(A: number[], B: number[]): Promise<void>;
 
   /**
-   * Gets the filter sampling rate.
+   * Gets the filter sampling rate value and limits.
    * The return values of this method are
    *
    * - Rate of type ``number``

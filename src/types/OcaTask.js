@@ -5,7 +5,8 @@
 export class OcaTask {
   /**
    * An execution thread that runs an AES70 Program. Programs are OcaLibrary
-   * volumes that contain application-specific execution instructions.
+   * volumes that contain application-specific execution instructions. **
+   * Deprecated** in OCA 1.5.
    * @class OcaTask
    */
   constructor(
@@ -29,7 +30,7 @@ export class OcaTask {
      */
     this.Label = Label;
     /**
-     * ID of program this task was given or null if it's idle.
+     * ID of program this task was given or all null if it's idle.
      * @type OcaLibVolIdentifier
      */
     this.ProgramID = ProgramID;
@@ -44,8 +45,7 @@ export class OcaTask {
      */
     this.TimeMode = TimeMode;
     /**
-     * ONo of relevant **OcaTimeSource** object or zero to use device time (see
-     * **OcaDeviceTimeManager**).
+     * ONo of relevant OcaTimeSource object, or zero if none.
      * @type number
      */
     this.TimeSourceONo = TimeSourceONo;
@@ -54,16 +54,16 @@ export class OcaTask {
      * **TimeMode=Relative**, the actual event start time equals the value of
      * **StartTime** plus the absolute time that **StartTime** was most recently
      * set. Datatype shall depend on value of **TimeUnits**: - If **TimeUnits**
-     * is seconds, datatype shall be **OcaTimePTP;** - If TimeUnits is samples,
+     * is seconds, datatype shall be **OcaTime;** - If TimeUnits is samples,
      * datatype shall be **OcaUint64**. If **TimeMode=Absolute**, the actual
      * event start time equals the value of **StartTime**
-     * @type OcaTimePTP
+     * @type OcaTime
      */
     this.StartTime = StartTime;
     /**
      * Duration of task execution, or zero to run until complete or explicitly
      * stopped.
-     * @type OcaTimePTP
+     * @type number
      */
     this.Duration = Duration;
     /**

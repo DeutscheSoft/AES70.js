@@ -3,8 +3,8 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaLevelSensor } from './OcaLevelSensor.js';
 
 /**
- * Child of **OcaLevelSensor** that returns an audio meter reading in dB
- * relative to a known reference level, and whose value has been calculated by
+ * Child of **OcaLevelSensor** that shall return an audio meter reading in dB
+ * relative to a known reference level, and whose value shall be calculated by
  * the selected averaging algorithm.
  * @extends OcaLevelSensor
  * @class OcaAudioLevelSensor
@@ -13,7 +13,7 @@ export const OcaAudioLevelSensor = make_control_class(
   'OcaAudioLevelSensor',
   5,
   '\u0001\u0001\u0002\u0002\u0001',
-  2,
+  3,
   OcaLevelSensor,
   [
     ['GetLaw', 5, 1, [], [OcaLevelMeterLaw]],
@@ -24,17 +24,14 @@ export const OcaAudioLevelSensor = make_control_class(
 );
 
 /**
- * Gets the value of the Law property. The return value indicates whether the
- * property was successfully retrieved.
+ * Gets the value of the **Law** property.
  *
  * @method OcaAudioLevelSensor#GetLaw
  * @returns {Promise<OcaLevelMeterLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelMeterLaw`.
  */
 /**
- * Sets the value of the Law property. The return value indicates whether the
- * property was successfully set. Only implemented for objects whose Law
- * property is read/write.
+ * Sets the value of the **Law** property.
  *
  * @method OcaAudioLevelSensor#SetLaw
  * @param {IOcaLevelMeterLaw} law

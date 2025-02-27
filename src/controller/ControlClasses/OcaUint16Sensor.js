@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaBasicSensor } from './OcaBasicSensor.js';
 
 /**
- * Basic uint16 sensor.
+ * 16-bit unsigned integer sensor
  * @extends OcaBasicSensor
  * @class OcaUint16Sensor
  */
@@ -11,7 +11,7 @@ export const OcaUint16Sensor = make_control_class(
   'OcaUint16Sensor',
   5,
   '\u0001\u0001\u0002\u0001\u0007',
-  2,
+  3,
   OcaBasicSensor,
   [['GetReading', 5, 1, [], [OcaUint16, OcaUint16, OcaUint16]]],
   [['Reading', [OcaUint16], 5, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaUint16Sensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the **Reading** property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Reading** property.
  * The return values of this method are
  *
  * - Reading of type ``number``

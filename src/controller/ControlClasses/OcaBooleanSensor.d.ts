@@ -3,7 +3,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaBasicSensor } from './OcaBasicSensor';
 
 /**
- * Basic boolean sensor.
+ * Boolean sensor
  * @extends OcaBasicSensor
  * @class OcaBooleanSensor
  */
@@ -16,8 +16,7 @@ export declare class OcaBooleanSensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the **Reading** property. The return value indicates whether the data
-   * was successfully retrieved.
+   * Gets the value of the **Reading** property.
    *
    * @method OcaBooleanSensor#GetReading
    * @returns {Promise<boolean>}

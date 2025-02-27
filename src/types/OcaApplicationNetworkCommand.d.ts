@@ -18,18 +18,6 @@ export class OcaApplicationNetworkCommand {
    * Singleton object corresponding to the entry with value ``2``.
    */
   static Start: OcaApplicationNetworkCommand;
-  /**
-   * Singleton object corresponding to the entry with value ``3``.
-   */
-  static Pause: OcaApplicationNetworkCommand;
-  /**
-   * Singleton object corresponding to the entry with value ``4``.
-   */
-  static Stop: OcaApplicationNetworkCommand;
-  /**
-   * Singleton object corresponding to the entry with value ``5``.
-   */
-  static Reset: OcaApplicationNetworkCommand;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -57,12 +45,6 @@ export type IOcaApplicationNetworkCommand =
   | 'None'
   | 'Prepare'
   | 'Start'
-  | 'Pause'
-  | 'Stop'
-  | 'Reset'
   | 0
   | 1
-  | 2
-  | 3
-  | 4
-  | 5;
+  | 2;

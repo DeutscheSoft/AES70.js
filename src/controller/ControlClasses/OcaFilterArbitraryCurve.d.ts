@@ -8,7 +8,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * An arbitrary-curve filter, with transfer function specified as amplitude and
+ * Arbitrary-curve filter, with transfer function specified as amplitude and
  * phase versus frequency.
  * @extends OcaActuator
  * @class OcaFilterArbitraryCurve
@@ -37,7 +37,7 @@ export declare class OcaFilterArbitraryCurve extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Returns the complex transfer function.
+   * Gets the complex transfer function.
    *
    * @method OcaFilterArbitraryCurve#GetTransferFunction
    * @returns {Promise<OcaTransferFunction>}
@@ -56,7 +56,7 @@ export declare class OcaFilterArbitraryCurve extends OcaActuator {
   SetTransferFunction(TransferFunction: IOcaTransferFunction): Promise<void>;
 
   /**
-   * Gets the filter sampling rate.
+   * Gets the value and limits of the filter sampling rate.
    * The return values of this method are
    *
    * - Rate of type ``number``
@@ -79,8 +79,7 @@ export declare class OcaFilterArbitraryCurve extends OcaActuator {
   SetSampleRate(Rate: number): Promise<void>;
 
   /**
-   * Returns the minimum number of required points in the specified transfer
-   * function.
+   * Gets the value and limits of the TFMinLength property.
    *
    * @method OcaFilterArbitraryCurve#GetTFMinLength
    * @returns {Promise<number>}
@@ -89,8 +88,7 @@ export declare class OcaFilterArbitraryCurve extends OcaActuator {
   GetTFMinLength(): Promise<number>;
 
   /**
-   * Returns the maximum number of allowed points in the specified transfer
-   * function.
+   * Gets the value and limits of the TFMaxLength property.
    *
    * @method OcaFilterArbitraryCurve#GetTFMaxLength
    * @returns {Promise<number>}

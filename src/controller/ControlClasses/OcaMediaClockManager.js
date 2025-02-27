@@ -7,9 +7,11 @@ import { OcaManager } from './OcaManager.js';
 /**
  * Optional manager that collects all media clocks the device uses.
  *
- *  - Must be instantiated once for every device that has more than one media
- *    clock object. In this context, "media clock" means an instance of
+ *  - Must be instantiated in every device that has more than one media clock
+ *    object. In this context, "media clock" means an instance of
  *    **OcaMediaClock**, **OcaMediaClock3**, or any subclass of these classes.
+ *
+ *  - May be instantiated at most once in any device.
  *
  *  - If instantiated, object number must be 7.
  *
@@ -21,7 +23,7 @@ export const OcaMediaClockManager = make_control_class(
   'OcaMediaClockManager',
   3,
   '\u0001\u0003\u0007',
-  2,
+  3,
   OcaManager,
   [
     ['GetClocks', 3, 1, [], [OcaList(OcaUint32)]],
@@ -36,7 +38,7 @@ export const OcaMediaClockManager = make_control_class(
       1,
       false,
       false,
-      ['MediaClockTypesSupported'],
+      null,
     ],
     ['Clocks', [OcaList(OcaUint32)], 3, 2, false, false, null],
     ['Clock3s', [OcaList(OcaUint32)], 3, 3, false, false, null],
@@ -46,8 +48,7 @@ export const OcaMediaClockManager = make_control_class(
 
 /**
  * Gets the list of object numbers of **OcaMediaClock** instances in this
- * device. Return value indicates whether list was successfully retrieved. Note:
- * In AES70-2017, this method is deprecated.
+ * device. **Deprecated** in version 2 of this class.
  *
  * @method OcaMediaClockManager#GetClocks
  * @returns {Promise<number[]>}
@@ -56,7 +57,7 @@ export const OcaMediaClockManager = make_control_class(
 /**
  * Gets the list of media clock types supported by **OcaMediaClock** objects in
  * the device. Return value indicates whether the list was successfully
- * retrieved. Note : In AES70-2017, this method is deprecated.
+ * retrieved. **Deprecated** in version 2 of this class.
  *
  * @method OcaMediaClockManager#GetMediaClockTypesSupported
  * @returns {Promise<OcaMediaClockType[]>}
@@ -64,7 +65,7 @@ export const OcaMediaClockManager = make_control_class(
  */
 /**
  * Gets the list of object numbers of **OcaMediaClock3** instances in this
- * device. Return value indicates whether list was successfully retrieved.
+ * device.
  *
  * @method OcaMediaClockManager#GetClock3s
  * @returns {Promise<number[]>}
@@ -81,11 +82,6 @@ export const OcaMediaClockManager = make_control_class(
  * this property is empty.
  *
  * @member {PropertyEvent<OcaMediaClockType[]>} OcaMediaClockManager#OnClockSourceTypesSupportedChanged
- */
-/**
- * An alias for OnClockSourceTypesSupportedChanged
- *
- * @member {PropertyEvent<OcaMediaClockType[]>} OcaMediaClockManager#OnMediaClockTypesSupportedChanged
  */
 /**
  * This event is emitted when the property ``Clocks`` changes in the remote object.

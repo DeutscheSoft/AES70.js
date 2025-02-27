@@ -11,7 +11,7 @@ export const OcaSensor = make_control_class(
   'OcaSensor',
   3,
   '\u0001\u0001\u0002',
-  2,
+  3,
   OcaWorker,
   [['GetReadingState', 3, 1, [], [OcaSensorReadingState]]],
   [['ReadingState', [OcaSensorReadingState], 3, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaSensor = make_control_class(
 );
 
 /**
- * Gets the current reading state of the sensor. The return value indicates
- * whether the state was successfully retrived.
+ * Gets the current reading state of the sensor.
  *
  * @method OcaSensor#GetReadingState
  * @returns {Promise<OcaSensorReadingState>}

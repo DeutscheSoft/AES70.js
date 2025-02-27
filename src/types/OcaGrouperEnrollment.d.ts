@@ -4,15 +4,12 @@
 
 export declare interface IOcaGrouperEnrollment {
   /**
-   * Grouper's index of group in which the citizen identified by CitizenIndex is
-   * enrolled.
+   * Index of Group in which the given Citizen identified is enrolled.
    * @type number
    */
   GroupIndex: number;
 
   /**
-   * Grouper's index of a citizen enrolled in the group identified by
-   * GroupIndex.
    * @type number
    */
   CitizenIndex: number;
@@ -20,21 +17,19 @@ export declare interface IOcaGrouperEnrollment {
 
 export declare class OcaGrouperEnrollment implements IOcaGrouperEnrollment {
   /**
-   * Describes the enrollment of a citizen into a group.
+   * Describes the Enrollment of a Citizen in a Group. **Deprecated** in
+   * AES70-2024.
    * @class OcaGrouperEnrollment
    */
   constructor(GroupIndex: number, CitizenIndex: number);
 
   /**
-   * Grouper's index of group in which the citizen identified by CitizenIndex is
-   * enrolled.
+   * Index of Group in which the given Citizen identified is enrolled.
    * @type number
    */
   GroupIndex: number;
 
   /**
-   * Grouper's index of a citizen enrolled in the group identified by
-   * GroupIndex.
    * @type number
    */
   CitizenIndex: number;

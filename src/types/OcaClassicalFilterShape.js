@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enumeration of classicalr filter types that can be used by OCA objects.
+ * Enumeration of classical filter shapes
  * @class OcaClassicalFilterShape
  */
 export class OcaClassicalFilterShape extends Enum({

@@ -5,7 +5,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * An arbitrary-curve filter, with transfer function specified as amplitude and
+ * Arbitrary-curve filter, with transfer function specified as amplitude and
  * phase versus frequency.
  * @extends OcaActuator
  * @class OcaFilterArbitraryCurve
@@ -14,7 +14,7 @@ export const OcaFilterArbitraryCurve = make_control_class(
   'OcaFilterArbitraryCurve',
   4,
   '\u0001\u0001\u0001\r',
-  2,
+  3,
   OcaActuator,
   [
     ['GetTransferFunction', 4, 1, [], [OcaTransferFunction]],
@@ -34,7 +34,7 @@ export const OcaFilterArbitraryCurve = make_control_class(
 );
 
 /**
- * Returns the complex transfer function.
+ * Gets the complex transfer function.
  *
  * @method OcaFilterArbitraryCurve#GetTransferFunction
  * @returns {Promise<OcaTransferFunction>}
@@ -49,7 +49,7 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the filter sampling rate.
+ * Gets the value and limits of the filter sampling rate.
  * The return values of this method are
  *
  * - Rate of type ``number``
@@ -68,16 +68,14 @@ export const OcaFilterArbitraryCurve = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the minimum number of required points in the specified transfer
- * function.
+ * Gets the value and limits of the TFMinLength property.
  *
  * @method OcaFilterArbitraryCurve#GetTFMinLength
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Returns the maximum number of allowed points in the specified transfer
- * function.
+ * Gets the value and limits of the TFMaxLength property.
  *
  * @method OcaFilterArbitraryCurve#GetTFMaxLength
  * @returns {Promise<number>}
@@ -93,22 +91,22 @@ export const OcaFilterArbitraryCurve = make_control_class(
 /**
  * This event is emitted when the property ``SampleRate`` changes in the remote object.
  * The property ``SampleRate`` is described in the AES70 standard as follows.
- * Sample rate inside the filter. We can't assume it's the same as the device
- * input or output rate.
+ * Sampling rate inside the filter. Note: This rate is not necessarily the same
+ * as the Device input or output sampling rate.
  *
  * @member {PropertyEvent<number>} OcaFilterArbitraryCurve#OnSampleRateChanged
  */
 /**
  * This event is emitted when the property ``TFMinLength`` changes in the remote object.
  * The property ``TFMinLength`` is described in the AES70 standard as follows.
- * Minimum number of points that transfer function must specify
+ * Minimum number of points that the transfer function must specify
  *
  * @member {PropertyEvent<number>} OcaFilterArbitraryCurve#OnTFMinLengthChanged
  */
 /**
  * This event is emitted when the property ``TFMaxLength`` changes in the remote object.
  * The property ``TFMaxLength`` is described in the AES70 standard as follows.
- * Maximum number of points that transfer function may specify
+ * Maximum number of points that the transfer function may specify
  *
  * @member {PropertyEvent<number>} OcaFilterArbitraryCurve#OnTFMaxLengthChanged
  */

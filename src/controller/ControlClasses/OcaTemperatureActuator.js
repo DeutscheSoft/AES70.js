@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * A temperature actuator. Works in Celsius.
+ * A temperature actuator with Celsius units of measure.
  * @extends OcaActuator
  * @class OcaTemperatureActuator
  */
@@ -11,7 +11,7 @@ export const OcaTemperatureActuator = make_control_class(
   'OcaTemperatureActuator',
   4,
   '\u0001\u0001\u0001\u0014',
-  2,
+  3,
   OcaActuator,
   [
     ['GetTemperature', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
@@ -22,8 +22,7 @@ export const OcaTemperatureActuator = make_control_class(
 );
 
 /**
- * Gets the value of the Temperature property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value and limits of the **Temperature** property.
  * The return values of this method are
  *
  * - temperature of type ``number``
@@ -34,8 +33,7 @@ export const OcaTemperatureActuator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Temperature property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the **Temperature** property.
  *
  * @method OcaTemperatureActuator#SetTemperature
  * @param {number} temperature

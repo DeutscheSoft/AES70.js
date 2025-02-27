@@ -8,7 +8,7 @@ import {
 
 export declare interface IOcaMediaConnection {
   /**
-   * True iff connection is secure.
+   * True if and only if connection is secure.
    * @type boolean
    */
   Secure: boolean;
@@ -64,7 +64,7 @@ export declare class OcaMediaConnection implements IOcaMediaConnection {
   );
 
   /**
-   * True iff connection is secure.
+   * True if and only if connection is secure.
    * @type boolean
    */
   Secure: boolean;

@@ -4,16 +4,15 @@
 import { Enum } from './Enum.js';
 
 /**
- * Types of time references.
+ * Types of time references. **This datatype is deprecated as of AES70-2023.**
  * @class OcaTimeReferenceType
  */
 export class OcaTimeReferenceType extends Enum({
   Undefined: 0,
   Local: 1,
   Private: 2,
-  GPS: 3,
-  Galileo: 4,
-  GLONASS: 5,
+  TAI: 3,
+  ExpansionBase: 128,
 }) {}
 
 /**
@@ -40,21 +39,14 @@ export class OcaTimeReferenceType extends Enum({
 /**
  * Singleton object corresponding to the entry with value ``3``.
  * @type {OcaTimeReferenceType}
- * @member GPS
+ * @member TAI
  * @memberof OcaTimeReferenceType
  * @static
  */
 /**
- * Singleton object corresponding to the entry with value ``4``.
+ * Singleton object corresponding to the entry with value ``128``.
  * @type {OcaTimeReferenceType}
- * @member Galileo
- * @memberof OcaTimeReferenceType
- * @static
- */
-/**
- * Singleton object corresponding to the entry with value ``5``.
- * @type {OcaTimeReferenceType}
- * @member GLONASS
+ * @member ExpansionBase
  * @memberof OcaTimeReferenceType
  * @static
  */

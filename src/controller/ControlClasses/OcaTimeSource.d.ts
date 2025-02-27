@@ -1,4 +1,7 @@
-import { IOcaTimeProtocol, OcaTimeProtocol } from '../../types/OcaTimeProtocol';
+import {
+  IOcaTimeDeliveryMechanism,
+  OcaTimeDeliveryMechanism,
+} from '../../types/OcaTimeDeliveryMechanism';
 import {
   IOcaTimeReferenceType,
   OcaTimeReferenceType,
@@ -10,8 +13,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaAgent } from './OcaAgent';
 
 /**
- * A time source, internal or external. See RFC 7273 for a detailed discussion
- * of time sources.
+ * A time source, internal or external, and the delivery method by which time
+ * values reach this device.
  * @extends OcaAgent
  * @class OcaTimeSource
  */
@@ -22,15 +25,23 @@ export declare class OcaTimeSource extends OcaAgent {
   OnAvailabilityChanged: PropertyEvent<OcaTimeSourceAvailability>;
 
   /**
-   * This event is emitted whenever Protocol changes.
+   * This event is emitted whenever TimeDeliveryMechanism changes.
    */
-  OnProtocolChanged: PropertyEvent<OcaTimeProtocol>;
+  OnTimeDeliveryMechanismChanged: PropertyEvent<OcaTimeDeliveryMechanism>;
 
   /**
-   * This event is emitted whenever Parameters changes.
+   * An alias for OnTimeDeliveryMechanismChanged
+   */
+  OnProtocolChanged: PropertyEvent<OcaTimeDeliveryMechanism>;
+  /**
+   * This event is emitted whenever ReferenceSDPDescription changes.
+   */
+  OnReferenceSDPDescriptionChanged: PropertyEvent<string>;
+
+  /**
+   * An alias for OnReferenceSDPDescriptionChanged
    */
   OnParametersChanged: PropertyEvent<string>;
-
   /**
    * This event is emitted whenever ReferenceType changes.
    */
@@ -46,11 +57,15 @@ export declare class OcaTimeSource extends OcaAgent {
    */
   OnSyncStatusChanged: PropertyEvent<OcaTimeSourceSyncStatus>;
 
+  /**
+   * This event is emitted whenever TimeDeliveryParameters changes.
+   */
+  OnTimeDeliveryParametersChanged: PropertyEvent<string>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the **Availability** property. The return value indicates
-   * whether the value was successfully retrieved.
+   * Gets the value of the **Availability** property.
    *
    * @method OcaTimeSource#GetAvailability
    * @returns {Promise<OcaTimeSourceAvailability>}
@@ -59,29 +74,61 @@ export declare class OcaTimeSource extends OcaAgent {
   GetAvailability(): Promise<OcaTimeSourceAvailability>;
 
   /**
-   * Gets the value of the **Protocol** property. The return value indicates
-   * whether the value was successfully retrieved.
+   * Gets the value of the **TimeDeliveryMechanism** property. Prior to v3 of
+   * this class, was named **GetProtocol.**
    *
-   * @method OcaTimeSource#GetProtocol
-   * @returns {Promise<OcaTimeProtocol>}
-   *   A promise which resolves to a single value of type :class:`OcaTimeProtocol`.
+   * @method OcaTimeSource#GetTimeDeliveryMechanism
+   * @returns {Promise<OcaTimeDeliveryMechanism>}
+   *   A promise which resolves to a single value of type :class:`OcaTimeDeliveryMechanism`.
    */
-  GetProtocol(): Promise<OcaTimeProtocol>;
+  GetTimeDeliveryMechanism(): Promise<OcaTimeDeliveryMechanism>;
 
   /**
-   * Sets the value of the **Protocol** property. The return value indicates
-   * whether the value was successfully set.
+   * Gets the value of the **TimeDeliveryMechanism** property. Prior to v3 of
+   * this class, was named **GetProtocol.**
+   * An alias for GetTimeDeliveryMechanism.
    *
-   * @method OcaTimeSource#SetProtocol
-   * @param {IOcaTimeProtocol} Protocol
+   * @method OcaTimeSource#GetProtocol
+   * @returns {Promise<OcaTimeDeliveryMechanism>}
+   *   A promise which resolves to a single value of type :class:`OcaTimeDeliveryMechanism`.
+   */
+  GetProtocol(): Promise<OcaTimeDeliveryMechanism>;
+
+  /**
+   * Sets the value of the **TimeDeliveryMechanism** property. Prior to v3 of
+   * this class, was named **SetProtocol**.
+   *
+   * @method OcaTimeSource#SetTimeDeliveryMechanism
+   * @param {IOcaTimeDeliveryMechanism} Mechanism
    *
    * @returns {Promise<void>}
    */
-  SetProtocol(Protocol: IOcaTimeProtocol): Promise<void>;
+  SetTimeDeliveryMechanism(Mechanism: IOcaTimeDeliveryMechanism): Promise<void>;
 
   /**
-   * Gets the value of the **Parameters** property. The return value indicates
-   * whether the value was successfully retrieved.
+   * Sets the value of the **TimeDeliveryMechanism** property. Prior to v3 of
+   * this class, was named **SetProtocol**.
+   * An alias for SetTimeDeliveryMechanism.
+   *
+   * @method OcaTimeSource#SetProtocol
+   * @param {IOcaTimeDeliveryMechanism} Mechanism
+   *
+   * @returns {Promise<void>}
+   */
+  SetProtocol(Mechanism: IOcaTimeDeliveryMechanism): Promise<void>;
+
+  /**
+   * Gets the value of the **ReferenceSDPDescription** property.
+   *
+   * @method OcaTimeSource#GetReferenceSDPDescription
+   * @returns {Promise<string>}
+   *   A promise which resolves to a single value of type ``string``.
+   */
+  GetReferenceSDPDescription(): Promise<string>;
+
+  /**
+   * Gets the value of the **ReferenceSDPDescription** property.
+   * An alias for GetReferenceSDPDescription.
    *
    * @method OcaTimeSource#GetParameters
    * @returns {Promise<string>}
@@ -90,9 +137,20 @@ export declare class OcaTimeSource extends OcaAgent {
   GetParameters(): Promise<string>;
 
   /**
-   * Sets the value of the **Parameters** property. The return value indicates
-   * whether the value was successfully set. Optional method, may not be
-   * supported in all implementations.
+   * Sets the value of the **ReferenceSDPDescription** property. Optional
+   * method, may not be supported in all implementations.
+   *
+   * @method OcaTimeSource#SetReferenceSDPDescription
+   * @param {string} Parameters
+   *
+   * @returns {Promise<void>}
+   */
+  SetReferenceSDPDescription(Parameters: string): Promise<void>;
+
+  /**
+   * Sets the value of the **ReferenceSDPDescription** property. Optional
+   * method, may not be supported in all implementations.
+   * An alias for SetReferenceSDPDescription.
    *
    * @method OcaTimeSource#SetParameters
    * @param {string} Parameters
@@ -102,8 +160,7 @@ export declare class OcaTimeSource extends OcaAgent {
   SetParameters(Parameters: string): Promise<void>;
 
   /**
-   * Gets the time reference type. The return value indicates whether the value
-   * was successfully retrieved.
+   * Gets the time reference type. **This method is deprecated.**
    *
    * @method OcaTimeSource#GetReferenceType
    * @returns {Promise<OcaTimeReferenceType>}
@@ -112,9 +169,8 @@ export declare class OcaTimeSource extends OcaAgent {
   GetReferenceType(): Promise<OcaTimeReferenceType>;
 
   /**
-   * Sets the time reference type. The return value indicates whether the value
-   * was successfully set. Optional method, may not be supported in all
-   * implementations.
+   * Sets the time reference type. Optional method, may not be supported in all
+   * implementations. **This method is deprecated.**
    *
    * @method OcaTimeSource#SetReferenceType
    * @param {IOcaTimeReferenceType} ReferenceType
@@ -124,8 +180,7 @@ export declare class OcaTimeSource extends OcaAgent {
   SetReferenceType(ReferenceType: IOcaTimeReferenceType): Promise<void>;
 
   /**
-   * Gets the timing source ID. The return value indicates whether the value was
-   * successfully retrieved. Optional method, not required for all time
+   * Gets the timing source ID. Optional method, not required for all time
    * reference types.
    *
    * @method OcaTimeSource#GetReferenceID
@@ -135,9 +190,8 @@ export declare class OcaTimeSource extends OcaAgent {
   GetReferenceID(): Promise<string>;
 
   /**
-   * Sets the time reference ID. The return value indicates whether the ID was
-   * successfully set. Optional method, not required for all time reference
-   * types.
+   * Sets the time reference ID. Optional method, not required for all time
+   * reference types.
    *
    * @method OcaTimeSource#SetReferenceID
    * @param {string} ID
@@ -147,8 +201,7 @@ export declare class OcaTimeSource extends OcaAgent {
   SetReferenceID(ID: string): Promise<void>;
 
   /**
-   * Gets the synchronization status of this time source. The return value
-   * indicates whether the value was successfully retrieved.
+   * Gets the synchronization status of this time source.
    *
    * @method OcaTimeSource#GetSyncStatus
    * @returns {Promise<OcaTimeSourceSyncStatus>}
@@ -157,11 +210,29 @@ export declare class OcaTimeSource extends OcaAgent {
   GetSyncStatus(): Promise<OcaTimeSourceSyncStatus>;
 
   /**
-   * Resets this time source. Initiates a new synchronization sequence. The
-   * return value indicates whether the reset was successful.
+   * Resets this time source. Initiates a new synchronization sequence.
    *
    * @method OcaTimeSource#Reset
    * @returns {Promise<void>}
    */
   Reset(): Promise<void>;
+
+  /**
+   * Gets the value of the **TimeDeliveryParameters** property. Optional method.
+   *
+   * @method OcaTimeSource#GetTimeDeliveryParameters
+   * @returns {Promise<string>}
+   *   A promise which resolves to a single value of type ``string``.
+   */
+  GetTimeDeliveryParameters(): Promise<string>;
+
+  /**
+   * Sets the value of the **TimeDeliveryParameters** property. Optional method.
+   *
+   * @method OcaTimeSource#SetTimeDeliveryParameters
+   * @param {string} Record
+   *
+   * @returns {Promise<void>}
+   */
+  SetTimeDeliveryParameters(Record: string): Promise<void>;
 }

@@ -4,7 +4,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
 
 /**
- * Basic temperature sensor.
+ * Temperature sensor. Units of measure are Celsius.
  * @extends OcaSensor
  * @class OcaTemperatureSensor
  */
@@ -17,8 +17,7 @@ export declare class OcaTemperatureSensor extends OcaSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Reading** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Reading** property.
    * The return values of this method are
    *
    * - Reading of type ``number``

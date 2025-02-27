@@ -1,9 +1,11 @@
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaEvent } from '../../OCP1/OcaEvent.js';
+import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMethod } from '../../OCP1/OcaMethod.js';
 import { OcaNotificationDeliveryMode } from '../../OCP1/OcaNotificationDeliveryMode.js';
 import { OcaObjectListEventData } from '../../OCP1/OcaObjectListEventData.js';
 import { OcaPropertyID } from '../../OCP1/OcaPropertyID.js';
+import { OcaStatus } from '../../OCP1/OcaStatus.js';
 import { OcaSubscriptionManagerState } from '../../OCP1/OcaSubscriptionManagerState.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
@@ -13,15 +15,11 @@ import { OcaManager } from './OcaManager.js';
 /**
  * Manager that collects and controls the event subscriptions of the device.
  *
- *  - Must be instantiated once in every device that supports subscriptions.
+ *  - Must be instantiated exactly once in every device.
  *
- *  - May be instantiated at most once in any device.
- *
- *  - If instantiated, must have object number 4.
+ *  - Object number must be 4.
  *
  *
- * Absence of an **OcaSubscriptionManager** object signifies that the device
- * does not support event subscriptions.
  * @extends OcaManager
  * @class OcaSubscriptionManager
  */
@@ -29,7 +27,7 @@ export const OcaSubscriptionManager = make_control_class(
   'OcaSubscriptionManager',
   3,
   '\u0001\u0003\u0004',
-  2,
+  4,
   OcaManager,
   [
     [
@@ -64,6 +62,73 @@ export const OcaSubscriptionManager = make_control_class(
       [],
     ],
     ['GetMaximumSubscriberContextLength', 3, 7, [], [OcaUint16]],
+    [
+      'AddSubscription2',
+      3,
+      8,
+      [OcaEvent, OcaNotificationDeliveryMode, OcaBlob],
+      [],
+    ],
+    [
+      'RemoveSubscription2',
+      3,
+      9,
+      [OcaEvent, OcaNotificationDeliveryMode, OcaBlob],
+      [],
+    ],
+    [
+      'AddPropertyChangeSubscription2',
+      3,
+      10,
+      [OcaUint32, OcaPropertyID, OcaNotificationDeliveryMode, OcaBlob],
+      [],
+    ],
+    [
+      'RemovePropertyChangeSubscription2',
+      3,
+      11,
+      [OcaUint32, OcaPropertyID, OcaNotificationDeliveryMode, OcaBlob],
+      [],
+    ],
+    [
+      'AddSubscription2List',
+      3,
+      12,
+      [OcaList(OcaEvent), OcaNotificationDeliveryMode, OcaBlob],
+      [OcaList(OcaStatus)],
+    ],
+    [
+      'RemoveSubscription2List',
+      3,
+      13,
+      [OcaList(OcaEvent), OcaNotificationDeliveryMode, OcaBlob],
+      [],
+    ],
+    [
+      'AddPropertyChangeSubscription2List',
+      3,
+      14,
+      [
+        OcaList(OcaUint32),
+        OcaList(OcaPropertyID),
+        OcaNotificationDeliveryMode,
+        OcaBlob,
+        OcaList(OcaStatus),
+      ],
+      [],
+    ],
+    [
+      'RemovePropertyChangeSubscription2List',
+      3,
+      15,
+      [
+        OcaList(OcaUint32),
+        OcaList(OcaPropertyID),
+        OcaNotificationDeliveryMode,
+        OcaBlob,
+      ],
+      [],
+    ],
   ],
   [['State', [OcaSubscriptionManagerState], 3, 1, false, false, null]],
   [
@@ -73,12 +138,14 @@ export const OcaSubscriptionManager = make_control_class(
 );
 
 /**
- * Adds a subscription to an event. The subscription is added for the session on
- * which the command came in. If a subscription identical to the one being
- * requested already exists, an additional one shall not be added. Two
+ * Adds an EV1 subscription to an event. The subscription is added for the
+ * session on which the command came in. If a subscription identical to the one
+ * being requested already exists, an additional one shall not be added. Two
  * subscriptions are identical if the **Event, Subscriber,
  * NotificationDeliveryMode**, and **DestinationInformation** parameters are all
- * identical. The return value indicates whether the subscription succeeded.
+ * identical. **Deprecated** in version 3 of this class, replaced by
+ * **AddPropertyChangeSubscription(..).** Deprecated in version 3 of this class,
+ * and replaced by **AddSubscription2**.
  *
  * @method OcaSubscriptionManager#AddSubscription
  * @param {IOcaEvent} Event
@@ -90,9 +157,9 @@ export const OcaSubscriptionManager = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Removes all subscriptions to the given event with the given **OcaMethod**.
- * The return value indicates whether the subscription(s) was (were)
- * successfully removed.
+ * Removes all EV1 subscriptions to the given event with the given
+ * **OcaMethod**. **Deprecated** in version 3 of this class, and replaced by
+ * **RemoveSubscription2**.
  *
  * @method OcaSubscriptionManager#RemoveSubscription
  * @param {IOcaEvent} Event
@@ -101,8 +168,8 @@ export const OcaSubscriptionManager = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Temporarily disables emitting of event notifications (to all subscribers, not
- * just to the subscriber calling this method). Events from the Subscription
+ * Temporarily disables emitting of event notifications to all subscribers, not
+ * just to the subscriber calling this method. Events from the Subscription
  * Manager itself are not disabled. This method can be used if either a
  * controller or the local device knows that it is going to change the state of
  * the device significantly, which could lead to a notification storm of events.
@@ -121,24 +188,21 @@ export const OcaSubscriptionManager = make_control_class(
  * are re-enabled, the subscription manager will raise the **SynchronizeState**
  * event, passing the list of objects that have changed state. Subsequently, the
  * subscription manager will transmit all notifications as normal. If the
- * connection to the controller that invoked the DisableEvents() is lost, this
- * method will be called automatically to prevent the situation in which the
- * raising of events would never be re-enabled. The return value indicates if
- * re-enabling the event-based events succeeded.
+ * connection to the controller that invoked the **DisableEvents()** is lost,
+ * this method will be called automatically to prevent the situation in which
+ * the raising of events would never be re-enabled.
  *
  * @method OcaSubscriptionManager#ReEnableNotifications
  * @returns {Promise<void>}
  */
 /**
- * Adds a subscription to the PropertyChanged event in the object Emitter for
- * changes of the property Property. If the NotificationDeliveryMode is Fast,
- * the subscription is added for the session on which the command came in. If a
- * subscription identical to the one being requested already exists, an
- * additional one shall not be added. Two subscriptions are identical if the
- * Emitter, Property, Subscriber, SubsciberContext, NotificationDeliveryMode,
- * and DestinationInformation parameters are all identical. The return value
- * indicates whether the subscription succeeded. Added in v2 of this class, in
- * AES70-2017.
+ * Adds an EV1 subscription to the **PropertyChanged** event in the object
+ * **Emitter** for changes of the property **Property**. If a subscription
+ * identical to the one being requested already exists, an additional one shall
+ * not be added. Two subscriptions are identical if the **Emitter, Property,
+ * Subscriber, SubsciberContext, NotificationDeliveryMode,** and
+ * **DestinationInformation** parameters are all identical. **Deprecated** in
+ * version 3 of this class, replaced by **AddPropertyChangeSubscription2(..).**
  *
  * @method OcaSubscriptionManager#AddPropertyChangeSubscription
  * @param {number} Emitter
@@ -151,11 +215,10 @@ export const OcaSubscriptionManager = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Removes any subscription to a PropertyChanged event with the given Emitter,
- * Property, Subscriber, SubscriberContext, NotificationDeliveryMode, and
- * DestinationInformation. The return value indicates whether the
- * subscription(s) was (were) successfully removed. Added in v2 of this class,
- * in AES70-2017.
+ * Removes any EV1 subscription to a **PropertyChanged** event with the given
+ * Emitter, Property, Subscriber, SubscriberContext, NotificationDeliveryMode,
+ * and DestinationInformation. **Deprecated** in version 3 of this class,
+ * replaced by **RemovePropertyChangeSubscription2(...).**
  *
  * @method OcaSubscriptionManager#RemovePropertyChangeSubscription
  * @param {number} Emitter
@@ -165,16 +228,138 @@ export const OcaSubscriptionManager = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns maximum byte length of payload of subscriber context parameter that
- * this device supports. This returned value shall be either zero or four. If
- * the returned payload length is not zero, it shall be four. No other values
+ * Returns maximum byte length of payload of EV1 subscriber context parameter
+ * that this device supports. This returned value shall be either zero or four.
+ * If the returned payload length is not zero, it shall be four. No other values
  * shall be allowed, and the returned value shall not change once the device has
- * initialized. NOTE: In AES70-2015, arbitrary subscriber context lengths were
- * allowed; this is no longer true.
+ * initialized. **Deprecated** in version 3 of this class. Not used in EV2.
+ * NOTE: In AES70-2015, arbitrary subscriber context lengths were allowed; this
+ * is no longer true.
  *
  * @method OcaSubscriptionManager#GetMaximumSubscriberContextLength
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
+ */
+/**
+ * Adds an EV2 subscription.
+ *
+ * @method OcaSubscriptionManager#AddSubscription2
+ * @param {IOcaEvent} Event
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Removes all EV2 subscriptions with the given **Event**,
+ * **NotificationDeliveryMode**, and **DestinationInformation**.
+ *
+ * @method OcaSubscriptionManager#RemoveSubscription2
+ * @param {IOcaEvent} Event
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Adds an EV2 subscription to the **PropertyChanged** event in the object
+ * **Emitter** for changes of the property **Property**. If a subscription
+ * identical to the one being requested already exists, an additional one shall
+ * not be added and the method shall return the status value **InvalidRequest**.
+ * Two subscriptions are identical if the **Emitter, Property,
+ * NotificationDeliveryMode,** and **DestinationInformation** parameters are all
+ * identical.
+ *
+ * @method OcaSubscriptionManager#AddPropertyChangeSubscription2
+ * @param {number} Emitter
+ * @param {IOcaPropertyID} Property
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Removes all EV2 subscriptions to **PropertyChanged** events with the given
+ * **Emitter**, **Property**, **NotificationDeliveryMode**, and
+ * **DestinationInformation**.
+ *
+ * @method OcaSubscriptionManager#RemovePropertyChangeSubscription2
+ * @param {number} Emitter
+ * @param {IOcaPropertyID} Property
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Adds a list of EV2 subscriptions. **OcaStatus** return values from this
+ * method are as follows:
+ *
+ *  - **OK**: Requested subscriptions were attempted; all, none, or some
+ *    succeeded. Individual subscription result details are returned in
+ *    parameter **ResultStatuses**.
+ *
+ *  - **<anything else>:** Problem - no subscription attempts were made.
+ *
+ *
+ *
+ * @method OcaSubscriptionManager#AddSubscription2List
+ * @param {IOcaEvent[]} Events
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<OcaStatus[]>}
+ *   A promise which resolves to a single value of type :class:`OcaStatus[]`.
+ */
+/**
+ * Removes all EV2 subscriptions in the given list of Events that have the
+ * specified **NotificationDeliveryMode** and **DestinationInformation**.
+ *
+ * @method OcaSubscriptionManager#RemoveSubscription2List
+ * @param {IOcaEvent[]} Events
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Adds a list of EV2 property-change subscriptions. **OcaStatus** return values
+ * from this method are as follows:
+ *
+ *  - **OK**: Requested subscriptions were attempted; all, none, or some
+ *    succeeded. Individual subscription result details are returned in list
+ *    parameter **ResultStatuses**.
+ *
+ *  - **<anything else>:** Problem - no subscription attempts were made.
+ *
+ *
+ * If a subscription identical to the one being requested already exists, an
+ * additional one shall not be added and the method shall return the
+ * **ResultStatuses** value **InvalidRequest**. Two subscriptions are identical
+ * if the **Emitter, Property, NotificationDeliveryMode,** and
+ * **DestinationInformation** parameters are all identical.
+ *
+ * @method OcaSubscriptionManager#AddPropertyChangeSubscription2List
+ * @param {number[]} Emitters
+ * @param {IOcaPropertyID[]} Properties
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ * @param {IOcaStatus[]} ResultStatuses
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Removes all EV2 property-change subscriptions in the given lists of Events
+ * and Properties that have the specified **NotificationDeliveryMode** and
+ * **DestinationInformation**.
+ *
+ * @method OcaSubscriptionManager#RemovePropertyChangeSubscription2List
+ * @param {number[]} Emitters
+ * @param {IOcaPropertyID[]} Properties
+ * @param {IOcaNotificationDeliveryMode} NotificationDeliveryMode
+ * @param {Uint8Array} DestinationInformation
+ *
+ * @returns {Promise<void>}
  */
 /**
  * Event that is raised when the value of the **State** property changes from

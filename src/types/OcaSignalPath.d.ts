@@ -5,34 +5,34 @@ import { IOcaPort, OcaPort } from './OcaPort';
 
 export declare interface IOcaSignalPath {
   /**
-   * Source port (i.e. output port) of the signal path.
+   * Output port. Signal originates here.
    * @type OcaPort
    */
-  SourcePort: IOcaPort;
+  OutputPort: IOcaPort;
 
   /**
-   * Sink port (i.e. input port) of the signal path.
+   * Input port. Signal is received here.
    * @type OcaPort
    */
-  SinkPort: IOcaPort;
+  InputPort: IOcaPort;
 }
 
 export declare class OcaSignalPath implements IOcaSignalPath {
   /**
-   * Signal path between two object ports in the same device.
+   * Signal path between two OcaPorts in the same device.
    * @class OcaSignalPath
    */
-  constructor(SourcePort: OcaPort, SinkPort: OcaPort);
+  constructor(OutputPort: OcaPort, InputPort: OcaPort);
 
   /**
-   * Source port (i.e. output port) of the signal path.
+   * Output port. Signal originates here.
    * @type OcaPort
    */
-  SourcePort: OcaPort;
+  OutputPort: OcaPort;
 
   /**
-   * Sink port (i.e. input port) of the signal path.
+   * Input port. Signal is received here.
    * @type OcaPort
    */
-  SinkPort: OcaPort;
+  InputPort: OcaPort;
 }

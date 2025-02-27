@@ -17,10 +17,11 @@ export declare interface IOcaPort {
   ID: IOcaPortID;
 
   /**
-   * Port ID of the port.
+   * Role of the port in the containing object. Values beginning with "oca" in
+   * any character case are reserved for AES use.
    * @type string
    */
-  Name: string;
+  Role: string;
 }
 
 export declare class OcaPort implements IOcaPort {
@@ -29,7 +30,7 @@ export declare class OcaPort implements IOcaPort {
    * path representation of an OCA device.
    * @class OcaPort
    */
-  constructor(Owner: number, ID: OcaPortID, Name: string);
+  constructor(Owner: number, ID: OcaPortID, Role: string);
 
   /**
    * Object number of the object that owns the port.
@@ -44,8 +45,9 @@ export declare class OcaPort implements IOcaPort {
   ID: OcaPortID;
 
   /**
-   * Port ID of the port.
+   * Role of the port in the containing object. Values beginning with "oca" in
+   * any character case are reserved for AES use.
    * @type string
    */
-  Name: string;
+  Role: string;
 }

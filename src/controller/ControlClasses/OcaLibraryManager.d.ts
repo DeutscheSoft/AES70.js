@@ -29,7 +29,7 @@ export declare class OcaLibraryManager extends OcaManager {
   /**
    * This event is emitted whenever CurrentPatch changes.
    */
-  OnCurrentPatchChanged: PropertyEvent<OcaLibVolIdentifier>;
+  OnCurrentPatchChanged: PropertyEvent<number>;
 
   constructor(objectNumber: number, device: RemoteDevice);
 

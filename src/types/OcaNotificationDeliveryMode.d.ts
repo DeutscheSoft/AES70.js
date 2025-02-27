@@ -3,18 +3,18 @@
  */
 /**
  * Enum for subscriptions that specifies whether its notification messages are
- * to be delivered by reliable means (e.g. TCP) or fast means (e.g. UDP).
+ * to be delivered by normal means (e.g. TCP) or lightweight means (e.g. UDP).
  * @class OcaNotificationDeliveryMode
  */
 export class OcaNotificationDeliveryMode {
   /**
    * Singleton object corresponding to the entry with value ``1``.
    */
-  static Reliable: OcaNotificationDeliveryMode;
+  static Normal: OcaNotificationDeliveryMode;
   /**
    * Singleton object corresponding to the entry with value ``2``.
    */
-  static Fast: OcaNotificationDeliveryMode;
+  static Lightweight: OcaNotificationDeliveryMode;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -39,7 +39,7 @@ export class OcaNotificationDeliveryMode {
 
 export type IOcaNotificationDeliveryMode =
   | OcaNotificationDeliveryMode
-  | 'Reliable'
-  | 'Fast'
+  | 'Normal'
+  | 'Lightweight'
   | 1
   | 2;

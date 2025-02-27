@@ -6,10 +6,7 @@ import {
   IOcaMediaConnectorStatus,
   OcaMediaConnectorStatus,
 } from '../../types/OcaMediaConnectorStatus';
-import {
-  IOcaMediaSinkConnector,
-  OcaMediaSinkConnector,
-} from '../../types/OcaMediaSinkConnector';
+import { OcaMediaSinkConnector } from '../../types/OcaMediaSinkConnector';
 import {
   IOcaMediaSourceConnector,
   OcaMediaSourceConnector,
@@ -29,11 +26,10 @@ import { OcaApplicationNetwork } from './OcaApplicationNetwork';
  */
 export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
   /**
-   * Event indicating that a media source connector has changed. The change type
-   * indicates if the connector was added, deleted or changed.
-   * @member OcaMediaTransportNetwork#OnSourceConnectorChanged {Event}
+   * Event indicating that the status of a source or sink connector has changed.
+   * @member OcaMediaTransportNetwork#OnConnectorStatusChanged {Event}
    */
-  OnSourceConnectorChanged: Event;
+  OnConnectorStatusChanged: Event;
 
   /**
    * Event indicating that a media sink connector has changed. The change type
@@ -43,19 +39,16 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
   OnSinkConnectorChanged: Event;
 
   /**
-   * Event indicating that the status of a source or sink connector has changed.
-   * @member OcaMediaTransportNetwork#OnConnectorStatusChanged {Event}
+   * Event indicating that a media source connector has changed. The change type
+   * indicates if the connector was added, deleted or changed.
+   * @member OcaMediaTransportNetwork#OnSourceConnectorChanged {Event}
    */
-  OnConnectorStatusChanged: Event;
+  OnSourceConnectorChanged: Event;
   /**
    * This event is emitted whenever Protocol changes.
    */
   OnProtocolChanged: PropertyEvent<OcaNetworkMediaProtocol>;
 
-  /**
-   * An alias for OnProtocolChanged
-   */
-  OnMediaProtocolChanged: PropertyEvent<OcaNetworkMediaProtocol>;
   /**
    * This event is emitted whenever Ports changes.
    */
@@ -256,13 +249,12 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    * @param {IOcaMediaSourceConnector} Connector
    * @param {IOcaMediaConnectorState} InitialStatus
    *
-   * @returns {Promise<OcaMediaSourceConnector>}
-   *   A promise which resolves to a single value of type :class:`OcaMediaSourceConnector`.
+   * @returns {Promise<void>}
    */
   AddSourceConnector(
     Connector: IOcaMediaSourceConnector,
     InitialStatus: IOcaMediaConnectorState
-  ): Promise<OcaMediaSourceConnector>;
+  ): Promise<void>;
 
   /**
    * Adds a sinkconnector to this network. Parameters of the new connector are
@@ -275,15 +267,10 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#AddSinkConnector
    * @param {IOcaMediaConnectorStatus} InitialStatus
-   * @param {IOcaMediaSinkConnector} Connector
    *
-   * @returns {Promise<OcaMediaSinkConnector>}
-   *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
+   * @returns {Promise<void>}
    */
-  AddSinkConnector(
-    InitialStatus: IOcaMediaConnectorStatus,
-    Connector: IOcaMediaSinkConnector
-  ): Promise<OcaMediaSinkConnector>;
+  AddSinkConnector(InitialStatus: IOcaMediaConnectorStatus): Promise<void>;
 
   /**
    * Change the state of a given connector. Return status indicates the success

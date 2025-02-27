@@ -4,7 +4,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
 
 /**
- * Senses a gain value. Typically used to indicate instantaneous gain value of a
+ * Gain value sensor. Typically used to indicate instantaneous gain value of a
  * dynamics element.
  * @extends OcaSensor
  * @class OcaGainSensor
@@ -18,8 +18,7 @@ export declare class OcaGainSensor extends OcaSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Reading** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Reading** property.
    * The return values of this method are
    *
    * - Reading of type ``number``

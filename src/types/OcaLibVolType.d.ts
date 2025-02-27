@@ -5,8 +5,7 @@
 export declare interface IOcaLibVolType {
   /**
    * Unique identifier of organization that has authority over this library
-   * volume type. A zero value indicates a standard library volume type defined
-   * by the AES70 standard.
+   * volume type.
    * @type Uint8Array
    */
   Authority: Uint8Array;
@@ -29,8 +28,7 @@ export declare class OcaLibVolType implements IOcaLibVolType {
 
   /**
    * Unique identifier of organization that has authority over this library
-   * volume type. A zero value indicates a standard library volume type defined
-   * by the AES70 standard.
+   * volume type.
    * @type Uint8Array
    */
   Authority: Uint8Array;

@@ -9,15 +9,19 @@ import { OcaBasicSensor } from './OcaBasicSensor';
  */
 export declare class OcaBitstringSensor extends OcaBasicSensor {
   /**
-   * This event is emitted whenever BitString changes.
+   * This event is emitted whenever Reading changes.
+   */
+  OnReadingChanged: PropertyEvent<boolean[]>;
+
+  /**
+   * An alias for OnReadingChanged
    */
   OnBitStringChanged: PropertyEvent<boolean[]>;
 
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the number of bits of the bitmask data. Returned status indicates
-   * success or failure of the retrieval.
+   * Gets the number of bits of the bitstring data.
    *
    * @method OcaBitstringSensor#GetNrBits
    * @returns {Promise<number>}
@@ -26,8 +30,7 @@ export declare class OcaBitstringSensor extends OcaBasicSensor {
   GetNrBits(): Promise<number>;
 
   /**
-   * Gets the value of the given bit. Return status indicates success or failure
-   * of the retrieval.
+   * Gets the value of the given bit.
    *
    * @method OcaBitstringSensor#GetBit
    * @param {number} bitNr
@@ -38,8 +41,17 @@ export declare class OcaBitstringSensor extends OcaBasicSensor {
   GetBit(bitNr: number): Promise<number>;
 
   /**
-   * Gets the entire bitstring. Return status indicates success or failure of
-   * the retrieval.
+   * Gets the entire bitstring.
+   *
+   * @method OcaBitstringSensor#GetReading
+   * @returns {Promise<boolean[]>}
+   *   A promise which resolves to a single value of type ``boolean[]``.
+   */
+  GetReading(): Promise<boolean[]>;
+
+  /**
+   * Gets the entire bitstring.
+   * An alias for GetReading.
    *
    * @method OcaBitstringSensor#GetBitString
    * @returns {Promise<boolean[]>}

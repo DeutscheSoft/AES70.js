@@ -5,7 +5,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaSensor } from './OcaSensor';
 
 /**
- * Basic impedance sensor. Value is complex (magnitude and phase).
+ * Complex impedance sensor. Value shall be reported as a magnitude and a phase.
  * @extends OcaSensor
  * @class OcaImpedanceSensor
  */
@@ -18,8 +18,7 @@ export declare class OcaImpedanceSensor extends OcaSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Reading** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Reading** property.
    * The return values of this method are
    *
    * - Reading of type ``IOcaImpedance``

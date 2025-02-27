@@ -9,11 +9,11 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * A multipurpose dynamics processor. Can be configured as compressor, limiter,
- * expander, or gate. This class is expected to handle the majority of the basic
+ * Multipurpose dynamics processor. Can be configured as compressor, limiter,
+ * expander, or gate. This class is designed to handle the majority of the basic
  * cases. More complex devices may be described in a different manner, using one
  * or more **OcaDynamicsDetector** and **OcaDynamicsCurve** objects, in
- * conjunction with other Worker objects as needed.
+ * conjunction with other **Worker** objects as needed.
  * @extends OcaActuator
  * @class OcaDynamics
  */
@@ -21,7 +21,7 @@ export const OcaDynamics = make_control_class(
   'OcaDynamics',
   4,
   '\u0001\u0001\u0001\u000e',
-  2,
+  3,
   OcaActuator,
   [
     ['GetTriggered', 4, 1, [], [OcaBoolean]],
@@ -99,32 +99,28 @@ export const OcaDynamics = make_control_class(
 );
 
 /**
- * Gets the value of the Triggered property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the **Triggered** property.
  *
  * @method OcaDynamics#GetTriggered
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Gets the value of the DynamicGain property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the **DynamicGain** property.
  *
  * @method OcaDynamics#GetDynamicGain
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the Function property. The return value indicates whether
- * the property was successfully retrieved.
+ * Sets the value of the **Function** property.
  *
  * @method OcaDynamics#GetFunction
  * @returns {Promise<OcaDynamicsFunction>}
  *   A promise which resolves to a single value of type :class:`OcaDynamicsFunction`.
  */
 /**
- * Sets the value of the Function property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Function** property.
  *
  * @method OcaDynamics#SetFunction
  * @param {IOcaDynamicsFunction} Func
@@ -132,9 +128,8 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Ratio property. The return value indicates whether the
- * property was successfully retrieved. GetRatio() is a DEPRECATED method.
- * Please use **GetSlope()** instead.
+ * Gets the value and limits of the **Ratio** property. DEPRECATED method,
+ * please use **GetSlope()** instead.
  * The return values of this method are
  *
  * - Ratio of type ``number``
@@ -145,8 +140,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Ratio property. The return value indicates whether the
- * property was successfully set. SetRatio() is a DEPRECATED method. Please use
+ * Sets the value of the **Ratio** property. DEPRECATED method, please use
  * **SetSlope()** instead.
  *
  * @method OcaDynamics#SetRatio
@@ -155,8 +149,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Threshold property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **Threshold** property.
  * The return values of this method are
  *
  * - Threshold of type ``IOcaDBr``
@@ -167,8 +160,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<OcaDBr,number,number>>}
  */
 /**
- * Sets the value of the Threshold property. The return value indicates if the
- * value was successfully set.
+ * Sets the value of the **Threshold** property.
  *
  * @method OcaDynamics#SetThreshold
  * @param {IOcaDBr} threshold
@@ -176,16 +168,14 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ThresholdPresentationUnits property. The return value
- * indicates if the value was successfully retrieved.
+ * Gets the value of the **ThresholdPresentationUnits** property.
  *
  * @method OcaDynamics#GetThresholdPresentationUnits
  * @returns {Promise<OcaPresentationUnit>}
  *   A promise which resolves to a single value of type :class:`OcaPresentationUnit`.
  */
 /**
- * Sets the value of the ThresholdPresentationUnits property. The return value
- * indicates if the value was successfully set.
+ * Sets the value of the **ThresholdPresentationUnits** property.
  *
  * @method OcaDynamics#SetThresholdPresentationUnits
  * @param {IOcaPresentationUnit} Units
@@ -193,16 +183,14 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets the value of the DetectorLaw property. The return value indicates if the
- * value was successfully set.
+ * Sets the value of the **DetectorLaw** property.
  *
  * @method OcaDynamics#GetDetectorLaw
  * @returns {Promise<OcaLevelDetectionLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelDetectionLaw`.
  */
 /**
- * Sets the value of the DetectorLaw property. The return value indicates if the
- * value was successfully set.
+ * Sets the value of the **DetectorLaw** property.
  *
  * @method OcaDynamics#SetDetectorLaw
  * @param {IOcaLevelDetectionLaw} Law
@@ -210,8 +198,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the AttackTime property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **AttackTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -222,8 +209,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the AttackTime property. The return value indicates if the
- * value was successfully set.
+ * Sets the value of the **AttackTime** property.
  *
  * @method OcaDynamics#SetAttackTime
  * @param {number} Time
@@ -231,8 +217,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ReleaseTime property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **ReleaseTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -243,8 +228,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the ReleaseTime property. The return value indicates if the
- * value was successfully set.
+ * Sets the value of the **ReleaseTime** property.
  *
  * @method OcaDynamics#SetReleaseTime
  * @param {number} Time
@@ -252,8 +236,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the HoldTime property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **HoldTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -264,8 +247,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the HoldTime property. The return value indicates if the
- * value was successfully set.
+ * Sets the value of the **HoldTime** property.
  *
  * @method OcaDynamics#SetHoldTime
  * @param {number} Time
@@ -273,8 +255,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the DynamicGainFLoor property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value and limits of the **DynamicGainFloor** property.
  * The return values of this method are
  *
  * - Limit of type ``number``
@@ -285,8 +266,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DynamicGainFloor property. The return value indicates
- * if the value was successfully set.
+ * Sets the value of the **DynamicGainFloor** property.
  *
  * @method OcaDynamics#SetDynamicGainFloor
  * @param {number} Limit
@@ -294,8 +274,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the DynamicGainCeiling property. The return value indicates
- * if the value was successfully retrieved.
+ * Gets the value and limits of the **DynamicGainCeiling** property.
  * The return values of this method are
  *
  * - Limit of type ``number``
@@ -306,8 +285,8 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DynamicGainCeiling property. The return value indicates
- * if the value was successfully set.
+ * Value to which the DynamicGainCeiling property shall be set if the method
+ * succeeds
  *
  * @method OcaDynamics#SetDynamicGainCeiling
  * @param {number} Limit
@@ -315,8 +294,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the KneeParameter property. The return value indicates if
- * the value was successfully retrieved.
+ * Gets the value and limits of the **KneeParameter** property.
  * The return values of this method are
  *
  * - Parameter of type ``number``
@@ -327,8 +305,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the KneeParameter property. The return value indicates if
- * the value was successfully set.
+ * Sets the value of the **KneeParameter** property.
  *
  * @method OcaDynamics#SetKneeParameter
  * @param {number} Parameter
@@ -336,8 +313,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Slope property. The return value indicates whether the
- * property was successfully retrieved.
+ * Gets the value and limits of the **Slope** property.
  * The return values of this method are
  *
  * - Slope of type ``number``
@@ -348,8 +324,7 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Slope property. The return value indicates whether the
- * property was successfully set.
+ * Sets the value of the **Slope** property.
  *
  * @method OcaDynamics#SetSlope
  * @param {number} Slope
@@ -357,9 +332,9 @@ export const OcaDynamics = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets some or all dynamics parameters. The return value indicates if the
- * parameters were successfully set. The action of this method is atomic - if
- * any of the value changes fails, none of the changes are made.
+ * Sets some or all dynamics parameters. The action of this method shall be
+ * atomic - if any of the value changes fails, **none** of the changes shall be
+ * made.
  *
  * @method OcaDynamics#SetMultiple
  * @param {IOcaParameterMask} Mask
@@ -372,17 +347,17 @@ export const OcaDynamics = make_control_class(
  * @param {number} HoldTime
  * @param {number} DynamicGainCeiling
  * @param {number} DynamicGainFloor
- * @param {number} Slope
  * @param {number} KneeParameter
+ * @param {number} Slope
  *
  * @returns {Promise<void>}
  */
 /**
  * This event is emitted when the property ``Triggered`` changes in the remote object.
  * The property ``Triggered`` is described in the AES70 standard as follows.
- * Read-only property that indicates whether the dynamics processor is currently
- * triggered (i.e. the signal level is above upper threshold or below lower
- * threshold). This property can be monitored via a periodic event subscription.
+ * Read-only property that shall indicate whether the dynamics processor is
+ * currently triggered (i.e. the signal level is above upper threshold or below
+ * lower threshold).
  *
  * @member {PropertyEvent<boolean>} OcaDynamics#OnTriggeredChanged
  */
@@ -404,8 +379,8 @@ export const OcaDynamics = make_control_class(
  * This event is emitted when the property ``Ratio`` changes in the remote object.
  * The property ``Ratio`` is described in the AES70 standard as follows.
  * DEPRECATED PROPERTY - please use property **Slope** instead. Compression or
- * expansion ratio. For Function = Compress or Limit, value is d(input
- * amplitude)/d(output amplitude). For Function = Expand or Gate, value is
+ * expansion ratio. For Function = Compress or Limit, value shall be d(input
+ * amplitude)/d(output amplitude). For Function = Expand or Gate, value shall be
  * d(output amplitude)/d(input amplitude).
  *
  * @member {PropertyEvent<number>} OcaDynamics#OnRatioChanged
@@ -427,6 +402,7 @@ export const OcaDynamics = make_control_class(
 /**
  * This event is emitted when the property ``DetectorLaw`` changes in the remote object.
  * The property ``DetectorLaw`` is described in the AES70 standard as follows.
+ * Level detection law - peak, RMS, etc
  *
  * @member {PropertyEvent<OcaLevelDetectionLaw>} OcaDynamics#OnDetectorLawChanged
  */
@@ -454,21 +430,21 @@ export const OcaDynamics = make_control_class(
 /**
  * This event is emitted when the property ``DynamicGainCeiling`` changes in the remote object.
  * The property ``DynamicGainCeiling`` is described in the AES70 standard as follows.
- * Upper limit for DynamicGain
+ * Upper limit for value of **DynamicGain**
  *
  * @member {PropertyEvent<number>} OcaDynamics#OnDynamicGainCeilingChanged
  */
 /**
  * This event is emitted when the property ``DynamicGainFloor`` changes in the remote object.
  * The property ``DynamicGainFloor`` is described in the AES70 standard as follows.
- * Lower limit for for DynamicGain
+ * Lower limit for for value of **DynamicGain**
  *
  * @member {PropertyEvent<number>} OcaDynamics#OnDynamicGainFloorChanged
  */
 /**
  * This event is emitted when the property ``KneeParameter`` changes in the remote object.
  * The property ``KneeParameter`` is described in the AES70 standard as follows.
- * Soft knee parameter. Interpretation is device-dependent.
+ * Soft knee parameter. Interpretation shall be device-dependent.
  *
  * @member {PropertyEvent<number>} OcaDynamics#OnKneeParameterChanged
  */
@@ -476,8 +452,9 @@ export const OcaDynamics = make_control_class(
  * This event is emitted when the property ``Slope`` changes in the remote object.
  * The property ``Slope`` is described in the AES70 standard as follows.
  * Slope of transfer function = d(output amplitude) / d(input amplitude). See
- * notes for class OcaDynamicsCurve for further detail. Note that the definition
- * of this value does not depend on the value of property Function.
+ * notes for class **OcaDynamicsCurve** for further detail. Note that the
+ * definition of this value does not depend on the value of property
+ * **Function**.
  *
  * @member {PropertyEvent<number>} OcaDynamics#OnSlopeChanged
  */

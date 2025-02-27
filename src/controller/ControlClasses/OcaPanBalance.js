@@ -11,7 +11,7 @@ export const OcaPanBalance = make_control_class(
   'OcaPanBalance',
   4,
   '\u0001\u0001\u0001\u0006',
-  2,
+  3,
   OcaActuator,
   [
     ['GetPosition', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
@@ -27,8 +27,7 @@ export const OcaPanBalance = make_control_class(
 );
 
 /**
- * Gets the value and limits of the Position property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Position** property.
  * The return values of this method are
  *
  * - Position of type ``number``
@@ -39,8 +38,7 @@ export const OcaPanBalance = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Position property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Position** property.
  *
  * @method OcaPanBalance#SetPosition
  * @param {number} Position
@@ -48,8 +46,7 @@ export const OcaPanBalance = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value and limits of the MidpointGain property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **MidpointGain** property.
  * The return values of this method are
  *
  * - Gain of type ``number``
@@ -60,8 +57,7 @@ export const OcaPanBalance = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the MidpointGain property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the **MidpointGain** property.
  *
  * @method OcaPanBalance#SetMidpointGain
  * @param {number} Gain

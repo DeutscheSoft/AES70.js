@@ -6,7 +6,8 @@ import { OcaDelay } from './OcaDelay.js';
 /**
  * Signal delay - extended version. Allows setting delay value in various units.
  * Note that the inherited property 04p01 DelayTime is also supported by this
- * class and reflects actual achieved delay in seconds.
+ * class and reflects actual achieved delay in seconds. This class is
+ * **deprecated** in AES70-2022.
  * @extends OcaDelay
  * @class OcaDelayExtended
  */
@@ -14,7 +15,7 @@ export const OcaDelayExtended = make_control_class(
   'OcaDelayExtended',
   5,
   '\u0001\u0001\u0001\u0007\u0001',
-  2,
+  3,
   OcaDelay,
   [
     ['GetDelayValue', 5, 1, [], [OcaDelayValue, OcaDelayValue, OcaDelayValue]],
@@ -26,8 +27,7 @@ export const OcaDelayExtended = make_control_class(
 );
 
 /**
- * Gets the value of the DelayValue property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value and limits of the **DelayValue** property.
  * The return values of this method are
  *
  * - Value of type ``IOcaDelayValue``
@@ -38,8 +38,7 @@ export const OcaDelayExtended = make_control_class(
  * @returns {Promise<Arguments<OcaDelayValue,OcaDelayValue,OcaDelayValue>>}
  */
 /**
- * Sets the value of the DelayValue property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **DelayValue** property.
  *
  * @method OcaDelayExtended#SetDelayValue
  * @param {IOcaDelayValue} Value
@@ -47,8 +46,7 @@ export const OcaDelayExtended = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Return current delay setting, converted to given units. The return value
- * indicates whether the method has succeeded.
+ * Get current delay setting, converted to given units.
  *
  * @method OcaDelayExtended#GetDelayValueConverted
  * @param {IOcaDelayUnit} UoM

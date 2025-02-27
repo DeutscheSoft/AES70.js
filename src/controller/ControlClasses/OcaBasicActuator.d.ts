@@ -2,7 +2,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * Abstract base class for weakly typed actuators.
+ * Abstract base class for basic actuators.
  * @extends OcaActuator
  * @class OcaBasicActuator
  */

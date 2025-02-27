@@ -10,8 +10,7 @@ export class OcaLibVolType {
   constructor(Authority, ID) {
     /**
      * Unique identifier of organization that has authority over this library
-     * volume type. A zero value indicates a standard library volume type
-     * defined by the AES70 standard.
+     * volume type.
      * @type Uint8Array
      */
     this.Authority = Authority;

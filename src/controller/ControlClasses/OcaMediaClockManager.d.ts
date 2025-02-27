@@ -6,9 +6,11 @@ import { OcaManager } from './OcaManager';
 /**
  * Optional manager that collects all media clocks the device uses.
  *
- *  - Must be instantiated once for every device that has more than one media
- *    clock object. In this context, "media clock" means an instance of
+ *  - Must be instantiated in every device that has more than one media clock
+ *    object. In this context, "media clock" means an instance of
  *    **OcaMediaClock**, **OcaMediaClock3**, or any subclass of these classes.
+ *
+ *  - May be instantiated at most once in any device.
  *
  *  - If instantiated, object number must be 7.
  *
@@ -23,10 +25,6 @@ export declare class OcaMediaClockManager extends OcaManager {
   OnClockSourceTypesSupportedChanged: PropertyEvent<OcaMediaClockType[]>;
 
   /**
-   * An alias for OnClockSourceTypesSupportedChanged
-   */
-  OnMediaClockTypesSupportedChanged: PropertyEvent<OcaMediaClockType[]>;
-  /**
    * This event is emitted whenever Clocks changes.
    */
   OnClocksChanged: PropertyEvent<number[]>;
@@ -40,8 +38,7 @@ export declare class OcaMediaClockManager extends OcaManager {
 
   /**
    * Gets the list of object numbers of **OcaMediaClock** instances in this
-   * device. Return value indicates whether list was successfully retrieved.
-   * Note: In AES70-2017, this method is deprecated.
+   * device. **Deprecated** in version 2 of this class.
    *
    * @method OcaMediaClockManager#GetClocks
    * @returns {Promise<number[]>}
@@ -52,7 +49,7 @@ export declare class OcaMediaClockManager extends OcaManager {
   /**
    * Gets the list of media clock types supported by **OcaMediaClock** objects
    * in the device. Return value indicates whether the list was successfully
-   * retrieved. Note : In AES70-2017, this method is deprecated.
+   * retrieved. **Deprecated** in version 2 of this class.
    *
    * @method OcaMediaClockManager#GetMediaClockTypesSupported
    * @returns {Promise<OcaMediaClockType[]>}
@@ -62,7 +59,7 @@ export declare class OcaMediaClockManager extends OcaManager {
 
   /**
    * Gets the list of object numbers of **OcaMediaClock3** instances in this
-   * device. Return value indicates whether list was successfully retrieved.
+   * device.
    *
    * @method OcaMediaClockManager#GetClock3s
    * @returns {Promise<number[]>}

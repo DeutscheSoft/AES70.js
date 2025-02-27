@@ -5,7 +5,7 @@ import { Enum } from './Enum.js';
 
 /**
  * Enum describing status change types, as used in **OcaGrouper's StatusChange**
- * event.
+ * event. **Deprecated** in AES70-2024.
  * @class OcaGrouperStatusChangeType
  */
 export class OcaGrouperStatusChangeType extends Enum({

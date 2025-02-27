@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { FixedLengthArray } from './FixedLengthArray.js';
+import { OcaArray1D } from './OcaArray1D.js';
 import { OcaFloat32 } from './OcaFloat32.js';
 import { OcaPositionCoordinateSystem } from './OcaPositionCoordinateSystem.js';
 import { OcaPositionDescriptorFieldFlags } from './OcaPositionDescriptorFieldFlags.js';
@@ -13,7 +13,7 @@ export const OcaPositionDescriptor = Struct(
   {
     CoordinateSystem: OcaPositionCoordinateSystem,
     FieldFlags: OcaPositionDescriptorFieldFlags,
-    Values: FixedLengthArray(OcaFloat32, 6),
+    Values: OcaArray1D(OcaFloat32, 6),
   },
   type
 );

@@ -44,7 +44,7 @@ export const OcaStreamConnector = make_control_class(
   'OcaStreamConnector',
   3,
   '\u0001\u0002\u000b',
-  2,
+  3,
   OcaAgent,
   [
     ['GetOwnerNetwork', 3, 1, [], [OcaUint32]],

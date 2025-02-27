@@ -66,6 +66,18 @@ export class OcaStatus {
    * Singleton object corresponding to the entry with value ``14``.
    */
   static BufferOverflow: OcaStatus;
+  /**
+   * Singleton object corresponding to the entry with value ``15``.
+   */
+  static PermissionDenied: OcaStatus;
+  /**
+   * Singleton object corresponding to the entry with value ``16``.
+   */
+  static OutOfMemory: OcaStatus;
+  /**
+   * Singleton object corresponding to the entry with value ``17``.
+   */
+  static Busy: OcaStatus;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -105,6 +117,9 @@ export type IOcaStatus =
   | 'PartiallySucceeded'
   | 'Timeout'
   | 'BufferOverflow'
+  | 'PermissionDenied'
+  | 'OutOfMemory'
+  | 'Busy'
   | 0
   | 1
   | 2
@@ -119,4 +134,7 @@ export type IOcaStatus =
   | 11
   | 12
   | 13
-  | 14;
+  | 14
+  | 15
+  | 16
+  | 17;

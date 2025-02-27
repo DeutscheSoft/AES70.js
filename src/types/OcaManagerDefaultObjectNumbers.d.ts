@@ -97,4 +97,11 @@ export declare const OcaManagerDefaultObjectNumbers: {
    * @static
    */
   DiagnosticManager: number;
+  /**
+   * Object number of the :class:`OcaLockManager`.
+   * @type {number}
+   * @member LockManager
+   * @static
+   */
+  LockManager: number;
 };

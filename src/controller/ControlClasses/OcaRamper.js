@@ -6,6 +6,9 @@ import { OcaRamperInterpolationLaw } from '../../OCP1/OcaRamperInterpolationLaw.
 import { OcaRamperState } from '../../OCP1/OcaRamperState.js';
 import { OcaTimeMode } from '../../OCP1/OcaTimeMode.js';
 import { OcaUint64 } from '../../OCP1/OcaUint64.js';
+import { OcaVariant } from '../../OCP1/OcaVariant.js';
+import { OcaWhenPhysicalAbsolute } from '../../OCP1/OcaWhenPhysicalAbsolute.js';
+import { OcaWhenPhysicalRelative } from '../../OCP1/OcaWhenPhysicalRelative.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
 
@@ -52,6 +55,20 @@ export const OcaRamper = make_control_class(
     ['SetInterpolationLaw', 3, 12, [OcaRamperInterpolationLaw], []],
     ['GetGoal', 3, 13, [], [OcaFloat64]],
     ['SetGoal', 3, 14, [OcaFloat64], []],
+    [
+      'GetStartWhen',
+      3,
+      15,
+      [],
+      [OcaVariant(OcaWhenPhysicalAbsolute, OcaWhenPhysicalRelative)],
+    ],
+    [
+      'SetStartWhen',
+      3,
+      16,
+      [OcaVariant(OcaWhenPhysicalAbsolute, OcaWhenPhysicalRelative)],
+      [],
+    ],
   ],
   [
     ['State', [OcaRamperState], 3, 1, false, false, null],
@@ -61,12 +78,21 @@ export const OcaRamper = make_control_class(
     ['Duration', [OcaFloat32], 3, 5, false, false, null],
     ['InterpolationLaw', [OcaRamperInterpolationLaw], 3, 6, false, false, null],
     ['Goal', [OcaFloat64], 3, 7, false, false, null],
+    [
+      'StartWhen',
+      [OcaVariant(OcaWhenPhysicalAbsolute, OcaWhenPhysicalRelative)],
+      3,
+      8,
+      false,
+      false,
+      null,
+    ],
   ],
   []
 );
 
 /**
- * Executes the given ramper command. The return value indicates whether the
+ * Executes the given Ramper command. The return value indicates whether the
  * command was successfully executed.
  *
  * @method OcaRamper#Control
@@ -100,16 +126,16 @@ export const OcaRamper = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets ramper time mode (absolute or relative). The return value indicates
- * whether the time mode was successfully retrieved.
+ * Gets ramper time mode (absolute or relative). **Deprecated** in v3 of this
+ * class.
  *
  * @method OcaRamper#GetTimeMode
  * @returns {Promise<OcaTimeMode>}
  *   A promise which resolves to a single value of type :class:`OcaTimeMode`.
  */
 /**
- * Sets ramper time mode (absolute or relative). The return value indicates
- * whether the time mode was successfully set.
+ * Sets ramper time mode (absolute or relative). **Deprecated** in v3 of this
+ * class.
  *
  * @method OcaRamper#SetTimeMode
  * @param {IOcaTimeMode} TimeMode
@@ -117,16 +143,15 @@ export const OcaRamper = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets ramp start time. The return value indicates whether the start time was
- * successfully retrieved.
+ * Output parameter that holds the start time of the ramp if the method
+ * succeeds. **Deprecated** in version 3 of this class.
  *
  * @method OcaRamper#GetStartTime
  * @returns {Promise<number|BigInt>}
  *   A promise which resolves to a single value of type ``number|BigInt``.
  */
 /**
- * Sets ramper start time. The return value indicates whether the start time was
- * successfully set.
+ * Sets ramper start time. **Deprecated** in v3 of this class.
  *
  * @method OcaRamper#SetStartTime
  * @param {number|BigInt} TimeMode
@@ -139,7 +164,7 @@ export const OcaRamper = make_control_class(
  * The return values of this method are
  *
  * - Duration of type ``number``
- * - miinDuration of type ``number``
+ * - minDuration of type ``number``
  * - maxDuration of type ``number``
  *
  * @method OcaRamper#GetDuration
@@ -189,6 +214,22 @@ export const OcaRamper = make_control_class(
  * @returns {Promise<void>}
  */
 /**
+ * Gets the value of the **StartWhen** property.
+ *
+ * @method OcaRamper#GetStartWhen
+ * @returns {Promise<(OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative)>}
+ *   A promise which resolves to a single value of type ``(OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative)``.
+ */
+/**
+ * Sets the value of the **StartWhen** property. Shall fail if called when
+ * **State** is **Ramping**.
+ *
+ * @method OcaRamper#SetStartWhen
+ * @param {(IOcaWhenPhysicalAbsolute | IOcaWhenPhysicalRelative)} When
+ *
+ * @returns {Promise<void>}
+ */
+/**
  * This event is emitted when the property ``State`` changes in the remote object.
  * The property ``State`` is described in the AES70 standard as follows.
  * {Ready, Ramping, Paused, Completed, Disabled} Readonly.
@@ -205,7 +246,8 @@ export const OcaRamper = make_control_class(
 /**
  * This event is emitted when the property ``TimeMode`` changes in the remote object.
  * The property ``TimeMode`` is described in the AES70 standard as follows.
- * Absolute or Relative time.
+ * Absolute or Relative time. In version 3 of this class, this property is
+ * **deprecated** and replaced by property **StartWhen**.
  *
  * @member {PropertyEvent<OcaTimeMode>} OcaRamper#OnTimeModeChanged
  */
@@ -215,7 +257,9 @@ export const OcaRamper = make_control_class(
  * Time at which to start ramp. If **TimeMode=Relative**, the actual event start
  * time equals the value of **StartTime** plus the absolute time that
  * **StartTime** was most recently set. If **TimeMode=Absolute**, the actual
- * event start time equals the value of **StartTime**
+ * event start time equals the value of **StartTime.** In version 3 of this
+ * class, this property is **deprecated** and replaced by property
+ * **StartWhen**.
  *
  * @member {PropertyEvent<number|BigInt>} OcaRamper#OnStartTimeChanged
  */
@@ -239,4 +283,13 @@ export const OcaRamper = make_control_class(
  * Final value of ramp. Datatype is target property's datatype.
  *
  * @member {PropertyEvent<number>} OcaRamper#OnGoalChanged
+ */
+/**
+ * This event is emitted when the property ``StartWhen`` changes in the remote object.
+ * The property ``StartWhen`` is described in the AES70 standard as follows.
+ * An **OcaWhen** item that specifies when to start ramp. Absolute or relative
+ * time, according to what the **OcaWhen** item specifies. Relative time values
+ * are based on the absolute time that **StartWhen** was most recently set.
+ *
+ * @member {PropertyEvent<(OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative)>} OcaRamper#OnStartWhenChanged
  */

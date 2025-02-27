@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaBasicSensor } from './OcaBasicSensor.js';
 
 /**
- * Basic boolean sensor.
+ * Boolean sensor
  * @extends OcaBasicSensor
  * @class OcaBooleanSensor
  */
@@ -11,7 +11,7 @@ export const OcaBooleanSensor = make_control_class(
   'OcaBooleanSensor',
   5,
   '\u0001\u0001\u0002\u0001\u0001',
-  2,
+  3,
   OcaBasicSensor,
   [['GetReading', 5, 1, [], [OcaBoolean]]],
   [['Reading', [OcaBoolean], 5, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaBooleanSensor = make_control_class(
 );
 
 /**
- * Gets the **Reading** property. The return value indicates whether the data
- * was successfully retrieved.
+ * Gets the value of the **Reading** property.
  *
  * @method OcaBooleanSensor#GetReading
  * @returns {Promise<boolean>}

@@ -24,7 +24,7 @@ export declare class OcaProtoObjectIdentification
   implements IOcaProtoObjectIdentification {
   /**
    * Prototype object identification. Composite of prototype object number and
-   * prototype object's class identification. Used in **OcaBlockFactory**.
+   * prototype object's class identification.
    * @class OcaProtoObjectIdentification
    */
   constructor(POno: number, ClassIdentification: OcaClassIdentification);

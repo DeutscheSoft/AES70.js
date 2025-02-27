@@ -12,7 +12,7 @@ export const OcaPort = Struct(
   {
     Owner: OcaUint32,
     ID: OcaPortID,
-    Name: OcaString,
+    Role: OcaString,
   },
   type
 );

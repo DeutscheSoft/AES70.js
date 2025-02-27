@@ -2,28 +2,29 @@
  * This file has been generated.
  */
 /**
- * States of the ramper. Here are the rules for ramper state change:
+ * States of the Ramper . Here are the rules for Ramper state changes:
  *
- *  - A freshly-constructed ramper's state is **NotInitialized**.
+ *  - A freshly-constructed Ramper's state shall be **NotInitialized**.
  *
- *  - A ramper becomes **Initialized** when : The ramper is **NotInitialized**;
- *    AND ** TargetProperty** has been set to a valid value; AND ** Goal** has
- *    been set; AND ** Duration** has been set.
+ *  - A Ramper's state shall become **Initialized** when: Its state is
+ *    **NotInitialized,** AND ** TargetProperty** has been set to a valid value,
+ *    AND ** Goal** has been set, AND ** Duration** has been set.
  *
- *  - A ramper becomes **Scheduled** when It is **Initialized**; AND **Tstart**
- *    and **TimeMode** have been set; AND (T :sub:`start` + **Duration**) is in
- *    the future.
+ *  - A Ramper's state shall become **Scheduled** when: It is **Initialized,**
+ *    AND **StartWhen** has been set, AND The given start time + **Duration** is
+ *    in the future.
  *
- *  - A ramper becomes **Enabled** when it is **Scheduled** AND receives an
- *    *Enable* command.
+ *  - A Ramper's state shall become **Enabled** when: Its state is
+ *    **Scheduled,** AND It receives an **Enable **command.
  *
- *  - A ramper becomes **Ramping** when: It is **Enabled** and the ramp start
- *    time is reached; OR It is **Initialized**, **Scheduled**, or **Enabled**
- *    and a *Start* command is received.
+ *  - A Ramper's state shall become **Ramping** when: It is **Enabled** and the
+ *    ramp start time is reached, OR It is **Initialized**, **Scheduled**, or
+ *    **Enabled** and a **Start** command is received.
  *
- *  - Completion of a ramp or Receipt of a *Halt* command causes the state to
- *    become: **Scheduled**, if T :sub:`start`, Time Mode have been set; AND (T
- *    :sub:`start` + Duration) is in the future. Otherwise, **Initialized.**
+ *  - When a ramp operation completes, or when **Halt** command is received: -
+ *    The Ramper's state shall become **Scheduled**, when: **StartWhen** has
+ *    been set, AND The given start time + **Duration** is in the future. -
+ *    Otherwise, the Ramper's state shall become **Initialized.**
  *
  *
  * @class OcaRamperState
@@ -36,7 +37,7 @@ export class OcaRamperState {
   /**
    * Singleton object corresponding to the entry with value ``2``.
    */
-  static Iniitialized: OcaRamperState;
+  static Initialized: OcaRamperState;
   /**
    * Singleton object corresponding to the entry with value ``3``.
    */
@@ -74,7 +75,7 @@ export class OcaRamperState {
 export type IOcaRamperState =
   | OcaRamperState
   | 'NotInitialized'
-  | 'Iniitialized'
+  | 'Initialized'
   | 'Scheduled'
   | 'Enabled'
   | 'Ramping'

@@ -11,7 +11,7 @@ export const OcaFrequencyActuator = make_control_class(
   'OcaFrequencyActuator',
   4,
   '\u0001\u0001\u0001\b',
-  2,
+  3,
   OcaActuator,
   [
     ['GetFrequency', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
@@ -22,8 +22,7 @@ export const OcaFrequencyActuator = make_control_class(
 );
 
 /**
- * Gets the value of the Frequency property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value and limits of the **Frequency** property.
  * The return values of this method are
  *
  * - Frequency of type ``number``
@@ -34,8 +33,7 @@ export const OcaFrequencyActuator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Frequency property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Frequency** property.
  *
  * @method OcaFrequencyActuator#SetFrequency
  * @param {number} Frequency

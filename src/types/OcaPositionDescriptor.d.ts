@@ -22,14 +22,14 @@ export declare interface IOcaPositionDescriptor {
 
   /**
    * The coordinates
-   * @type number[]
+   * @type 6[]
    */
-  Values: number[];
+  Values: 6[];
 }
 
 export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
   /**
-   * A six-axis c1,c2,c3,c4,c5,c6) coordinate. For mechanical systems, these
+   * A six-axis (c1,c2,c3,c4,c5,c6) coordinate. For mechanical systems, these
    * axes shall be interpreted as follows:
    *
    *  - c1 = X; axial (fore-and-aft) position
@@ -69,7 +69,7 @@ export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
   constructor(
     CoordinateSystem: OcaPositionCoordinateSystem,
     FieldFlags: IOcaPositionDescriptorFieldFlags,
-    Values: number[]
+    Values: 6[]
   );
 
   /**
@@ -86,7 +86,7 @@ export declare class OcaPositionDescriptor implements IOcaPositionDescriptor {
 
   /**
    * The coordinates
-   * @type number[]
+   * @type 6[]
    */
-  Values: number[];
+  Values: 6[];
 }

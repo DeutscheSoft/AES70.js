@@ -8,8 +8,8 @@ import { OcaSignalPath as type } from '../types/OcaSignalPath.js';
 
 export const OcaSignalPath = Struct(
   {
-    SourcePort: OcaPort,
-    SinkPort: OcaPort,
+    OutputPort: OcaPort,
+    InputPort: OcaPort,
   },
   type
 );

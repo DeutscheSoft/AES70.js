@@ -1,6 +1,10 @@
+import { IOcaIODirection } from '../../types/OcaIODirection';
 import { OcaPort } from '../../types/OcaPort';
+import {
+  IOcaPortClockMapEntry,
+  OcaPortClockMapEntry,
+} from '../../types/OcaPortClockMapEntry';
 import { IOcaPortID, OcaPortID } from '../../types/OcaPortID';
-import { IOcaPortMode } from '../../types/OcaPortMode';
 import { Arguments } from '../arguments';
 import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
@@ -29,20 +33,19 @@ export declare class OcaWorker extends OcaRoot {
   OnLabelChanged: PropertyEvent<string>;
 
   /**
-   * This event is emitted whenever Owner changes.
-   */
-  OnOwnerChanged: PropertyEvent<number>;
-
-  /**
    * This event is emitted whenever Latency changes.
    */
   OnLatencyChanged: PropertyEvent<number>;
 
+  /**
+   * This event is emitted whenever PortClockMap changes.
+   */
+  OnPortClockMapChanged: PropertyEvent<Map<OcaPortID, OcaPortClockMapEntry>>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Enabled property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the Enabled property.
    *
    * @method OcaWorker#GetEnabled
    * @returns {Promise<boolean>}
@@ -51,8 +54,7 @@ export declare class OcaWorker extends OcaRoot {
   GetEnabled(): Promise<boolean>;
 
   /**
-   * Sets the value of the Enabled property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the Enabled property.
    *
    * @method OcaWorker#SetEnabled
    * @param {boolean} enabled
@@ -62,21 +64,19 @@ export declare class OcaWorker extends OcaRoot {
   SetEnabled(enabled: boolean): Promise<void>;
 
   /**
-   * Adds an input or output port.. The return value indicates whether the port
-   * was successfully added.
+   * Adds an input or output port..
    *
    * @method OcaWorker#AddPort
-   * @param {string} Label
-   * @param {IOcaPortMode} Mode
+   * @param {string} Name
+   * @param {IOcaIODirection} Mode
    *
    * @returns {Promise<OcaPortID>}
    *   A promise which resolves to a single value of type :class:`OcaPortID`.
    */
-  AddPort(Label: string, Mode: IOcaPortMode): Promise<OcaPortID>;
+  AddPort(Name: string, Mode: IOcaIODirection): Promise<OcaPortID>;
 
   /**
-   * Deletes an input or output port.. The return value indicates whether the
-   * port was successfully deleted.
+   * Deletes an input or output port..
    *
    * @method OcaWorker#DeletePort
    * @param {IOcaPortID} ID
@@ -86,8 +86,7 @@ export declare class OcaWorker extends OcaRoot {
   DeletePort(ID: IOcaPortID): Promise<void>;
 
   /**
-   * Gets the list of ports owned by the Worker object. The return value
-   * indicates whether the list was successfully retrieved.
+   * Gets the list of ports owned by the Worker object.
    *
    * @method OcaWorker#GetPorts
    * @returns {Promise<OcaPort[]>}
@@ -96,8 +95,7 @@ export declare class OcaWorker extends OcaRoot {
   GetPorts(): Promise<OcaPort[]>;
 
   /**
-   * Gets the name of the designated port. The return value indicates whether
-   * the name was successfully retrieved.
+   * Gets the name of the designated port.
    *
    * @method OcaWorker#GetPortName
    * @param {IOcaPortID} PortID
@@ -108,20 +106,18 @@ export declare class OcaWorker extends OcaRoot {
   GetPortName(PortID: IOcaPortID): Promise<string>;
 
   /**
-   * Sets the name of the designated port. The return value indicates whether
-   * the name was successfully set.
+   * Sets the name of the designated port.
    *
    * @method OcaWorker#SetPortName
-   * @param {IOcaPortID} PortID
+   * @param {IOcaPortID} ID
    * @param {string} Name
    *
    * @returns {Promise<void>}
    */
-  SetPortName(PortID: IOcaPortID, Name: string): Promise<void>;
+  SetPortName(ID: IOcaPortID, Name: string): Promise<void>;
 
   /**
-   * Gets the value of the Label property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the Label property.
    *
    * @method OcaWorker#GetLabel
    * @returns {Promise<string>}
@@ -130,8 +126,7 @@ export declare class OcaWorker extends OcaRoot {
   GetLabel(): Promise<string>;
 
   /**
-   * Sets the value of the Label property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the Label property.
    *
    * @method OcaWorker#SetLabel
    * @param {string} label
@@ -141,8 +136,7 @@ export declare class OcaWorker extends OcaRoot {
   SetLabel(label: string): Promise<void>;
 
   /**
-   * Gets the value of the Owner property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the Owner property.
    *
    * @method OcaWorker#GetOwner
    * @returns {Promise<number>}
@@ -151,8 +145,7 @@ export declare class OcaWorker extends OcaRoot {
   GetOwner(): Promise<number>;
 
   /**
-   * Gets the value of the Latency property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the Latency property.
    *
    * @method OcaWorker#GetLatency
    * @returns {Promise<number>}
@@ -161,8 +154,7 @@ export declare class OcaWorker extends OcaRoot {
   GetLatency(): Promise<number>;
 
   /**
-   * Sets the value of the Latency property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the Latency property.
    *
    * @method OcaWorker#SetLatency
    * @param {number} latency
@@ -172,15 +164,70 @@ export declare class OcaWorker extends OcaRoot {
   SetLatency(latency: number): Promise<void>;
 
   /**
-   * Returns path from the given object down to root. The return value indicates
-   * whether the operation succeeded. Added in version 2.
+   * Returns Role Path and ONo Path from the Root Block to this object. The
+   * return value indicates whether the operation succeeded.
    * The return values of this method are
    *
-   * - NamePath of type ``string[]``
+   * - RolePath of type ``string[]``
    * - ONoPath of type ``number[]``
    *
    * @method OcaWorker#GetPath
    * @returns {Promise<Arguments<string[],number[]>>}
    */
   GetPath(): Promise<Arguments<[string[], number[]]>>;
+
+  /**
+   * Gets the value of the PortClockMap property.
+   *
+   * @method OcaWorker#GetPortClockMap
+   * @returns {Promise<Map<OcaPortID, OcaPortClockMapEntry>>}
+   *   A promise which resolves to a single value of type ``Map<OcaPortID, OcaPortClockMapEntry>``.
+   */
+  GetPortClockMap(): Promise<Map<OcaPortID, OcaPortClockMapEntry>>;
+
+  /**
+   * Sets the value of the PortClockMap property.
+   *
+   * @method OcaWorker#SetPortClockMap
+   * @param {Map<IOcaPortID, IOcaPortClockMapEntry>} Map
+   *
+   * @returns {Promise<void>}
+   */
+  SetPortClockMap(Map: Map<IOcaPortID, IOcaPortClockMapEntry>): Promise<void>;
+
+  /**
+   * Gets the value of the PortClockMap entry identified by the given PortID.
+   *
+   * @method OcaWorker#GetPortClockMapEntry
+   * @param {IOcaPortID} ID
+   *
+   * @returns {Promise<OcaPortClockMapEntry>}
+   *   A promise which resolves to a single value of type :class:`OcaPortClockMapEntry`.
+   */
+  GetPortClockMapEntry(ID: IOcaPortID): Promise<OcaPortClockMapEntry>;
+
+  /**
+   * Sets an entry in the PortClockMap property. Adds entry if none already
+   * exists for the given port; replaces entry if it does already exist.
+   *
+   * @method OcaWorker#SetPortClockMapEntry
+   * @param {IOcaPortID} PortID
+   * @param {IOcaPortClockMapEntry} Entry
+   *
+   * @returns {Promise<void>}
+   */
+  SetPortClockMapEntry(
+    PortID: IOcaPortID,
+    Entry: IOcaPortClockMapEntry
+  ): Promise<void>;
+
+  /**
+   * Deletes PortClockMap entry identified by the given ID.
+   *
+   * @method OcaWorker#DeletePortClockMapEntry
+   * @param {IOcaPortID} ID
+   *
+   * @returns {Promise<void>}
+   */
+  DeletePortClockMapEntry(ID: IOcaPortID): Promise<void>;
 }

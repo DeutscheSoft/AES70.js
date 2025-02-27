@@ -27,7 +27,7 @@ export class OcaMediaConnection {
    */
   constructor(Secure, StreamParameters, StreamCastMode, StreamChannelCount) {
     /**
-     * True iff connection is secure.
+     * True if and only if connection is secure.
      * @type boolean
      */
     this.Secure = Secure;

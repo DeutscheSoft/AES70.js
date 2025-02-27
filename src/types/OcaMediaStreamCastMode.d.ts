@@ -2,14 +2,14 @@
  * This file has been generated.
  */
 /**
- * Type of media endpoint: unicast or multicast.
+ * Transmission mode: unicast or multicast
  * @class OcaMediaStreamCastMode
  */
 export class OcaMediaStreamCastMode {
   /**
    * Singleton object corresponding to the entry with value ``0``.
    */
-  static None: OcaMediaStreamCastMode;
+  static Unknown: OcaMediaStreamCastMode;
   /**
    * Singleton object corresponding to the entry with value ``1``.
    */
@@ -42,7 +42,7 @@ export class OcaMediaStreamCastMode {
 
 export type IOcaMediaStreamCastMode =
   | OcaMediaStreamCastMode
-  | 'None'
+  | 'Unknown'
   | 'Unicast'
   | 'Multicast'
   | 0

@@ -2,7 +2,8 @@
  * This file has been generated.
  */
 /**
- * Commands controllers can send to OcaTasks to change their states
+ * Commands controllers can send to OcaTasks to change their states.
+ * **Deprecated** in OCA 1.5.
  * @class OcaTaskCommand
  */
 export class OcaTaskCommand {
@@ -14,10 +15,6 @@ export class OcaTaskCommand {
    * Singleton object corresponding to the entry with value ``1``.
    */
   static Prepare: OcaTaskCommand;
-  /**
-   * Singleton object corresponding to the entry with value ``2``.
-   */
-  static Enable: OcaTaskCommand;
   /**
    * Singleton object corresponding to the entry with value ``3``.
    */
@@ -64,7 +61,6 @@ export type IOcaTaskCommand =
   | OcaTaskCommand
   | 'None'
   | 'Prepare'
-  | 'Enable'
   | 'Start'
   | 'Stop'
   | 'Abort'
@@ -72,7 +68,6 @@ export type IOcaTaskCommand =
   | 'Clear'
   | 0
   | 1
-  | 2
   | 3
   | 4
   | 5

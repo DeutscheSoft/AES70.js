@@ -11,7 +11,7 @@ export const OcaFrequencySensor = make_control_class(
   'OcaFrequencySensor',
   4,
   '\u0001\u0001\u0002\u0004',
-  2,
+  3,
   OcaSensor,
   [['GetReading', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]]],
   [['Reading', [OcaFloat32], 4, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaFrequencySensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the **Reading** property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Reading** property.
  * The return values of this method are
  *
  * - Reading of type ``number``

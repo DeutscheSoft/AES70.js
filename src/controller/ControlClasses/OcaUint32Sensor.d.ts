@@ -4,7 +4,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaBasicSensor } from './OcaBasicSensor';
 
 /**
- * Basic uint32 sensor.
+ * 32-bit unsigned integer sensor
  * @extends OcaBasicSensor
  * @class OcaUint32Sensor
  */
@@ -17,8 +17,7 @@ export declare class OcaUint32Sensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Reading** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Reading** property.
    * The return values of this method are
    *
    * - Reading of type ``number``

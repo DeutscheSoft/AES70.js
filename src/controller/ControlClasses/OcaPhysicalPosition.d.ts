@@ -24,8 +24,7 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Retrieves value of property **CoordinateSystem**. Result indicates whether
-   * retrieval was successful.
+   * Gets value of property **CoordinateSystem**.
    *
    * @method OcaPhysicalPosition#GetCoordinateSystem
    * @returns {Promise<OcaPositionCoordinateSystem>}
@@ -34,8 +33,7 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   GetCoordinateSystem(): Promise<OcaPositionCoordinateSystem>;
 
   /**
-   * Retrieves value of property **PositionDescriptorFieldFlags**. Result
-   * indicates whether retrieval was successful.
+   * Gets value of property **PositionDescriptorFieldFlags**.
    *
    * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
    * @returns {Promise<IOcaPositionDescriptorFieldFlags>}
@@ -44,8 +42,7 @@ export declare class OcaPhysicalPosition extends OcaAgent {
   GetPositionDescriptorFieldFlags(): Promise<IOcaPositionDescriptorFieldFlags>;
 
   /**
-   * Retrieves value of property **PositioinDescriptor**. Result indicates
-   * whether retrieval was successful.
+   * Gets value of property **PositionDescriptor**.
    * The return values of this method are
    *
    * - PositionDescriptor of type ``IOcaPositionDescriptor``

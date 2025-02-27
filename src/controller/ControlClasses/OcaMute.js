@@ -11,7 +11,7 @@ export const OcaMute = make_control_class(
   'OcaMute',
   4,
   '\u0001\u0001\u0001\u0002',
-  2,
+  3,
   OcaActuator,
   [
     ['GetState', 4, 1, [], [OcaMuteState]],
@@ -22,16 +22,14 @@ export const OcaMute = make_control_class(
 );
 
 /**
- * Gets the current mute state. The return value indicates whether the state was
- * successfully retrieved.
+ * Gets the current mute state (i.e. value of the **State** property).
  *
  * @method OcaMute#GetState
  * @returns {Promise<OcaMuteState>}
  *   A promise which resolves to a single value of type :class:`OcaMuteState`.
  */
 /**
- * Sets the mute state (i.e. value of the State property). The return value
- * indicates whether the state was successfully set.
+ * Sets the mute state (i.e. value of the State property).
  *
  * @method OcaMute#SetState
  * @param {IOcaMuteState} state

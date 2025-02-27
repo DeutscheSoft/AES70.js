@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaSensor } from './OcaSensor.js';
 
 /**
- * Basic voltage sensor.
+ * Voltage sensor.
  * @extends OcaSensor
  * @class OcaVoltageSensor
  */
@@ -11,7 +11,7 @@ export const OcaVoltageSensor = make_control_class(
   'OcaVoltageSensor',
   4,
   '\u0001\u0001\u0002\u0007',
-  1,
+  3,
   OcaSensor,
   [['GetReading', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]]],
   [['Reading', [OcaFloat32], 4, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaVoltageSensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the **Reading** property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Reading** property.
  * The return values of this method are
  *
  * - Reading of type ``number``

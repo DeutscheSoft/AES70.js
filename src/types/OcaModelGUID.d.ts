@@ -25,7 +25,6 @@ export declare interface IOcaModelGUID {
 
 export declare class OcaModelGUID implements IOcaModelGUID {
   /**
-   * 64 bit device type GUID.
    * @class OcaModelGUID
    */
   constructor(Reserved: Uint8Array, MfrCode: Uint8Array, ModelCode: Uint8Array);

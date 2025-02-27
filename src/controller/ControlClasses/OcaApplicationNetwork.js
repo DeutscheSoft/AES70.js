@@ -2,7 +2,6 @@ import { OcaApplicationNetworkCommand } from '../../OCP1/OcaApplicationNetworkCo
 import { OcaApplicationNetworkState } from '../../OCP1/OcaApplicationNetworkState.js';
 import { OcaBlob } from '../../OCP1/OcaBlob.js';
 import { OcaList } from '../../OCP1/OcaList.js';
-import { OcaNetworkSystemInterfaceDescriptor } from '../../OCP1/OcaNetworkSystemInterfaceDescriptor.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
@@ -26,20 +25,8 @@ export const OcaApplicationNetwork = make_control_class(
     ['GetOwner', 2, 3, [], [OcaUint32]],
     ['GetServiceID', 2, 4, [], [OcaBlob]],
     ['SetServiceID', 2, 5, [OcaBlob], []],
-    [
-      'GetSystemInterfaces',
-      2,
-      6,
-      [],
-      [OcaList(OcaNetworkSystemInterfaceDescriptor)],
-    ],
-    [
-      'SetSystemInterfaces',
-      2,
-      7,
-      [OcaList(OcaNetworkSystemInterfaceDescriptor)],
-      [],
-    ],
+    ['GetSystemInterfaces', 2, 6, [], [OcaList(OcaBlob)]],
+    ['SetSystemInterfaces', 2, 7, [OcaList(OcaBlob)], []],
     ['GetState', 2, 8, [], [OcaApplicationNetworkState]],
     ['GetErrorCode', 2, 9, [], [OcaUint16]],
     ['Control', 2, 10, [OcaApplicationNetworkCommand], []],
@@ -47,17 +34,9 @@ export const OcaApplicationNetwork = make_control_class(
   ],
   [
     ['Label', [OcaString], 2, 1, false, true, null],
-    ['Owner', [OcaUint32], 2, 2, false, true, null],
+    ['Owner', [OcaUint32], 2, 2, true, false, null],
     ['ServiceID', [OcaBlob], 2, 3, false, false, null],
-    [
-      'SystemInterfaces',
-      [OcaList(OcaNetworkSystemInterfaceDescriptor)],
-      2,
-      4,
-      false,
-      false,
-      null,
-    ],
+    ['SystemInterfaces', [OcaList(OcaBlob)], 2, 4, false, false, null],
     ['State', [OcaApplicationNetworkState], 2, 5, false, false, null],
     ['ErrorCode', [OcaUint16], 2, 6, false, false, null],
   ],
@@ -111,8 +90,8 @@ export const OcaApplicationNetwork = make_control_class(
  * status indicates whether the list was successfully retrieved.
  *
  * @method OcaApplicationNetwork#GetSystemInterfaces
- * @returns {Promise<OcaNetworkSystemInterfaceDescriptor[]>}
- *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceDescriptor[]`.
+ * @returns {Promise<Uint8Array[]>}
+ *   A promise which resolves to a single value of type ``Uint8Array[]``.
  */
 /**
  * Sets the network's System Interface Descriptor(s). Return status indicates
@@ -120,7 +99,7 @@ export const OcaApplicationNetwork = make_control_class(
  * Descriptor may be set at construction time.
  *
  * @method OcaApplicationNetwork#SetSystemInterfaces
- * @param {IOcaNetworkSystemInterfaceDescriptor[]} Descriptors
+ * @param {Uint8Array[]} Descriptors
  *
  * @returns {Promise<void>}
  */
@@ -151,11 +130,11 @@ export const OcaApplicationNetwork = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns path from given object down to root. The return value indicates
- * whether the operation succeeded.
+ * Returns Role Path and ONo Path from the Root Block to this object. The return
+ * value indicates whether the operation succeeded.
  * The return values of this method are
  *
- * - NamePath of type ``string[]``
+ * - RolePath of type ``string[]``
  * - ONoPath of type ``number[]``
  *
  * @method OcaApplicationNetwork#GetPath
@@ -181,7 +160,7 @@ export const OcaApplicationNetwork = make_control_class(
  * format is system and network dependent; for OCA purposes, it is maintained as
  * a variable-length blob which the protocol does not inspect.
  *
- * @member {PropertyEvent<OcaNetworkSystemInterfaceDescriptor[]>} OcaApplicationNetwork#OnSystemInterfacesChanged
+ * @member {PropertyEvent<Uint8Array[]>} OcaApplicationNetwork#OnSystemInterfacesChanged
  */
 /**
  * This event is emitted when the property ``State`` changes in the remote object.

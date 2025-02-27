@@ -23,6 +23,9 @@ export class OcaStatus extends Enum({
   PartiallySucceeded: 12,
   Timeout: 13,
   BufferOverflow: 14,
+  PermissionDenied: 15,
+  OutOfMemory: 16,
+  Busy: 17,
 }) {}
 
 /**
@@ -127,6 +130,27 @@ export class OcaStatus extends Enum({
  * Singleton object corresponding to the entry with value ``14``.
  * @type {OcaStatus}
  * @member BufferOverflow
+ * @memberof OcaStatus
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``15``.
+ * @type {OcaStatus}
+ * @member PermissionDenied
+ * @memberof OcaStatus
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``16``.
+ * @type {OcaStatus}
+ * @member OutOfMemory
+ * @memberof OcaStatus
+ * @static
+ */
+/**
+ * Singleton object corresponding to the entry with value ``17``.
+ * @type {OcaStatus}
+ * @member Busy
  * @memberof OcaStatus
  * @static
  */

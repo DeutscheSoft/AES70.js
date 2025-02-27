@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaBasicSensor } from './OcaBasicSensor.js';
 
 /**
- * Basic Float64 sensor.
+ * 64-bit IEEE floating-point sensor
  * @extends OcaBasicSensor
  * @class OcaFloat64Sensor
  */
@@ -11,7 +11,7 @@ export const OcaFloat64Sensor = make_control_class(
   'OcaFloat64Sensor',
   5,
   '\u0001\u0001\u0002\u0001\u000b',
-  2,
+  3,
   OcaBasicSensor,
   [['GetReading', 5, 1, [], [OcaFloat64, OcaFloat64, OcaFloat64]]],
   [['Reading', [OcaFloat64], 5, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaFloat64Sensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the **Reading** property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Reading** property.
  * The return values of this method are
  *
  * - Reading of type ``number``

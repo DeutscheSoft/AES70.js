@@ -30,8 +30,8 @@ export declare interface IOcaGrouperStatusChangeEventData {
 export declare class OcaGrouperStatusChangeEventData
   implements IOcaGrouperStatusChangeEventData {
   /**
-   * Class that defines the event data parameter for the **StatusChange** event
-   * defined in **OcaGrouper**.
+   * Notification data supplied by the **OcaGrouper.StatusChange()** event.
+   * **Deprecated** in AES70-2024.
    * @class OcaGrouperStatusChangeEventData
    */
   constructor(

@@ -3,9 +3,9 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * Represents a function that turns on some kind of human-detectable indicator
- * for purposes of device identification during network setup. Physical form of
- * indicator is not defined by OCA, so it could be anything, e.g.
+ * Function that shall turn on some kind of human-detectable indicator for
+ * purposes of device identification during network setup. Physical form of
+ * indicator is not specified by AES70, so it could be anything, e.g.
  *
  *  - LED
  *
@@ -27,7 +27,7 @@ export const OcaIdentificationActuator = make_control_class(
   'OcaIdentificationActuator',
   4,
   '\u0001\u0001\u0001\u0015',
-  2,
+  3,
   OcaActuator,
   [
     ['GetActive', 4, 1, [], [OcaBoolean]],
@@ -38,16 +38,14 @@ export const OcaIdentificationActuator = make_control_class(
 );
 
 /**
- * Gets the current identification indicator activity state. The return value
- * indicates whether the state was successfully retrieved.
+ * Gets the value of the **Active** property.
  *
  * @method OcaIdentificationActuator#GetActive
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the Active state (i.e. value of the Active property). The return value
- * indicates whether the state was successfully set.
+ * Sets the value of the **Active** property.
  *
  * @method OcaIdentificationActuator#SetActive
  * @param {boolean} active
@@ -57,7 +55,7 @@ export const OcaIdentificationActuator = make_control_class(
 /**
  * This event is emitted when the property ``Active`` changes in the remote object.
  * The property ``Active`` is described in the AES70 standard as follows.
- * True iff indicator is active.
+ * True if and only if indicator is active.
  *
  * @member {PropertyEvent<boolean>} OcaIdentificationActuator#OnActiveChanged
  */

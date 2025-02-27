@@ -13,9 +13,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * A classical analog-style filter - highpass, lowpass, bandpass, etc., with
- * shape characteristics such as Butterworth, Chebyshev, Bessel, and
- * Linkwitz-Riley. Frequently used in loudspeaker crossover networks.
+ * Classical analog-style filter - highpass, lowpass, bandpass, etc., with shape
+ * characteristics such as Butterworth, Chebyshev, Bessel, and Linkwitz-Riley.
  * @extends OcaActuator
  * @class OcaFilterClassical
  */
@@ -48,8 +47,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Frequency property. The return value indicates if the
-   * property was successfully retrieved.
+   * Gets the value and limits of the **Frequency** property.
    * The return values of this method are
    *
    * - Frequency of type ``number``
@@ -62,8 +60,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   GetFrequency(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the Frequency property. The return value indicates if the
-   * property was successfully set.
+   * Sets the value of the **Frequency** property.
    *
    * @method OcaFilterClassical#SetFrequency
    * @param {number} frequency
@@ -73,8 +70,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   SetFrequency(frequency: number): Promise<void>;
 
   /**
-   * Returns the passband specification of the filter object. The return value
-   * indicates if the specification was successfully retrieved.
+   * Gets the value of the **Passband** property.
    *
    * @method OcaFilterClassical#GetPassband
    * @returns {Promise<OcaFilterPassband>}
@@ -83,8 +79,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   GetPassband(): Promise<OcaFilterPassband>;
 
   /**
-   * Sets the passband specification of the filter object. The return value
-   * indicates if the specification was successfully set.
+   * Sets the value of the **Passband** property.
    *
    * @method OcaFilterClassical#SetPassband
    * @param {IOcaFilterPassband} Passband
@@ -94,8 +89,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   SetPassband(Passband: IOcaFilterPassband): Promise<void>;
 
   /**
-   * Returns the Shape property of the filter. The return value indicates if the
-   * property was successfully retrieved.
+   * Gets the value of the **Shape** property.
    *
    * @method OcaFilterClassical#GetShape
    * @returns {Promise<OcaClassicalFilterShape>}
@@ -104,8 +98,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   GetShape(): Promise<OcaClassicalFilterShape>;
 
   /**
-   * Sets the Shape property of the filter. The return value indicates if the
-   * property was successfully set.
+   * Sets the value of the **Shape** property.
    *
    * @method OcaFilterClassical#SetShape
    * @param {IOcaClassicalFilterShape} Shape
@@ -115,8 +108,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   SetShape(Shape: IOcaClassicalFilterShape): Promise<void>;
 
   /**
-   * Returns the order of the filter. The return value indicates if the property
-   * was successfully retrieved.
+   * Gets the value and limits of the **Order** property.
    * The return values of this method are
    *
    * - Order of type ``number``
@@ -129,8 +121,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   GetOrder(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the order of the filter. The return value indicates if the property
-   * was successfully set.
+   * Sets the value of the **Order** property.
    *
    * @method OcaFilterClassical#SetOrder
    * @param {number} Order
@@ -140,8 +131,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   SetOrder(Order: number): Promise<void>;
 
   /**
-   * Returns the filter parameter. The return value indicates if the property
-   * was successfully retrieved.
+   * Gets the value and limits of the **Parameter** property.
    * The return values of this method are
    *
    * - Parameter of type ``number``
@@ -154,8 +144,7 @@ export declare class OcaFilterClassical extends OcaActuator {
   GetParameter(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the filter parameter. The return value indicates if the parameter was
-   * successfully set.
+   * Sets the value of the **Parameter** property.
    *
    * @method OcaFilterClassical#SetParameter
    * @param {number} Parameter
@@ -165,9 +154,9 @@ export declare class OcaFilterClassical extends OcaActuator {
   SetParameter(Parameter: number): Promise<void>;
 
   /**
-   * Sets some or all filter parameter. The return value indicates if the
-   * parameters were successfully set. The action of this method is atomic - if
-   * any of the value changes fails, none of the changes are made.
+   * Sets some or all filter parameters. The action of this method shall be
+   * atomic - if any of the changes fails, **none** of the changes shall be
+   * made.
    *
    * @method OcaFilterClassical#SetMultiple
    * @param {IOcaParameterMask} Mask

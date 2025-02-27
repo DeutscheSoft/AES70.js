@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaBasicSensor } from './OcaBasicSensor.js';
 
 /**
- * Basic int64 sensor.
+ * 64-bit signed integer sensor
  * @extends OcaBasicSensor
  * @class OcaInt64Sensor
  */
@@ -11,7 +11,7 @@ export const OcaInt64Sensor = make_control_class(
   'OcaInt64Sensor',
   5,
   '\u0001\u0001\u0002\u0001\u0005',
-  2,
+  3,
   OcaBasicSensor,
   [['GetReading', 5, 1, [], [OcaInt64, OcaInt64, OcaInt64]]],
   [['Reading', [OcaInt64], 5, 1, false, false, null]],
@@ -19,8 +19,7 @@ export const OcaInt64Sensor = make_control_class(
 );
 
 /**
- * Gets the value and limits of the **Reading** property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Reading** property.
  * The return values of this method are
  *
  * - Reading of type ``number|BigInt``

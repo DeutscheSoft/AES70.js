@@ -4,7 +4,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaBasicSensor } from './OcaBasicSensor';
 
 /**
- * Basic Float64 sensor.
+ * 64-bit IEEE floating-point sensor
  * @extends OcaBasicSensor
  * @class OcaFloat64Sensor
  */
@@ -17,8 +17,7 @@ export declare class OcaFloat64Sensor extends OcaBasicSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Reading** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Reading** property.
    * The return values of this method are
    *
    * - Reading of type ``number``

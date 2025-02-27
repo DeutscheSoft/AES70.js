@@ -39,6 +39,10 @@ export declare class OcaMediaClock extends OcaAgent {
   OnCurrentRateChanged: PropertyEvent<OcaMediaClockRate>;
 
   /**
+   * An alias for OnCurrentRateChanged
+   */
+  OnRateChanged: PropertyEvent<OcaMediaClockRate>;
+  /**
    * This event is emitted whenever LockState changes.
    */
   OnLockStateChanged: PropertyEvent<OcaMediaClockLockState>;
@@ -103,22 +107,22 @@ export declare class OcaMediaClock extends OcaAgent {
    * Gets the current sampling rate. The return value indicates whether the
    * value was successfully retrieved.
    *
-   * @method OcaMediaClock#GetCurrentRate
+   * @method OcaMediaClock#GetRate
    * @returns {Promise<OcaMediaClockRate>}
    *   A promise which resolves to a single value of type :class:`OcaMediaClockRate`.
    */
-  GetCurrentRate(): Promise<OcaMediaClockRate>;
+  GetRate(): Promise<OcaMediaClockRate>;
 
   /**
    * Sets the sampling rate. The return value indicates whether the rate was
    * successfully set.
    *
-   * @method OcaMediaClock#SetCurrentRate
+   * @method OcaMediaClock#SetRate
    * @param {IOcaMediaClockRate} rate
    *
    * @returns {Promise<void>}
    */
-  SetCurrentRate(rate: IOcaMediaClockRate): Promise<void>;
+  SetRate(rate: IOcaMediaClockRate): Promise<void>;
 
   /**
    * Gets the current media clock lock state. The return value indicates whether

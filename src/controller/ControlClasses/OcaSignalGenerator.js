@@ -15,7 +15,7 @@ export const OcaSignalGenerator = make_control_class(
   'OcaSignalGenerator',
   4,
   '\u0001\u0001\u0001\u0011',
-  2,
+  3,
   OcaActuator,
   [
     ['GetFrequency1', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
@@ -66,11 +66,10 @@ export const OcaSignalGenerator = make_control_class(
 );
 
 /**
- * Gets the value of the Frequency1 property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value and limits of the **Frequency1** property.
  * The return values of this method are
  *
- * - frequency of type ``number``
+ * - Frequency of type ``number``
  * - minFrequency of type ``number``
  * - maxFrequency of type ``number``
  *
@@ -78,17 +77,15 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Frequency1 property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Frequency1** property.
  *
  * @method OcaSignalGenerator#SetFrequency1
- * @param {number} frequency
+ * @param {number} Frequency
  *
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Frequency2 property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value and limits of the **Frequency2** property..
  * The return values of this method are
  *
  * - frequency of type ``number``
@@ -99,8 +96,7 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Frequency2 property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Frequency2** property.
  *
  * @method OcaSignalGenerator#SetFrequency2
  * @param {number} frequency
@@ -108,8 +104,7 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Level property. The return value indicates whether the
- * property was successfully retrieved.
+ * Gets the value and limits of the **Level** property.
  * The return values of this method are
  *
  * - Level of type ``number``
@@ -120,8 +115,7 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Level property. The return value indicates whether the
- * property was successfully set.
+ * Sets the value of the **Level** property.
  *
  * @method OcaSignalGenerator#SetLevel
  * @param {number} Level
@@ -129,16 +123,14 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Waveform property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the Waveform property.
  *
  * @method OcaSignalGenerator#GetWaveform
  * @returns {Promise<OcaWaveformType>}
  *   A promise which resolves to a single value of type :class:`OcaWaveformType`.
  */
 /**
- * Sets the value of the Waveform property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Waveform** property.
  *
  * @method OcaSignalGenerator#SetWaveform
  * @param {IOcaWaveformType} waveform
@@ -146,16 +138,14 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the SweepType property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the **SweepType** property.
  *
  * @method OcaSignalGenerator#GetSweepType
  * @returns {Promise<OcaSweepType>}
  *   A promise which resolves to a single value of type :class:`OcaSweepType`.
  */
 /**
- * Sets the value of the SweepType property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **SweepType** property.
  *
  * @method OcaSignalGenerator#SetSweepType
  * @param {IOcaSweepType} sweepType
@@ -163,8 +153,7 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the SweepTime property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value and limits of the **SweepTime** property.
  * The return values of this method are
  *
  * - sweepTime of type ``number``
@@ -175,8 +164,7 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the SweepTime property. The return value indicates whether
- * the property was successfully set.
+ * Gets the value of the **SweepTime** property.
  *
  * @method OcaSignalGenerator#SetSweepTime
  * @param {number} sweepTime
@@ -184,16 +172,14 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the SweepRepeat property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the **SweepRepeat** property.
  *
  * @method OcaSignalGenerator#GetSweepRepeat
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the value of the SweepRepeat property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the **SweepRepeat** property.
  *
  * @method OcaSignalGenerator#SetSweepRepeat
  * @param {boolean} sweepRepeat
@@ -201,31 +187,27 @@ export const OcaSignalGenerator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the Generating property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the **Generating** property.
  *
  * @method OcaSignalGenerator#GetGenerating
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Starts the signal generator. The return value indicates whether the signal
- * generator was successfully started.
+ * Starts the signal generator.
  *
  * @method OcaSignalGenerator#Start
  * @returns {Promise<void>}
  */
 /**
- * Stops the signal generator. The return value indicates whether the signal
- * generator was successfully stopped.
+ * Stops the signal generator.
  *
  * @method OcaSignalGenerator#Stop
  * @returns {Promise<void>}
  */
 /**
- * Sets some or all signal generation parameters. The return value indicates if
- * the parameters were successfully set. The action of this method is atomic -
- * if any of the value changes fails, none of the changes are made.
+ * Sets some or all signal generation parameters. The action of this method is
+ * atomic - if any of the value changes fails, none of the changes are made.
  *
  * @method OcaSignalGenerator#SetMultiple
  * @param {IOcaParameterMask} Mask

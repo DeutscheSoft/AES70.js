@@ -37,8 +37,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Law property. Return status indicates whether the
-   * value was successfully retrieved.
+   * Gets the value of the **Law** property.
    *
    * @method OcaDynamicsDetector#GetLaw
    * @returns {Promise<OcaLevelDetectionLaw>}
@@ -47,8 +46,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetLaw(): Promise<OcaLevelDetectionLaw>;
 
   /**
-   * Sets the value of the Law property. Return status indicates whether the
-   * value was successfully set.
+   * Sets the value of the **Law** property.
    *
    * @method OcaDynamicsDetector#SetLaw
    * @param {IOcaLevelDetectionLaw} Law
@@ -58,8 +56,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetLaw(Law: IOcaLevelDetectionLaw): Promise<void>;
 
   /**
-   * Gets the value of the AttackTime property. The return value indicates if
-   * the value was successfully retrieved.
+   * Gets the value and limits of the **AttackTime** property.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -72,8 +69,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetAttackTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the AttackTime property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **AttackTime** property.
    *
    * @method OcaDynamicsDetector#SetAttackTime
    * @param {number} Time
@@ -83,8 +79,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetAttackTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the ReleaseTime property. The return value indicates if
-   * the value was successfully retrieved.
+   * Gets the value and limits of the **ReleaseTime** property.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -97,8 +92,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetReleaseTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the ReleaseTime property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **ReleaseTime** property.
    *
    * @method OcaDynamicsDetector#SetReleaseTime
    * @param {number} Time
@@ -108,8 +102,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   SetReleaseTime(Time: number): Promise<void>;
 
   /**
-   * Gets the value of the HoldTime property. The return value indicates if the
-   * value was successfully retrieved.
+   * Gets the value and limits of the **HoldTime** property.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -122,8 +115,7 @@ export declare class OcaDynamicsDetector extends OcaActuator {
   GetHoldTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the HoldTime property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the **HoldTime** property.
    *
    * @method OcaDynamicsDetector#SetHoldTime
    * @param {number} Time

@@ -3,7 +3,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaBasicActuator } from './OcaBasicActuator';
 
 /**
- * String actuator.
+ * UTF-8 String actuator.
  * @extends OcaBasicActuator
  * @class OcaStringActuator
  */
@@ -16,8 +16,7 @@ export declare class OcaStringActuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and max length of the Value property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value of the **Setting** property.
    *
    * @method OcaStringActuator#GetSetting
    * @returns {Promise<string>}
@@ -26,18 +25,18 @@ export declare class OcaStringActuator extends OcaBasicActuator {
   GetSetting(): Promise<string>;
 
   /**
-   * Sets the value of the Value property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the **Setting** property.
    *
    * @method OcaStringActuator#SetSetting
-   * @param {string} Value
+   * @param {string} Setting
    *
    * @returns {Promise<void>}
    */
-  SetSetting(Value: string): Promise<void>;
+  SetSetting(Setting: string): Promise<void>;
 
   /**
-   * Gets the maximum string length that this object can handle.
+   * Output parameter that shall hold the maximum allowable length of the
+   * Setting property if the method succeeds
    *
    * @method OcaStringActuator#GetMaxLen
    * @returns {Promise<number>}

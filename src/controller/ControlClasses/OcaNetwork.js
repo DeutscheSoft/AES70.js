@@ -24,7 +24,7 @@ export const OcaNetwork = make_control_class(
   'OcaNetwork',
   3,
   '\u0001\u0002\u0001',
-  2,
+  3,
   OcaAgent,
   [
     ['GetLinkType', 3, 1, [], [OcaNetworkLinkType]],

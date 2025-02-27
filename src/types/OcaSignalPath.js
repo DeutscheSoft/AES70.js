@@ -4,19 +4,19 @@
 
 export class OcaSignalPath {
   /**
-   * Signal path between two object ports in the same device.
+   * Signal path between two OcaPorts in the same device.
    * @class OcaSignalPath
    */
-  constructor(SourcePort, SinkPort) {
+  constructor(OutputPort, InputPort) {
     /**
-     * Source port (i.e. output port) of the signal path.
+     * Output port. Signal originates here.
      * @type OcaPort
      */
-    this.SourcePort = SourcePort;
+    this.OutputPort = OutputPort;
     /**
-     * Sink port (i.e. input port) of the signal path.
+     * Input port. Signal is received here.
      * @type OcaPort
      */
-    this.SinkPort = SinkPort;
+    this.InputPort = InputPort;
   }
 }

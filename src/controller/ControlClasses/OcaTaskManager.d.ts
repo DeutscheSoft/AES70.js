@@ -8,7 +8,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaManager } from './OcaManager';
 
 /**
- * Optional manager that collects OcaTask and OcaProgram objects.
+ * This class is **deprecated** in version 2 (OCA 1.5). Optional manager that
+ * collects **OcaTask** and **OcaProgram** objects.
  *
  *  - May be instantiated once in any device.
  *
@@ -148,12 +149,9 @@ export declare class OcaTaskManager extends OcaManager {
    * successfully created.
    *
    * @method OcaTaskManager#AddTask
-   * @param {IOcaTask} Task
-   *
-   * @returns {Promise<OcaTask>}
-   *   A promise which resolves to a single value of type :class:`OcaTask`.
+   * @returns {Promise<void>}
    */
-  AddTask(Task: IOcaTask): Promise<OcaTask>;
+  AddTask(): Promise<void>;
 
   /**
    * Gets map of Tasks in the device. Return value indicates whether map was

@@ -4,7 +4,8 @@
 import { Enum } from './Enum.js';
 
 /**
- * Enumeration of types of delay units that are available in OCA.
+ * Enumeration of types of delay units that are available in AES70. This
+ * enumeration is **deprecated** in AES70-2022.
  * @class OcaDelayUnit
  */
 export class OcaDelayUnit extends Enum({

@@ -27,9 +27,8 @@ export declare class OcaSecurityManager extends OcaManager {
 
   /**
    * Enables security of control data (OCA messages). After calling this method
-   * all OCA messages are sent and received using a secure connection. The
-   * return value indicates whether the operation succeeded. If the operation
-   * fails security is not enabled.
+   * all OCA messages are sent and received using a secure connection. If the
+   * operation fails, security is not enabled.
    *
    * @method OcaSecurityManager#EnableControlSecurity
    * @returns {Promise<void>}
@@ -39,8 +38,7 @@ export declare class OcaSecurityManager extends OcaManager {
   /**
    * Disables security of control data (OCA messages). After calling this method
    * all OCA messages can be sent and received both on insecure and secure
-   * connections. The return value indicates whether the operation succeeded. If
-   * the operation fails security is not disabled.
+   * connections. If the operation fails, security is not disabled.
    *
    * @method OcaSecurityManager#DisableControlSecurity
    * @returns {Promise<void>}
@@ -51,7 +49,7 @@ export declare class OcaSecurityManager extends OcaManager {
    * Changes the pre-shared key identified by the passed identity. Note that
    * changing a PSK over the network will only work if the controller has a
    * secure connection to the device and control security has been turned on. If
-   * this is not the case the method will return DeviceError.
+   * this is not the case, the method will return DeviceError.
    *
    * @method OcaSecurityManager#ChangePreSharedKey
    * @param {string} identity
@@ -66,7 +64,8 @@ export declare class OcaSecurityManager extends OcaManager {
    * having multiple PSKs the device is able to participate in multiple secure
    * systems. Note that adding a PSK over the network will only work if the
    * controller has a secure connection to the device and control security has
-   * been turned on. If this is not the case the method will return DeviceError.
+   * been turned on. If this is not the case, the method will return
+   * DeviceError.
    *
    * @method OcaSecurityManager#AddPreSharedKey
    * @param {string} identity
@@ -77,12 +76,12 @@ export declare class OcaSecurityManager extends OcaManager {
   AddPreSharedKey(identity: string, key: Uint8Array): Promise<void>;
 
   /**
-   * Deletes a pre-shared key (identified by the passed identity) on the device.
-   * After deleting the pre-shared key the device will no longer be able to
-   * participate in the secure system that uses the PSK. Note that deleting a
-   * PSK over the network will only work if the controller has a secure
-   * connection to the device and control security has been turned on. If this
-   * is not the case the method will return DeviceError.
+   * Deletes the pre-shared key identified by the given identity from the
+   * device. After deleting the pre-shared key, the device will no longer be
+   * able to participate in the secure system that uses the PSK. Note that
+   * deleting a PSK over the network will only work if the controller has a
+   * secure connection to the device and control security has been turned on. If
+   * this is not the case, the method will return DeviceError.
    *
    * @method OcaSecurityManager#DeletePreSharedKey
    * @param {string} identity

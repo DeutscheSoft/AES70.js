@@ -23,7 +23,7 @@ export const OcaLibraryManager = make_control_class(
   'OcaLibraryManager',
   3,
   '\u0001\u0003\b',
-  2,
+  3,
   OcaManager,
   [
     ['AddLibrary', 3, 1, [OcaLibVolType], [OcaLibraryIdentifier]],
@@ -35,7 +35,7 @@ export const OcaLibraryManager = make_control_class(
   ],
   [
     ['Libraries', [OcaList(OcaLibraryIdentifier)], 3, 1, false, false, null],
-    ['CurrentPatch', [OcaLibVolIdentifier], 3, 2, false, false, null],
+    ['CurrentPatch', [OcaUint16], 3, 2, false, false, null],
   ],
   []
 );
@@ -108,5 +108,5 @@ export const OcaLibraryManager = make_control_class(
  * Changing the value of this property applies the patch represented by the new
  * value.
  *
- * @member {PropertyEvent<OcaLibVolIdentifier>} OcaLibraryManager#OnCurrentPatchChanged
+ * @member {PropertyEvent<number>} OcaLibraryManager#OnCurrentPatchChanged
  */

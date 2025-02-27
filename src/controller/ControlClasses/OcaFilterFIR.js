@@ -5,7 +5,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * A finite impulse response (FIR) filter.
+ * Finite impulse response (FIR) filter.
  * @extends OcaActuator
  * @class OcaFilterFIR
  */
@@ -13,7 +13,7 @@ export const OcaFilterFIR = make_control_class(
   'OcaFilterFIR',
   4,
   '\u0001\u0001\u0001\f',
-  2,
+  3,
   OcaActuator,
   [
     ['GetLength', 4, 1, [], [OcaUint32, OcaUint32, OcaUint32]],
@@ -31,8 +31,7 @@ export const OcaFilterFIR = make_control_class(
 );
 
 /**
- * Gets the length of the FIR filter. The return value indicates whether the
- * value was successfully retrieved.
+ * Gets the length and length limits of the FIR filter.
  * The return values of this method are
  *
  * - Length of type ``number``
@@ -43,16 +42,14 @@ export const OcaFilterFIR = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Gets the coefficients of the FIR filter. The return value indicates whether
- * the coefficients were successfully retrieved.
+ * Gets the coefficients of the FIR filter.
  *
  * @method OcaFilterFIR#GetCoefficients
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Sets the value of the properties of the FIR filter. The return value
- * indicates whether the properties were successfully set.
+ * Sets the coefficients of the FIR filter.
  *
  * @method OcaFilterFIR#SetCoefficients
  * @param {number[]} Coefficients
@@ -60,8 +57,7 @@ export const OcaFilterFIR = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the sample rate of the FIR filter. The return value indicates whether
- * the data was successfully retrieved.
+ * Gets the value and limits of the **SampleRate** property.
  * The return values of this method are
  *
  * - Rate of type ``number``
@@ -72,8 +68,7 @@ export const OcaFilterFIR = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the sample rate of the FIR filter. The return value indicates whether
- * the rate was successfully set.
+ * Sets the sampling rate of the FIR filter.
  *
  * @method OcaFilterFIR#SetSampleRate
  * @param {number} Rate
@@ -83,24 +78,23 @@ export const OcaFilterFIR = make_control_class(
 /**
  * This event is emitted when the property ``Length`` changes in the remote object.
  * The property ``Length`` is described in the AES70 standard as follows.
- * Length of the filter, in samples. Readonly. Value is set when
- * SetCoefficients(...) method executes.
+ * Length of the filter, in samples. Readonly.
  *
  * @member {PropertyEvent<number>} OcaFilterFIR#OnLengthChanged
  */
 /**
  * This event is emitted when the property ``Coefficients`` changes in the remote object.
  * The property ``Coefficients`` is described in the AES70 standard as follows.
- * Array of FIR Coefficients. The size of the array (number of entries) is equal
- * to the Order property plus 1.
+ * Array of FIR Coefficients. Number of entries shall be equal to the value of
+ * the **Order** property plus 1.
  *
  * @member {PropertyEvent<number[]>} OcaFilterFIR#OnCoefficientsChanged
  */
 /**
  * This event is emitted when the property ``SampleRate`` changes in the remote object.
  * The property ``SampleRate`` is described in the AES70 standard as follows.
- * Sample rate inside the filter. We can't assume it's the same as the device
- * input or output rate.
+ * Sampling rate inside the filter. Note: This rate is not necessarily the same
+ * as the Device input or output sampling rate.
  *
  * @member {PropertyEvent<number>} OcaFilterFIR#OnSampleRateChanged
  */

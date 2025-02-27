@@ -4,7 +4,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaBasicActuator } from './OcaBasicActuator';
 
 /**
- * Basic int64 actuator.
+ * 64-bit signed integer actuator
  * @extends OcaBasicActuator
  * @class OcaInt64Actuator
  */
@@ -17,8 +17,7 @@ export declare class OcaInt64Actuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Setting** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Setting** property.
    * The return values of this method are
    *
    * - Setting of type ``number|BigInt``
@@ -33,8 +32,7 @@ export declare class OcaInt64Actuator extends OcaBasicActuator {
   >;
 
   /**
-   * Sets the **Setting** property. The return value indicates whether the
-   * property was successfully set.
+   * Sets the **Setting** property.
    *
    * @method OcaInt64Actuator#SetSetting
    * @param {number|BigInt} Value

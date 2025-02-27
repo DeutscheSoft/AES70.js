@@ -5,20 +5,20 @@ import { IOcaOPath, OcaOPath } from './OcaOPath';
 
 export declare interface IOcaGrouperCitizen {
   /**
-   * Index of citizen in Grouper
+   * Index of Citizen in Grouper
    * @type number
    */
   Index: number;
 
   /**
-   * Object path (= hostname + object number) of the worker object that is the
-   * citizen of the grouper.
+   * Object Path (= hostname + Object Number) of the Worker object that is the
+   * Citizen of the Grouper.
    * @type OcaOPath
    */
   ObjectPath: IOcaOPath;
 
   /**
-   * True iff connection from grouper to citizen is healthy.
+   * True if and only if connection from Grouper to Citizen is healthy.
    * @type boolean
    */
   Online: boolean;
@@ -26,27 +26,27 @@ export declare interface IOcaGrouperCitizen {
 
 export declare class OcaGrouperCitizen implements IOcaGrouperCitizen {
   /**
-   * Describes a citizen of a grouper. Refers to a specific worker object
-   * somewhere in the media network.
+   * Describes a Citizen of a Grouper. Refers to a specific Worker object
+   * somewhere in the media network. **Deprecated** in AES70-2024.
    * @class OcaGrouperCitizen
    */
   constructor(Index: number, ObjectPath: OcaOPath, Online: boolean);
 
   /**
-   * Index of citizen in Grouper
+   * Index of Citizen in Grouper
    * @type number
    */
   Index: number;
 
   /**
-   * Object path (= hostname + object number) of the worker object that is the
-   * citizen of the grouper.
+   * Object Path (= hostname + Object Number) of the Worker object that is the
+   * Citizen of the Grouper.
    * @type OcaOPath
    */
   ObjectPath: OcaOPath;
 
   /**
-   * True iff connection from grouper to citizen is healthy.
+   * True if and only if connection from Grouper to Citizen is healthy.
    * @type boolean
    */
   Online: boolean;

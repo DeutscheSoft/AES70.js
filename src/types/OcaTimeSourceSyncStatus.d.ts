@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Synchronization statuses.
+ * Synchronization status of a time source.
  * @class OcaTimeSourceSyncStatus
  */
 export class OcaTimeSourceSyncStatus {

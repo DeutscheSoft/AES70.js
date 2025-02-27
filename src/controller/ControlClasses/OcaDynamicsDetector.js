@@ -13,7 +13,7 @@ export const OcaDynamicsDetector = make_control_class(
   'OcaDynamicsDetector',
   4,
   '\u0001\u0001\u0001\u000f',
-  2,
+  3,
   OcaActuator,
   [
     ['GetLaw', 4, 1, [], [OcaLevelDetectionLaw]],
@@ -48,16 +48,14 @@ export const OcaDynamicsDetector = make_control_class(
 );
 
 /**
- * Gets the value of the Law property. Return status indicates whether the value
- * was successfully retrieved.
+ * Gets the value of the **Law** property.
  *
  * @method OcaDynamicsDetector#GetLaw
  * @returns {Promise<OcaLevelDetectionLaw>}
  *   A promise which resolves to a single value of type :class:`OcaLevelDetectionLaw`.
  */
 /**
- * Sets the value of the Law property. Return status indicates whether the value
- * was successfully set.
+ * Sets the value of the **Law** property.
  *
  * @method OcaDynamicsDetector#SetLaw
  * @param {IOcaLevelDetectionLaw} Law
@@ -65,8 +63,7 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the AttackTime property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **AttackTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -77,8 +74,7 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the AttackTime property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **AttackTime** property.
  *
  * @method OcaDynamicsDetector#SetAttackTime
  * @param {number} Time
@@ -86,8 +82,7 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the ReleaseTime property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **ReleaseTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -98,8 +93,7 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the ReleaseTime property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the **ReleaseTime** property.
  *
  * @method OcaDynamicsDetector#SetReleaseTime
  * @param {number} Time
@@ -107,8 +101,7 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the HoldTime property. The return value indicates if the
- * value was successfully retrieved.
+ * Gets the value and limits of the **HoldTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -119,8 +112,7 @@ export const OcaDynamicsDetector = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the HoldTime property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **HoldTime** property.
  *
  * @method OcaDynamicsDetector#SetHoldTime
  * @param {number} Time

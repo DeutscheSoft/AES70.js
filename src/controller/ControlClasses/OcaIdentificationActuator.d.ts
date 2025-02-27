@@ -3,9 +3,9 @@ import { RemoteDevice } from '../remote_device';
 import { OcaActuator } from './OcaActuator';
 
 /**
- * Represents a function that turns on some kind of human-detectable indicator
- * for purposes of device identification during network setup. Physical form of
- * indicator is not defined by OCA, so it could be anything, e.g.
+ * Function that shall turn on some kind of human-detectable indicator for
+ * purposes of device identification during network setup. Physical form of
+ * indicator is not specified by AES70, so it could be anything, e.g.
  *
  *  - LED
  *
@@ -32,8 +32,7 @@ export declare class OcaIdentificationActuator extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the current identification indicator activity state. The return value
-   * indicates whether the state was successfully retrieved.
+   * Gets the value of the **Active** property.
    *
    * @method OcaIdentificationActuator#GetActive
    * @returns {Promise<boolean>}
@@ -42,8 +41,7 @@ export declare class OcaIdentificationActuator extends OcaActuator {
   GetActive(): Promise<boolean>;
 
   /**
-   * Sets the Active state (i.e. value of the Active property). The return value
-   * indicates whether the state was successfully set.
+   * Sets the value of the **Active** property.
    *
    * @method OcaIdentificationActuator#SetActive
    * @param {boolean} active

@@ -4,19 +4,20 @@
 
 export class OcaProtoSignalPath {
   /**
-   * Proto-signal path between two proto-member ports in a factory.
+   * Prototype signal path between two prototype member ports in a factory.
    * @class OcaProtoSignalPath
    */
-  constructor(SourceProtoPort, SinkProtoPort) {
+  constructor(OutputProtoPort, InputProtoPort) {
     /**
-     * Source proto-port (i.e. output port) of the proto-signal path.
+     * Output port (i.e. signal source) of the prototype signal path.
      * @type OcaProtoPort
      */
-    this.SourceProtoPort = SourceProtoPort;
+    this.OutputProtoPort = OutputProtoPort;
     /**
-     * Sink proto-port (i.e. input port) of the proto-signal path.
+     * Input prototype port (i.e. signal destination port) of the prototype
+     * signal path.
      * @type OcaProtoPort
      */
-    this.SinkProtoPort = SinkProtoPort;
+    this.InputProtoPort = InputProtoPort;
   }
 }

@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Types of time references.
+ * Types of time references. **This datatype is deprecated as of AES70-2023.**
  * @class OcaTimeReferenceType
  */
 export class OcaTimeReferenceType {
@@ -21,15 +21,11 @@ export class OcaTimeReferenceType {
   /**
    * Singleton object corresponding to the entry with value ``3``.
    */
-  static GPS: OcaTimeReferenceType;
+  static TAI: OcaTimeReferenceType;
   /**
-   * Singleton object corresponding to the entry with value ``4``.
+   * Singleton object corresponding to the entry with value ``128``.
    */
-  static Galileo: OcaTimeReferenceType;
-  /**
-   * Singleton object corresponding to the entry with value ``5``.
-   */
-  static GLONASS: OcaTimeReferenceType;
+  static ExpansionBase: OcaTimeReferenceType;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -57,12 +53,10 @@ export type IOcaTimeReferenceType =
   | 'Undefined'
   | 'Local'
   | 'Private'
-  | 'GPS'
-  | 'Galileo'
-  | 'GLONASS'
+  | 'TAI'
+  | 'ExpansionBase'
   | 0
   | 1
   | 2
   | 3
-  | 4
-  | 5;
+  | 128;

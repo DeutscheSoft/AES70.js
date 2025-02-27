@@ -1,25 +1,25 @@
 /*
  * This file has been generated.
  */
-import { IOcaProtoPortID, OcaProtoPortID } from './OcaProtoPortID';
+import { IOcaPortID, OcaPortID } from './OcaPortID';
 
 export declare interface IOcaProtoPort {
   /**
-   * Proto-object number of the proto-member that owns the proto-port. **The
-   * value of 0 (zero) is special, and refers to the block itself, rather than
-   * to any of its members.**
+   * Prototype object number of the prototype member that owns the prototype
+   * port. The value of 0 (zero) is special, and refers to the block itself,
+   * rather than to any of its members.
    * @type number
    */
   Owner: number;
 
   /**
-   * ID of the proto-port.
-   * @type OcaProtoPortID
+   * ID of the prototype port.
+   * @type OcaPortID
    */
-  ProtoID: IOcaProtoPortID;
+  ProtoID: IOcaPortID;
 
   /**
-   * Name of the proto-port.
+   * Name of the prototype port.
    * @type string
    */
   Name: string;
@@ -27,28 +27,26 @@ export declare interface IOcaProtoPort {
 
 export declare class OcaProtoPort implements IOcaProtoPort {
   /**
-   * Representation of an OCA (input or output) proto-port that is used in the
-   * proto-signal path representation of an OCA device.
    * @class OcaProtoPort
    */
-  constructor(Owner: number, ProtoID: OcaProtoPortID, Name: string);
+  constructor(Owner: number, ProtoID: OcaPortID, Name: string);
 
   /**
-   * Proto-object number of the proto-member that owns the proto-port. **The
-   * value of 0 (zero) is special, and refers to the block itself, rather than
-   * to any of its members.**
+   * Prototype object number of the prototype member that owns the prototype
+   * port. The value of 0 (zero) is special, and refers to the block itself,
+   * rather than to any of its members.
    * @type number
    */
   Owner: number;
 
   /**
-   * ID of the proto-port.
-   * @type OcaProtoPortID
+   * ID of the prototype port.
+   * @type OcaPortID
    */
-  ProtoID: OcaProtoPortID;
+  ProtoID: OcaPortID;
 
   /**
-   * Name of the proto-port.
+   * Name of the prototype port.
    * @type string
    */
   Name: string;

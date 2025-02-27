@@ -4,18 +4,19 @@
 import { Enum } from './Enum.js';
 
 /**
- * Select mode of **OcaGrouper**: master-slave or peer-to-peer
+ * Select mode of **OcaGrouper**: hierarchical or peer-to-peer. **Deprecated**
+ * in AES70-2024.
  * @class OcaGrouperMode
  */
 export class OcaGrouperMode extends Enum({
-  MasterSlave: 1,
+  Hierarchical: 1,
   PeerToPeer: 2,
 }) {}
 
 /**
  * Singleton object corresponding to the entry with value ``1``.
  * @type {OcaGrouperMode}
- * @member MasterSlave
+ * @member Hierarchical
  * @memberof OcaGrouperMode
  * @static
  */

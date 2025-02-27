@@ -3,7 +3,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaBasicActuator } from './OcaBasicActuator.js';
 
 /**
- * Basic int8 actuator.
+ * 8-bit signed integer actuator
  * @extends OcaBasicActuator
  * @class OcaInt8Actuator
  */
@@ -11,7 +11,7 @@ export const OcaInt8Actuator = make_control_class(
   'OcaInt8Actuator',
   5,
   '\u0001\u0001\u0001\u0001\u0002',
-  2,
+  3,
   OcaBasicActuator,
   [
     ['GetSetting', 5, 1, [], [OcaInt8, OcaInt8, OcaInt8]],
@@ -22,8 +22,7 @@ export const OcaInt8Actuator = make_control_class(
 );
 
 /**
- * Gets the value and limits of the **Setting** property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **Setting** property.
  * The return values of this method are
  *
  * - Setting of type ``number``
@@ -34,8 +33,7 @@ export const OcaInt8Actuator = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the **Setting** property. The return value indicates whether the
- * property was successfully set.
+ * Sets the **Setting** property.
  *
  * @method OcaInt8Actuator#SetSetting
  * @param {number} Setting

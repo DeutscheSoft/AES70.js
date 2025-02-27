@@ -14,16 +14,10 @@ export declare class OcaAgent extends OcaRoot {
    */
   OnLabelChanged: PropertyEvent<string>;
 
-  /**
-   * This event is emitted whenever Owner changes.
-   */
-  OnOwnerChanged: PropertyEvent<number>;
-
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Label property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the **Label** property.
    *
    * @method OcaAgent#GetLabel
    * @returns {Promise<string>}
@@ -32,8 +26,7 @@ export declare class OcaAgent extends OcaRoot {
   GetLabel(): Promise<string>;
 
   /**
-   * Sets the value of the Label property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the **Label** property.
    *
    * @method OcaAgent#SetLabel
    * @param {string} Label
@@ -43,8 +36,7 @@ export declare class OcaAgent extends OcaRoot {
   SetLabel(Label: string): Promise<void>;
 
   /**
-   * Gets the value of the Owner property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the **Owner** property.
    *
    * @method OcaAgent#GetOwner
    * @returns {Promise<number>}
@@ -53,11 +45,11 @@ export declare class OcaAgent extends OcaRoot {
   GetOwner(): Promise<number>;
 
   /**
-   * Returns path from the given object down to root. The return value indicates
-   * whether the operation succeeded. Added in version 2.
+   * Returns Role Path and ONo Path from the Root Block to this object. The
+   * return value indicates whether the operation succeeded.
    * The return values of this method are
    *
-   * - NamePath of type ``string[]``
+   * - RolePath of type ``string[]``
    * - ONoPath of type ``number[]``
    *
    * @method OcaAgent#GetPath

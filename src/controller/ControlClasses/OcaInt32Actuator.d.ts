@@ -4,7 +4,7 @@ import { RemoteDevice } from '../remote_device';
 import { OcaBasicActuator } from './OcaBasicActuator';
 
 /**
- * Basic int32 actuator.
+ * 32-bit signed integer actuator
  * @extends OcaBasicActuator
  * @class OcaInt32Actuator
  */
@@ -17,8 +17,7 @@ export declare class OcaInt32Actuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value and limits of the **Setting** property. The return value
-   * indicates whether the data was successfully retrieved.
+   * Gets the value and limits of the **Setting** property.
    * The return values of this method are
    *
    * - Setting of type ``number``
@@ -31,8 +30,7 @@ export declare class OcaInt32Actuator extends OcaBasicActuator {
   GetSetting(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the** Setting** property. The return value indicates whether the
-   * property was successfully set.
+   * Sets the** Setting** property.
    *
    * @method OcaInt32Actuator#SetSetting
    * @param {number} Setting

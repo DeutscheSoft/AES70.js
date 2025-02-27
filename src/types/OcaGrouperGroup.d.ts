@@ -4,20 +4,20 @@
 
 export declare interface IOcaGrouperGroup {
   /**
-   * Index of group in Grouper
+   * Index of Group in Grouper
    * @type number
    */
   Index: number;
 
   /**
-   * Name of the group.
+   * Name of Group
    * @type string
    */
   Name: string;
 
   /**
-   * Object number of the group's proxy. The proxy's class is the same as the
-   * Grouper's citizen class.
+   * Object Number of the Group's Proxy. The Proxy's class shall be the same as
+   * the Grouper's Citizen Class.
    * @type number
    */
   ProxyONo: number;
@@ -25,26 +25,26 @@ export declare interface IOcaGrouperGroup {
 
 export declare class OcaGrouperGroup implements IOcaGrouperGroup {
   /**
-   * Describes a group in a grouper.
+   * Describes a Group in a Grouper. **Deprecated** in AES70-2024.
    * @class OcaGrouperGroup
    */
   constructor(Index: number, Name: string, ProxyONo: number);
 
   /**
-   * Index of group in Grouper
+   * Index of Group in Grouper
    * @type number
    */
   Index: number;
 
   /**
-   * Name of the group.
+   * Name of Group
    * @type string
    */
   Name: string;
 
   /**
-   * Object number of the group's proxy. The proxy's class is the same as the
-   * Grouper's citizen class.
+   * Object Number of the Group's Proxy. The Proxy's class shall be the same as
+   * the Grouper's Citizen Class.
    * @type number
    */
   ProxyONo: number;

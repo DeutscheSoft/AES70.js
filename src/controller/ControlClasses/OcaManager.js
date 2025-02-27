@@ -13,7 +13,7 @@ export const OcaManager = make_control_class(
   'OcaManager',
   2,
   '\u0001\u0003',
-  2,
+  3,
   OcaRoot,
   [],
   [],

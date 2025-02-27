@@ -6,7 +6,6 @@ import { OcaMediaConnection } from '../../OCP1/OcaMediaConnection.js';
 import { OcaMediaConnectorCommand } from '../../OCP1/OcaMediaConnectorCommand.js';
 import { OcaMediaConnectorState } from '../../OCP1/OcaMediaConnectorState.js';
 import { OcaMediaConnectorStatus } from '../../OCP1/OcaMediaConnectorStatus.js';
-import { OcaMediaConnectorStatusChangedEventData } from '../../OCP1/OcaMediaConnectorStatusChangedEventData.js';
 import { OcaMediaSinkConnector } from '../../OCP1/OcaMediaSinkConnector.js';
 import { OcaMediaSinkConnectorChangedEventData } from '../../OCP1/OcaMediaSinkConnectorChangedEventData.js';
 import { OcaMediaSourceConnector } from '../../OCP1/OcaMediaSourceConnector.js';
@@ -50,15 +49,9 @@ export const OcaMediaTransportNetwork = make_control_class(
       3,
       15,
       [OcaMediaSourceConnector, OcaMediaConnectorState],
-      [OcaMediaSourceConnector],
+      [],
     ],
-    [
-      'AddSinkConnector',
-      3,
-      16,
-      [OcaMediaConnectorStatus, OcaMediaSinkConnector],
-      [OcaMediaSinkConnector],
-    ],
+    ['AddSinkConnector', 3, 16, [OcaMediaConnectorStatus], []],
     ['ControlConnector', 3, 17, [OcaUint16, OcaMediaConnectorCommand], []],
     [
       'SetSourceConnectorPinMap',
@@ -83,15 +76,7 @@ export const OcaMediaTransportNetwork = make_control_class(
     ['GetAlignmentGain', 3, 26, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
   ],
   [
-    [
-      'Protocol',
-      [OcaNetworkMediaProtocol],
-      3,
-      1,
-      false,
-      false,
-      ['MediaProtocol'],
-    ],
+    ['Protocol', [OcaNetworkMediaProtocol], 3, 1, false, false, null],
     ['Ports', [OcaList(OcaPort)], 3, 2, false, false, null],
     ['MaxSourceConnectors', [OcaUint16], 3, 3, false, false, null],
     ['MaxSinkConnectors', [OcaUint16], 3, 4, false, false, null],
@@ -101,9 +86,9 @@ export const OcaMediaTransportNetwork = make_control_class(
     ['AlignmentGain', [OcaFloat32], 3, 8, false, false, null],
   ],
   [
-    ['SourceConnectorChanged', 3, 1, [OcaMediaSourceConnectorChangedEventData]],
+    ['ConnectorStatusChanged', 3, 3, [OcaMediaConnectorStatus]],
     ['SinkConnectorChanged', 3, 2, [OcaMediaSinkConnectorChangedEventData]],
-    ['ConnectorStatusChanged', 3, 3, [OcaMediaConnectorStatusChangedEventData]],
+    ['SourceConnectorChanged', 3, 1, [OcaMediaSourceConnectorChangedEventData]],
   ]
 );
 
@@ -241,8 +226,7 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @param {IOcaMediaSourceConnector} Connector
  * @param {IOcaMediaConnectorState} InitialStatus
  *
- * @returns {Promise<OcaMediaSourceConnector>}
- *   A promise which resolves to a single value of type :class:`OcaMediaSourceConnector`.
+ * @returns {Promise<void>}
  */
 /**
  * Adds a sinkconnector to this network. Parameters of the new connector are
@@ -255,10 +239,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  *
  * @method OcaMediaTransportNetwork#AddSinkConnector
  * @param {IOcaMediaConnectorStatus} InitialStatus
- * @param {IOcaMediaSinkConnector} Connector
  *
- * @returns {Promise<OcaMediaSinkConnector>}
- *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
+ * @returns {Promise<void>}
  */
 /**
  * Change the state of a given connector. Return status indicates the success of
@@ -370,9 +352,8 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Event indicating that a media source connector has changed. The change type
- * indicates if the connector was added, deleted or changed.
- * @member OcaMediaTransportNetwork#OnSourceConnectorChanged {Event}
+ * Event indicating that the status of a source or sink connector has changed.
+ * @member OcaMediaTransportNetwork#OnConnectorStatusChanged {Event}
  */
 /**
  * Event indicating that a media sink connector has changed. The change type
@@ -380,8 +361,9 @@ export const OcaMediaTransportNetwork = make_control_class(
  * @member OcaMediaTransportNetwork#OnSinkConnectorChanged {Event}
  */
 /**
- * Event indicating that the status of a source or sink connector has changed.
- * @member OcaMediaTransportNetwork#OnConnectorStatusChanged {Event}
+ * Event indicating that a media source connector has changed. The change type
+ * indicates if the connector was added, deleted or changed.
+ * @member OcaMediaTransportNetwork#OnSourceConnectorChanged {Event}
  */
 /**
  * This event is emitted when the property ``Protocol`` changes in the remote object.
@@ -389,11 +371,6 @@ export const OcaMediaTransportNetwork = make_control_class(
  * Type of media transport protocol used by the network.
  *
  * @member {PropertyEvent<OcaNetworkMediaProtocol>} OcaMediaTransportNetwork#OnProtocolChanged
- */
-/**
- * An alias for OnProtocolChanged
- *
- * @member {PropertyEvent<OcaNetworkMediaProtocol>} OcaMediaTransportNetwork#OnMediaProtocolChanged
  */
 /**
  * This event is emitted when the property ``Ports`` changes in the remote object.

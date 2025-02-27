@@ -4,7 +4,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaBasicActuator } from './OcaBasicActuator.js';
 
 /**
- * String actuator.
+ * UTF-8 String actuator.
  * @extends OcaBasicActuator
  * @class OcaStringActuator
  */
@@ -12,7 +12,7 @@ export const OcaStringActuator = make_control_class(
   'OcaStringActuator',
   5,
   '\u0001\u0001\u0001\u0001\f',
-  2,
+  3,
   OcaBasicActuator,
   [
     ['GetSetting', 5, 1, [], [OcaString]],
@@ -27,24 +27,23 @@ export const OcaStringActuator = make_control_class(
 );
 
 /**
- * Gets the value and max length of the Value property. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value of the **Setting** property.
  *
  * @method OcaStringActuator#GetSetting
  * @returns {Promise<string>}
  *   A promise which resolves to a single value of type ``string``.
  */
 /**
- * Sets the value of the Value property. The return value indicates whether the
- * property was successfully set.
+ * Sets the value of the **Setting** property.
  *
  * @method OcaStringActuator#SetSetting
- * @param {string} Value
+ * @param {string} Setting
  *
  * @returns {Promise<void>}
  */
 /**
- * Gets the maximum string length that this object can handle.
+ * Output parameter that shall hold the maximum allowable length of the Setting
+ * property if the method succeeds
  *
  * @method OcaStringActuator#GetMaxLen
  * @returns {Promise<number>}

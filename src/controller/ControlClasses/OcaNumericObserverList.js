@@ -42,20 +42,20 @@ import { OcaAgent } from './OcaAgent.js';
  *  - For signed integer targets, the threshold and target are both coerced to
  *    **OcaInt64** before comparing.
  *
- *  - For boolean values, the threshold hreshold and target are both coerced to
+ *  - For boolean values, the threshold and target are both coerced to
  *    **OcaUint8**, True is assigned the value One, False is assigned the value
  *    Zero.
  *
  *
  * Note that this coercion may result in rounding errors if the observed
- * datatype is of type OcaUint64 or OcaUint64. An **OcaNumericObserver**
+ * datatype is of type **OcaUint64** or **OcaInt64**. An **OcaNumericObserver**
  * instance and the property it observes are bound at the time the
  * **OcaNumericObserver** instance is constructed. For static devices,
  * construction will occur during manufacture, or possibly during a subsequent
  * hardware configuration step. For reconfigurable devices, construction might
  * be done by online controllers as part of device configuration sessions. This
- * class is normally used for monitoring readings of sensor readings, but may be
- * used equally well for watching workers' parameter settings.
+ * class is normally used for monitoring sensor readings, but may be used
+ * equally well for watching workers' parameter settings.
  * @extends OcaAgent
  * @class OcaNumericObserverList
  */
@@ -63,7 +63,7 @@ export const OcaNumericObserverList = make_control_class(
   'OcaNumericObserverList',
   3,
   '\u0001\u0002\t',
-  2,
+  3,
   OcaAgent,
   [
     ['GetLastObservation', 3, 1, [], [OcaList(OcaFloat64)]],
@@ -100,16 +100,14 @@ export const OcaNumericObserverList = make_control_class(
  * of values in the returned list is determined by the order of values set by
  * SetObservedProperties, and is the same as the order of values returned by the
  * Observation event, and the same as the order of object identifications
- * returned by GetObservedProperties. The return status indicates whether the
- * value has been successfully returned.
+ * returned by GetObservedProperties.
  *
  * @method OcaNumericObserverList#GetLastObservation
  * @returns {Promise<number[]>}
  *   A promise which resolves to a single value of type ``number[]``.
  */
 /**
- * Gets the observer's state. The return value indicates whether the state was
- * successfully retrieved.
+ * Gets the observer's state.
  *
  * @method OcaNumericObserverList#GetState
  * @returns {Promise<OcaObserverState>}
@@ -118,10 +116,9 @@ export const OcaNumericObserverList = make_control_class(
 /**
  * Gets the identifications of the properties that the observer observes. The
  * order of property identifications in the returned list is determined by the
- * order of property identifications set by SetObservedProperties, and is the
- * same as the order of values returned by GetLastObservation and the
- * Observation event. The return value indicates whether the identifications
- * were successfully retrieved.
+ * order of property identifications set by **SetObservedProperties**, and is
+ * the same as the order of values returned by **GetLastObservation** and the
+ * **Observation** event.
  *
  * @method OcaNumericObserverList#GetObservedProperties
  * @returns {Promise<OcaProperty[]>}
@@ -130,9 +127,8 @@ export const OcaNumericObserverList = make_control_class(
 /**
  * Sets the identifications of the properties that the observer observes. The
  * order of property identifications supplied determines the order of property
- * identifications returned by GetObservedProperties and the order of values
- * returned by GetLastObservation and the Observation event. The return value
- * indicates whether the identifications were successfully set.
+ * identifications returned by **GetObservedProperties** and the order of values
+ * returned by **GetLastObservation** and the **Observation** event.
  *
  * @method OcaNumericObserverList#SetObservedProperties
  * @param {IOcaProperty[]} property
@@ -140,16 +136,14 @@ export const OcaNumericObserverList = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the **Threshold** property. The return value indicates
- * whether the threshold value was successfully retrieved.
+ * Gets the value of the **Threshold** property.
  *
  * @method OcaNumericObserverList#GetThreshold
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the **Threshold** property. The return value indicates
- * whether the threshold value was successfully set.
+ * Sets the value of the **Threshold** property.
  *
  * @method OcaNumericObserverList#SetThreshold
  * @param {number} Threshold
@@ -165,8 +159,7 @@ export const OcaNumericObserverList = make_control_class(
  *   A promise which resolves to a single value of type :class:`OcaRelationalOperator`.
  */
 /**
- * Sets the value of the **Operator** property. The return value indicates
- * whether the operator was successfully set.
+ * Sets the value of the **Operator** property.
  *
  * @method OcaNumericObserverList#SetOperator
  * @param {IOcaRelationalOperator} operator
@@ -174,16 +167,14 @@ export const OcaNumericObserverList = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the **TwoWay** property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the **TwoWay** property.
  *
  * @method OcaNumericObserverList#GetTwoWay
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the value of the **TwoWay** property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **TwoWay** property.
  *
  * @method OcaNumericObserverList#SetTwoWay
  * @param {boolean} twoWay
@@ -191,16 +182,14 @@ export const OcaNumericObserverList = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the **Hysteresis** property. The return value indicates
- * whether the property was successfully retrieved.
+ * Gets the value of the **Hysteresis** property.
  *
  * @method OcaNumericObserverList#GetHysteresis
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the **Hysteresis** property. The return value indicates
- * whether the property was successfully set.
+ * Sets the value of the **Hysteresis** property.
  *
  * @method OcaNumericObserverList#SetHysteresis
  * @param {number} hysteresis
@@ -208,16 +197,14 @@ export const OcaNumericObserverList = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the value of the **Period** property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value of the **Period** property.
  *
  * @method OcaNumericObserverList#GetPeriod
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Sets the value of the **Period** property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **Period** property.
  *
  * @method OcaNumericObserverList#SetPeriod
  * @param {number} period
@@ -244,7 +231,7 @@ export const OcaNumericObserverList = make_control_class(
 /**
  * This event is emitted when the property ``ObservedProperties`` changes in the remote object.
  * The property ``ObservedProperties`` is described in the AES70 standard as follows.
- * List of identifiers of the properties are being observed.
+ * List of identifiers of the properties being observed.
  *
  * @member {PropertyEvent<OcaProperty[]>} OcaNumericObserverList#OnObservedPropertiesChanged
  */
@@ -286,16 +273,16 @@ export const OcaNumericObserverList = make_control_class(
  * **Operator** property is 'Inequality'. If the State is **Not Triggered** it
  * changes to **Triggered** if any of the ObservedProperties reaches the
  * Threshold. If the State is **Triggered** it changes to **Not Triggered** only
- * if all of the ObservedProperties no longer meet the ‘Threshold including
- * Hysteresis’** .**
+ * if all of the ObservedProperties no longer meet the �Threshold including
+ * Hysteresis�** .**
  *
  * @member {PropertyEvent<number>} OcaNumericObserverList#OnHysteresisChanged
  */
 /**
  * This event is emitted when the property ``Period`` changes in the remote object.
  * The property ``Period`` is described in the AES70 standard as follows.
- * Repetition period or zero. If nonzero, the observer will retrieve the value
- * and emit
+ * Repetition period or zero. Zero value means the **Observation** event is not
+ * emitted periodically.
  *
  * @member {PropertyEvent<number>} OcaNumericObserverList#OnPeriodChanged
  */

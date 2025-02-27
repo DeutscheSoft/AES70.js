@@ -21,7 +21,7 @@ export const OcaCodingManager = make_control_class(
   'OcaCodingManager',
   3,
   '\u0001\u0003\f',
-  1,
+  3,
   OcaManager,
   [
     ['GetAvailableEncodingSchemes', 3, 1, [], [OcaMap(OcaUint16, OcaString)]],

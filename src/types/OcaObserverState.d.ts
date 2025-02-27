@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Interpolation law for ramper to use.
+ * State of observer
  * @class OcaObserverState
  */
 export class OcaObserverState {

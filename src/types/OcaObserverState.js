@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Interpolation law for ramper to use.
+ * State of observer
  * @class OcaObserverState
  */
 export class OcaObserverState extends Enum({

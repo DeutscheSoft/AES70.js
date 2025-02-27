@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Lock states of media clocks.
+ * Availability states of a Media Clock
  * @class OcaMediaClockAvailability
  */
 export class OcaMediaClockAvailability {

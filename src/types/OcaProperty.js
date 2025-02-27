@@ -4,8 +4,8 @@
 
 export class OcaProperty {
   /**
-   * Template for complete identification of an OCA property instance, including
-   * object number, property ID, Get and Set method IDs, and datatype.
+   * Identification of an OCA property instance, including object number,
+   * property ID, Get and Set method IDs, and datatype.
    * @class OcaProperty
    */
   constructor(ONo, Descriptor) {

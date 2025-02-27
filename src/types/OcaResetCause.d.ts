@@ -22,6 +22,10 @@ export class OcaResetCause {
    * Singleton object corresponding to the entry with value ``3``.
    */
   static ExternalRequest: OcaResetCause;
+  /**
+   * Singleton object corresponding to the entry with value ``255``.
+   */
+  static Unknown: OcaResetCause;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -50,7 +54,9 @@ export type IOcaResetCause =
   | 'InternalError'
   | 'Upgrade'
   | 'ExternalRequest'
+  | 'Unknown'
   | 0
   | 1
   | 2
-  | 3;
+  | 3
+  | 255;

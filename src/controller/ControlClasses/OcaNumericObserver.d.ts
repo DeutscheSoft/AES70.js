@@ -19,10 +19,10 @@ import { OcaAgent } from './OcaAgent';
  *    comparison condition. A selection of comparison operators is available.
  *    Such observations are called "asynchronous observations".
  *
- *  - **Timer expiry**. The value of the** Period** property, if nonzero, is a
- *    the time interval for the recurrent timed emission of **Observation**
- *    events. Such events ("periodic observations") are emitted regardless of
- *    the target property's value.
+ *  - **Timer expiry**. The value of the** Period** property, if nonzero, is the
+ *    time interval for the recurrent timed emission of **Observation** events.
+ *    Such events ("periodic observations") are emitted regardless of the target
+ *    property's value.
  *
  *  - **Combination of (1) and (2)**. If a numeric comparison and a nonzero
  *    period are both specified, then the **Observation** event is emitted when
@@ -39,27 +39,26 @@ import { OcaAgent } from './OcaAgent';
  *  - For signed integer targets, the threshold and target are both coerced to
  *    **OcaInt64** before comparing.
  *
- *  - For boolean values, the threshold hreshold and target are both coerced to
+ *  - For boolean values, the threshold threshold and target are both coerced to
  *    **OcaUint8**, True is assigned the value One, False is assigned the value
  *    Zero.
  *
  *
  * Note that this coercion may result in rounding errors if the observed
- * datatype is of type OcaUint64 or OcaUint64. An **OcaNumericObserver**
+ * datatype is of type **OcaUint64** or **OcaInt64**. An **OcaNumericObserver**
  * instance and the property it observes are bound at the time the
  * **OcaNumericObserver** instance is constructed. For static devices,
  * construction will occur during manufacture, or possibly during a subsequent
  * hardware configuration step. For reconfigurable devices, construction might
  * be done by online controllers as part of device configuration sessions. This
- * class is normally used for monitoring readings of sensor readings, but may be
- * used equally well for watching workers' parameter settings.
+ * class is normally used for monitoring sensor readings, but may be used
+ * equally well for watching workers' parameter settings.
  * @extends OcaAgent
  * @class OcaNumericObserver
  */
 export declare class OcaNumericObserver extends OcaAgent {
   /**
-   * Event emitted to signal an asynchronous, periodic, or conditional-periodic
-   * observation.
+   * Gets state of the Observer.
    * @member OcaNumericObserver#OnObservation {Event}
    */
   OnObservation: Event;
@@ -102,9 +101,8 @@ export declare class OcaNumericObserver extends OcaAgent {
 
   /**
    * Gets the value of the observed property that was reported by the most
-   * recently emitted Observation event. If the numeric observer has never
-   * emitted an Observation event, returns the IEEE not-a-number value. The
-   * return status indicates whether the value has been successfully returned.
+   * recently emitted **Observation** event. If the numeric observer has never
+   * emitted an **Observation** event, returns the IEEE not-a-number value.
    *
    * @method OcaNumericObserver#GetLastObservation
    * @returns {Promise<number>}
@@ -113,8 +111,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetLastObservation(): Promise<number>;
 
   /**
-   * Gets the observer's state. The return value indicates whether the state was
-   * successfully retrieved.
+   * Gets the value of the **State** property.
    *
    * @method OcaNumericObserver#GetState
    * @returns {Promise<OcaObserverState>}
@@ -123,9 +120,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetState(): Promise<OcaObserverState>;
 
   /**
-   * Gets the identification of the property that the observer observes. The
-   * return value indicates whether the identification was successfully
-   * retrieved.
+   * Gets the identification of the property that the observer is observing.
    *
    * @method OcaNumericObserver#GetObservedProperty
    * @returns {Promise<OcaProperty>}
@@ -134,8 +129,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetObservedProperty(): Promise<OcaProperty>;
 
   /**
-   * Sets the identification of the property that the observer observes. The
-   * return value indicates whether the identification was successfully set.
+   * Sets the identification of the property that the observer shall observe.
    *
    * @method OcaNumericObserver#SetObservedProperty
    * @param {IOcaProperty} property
@@ -145,8 +139,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   SetObservedProperty(property: IOcaProperty): Promise<void>;
 
   /**
-   * Gets the value of the **Threshold** property. The return value indicates
-   * whether the threshold value was successfully retrieved.
+   * Gets the value of the **Threshold** property.
    *
    * @method OcaNumericObserver#GetThreshold
    * @returns {Promise<number>}
@@ -155,8 +148,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetThreshold(): Promise<number>;
 
   /**
-   * Sets the value of the **Threshold** property. The return value indicates
-   * whether the threshold value was successfully set.
+   * Sets the value of the **Threshold** property.
    *
    * @method OcaNumericObserver#SetThreshold
    * @param {number} Threshold
@@ -166,8 +158,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   SetThreshold(Threshold: number): Promise<void>;
 
   /**
-   * Gets the value of the **Operator** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **Operator** property.
    *
    * @method OcaNumericObserver#GetOperator
    * @returns {Promise<OcaRelationalOperator>}
@@ -176,8 +167,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetOperator(): Promise<OcaRelationalOperator>;
 
   /**
-   * Sets the value of the **Operator** property. The return value indicates
-   * whether the operator was successfully set.
+   * Sets the value of the **Operator** property.
    *
    * @method OcaNumericObserver#SetOperator
    * @param {IOcaRelationalOperator} operator
@@ -187,8 +177,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   SetOperator(operator: IOcaRelationalOperator): Promise<void>;
 
   /**
-   * Gets the value of the **TwoWay** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **TwoWay** property.
    *
    * @method OcaNumericObserver#GetTwoWay
    * @returns {Promise<boolean>}
@@ -197,8 +186,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetTwoWay(): Promise<boolean>;
 
   /**
-   * Sets the value of the **TwoWay** property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **TwoWay** property.
    *
    * @method OcaNumericObserver#SetTwoWay
    * @param {boolean} twoWay
@@ -208,8 +196,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   SetTwoWay(twoWay: boolean): Promise<void>;
 
   /**
-   * Gets the value of the **Hysteresis** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **Hysteresis** property.
    *
    * @method OcaNumericObserver#GetHysteresis
    * @returns {Promise<number>}
@@ -218,8 +205,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetHysteresis(): Promise<number>;
 
   /**
-   * Sets the value of the **Hysteresis** property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **Hysteresis** property.
    *
    * @method OcaNumericObserver#SetHysteresis
    * @param {number} hysteresis
@@ -229,8 +215,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   SetHysteresis(hysteresis: number): Promise<void>;
 
   /**
-   * Gets the value of the **Period** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **Period** property.
    *
    * @method OcaNumericObserver#GetPeriod
    * @returns {Promise<number>}
@@ -239,8 +224,7 @@ export declare class OcaNumericObserver extends OcaAgent {
   GetPeriod(): Promise<number>;
 
   /**
-   * Sets the value of the **Period** property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **Period** property.
    *
    * @method OcaNumericObserver#SetPeriod
    * @param {number} period

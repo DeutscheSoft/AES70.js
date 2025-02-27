@@ -8,7 +8,7 @@ export class OcaPort {
    * path representation of an OCA device.
    * @class OcaPort
    */
-  constructor(Owner, ID, Name) {
+  constructor(Owner, ID, Role) {
     /**
      * Object number of the object that owns the port.
      * @type number
@@ -20,9 +20,10 @@ export class OcaPort {
      */
     this.ID = ID;
     /**
-     * Port ID of the port.
+     * Role of the port in the containing object. Values beginning with "oca" in
+     * any character case are reserved for AES use.
      * @type string
      */
-    this.Name = Name;
+    this.Role = Role;
   }
 }

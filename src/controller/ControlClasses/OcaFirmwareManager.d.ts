@@ -40,8 +40,7 @@ export declare class OcaFirmwareManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the ComponentVersions property. The return value
-   * indicates whether the property was successfully retrieved.
+   * Gets the value of the ComponentVersions property.
    *
    * @method OcaFirmwareManager#GetComponentVersions
    * @returns {Promise<OcaVersion[]>}
@@ -54,8 +53,7 @@ export declare class OcaFirmwareManager extends OcaManager {
    * components will be updated. If the method succeeds the device will be in
    * state 'Updating'. One or more active or passive updates can then follow,
    * after which the update process is ended by calling the '03m08
-   * EndUpdateProcess' method. The return value indicates if starting the update
-   * process succeeded.
+   * EndUpdateProcess' method.
    *
    * @method OcaFirmwareManager#StartUpdateProcess
    * @returns {Promise<void>}
@@ -70,8 +68,7 @@ export declare class OcaFirmwareManager extends OcaManager {
    * may implement separate processes for different components, but in each case
    * the interface is the same. The active interface consists of this method and
    * the methods 03m03 AddImageData, 03m04 VerifyImage and 03m05
-   * EndActiveImageUpdate. The return value indicates if starting the active
-   * update succeeded.
+   * EndActiveImageUpdate.
    *
    * @method OcaFirmwareManager#BeginActiveImageUpdate
    * @param {IOcaComponent} component
@@ -85,8 +82,7 @@ export declare class OcaFirmwareManager extends OcaManager {
    * part of the active update. Where this data is stored, is up to the
    * implementation of the manager. It can either be stored in RAM to be written
    * to Flash later, or directly to Flash, dependent on the chosen architecture
-   * and requirements. The return value indicates whether the data is correctly
-   * received and the data is not out of order.
+   * and requirements.
    *
    * @method OcaFirmwareManager#AddImageData
    * @param {number} id
@@ -111,8 +107,7 @@ export declare class OcaFirmwareManager extends OcaManager {
    * Ends the active software/firmware image update. This is needed to let the
    * device know that the current active component has finished, and therefore a
    * new active or passive update can be started (or the upload process can be
-   * ended by invoking the '03m08 EndUpdateProcess' method). The return value
-   * indicates if ending the active update succeeded.
+   * ended by invoking the '03m08 EndUpdateProcess' method).
    *
    * @method OcaFirmwareManager#EndActiveImageUpdate
    * @returns {Promise<void>}
@@ -150,7 +145,7 @@ export declare class OcaFirmwareManager extends OcaManager {
    * start using the new images. This should bring the device back into standard
    * operational mode (e.g. rebooting the device, this however depends on the
    * implementation of the upgrade process). As it will usually trigger a reset
-   * of the device in some cases no response parameter is used for this method.
+   * of the device, no response parameter is defined for this method.
    *
    * @method OcaFirmwareManager#EndUpdateProcess
    * @returns {Promise<void>}

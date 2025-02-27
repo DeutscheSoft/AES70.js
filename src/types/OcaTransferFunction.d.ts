@@ -24,7 +24,7 @@ export declare interface IOcaTransferFunction {
 
 export declare class OcaTransferFunction implements IOcaTransferFunction {
   /**
-   * A complex (i.e. magnitude + phase) transfer function.
+   * Complex (i.e. magnitude + phase) transfer function.
    * @class OcaTransferFunction
    */
   constructor(Frequency: number[], Amplitude: number[], Phase: number[]);

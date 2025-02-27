@@ -4,15 +4,16 @@ import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaTask } from '../../OCP1/OcaTask.js';
 import { OcaTaskCommand } from '../../OCP1/OcaTaskCommand.js';
 import { OcaTaskManagerState } from '../../OCP1/OcaTaskManagerState.js';
-import { OcaTaskStateChangedEventData } from '../../OCP1/OcaTaskStateChangedEventData.js';
 import { OcaTaskStatus } from '../../OCP1/OcaTaskStatus.js';
+import { OcaTaskStatusChangedEventData } from '../../OCP1/OcaTaskStatusChangedEventData.js';
 import { OcaUint16 } from '../../OCP1/OcaUint16.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 
 /**
- * Optional manager that collects OcaTask and OcaProgram objects.
+ * This class is **deprecated** in version 2 (OCA 1.5). Optional manager that
+ * collects **OcaTask** and **OcaProgram** objects.
  *
  *  - May be instantiated once in any device.
  *
@@ -42,7 +43,7 @@ export const OcaTaskManager = make_control_class(
   'OcaTaskManager',
   3,
   '\u0001\u0003\u000b',
-  1,
+  3,
   OcaManager,
   [
     ['Enable', 3, 1, [OcaBoolean], []],
@@ -52,7 +53,7 @@ export const OcaTaskManager = make_control_class(
     ['GetState', 3, 5, [], [OcaTaskManagerState]],
     ['GetTaskStatuses', 3, 6, [], [OcaTaskStatus]],
     ['GetTaskStatus', 3, 7, [OcaUint32], [OcaTaskStatus]],
-    ['AddTask', 3, 8, [OcaTask], [OcaTask]],
+    ['AddTask', 3, 8, [], []],
     ['GetTasks', 3, 9, [], [OcaMap(OcaUint32, OcaTask)]],
     ['GetTask', 3, 10, [OcaUint32], [OcaTask]],
     ['SetTask', 3, 11, [OcaUint32, OcaTask], []],
@@ -62,7 +63,7 @@ export const OcaTaskManager = make_control_class(
     ['State', [OcaTaskManagerState], 3, 1, false, false, null],
     ['Tasks', [OcaMap(OcaUint32, OcaTask)], 3, 2, false, false, null],
   ],
-  [['TaskStateChanged', 3, 1, [OcaTaskStateChangedEventData]]]
+  [['TaskStateChanged', 3, 1, [OcaTaskStatusChangedEventData]]]
 );
 
 /**
@@ -137,10 +138,7 @@ export const OcaTaskManager = make_control_class(
  * successfully created.
  *
  * @method OcaTaskManager#AddTask
- * @param {IOcaTask} Task
- *
- * @returns {Promise<OcaTask>}
- *   A promise which resolves to a single value of type :class:`OcaTask`.
+ * @returns {Promise<void>}
  */
 /**
  * Gets map of Tasks in the device. Return value indicates whether map was

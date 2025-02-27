@@ -1,7 +1,10 @@
+import { OcaDeviceOperationalState } from '../../types/OcaDeviceOperationalState';
 import { IOcaDeviceState } from '../../types/OcaDeviceState';
 import { OcaManagerDescriptor } from '../../types/OcaManagerDescriptor';
+import { OcaManufacturer } from '../../types/OcaManufacturer';
 import { OcaModelDescription } from '../../types/OcaModelDescription';
 import { OcaModelGUID } from '../../types/OcaModelGUID';
+import { OcaProduct } from '../../types/OcaProduct';
 import { OcaResetCause } from '../../types/OcaResetCause';
 import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
@@ -25,11 +28,6 @@ export declare class OcaDeviceManager extends OcaManager {
   OnModelGUIDChanged: PropertyEvent<OcaModelGUID>;
 
   /**
-   * This event is emitted whenever SerialNumber changes.
-   */
-  OnSerialNumberChanged: PropertyEvent<string>;
-
-  /**
    * This event is emitted whenever ModelDescription changes.
    */
   OnModelDescriptionChanged: PropertyEvent<OcaModelDescription>;
@@ -40,25 +38,28 @@ export declare class OcaDeviceManager extends OcaManager {
   OnDeviceNameChanged: PropertyEvent<string>;
 
   /**
-   * This event is emitted whenever OcaVersion changes.
-   */
-  OnOcaVersionChanged: PropertyEvent<number>;
-
-  /**
    * This event is emitted whenever DeviceRole changes.
    */
   OnDeviceRoleChanged: PropertyEvent<string>;
 
+  /**
+   * An alias for OnDeviceRoleChanged
+   */
+  OnRoleChanged: PropertyEvent<string>;
   /**
    * This event is emitted whenever UserInventoryCode changes.
    */
   OnUserInventoryCodeChanged: PropertyEvent<string>;
 
   /**
-   * This event is emitted whenever Enabled changes.
+   * This event is emitted whenever ControlEnabled changes.
+   */
+  OnControlEnabledChanged: PropertyEvent<boolean>;
+
+  /**
+   * An alias for OnControlEnabledChanged
    */
   OnEnabledChanged: PropertyEvent<boolean>;
-
   /**
    * This event is emitted whenever State changes.
    */
@@ -70,11 +71,6 @@ export declare class OcaDeviceManager extends OcaManager {
   OnBusyChanged: PropertyEvent<boolean>;
 
   /**
-   * This event is emitted whenever ResetCause changes.
-   */
-  OnResetCauseChanged: PropertyEvent<OcaResetCause>;
-
-  /**
    * This event is emitted whenever Message changes.
    */
   OnMessageChanged: PropertyEvent<string>;
@@ -84,11 +80,25 @@ export declare class OcaDeviceManager extends OcaManager {
    */
   OnManagersChanged: PropertyEvent<OcaManagerDescriptor[]>;
 
+  /**
+   * This event is emitted whenever OperationalState changes.
+   */
+  OnOperationalStateChanged: PropertyEvent<OcaDeviceOperationalState>;
+
+  /**
+   * This event is emitted whenever LoggingEnabled changes.
+   */
+  OnLoggingEnabledChanged: PropertyEvent<boolean>;
+
+  /**
+   * This event is emitted whenever MostRecentPatchDatasetONo changes.
+   */
+  OnMostRecentPatchDatasetONoChanged: PropertyEvent<number>;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the OcaVersion property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **OcaVersion** property.
    *
    * @method OcaDeviceManager#GetOcaVersion
    * @returns {Promise<number>}
@@ -97,8 +107,8 @@ export declare class OcaDeviceManager extends OcaManager {
   GetOcaVersion(): Promise<number>;
 
   /**
-   * Gets the model GUID. The return value indicates whether the GUID was
-   * successfully retrieved.
+   * Gets the model GUID. **Deprecated** in v3 of this class, replaced by
+   * **GetProduct()** .
    *
    * @method OcaDeviceManager#GetModelGUID
    * @returns {Promise<OcaModelGUID>}
@@ -107,8 +117,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetModelGUID(): Promise<OcaModelGUID>;
 
   /**
-   * Gets the value of the SerialNumber property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **SerialNumber** property.
    *
    * @method OcaDeviceManager#GetSerialNumber
    * @returns {Promise<string>}
@@ -117,8 +126,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetSerialNumber(): Promise<string>;
 
   /**
-   * Gets the device name. The return value indicates whether the property was
-   * successfully retrieved.
+   * Gets the device name.
    *
    * @method OcaDeviceManager#GetDeviceName
    * @returns {Promise<string>}
@@ -127,8 +135,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetDeviceName(): Promise<string>;
 
   /**
-   * Sets the device name. The return value indicates whether the property was
-   * successfully set.
+   * Sets the device name.
    *
    * @method OcaDeviceManager#SetDeviceName
    * @param {string} Name
@@ -138,8 +145,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetDeviceName(Name: string): Promise<void>;
 
   /**
-   * Gets the model description. The return value indicates whether the
-   * description was successfully retrieved.
+   * Gets the model description. **Deprecated** in v3 of this class, replaced
+   * by** GetProduct()** .
    *
    * @method OcaDeviceManager#GetModelDescription
    * @returns {Promise<OcaModelDescription>}
@@ -148,8 +155,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetModelDescription(): Promise<OcaModelDescription>;
 
   /**
-   * Gets the value of the Role property. The return value indicates whether the
-   * property was successfully retrieved.
+   * Gets the value of the **DeviceRole** property.
    *
    * @method OcaDeviceManager#GetDeviceRole
    * @returns {Promise<string>}
@@ -158,8 +164,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetDeviceRole(): Promise<string>;
 
   /**
-   * Sets the value of the Role property. The return value indicates whether the
-   * property was successfully set.
+   * Sets the value of the **DeviceRole** property.
    *
    * @method OcaDeviceManager#SetDeviceRole
    * @param {string} role
@@ -169,8 +174,7 @@ export declare class OcaDeviceManager extends OcaManager {
   SetDeviceRole(role: string): Promise<void>;
 
   /**
-   * Gets the value of the UserInventoryCode property. The return value
-   * indicates whether the property was successfully retrieved.
+   * Gets the value of the **UserInventoryCode** property.
    *
    * @method OcaDeviceManager#GetUserInventoryCode
    * @returns {Promise<string>}
@@ -179,8 +183,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetUserInventoryCode(): Promise<string>;
 
   /**
-   * Sets the value of the UserInventoryCode property. The return value
-   * indicates whether the property was successfully set.
+   * Sets the value of the **UserInventoryCode** property.
    *
    * @method OcaDeviceManager#SetUserInventoryCode
    * @param {string} Code
@@ -190,8 +193,7 @@ export declare class OcaDeviceManager extends OcaManager {
   SetUserInventoryCode(Code: string): Promise<void>;
 
   /**
-   * Gets the value of the Enabled property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the **Enabled** property. Deprecated in v3 of this class.
    *
    * @method OcaDeviceManager#GetEnabled
    * @returns {Promise<boolean>}
@@ -200,8 +202,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetEnabled(): Promise<boolean>;
 
   /**
-   * Sets the value of the Enabled property. The return value indicates whether
-   * the property was successfully set.
+   * Sets the value of the **Enabled** property. Deprecated in v3 of this class.
    *
    * @method OcaDeviceManager#SetEnabled
    * @param {boolean} enabled
@@ -211,8 +212,8 @@ export declare class OcaDeviceManager extends OcaManager {
   SetEnabled(enabled: boolean): Promise<void>;
 
   /**
-   * Gets the value of the State property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the State property. **Deprecated** in v3 of this class,
+   * replaced by **.GetOperationalState() .**
    *
    * @method OcaDeviceManager#GetState
    * @returns {Promise<IOcaDeviceState>}
@@ -221,10 +222,9 @@ export declare class OcaDeviceManager extends OcaManager {
   GetState(): Promise<IOcaDeviceState>;
 
   /**
-   * Sets the value of the reset key of the device. The return value indicates
-   * whether the property was successfully set. Note that the device manager
-   * must inform the CAP gateway of this key (via the host interface), since the
-   * CAP gateway will check for and handle the special reset message.
+   * Sets the value of the reset key and the required source address for the
+   * reset command. If given address is null, all source addresses will be
+   * accepted.
    *
    * @method OcaDeviceManager#SetResetKey
    * @param {Uint8Array} Key
@@ -235,8 +235,7 @@ export declare class OcaDeviceManager extends OcaManager {
   SetResetKey(Key: Uint8Array, Address: Uint8Array): Promise<void>;
 
   /**
-   * Gets the value of the ResetCause property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **ResetCause** property.
    *
    * @method OcaDeviceManager#GetResetCause
    * @returns {Promise<OcaResetCause>}
@@ -245,13 +244,12 @@ export declare class OcaDeviceManager extends OcaManager {
   GetResetCause(): Promise<OcaResetCause>;
 
   /**
-   * Clears the ResetCause property, i.e. resets it to the default value
+   * Clears the **ResetCause** property, i.e. resets it to the default value
    * 'PowerOn'. Must be used after the reset cause has been read out to ensure
-   * differentation between reconnects due to network loss and reconnects due to
-   * external or internal reset. Offered as a separate method (instead of
-   * implicitly clearing the cause after it has been read out) to accomodate
-   * systems that have multiple controllers. The return value indicates whether
-   * the property was successfully retrieved.
+   * differentiation between reconnects due to network loss and reconnects due
+   * to external or internal reset. Offered as a separate method (instead of
+   * implicitly clearing the cause after it has been read out) to accommodate
+   * systems that have multiple controllers.
    *
    * @method OcaDeviceManager#ClearResetCause
    * @returns {Promise<void>}
@@ -259,8 +257,7 @@ export declare class OcaDeviceManager extends OcaManager {
   ClearResetCause(): Promise<void>;
 
   /**
-   * Gets the value of property **Message**. Return value indicates whether
-   * value was successfully retrieved.
+   * Gets the value of property **Message**.
    *
    * @method OcaDeviceManager#GetMessage
    * @returns {Promise<string>}
@@ -269,8 +266,7 @@ export declare class OcaDeviceManager extends OcaManager {
   GetMessage(): Promise<string>;
 
   /**
-   * Set arbitrary text message into **Message** property. The return value
-   * indicates whether the value was successfully set.
+   * Set arbitrary text message into **Message** property.
    *
    * @method OcaDeviceManager#SetMessage
    * @param {string} Text
@@ -281,7 +277,6 @@ export declare class OcaDeviceManager extends OcaManager {
 
   /**
    * Retrive the list of descriptors of managers instantiated in this device.
-   * The return value indicates whether the retrieval was successful.
    *
    * @method OcaDeviceManager#GetManagers
    * @returns {Promise<OcaManagerDescriptor[]>}
@@ -290,12 +285,78 @@ export declare class OcaDeviceManager extends OcaManager {
   GetManagers(): Promise<OcaManagerDescriptor[]>;
 
   /**
-   * Gets the value of property **DeviceRevisionID**. Return value indicates
-   * whether value was successfully retrieved.
+   * Gets the value of deprecated property **DeviceRevisionID**. **Deprecated**
+   * in v3 of this class, replaced by **.GetProduct()** .
    *
    * @method OcaDeviceManager#GetDeviceRevisionID
    * @returns {Promise<string>}
    *   A promise which resolves to a single value of type ``string``.
    */
   GetDeviceRevisionID(): Promise<string>;
+
+  /**
+   * Gets the device's manufacturer descriptor.
+   *
+   * @method OcaDeviceManager#GetManufacturer
+   * @returns {Promise<OcaManufacturer>}
+   *   A promise which resolves to a single value of type :class:`OcaManufacturer`.
+   */
+  GetManufacturer(): Promise<OcaManufacturer>;
+
+  /**
+   * Gets the device's product descriptor.
+   *
+   * @method OcaDeviceManager#GetProduct
+   * @returns {Promise<OcaProduct>}
+   *   A promise which resolves to a single value of type :class:`OcaProduct`.
+   */
+  GetProduct(): Promise<OcaProduct>;
+
+  /**
+   * Gets the device's operational state.
+   *
+   * @method OcaDeviceManager#GetOperationalState
+   * @returns {Promise<OcaDeviceOperationalState>}
+   *   A promise which resolves to a single value of type :class:`OcaDeviceOperationalState`.
+   */
+  GetOperationalState(): Promise<OcaDeviceOperationalState>;
+
+  /**
+   * Gets the value of property **LoggingEnabled**.
+   *
+   * @method OcaDeviceManager#GetLoggingEnabled
+   * @returns {Promise<boolean>}
+   *   A promise which resolves to a single value of type ``boolean``.
+   */
+  GetLoggingEnabled(): Promise<boolean>;
+
+  /**
+   * Sets the value of property **LoggingEnabled**.
+   *
+   * @method OcaDeviceManager#SetLoggingEnabled
+   * @param {boolean} Enabled
+   *
+   * @returns {Promise<void>}
+   */
+  SetLoggingEnabled(Enabled: boolean): Promise<void>;
+
+  /**
+   * Gets the value of property **MostRecentPatchDatasetONo**.
+   *
+   * @method OcaDeviceManager#GetMostRecentPatchDatasetONo
+   * @returns {Promise<number>}
+   *   A promise which resolves to a single value of type ``number``.
+   */
+  GetMostRecentPatchDatasetONo(): Promise<number>;
+
+  /**
+   * Applies the patch in the **OcaDataset** identified by the given **ONo**,
+   * and sets the value of property MostRecentPatchDatasetONo.
+   *
+   * @method OcaDeviceManager#ApplyPatch
+   * @param {number} ONo
+   *
+   * @returns {Promise<void>}
+   */
+  ApplyPatch(ONo: number): Promise<void>;
 }

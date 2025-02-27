@@ -11,7 +11,7 @@ export const OcaGain = make_control_class(
   'OcaGain',
   4,
   '\u0001\u0001\u0001\u0005',
-  2,
+  3,
   OcaActuator,
   [
     ['GetGain', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
@@ -22,8 +22,7 @@ export const OcaGain = make_control_class(
 );
 
 /**
- * Gets the value and limits of the Gain property. The return value indicates
- * whether the data was successfully retrieved.
+ * Gets the value and limits of the **Gain** property.
  * The return values of this method are
  *
  * - Gain of type ``number``
@@ -34,8 +33,7 @@ export const OcaGain = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the Gain property. The return value indicates whether the
- * property was successfully set.
+ * Sets the value of the **Gain** property.
  *
  * @method OcaGain#SetGain
  * @param {number} Gain

@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * States of time sources
+ * Availability states of a time source
  * @class OcaTimeSourceAvailability
  */
 export class OcaTimeSourceAvailability extends Enum({

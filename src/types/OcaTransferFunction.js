@@ -4,7 +4,7 @@
 
 export class OcaTransferFunction {
   /**
-   * A complex (i.e. magnitude + phase) transfer function.
+   * Complex (i.e. magnitude + phase) transfer function.
    * @class OcaTransferFunction
    */
   constructor(Frequency, Amplitude, Phase) {

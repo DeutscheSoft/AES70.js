@@ -16,8 +16,7 @@ export declare class OcaBooleanActuator extends OcaBasicActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the **Setting** property. The return value indicates whether the data
-   * was successfully retrieved.
+   * Gets the **Setting** property.
    *
    * @method OcaBooleanActuator#GetSetting
    * @returns {Promise<boolean>}
@@ -26,8 +25,7 @@ export declare class OcaBooleanActuator extends OcaBasicActuator {
   GetSetting(): Promise<boolean>;
 
   /**
-   * Sets the **Setting** property. The return value indicates whether the
-   * property was successfully set.
+   * Sets the **Setting** property.
    *
    * @method OcaBooleanActuator#SetSetting
    * @param {boolean} Setting

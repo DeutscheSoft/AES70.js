@@ -16,7 +16,7 @@ export const OcaMediaClock = make_control_class(
   'OcaMediaClock',
   3,
   '\u0001\u0002\u0006',
-  2,
+  3,
   OcaAgent,
   [
     ['GetType', 3, 1, [], [OcaMediaClockType]],
@@ -24,15 +24,15 @@ export const OcaMediaClock = make_control_class(
     ['GetDomainID', 3, 3, [], [OcaUint16]],
     ['SetDomainID', 3, 4, [OcaUint16], []],
     ['GetSupportedRates', 3, 5, [], [OcaList(OcaMediaClockRate)]],
-    ['GetCurrentRate', 3, 6, [], [OcaMediaClockRate]],
-    ['SetCurrentRate', 3, 7, [OcaMediaClockRate], []],
+    ['GetRate', 3, 6, [], [OcaMediaClockRate]],
+    ['SetRate', 3, 7, [OcaMediaClockRate], []],
     ['GetLockState', 3, 8, [], [OcaMediaClockLockState]],
   ],
   [
     ['Type', [OcaMediaClockType], 3, 1, false, false, null],
     ['DomainID', [OcaUint16], 3, 2, false, false, null],
     ['RatesSupported', [OcaList(OcaMediaClockRate)], 3, 3, false, false, null],
-    ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, null],
+    ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, ['Rate']],
     ['LockState', [OcaMediaClockLockState], 3, 5, false, false, null],
   ],
   []
@@ -86,7 +86,7 @@ export const OcaMediaClock = make_control_class(
  * Gets the current sampling rate. The return value indicates whether the value
  * was successfully retrieved.
  *
- * @method OcaMediaClock#GetCurrentRate
+ * @method OcaMediaClock#GetRate
  * @returns {Promise<OcaMediaClockRate>}
  *   A promise which resolves to a single value of type :class:`OcaMediaClockRate`.
  */
@@ -94,7 +94,7 @@ export const OcaMediaClock = make_control_class(
  * Sets the sampling rate. The return value indicates whether the rate was
  * successfully set.
  *
- * @method OcaMediaClock#SetCurrentRate
+ * @method OcaMediaClock#SetRate
  * @param {IOcaMediaClockRate} rate
  *
  * @returns {Promise<void>}
@@ -134,6 +134,11 @@ export const OcaMediaClock = make_control_class(
  * Current clock rate
  *
  * @member {PropertyEvent<OcaMediaClockRate>} OcaMediaClock#OnCurrentRateChanged
+ */
+/**
+ * An alias for OnCurrentRateChanged
+ *
+ * @member {PropertyEvent<OcaMediaClockRate>} OcaMediaClock#OnRateChanged
  */
 /**
  * This event is emitted when the property ``LockState`` changes in the remote object.

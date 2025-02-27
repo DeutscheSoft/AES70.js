@@ -11,7 +11,7 @@ export const OcaBooleanActuator = make_control_class(
   'OcaBooleanActuator',
   5,
   '\u0001\u0001\u0001\u0001\u0001',
-  2,
+  3,
   OcaBasicActuator,
   [
     ['GetSetting', 5, 1, [], [OcaBoolean]],
@@ -22,16 +22,14 @@ export const OcaBooleanActuator = make_control_class(
 );
 
 /**
- * Gets the **Setting** property. The return value indicates whether the data
- * was successfully retrieved.
+ * Gets the **Setting** property.
  *
  * @method OcaBooleanActuator#GetSetting
  * @returns {Promise<boolean>}
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the **Setting** property. The return value indicates whether the
- * property was successfully set.
+ * Sets the **Setting** property.
  *
  * @method OcaBooleanActuator#SetSetting
  * @param {boolean} Setting

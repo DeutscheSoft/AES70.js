@@ -2,7 +2,7 @@ import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaMediaClockAvailability } from '../../OCP1/OcaMediaClockAvailability.js';
 import { OcaMediaClockRate } from '../../OCP1/OcaMediaClockRate.js';
-import { OcaTimePTP } from '../../OCP1/OcaTimePTP.js';
+import { OcaTime } from '../../OCP1/OcaTime.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaAgent } from './OcaAgent.js';
@@ -17,15 +17,15 @@ export const OcaMediaClock3 = make_control_class(
   'OcaMediaClock3',
   3,
   '\u0001\u0002\u000f',
-  1,
+  3,
   OcaAgent,
   [
     ['GetAvailability', 3, 1, [], [OcaMediaClockAvailability]],
     ['SetAvailability', 3, 2, [OcaMediaClockAvailability], []],
     ['GetCurrentRate', 3, 3, [], [OcaMediaClockRate, OcaUint32]],
     ['SetCurrentRate', 3, 4, [OcaMediaClockRate, OcaUint32], []],
-    ['GetOffset', 3, 5, [], [OcaTimePTP]],
-    ['SetOffset', 3, 6, [OcaTimePTP], []],
+    ['GetOffset', 3, 5, [], [OcaTime]],
+    ['SetOffset', 3, 6, [OcaTime], []],
     [
       'GetSupportedRates',
       3,
@@ -37,7 +37,7 @@ export const OcaMediaClock3 = make_control_class(
   [
     ['Availability', [OcaMediaClockAvailability], 3, 1, false, false, null],
     ['TimeSourceONo', [OcaUint32], 3, 2, false, false, null],
-    ['Offset', [OcaTimePTP], 3, 3, false, false, null],
+    ['Offset', [OcaTime], 3, 3, false, false, null],
     ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, null],
     [
       'SupportedRates',
@@ -53,17 +53,15 @@ export const OcaMediaClock3 = make_control_class(
 );
 
 /**
- * Gets the value of the **Availability** property. The return value indicates
- * whether the value was successfully retrieved.
+ * Gets the value of the **Availability** property.
  *
  * @method OcaMediaClock3#GetAvailability
  * @returns {Promise<OcaMediaClockAvailability>}
  *   A promise which resolves to a single value of type :class:`OcaMediaClockAvailability`.
  */
 /**
- * Sets the value of the **Availability** property. The return value indicates
- * whether the value was successfully set. Optional method, may not be supported
- * in all implementations.
+ * Sets the value of the **Availability** property. Optional method, need not be
+ * supported in all implementations.
  *
  * @method OcaMediaClock3#SetAvailability
  * @param {IOcaMediaClockAvailability} Availability
@@ -72,8 +70,7 @@ export const OcaMediaClock3 = make_control_class(
  */
 /**
  * Gets the current clock rate and the ONo of the associated **OcaTimeSource**
- * object. The return value indicates whether the value was successfully
- * retrieved.
+ * object.
  * The return values of this method are
  *
  * - Rate of type ``IOcaMediaClockRate``
@@ -84,8 +81,7 @@ export const OcaMediaClock3 = make_control_class(
  */
 /**
  * Sets the clock rate and the ONo of the associated **OcaTimeSource** object.
- * The return value indicates whether the value was successfully set. Optional
- * method, may not be supported in all implementations.
+ * Optional method, may not be supported in all implementations.
  *
  * @method OcaMediaClock3#SetCurrentRate
  * @param {IOcaMediaClockRate} Rate
@@ -95,27 +91,24 @@ export const OcaMediaClock3 = make_control_class(
  */
 /**
  * Gets the offset of this media clock's time from that of the associated
- * **OcaTimeSource** object. The return value indicates whether the value was
- * successfully retrieved.
+ * **OcaTimeSource** object.
  *
  * @method OcaMediaClock3#GetOffset
- * @returns {Promise<OcaTimePTP>}
- *   A promise which resolves to a single value of type :class:`OcaTimePTP`.
+ * @returns {Promise<OcaTime>}
+ *   A promise which resolves to a single value of type :class:`OcaTime`.
  */
 /**
  * Sets the offset of this media clock's time from that of the associated
- * **OcaTimeSource** object. The return value indicates whether the value was
- * successfully set. Optional method, may not be supported in all
+ * **OcaTimeSource** object. Optional method, may not be supported in all
  * implementations.
  *
  * @method OcaMediaClock3#SetOffset
- * @param {IOcaTimePTP} Offset
+ * @param {IOcaTime} Offset
  *
  * @returns {Promise<void>}
  */
 /**
- * Gets the list of supported media clock rates for the given time source. The
- * return value indicates whether the list was successfully retrieved.
+ * Gets the list of supported media clock rates for each supported time source.
  *
  * @method OcaMediaClock3#GetSupportedRates
  * @returns {Promise<Map<number, OcaMediaClockRate[]>>}
@@ -124,14 +117,14 @@ export const OcaMediaClock3 = make_control_class(
 /**
  * This event is emitted when the property ``Availability`` changes in the remote object.
  * The property ``Availability`` is described in the AES70 standard as follows.
- * Availability of media clock.
+ * Availability of the media clock.
  *
  * @member {PropertyEvent<OcaMediaClockAvailability>} OcaMediaClock3#OnAvailabilityChanged
  */
 /**
  * This event is emitted when the property ``TimeSourceONo`` changes in the remote object.
  * The property ``TimeSourceONo`` is described in the AES70 standard as follows.
- * ONo of time source that drives this media clock.
+ * **ONo** of time source object that drives this media clock.
  *
  * @member {PropertyEvent<number>} OcaMediaClock3#OnTimeSourceONoChanged
  */
@@ -142,7 +135,7 @@ export const OcaMediaClock3 = make_control_class(
  * transport networks, this value is NOT the RTP time offset. RTP time offset is
  * an implementation detail that is out of AES70's scope.
  *
- * @member {PropertyEvent<OcaTimePTP>} OcaMediaClock3#OnOffsetChanged
+ * @member {PropertyEvent<OcaTime>} OcaMediaClock3#OnOffsetChanged
  */
 /**
  * This event is emitted when the property ``CurrentRate`` changes in the remote object.
@@ -154,9 +147,9 @@ export const OcaMediaClock3 = make_control_class(
 /**
  * This event is emitted when the property ``SupportedRates`` changes in the remote object.
  * The property ``SupportedRates`` is described in the AES70 standard as follows.
- * Map of supported rates for each supported time source. Key of map is ONo of
- * supported time source; value is list of supported clock rates for the given
- * time source. Private parameter, does not generate property-change events.
+ * Map of supported rates for each supported time source. Key of map is **ONo**
+ * of an **OcaTimeSource** object; value is list of supported clock rates for
+ * the given time source.
  *
  * @member {PropertyEvent<Map<number, OcaMediaClockRate[]>>} OcaMediaClock3#OnSupportedRatesChanged
  */

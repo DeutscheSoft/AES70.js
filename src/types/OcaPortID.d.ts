@@ -1,14 +1,15 @@
 /*
  * This file has been generated.
  */
-import { IOcaPortMode, OcaPortMode } from './OcaPortMode';
+import { IOcaIODirection, OcaIODirection } from './OcaIODirection';
 
 export declare interface IOcaPortID {
   /**
-   * Enum that indicates whether the port is for input or output.
-   * @type OcaPortMode
+   * Indicates whether the port is for input or output. Before OCA 1.5, was
+   * named **Mode**, with (now-renamed) datatype **OcaPortMode.**
+   * @type OcaIODirection
    */
-  Mode: IOcaPortMode;
+  Direction: IOcaIODirection;
 
   /**
    * Index of port within given input or output set of specified object.
@@ -19,18 +20,19 @@ export declare interface IOcaPortID {
 
 export declare class OcaPortID implements IOcaPortID {
   /**
-   * Unique identifier of input or output port within a given worker or block
+   * Unique identifier of input or output Port within a given Worker or Block
    * class. Port numbers are ordinals starting at 1, and there are separate
-   * numbering spaces for input and output ports.
+   * numbering spaces for input and output Ports.
    * @class OcaPortID
    */
-  constructor(Mode: OcaPortMode, Index: number);
+  constructor(Direction: OcaIODirection, Index: number);
 
   /**
-   * Enum that indicates whether the port is for input or output.
-   * @type OcaPortMode
+   * Indicates whether the port is for input or output. Before OCA 1.5, was
+   * named **Mode**, with (now-renamed) datatype **OcaPortMode.**
+   * @type OcaIODirection
    */
-  Mode: OcaPortMode;
+  Direction: OcaIODirection;
 
   /**
    * Index of port within given input or output set of specified object.

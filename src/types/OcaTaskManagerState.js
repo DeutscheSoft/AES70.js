@@ -27,6 +27,7 @@ import { Enum } from './Enum.js';
  *  - passing a **Stop** or **Abort** command to each task individually.
  *
  *
+ * **Deprecated** in OCA 1.5.
  * @class OcaTaskManagerState
  */
 export class OcaTaskManagerState extends Enum({

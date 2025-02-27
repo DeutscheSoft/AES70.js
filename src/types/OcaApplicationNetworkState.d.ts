@@ -18,30 +18,6 @@ export class OcaApplicationNetworkState {
    * Singleton object corresponding to the entry with value ``2``.
    */
   static Readying: OcaApplicationNetworkState;
-  /**
-   * Singleton object corresponding to the entry with value ``3``.
-   */
-  static Ready: OcaApplicationNetworkState;
-  /**
-   * Singleton object corresponding to the entry with value ``4``.
-   */
-  static Running: OcaApplicationNetworkState;
-  /**
-   * Singleton object corresponding to the entry with value ``5``.
-   */
-  static Paused: OcaApplicationNetworkState;
-  /**
-   * Singleton object corresponding to the entry with value ``6``.
-   */
-  static Stopping: OcaApplicationNetworkState;
-  /**
-   * Singleton object corresponding to the entry with value ``7``.
-   */
-  static Stopped: OcaApplicationNetworkState;
-  /**
-   * Singleton object corresponding to the entry with value ``8``.
-   */
-  static Fault: OcaApplicationNetworkState;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -69,18 +45,6 @@ export type IOcaApplicationNetworkState =
   | 'Unknown'
   | 'NotReady'
   | 'Readying'
-  | 'Ready'
-  | 'Running'
-  | 'Paused'
-  | 'Stopping'
-  | 'Stopped'
-  | 'Fault'
   | 0
   | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8;
+  | 2;

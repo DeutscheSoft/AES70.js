@@ -29,7 +29,7 @@ export const OcaNetworkSignalChannel = make_control_class(
   'OcaNetworkSignalChannel',
   3,
   '\u0001\u0001\u0006',
-  2,
+  3,
   OcaWorker,
   [
     ['GetIDAdvertised', 3, 1, [], [OcaBlob]],

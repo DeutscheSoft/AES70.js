@@ -4,24 +4,24 @@
 
 export class OcaGrouperCitizen {
   /**
-   * Describes a citizen of a grouper. Refers to a specific worker object
-   * somewhere in the media network.
+   * Describes a Citizen of a Grouper. Refers to a specific Worker object
+   * somewhere in the media network. **Deprecated** in AES70-2024.
    * @class OcaGrouperCitizen
    */
   constructor(Index, ObjectPath, Online) {
     /**
-     * Index of citizen in Grouper
+     * Index of Citizen in Grouper
      * @type number
      */
     this.Index = Index;
     /**
-     * Object path (= hostname + object number) of the worker object that is the
-     * citizen of the grouper.
+     * Object Path (= hostname + Object Number) of the Worker object that is the
+     * Citizen of the Grouper.
      * @type OcaOPath
      */
     this.ObjectPath = ObjectPath;
     /**
-     * True iff connection from grouper to citizen is healthy.
+     * True if and only if connection from Grouper to Citizen is healthy.
      * @type boolean
      */
     this.Online = Online;

@@ -11,13 +11,13 @@ export declare interface IOcaMediaClockRate {
 
   /**
    * Pull range in hertz. Not all clock types will specify this. Use IEEE NaN
-   * for unspecified value (OcaFrequency is IEEE floating-point).
+   * for an unspecified value (OcaFrequency is IEEE floating-point).
    * @type number
    */
   PullRange: number;
 
   /**
-   * Accuracy in ppm. Not all clock types will specify this. Use IEEE NaN for
+   * Accuracy in ppm. Not all clock types will specify this. Use IEEE NaN for an
    * unspecified value.
    * @type number
    */
@@ -25,7 +25,7 @@ export declare interface IOcaMediaClockRate {
 
   /**
    * Maximum jitter in ppm. Not all clock types will specify this. Use IEEE NaN
-   * for unspecified value.
+   * foran unspecified value.
    * @type number
    */
   JitterMax: number;
@@ -33,7 +33,7 @@ export declare interface IOcaMediaClockRate {
 
 export declare class OcaMediaClockRate implements IOcaMediaClockRate {
   /**
-   * Media clock nominal rate and associated parameters.
+   * Media Clock nominal rate and associated parameters.
    * @class OcaMediaClockRate
    */
   constructor(
@@ -51,13 +51,13 @@ export declare class OcaMediaClockRate implements IOcaMediaClockRate {
 
   /**
    * Pull range in hertz. Not all clock types will specify this. Use IEEE NaN
-   * for unspecified value (OcaFrequency is IEEE floating-point).
+   * for an unspecified value (OcaFrequency is IEEE floating-point).
    * @type number
    */
   PullRange: number;
 
   /**
-   * Accuracy in ppm. Not all clock types will specify this. Use IEEE NaN for
+   * Accuracy in ppm. Not all clock types will specify this. Use IEEE NaN for an
    * unspecified value.
    * @type number
    */
@@ -65,7 +65,7 @@ export declare class OcaMediaClockRate implements IOcaMediaClockRate {
 
   /**
    * Maximum jitter in ppm. Not all clock types will specify this. Use IEEE NaN
-   * for unspecified value.
+   * foran unspecified value.
    * @type number
    */
   JitterMax: number;

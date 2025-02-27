@@ -1,9 +1,5 @@
 import { IOcaApplicationNetworkCommand } from '../../types/OcaApplicationNetworkCommand';
 import { OcaApplicationNetworkState } from '../../types/OcaApplicationNetworkState';
-import {
-  IOcaNetworkSystemInterfaceDescriptor,
-  OcaNetworkSystemInterfaceDescriptor,
-} from '../../types/OcaNetworkSystemInterfaceDescriptor';
 import { Arguments } from '../arguments';
 import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
@@ -23,9 +19,7 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   /**
    * This event is emitted whenever SystemInterfaces changes.
    */
-  OnSystemInterfacesChanged: PropertyEvent<
-    OcaNetworkSystemInterfaceDescriptor[]
-  >;
+  OnSystemInterfacesChanged: PropertyEvent<Uint8Array[]>;
 
   /**
    * This event is emitted whenever State changes.
@@ -96,10 +90,10 @@ export declare class OcaApplicationNetwork extends OcaRoot {
    * status indicates whether the list was successfully retrieved.
    *
    * @method OcaApplicationNetwork#GetSystemInterfaces
-   * @returns {Promise<OcaNetworkSystemInterfaceDescriptor[]>}
-   *   A promise which resolves to a single value of type :class:`OcaNetworkSystemInterfaceDescriptor[]`.
+   * @returns {Promise<Uint8Array[]>}
+   *   A promise which resolves to a single value of type ``Uint8Array[]``.
    */
-  GetSystemInterfaces(): Promise<OcaNetworkSystemInterfaceDescriptor[]>;
+  GetSystemInterfaces(): Promise<Uint8Array[]>;
 
   /**
    * Sets the network's System Interface Descriptor(s). Return status indicates
@@ -107,13 +101,11 @@ export declare class OcaApplicationNetwork extends OcaRoot {
    * Descriptor may be set at construction time.
    *
    * @method OcaApplicationNetwork#SetSystemInterfaces
-   * @param {IOcaNetworkSystemInterfaceDescriptor[]} Descriptors
+   * @param {Uint8Array[]} Descriptors
    *
    * @returns {Promise<void>}
    */
-  SetSystemInterfaces(
-    Descriptors: IOcaNetworkSystemInterfaceDescriptor[]
-  ): Promise<void>;
+  SetSystemInterfaces(Descriptors: Uint8Array[]): Promise<void>;
 
   /**
    * Retrieves the network's state. Return status indicates whether the status
@@ -148,11 +140,11 @@ export declare class OcaApplicationNetwork extends OcaRoot {
   Control(Command: IOcaApplicationNetworkCommand): Promise<void>;
 
   /**
-   * Returns path from given object down to root. The return value indicates
-   * whether the operation succeeded.
+   * Returns Role Path and ONo Path from the Root Block to this object. The
+   * return value indicates whether the operation succeeded.
    * The return values of this method are
    *
-   * - NamePath of type ``string[]``
+   * - RolePath of type ``string[]``
    * - ONoPath of type ``number[]``
    *
    * @method OcaApplicationNetwork#GetPath

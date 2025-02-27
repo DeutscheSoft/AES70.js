@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Lock states of media clocks.
+ * Availability states of a Media Clock
  * @class OcaMediaClockAvailability
  */
 export class OcaMediaClockAvailability extends Enum({

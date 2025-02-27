@@ -4,13 +4,13 @@
 import { Enum } from './Enum.js';
 
 /**
- * Commands controllers can send to OcaTasks to change their states
+ * Commands controllers can send to OcaTasks to change their states.
+ * **Deprecated** in OCA 1.5.
  * @class OcaTaskCommand
  */
 export class OcaTaskCommand extends Enum({
   None: 0,
   Prepare: 1,
-  Enable: 2,
   Start: 3,
   Stop: 4,
   Abort: 5,
@@ -29,13 +29,6 @@ export class OcaTaskCommand extends Enum({
  * Singleton object corresponding to the entry with value ``1``.
  * @type {OcaTaskCommand}
  * @member Prepare
- * @memberof OcaTaskCommand
- * @static
- */
-/**
- * Singleton object corresponding to the entry with value ``2``.
- * @type {OcaTaskCommand}
- * @member Enable
  * @memberof OcaTaskCommand
  * @static
  */

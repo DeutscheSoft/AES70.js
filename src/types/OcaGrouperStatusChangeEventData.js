@@ -4,8 +4,8 @@
 
 export class OcaGrouperStatusChangeEventData {
   /**
-   * Class that defines the event data parameter for the **StatusChange** event
-   * defined in **OcaGrouper**.
+   * Notification data supplied by the **OcaGrouper.StatusChange()** event.
+   * **Deprecated** in AES70-2024.
    * @class OcaGrouperStatusChangeEventData
    */
   constructor(groupIndex, citizenIndex, changeType) {

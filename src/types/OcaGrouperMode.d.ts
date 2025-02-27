@@ -2,14 +2,15 @@
  * This file has been generated.
  */
 /**
- * Select mode of **OcaGrouper**: master-slave or peer-to-peer
+ * Select mode of **OcaGrouper**: hierarchical or peer-to-peer. **Deprecated**
+ * in AES70-2024.
  * @class OcaGrouperMode
  */
 export class OcaGrouperMode {
   /**
    * Singleton object corresponding to the entry with value ``1``.
    */
-  static MasterSlave: OcaGrouperMode;
+  static Hierarchical: OcaGrouperMode;
   /**
    * Singleton object corresponding to the entry with value ``2``.
    */
@@ -38,7 +39,7 @@ export class OcaGrouperMode {
 
 export type IOcaGrouperMode =
   | OcaGrouperMode
-  | 'MasterSlave'
+  | 'Hierarchical'
   | 'PeerToPeer'
   | 1
   | 2;

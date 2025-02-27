@@ -4,11 +4,11 @@
 import { Enum } from './Enum.js';
 
 /**
- * Type of media endpoint: unicast or multicast.
+ * Transmission mode: unicast or multicast
  * @class OcaMediaStreamCastMode
  */
 export class OcaMediaStreamCastMode extends Enum({
-  None: 0,
+  Unknown: 0,
   Unicast: 1,
   Multicast: 2,
 }) {}
@@ -16,7 +16,7 @@ export class OcaMediaStreamCastMode extends Enum({
 /**
  * Singleton object corresponding to the entry with value ``0``.
  * @type {OcaMediaStreamCastMode}
- * @member None
+ * @member Unknown
  * @memberof OcaMediaStreamCastMode
  * @static
  */

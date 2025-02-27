@@ -4,7 +4,7 @@
 import { Enum } from './Enum.js';
 
 /**
- * Status of a device power supply.
+ * State of a power supply.
  * @class OcaPowerSupplyState
  */
 export class OcaPowerSupplyState extends Enum({

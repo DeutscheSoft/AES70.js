@@ -7,8 +7,8 @@ import { RemoteDevice } from '../remote_device';
 import { OcaLevelSensor } from './OcaLevelSensor';
 
 /**
- * Child of **OcaLevelSensor** that returns an audio meter reading in dB
- * relative to a known reference level, and whose value has been calculated by
+ * Child of **OcaLevelSensor** that shall return an audio meter reading in dB
+ * relative to a known reference level, and whose value shall be calculated by
  * the selected averaging algorithm.
  * @extends OcaLevelSensor
  * @class OcaAudioLevelSensor
@@ -22,8 +22,7 @@ export declare class OcaAudioLevelSensor extends OcaLevelSensor {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the Law property. The return value indicates whether the
-   * property was successfully retrieved.
+   * Gets the value of the **Law** property.
    *
    * @method OcaAudioLevelSensor#GetLaw
    * @returns {Promise<OcaLevelMeterLaw>}
@@ -32,9 +31,7 @@ export declare class OcaAudioLevelSensor extends OcaLevelSensor {
   GetLaw(): Promise<OcaLevelMeterLaw>;
 
   /**
-   * Sets the value of the Law property. The return value indicates whether the
-   * property was successfully set. Only implemented for objects whose Law
-   * property is read/write.
+   * Sets the value of the **Law** property.
    *
    * @method OcaAudioLevelSensor#SetLaw
    * @param {IOcaLevelMeterLaw} law

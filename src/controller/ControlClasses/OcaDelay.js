@@ -11,7 +11,7 @@ export const OcaDelay = make_control_class(
   'OcaDelay',
   4,
   '\u0001\u0001\u0001\u0007',
-  2,
+  3,
   OcaActuator,
   [
     ['GetDelayTime', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
@@ -22,8 +22,7 @@ export const OcaDelay = make_control_class(
 );
 
 /**
- * Gets the value of the DelayTime property. The return value indicates whether
- * the property was successfully retrieved.
+ * Gets the value and limits of the **DelayTime** property.
  * The return values of this method are
  *
  * - Time of type ``number``
@@ -34,8 +33,7 @@ export const OcaDelay = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the value of the DelayTime property. The return value indicates whether
- * the property was successfully set.
+ * Sets the value of the **DelayTime** property.
  *
  * @method OcaDelay#SetDelayTime
  * @param {number} delayTime

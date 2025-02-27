@@ -5,8 +5,8 @@ import {
   IOcaLibVolIdentifier,
   OcaLibVolIdentifier,
 } from './OcaLibVolIdentifier';
+import { IOcaTime, OcaTime } from './OcaTime';
 import { IOcaTimeMode, OcaTimeMode } from './OcaTimeMode';
-import { IOcaTimePTP, OcaTimePTP } from './OcaTimePTP';
 
 export declare interface IOcaTask {
   /**
@@ -21,7 +21,7 @@ export declare interface IOcaTask {
   Label: string;
 
   /**
-   * ID of program this task was given or null if it's idle.
+   * ID of program this task was given or all null if it's idle.
    * @type OcaLibVolIdentifier
    */
   ProgramID: IOcaLibVolIdentifier;
@@ -39,8 +39,7 @@ export declare interface IOcaTask {
   TimeMode: IOcaTimeMode;
 
   /**
-   * ONo of relevant **OcaTimeSource** object or zero to use device time (see
-   * **OcaDeviceTimeManager**).
+   * ONo of relevant OcaTimeSource object, or zero if none.
    * @type number
    */
   TimeSourceONo: number;
@@ -50,19 +49,19 @@ export declare interface IOcaTask {
    * **TimeMode=Relative**, the actual event start time equals the value of
    * **StartTime** plus the absolute time that **StartTime** was most recently
    * set. Datatype shall depend on value of **TimeUnits**: - If **TimeUnits** is
-   * seconds, datatype shall be **OcaTimePTP;** - If TimeUnits is samples,
-   * datatype shall be **OcaUint64**. If **TimeMode=Absolute**, the actual event
-   * start time equals the value of **StartTime**
-   * @type OcaTimePTP
+   * seconds, datatype shall be **OcaTime;** - If TimeUnits is samples, datatype
+   * shall be **OcaUint64**. If **TimeMode=Absolute**, the actual event start
+   * time equals the value of **StartTime**
+   * @type OcaTime
    */
-  StartTime: IOcaTimePTP;
+  StartTime: IOcaTime;
 
   /**
    * Duration of task execution, or zero to run until complete or explicitly
    * stopped.
-   * @type OcaTimePTP
+   * @type number
    */
-  Duration: IOcaTimePTP;
+  Duration: number;
 
   /**
    * Arbitrary application-specific parameters for the Task and its Program.
@@ -74,7 +73,8 @@ export declare interface IOcaTask {
 export declare class OcaTask implements IOcaTask {
   /**
    * An execution thread that runs an AES70 Program. Programs are OcaLibrary
-   * volumes that contain application-specific execution instructions.
+   * volumes that contain application-specific execution instructions. **
+   * Deprecated** in OCA 1.5.
    * @class OcaTask
    */
   constructor(
@@ -84,8 +84,8 @@ export declare class OcaTask implements IOcaTask {
     GroupID: number,
     TimeMode: OcaTimeMode,
     TimeSourceONo: number,
-    StartTime: OcaTimePTP,
-    Duration: OcaTimePTP,
+    StartTime: OcaTime,
+    Duration: number,
     ApplicationSpecificParameters: Uint8Array
   );
 
@@ -101,7 +101,7 @@ export declare class OcaTask implements IOcaTask {
   Label: string;
 
   /**
-   * ID of program this task was given or null if it's idle.
+   * ID of program this task was given or all null if it's idle.
    * @type OcaLibVolIdentifier
    */
   ProgramID: OcaLibVolIdentifier;
@@ -119,8 +119,7 @@ export declare class OcaTask implements IOcaTask {
   TimeMode: OcaTimeMode;
 
   /**
-   * ONo of relevant **OcaTimeSource** object or zero to use device time (see
-   * **OcaDeviceTimeManager**).
+   * ONo of relevant OcaTimeSource object, or zero if none.
    * @type number
    */
   TimeSourceONo: number;
@@ -130,19 +129,19 @@ export declare class OcaTask implements IOcaTask {
    * **TimeMode=Relative**, the actual event start time equals the value of
    * **StartTime** plus the absolute time that **StartTime** was most recently
    * set. Datatype shall depend on value of **TimeUnits**: - If **TimeUnits** is
-   * seconds, datatype shall be **OcaTimePTP;** - If TimeUnits is samples,
-   * datatype shall be **OcaUint64**. If **TimeMode=Absolute**, the actual event
-   * start time equals the value of **StartTime**
-   * @type OcaTimePTP
+   * seconds, datatype shall be **OcaTime;** - If TimeUnits is samples, datatype
+   * shall be **OcaUint64**. If **TimeMode=Absolute**, the actual event start
+   * time equals the value of **StartTime**
+   * @type OcaTime
    */
-  StartTime: OcaTimePTP;
+  StartTime: OcaTime;
 
   /**
    * Duration of task execution, or zero to run until complete or explicitly
    * stopped.
-   * @type OcaTimePTP
+   * @type number
    */
-  Duration: OcaTimePTP;
+  Duration: number;
 
   /**
    * Arbitrary application-specific parameters for the Task and its Program.

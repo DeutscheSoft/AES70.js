@@ -17,8 +17,7 @@ export declare class OcaDelay extends OcaActuator {
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the value of the DelayTime property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value and limits of the **DelayTime** property.
    * The return values of this method are
    *
    * - Time of type ``number``
@@ -31,8 +30,7 @@ export declare class OcaDelay extends OcaActuator {
   GetDelayTime(): Promise<Arguments<[number, number, number]>>;
 
   /**
-   * Sets the value of the DelayTime property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **DelayTime** property.
    *
    * @method OcaDelay#SetDelayTime
    * @param {number} delayTime

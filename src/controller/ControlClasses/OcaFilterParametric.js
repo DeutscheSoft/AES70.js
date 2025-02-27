@@ -5,7 +5,7 @@ import { make_control_class } from '../make_control_class.js';
 import { OcaActuator } from './OcaActuator.js';
 
 /**
- * A parametric equalizer section with various shape options.
+ * Parametric equalizer section with various shape options.
  * @extends OcaActuator
  * @class OcaFilterParametric
  */
@@ -13,17 +13,24 @@ export const OcaFilterParametric = make_control_class(
   'OcaFilterParametric',
   4,
   '\u0001\u0001\u0001\n',
-  2,
+  3,
   OcaActuator,
   [
     ['GetFrequency', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
     ['SetFrequency', 4, 2, [OcaFloat32], []],
     ['GetShape', 4, 3, [], [OcaParametricEQShape]],
     ['SetShape', 4, 4, [OcaParametricEQShape], []],
-    ['GetWidthParameter', 4, 5, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
-    ['SetWidthParameter', 4, 6, [OcaFloat32], []],
+    [
+      'GetWidthParameter',
+      4,
+      5,
+      [],
+      [OcaFloat32, OcaFloat32, OcaFloat32],
+      ['GetQ'],
+    ],
+    ['SetWidthParameter', 4, 6, [OcaFloat32], [], ['SetQ']],
     ['GetInbandGain', 4, 7, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
-    ['SetInbandGain', 4, 8, [OcaFloat32], []],
+    ['SetInbandGain', 4, 8, [OcaFloat32], [], ['SetInbandgain']],
     ['GetShapeParameter', 4, 9, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
     ['SetShapeParameter', 4, 10, [OcaFloat32], []],
     [
@@ -45,15 +52,14 @@ export const OcaFilterParametric = make_control_class(
     ['Frequency', [OcaFloat32], 4, 1, false, false, null],
     ['Shape', [OcaParametricEQShape], 4, 2, false, false, null],
     ['WidthParameter', [OcaFloat32], 4, 3, false, false, ['Q']],
-    ['InbandGain', [OcaFloat32], 4, 4, false, false, null],
+    ['InBandGain', [OcaFloat32], 4, 4, false, false, ['InbandGain']],
     ['ShapeParameter', [OcaFloat32], 4, 5, false, false, null],
   ],
   []
 );
 
 /**
- * Gets the equalizer frequency setpoint. The return value indicates whether the
- * data was successfully retrieved.
+ * Gets the value and limits of the **Frequency** property.
  * The return values of this method are
  *
  * - Frequency of type ``number``
@@ -64,8 +70,7 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the equalizer frequency. The return value indicates whether the value
- * was successfully set.
+ * Sets the value of the **Frequency** property.
  *
  * @method OcaFilterParametric#SetFrequency
  * @param {number} Frequency
@@ -73,16 +78,14 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the curve shape of the equalizer. The return value indicates whether the
- * data was successfully retrieved.
+ * Gets the value of the **Shape** property.
  *
  * @method OcaFilterParametric#GetShape
  * @returns {Promise<OcaParametricEQShape>}
  *   A promise which resolves to a single value of type :class:`OcaParametricEQShape`.
  */
 /**
- * Sets the curve shape shape of the equalizer. The return value indicates
- * whether the shape was successfully set.
+ * Sets the value of the **Shape** property.
  *
  * @method OcaFilterParametric#SetShape
  * @param {IOcaParametricEQShape} type
@@ -90,8 +93,7 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the width parameter property of the equalizer. The return value
- * indicates whether the data was successfully retrieved.
+ * Gets the value and limits of the **WidthParameter** property.
  * The return values of this method are
  *
  * - Width of type ``number``
@@ -102,8 +104,19 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the width parameter property of the equalizer. The return value
- * indicates whether the Q was successfully set.
+ * Gets the value and limits of the **WidthParameter** property.
+ * An alias for GetWidthParameter.
+ * The return values of this method are
+ *
+ * - Width of type ``number``
+ * - minWidth of type ``number``
+ * - maxWidth of type ``number``
+ *
+ * @method OcaFilterParametric#GetQ
+ * @returns {Promise<Arguments<number,number,number>>}
+ */
+/**
+ * Sets the value of the **WidthParameter** property.
  *
  * @method OcaFilterParametric#SetWidthParameter
  * @param {number} Width
@@ -111,8 +124,16 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the in-band gain of the equalizer. The return value indicates whether
- * the data was successfully retrieved.
+ * Sets the value of the **WidthParameter** property.
+ * An alias for SetWidthParameter.
+ *
+ * @method OcaFilterParametric#SetQ
+ * @param {number} Width
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Gets the value, min, and max of the **InBandGain** property.
  * The return values of this method are
  *
  * - gain of type ``number``
@@ -123,8 +144,7 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the in-band gain of the equalizer. The return value indicates whether
- * the gain was successfully set.
+ * Sets the value of the **InBandGain** property.
  *
  * @method OcaFilterParametric#SetInbandGain
  * @param {number} gain
@@ -132,8 +152,16 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Returns the shape parameter of the equalizer. The return value indicates
- * whether the data was successfully retrieved.
+ * Sets the value of the **InBandGain** property.
+ * An alias for SetInbandGain.
+ *
+ * @method OcaFilterParametric#SetInbandgain
+ * @param {number} gain
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * Gets the value and limits of the **ShapeParameter** property.
  * The return values of this method are
  *
  * - shape of type ``number``
@@ -144,8 +172,7 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<Arguments<number,number,number>>}
  */
 /**
- * Sets the shape parameter of the equalizer. The return value indicates whether
- * the parameter was successfully set.
+ * Sets the value of the S**hapeParameter** property.
  *
  * @method OcaFilterParametric#SetShapeParameter
  * @param {number} shape
@@ -153,8 +180,7 @@ export const OcaFilterParametric = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Sets some or all filter parameters. The return value indicates if the
- * parameters were successfully set. The action of this method is atomic - if
+ * Sets some or all filter parameters. The action of this method is atomic - if
  * any of the value changes fails, none of the changes are made.
  *
  * @method OcaFilterParametric#SetMultiple
@@ -170,14 +196,14 @@ export const OcaFilterParametric = make_control_class(
 /**
  * This event is emitted when the property ``Frequency`` changes in the remote object.
  * The property ``Frequency`` is described in the AES70 standard as follows.
- * The frequency setpoint of the parametric filter.
+ * Frequency setpoint of the parametric filter.
  *
  * @member {PropertyEvent<number>} OcaFilterParametric#OnFrequencyChanged
  */
 /**
  * This event is emitted when the property ``Shape`` changes in the remote object.
  * The property ``Shape`` is described in the AES70 standard as follows.
- * The shape of the parametric filter - peak, shelf, etc.
+ * Shape of the parametric filter - peak, shelf, etc.
  *
  * @member {PropertyEvent<OcaParametricEQShape>} OcaFilterParametric#OnShapeChanged
  */
@@ -195,9 +221,14 @@ export const OcaFilterParametric = make_control_class(
  * @member {PropertyEvent<number>} OcaFilterParametric#OnQChanged
  */
 /**
- * This event is emitted when the property ``InbandGain`` changes in the remote object.
- * The property ``InbandGain`` is described in the AES70 standard as follows.
+ * This event is emitted when the property ``InBandGain`` changes in the remote object.
+ * The property ``InBandGain`` is described in the AES70 standard as follows.
  * In-band gain of the parametric filter.
+ *
+ * @member {PropertyEvent<number>} OcaFilterParametric#OnInBandGainChanged
+ */
+/**
+ * An alias for OnInBandGainChanged
  *
  * @member {PropertyEvent<number>} OcaFilterParametric#OnInbandGainChanged
  */

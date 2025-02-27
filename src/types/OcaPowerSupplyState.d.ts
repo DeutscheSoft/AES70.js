@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * Status of a device power supply.
+ * State of a power supply.
  * @class OcaPowerSupplyState
  */
 export class OcaPowerSupplyState {

@@ -2,7 +2,7 @@
  * This file has been generated.
  */
 /**
- * States of time sources
+ * Availability states of a time source
  * @class OcaTimeSourceAvailability
  */
 export class OcaTimeSourceAvailability {

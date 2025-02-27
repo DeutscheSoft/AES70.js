@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { OcaPortMode } from './OcaPortMode.js';
+import { OcaIODirection } from './OcaIODirection.js';
 import { OcaUint16 } from './OcaUint16.js';
 import { Struct } from './Struct.js';
 
@@ -9,7 +9,7 @@ import { OcaPortID as type } from '../types/OcaPortID.js';
 
 export const OcaPortID = Struct(
   {
-    Mode: OcaPortMode,
+    Direction: OcaIODirection,
     Index: OcaUint16,
   },
   type

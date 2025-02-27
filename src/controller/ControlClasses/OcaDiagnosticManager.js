@@ -1,5 +1,3 @@
-import { OcaString } from '../../OCP1/OcaString.js';
-import { OcaUint32 } from '../../OCP1/OcaUint32.js';
 import { make_control_class } from '../make_control_class.js';
 import { OcaManager } from './OcaManager.js';
 
@@ -8,7 +6,7 @@ import { OcaManager } from './OcaManager.js';
  * manager classes, OcaDiagnosticManager may be subclassed to provide
  * proprietary application diagnostic enhancements.
  *
- *  - May be instantiated once in any device.
+ *  - May be instantiated at most once in any device.
  *
  *  - If instantiated, object number must be 13.
  *
@@ -20,20 +18,9 @@ export const OcaDiagnosticManager = make_control_class(
   'OcaDiagnosticManager',
   3,
   '\u0001\u0003\r',
-  1,
+  3,
   OcaManager,
-  [['GetLockStatus', 3, 1, [OcaUint32], [OcaString]]],
+  [],
   [],
   []
 );
-
-/**
- * Retrieves a text description of the given object's lock status. Return value
- * indicates success of the retrieval.
- *
- * @method OcaDiagnosticManager#GetLockStatus
- * @param {number} ONo
- *
- * @returns {Promise<string>}
- *   A promise which resolves to a single value of type ``string``.
- */

@@ -54,7 +54,7 @@ export declare interface IOcaStream {
   RemoteConnectorIdentification: IOcaStreamConnectorIdentification;
 
   /**
-   * True iff connection is secure.
+   * True if and only if connection is secure.
    * @type boolean
    */
   Secure: boolean;
@@ -158,7 +158,7 @@ export declare class OcaStream implements IOcaStream {
   RemoteConnectorIdentification: OcaStreamConnectorIdentification;
 
   /**
-   * True iff connection is secure.
+   * True if and only if connection is secure.
    * @type boolean
    */
   Secure: boolean;

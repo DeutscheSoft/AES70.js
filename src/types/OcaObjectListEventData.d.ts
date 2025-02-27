@@ -12,8 +12,8 @@ export declare interface IOcaObjectListEventData {
 
 export declare class OcaObjectListEventData implements IOcaObjectListEventData {
   /**
-   * Event data for events returning object lists, for example the
-   * **SynchronizeState** event defined in **OcaSubscriptionManager.**
+   * Notification data supplied by events returning object lists, for example
+   * the **SynchronizeState** event defined in **OcaSubscriptionManager.**
    * @class OcaObjectListEventData
    */
   constructor(objectList: number[]);

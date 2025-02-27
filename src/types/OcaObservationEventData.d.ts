@@ -13,8 +13,8 @@ export declare interface IOcaObservationEventData {
 export declare class OcaObservationEventData
   implements IOcaObservationEventData {
   /**
-   * Event data for event **OcaNumericObserver.Observation**. Note: due to an
-   * error in AES70-2015, this class was not made a subclass of
+   * Notification data supplied by event **OcaNumericObserver.Observation**.
+   * Note: due to an error in AES70-2015, this class was not made a subclass of
    * **OcaEventData**. Therefore, this class explicitly defines the **Event**
    * property explicitly, rather than inheriting it from **OcaEventData,** as
    * other event data classes do. However, the effect is the same as for all

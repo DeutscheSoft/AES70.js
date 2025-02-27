@@ -4,8 +4,8 @@
 
 export class OcaObjectListEventData {
   /**
-   * Event data for events returning object lists, for example the
-   * **SynchronizeState** event defined in **OcaSubscriptionManager.**
+   * Notification data supplied by events returning object lists, for example
+   * the **SynchronizeState** event defined in **OcaSubscriptionManager.**
    * @class OcaObjectListEventData
    */
   constructor(objectList) {

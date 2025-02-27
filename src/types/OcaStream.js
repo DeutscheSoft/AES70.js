@@ -74,7 +74,7 @@ export class OcaStream {
      */
     this.RemoteConnectorIdentification = RemoteConnectorIdentification;
     /**
-     * True iff connection is secure.
+     * True if and only if connection is secure.
      * @type boolean
      */
     this.Secure = Secure;

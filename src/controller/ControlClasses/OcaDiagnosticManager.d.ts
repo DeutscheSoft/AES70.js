@@ -6,7 +6,7 @@ import { OcaManager } from './OcaManager';
  * manager classes, OcaDiagnosticManager may be subclassed to provide
  * proprietary application diagnostic enhancements.
  *
- *  - May be instantiated once in any device.
+ *  - May be instantiated at most once in any device.
  *
  *  - If instantiated, object number must be 13.
  *
@@ -16,16 +16,4 @@ import { OcaManager } from './OcaManager';
  */
 export declare class OcaDiagnosticManager extends OcaManager {
   constructor(objectNumber: number, device: RemoteDevice);
-
-  /**
-   * Retrieves a text description of the given object's lock status. Return
-   * value indicates success of the retrieval.
-   *
-   * @method OcaDiagnosticManager#GetLockStatus
-   * @param {number} ONo
-   *
-   * @returns {Promise<string>}
-   *   A promise which resolves to a single value of type ``string``.
-   */
-  GetLockStatus(ONo: number): Promise<string>;
 }

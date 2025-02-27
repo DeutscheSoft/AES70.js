@@ -42,20 +42,20 @@ import { OcaAgent } from './OcaAgent';
  *  - For signed integer targets, the threshold and target are both coerced to
  *    **OcaInt64** before comparing.
  *
- *  - For boolean values, the threshold hreshold and target are both coerced to
+ *  - For boolean values, the threshold and target are both coerced to
  *    **OcaUint8**, True is assigned the value One, False is assigned the value
  *    Zero.
  *
  *
  * Note that this coercion may result in rounding errors if the observed
- * datatype is of type OcaUint64 or OcaUint64. An **OcaNumericObserver**
+ * datatype is of type **OcaUint64** or **OcaInt64**. An **OcaNumericObserver**
  * instance and the property it observes are bound at the time the
  * **OcaNumericObserver** instance is constructed. For static devices,
  * construction will occur during manufacture, or possibly during a subsequent
  * hardware configuration step. For reconfigurable devices, construction might
  * be done by online controllers as part of device configuration sessions. This
- * class is normally used for monitoring readings of sensor readings, but may be
- * used equally well for watching workers' parameter settings.
+ * class is normally used for monitoring sensor readings, but may be used
+ * equally well for watching workers' parameter settings.
  * @extends OcaAgent
  * @class OcaNumericObserverList
  */
@@ -115,8 +115,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
    * The order of values in the returned list is determined by the order of
    * values set by SetObservedProperties, and is the same as the order of values
    * returned by the Observation event, and the same as the order of object
-   * identifications returned by GetObservedProperties. The return status
-   * indicates whether the value has been successfully returned.
+   * identifications returned by GetObservedProperties.
    *
    * @method OcaNumericObserverList#GetLastObservation
    * @returns {Promise<number[]>}
@@ -125,8 +124,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   GetLastObservation(): Promise<number[]>;
 
   /**
-   * Gets the observer's state. The return value indicates whether the state was
-   * successfully retrieved.
+   * Gets the observer's state.
    *
    * @method OcaNumericObserverList#GetState
    * @returns {Promise<OcaObserverState>}
@@ -137,10 +135,9 @@ export declare class OcaNumericObserverList extends OcaAgent {
   /**
    * Gets the identifications of the properties that the observer observes. The
    * order of property identifications in the returned list is determined by the
-   * order of property identifications set by SetObservedProperties, and is the
-   * same as the order of values returned by GetLastObservation and the
-   * Observation event. The return value indicates whether the identifications
-   * were successfully retrieved.
+   * order of property identifications set by **SetObservedProperties**, and is
+   * the same as the order of values returned by **GetLastObservation** and the
+   * **Observation** event.
    *
    * @method OcaNumericObserverList#GetObservedProperties
    * @returns {Promise<OcaProperty[]>}
@@ -151,9 +148,8 @@ export declare class OcaNumericObserverList extends OcaAgent {
   /**
    * Sets the identifications of the properties that the observer observes. The
    * order of property identifications supplied determines the order of property
-   * identifications returned by GetObservedProperties and the order of values
-   * returned by GetLastObservation and the Observation event. The return value
-   * indicates whether the identifications were successfully set.
+   * identifications returned by **GetObservedProperties** and the order of
+   * values returned by **GetLastObservation** and the **Observation** event.
    *
    * @method OcaNumericObserverList#SetObservedProperties
    * @param {IOcaProperty[]} property
@@ -163,8 +159,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   SetObservedProperties(property: IOcaProperty[]): Promise<void>;
 
   /**
-   * Gets the value of the **Threshold** property. The return value indicates
-   * whether the threshold value was successfully retrieved.
+   * Gets the value of the **Threshold** property.
    *
    * @method OcaNumericObserverList#GetThreshold
    * @returns {Promise<number>}
@@ -173,8 +168,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   GetThreshold(): Promise<number>;
 
   /**
-   * Sets the value of the **Threshold** property. The return value indicates
-   * whether the threshold value was successfully set.
+   * Sets the value of the **Threshold** property.
    *
    * @method OcaNumericObserverList#SetThreshold
    * @param {number} Threshold
@@ -194,8 +188,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   GetOperator(): Promise<OcaRelationalOperator>;
 
   /**
-   * Sets the value of the **Operator** property. The return value indicates
-   * whether the operator was successfully set.
+   * Sets the value of the **Operator** property.
    *
    * @method OcaNumericObserverList#SetOperator
    * @param {IOcaRelationalOperator} operator
@@ -205,8 +198,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   SetOperator(operator: IOcaRelationalOperator): Promise<void>;
 
   /**
-   * Gets the value of the **TwoWay** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **TwoWay** property.
    *
    * @method OcaNumericObserverList#GetTwoWay
    * @returns {Promise<boolean>}
@@ -215,8 +207,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   GetTwoWay(): Promise<boolean>;
 
   /**
-   * Sets the value of the **TwoWay** property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **TwoWay** property.
    *
    * @method OcaNumericObserverList#SetTwoWay
    * @param {boolean} twoWay
@@ -226,8 +217,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   SetTwoWay(twoWay: boolean): Promise<void>;
 
   /**
-   * Gets the value of the **Hysteresis** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **Hysteresis** property.
    *
    * @method OcaNumericObserverList#GetHysteresis
    * @returns {Promise<number>}
@@ -236,8 +226,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   GetHysteresis(): Promise<number>;
 
   /**
-   * Sets the value of the **Hysteresis** property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **Hysteresis** property.
    *
    * @method OcaNumericObserverList#SetHysteresis
    * @param {number} hysteresis
@@ -247,8 +236,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   SetHysteresis(hysteresis: number): Promise<void>;
 
   /**
-   * Gets the value of the **Period** property. The return value indicates
-   * whether the property was successfully retrieved.
+   * Gets the value of the **Period** property.
    *
    * @method OcaNumericObserverList#GetPeriod
    * @returns {Promise<number>}
@@ -257,8 +245,7 @@ export declare class OcaNumericObserverList extends OcaAgent {
   GetPeriod(): Promise<number>;
 
   /**
-   * Sets the value of the **Period** property. The return value indicates
-   * whether the property was successfully set.
+   * Sets the value of the **Period** property.
    *
    * @method OcaNumericObserverList#SetPeriod
    * @param {number} period

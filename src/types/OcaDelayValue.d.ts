@@ -19,7 +19,8 @@ export declare interface IOcaDelayValue {
 
 export declare class OcaDelayValue implements IOcaDelayValue {
   /**
-   * Multifield descriptor that defines a delay value element.
+   * Multifield descriptor that defines a delay value element. This datatype is
+   * **deprecated** in AES70-2022.
    * @class OcaDelayValue
    */
   constructor(DelayValue: number, DelayUnit: OcaDelayUnit);

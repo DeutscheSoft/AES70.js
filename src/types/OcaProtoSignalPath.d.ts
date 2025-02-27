@@ -5,34 +5,36 @@ import { IOcaProtoPort, OcaProtoPort } from './OcaProtoPort';
 
 export declare interface IOcaProtoSignalPath {
   /**
-   * Source proto-port (i.e. output port) of the proto-signal path.
+   * Output port (i.e. signal source) of the prototype signal path.
    * @type OcaProtoPort
    */
-  SourceProtoPort: IOcaProtoPort;
+  OutputProtoPort: IOcaProtoPort;
 
   /**
-   * Sink proto-port (i.e. input port) of the proto-signal path.
+   * Input prototype port (i.e. signal destination port) of the prototype signal
+   * path.
    * @type OcaProtoPort
    */
-  SinkProtoPort: IOcaProtoPort;
+  InputProtoPort: IOcaProtoPort;
 }
 
 export declare class OcaProtoSignalPath implements IOcaProtoSignalPath {
   /**
-   * Proto-signal path between two proto-member ports in a factory.
+   * Prototype signal path between two prototype member ports in a factory.
    * @class OcaProtoSignalPath
    */
-  constructor(SourceProtoPort: OcaProtoPort, SinkProtoPort: OcaProtoPort);
+  constructor(OutputProtoPort: OcaProtoPort, InputProtoPort: OcaProtoPort);
 
   /**
-   * Source proto-port (i.e. output port) of the proto-signal path.
+   * Output port (i.e. signal source) of the prototype signal path.
    * @type OcaProtoPort
    */
-  SourceProtoPort: OcaProtoPort;
+  OutputProtoPort: OcaProtoPort;
 
   /**
-   * Sink proto-port (i.e. input port) of the proto-signal path.
+   * Input prototype port (i.e. signal destination port) of the prototype signal
+   * path.
    * @type OcaProtoPort
    */
-  SinkProtoPort: OcaProtoPort;
+  InputProtoPort: OcaProtoPort;
 }

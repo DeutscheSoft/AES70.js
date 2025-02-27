@@ -6,6 +6,14 @@ import {
 } from '../../types/OcaRamperInterpolationLaw';
 import { OcaRamperState } from '../../types/OcaRamperState';
 import { IOcaTimeMode, OcaTimeMode } from '../../types/OcaTimeMode';
+import {
+  IOcaWhenPhysicalAbsolute,
+  OcaWhenPhysicalAbsolute,
+} from '../../types/OcaWhenPhysicalAbsolute';
+import {
+  IOcaWhenPhysicalRelative,
+  OcaWhenPhysicalRelative,
+} from '../../types/OcaWhenPhysicalRelative';
 import { Arguments } from '../arguments';
 import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
@@ -69,10 +77,17 @@ export declare class OcaRamper extends OcaAgent {
    */
   OnGoalChanged: PropertyEvent<number>;
 
+  /**
+   * This event is emitted whenever StartWhen changes.
+   */
+  OnStartWhenChanged: PropertyEvent<
+    OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative
+  >;
+
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Executes the given ramper command. The return value indicates whether the
+   * Executes the given Ramper command. The return value indicates whether the
    * command was successfully executed.
    *
    * @method OcaRamper#Control
@@ -114,8 +129,8 @@ export declare class OcaRamper extends OcaAgent {
   SetRampedProperty(property: IOcaProperty): Promise<void>;
 
   /**
-   * Gets ramper time mode (absolute or relative). The return value indicates
-   * whether the time mode was successfully retrieved.
+   * Gets ramper time mode (absolute or relative). **Deprecated** in v3 of this
+   * class.
    *
    * @method OcaRamper#GetTimeMode
    * @returns {Promise<OcaTimeMode>}
@@ -124,8 +139,8 @@ export declare class OcaRamper extends OcaAgent {
   GetTimeMode(): Promise<OcaTimeMode>;
 
   /**
-   * Sets ramper time mode (absolute or relative). The return value indicates
-   * whether the time mode was successfully set.
+   * Sets ramper time mode (absolute or relative). **Deprecated** in v3 of this
+   * class.
    *
    * @method OcaRamper#SetTimeMode
    * @param {IOcaTimeMode} TimeMode
@@ -135,8 +150,8 @@ export declare class OcaRamper extends OcaAgent {
   SetTimeMode(TimeMode: IOcaTimeMode): Promise<void>;
 
   /**
-   * Gets ramp start time. The return value indicates whether the start time was
-   * successfully retrieved.
+   * Output parameter that holds the start time of the ramp if the method
+   * succeeds. **Deprecated** in version 3 of this class.
    *
    * @method OcaRamper#GetStartTime
    * @returns {Promise<number|BigInt>}
@@ -145,8 +160,7 @@ export declare class OcaRamper extends OcaAgent {
   GetStartTime(): Promise<number | BigInt>;
 
   /**
-   * Sets ramper start time. The return value indicates whether the start time
-   * was successfully set.
+   * Sets ramper start time. **Deprecated** in v3 of this class.
    *
    * @method OcaRamper#SetStartTime
    * @param {number|BigInt} TimeMode
@@ -161,7 +175,7 @@ export declare class OcaRamper extends OcaAgent {
    * The return values of this method are
    *
    * - Duration of type ``number``
-   * - miinDuration of type ``number``
+   * - minDuration of type ``number``
    * - maxDuration of type ``number``
    *
    * @method OcaRamper#GetDuration
@@ -221,4 +235,26 @@ export declare class OcaRamper extends OcaAgent {
    * @returns {Promise<void>}
    */
   SetGoal(goal: number): Promise<void>;
+
+  /**
+   * Gets the value of the **StartWhen** property.
+   *
+   * @method OcaRamper#GetStartWhen
+   * @returns {Promise<(OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative)>}
+   *   A promise which resolves to a single value of type ``(OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative)``.
+   */
+  GetStartWhen(): Promise<OcaWhenPhysicalAbsolute | OcaWhenPhysicalRelative>;
+
+  /**
+   * Sets the value of the **StartWhen** property. Shall fail if called when
+   * **State** is **Ramping**.
+   *
+   * @method OcaRamper#SetStartWhen
+   * @param {(IOcaWhenPhysicalAbsolute | IOcaWhenPhysicalRelative)} When
+   *
+   * @returns {Promise<void>}
+   */
+  SetStartWhen(
+    When: IOcaWhenPhysicalAbsolute | IOcaWhenPhysicalRelative
+  ): Promise<void>;
 }

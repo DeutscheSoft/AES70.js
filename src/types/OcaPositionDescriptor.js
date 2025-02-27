@@ -4,7 +4,7 @@
 
 export class OcaPositionDescriptor {
   /**
-   * A six-axis c1,c2,c3,c4,c5,c6) coordinate. For mechanical systems, these
+   * A six-axis (c1,c2,c3,c4,c5,c6) coordinate. For mechanical systems, these
    * axes shall be interpreted as follows:
    *
    *  - c1 = X; axial (fore-and-aft) position
@@ -54,7 +54,7 @@ export class OcaPositionDescriptor {
     this.FieldFlags = FieldFlags;
     /**
      * The coordinates
-     * @type number[]
+     * @type 6[]
      */
     this.Values = Values;
   }

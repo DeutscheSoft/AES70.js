@@ -4,7 +4,6 @@
 
 export class OcaModelGUID {
   /**
-   * 64 bit device type GUID.
    * @class OcaModelGUID
    */
   constructor(Reserved, MfrCode, ModelCode) {

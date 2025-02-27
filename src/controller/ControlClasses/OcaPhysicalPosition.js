@@ -14,7 +14,7 @@ export const OcaPhysicalPosition = make_control_class(
   'OcaPhysicalPosition',
   3,
   '\u0001\u0002\u0011',
-  1,
+  3,
   OcaAgent,
   [
     ['GetCoordinateSystem', 3, 1, [], [OcaPositionCoordinateSystem]],
@@ -59,24 +59,21 @@ export const OcaPhysicalPosition = make_control_class(
 );
 
 /**
- * Retrieves value of property **CoordinateSystem**. Result indicates whether
- * retrieval was successful.
+ * Gets value of property **CoordinateSystem**.
  *
  * @method OcaPhysicalPosition#GetCoordinateSystem
  * @returns {Promise<OcaPositionCoordinateSystem>}
  *   A promise which resolves to a single value of type :class:`OcaPositionCoordinateSystem`.
  */
 /**
- * Retrieves value of property **PositionDescriptorFieldFlags**. Result
- * indicates whether retrieval was successful.
+ * Gets value of property **PositionDescriptorFieldFlags**.
  *
  * @method OcaPhysicalPosition#GetPositionDescriptorFieldFlags
  * @returns {Promise<IOcaPositionDescriptorFieldFlags>}
  *   A promise which resolves to a single value of type ``IOcaPositionDescriptorFieldFlags``.
  */
 /**
- * Retrieves value of property **PositioinDescriptor**. Result indicates whether
- * retrieval was successful.
+ * Gets value of property **PositionDescriptor**.
  * The return values of this method are
  *
  * - PositionDescriptor of type ``IOcaPositionDescriptor``

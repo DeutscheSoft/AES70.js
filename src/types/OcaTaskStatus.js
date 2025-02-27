@@ -4,18 +4,8 @@
 
 export class OcaTaskStatus {
   /**
-   * Status of an OcaTask: task state plus a nonspecific blob named Parameter
-   * which the application can use, or not.
-   *
-   *  - The initial value of Parameter is null.
-   *
-   *  - The controller sets the value of Parameter via the Control() method.
-   *
-   *  - If the task's state changes due to an internal event (examples: task
-   *    duration value reached; or failure due to an error), Parameter is not
-   *    changed.
-   *
-   *
+   * Status of an OcaTask: task state plus an error code that gives more detail.
+   * **Deprecated** in OCA 1.5.
    * @class OcaTaskStatus
    */
   constructor(ID, State, ErrorCode) {

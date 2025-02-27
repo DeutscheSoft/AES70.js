@@ -9,7 +9,7 @@ import { OcaGlobalTypeIdentifier as type } from '../types/OcaGlobalTypeIdentifie
 
 export const OcaGlobalTypeIdentifier = Struct(
   {
-    Authority: OcaBlobFixedLen(3),
+    Organization: OcaBlobFixedLen(3),
     ID: OcaUint32,
   },
   type

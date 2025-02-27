@@ -13,30 +13,28 @@ export const OcaBitstringActuator = make_control_class(
   'OcaBitstringActuator',
   5,
   '\u0001\u0001\u0001\u0001\r',
-  2,
+  3,
   OcaBasicActuator,
   [
     ['GetNrBits', 5, 1, [], [OcaUint16]],
     ['GetBit', 5, 2, [OcaUint16], [OcaBoolean]],
     ['SetBit', 5, 3, [OcaUint16, OcaBoolean], []],
-    ['GetBitstring', 5, 4, [], [OcaBitstring]],
-    ['SetBitstring', 5, 5, [OcaBitstring], []],
+    ['GetSetting', 5, 4, [], [OcaBitstring], ['GetBitstring']],
+    ['SetSetting', 5, 5, [OcaBitstring], [], ['SetBitstring']],
   ],
-  [['Bitstring', [OcaBitstring], 5, 1, false, false, null]],
+  [['Setting', [OcaBitstring], 5, 1, false, false, ['Bitstring']]],
   []
 );
 
 /**
- * Gets the number of bits in the string. The return value indicates whether the
- * property was successfully gathered.
+ * Gets the number of bits in the string.
  *
  * @method OcaBitstringActuator#GetNrBits
  * @returns {Promise<number>}
  *   A promise which resolves to a single value of type ``number``.
  */
 /**
- * Gets the bit value of the given bit. The return value indicates whether the
- * property was successfully gathered.
+ * Gets the bit value of the given bit.
  *
  * @method OcaBitstringActuator#GetBit
  * @param {number} bitNr
@@ -45,8 +43,7 @@ export const OcaBitstringActuator = make_control_class(
  *   A promise which resolves to a single value of type ``boolean``.
  */
 /**
- * Sets the bit value of the given bit. The return value indicates whether the
- * property was successfully set.
+ * Sets the bit value of the given bit.
  *
  * @method OcaBitstringActuator#SetBit
  * @param {number} bitNr
@@ -55,26 +52,46 @@ export const OcaBitstringActuator = make_control_class(
  * @returns {Promise<void>}
  */
 /**
- * Gets the entire bitstring.The return value indicates whether the property was
- * successfully gathered.
+ * Gets the entire bitstring.
+ *
+ * @method OcaBitstringActuator#GetSetting
+ * @returns {Promise<boolean[]>}
+ *   A promise which resolves to a single value of type ``boolean[]``.
+ */
+/**
+ * Gets the entire bitstring.
+ * An alias for GetSetting.
  *
  * @method OcaBitstringActuator#GetBitstring
  * @returns {Promise<boolean[]>}
  *   A promise which resolves to a single value of type ``boolean[]``.
  */
 /**
- * Sets the entire bitstring. The return value indicates whether the property
- * was successfully set.
+ * Sets the entire bitstring.
  *
- * @method OcaBitstringActuator#SetBitstring
- * @param {boolean[]} BitString
+ * @method OcaBitstringActuator#SetSetting
+ * @param {boolean[]} Setting
  *
  * @returns {Promise<void>}
  */
 /**
- * This event is emitted when the property ``Bitstring`` changes in the remote object.
- * The property ``Bitstring`` is described in the AES70 standard as follows.
- * The bitstring data.
+ * Sets the entire bitstring.
+ * An alias for SetSetting.
+ *
+ * @method OcaBitstringActuator#SetBitstring
+ * @param {boolean[]} Setting
+ *
+ * @returns {Promise<void>}
+ */
+/**
+ * This event is emitted when the property ``Setting`` changes in the remote object.
+ * The property ``Setting`` is described in the AES70 standard as follows.
+ * The bitstring data. New name for v3 of this class.
+ *
+ * @member {PropertyEvent<boolean[]>} OcaBitstringActuator#OnSettingChanged
+ */
+/**
+ * An alias for OnSettingChanged
  *
  * @member {PropertyEvent<boolean[]>} OcaBitstringActuator#OnBitstringChanged
  */

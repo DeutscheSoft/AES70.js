@@ -1,6 +1,8 @@
 import { OcaClassIdentification } from '../../types/OcaClassIdentification';
+import { OcaLockState } from '../../types/OcaLockState';
 import { Event } from '../event';
 import { ObjectBase } from '../object_base';
+import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
 
 /**
@@ -12,18 +14,21 @@ import { RemoteDevice } from '../remote_device';
 export declare class OcaRoot extends ObjectBase {
   /**
    * General event that is emitted when a property changes. In each setter
-   * method (of derived classes) this event must be raised with the proper
+   * method (of derived classes) this event shall be raised with the proper
    * derived event data structure.
    * @member OcaRoot#OnPropertyChanged {Event}
    */
   OnPropertyChanged: Event;
+  /**
+   * This event is emitted whenever LockState changes.
+   */
+  OnLockStateChanged: PropertyEvent<OcaLockState>;
 
   constructor(objectNumber: number, device: RemoteDevice);
 
   /**
-   * Gets the class identification, a structure that contains the ClassID and
-   * ClassVersion. The return value indicates whether the property was
-   * successfully retrieved.
+   * Gets the class identification, a structure contains the ClassID and
+   * ClassVersion.
    *
    * @method OcaRoot#GetClassIdentification
    * @returns {Promise<OcaClassIdentification>}
@@ -32,8 +37,7 @@ export declare class OcaRoot extends ObjectBase {
   GetClassIdentification(): Promise<OcaClassIdentification>;
 
   /**
-   * Gets the value of the Lockable property. The return value indicates whether
-   * the property was successfully retrieved.
+   * Gets the value of the Lockable property.
    *
    * @method OcaRoot#GetLockable
    * @returns {Promise<boolean>}
@@ -43,11 +47,33 @@ export declare class OcaRoot extends ObjectBase {
 
   /**
    * Locks the object totally, so that it can only be accessed for reading or
-   * writing by the lockholder. If the device is read-only locked (by a prior
-   * call to LockReadonly()) when Lock() is called by the same lockholder, the
-   * lock state is upgraded to total. If the call is from a session other than
-   * the lockholder's, the call fails. The return value indicates whether the
-   * operation succeeded.
+   * writing by the lockholder.
+   *
+   *  - If the object's **LockState** is **LockNoWrite** by the same lockholder,
+   *    the lock state is upgraded to LockNoReadWrite.
+   *
+   *  - If the call is from a session other than the lockholder's, the call
+   *    fails.
+   *
+   *
+   *
+   * @method OcaRoot#SetLockNoReadWrite
+   * @returns {Promise<void>}
+   */
+  SetLockNoReadWrite(): Promise<void>;
+
+  /**
+   * Locks the object totally, so that it can only be accessed for reading or
+   * writing by the lockholder.
+   *
+   *  - If the object's **LockState** is **LockNoWrite** by the same lockholder,
+   *    the lock state is upgraded to LockNoReadWrite.
+   *
+   *  - If the call is from a session other than the lockholder's, the call
+   *    fails.
+   *
+   *
+   * An alias for SetLockNoReadWrite.
    *
    * @method OcaRoot#LockTotal
    * @returns {Promise<void>}
@@ -56,8 +82,7 @@ export declare class OcaRoot extends ObjectBase {
 
   /**
    * Unlocks the object so that it can be freely accessed again. This method can
-   * only succeed if it is called by the lockholder. The return value indicates
-   * whether the operation succeeded.
+   * only succeed if it is called by the lockholder.
    *
    * @method OcaRoot#Unlock
    * @returns {Promise<void>}
@@ -65,8 +90,7 @@ export declare class OcaRoot extends ObjectBase {
   Unlock(): Promise<void>;
 
   /**
-   * Returns value of Role property. The return value indicates whether the
-   * operation succeeded.
+   * Returns value of Role property.
    *
    * @method OcaRoot#GetRole
    * @returns {Promise<string>}
@@ -75,15 +99,36 @@ export declare class OcaRoot extends ObjectBase {
   GetRole(): Promise<string>;
 
   /**
-   * Locks the object so that its properties may only be modified by the
-   * lockholder, but others can still retrieve property values. If the device is
-   * already locked (by a prior call to Lock() or LockReadonly()) when
-   * LockReadonly() is called by the same lockholder, the lock state is set to
-   * read-only. If the call is from a session other than the lockholder's, the
-   * call fails. The return value indicates whether the operation succeeded.
+   * Locks the object so that it may only be controlled by the lockholder, but
+   * others can still retrieve property values. If **LockState** is
+   * **LockNoReadWrite** by the same lockholder, the lock state is downgraded to
+   * **LockNoWrite**. If the call is from a session other than the lockholder's,
+   * the call fails.
    *
-   * @method OcaRoot#LockReadonly
+   * @method OcaRoot#SetLockNoWrite
    * @returns {Promise<void>}
    */
-  LockReadonly(): Promise<void>;
+  SetLockNoWrite(): Promise<void>;
+
+  /**
+   * Locks the object so that it may only be controlled by the lockholder, but
+   * others can still retrieve property values. If **LockState** is
+   * **LockNoReadWrite** by the same lockholder, the lock state is downgraded to
+   * **LockNoWrite**. If the call is from a session other than the lockholder's,
+   * the call fails.
+   * An alias for SetLockNoWrite.
+   *
+   * @method OcaRoot#LockReadOnly
+   * @returns {Promise<void>}
+   */
+  LockReadOnly(): Promise<void>;
+
+  /**
+   * Returns the current value of the **LockState** property.
+   *
+   * @method OcaRoot#GetLockState
+   * @returns {Promise<OcaLockState>}
+   *   A promise which resolves to a single value of type :class:`OcaLockState`.
+   */
+  GetLockState(): Promise<OcaLockState>;
 }
