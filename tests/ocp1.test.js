@@ -1,6 +1,7 @@
 import assert, { deepEqual, strictEqual } from 'node:assert';
 import { describe, it } from 'node:test';
 
+import { OcaArray1D } from '../src/OCP1/OcaArray1D.js';
 import { OcaBoolean } from '../src/OCP1/OcaBoolean.js';
 import { OcaInt8 } from '../src/OCP1/OcaInt8.js';
 import { OcaInt16 } from '../src/OCP1/OcaInt16.js';
@@ -106,6 +107,12 @@ describe('ocp1', () => {
     2 + 8 * 233
   );
   testEncodeDecode(
+    'OcaArray1D<OcaFloat64, 233>',
+    OcaArray1D(OcaFloat64, 233),
+    new Array(233).fill(0).map(() => Math.random()),
+    8 * 233
+  );
+  testEncodeDecode(
     'OcaList32<OcaFloat64>',
     OcaList32(OcaFloat64),
     new Array(233).fill(0).map(() => Math.random()),
@@ -117,6 +124,12 @@ describe('ocp1', () => {
     OcaList(OcaString),
     ['foobar', 'bar'],
     2 + 4 + 6 + 3
+  );
+  testEncodeDecode(
+    'OcaArray1D<OcaString, 2>',
+    OcaArray1D(OcaString, 2),
+    ['foobar', 'bar'],
+    4 + 6 + 3
   );
   testEncodeDecode(
     'OcaList32<OcaString>',
