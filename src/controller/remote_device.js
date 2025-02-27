@@ -183,7 +183,7 @@ export class RemoteDevice extends Events {
       event,
       subscriberMethod,
       new Uint8Array(0),
-      OcaNotificationDeliveryMode.Reliable,
+      OcaNotificationDeliveryMode.Normal,
       new Uint8Array(0)
     );
   }
