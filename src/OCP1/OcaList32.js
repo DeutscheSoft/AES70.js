@@ -1,3 +1,3 @@
 import { createListType } from './createListType.js';
 
-export const OcaList = createListType(2);
+export const OcaList32 = createListType(4);

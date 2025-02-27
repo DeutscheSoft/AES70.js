@@ -14,6 +14,7 @@ import { OcaFloat32 } from '../src/OCP1/OcaFloat32.js';
 import { OcaFloat64 } from '../src/OCP1/OcaFloat64.js';
 import { OcaString } from '../src/OCP1/OcaString.js';
 import { OcaList } from '../src/OCP1/OcaList.js';
+import { OcaList32 } from '../src/OCP1/OcaList32.js';
 import { OcaList2D } from '../src/OCP1/OcaList2D.js';
 import { OcaMap } from '../src/OCP1/OcaMap.js';
 import { Struct } from '../src/OCP1/Struct.js';
@@ -104,7 +105,25 @@ describe('ocp1', () => {
     new Array(233).fill(0).map(() => Math.random()),
     2 + 8 * 233
   );
+  testEncodeDecode(
+    'OcaList32<OcaFloat64>',
+    OcaList32(OcaFloat64),
+    new Array(233).fill(0).map(() => Math.random()),
+    4 + 8 * 233
+  );
   testEncodeDecode('OcaString', OcaString, 'foobar', 8);
+  testEncodeDecode(
+    'OcaList<OcaString>',
+    OcaList(OcaString),
+    ['foobar', 'bar'],
+    2 + 4 + 6 + 3
+  );
+  testEncodeDecode(
+    'OcaList32<OcaString>',
+    OcaList32(OcaString),
+    ['foobar', 'bar'],
+    4 + 4 + 6 + 3
+  );
   testEncodeDecode('OcaList2D<OcaString>', OcaList2D(OcaString), [
     ['foobar', 'bar'],
     ['bar', 'foo'],
@@ -200,14 +219,14 @@ describe('ocp1', () => {
     const Type = OcaBlob;
     const data = new Uint8Array(10);
 
-    testEncodeDecode('OcaBlob', Type, data, 2+data.length);
+    testEncodeDecode('OcaBlob', Type, data, 2 + data.length);
   }
 
   {
     const Type = OcaLongBlob;
     const data = new Uint8Array(10);
 
-    testEncodeDecode('OcaBlob', Type, data, 4+data.length);
+    testEncodeDecode('OcaBlob', Type, data, 4 + data.length);
   }
 
   it('OcaSubscriptionManager.AddSubscription', () => {
