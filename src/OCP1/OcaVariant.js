@@ -1,13 +1,23 @@
 import { createType } from './createType.js';
+import { OcaVariant as OcaVariantType } from '../types/OcaVariant.js';
 
 export function OcaVariant(...Types) {
   const canEncode = function (value) {
+    if (typeof value === 'object' && value instanceof OcaVariantType) {
+      return Types[value.Index].canEncode(value.Value);
+    }
+
     for (const type of Types) {
       if (type.canEncode(value)) return true;
     }
     return false;
   };
   const encodeTo = function (dataView, pos, value) {
+    if (typeof value === 'object' && value instanceof OcaVariantType) {
+      dataView.setUint8(pos++, value.Index);
+      return Types[value.Index].encodeTo(dataView, pos, value.Value);
+    }
+
     for (let i = 0; i < Types.length; i++) {
       const type = Types[i];
 
@@ -22,7 +32,11 @@ export function OcaVariant(...Types) {
     const index = dataView.getUint8(pos++);
     const type = Types[index];
 
-    return type.decodeFrom(dataView, pos);
+    const tmp = type.decodeFrom(dataView, pos);
+
+    tmp[1] = new OcaVariantType(index, tmp[1]);
+
+    return tmp;
   };
   const decodeLength = function (dataView, pos) {
     const index = dataView.getUint8(pos);
@@ -58,12 +72,17 @@ export function OcaVariant(...Types) {
   return createType({
     isConstantLength: false,
     encodedLength: function (value) {
+      if (typeof value === 'object' && value instanceof OcaVariantType) {
+        return Types[value.Index].encodedLength(value.Value) + 1;
+      }
+
       for (const type of Types) {
         if (type.canEncode(value)) {
           return 1 + type.encodedLength(value);
         }
       }
-      return encodedLengths[0] + 1;
+
+      throw new TypeError('Cannot encode argument.');
     },
     canEncode,
     encodeTo,

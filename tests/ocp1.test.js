@@ -25,10 +25,13 @@ import { OcaLongBlob } from '../src/OCP1/OcaLongBlob.js';
 import { Arguments } from '../src/OCP1/Arguments.js';
 import { String16 } from '../src/OCP1/String16.js';
 import { OcaBitstring } from '../src/OCP1/OcaBitstring.js';
-import { OcaVariant } from '../src/OCP1/OcaVariant.js';
+import { OcaVariant as OcaVariantEncoder } from '../src/OCP1/OcaVariant.js';
+import { OcaVariant } from '../src/types/OcaVariant.js';
 
 import { OcaClassicalFilterShape } from '../src/OCP1/OcaClassicalFilterShape.js';
 import { OcaDeviceState } from '../src/OCP1/OcaDeviceState.js';
+import { OcaWhenPhysicalAbsolute } from '../src/OCP1/OcaWhenPhysicalAbsolute.js';
+import { OcaWhenPhysicalRelative } from '../src/OCP1/OcaWhenPhysicalRelative.js';
 
 import { EncodedArguments } from '../src/OCP1/encoded_arguments.js';
 
@@ -213,19 +216,63 @@ describe('ocp1', () => {
   }
 
   {
-    const Type = OcaVariant(OcaString, OcaUint8);
+    const Type = OcaVariantEncoder(OcaString, OcaUint8);
     testEncodeDecode(
       'OcaVariant(OcaString, OcaUint8)',
       Type,
-      'foobar',
+      new OcaVariant(0, 'foobar'),
       2 + 6 + 1
     );
-    testEncodeDecode('OcaVariant(OcaString, OcaUint8)', Type, 8, 2);
+    testEncodeDecode(
+      'OcaVariant(OcaString, OcaUint8)',
+      Type,
+      new OcaVariant(1, 8),
+      2
+    );
   }
 
   {
-    const Type = OcaVariant(OcaInt8, OcaUint8);
-    testEncodeDecode('OcaVariant(OcaInt8, OcaUint8)', Type, 13, 2);
+    const Type = OcaVariantEncoder(OcaInt8, OcaUint8);
+    testEncodeDecode(
+      'OcaVariant(OcaInt8, OcaUint8)',
+      Type,
+      new OcaVariant(0, 13),
+      2
+    );
+  }
+
+  {
+    const Type = OcaVariantEncoder(
+      OcaWhenPhysicalAbsolute,
+      OcaWhenPhysicalRelative
+    );
+    const value = new OcaVariant(0, {
+      TimeRefONo: 12,
+      Value: { Negative: false, Seconds: 1345, Nanoseconds: 345 },
+    });
+
+    testEncodeDecode(
+      'OcaVariant(OcaWhenPhysicalAbsolute, OcaWhenPhysicalRelative)',
+      Type,
+      value
+    );
+  }
+
+  {
+    const Type = OcaVariantEncoder(
+      OcaWhenPhysicalAbsolute,
+      OcaWhenPhysicalRelative
+    );
+    const value = new OcaVariant(1, {
+      TimeRefONo: 12,
+      Value: { Negative: false, Seconds: 1345, Nanoseconds: 345 },
+    });
+
+    testEncodeDecode(
+      'OcaVariant(OcaWhenPhysicalAbsolute, OcaWhenPhysicalRelative)',
+      Type,
+      value
+    );
   }
 
   {
