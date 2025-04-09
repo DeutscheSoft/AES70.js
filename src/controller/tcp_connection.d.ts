@@ -2,11 +2,13 @@ import {
   ClientConnection,
   IClientConnectionOptions,
 } from './client_connection.js';
-import { Socket, TcpSocketConnectOpts } from 'net';
+import { Socket, NetConnectOpts } from 'net';
 
 export interface ITCPConnectionOptions
   extends IClientConnectionOptions,
-    TcpSocketConnectOpts {}
+    NetConnectOpts {
+  connectSignal?: AbortSignal;
+}
 
 /**
  * :class:`ClientConnection` subclass which implements OCP.1 with TCP

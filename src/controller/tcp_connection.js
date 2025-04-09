@@ -1,6 +1,6 @@
 /* eslint-env node */
 
-import { Socket } from 'net';
+import { createConnection } from 'net';
 import { Buffer } from 'buffer';
 import { performance } from 'perf_hooks';
 
@@ -41,28 +41,45 @@ export class TCPConnection extends ClientConnection {
 
   /**
    * Connect to the given endpoint.
-   *
+   * @param {net.NetConnectOpts} options
    * @param {String} options.host
    *    Hostname or ip address.
    * @param {number} options.port
    *    Port number.
+   * @param {AbortSignal} [options.connectSignal]
+   *    An optional AbortSignal which can be used to abort the connect attempt.
+   *    Note that this is different from the `signal` option which will destroy
+   *    the socket also after the connect attempt has been successful.
    * @returns {Promise<TCPConnection>}
    *    The connection.
    */
   static connect(options) {
     return new Promise((resolve, reject) => {
-      const socket = new Socket();
+      const connectSignal = options.connectSignal;
+      if (connectSignal) connectSignal.throwIfAborted();
+      const socket = new createConnection(options);
       const onerror = function (ev) {
         reject(ev);
+        cleanup();
       };
+      const onabort = function (ev) {
+        const err = connectSignal.reason;
+        reject(err);
+        socket.destroy(err);
+      };
+      const cleanup = function () {
+        socket.removeListener('error', onerror);
+        socket.removeListener('timeout', onerror);
+        if (connectSignal) connectSignal.removeEventListener('abort', onabort);
+      };
+
+      if (connectSignal) connectSignal.addEventListener('abort', onabort);
       socket.on('error', onerror);
       socket.on('timeout', onerror);
       socket.on('connect', () => {
-        socket.removeListener('error', onerror);
-        socket.removeListener('timeout', onerror);
         resolve(new this(socket, options));
+        cleanup();
       });
-      socket.connect(options);
     });
   }
 

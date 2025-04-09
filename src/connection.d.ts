@@ -62,6 +62,11 @@ export declare class Connection extends Events {
   close(): void;
 
   /**
+   * Returns true if this connection has been closed.
+   */
+  is_closed(): boolean;
+
+  /**
    * Receive and handle some incoming data. This is usually called
    * internally when data is received on e.g. a tcp socket.
    */
