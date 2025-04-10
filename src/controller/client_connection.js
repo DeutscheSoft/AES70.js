@@ -21,13 +21,17 @@ class PendingCommand {
     this.retries = 0;
   }
 
+  handleError(error) {
+    if (this.stack && error instanceof Error) error.stack = this.stack;
+    this.reject(error);
+  }
+
   response(o) {
     const { resolve, reject, returnTypes, command } = this;
 
     if (o.status_code !== 0) {
       const error = new RemoteError(new OcaStatus(o.status_code), command);
-      if (this.stack) error.stack = this.stack;
-      reject(error);
+      this.handleError(error);
     } else if (!returnTypes) {
       resolve(o);
     } else {
@@ -84,7 +88,7 @@ export class ClientConnection extends Connection {
     this._pendingCommands = null;
     const e = new Error('closed');
     pendingCommands.forEach((pendingCommand, id) => {
-      pendingCommand.reject(e);
+      pendingCommand.handleError(structuredClone(e));
     });
   }
 
