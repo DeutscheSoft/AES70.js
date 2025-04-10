@@ -1,26 +1,15 @@
-import { env, exit } from 'node:process';
 import { TCPConnection } from '../src/controller/tcp_connection.js';
 import { after, before, describe, it } from 'node:test';
 import { RemoteDevice } from '../src/controller/remote_device.js';
 import assert, { equal } from 'node:assert';
+import { allClassesTarget } from './all_classes_target.js';
 
-const AES70_TEST_DEVICE_ALL_CLASSES = env.AES70_TEST_DEVICE_ALL_CLASSES;
-
-if (!AES70_TEST_DEVICE_ALL_CLASSES) {
-  exit(0);
-}
-
-const [host, portStr] = AES70_TEST_DEVICE_ALL_CLASSES.split(':');
-
-const port = parseInt(portStr);
-
-describe('aliases', async () => {
+describe('aliases', { skip: !allClassesTarget }, async () => {
   let device, objectTree;
 
   before(async () => {
     const connection = await TCPConnection.connect({
-      host,
-      port,
+      ...allClassesTarget,
     });
     device = new RemoteDevice(connection);
 

@@ -1,26 +1,14 @@
-import { env, exit } from 'node:process';
 import { TCPConnection } from '../src/controller/tcp_connection.js';
 import { describe, it } from 'node:test';
 import assert, { equal, doesNotReject, rejects } from 'node:assert';
 import { delay } from './delay.js';
+import { allClassesTarget } from './all_classes_target.js';
 
-const AES70_TEST_DEVICE_ALL_CLASSES = env.AES70_TEST_DEVICE_ALL_CLASSES;
-
-if (!AES70_TEST_DEVICE_ALL_CLASSES) {
-  console.log('Missing variable AES70_TEST_DEVICE_ALL_CLASSES');
-  exit(0);
-}
-
-const [host, portStr] = AES70_TEST_DEVICE_ALL_CLASSES.split(':');
-
-const port = parseInt(portStr);
-
-describe('TCPConnection', () => {
+describe('TCPConnection', { skip: !allClassesTarget }, () => {
   it('connect with abort', async () => {
     await rejects(
       TCPConnection.connect({
-        host,
-        port,
+        ...allClassesTarget,
         connectSignal: AbortSignal.timeout(10),
       }),
       (err) => {
@@ -33,8 +21,7 @@ describe('TCPConnection', () => {
     let con;
     await doesNotReject(async () => {
       con = await TCPConnection.connect({
-        host,
-        port,
+        ...allClassesTarget,
         signal: AbortSignal.timeout(1000),
       });
     });
@@ -47,8 +34,7 @@ describe('TCPConnection', () => {
     let con;
     await doesNotReject(async () => {
       con = await TCPConnection.connect({
-        host,
-        port,
+        ...allClassesTarget,
         connectSignal: AbortSignal.timeout(1000),
       });
     });
