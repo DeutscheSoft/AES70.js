@@ -3,6 +3,7 @@ import { Connection } from '../connection.js';
 import { Response } from '../OCP1/response.js';
 import { KeepAlive } from '../OCP1/keepalive.js';
 import { Notification } from '../OCP1/notification.js';
+import { Notification2 } from '../OCP1/notification2.js';
 import { Arguments } from './arguments.js';
 import { OcaStatus } from '../types/OcaStatus.js';
 
@@ -193,7 +194,7 @@ export class ClientConnection extends Connection {
         }
 
         pendingCommand.response(o);
-      } else if (o instanceof Notification) {
+      } else if (o instanceof Notification || o instanceof Notification2) {
         const subscribers = this._subscribers;
         const key = eventToKey(o.event);
 

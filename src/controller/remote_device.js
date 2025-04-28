@@ -16,12 +16,16 @@ import { OcaTaskManager } from './ControlClasses/OcaTaskManager.js';
 import { OcaCodingManager } from './ControlClasses/OcaCodingManager.js';
 import { OcaDiagnosticManager } from './ControlClasses/OcaDiagnosticManager.js';
 import { OcaBlock } from './ControlClasses/OcaBlock.js';
+import { RemoteError } from './remote_error.js';
+import { OcaStatus } from '../types/OcaStatus.js';
 import tree_to_rolemap from './tree_to_rolemap.js';
 
 import * as RemoteControlClasses from './ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from '../types/OcaManagerDefaultObjectNumbers.js';
 import { OcaNotificationDeliveryMode } from '../types/OcaNotificationDeliveryMode.js';
+
+const emptyUint8Array = new Uint8Array(0);
 
 function eventToKey(event) {
   const ono = event.EmitterONo;
@@ -54,6 +58,8 @@ export class RemoteDevice extends Events {
     this.objects = new Map();
     this.connection = connection;
     this._stackDebug = false;
+    this._supportsEV2 = undefined;
+    this._checkEV2Promise = undefined;
 
     connection.on('error', (e) => {
       this.emit('error', e);
@@ -178,14 +184,47 @@ export class RemoteDevice extends Events {
     return this.connection.send_command(cmd, returnType, callback, stack);
   }
 
-  _doSubscribe(event) {
-    return this.SubscriptionManager.AddSubscription(
+  async _doSubscribe(event) {
+    const { _checkEV2Promise } = this;
+
+    if (_checkEV2Promise) await _checkEV2Promise;
+
+    const { _supportsEV2, SubscriptionManager } = this;
+
+    if (_supportsEV2 === undefined || _supportsEV2) {
+      const p = SubscriptionManager.AddSubscription2(
+        event,
+        OcaNotificationDeliveryMode.Normal,
+        emptyUint8Array
+      );
+
+      try {
+        if (_supportsEV2 === undefined) this._checkEV2Promise = p;
+        await p;
+        if (_supportsEV2 === undefined) {
+          this._supportsEV2 = true;
+        }
+        return 2;
+      } catch (err) {
+        if (!RemoteError.check_status(err, OcaStatus.NotImplemented)) {
+          throw err;
+        }
+        this._supportsEV2 = false;
+      } finally {
+        if (_supportsEV2 === undefined) {
+          this._checkEV2Promise = undefined;
+        }
+      }
+    }
+
+    await SubscriptionManager.AddSubscription(
       event,
       subscriberMethod,
-      new Uint8Array(0),
+      emptyUint8Array,
       OcaNotificationDeliveryMode.Normal,
-      new Uint8Array(0)
+      emptyUint8Array
     );
+    return 1;
   }
 
   async add_subscription(event, callback) {
@@ -226,19 +265,24 @@ export class RemoteDevice extends Events {
     const info = {
       callbacks: new Set([callback]),
       callback: cb,
+      version: 0,
+      subscribing: null,
     };
 
     subscriptions.set(key, info);
 
     try {
-      await this._doSubscribe(event);
+      const p = this._doSubscribe(event);
+      info.subscribing = p;
+      info.version = await p;
+      info.subscribing = null;
     } catch (err) {
       subscriptions.delete(key);
       throw err;
     }
   }
 
-  remove_subscription(event, callback) {
+  async remove_subscription(event, callback) {
     const key = eventToKey(event);
 
     const info = this.subscriptions.get(key);
@@ -252,13 +296,25 @@ export class RemoteDevice extends Events {
     if (!a.size) {
       this.connection._removeSubscriber(event);
       this.subscriptions.delete(key);
-      return this.SubscriptionManager.RemoveSubscription(
-        event,
-        subscriberMethod
-      );
+      if (info.subscribing) {
+        await info.subscribing.catch((err) => {});
+      }
+      if (info.version === 2) {
+        return this.SubscriptionManager.RemoveSubscription2(
+          event,
+          OcaNotificationDeliveryMode.Normal,
+          emptyUint8Array
+        );
+      } else if (info.version === 1) {
+        return this.SubscriptionManager.RemoveSubscription(
+          event,
+          subscriberMethod
+        );
+      } else {
+        // If this happens, the subscription failed. In this case
+        // there is also nothing to do here.
+      }
     }
-
-    return Promise.resolve(true);
   }
 
   find_best_class(id) {

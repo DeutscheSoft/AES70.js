@@ -3,8 +3,16 @@ import { CommandRrq } from './commandrrq.js';
 import { Notification } from './notification.js';
 import { Response } from './response.js';
 import { KeepAlive } from './keepalive.js';
+import { Notification2 } from './notification2.js';
 
-const PDUTypes = [Command, CommandRrq, Notification, Response, KeepAlive];
+const PDUTypes = [
+  Command,
+  CommandRrq,
+  Notification,
+  Response,
+  KeepAlive,
+  Notification2,
+];
 
 export function decodeMessage(data, pos, ret) {
   if (data.byteLength < data.byteOffset + pos + 10) return -1;

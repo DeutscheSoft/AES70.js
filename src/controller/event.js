@@ -14,6 +14,12 @@ export class Event extends BaseEvent {
     this.callback = (notification) => {
       if (!this.handlers.size) return;
 
+      if (notification.exception) {
+        // TODO: how to handle it.
+        console.warn('Unhandled notification exception: %o', notification);
+        return;
+      }
+
       const args = new Array(argumentTypes.length);
       // Events without arguments have parameters = null
       const data = new DataView(notification.parameters || emptyBuffer);
