@@ -53,8 +53,8 @@ export class BaseEvent {
    * Unsubscribe all event handlers.
    */
   Dipose() {
-    this.handlers.clear();
-
     if (this.handlers.size) this.do_unsubscribe().catch(function () {});
+
+    this.handlers.clear();
   }
 }
