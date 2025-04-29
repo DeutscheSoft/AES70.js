@@ -8,7 +8,7 @@ import { Arguments } from '../src/controller/arguments.js';
 import { delay } from './delay.js';
 import { allClassesTarget } from './all_classes_target.js';
 
-describe('observerProperty', { skip: !allClassesTarget }, async () => {
+describe('observeProperty', { skip: !allClassesTarget }, async () => {
   let device, objectTree;
 
   before(async () => {
