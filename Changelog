@@ -2,6 +2,18 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [1.6.1] - 2025-05-06
+
+- TCPConnection.connect: Add connecSignal to abort
+  connection attempts.
+
+- Encode arguments earlier. This means that when calling
+  a remove oca method with invalid arguments, and error
+  is thrown right away. This helps with debugging user
+  errors.
+
+- Add typescript declarations for ObjectBase.
+
 ## [1.6.0] - 2025-01-30
 
 - Add stack debug feature to RemoteDevice
