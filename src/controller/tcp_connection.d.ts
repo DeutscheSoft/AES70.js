@@ -2,13 +2,15 @@ import {
   ClientConnection,
   IClientConnectionOptions,
 } from './client_connection.js';
-import { Socket, NetConnectOpts } from 'net';
+import { Socket, NetConnectOpts } from 'node:net';
 
-export interface ITCPConnectionOptions
-  extends IClientConnectionOptions,
-    NetConnectOpts {
-  connectSignal?: AbortSignal;
-}
+export type ITCPConnectionOptions = IClientConnectionOptions &
+  NetConnectOpts & {
+    /**
+     * This AbortSignal can be used to abort a connection attempt.
+     */
+    connectSignal?: AbortSignal;
+  };
 
 /**
  * :class:`ClientConnection` subclass which implements OCP.1 with TCP
