@@ -1,3 +1,5 @@
+import { PROTOCOL_VERSION_2024 } from './protocol_version.js';
+
 export const messageHeaderSize = 10;
 
 function calculateMessageLength(pdus) {
@@ -14,6 +16,8 @@ function calculateMessageLength(pdus) {
   return len;
 }
 
+export const currentProtocolVersion = PROTOCOL_VERSION_2024;
+
 export function encodeMessageTo(dst, pos, pdus, offset, end) {
   if (!offset) offset = 0;
 
@@ -28,7 +32,7 @@ export function encodeMessageTo(dst, pos, pdus, offset, end) {
 
   const startPos = pos;
 
-  dst.setUint16(pos, 1);
+  dst.setUint16(pos, currentProtocolVersion);
   pos += 2;
   const lenPos = pos;
   pos += 4;
