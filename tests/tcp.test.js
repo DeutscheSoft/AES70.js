@@ -9,7 +9,7 @@ describe('TCPConnection', { skip: !allClassesTarget }, () => {
     await rejects(
       TCPConnection.connect({
         ...allClassesTarget,
-        connectSignal: AbortSignal.timeout(10),
+        connectSignal: AbortSignal.timeout(0),
       }),
       (err) => {
         equal(err.name, 'TimeoutError');
