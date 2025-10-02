@@ -114,6 +114,17 @@ export declare class OcaMediaClock extends OcaAgent {
   GetRate(): Promise<OcaMediaClockRate>;
 
   /**
+   * Gets the current sampling rate. The return value indicates whether the
+   * value was successfully retrieved.
+   * An alias for GetRate.
+   *
+   * @method OcaMediaClock#GetCurrentRate
+   * @returns {Promise<OcaMediaClockRate>}
+   *   A promise which resolves to a single value of type :class:`OcaMediaClockRate`.
+   */
+  GetCurrentRate(): Promise<OcaMediaClockRate>;
+
+  /**
    * Sets the sampling rate. The return value indicates whether the rate was
    * successfully set.
    *
@@ -123,6 +134,18 @@ export declare class OcaMediaClock extends OcaAgent {
    * @returns {Promise<void>}
    */
   SetRate(rate: IOcaMediaClockRate): Promise<void>;
+
+  /**
+   * Sets the sampling rate. The return value indicates whether the rate was
+   * successfully set.
+   * An alias for SetRate.
+   *
+   * @method OcaMediaClock#SetCurrentRate
+   * @param {IOcaMediaClockRate} rate
+   *
+   * @returns {Promise<void>}
+   */
+  SetCurrentRate(rate: IOcaMediaClockRate): Promise<void>;
 
   /**
    * Gets the current media clock lock state. The return value indicates whether

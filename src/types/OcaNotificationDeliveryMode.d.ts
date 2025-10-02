@@ -15,6 +15,14 @@ export class OcaNotificationDeliveryMode {
    * Singleton object corresponding to the entry with value ``2``.
    */
   static Lightweight: OcaNotificationDeliveryMode;
+  /**
+   * Singleton object corresponding to the entry with value ``1``.
+   */
+  static Reliable: OcaNotificationDeliveryMode;
+  /**
+   * Singleton object corresponding to the entry with value ``2``.
+   */
+  static Fast: OcaNotificationDeliveryMode;
 
   /**
    * Returns the numeric value of this enum entry.
@@ -41,5 +49,9 @@ export type IOcaNotificationDeliveryMode =
   | OcaNotificationDeliveryMode
   | 'Normal'
   | 'Lightweight'
+  | 'Reliable'
+  | 'Fast'
+  | 1
+  | 2
   | 1
   | 2;
