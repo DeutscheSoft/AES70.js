@@ -39,13 +39,18 @@ export class Connection extends Events {
     this.tx_bytes = 0;
     this.keepalive_interval = -1;
     this._keepalive_interval_id = null;
-    const cleanup = () => {
-      this.removeEventListener('close', cleanup);
-      this.removeEventListener('error', cleanup);
+    this._closed = false;
+    this.on('close', () => {
+      if (this._closed) return;
+      this._closed = true;
       this.cleanup();
-    };
-    this.on('close', cleanup);
-    this.on('error', cleanup);
+    });
+    this.on('error', (e) => {
+      if (this._closed) return;
+      this._closed = true;
+      this.emit('close');
+      this.cleanup();
+    });
   }
 
   get is_reliable() {
