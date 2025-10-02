@@ -65,8 +65,8 @@ export class RemoteDevice extends Events {
       this.emit('error', e);
     });
 
-    connection.on('close', (e) => {
-      this.emit('close', e);
+    connection.on('close', () => {
+      this.emit('close');
     });
 
     this.modules = [];
