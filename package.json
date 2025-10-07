@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "node --test --test-concurrency=1 tests/*.test.js",
-    "test:only": "node --test-only --test-concurrency=1 tests/*.test.js",
+    "test:only": "node --test --test-only --test-concurrency=1 tests/*.test.js",
     "prepublishOnly": "make",
     "docs": "cd esdoc && npm run build",
     "prettier": "npx prettier@2.0.5 --write .",
