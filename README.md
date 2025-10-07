@@ -30,8 +30,7 @@ need to implement all classes involved.
 All classes and datatypes defined in the
 current AES70 Standard are published in the form of an XMI document. This XMI
 document has been used to generate the class structure and interfaces which
-are part of this library. At this point AES70.js fully supports the most recent
-version AES70-2018.
+are part of this library. At this point AES70.js supports the version AES70-2024.
 
 # Basics
 
