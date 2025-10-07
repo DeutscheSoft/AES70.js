@@ -1,3 +1,4 @@
+import { CloseError } from '../close_error.js';
 import { OcaEvent } from '../types/OcaEvent.js';
 
 class EventSubscriber {
@@ -22,6 +23,7 @@ class EventSubscriber {
         console.error('Exception thrown by error event handler: ', e);
       }
     } else {
+      if (error instanceof CloseError) return;
       console.warn('No handler for error', error);
     }
   }

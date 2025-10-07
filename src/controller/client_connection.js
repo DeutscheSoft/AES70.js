@@ -8,6 +8,7 @@ import { Notification2 } from '../OCP1/notification2.js';
 import { Arguments } from './arguments.js';
 import { OcaStatus } from '../types/OcaStatus.js';
 import { EncodedArguments } from '../OCP1/encoded_arguments.js';
+import { CloseError } from '../close_error.js';
 
 class PendingCommand {
   get handle() {
@@ -92,14 +93,14 @@ export class ClientConnection extends Connection {
     this._subscribers = new Map();
   }
 
-  cleanup() {
-    super.cleanup();
+  cleanup(error) {
+    super.cleanup(error);
     const subscribers = this._subscribers;
     this._subscribers = null;
     const pendingCommands = this._pendingCommands;
     this._pendingCommands = null;
 
-    const e = new Error('closed');
+    const e = new CloseError(error);
     pendingCommands.forEach((pendingCommand, id) => {
       pendingCommand.handleError(structuredClone(e));
     });

@@ -16,6 +16,8 @@ export * from './controller/abstract_udp_connection';
 export * from './controller/fetch_device_content';
 export * from './controller/remote_error';
 export * from './controller/notification_error';
+export * from './close_error';
+export * from './timeout_error';
 
 import * as RemoteControlClasses from './controller/ControlClasses';
 import * as Types from './types';

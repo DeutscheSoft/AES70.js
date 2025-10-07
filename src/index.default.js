@@ -18,6 +18,8 @@ export * from './controller/PropertyObserver.js';
 export * from './controller/fetch_device_content.js';
 export * from './controller/remote_error.js';
 export * from './controller/notification_error.js';
+export * from './close_error.js';
+export * from './timeout_error.js';
 
 import * as RemoteControlClasses from './controller/ControlClasses.js';
 import * as Types from './types.js';

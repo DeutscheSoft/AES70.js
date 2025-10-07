@@ -51,7 +51,7 @@ export class Connection extends Events {
       if (this._closed) return;
       this._closed = true;
       this.emit('close');
-      this.cleanup();
+      this.cleanup(e);
     });
   }
 
@@ -143,7 +143,7 @@ export class Connection extends Events {
     this.emit('error', err);
   }
 
-  cleanup() {
+  cleanup(error) {
     if (this.is_closed()) throw new Error('cleanup() called twice.');
 
     // disable keepalive
@@ -160,7 +160,7 @@ export class Connection extends Events {
 
     if (this.rx_idle_time() > t * 3) {
       this.emit('timeout');
-      this.error(new Error('Keepalive timeout.'));
+      this.error(new TimeoutError());
     } else if (this.tx_idle_time() > t * 0.75) {
       /* Try to flush buffers before actually sending out anything. */
       this.flush();
