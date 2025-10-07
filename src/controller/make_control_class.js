@@ -42,6 +42,11 @@ function createPropertySync(control_class) {
     if (has_setter) descriptor.set = make_setter(prop.setter(blue_print, true));
 
     Object.defineProperty(o, prop.name, descriptor);
+    if (prop.aliases) {
+      prop.aliases.forEach((alias) => {
+        Object.defineProperty(o, alias, descriptor);
+      });
+    }
     index++;
   });
 
