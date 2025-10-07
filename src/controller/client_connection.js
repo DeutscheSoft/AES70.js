@@ -1,25 +1,36 @@
 import { RemoteError } from './remote_error.js';
 import { Connection } from '../connection.js';
 import { Response } from '../OCP1/response.js';
+import { CommandRrq } from '../OCP1/commandrrq.js';
 import { KeepAlive } from '../OCP1/keepalive.js';
 import { Notification } from '../OCP1/notification.js';
 import { Notification2 } from '../OCP1/notification2.js';
 import { Arguments } from './arguments.js';
 import { OcaStatus } from '../types/OcaStatus.js';
+import { EncodedArguments } from '../OCP1/encoded_arguments.js';
 
 class PendingCommand {
   get handle() {
     return this.command.handle;
   }
 
-  constructor(resolve, reject, returnTypes, command, stack) {
+  constructor(resolve, reject, returnTypes, command, stack, name) {
     this.resolve = resolve;
     this.reject = reject;
     this.returnTypes = returnTypes;
     this.command = command;
     this.stack = stack;
+    this.name = name;
     this.lastSent = 0;
     this.retries = 0;
+  }
+
+  get_arguments() {
+    const parameters = this.command.parameters;
+
+    if (parameters && parameters instanceof EncodedArguments) {
+      return parameters.data;
+    }
   }
 
   handleError(error) {
@@ -137,7 +148,19 @@ export class ClientConnection extends Connection {
     return this._now();
   }
 
-  send_command(command, returnTypes, callback, stack) {
+  find_pending_command(pdu) {
+    const pendingCommands = this._pendingCommands;
+
+    if (pdu instanceof CommandRrq) {
+      return pendingCommands.get(pdu.handle);
+    } else if (pdu instanceof Response) {
+      return pendingCommands.get(pdu.handle);
+    } else {
+      throw new Error(`Expected command or response.`);
+    }
+  }
+
+  send_command(command, returnTypes, callback, stack, name) {
     const executor = (resolve, reject) => {
       const handle = this._getNextCommandHandle();
 
@@ -148,7 +171,8 @@ export class ClientConnection extends Connection {
         reject,
         returnTypes,
         command,
-        stack
+        stack,
+        name
       );
 
       this._pendingCommands.set(handle, pendingCommand);

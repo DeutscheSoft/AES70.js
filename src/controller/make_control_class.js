@@ -58,6 +58,8 @@ function implement_method(cls, method) {
 
   const [name, level, index, argumentTypes, returnTypes, aliases] = method;
 
+  const debugName = `${cls.ClassName}.${name}`;
+
   cls.prototype[name] = function (...args) {
     const argumentCount = argumentTypes.length;
     let callback = null;
@@ -86,7 +88,7 @@ function implement_method(cls, method) {
       argumentCount,
       new EncodedArguments(argumentTypes, args)
     );
-    return this.device.send_command(cmd, returnTypes, callback);
+    return this.device.send_command(cmd, returnTypes, callback, debugName);
   };
 
   if (aliases) {

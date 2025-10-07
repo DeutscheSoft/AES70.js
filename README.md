@@ -108,62 +108,95 @@ done using the method `RemoteDevice.get_device_tree()` method.
 
 A full working example:
 
-        import { TCPConnection, RemoteDevice } from 'aes70';
+```js
+import { TCPConnection, RemoteDevice } from 'aes70';
 
-        async function run()
-        {
-          const connection = await TCPConnection.connect({
-              host: 'example.org',
-              port: 65000,
-          });
-          const device = new RemoteDevice(connection);
+async function run() {
+  const connection = await TCPConnection.connect({
+    host: 'example.org',
+    port: 65000,
+  });
+  const device = new RemoteDevice(connection);
 
-          device.set_keepalive_interval(1);
+  device.set_keepalive_interval(1);
 
-          console.log("Device name:", await device.DeviceManager.GetModelDescription());
+  console.log('Device name:', await device.DeviceManager.GetModelDescription());
 
-          console.log("Object inside this device:");
+  console.log('Object inside this device:');
 
-          const tree = await device.get_device_tree();
+  const tree = await device.get_device_tree();
 
-          const rec = async (a) => {
-            for (let i = 0; i < a.length; i++)
-            {
-              const obj = a[i];
+  const rec = async (a) => {
+    for (let i = 0; i < a.length; i++) {
+      const obj = a[i];
 
-              if (Array.isArray(obj))
-              {
-                // children
-                await rec(obj);
-              }
-              else
-              {
-                console.log("Type: %s", obj.constructor.ClassName);
-                console.log("Properties:");
-                const properties = obj.GetPropertySync();
+      if (Array.isArray(obj)) {
+        // children
+        await rec(obj);
+      } else {
+        console.log('Type: %s', obj.constructor.ClassName);
+        console.log('Properties:');
+        const properties = obj.GetPropertySync();
 
-                // fetch the values of all properties from the device.
-                await properties.sync();
+        // fetch the values of all properties from the device.
+        await properties.sync();
 
-                properties.forEach((value, name) => {
-                  if (value !== undefined)
-                    console.log("  %s: %o", name, value);
-                });
+        properties.forEach((value, name) => {
+          if (value !== undefined) console.log('  %s: %o', name, value);
+        });
 
-                // unsubscribe all event handlers
-                properties.Dispose();
-              }
-            }
-          };
+        // unsubscribe all event handlers
+        properties.Dispose();
+      }
+    }
+  };
 
-          await rec(tree);
-        }
+  await rec(tree);
+}
 
-        run().then(() => console.log("Done."));
+run().then(() => console.log('Done.'));
+```
 
 The tree returned by `RemoteDevice.get_device_tree` returns all objects of the
 device below the root block. They represent all objects defined inside of the
 AES70 device aside from the manager objects.
+
+## Logging AES70 packets
+
+To understand what packets are being sent on a connection one possible option
+is to subscribe to the `send` and `receive` events. The `ClientConnection` class
+can then be queried for additional information about these packets to understand
+what method calls they correspond. This example code can be used:
+
+```js
+connection.on('error', (error) => console.error('connection error', error));
+connection.on('receive', (pdu) => {
+  if (pdu instanceof Response) {
+    const pendingCommand = connection.find_pending_command(pdu);
+    if (pendingCommand) {
+      console.log(
+        'RECV',
+        pendingCommand.name,
+        pendingCommand.get_arguments(),
+        '->',
+        Types.OcaStatus.getName(pdu.status_code)
+      );
+    }
+  } else {
+    console.log('RECV', pdu);
+  }
+});
+connection.on('send', (pdu) => {
+  if (pdu instanceof Command) {
+    const pendingCommand = connection.find_pending_command(pdu);
+    if (pendingCommand) {
+      console.log('SEND', pendingCommand.name, pendingCommand.get_arguments());
+    }
+  } else {
+    console.log('SEND', pdu);
+  }
+});
+```
 
 # Documentation
 

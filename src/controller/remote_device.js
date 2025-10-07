@@ -215,9 +215,9 @@ export class RemoteDevice extends Events {
     this.connection.close();
   }
 
-  send_command(cmd, returnType, callback) {
+  send_command(cmd, returnType, callback, name) {
     const stack = this._stackDebug ? new Error().stack : null;
-    return this.connection.send_command(cmd, returnType, callback, stack);
+    return this.connection.send_command(cmd, returnType, callback, stack, name);
   }
 
   async _doSubscribe(event) {
