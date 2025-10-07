@@ -2,6 +2,15 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [2.0.0] - 2025-10-07
+
+- Updates to AES70-2024
+  This includes many new datatypes and control classes. It also includes
+  changes APIs, especially around event handling. The main change is that
+  event subscriptions now expect a second callback which can be used to
+  receive error/cancellation events. They were introduced in aes70-2024
+  to signal e.g. object deletion.
+
 ## [1.6.1] - 2025-05-06
 
 - TCPConnection.connect: Add connecSignal to abort
