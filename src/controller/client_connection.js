@@ -180,7 +180,7 @@ export class ClientConnection extends Connection {
       }
 
       const o = pdus[i];
-      //log("INCOMING", o);
+      this.emit('receive', o);
       if (o instanceof Response) {
         const pendingCommand = this._removePendingCommand(o.handle);
 

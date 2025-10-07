@@ -10,6 +10,8 @@ import { MessageGenerator } from './OCP1/message_generator.js';
  *   no parameters.
  * - ``error`` is emitted when this connection has been closed with an error.
  *   This event emits the error object as a single parameter.
+ * - ``send`` is emitted with each pdu that is sent.
+ * - ``receive`` is emitted with each pdu that is received.
  *
  * @param {object} options
  *      The options.
@@ -59,6 +61,7 @@ export class Connection extends Events {
 
   send(pdu) {
     if (this.is_closed()) throw new Error('Connection is closed.');
+    this.emit('send', pdu);
     this._message_generator.add(pdu);
   }
 
