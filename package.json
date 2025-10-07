@@ -16,7 +16,7 @@
   "scripts": {
     "test": "node --test --test-concurrency=1 tests/*.test.js",
     "test:only": "node --test --test-only --test-concurrency=1 tests/*.test.js",
-    "prepublishOnly": "make",
+    "prepublishOnly": "npx rollup@4.52.4 src/bundle.browser.js --file dist/AES70.es5.js --format iife",
     "docs": "cd esdoc && npm run build",
     "prettier": "npx prettier@2.0.5 --write .",
     "format": "npx prettier@2.0.5 --write .",
