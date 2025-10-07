@@ -1,5 +1,5 @@
 import { BaseEvent } from './base_event.js';
-import { error } from '../log.js';
+import { NotificationError } from './notification_error.js';
 
 const emptyBuffer = new ArrayBuffer();
 
@@ -11,12 +11,16 @@ const emptyBuffer = new ArrayBuffer();
 export class Event extends BaseEvent {
   constructor(object, id, argumentTypes) {
     super(object, id, argumentTypes);
-    this.callback = (notification) => {
-      if (!this.handlers.size) return;
+    this.callback = (ok, notification) => {
+      if (!ok) {
+        this.emit_error(notification);
+        return;
+      }
+
+      if (!this.has_subscribers()) return;
 
       if (notification.exception) {
-        // TODO: how to handle it.
-        console.warn('Unhandled notification exception: %o', notification);
+        this.emit_error(new NotificationError(notification));
         return;
       }
 
@@ -29,28 +33,15 @@ export class Event extends BaseEvent {
         [pos, tmp] = argumentTypes[i].decodeFrom(data, pos);
         args[i] = tmp;
       }
-      const object = this.object;
-      this.handlers.forEach(function (callback) {
-        try {
-          callback.apply(object, args);
-        } catch (e) {
-          error(e);
-        }
-      });
+      this.emit(args);
     };
   }
 
   do_subscribe() {
-    return this.object.device.add_subscription(
-      this.GetOcaEvent(),
-      this.callback
-    );
+    this.object.device.add_subscription(this.GetOcaEvent(), this.callback);
   }
 
-  do_unsubscribe(callback) {
-    return this.object.device.remove_subscription(
-      this.GetOcaEvent(),
-      this.callback
-    );
+  do_unsubscribe() {
+    this.object.device.remove_subscription(this.GetOcaEvent(), this.callback);
   }
 }

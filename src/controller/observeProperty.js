@@ -94,6 +94,10 @@ export function observeProperty(o, property, callback) {
     console.warn('Unhandled event', value, changeType, eventId);
   };
 
+  const errorCallback = (error) => {
+    callback(false, error);
+  };
+
   let active = true;
   const event = property.event(o);
   const getter = property.getter(o);
@@ -102,14 +106,10 @@ export function observeProperty(o, property, callback) {
     throw new Error(`Not getter found for ${propertyName} in ${o.ClassName}`);
   }
 
+  let unsubscribe = null;
+
   if (event) {
-    const p = event.subscribe(eventCallback);
-    if (p) {
-      p.catch((error) => {
-        if (!active) return;
-        callback(false, error);
-      });
-    }
+    unsubscribe = event.subscribe(eventCallback, errorCallback);
   }
 
   getter((ok, result) => {
@@ -124,6 +124,6 @@ export function observeProperty(o, property, callback) {
 
   return () => {
     active = false;
-    if (event) event.unsubscribe(eventCallback);
+    if (unsubscribe) unsubscribe();
   };
 }

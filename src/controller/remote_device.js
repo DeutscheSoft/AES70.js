@@ -42,6 +42,42 @@ const subscriberMethod = {
   },
 };
 
+class EventSubscription {
+  constructor(event, cb) {
+    this.event = event;
+    this.callbacks = [];
+    this.cb = cb;
+    this.subscribing = null;
+    this.version = 0;
+  }
+
+  add_callback(cb) {
+    this.callbacks.push(cb);
+  }
+
+  delete_callback(cb) {
+    this.callbacks = this.callbacks.filter((entry) => entry !== cb);
+  }
+
+  emit(ok, notification) {
+    this.callbacks.forEach((cb) => {
+      try {
+        cb(ok, notification);
+      } catch (error) {
+        console.log('Event handler threw an exception', error);
+      }
+    });
+  }
+
+  emit_error(error) {
+    this.emit(false, error);
+  }
+
+  has_subscribers() {
+    return this.callbacks.length !== 0;
+  }
+}
+
 /**
  * Controller class for a remote OCA device.
  *
@@ -227,94 +263,90 @@ export class RemoteDevice extends Events {
     return 1;
   }
 
-  async add_subscription(event, callback) {
+  _doUnsubscribe(info, event) {
+    if (info.version === 2) {
+      return this.SubscriptionManager.RemoveSubscription2(
+        event,
+        OcaNotificationDeliveryMode.Normal,
+        emptyUint8Array
+      );
+    } else if (info.version === 1) {
+      return this.SubscriptionManager.RemoveSubscription(
+        event,
+        subscriberMethod
+      );
+    } else {
+      // If this happens, the subscription failed. In this case
+      // there is also nothing to do here.
+    }
+  }
+
+  add_subscription(event, callback) {
     if (this.connection.is_closed()) throw new Error('Connection was closed.');
 
     const key = eventToKey(event);
     const subscriptions = this.subscriptions;
 
-    {
-      const info = subscriptions.get(key);
+    let info = subscriptions.get(key);
 
-      if (info) {
-        info.callbacks.add(callback);
-        return true;
-      }
+    if (info) {
+      info.add_callback(callback);
+      return;
     }
 
     /* do the actual subscription */
 
-    const cb = (o) => {
+    const dropSubscribers = () => {
+      this.subscriptions.delete(key);
+      this.connection._removeSubscriber(event);
+    };
+
+    const cb = (ok, notification) => {
       const S = this.subscriptions.get(key);
       if (!S) {
         warn('Subscription lost.');
         return;
       }
-      const a = S.callbacks;
-      a.forEach(function (cb) {
-        try {
-          cb(o);
-        } catch (e) {
-          error(e);
-        }
-      });
+      S.emit(ok, notification);
+
+      if (!ok || notification.exception) {
+        dropSubscribers();
+      } else if (S.version > 0 && !S.has_subscribers()) {
+        dropSubscribers();
+        this._doUnsubscribe(S, event).catch((error) => {
+          console.error('Unsubscribe failed: ', error);
+        });
+      }
     };
 
     this.connection._addSubscriber(event, cb);
 
-    const info = {
-      callbacks: new Set([callback]),
-      callback: cb,
-      version: 0,
-      subscribing: null,
-    };
+    info = new EventSubscription(event, cb);
+
+    info.add_callback(callback);
 
     subscriptions.set(key, info);
 
-    try {
-      const p = this._doSubscribe(event);
-      info.subscribing = p;
-      info.version = await p;
-      info.subscribing = null;
-    } catch (err) {
-      subscriptions.delete(key);
-      throw err;
-    }
+    const p = this._doSubscribe(event);
+    p.then(
+      (version) => {
+        info.version = version;
+      },
+      (error) => {
+        info.emit_error(error);
+        dropSubscribers();
+      }
+    );
   }
 
-  async remove_subscription(event, callback) {
+  remove_subscription(event, callback) {
     const key = eventToKey(event);
 
     const info = this.subscriptions.get(key);
 
     if (!info) return Promise.reject('Callback not registered.');
 
-    const a = info.callbacks;
-
-    a.delete(callback);
-
-    if (!a.size) {
-      this.connection._removeSubscriber(event);
-      this.subscriptions.delete(key);
-      if (info.subscribing) {
-        await info.subscribing.catch((err) => {});
-      }
-      if (info.version === 2) {
-        return this.SubscriptionManager.RemoveSubscription2(
-          event,
-          OcaNotificationDeliveryMode.Normal,
-          emptyUint8Array
-        );
-      } else if (info.version === 1) {
-        return this.SubscriptionManager.RemoveSubscription(
-          event,
-          subscriberMethod
-        );
-      } else {
-        // If this happens, the subscription failed. In this case
-        // there is also nothing to do here.
-      }
-    }
+    info.delete_callback(callback);
   }
 
   find_best_class(id) {

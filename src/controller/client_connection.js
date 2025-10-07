@@ -83,13 +83,18 @@ export class ClientConnection extends Connection {
 
   cleanup() {
     super.cleanup();
+    const subscribers = this._subscribers;
     this._subscribers = null;
-
     const pendingCommands = this._pendingCommands;
     this._pendingCommands = null;
+
     const e = new Error('closed');
     pendingCommands.forEach((pendingCommand, id) => {
       pendingCommand.handleError(structuredClone(e));
+    });
+
+    subscribers.forEach((cb) => {
+      cb(false, e);
     });
   }
 
@@ -103,6 +108,7 @@ export class ClientConnection extends Connection {
   }
 
   _removeSubscriber(event) {
+    if (this.is_closed()) return;
     const key = eventToKey(event);
     const subscribers = this._subscribers;
 
@@ -203,8 +209,9 @@ export class ClientConnection extends Connection {
         if (!cb) {
           // NOTE: this is legal
           continue;
+        } else {
+          cb(true, o);
         }
-        cb(o);
       } else if (o instanceof KeepAlive) {
         if (!(o.time > 0)) {
           throw new Error('Bad keepalive timeout.');

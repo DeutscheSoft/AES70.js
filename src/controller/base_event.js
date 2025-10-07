@@ -1,5 +1,32 @@
 import { OcaEvent } from '../types/OcaEvent.js';
 
+class EventSubscriber {
+  constructor(callback, error_callback) {
+    this.callback = callback;
+    this.failure_callback = error_callback;
+  }
+
+  emit(ctx, results) {
+    try {
+      this.callback.apply(ctx, results);
+    } catch (error) {
+      console.error('Exception thrown by event handler: ', error);
+    }
+  }
+
+  emit_error(ctx, error) {
+    if (this.error_callback) {
+      try {
+        this.error_callback.call(ctx, error);
+      } catch (e) {
+        console.error('Exception thrown by error event handler: ', e);
+      }
+    } else {
+      console.warn('No handler for error', error);
+    }
+  }
+}
+
 /**
  * Base class for all events.
  */
@@ -7,9 +34,26 @@ export class BaseEvent {
   constructor(object, id, argumentTypes) {
     this.object = object;
     this.id = id;
-    this.handlers = new Set();
+    this.subscribers = [];
     this.result = null;
     this.argumentTypes = argumentTypes;
+  }
+
+  has_subscribers() {
+    return this.subscribers.length > 0;
+  }
+
+  emit(results) {
+    this.subscribers.forEach((subscriber) => {
+      subscriber.emit(this.object, results);
+    });
+  }
+
+  emit_error(error) {
+    this.subscribers.forEach((subscriber) => {
+      subscriber.emit_error(this.object, error);
+    });
+    this.subscribers.splice(0, this.subscribers.length);
   }
 
   GetOcaEvent() {
@@ -19,42 +63,46 @@ export class BaseEvent {
   do_subscribe() {}
   do_unsubscribe() {}
 
+  _remove_subscriber(index) {
+    this.subscribers.splice(index, 1);
+
+    if (!this.subscribers.length) this.do_unsubscribe();
+  }
+
   /**
    * Subscribe to this event.
    * @param {function} callback
    */
-  subscribe(callback) {
-    this.handlers.add(callback);
+  subscribe(callback, failure_callback) {
+    const subscriber = new EventSubscriber(callback, failure_callback);
+    this.subscribers.push(subscriber);
 
-    if (this.handlers.size === 1)
-      return (this.result = this.do_subscribe().then(() => {
-        this.result = null;
-        return true;
-      }));
+    if (this.subscribers.length === 1) {
+      this.do_subscribe();
+    }
 
-    if (this.result !== null) return this.result;
-
-    return Promise.resolve(true);
+    return () => {
+      const index = this.subscribers.indexOf(subscriber);
+      if (index === -1) return;
+      this._remove_subscriber(index);
+    };
   }
 
   /**
    * Unsubscribe from this event.
    * @param {function} callback
+   * @deprecated Use the cleanup handler returned from
+   *  subscriber() instead.
    */
   unsubscribe(callback) {
-    this.handlers.delete(callback);
+    const index = this.subscribers.findIndex(
+      (subscriber) => subscriber.callback == callback
+    );
 
-    if (!this.handlers.size) this.do_unsubscribe().catch(function () {});
+    if (index === -1) {
+      throw new Error('Subscriber does not exist.');
+    }
 
-    return Promise.resolve(true);
-  }
-
-  /**
-   * Unsubscribe all event handlers.
-   */
-  Dipose() {
-    if (this.handlers.size) this.do_unsubscribe().catch(function () {});
-
-    this.handlers.clear();
+    this._remove_subscriber(index);
   }
 }

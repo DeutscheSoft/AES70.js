@@ -21,21 +21,29 @@ export class PropertyEvent extends BaseEvent {
 
       const value = propertyType[0].decodeFrom(dataView, 0)[1];
 
-      this.handlers.forEach(function (callback) {
-        try {
-          callback.call(object, value, changeType, id);
-        } catch (e) {
-          error(e);
-        }
-      });
+      this.emit([value, changeType, id]);
     };
+    this.error_callback = (error) => {
+      this.emit_error(error);
+    };
+    this._unsubscribe = null;
   }
 
   do_subscribe() {
-    return this.object.OnPropertyChanged.subscribe(this.callback);
+    this._unsubscribe = this.object.OnPropertyChanged.subscribe(
+      this.callback,
+      this.error_callback
+    );
   }
 
-  do_unsubscribe(callback) {
-    return this.object.OnPropertyChanged.unsubscribe(this.callback);
+  do_unsubscribe() {
+    const unsubscribe = this._unsubscribe;
+    if (!unsubscribe) return;
+    this._unsubscribe = null;
+    try {
+      unsubscribe();
+    } catch (error) {
+      console.error('Unsubscribing PropertyChanged event failed: ', error);
+    }
   }
 }
