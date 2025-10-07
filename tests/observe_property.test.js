@@ -7,8 +7,6 @@ import { observeProperty } from '../src/controller/observeProperty.js';
 import { Arguments } from '../src/controller/arguments.js';
 import { delay } from './delay.js';
 import { allClassesTarget } from './all_classes_target.js';
-import { Command, Response } from '../src/index.default.js';
-import { Types } from '../src/index.default.js';
 
 describe('observeProperty', { skip: !allClassesTarget }, async () => {
   let device, objectTree;

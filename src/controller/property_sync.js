@@ -1,5 +1,7 @@
 import { Arguments } from './arguments.js';
 import { OcaPropertyChangeType } from '../types/OcaPropertyChangeType.js';
+import { observeProperty } from './observeProperty.js';
+import { RemoteError } from './remote_error.js';
 
 /**
  * Objects of this class can be used to keep a synchronized object containing
@@ -30,7 +32,7 @@ export class PropertySync {
   sync() {
     if (this.synchronized) return Promise.resolve();
 
-    let index = 0;
+    let i = 0;
     const tasks = [];
 
     this.o.get_properties().forEach((prop) => {
@@ -38,31 +40,21 @@ export class PropertySync {
 
       if (!getter) return;
 
-      const event = prop.event(this.o);
+      const index = i++;
 
-      const change_handler = function (index, value, changeType) {
-        if (changeType !== OcaPropertyChangeType.CurrentChanged) return;
-
-        this.values[index] = value;
-      };
-
-      const get_handler = function (index, value) {
-        if (value instanceof Arguments) value = value.item(0);
-        this.values[index] = value;
-      };
-
-      if (event) {
-        const cb = change_handler.bind(this, index);
-        // NOTE: we do not want to wait for the promise to resolve
-        // before storing this unsubscription handler because that
-        // would have a potential race condition.
-        this.subscriptions.push(event.unsubscribe.bind(event, cb));
-        tasks.push(event.subscribe(cb).catch(function () {}));
-      }
-
-      tasks.push(getter().then(get_handler.bind(this, index), function () {}));
-
-      index++;
+      const task = new Promise((resolve, reject) => {
+        const unsubscribe = observeProperty(this.o, prop, (ok, result) => {
+          if (ok) {
+            this.values[index] =
+              result instanceof Arguments ? result.item(0) : result;
+            resolve();
+          } else if (result instanceof RemoteError) {
+            resolve();
+          }
+        });
+        this.subscriptions.push(unsubscribe);
+      });
+      tasks.push(task);
     });
 
     return Promise.all(tasks);

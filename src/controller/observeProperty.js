@@ -103,7 +103,7 @@ export function observeProperty(o, property, callback) {
   const getter = property.getter(o);
 
   if (!getter) {
-    throw new Error(`Not getter found for ${propertyName} in ${o.ClassName}`);
+    throw new Error(`No getter found for ${propertyName} in ${o.ClassName}`);
   }
 
   let unsubscribe = null;
