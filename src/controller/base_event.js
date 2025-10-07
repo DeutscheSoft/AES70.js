@@ -2,9 +2,9 @@ import { CloseError } from '../close_error.js';
 import { OcaEvent } from '../types/OcaEvent.js';
 
 class EventSubscriber {
-  constructor(callback, error_callback) {
+  constructor(callback, failure_callback) {
     this.callback = callback;
-    this.failure_callback = error_callback;
+    this.failure_callback = failure_callback;
   }
 
   emit(ctx, results) {
@@ -16,9 +16,9 @@ class EventSubscriber {
   }
 
   emit_error(ctx, error) {
-    if (this.error_callback) {
+    if (this.failure_callback) {
       try {
-        this.error_callback.call(ctx, error);
+        this.failure_callback.call(ctx, error);
       } catch (e) {
         console.error('Exception thrown by error event handler: ', e);
       }
