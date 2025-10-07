@@ -2,6 +2,7 @@ import { Events } from './events.js';
 import { decodeMessage } from './OCP1/decode_message.js';
 import { KeepAlive } from './OCP1/keepalive.js';
 import { MessageGenerator } from './OCP1/message_generator.js';
+import { TimeoutError } from './timeout_error.js';
 
 /**
  * Connection base class. It extends :class:`Events` and defines two events:
