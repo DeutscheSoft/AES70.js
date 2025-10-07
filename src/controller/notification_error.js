@@ -25,7 +25,7 @@ function parseNotificationExceptionData(buffer) {
   [pos, try_again] = OcaBoolean.decodeFrom(view, pos);
   [pos, data] = OcaBlob.decodeFrom(view, pos);
 
-  return [type, try_again, view];
+  return [type, try_again, data];
 }
 
 /**
