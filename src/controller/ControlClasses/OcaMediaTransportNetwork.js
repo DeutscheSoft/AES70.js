@@ -51,7 +51,13 @@ export const OcaMediaTransportNetwork = make_control_class(
       [OcaMediaSourceConnector, OcaMediaConnectorState],
       [],
     ],
-    ['AddSinkConnector', 3, 16, [OcaMediaConnectorStatus], []],
+    [
+      'AddSinkConnector',
+      3,
+      16,
+      [OcaMediaConnectorStatus, OcaMediaSinkConnector],
+      [OcaMediaSinkConnector],
+    ],
     ['ControlConnector', 3, 17, [OcaUint16, OcaMediaConnectorCommand], []],
     [
       'SetSourceConnectorPinMap',
@@ -239,8 +245,10 @@ export const OcaMediaTransportNetwork = make_control_class(
  *
  * @method OcaMediaTransportNetwork#AddSinkConnector
  * @param {IOcaMediaConnectorStatus} InitialStatus
+ * @param {IOcaMediaSinkConnector} Connector
  *
- * @returns {Promise<void>}
+ * @returns {Promise<OcaMediaSinkConnector>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
  */
 /**
  * Change the state of a given connector. Return status indicates the success of

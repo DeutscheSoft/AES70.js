@@ -53,7 +53,7 @@ export const OcaTaskManager = make_control_class(
     ['GetState', 3, 5, [], [OcaTaskManagerState]],
     ['GetTaskStatuses', 3, 6, [], [OcaTaskStatus]],
     ['GetTaskStatus', 3, 7, [OcaUint32], [OcaTaskStatus]],
-    ['AddTask', 3, 8, [], []],
+    ['AddTask', 3, 8, [OcaTask], [OcaTask]],
     ['GetTasks', 3, 9, [], [OcaMap(OcaUint32, OcaTask)]],
     ['GetTask', 3, 10, [OcaUint32], [OcaTask]],
     ['SetTask', 3, 11, [OcaUint32, OcaTask], []],
@@ -138,7 +138,10 @@ export const OcaTaskManager = make_control_class(
  * successfully created.
  *
  * @method OcaTaskManager#AddTask
- * @returns {Promise<void>}
+ * @param {IOcaTask} Task
+ *
+ * @returns {Promise<OcaTask>}
+ *   A promise which resolves to a single value of type :class:`OcaTask`.
  */
 /**
  * Gets map of Tasks in the device. Return value indicates whether map was

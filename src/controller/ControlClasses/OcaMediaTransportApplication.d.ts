@@ -1,7 +1,10 @@
 import { OcaCounter } from '../../types/OcaCounter';
 import { OcaCounterSet } from '../../types/OcaCounterSet';
 import { IOcaIODirection } from '../../types/OcaIODirection';
-import { OcaMediaStreamEndpoint } from '../../types/OcaMediaStreamEndpoint';
+import {
+  IOcaMediaStreamEndpoint,
+  OcaMediaStreamEndpoint,
+} from '../../types/OcaMediaStreamEndpoint';
 import { IOcaMediaStreamEndpointCommand } from '../../types/OcaMediaStreamEndpointCommand';
 import { IOcaMediaStreamEndpointState } from '../../types/OcaMediaStreamEndpointState';
 import { OcaMediaStreamEndpointStatus } from '../../types/OcaMediaStreamEndpointStatus';
@@ -375,11 +378,16 @@ export declare class OcaMediaTransportApplication extends OcaNetworkApplication 
    * property **AlignmentLevelLimits**.
    *
    * @method OcaMediaTransportApplication#AddEndpoint
+   * @param {IOcaMediaStreamEndpoint} Endpoint
    * @param {IOcaMediaStreamEndpointState} InitialStatus
    *
-   * @returns {Promise<void>}
+   * @returns {Promise<OcaMediaStreamEndpoint>}
+   *   A promise which resolves to a single value of type :class:`OcaMediaStreamEndpoint`.
    */
-  AddEndpoint(InitialStatus: IOcaMediaStreamEndpointState): Promise<void>;
+  AddEndpoint(
+    Endpoint: IOcaMediaStreamEndpoint,
+    InitialStatus: IOcaMediaStreamEndpointState
+  ): Promise<OcaMediaStreamEndpoint>;
 
   /**
    * Deletes a stream endpoint from this media transport application object.

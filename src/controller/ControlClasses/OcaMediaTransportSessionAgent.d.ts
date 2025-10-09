@@ -1,4 +1,11 @@
-import { OcaMediaTransportSession } from '../../types/OcaMediaTransportSession';
+import {
+  IOcaMediaTransportSession,
+  OcaMediaTransportSession,
+} from '../../types/OcaMediaTransportSession';
+import {
+  IOcaMediaTransportSessionConnection,
+  OcaMediaTransportSessionConnection,
+} from '../../types/OcaMediaTransportSessionConnection';
 import { OcaMediaTransportSessionStatus } from '../../types/OcaMediaTransportSessionStatus';
 import { PropertyEvent } from '../property_event';
 import { RemoteDevice } from '../remote_device';
@@ -66,9 +73,14 @@ export declare class OcaMediaTransportSessionAgent extends OcaAgent {
    * with session ID filled in.
    *
    * @method OcaMediaTransportSessionAgent#AddSession
-   * @returns {Promise<void>}
+   * @param {IOcaMediaTransportSession} Session
+   *
+   * @returns {Promise<OcaMediaTransportSession>}
+   *   A promise which resolves to a single value of type :class:`OcaMediaTransportSession`.
    */
-  AddSession(): Promise<void>;
+  AddSession(
+    Session: IOcaMediaTransportSession
+  ): Promise<OcaMediaTransportSession>;
 
   /**
    * Configures a session.
@@ -170,10 +182,15 @@ export declare class OcaMediaTransportSessionAgent extends OcaAgent {
    *
    * @method OcaMediaTransportSessionAgent#AddConnection
    * @param {number} SessionID
+   * @param {IOcaMediaTransportSessionConnection} Connection
    *
-   * @returns {Promise<void>}
+   * @returns {Promise<OcaMediaTransportSessionConnection>}
+   *   A promise which resolves to a single value of type :class:`OcaMediaTransportSessionConnection`.
    */
-  AddConnection(SessionID: number): Promise<void>;
+  AddConnection(
+    SessionID: number,
+    Connection: IOcaMediaTransportSessionConnection
+  ): Promise<OcaMediaTransportSessionConnection>;
 
   /**
    * Configures a connection.

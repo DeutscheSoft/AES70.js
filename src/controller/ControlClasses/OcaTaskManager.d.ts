@@ -149,9 +149,12 @@ export declare class OcaTaskManager extends OcaManager {
    * successfully created.
    *
    * @method OcaTaskManager#AddTask
-   * @returns {Promise<void>}
+   * @param {IOcaTask} Task
+   *
+   * @returns {Promise<OcaTask>}
+   *   A promise which resolves to a single value of type :class:`OcaTask`.
    */
-  AddTask(): Promise<void>;
+  AddTask(Task: IOcaTask): Promise<OcaTask>;
 
   /**
    * Gets map of Tasks in the device. Return value indicates whether map was

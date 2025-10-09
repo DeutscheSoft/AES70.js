@@ -99,7 +99,13 @@ export const OcaMediaTransportApplication = make_control_class(
       [OcaMap(OcaUint32, OcaMediaStreamEndpointStatus)],
     ],
     ['GetEndpointStatus', 3, 24, [OcaUint32], [OcaMediaStreamEndpointStatus]],
-    ['AddEndpoint', 3, 25, [OcaMediaStreamEndpointState], []],
+    [
+      'AddEndpoint',
+      3,
+      25,
+      [OcaMediaStreamEndpoint, OcaMediaStreamEndpointState],
+      [OcaMediaStreamEndpoint],
+    ],
     ['DeleteEndpoint', 3, 26, [OcaUint32], []],
     [
       'ApplyEndpointCommand',
@@ -427,9 +433,11 @@ export const OcaMediaTransportApplication = make_control_class(
  * property **AlignmentLevelLimits**.
  *
  * @method OcaMediaTransportApplication#AddEndpoint
+ * @param {IOcaMediaStreamEndpoint} Endpoint
  * @param {IOcaMediaStreamEndpointState} InitialStatus
  *
- * @returns {Promise<void>}
+ * @returns {Promise<OcaMediaStreamEndpoint>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaStreamEndpoint`.
  */
 /**
  * Deletes a stream endpoint from this media transport application object.

@@ -6,7 +6,10 @@ import {
   IOcaMediaConnectorStatus,
   OcaMediaConnectorStatus,
 } from '../../types/OcaMediaConnectorStatus';
-import { OcaMediaSinkConnector } from '../../types/OcaMediaSinkConnector';
+import {
+  IOcaMediaSinkConnector,
+  OcaMediaSinkConnector,
+} from '../../types/OcaMediaSinkConnector';
 import {
   IOcaMediaSourceConnector,
   OcaMediaSourceConnector,
@@ -267,10 +270,15 @@ export declare class OcaMediaTransportNetwork extends OcaApplicationNetwork {
    *
    * @method OcaMediaTransportNetwork#AddSinkConnector
    * @param {IOcaMediaConnectorStatus} InitialStatus
+   * @param {IOcaMediaSinkConnector} Connector
    *
-   * @returns {Promise<void>}
+   * @returns {Promise<OcaMediaSinkConnector>}
+   *   A promise which resolves to a single value of type :class:`OcaMediaSinkConnector`.
    */
-  AddSinkConnector(InitialStatus: IOcaMediaConnectorStatus): Promise<void>;
+  AddSinkConnector(
+    InitialStatus: IOcaMediaConnectorStatus,
+    Connector: IOcaMediaSinkConnector
+  ): Promise<OcaMediaSinkConnector>;
 
   /**
    * Change the state of a given connector. Return status indicates the success

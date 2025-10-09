@@ -3,6 +3,7 @@ import { OcaBoolean } from '../../OCP1/OcaBoolean.js';
 import { OcaList } from '../../OCP1/OcaList.js';
 import { OcaMap } from '../../OCP1/OcaMap.js';
 import { OcaMediaTransportSession } from '../../OCP1/OcaMediaTransportSession.js';
+import { OcaMediaTransportSessionConnection } from '../../OCP1/OcaMediaTransportSessionConnection.js';
 import { OcaMediaTransportSessionStatus } from '../../OCP1/OcaMediaTransportSessionStatus.js';
 import { OcaString } from '../../OCP1/OcaString.js';
 import { OcaUint32 } from '../../OCP1/OcaUint32.js';
@@ -27,7 +28,13 @@ export const OcaMediaTransportSessionAgent = make_control_class(
     ['GetSessionType', 3, 1, [], [OcaString]],
     ['GetSessions', 3, 2, [], [OcaList(OcaMediaTransportSession)]],
     ['GetSession', 3, 3, [OcaUint32], [OcaMediaTransportSession]],
-    ['AddSession', 3, 4, [], []],
+    [
+      'AddSession',
+      3,
+      4,
+      [OcaMediaTransportSession],
+      [OcaMediaTransportSession],
+    ],
     ['ConfigureSession', 3, 5, [OcaUint32, OcaBlob, OcaString, OcaBlob], []],
     ['DeleteSession', 3, 6, [OcaUint32], []],
     ['ResetSession', 3, 7, [OcaUint32], []],
@@ -42,7 +49,13 @@ export const OcaMediaTransportSessionAgent = make_control_class(
       [OcaMap(OcaUint32, OcaMediaTransportSessionStatus)],
     ],
     ['GetSessionStatus', 3, 12, [OcaUint32], [OcaMediaTransportSessionStatus]],
-    ['AddConnection', 3, 13, [OcaUint32], []],
+    [
+      'AddConnection',
+      3,
+      13,
+      [OcaUint32, OcaMediaTransportSessionConnection],
+      [OcaMediaTransportSessionConnection],
+    ],
     [
       'ConfigureConnection',
       3,
@@ -100,7 +113,10 @@ export const OcaMediaTransportSessionAgent = make_control_class(
  * session ID filled in.
  *
  * @method OcaMediaTransportSessionAgent#AddSession
- * @returns {Promise<void>}
+ * @param {IOcaMediaTransportSession} Session
+ *
+ * @returns {Promise<OcaMediaTransportSession>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaTransportSession`.
  */
 /**
  * Configures a session.
@@ -180,8 +196,10 @@ export const OcaMediaTransportSessionAgent = make_control_class(
  *
  * @method OcaMediaTransportSessionAgent#AddConnection
  * @param {number} SessionID
+ * @param {IOcaMediaTransportSessionConnection} Connection
  *
- * @returns {Promise<void>}
+ * @returns {Promise<OcaMediaTransportSessionConnection>}
+ *   A promise which resolves to a single value of type :class:`OcaMediaTransportSessionConnection`.
  */
 /**
  * Configures a connection.
