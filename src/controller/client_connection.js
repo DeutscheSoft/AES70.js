@@ -241,9 +241,43 @@ export class ClientConnection extends Connection {
         if (!(o.time > 0)) {
           throw new Error('Bad keepalive timeout.');
         }
+        this.emit('keepalive', o);
       } else {
         throw new Error('Unexpected PDU');
       }
     }
+  }
+
+  /**
+   * Activates keepalive handling (using set_keepalive_interval) and waits for
+   * at least one keepalive packet to arrive. If no keepalive message is received,
+   * the connection will be closed and the returned promise will reject.
+   * @param {number} interval
+   *   Keepalive interval in seconds.
+   */
+  wait_for_keepalive(interval) {
+    return new Promise((resolve, reject) => {
+      const subscriptions = [];
+
+      const cleanup = () => {
+        subscriptions.forEach((cb) => cb());
+        subscriptions.length = 0;
+      };
+      subscriptions.push(
+        this.subscribe('error', (error) => {
+          reject(error);
+          cleanup();
+        }),
+        this.subscribe('close', () => {
+          reject(new CloseError());
+          cleanup();
+        }),
+        this.subscribe('keepalive', () => {
+          resolve();
+          cleanup();
+        })
+      );
+      this.set_keepalive_interval(interval);
+    });
   }
 }

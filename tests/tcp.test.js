@@ -19,11 +19,9 @@ describe('TCPConnection', { skip: !allClassesTarget }, () => {
   });
   it('connect with late abort', async () => {
     let con;
-    await doesNotReject(async () => {
-      con = await TCPConnection.connect({
-        ...allClassesTarget,
-        signal: AbortSignal.timeout(1000),
-      });
+    con = await TCPConnection.connect({
+      ...allClassesTarget,
+      signal: AbortSignal.timeout(1000),
     });
 
     await delay(2000);
@@ -43,6 +41,13 @@ describe('TCPConnection', { skip: !allClassesTarget }, () => {
 
     assert(!con.is_closed());
 
+    con.close();
+  });
+  it('wait_for_keepalive success', async () => {
+    const con = await TCPConnection.connect({
+      ...allClassesTarget,
+    });
+    await con.wait_for_keepalive(1);
     con.close();
   });
 });

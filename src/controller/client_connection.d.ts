@@ -33,4 +33,13 @@ export interface PendingCommand {
  */
 export declare class ClientConnection extends Connection {
   constructor(options: IClientConnectionOptions);
+
+  /**
+   * Activates keepalive handling (using set_keepalive_interval) and waits for
+   * at least one keepalive packet to arrive. If no keepalive message is received,
+   * the connection will be closed and the returned promise will reject.
+   * @param {number} interval
+   *   Keepalive interval in seconds.
+   */
+  wait_for_keepalive(interval: number): Promise<void>;
 }

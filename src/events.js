@@ -34,6 +34,10 @@ export class Events {
    * @param {Function} cb - Callback function.
    */
   on(name, cb) {
+    if (typeof name !== 'string')
+      throw new TypeError('Event name must be a string.');
+    if (typeof cb !== 'function')
+      throw new TypeError('Event handler must be a function.');
     let handlers = this.event_handlers.get(name);
 
     if (!handlers) {
@@ -64,9 +68,33 @@ export class Events {
   }
 
   /**
+   * Removes an event handler.
+   *
+   * @param {strign} name
+   * @param {Function} cb
+   */
+  off(name, cb) {
+    this.removeEventListener(name, cb);
+  }
+
+  /**
    * Removes all event listeners.
    */
   removeAllEventListeners() {
     this.event_handlers.clear();
+  }
+
+  /**
+   *
+   * @param {string} name
+   * @param {Function} cb
+   */
+  subscribe(name, cb) {
+    this.on(name, cb);
+    return () => {
+      if (name === undefined) return;
+      this.off(name, cb);
+      name = undefined;
+    };
   }
 }

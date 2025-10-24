@@ -25,7 +25,18 @@ export class Events {
   removeEventListener(name: string, cb: (...args) => void): void;
 
   /**
+   * Unsubscribe from an event.
+   */
+  off(name: string, cb: (...args) => void): void;
+
+  /**
    * Removes all event listeners.
    */
   removeAllEventListeners(): void;
+
+  /**
+   * Subscribe to an event. Returns a cleanup function which can be called to
+   * unsubscribe.
+   */
+  subscribe(name: string, cb: (...args) => void): () => void;
 }
