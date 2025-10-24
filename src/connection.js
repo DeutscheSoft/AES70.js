@@ -186,6 +186,12 @@ export class Connection extends Events {
    *    Keepalive interval in seconds.
    */
   set_keepalive_interval(seconds) {
+    if (!(seconds <= 10)) {
+      console.warn(
+        'Unusually large keepalive interval %o seconds. Confusion of ms vs. seconds?'
+      );
+    }
+
     const t = seconds * 1000;
 
     if (this._keepalive_interval_id !== null) {
