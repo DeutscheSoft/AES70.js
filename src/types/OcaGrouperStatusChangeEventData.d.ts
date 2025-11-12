@@ -4,7 +4,7 @@
 import {
   IOcaGrouperStatusChangeType,
   OcaGrouperStatusChangeType,
-} from './OcaGrouperStatusChangeType';
+} from './OcaGrouperStatusChangeType.js';
 
 export declare interface IOcaGrouperStatusChangeEventData {
   /**

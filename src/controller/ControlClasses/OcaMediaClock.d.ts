@@ -1,15 +1,15 @@
-import { OcaMediaClockLockState } from '../../types/OcaMediaClockLockState';
+import { OcaMediaClockLockState } from '../../types/OcaMediaClockLockState.js';
 import {
   IOcaMediaClockRate,
   OcaMediaClockRate,
-} from '../../types/OcaMediaClockRate';
+} from '../../types/OcaMediaClockRate.js';
 import {
   IOcaMediaClockType,
   OcaMediaClockType,
-} from '../../types/OcaMediaClockType';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaMediaClockType.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * **DEPRECATED CLASS** *Replaced by* **OcaMediaClock3** A media clock, internal

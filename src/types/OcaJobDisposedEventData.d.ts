@@ -1,8 +1,8 @@
 /*
  * This file has been generated.
  */
-import { IOcaJobDisposition, OcaJobDisposition } from './OcaJobDisposition';
-import { IOcaJobQueueItem, OcaJobQueueItem } from './OcaJobQueueItem';
+import { IOcaJobDisposition, OcaJobDisposition } from './OcaJobDisposition.js';
+import { IOcaJobQueueItem, OcaJobQueueItem } from './OcaJobQueueItem.js';
 
 export declare interface IOcaJobDisposedEventData {
   /**

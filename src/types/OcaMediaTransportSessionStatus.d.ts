@@ -4,7 +4,7 @@
 import {
   IOcaMediaTransportSessionState,
   OcaMediaTransportSessionState,
-} from './OcaMediaTransportSessionState';
+} from './OcaMediaTransportSessionState.js';
 
 export declare interface IOcaMediaTransportSessionStatus {
   /**

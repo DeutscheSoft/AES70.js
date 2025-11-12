@@ -1,13 +1,13 @@
-import { IOcaEvent } from '../../types/OcaEvent';
-import { IOcaMethod } from '../../types/OcaMethod';
-import { IOcaNotificationDeliveryMode } from '../../types/OcaNotificationDeliveryMode';
-import { IOcaPropertyID } from '../../types/OcaPropertyID';
-import { IOcaStatus, OcaStatus } from '../../types/OcaStatus';
-import { OcaSubscriptionManagerState } from '../../types/OcaSubscriptionManagerState';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { IOcaEvent } from '../../types/OcaEvent.js';
+import { IOcaMethod } from '../../types/OcaMethod.js';
+import { IOcaNotificationDeliveryMode } from '../../types/OcaNotificationDeliveryMode.js';
+import { IOcaPropertyID } from '../../types/OcaPropertyID.js';
+import { IOcaStatus, OcaStatus } from '../../types/OcaStatus.js';
+import { OcaSubscriptionManagerState } from '../../types/OcaSubscriptionManagerState.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Manager that collects and controls the event subscriptions of the device.

@@ -1,9 +1,12 @@
 /*
  * This file has been generated.
  */
-import { IOcaMediaCoding, OcaMediaCoding } from './OcaMediaCoding';
-import { IOcaMediaConnection, OcaMediaConnection } from './OcaMediaConnection';
-import { IOcaPortID, OcaPortID } from './OcaPortID';
+import { IOcaMediaCoding, OcaMediaCoding } from './OcaMediaCoding.js';
+import {
+  IOcaMediaConnection,
+  OcaMediaConnection,
+} from './OcaMediaConnection.js';
+import { IOcaPortID, OcaPortID } from './OcaPortID.js';
 
 export declare interface IOcaMediaSinkConnector {
   /**

@@ -4,8 +4,8 @@
 import {
   IOcaPositionCoordinateSystem,
   OcaPositionCoordinateSystem,
-} from './OcaPositionCoordinateSystem';
-import { IOcaPositionDescriptorFieldFlags } from './OcaPositionDescriptorFieldFlags';
+} from './OcaPositionCoordinateSystem.js';
+import { IOcaPositionDescriptorFieldFlags } from './OcaPositionDescriptorFieldFlags.js';
 
 export declare interface IOcaPositionDescriptor {
   /**

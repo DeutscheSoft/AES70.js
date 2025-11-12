@@ -4,8 +4,8 @@
 import {
   IOcaIP6AutoconfigMode,
   OcaIP6AutoconfigMode,
-} from './OcaIP6AutoconfigMode';
-import { IOcaIP6Gateway, OcaIP6Gateway } from './OcaIP6Gateway';
+} from './OcaIP6AutoconfigMode.js';
+import { IOcaIP6Gateway, OcaIP6Gateway } from './OcaIP6Gateway.js';
 
 export declare interface IOcaIP6NetworkSettings {
   /**

@@ -1,7 +1,7 @@
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class for defining agents.

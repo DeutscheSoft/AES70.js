@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaPropertyID, OcaPropertyID } from './OcaPropertyID';
+import { IOcaPropertyID, OcaPropertyID } from './OcaPropertyID.js';
 
 export declare interface IOcaConstructionParameter {
   /**

@@ -4,7 +4,7 @@
 import {
   IOcaMediaStreamCastMode,
   OcaMediaStreamCastMode,
-} from './OcaMediaStreamCastMode';
+} from './OcaMediaStreamCastMode.js';
 
 export declare interface IOcaMediaConnection {
   /**

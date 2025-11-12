@@ -1,5 +1,5 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaSensor } from './OcaSensor';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaSensor } from './OcaSensor.js';
 
 /**
  * Abstract base class for basic sensors.

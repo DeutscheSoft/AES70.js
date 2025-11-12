@@ -1,4 +1,4 @@
-import { Events } from './events';
+import { Events } from './events.js';
 
 /**
  * Possible options for a connection.

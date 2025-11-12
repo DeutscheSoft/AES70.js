@@ -1,5 +1,5 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class for classes that represent non-audio (i.e. control and

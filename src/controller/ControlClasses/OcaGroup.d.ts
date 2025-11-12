@@ -1,7 +1,7 @@
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Control aggregator. See **[AES70-1(Control Aggregation)]** for the normative

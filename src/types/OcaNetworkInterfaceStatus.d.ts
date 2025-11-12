@@ -4,7 +4,7 @@
 import {
   IOcaNetworkInterfaceState,
   OcaNetworkInterfaceState,
-} from './OcaNetworkInterfaceState';
+} from './OcaNetworkInterfaceState.js';
 
 export declare interface IOcaNetworkInterfaceStatus {
   /**

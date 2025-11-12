@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaPortID, OcaPortID } from './OcaPortID';
+import { IOcaPortID, OcaPortID } from './OcaPortID.js';
 
 export declare interface IOcaPort {
   /**

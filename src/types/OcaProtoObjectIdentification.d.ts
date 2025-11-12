@@ -4,7 +4,7 @@
 import {
   IOcaClassIdentification,
   OcaClassIdentification,
-} from './OcaClassIdentification';
+} from './OcaClassIdentification.js';
 
 export declare interface IOcaProtoObjectIdentification {
   /**

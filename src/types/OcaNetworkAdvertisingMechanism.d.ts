@@ -4,7 +4,7 @@
 import {
   IOcaNetworkAdvertisingService,
   OcaNetworkAdvertisingService,
-} from './OcaNetworkAdvertisingService';
+} from './OcaNetworkAdvertisingService.js';
 
 export declare interface IOcaNetworkAdvertisingMechanism {
   /**

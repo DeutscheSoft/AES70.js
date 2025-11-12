@@ -1,2 +1,2 @@
-export * from './index.default';
-export * from './controller/websocket_connection';
+export * from './index.default.js';
+export * from './controller/websocket_connection.js';

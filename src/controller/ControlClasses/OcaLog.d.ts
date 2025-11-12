@@ -1,10 +1,10 @@
-import { IOcaLockState } from '../../types/OcaLockState';
-import { IOcaLogFilter } from '../../types/OcaLogFilter';
-import { IOcaLogRecord, OcaLogRecord } from '../../types/OcaLogRecord';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaDataset } from './OcaDataset';
+import { IOcaLockState } from '../../types/OcaLockState.js';
+import { IOcaLogFilter } from '../../types/OcaLogFilter.js';
+import { IOcaLogRecord, OcaLogRecord } from '../../types/OcaLogRecord.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaDataset } from './OcaDataset.js';
 
 /**
  * A log object. Child of **OcaDataSet.**

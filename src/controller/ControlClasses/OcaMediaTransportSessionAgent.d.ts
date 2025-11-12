@@ -1,15 +1,15 @@
 import {
   IOcaMediaTransportSession,
   OcaMediaTransportSession,
-} from '../../types/OcaMediaTransportSession';
+} from '../../types/OcaMediaTransportSession.js';
 import {
   IOcaMediaTransportSessionConnection,
   OcaMediaTransportSessionConnection,
-} from '../../types/OcaMediaTransportSessionConnection';
-import { OcaMediaTransportSessionStatus } from '../../types/OcaMediaTransportSessionStatus';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaMediaTransportSessionConnection.js';
+import { OcaMediaTransportSessionStatus } from '../../types/OcaMediaTransportSessionStatus.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Agent to set up, monitor, control, and take down media transport sessions.

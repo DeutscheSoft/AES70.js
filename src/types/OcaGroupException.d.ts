@@ -1,8 +1,8 @@
 /*
  * This file has been generated.
  */
-import { IOcaMethodID, OcaMethodID } from './OcaMethodID';
-import { IOcaStatus, OcaStatus } from './OcaStatus';
+import { IOcaMethodID, OcaMethodID } from './OcaMethodID.js';
+import { IOcaStatus, OcaStatus } from './OcaStatus.js';
 
 export declare interface IOcaGroupException {
   /**

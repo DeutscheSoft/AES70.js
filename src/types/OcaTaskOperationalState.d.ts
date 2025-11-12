@@ -4,8 +4,8 @@
 import {
   IOcaTaskGenericState,
   OcaTaskGenericState,
-} from './OcaTaskGenericState';
-import { IOcaTypedBlob, OcaTypedBlob } from './OcaTypedBlob';
+} from './OcaTaskGenericState.js';
+import { IOcaTypedBlob, OcaTypedBlob } from './OcaTypedBlob.js';
 
 export declare interface IOcaTaskOperationalState {
   /**

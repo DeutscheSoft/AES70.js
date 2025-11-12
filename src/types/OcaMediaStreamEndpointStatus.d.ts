@@ -4,7 +4,7 @@
 import {
   IOcaMediaStreamEndpointState,
   OcaMediaStreamEndpointState,
-} from './OcaMediaStreamEndpointState';
+} from './OcaMediaStreamEndpointState.js';
 
 export declare interface IOcaMediaStreamEndpointStatus {
   /**

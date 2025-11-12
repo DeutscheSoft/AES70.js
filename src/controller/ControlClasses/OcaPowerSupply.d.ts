@@ -1,12 +1,12 @@
-import { OcaPowerSupplyLocation } from '../../types/OcaPowerSupplyLocation';
+import { OcaPowerSupplyLocation } from '../../types/OcaPowerSupplyLocation.js';
 import {
   IOcaPowerSupplyState,
   OcaPowerSupplyState,
-} from '../../types/OcaPowerSupplyState';
-import { OcaPowerSupplyType } from '../../types/OcaPowerSupplyType';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaPowerSupplyState.js';
+import { OcaPowerSupplyType } from '../../types/OcaPowerSupplyType.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * A power supply.

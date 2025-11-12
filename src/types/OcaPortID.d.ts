@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaIODirection, OcaIODirection } from './OcaIODirection';
+import { IOcaIODirection, OcaIODirection } from './OcaIODirection.js';
 
 export declare interface IOcaPortID {
   /**

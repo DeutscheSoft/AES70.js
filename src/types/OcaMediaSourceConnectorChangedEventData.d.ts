@@ -1,15 +1,15 @@
 /*
  * This file has been generated.
  */
-import { IOcaMediaConnectorElement } from './OcaMediaConnectorElement';
+import { IOcaMediaConnectorElement } from './OcaMediaConnectorElement.js';
 import {
   IOcaMediaSourceConnector,
   OcaMediaSourceConnector,
-} from './OcaMediaSourceConnector';
+} from './OcaMediaSourceConnector.js';
 import {
   IOcaPropertyChangeType,
   OcaPropertyChangeType,
-} from './OcaPropertyChangeType';
+} from './OcaPropertyChangeType.js';
 
 export declare interface IOcaMediaSourceConnectorChangedEventData {
   /**

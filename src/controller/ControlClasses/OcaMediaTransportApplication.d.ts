@@ -1,33 +1,33 @@
-import { OcaCounter } from '../../types/OcaCounter';
-import { OcaCounterSet } from '../../types/OcaCounterSet';
-import { IOcaIODirection } from '../../types/OcaIODirection';
+import { OcaCounter } from '../../types/OcaCounter.js';
+import { OcaCounterSet } from '../../types/OcaCounterSet.js';
+import { IOcaIODirection } from '../../types/OcaIODirection.js';
 import {
   IOcaMediaStreamEndpoint,
   OcaMediaStreamEndpoint,
-} from '../../types/OcaMediaStreamEndpoint';
-import { IOcaMediaStreamEndpointCommand } from '../../types/OcaMediaStreamEndpointCommand';
-import { IOcaMediaStreamEndpointState } from '../../types/OcaMediaStreamEndpointState';
-import { OcaMediaStreamEndpointStatus } from '../../types/OcaMediaStreamEndpointStatus';
-import { IOcaMediaStreamMode } from '../../types/OcaMediaStreamMode';
+} from '../../types/OcaMediaStreamEndpoint.js';
+import { IOcaMediaStreamEndpointCommand } from '../../types/OcaMediaStreamEndpointCommand.js';
+import { IOcaMediaStreamEndpointState } from '../../types/OcaMediaStreamEndpointState.js';
+import { OcaMediaStreamEndpointStatus } from '../../types/OcaMediaStreamEndpointStatus.js';
+import { IOcaMediaStreamMode } from '../../types/OcaMediaStreamMode.js';
 import {
   IOcaMediaStreamModeCapability,
   OcaMediaStreamModeCapability,
-} from '../../types/OcaMediaStreamModeCapability';
+} from '../../types/OcaMediaStreamModeCapability.js';
 import {
   IOcaMediaTransportTimingParameters,
   OcaMediaTransportTimingParameters,
-} from '../../types/OcaMediaTransportTimingParameters';
-import { OcaPort } from '../../types/OcaPort';
+} from '../../types/OcaMediaTransportTimingParameters.js';
+import { OcaPort } from '../../types/OcaPort.js';
 import {
   IOcaPortClockMapEntry,
   OcaPortClockMapEntry,
-} from '../../types/OcaPortClockMapEntry';
-import { IOcaPortID, OcaPortID } from '../../types/OcaPortID';
-import { OcaTimeReferenceType } from '../../types/OcaTimeReferenceType';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaNetworkApplication } from './OcaNetworkApplication';
+} from '../../types/OcaPortClockMapEntry.js';
+import { IOcaPortID, OcaPortID } from '../../types/OcaPortID.js';
+import { OcaTimeReferenceType } from '../../types/OcaTimeReferenceType.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaNetworkApplication } from './OcaNetworkApplication.js';
 
 /**
  * Connection Management 4 (CM4) class. Specifies the device's control interface

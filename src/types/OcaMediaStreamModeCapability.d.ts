@@ -1,12 +1,12 @@
 /*
  * This file has been generated.
  */
-import { IOcaInterval, OcaInterval } from './OcaInterval';
+import { IOcaInterval, OcaInterval } from './OcaInterval.js';
 import {
   IOcaMediaFrameFormat,
   OcaMediaFrameFormat,
-} from './OcaMediaFrameFormat';
-import { IOcaMediaStreamModeCapabilityDirection } from './OcaMediaStreamModeCapabilityDirection';
+} from './OcaMediaFrameFormat.js';
+import { IOcaMediaStreamModeCapabilityDirection } from './OcaMediaStreamModeCapabilityDirection.js';
 
 export declare interface IOcaMediaStreamModeCapability {
   /**

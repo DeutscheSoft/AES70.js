@@ -1,5 +1,5 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Actuator with no control parameters of its own, used as a simple node to

@@ -1,9 +1,9 @@
-import { IOcaDelayUnit } from '../../types/OcaDelayUnit';
-import { IOcaDelayValue, OcaDelayValue } from '../../types/OcaDelayValue';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaDelay } from './OcaDelay';
+import { IOcaDelayUnit } from '../../types/OcaDelayUnit.js';
+import { IOcaDelayValue, OcaDelayValue } from '../../types/OcaDelayValue.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaDelay } from './OcaDelay.js';
 
 /**
  * Signal delay - extended version. Allows setting delay value in various units.

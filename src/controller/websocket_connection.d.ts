@@ -1,7 +1,7 @@
 import {
   WebSocketConnectionBase,
   IWebSocketConnectionBaseOptions,
-} from './websocket_connection_base';
+} from './websocket_connection_base.js';
 
 export type IWebSocketConnectionOptions = IWebSocketConnectionBaseOptions;
 

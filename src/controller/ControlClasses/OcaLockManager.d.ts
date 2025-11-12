@@ -1,6 +1,6 @@
-import { IOcaLockState } from '../../types/OcaLockState';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { IOcaLockState } from '../../types/OcaLockState.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional object and device lock manager that supports mutex-type waits for

@@ -4,8 +4,8 @@
 import {
   IOcaMatrixCoordinates,
   OcaMatrixCoordinates,
-} from './OcaMatrixCoordinates';
-import { IOcaMethodID, OcaMethodID } from './OcaMethodID';
+} from './OcaMatrixCoordinates.js';
+import { IOcaMethodID, OcaMethodID } from './OcaMethodID.js';
 
 export declare interface IOcaMatrixCommand {
   /**

@@ -1,21 +1,21 @@
-import { IOcaDBr, OcaDBr } from '../../types/OcaDBr';
+import { IOcaDBr, OcaDBr } from '../../types/OcaDBr.js';
 import {
   IOcaDynamicsFunction,
   OcaDynamicsFunction,
-} from '../../types/OcaDynamicsFunction';
+} from '../../types/OcaDynamicsFunction.js';
 import {
   IOcaLevelDetectionLaw,
   OcaLevelDetectionLaw,
-} from '../../types/OcaLevelDetectionLaw';
-import { IOcaParameterMask } from '../../types/OcaParameterMask';
+} from '../../types/OcaLevelDetectionLaw.js';
+import { IOcaParameterMask } from '../../types/OcaParameterMask.js';
 import {
   IOcaPresentationUnit,
   OcaPresentationUnit,
-} from '../../types/OcaPresentationUnit';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+} from '../../types/OcaPresentationUnit.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Multipurpose dynamics processor. Can be configured as compressor, limiter,

@@ -1,14 +1,14 @@
-import { OcaDeviceOperationalState } from '../../types/OcaDeviceOperationalState';
-import { IOcaDeviceState } from '../../types/OcaDeviceState';
-import { OcaManagerDescriptor } from '../../types/OcaManagerDescriptor';
-import { OcaManufacturer } from '../../types/OcaManufacturer';
-import { OcaModelDescription } from '../../types/OcaModelDescription';
-import { OcaModelGUID } from '../../types/OcaModelGUID';
-import { OcaProduct } from '../../types/OcaProduct';
-import { OcaResetCause } from '../../types/OcaResetCause';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { OcaDeviceOperationalState } from '../../types/OcaDeviceOperationalState.js';
+import { IOcaDeviceState } from '../../types/OcaDeviceState.js';
+import { OcaManagerDescriptor } from '../../types/OcaManagerDescriptor.js';
+import { OcaManufacturer } from '../../types/OcaManufacturer.js';
+import { OcaModelDescription } from '../../types/OcaModelDescription.js';
+import { OcaModelGUID } from '../../types/OcaModelGUID.js';
+import { OcaProduct } from '../../types/OcaProduct.js';
+import { OcaResetCause } from '../../types/OcaResetCause.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Mandatory manager that contains information relevant to the whole device.

@@ -1,9 +1,9 @@
-import { IOcaLockState } from '../../types/OcaLockState';
-import { OcaTime } from '../../types/OcaTime';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+import { IOcaLockState } from '../../types/OcaLockState.js';
+import { OcaTime } from '../../types/OcaTime.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  *

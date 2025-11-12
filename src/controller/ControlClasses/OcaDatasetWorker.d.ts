@@ -1,6 +1,6 @@
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * Abstract base class for Dataset Workers, i.e. Workers that perform operations

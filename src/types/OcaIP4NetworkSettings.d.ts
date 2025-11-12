@@ -4,8 +4,8 @@
 import {
   IOcaIP4AutoconfigMode,
   OcaIP4AutoconfigMode,
-} from './OcaIP4AutoconfigMode';
-import { IOcaIP4Gateway, OcaIP4Gateway } from './OcaIP4Gateway';
+} from './OcaIP4AutoconfigMode.js';
+import { IOcaIP4Gateway, OcaIP4Gateway } from './OcaIP4Gateway.js';
 
 export declare interface IOcaIP4NetworkSettings {
   /**

@@ -4,7 +4,7 @@
 import {
   IOcaRelationalOperator,
   OcaRelationalOperator,
-} from './OcaRelationalOperator';
+} from './OcaRelationalOperator.js';
 
 export declare interface IOcaCounterNotifierFilterParameters {
   /**

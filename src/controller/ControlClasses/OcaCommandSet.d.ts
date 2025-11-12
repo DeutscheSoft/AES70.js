@@ -1,7 +1,7 @@
-import { IOcaCommand, OcaCommand } from '../../types/OcaCommand';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaProgram } from './OcaProgram';
+import { IOcaCommand, OcaCommand } from '../../types/OcaCommand.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaProgram } from './OcaProgram.js';
 
 /**
  * A command set. Child of **OcaProgram**.

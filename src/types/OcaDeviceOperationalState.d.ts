@@ -4,7 +4,7 @@
 import {
   IOcaDeviceGenericState,
   OcaDeviceGenericState,
-} from './OcaDeviceGenericState';
+} from './OcaDeviceGenericState.js';
 
 export declare interface IOcaDeviceOperationalState {
   /**

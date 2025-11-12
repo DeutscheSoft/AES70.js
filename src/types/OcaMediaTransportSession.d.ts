@@ -4,11 +4,11 @@
 import {
   IOcaMediaTransportSessionConnection,
   OcaMediaTransportSessionConnection,
-} from './OcaMediaTransportSessionConnection';
+} from './OcaMediaTransportSessionConnection.js';
 import {
   IOcaMediaTransportSessionConnectionState,
   OcaMediaTransportSessionConnectionState,
-} from './OcaMediaTransportSessionConnectionState';
+} from './OcaMediaTransportSessionConnectionState.js';
 
 export declare interface IOcaMediaTransportSession {
   /**

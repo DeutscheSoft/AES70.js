@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaProtoPort, OcaProtoPort } from './OcaProtoPort';
+import { IOcaProtoPort, OcaProtoPort } from './OcaProtoPort.js';
 
 export declare interface IOcaProtoSignalPath {
   /**

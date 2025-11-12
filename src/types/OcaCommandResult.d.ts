@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaStatus, OcaStatus } from './OcaStatus';
+import { IOcaStatus, OcaStatus } from './OcaStatus.js';
 
 export declare interface IOcaCommandResult {
   /**

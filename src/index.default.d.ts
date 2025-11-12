@@ -1,25 +1,25 @@
-export * from './log';
+export * from './log.js';
 
-export * from './connection';
-export * from './OCP1/command';
-export * from './OCP1/commandrrq';
-export * from './OCP1/response';
-export * from './OCP1/notification';
-export * from './OCP1/keepalive';
-export * from './OCP1/encode_message';
-export * from './OCP1/decode_message';
+export * from './connection.js';
+export * from './OCP1/command.js';
+export * from './OCP1/commandrrq.js';
+export * from './OCP1/response.js';
+export * from './OCP1/notification.js';
+export * from './OCP1/keepalive.js';
+export * from './OCP1/encode_message.js';
+export * from './OCP1/decode_message.js';
 
-export * from './controller/client_connection';
-export * from './controller/remote_device';
-export * from './controller/define_custom_class';
-export * from './controller/abstract_udp_connection';
-export * from './controller/fetch_device_content';
-export * from './controller/remote_error';
-export * from './controller/notification_error';
-export * from './close_error';
-export * from './timeout_error';
+export * from './controller/client_connection.js';
+export * from './controller/remote_device.js';
+export * from './controller/define_custom_class.js';
+export * from './controller/abstract_udp_connection.js';
+export * from './controller/fetch_device_content.js';
+export * from './controller/remote_error.js';
+export * from './controller/notification_error.js';
+export * from './close_error.js';
+export * from './timeout_error.js';
 
-import * as RemoteControlClasses from './controller/ControlClasses';
-import * as Types from './types';
+import * as RemoteControlClasses from './controller/ControlClasses.js';
+import * as Types from './types.js';
 
 export { RemoteControlClasses, Types };

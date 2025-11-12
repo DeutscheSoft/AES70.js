@@ -1,11 +1,11 @@
-import { OcaCounter } from '../../types/OcaCounter';
-import { OcaCounterSet } from '../../types/OcaCounterSet';
-import { IOcaNetworkInterfaceCommand } from '../../types/OcaNetworkInterfaceCommand';
-import { OcaNetworkInterfaceStatus } from '../../types/OcaNetworkInterfaceStatus';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+import { OcaCounter } from '../../types/OcaCounter.js';
+import { OcaCounterSet } from '../../types/OcaCounterSet.js';
+import { IOcaNetworkInterfaceCommand } from '../../types/OcaNetworkInterfaceCommand.js';
+import { OcaNetworkInterfaceStatus } from '../../types/OcaNetworkInterfaceStatus.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Represents the device's connection to a data network.

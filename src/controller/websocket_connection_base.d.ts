@@ -1,7 +1,7 @@
 import {
   IClientConnectionOptions,
   ClientConnection,
-} from './client_connection';
+} from './client_connection.js';
 
 export interface IWebSocketConnectionBaseOptions
   extends IClientConnectionOptions {

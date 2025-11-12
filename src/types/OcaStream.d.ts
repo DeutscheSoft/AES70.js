@@ -4,9 +4,9 @@
 import {
   IOcaStreamConnectorIdentification,
   OcaStreamConnectorIdentification,
-} from './OcaStreamConnectorIdentification';
-import { IOcaStreamStatus, OcaStreamStatus } from './OcaStreamStatus';
-import { IOcaStreamType, OcaStreamType } from './OcaStreamType';
+} from './OcaStreamConnectorIdentification.js';
+import { IOcaStreamStatus, OcaStreamStatus } from './OcaStreamStatus.js';
+import { IOcaStreamType, OcaStreamType } from './OcaStreamType.js';
 
 export declare interface IOcaStream {
   /**

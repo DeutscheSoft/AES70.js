@@ -1,8 +1,8 @@
 /*
  * This file has been generated.
  */
-import { IOcaInterval, OcaInterval } from './OcaInterval';
-import { IOcaTime, OcaTime } from './OcaTime';
+import { IOcaInterval, OcaInterval } from './OcaInterval.js';
+import { IOcaTime, OcaTime } from './OcaTime.js';
 
 export declare interface IOcaLogFilter {
   /**

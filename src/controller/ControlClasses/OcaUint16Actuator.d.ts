@@ -1,7 +1,7 @@
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaBasicActuator } from './OcaBasicActuator';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaBasicActuator } from './OcaBasicActuator.js';
 
 /**
  * 16-bit unsigned integer actuator

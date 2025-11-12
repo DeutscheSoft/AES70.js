@@ -1,6 +1,6 @@
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Manager that collects and controls security settings (including security

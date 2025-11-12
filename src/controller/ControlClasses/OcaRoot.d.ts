@@ -1,9 +1,9 @@
-import { OcaClassIdentification } from '../../types/OcaClassIdentification';
-import { OcaLockState } from '../../types/OcaLockState';
-import { Event } from '../event';
-import { ObjectBase } from '../object_base';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
+import { OcaClassIdentification } from '../../types/OcaClassIdentification.js';
+import { OcaLockState } from '../../types/OcaLockState.js';
+import { Event } from '../event.js';
+import { ObjectBase } from '../object_base.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
 
 /**
  * The abstract root class of which all OCA classes derive. It offers basic OCA

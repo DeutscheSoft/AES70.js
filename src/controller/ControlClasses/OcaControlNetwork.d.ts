@@ -1,7 +1,7 @@
-import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaApplicationNetwork } from './OcaApplicationNetwork';
+import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
 
 /**
  * @extends OcaApplicationNetwork

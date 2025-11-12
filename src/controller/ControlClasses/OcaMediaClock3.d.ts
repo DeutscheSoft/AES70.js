@@ -1,16 +1,16 @@
 import {
   IOcaMediaClockAvailability,
   OcaMediaClockAvailability,
-} from '../../types/OcaMediaClockAvailability';
+} from '../../types/OcaMediaClockAvailability.js';
 import {
   IOcaMediaClockRate,
   OcaMediaClockRate,
-} from '../../types/OcaMediaClockRate';
-import { IOcaTime, OcaTime } from '../../types/OcaTime';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaMediaClockRate.js';
+import { IOcaTime, OcaTime } from '../../types/OcaTime.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * A media clock, internal or external. OCA Connection Management 3 (OCA-CM3)

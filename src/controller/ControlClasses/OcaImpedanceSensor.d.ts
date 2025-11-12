@@ -1,8 +1,8 @@
-import { OcaImpedance } from '../../types/OcaImpedance';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaSensor } from './OcaSensor';
+import { OcaImpedance } from '../../types/OcaImpedance.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaSensor } from './OcaSensor.js';
 
 /**
  * Complex impedance sensor. Value shall be reported as a magnitude and a phase.

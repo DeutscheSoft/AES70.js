@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaBlockMember, OcaBlockMember } from './OcaBlockMember';
+import { IOcaBlockMember, OcaBlockMember } from './OcaBlockMember.js';
 
 export declare interface IOcaDatasetSearchResult {
   /**

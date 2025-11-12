@@ -1,23 +1,23 @@
-import { IOcaConstructionParameter } from '../../types/OcaConstructionParameter';
+import { IOcaConstructionParameter } from '../../types/OcaConstructionParameter.js';
 import {
   IOcaGlobalTypeIdentifier,
   OcaGlobalTypeIdentifier,
-} from '../../types/OcaGlobalTypeIdentifier';
-import { IOcaIODirection } from '../../types/OcaIODirection';
-import { IOcaPortID, OcaPortID } from '../../types/OcaPortID';
-import { OcaProtoObjectIdentification } from '../../types/OcaProtoObjectIdentification';
-import { IOcaProtoPort, OcaProtoPort } from '../../types/OcaProtoPort';
+} from '../../types/OcaGlobalTypeIdentifier.js';
+import { IOcaIODirection } from '../../types/OcaIODirection.js';
+import { IOcaPortID, OcaPortID } from '../../types/OcaPortID.js';
+import { OcaProtoObjectIdentification } from '../../types/OcaProtoObjectIdentification.js';
+import { IOcaProtoPort, OcaProtoPort } from '../../types/OcaProtoPort.js';
 import {
   IOcaProtoPortClockMapEntry,
   OcaProtoPortClockMapEntry,
-} from '../../types/OcaProtoPortClockMapEntry';
+} from '../../types/OcaProtoPortClockMapEntry.js';
 import {
   IOcaProtoSignalPath,
   OcaProtoSignalPath,
-} from '../../types/OcaProtoSignalPath';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaProtoSignalPath.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Create custom **OcaBlock** instances (*blocks*). Usable only in

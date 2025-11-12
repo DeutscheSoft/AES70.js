@@ -1,13 +1,13 @@
-import { OcaCounter } from '../../types/OcaCounter';
-import { OcaCounterSet } from '../../types/OcaCounterSet';
+import { OcaCounter } from '../../types/OcaCounter.js';
+import { OcaCounterSet } from '../../types/OcaCounterSet.js';
 import {
   IOcaNetworkInterfaceAssignment,
   OcaNetworkInterfaceAssignment,
-} from '../../types/OcaNetworkInterfaceAssignment';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+} from '../../types/OcaNetworkInterfaceAssignment.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Base class for network applications

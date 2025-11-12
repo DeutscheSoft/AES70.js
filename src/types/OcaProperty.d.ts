@@ -4,7 +4,7 @@
 import {
   IOcaPropertyDescriptor,
   OcaPropertyDescriptor,
-} from './OcaPropertyDescriptor';
+} from './OcaPropertyDescriptor.js';
 
 export declare interface IOcaProperty {
   /**

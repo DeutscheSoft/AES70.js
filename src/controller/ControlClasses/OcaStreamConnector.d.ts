@@ -1,12 +1,12 @@
 import {
   IOcaNetworkMediaSourceOrSink,
   OcaNetworkMediaSourceOrSink,
-} from '../../types/OcaNetworkMediaSourceOrSink';
-import { IOcaStream, OcaStream } from '../../types/OcaStream';
-import { OcaStreamConnectorStatus } from '../../types/OcaStreamConnectorStatus';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaNetworkMediaSourceOrSink.js';
+import { IOcaStream, OcaStream } from '../../types/OcaStream.js';
+import { OcaStreamConnectorStatus } from '../../types/OcaStreamConnectorStatus.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * **DEPRECATED CLASS** *Replaced by the* **OcaMediaSinkConnector ***and*

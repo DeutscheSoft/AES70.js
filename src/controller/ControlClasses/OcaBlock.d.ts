@@ -1,21 +1,21 @@
-import { OcaActionObjectSearchResult } from '../../types/OcaActionObjectSearchResult';
-import { IOcaActionObjectSearchResultFlags } from '../../types/OcaActionObjectSearchResultFlags';
-import { IOcaBlockConfigurability } from '../../types/OcaBlockConfigurability';
-import { OcaBlockMember } from '../../types/OcaBlockMember';
-import { IOcaConstructionParameter } from '../../types/OcaConstructionParameter';
-import { OcaDatasetSearchResult } from '../../types/OcaDatasetSearchResult';
-import { OcaGlobalTypeIdentifier } from '../../types/OcaGlobalTypeIdentifier';
-import { OcaLibVolData_ParamSet } from '../../types/OcaLibVolData_ParamSet';
+import { OcaActionObjectSearchResult } from '../../types/OcaActionObjectSearchResult.js';
+import { IOcaActionObjectSearchResultFlags } from '../../types/OcaActionObjectSearchResultFlags.js';
+import { IOcaBlockConfigurability } from '../../types/OcaBlockConfigurability.js';
+import { OcaBlockMember } from '../../types/OcaBlockMember.js';
+import { IOcaConstructionParameter } from '../../types/OcaConstructionParameter.js';
+import { OcaDatasetSearchResult } from '../../types/OcaDatasetSearchResult.js';
+import { OcaGlobalTypeIdentifier } from '../../types/OcaGlobalTypeIdentifier.js';
+import { OcaLibVolData_ParamSet } from '../../types/OcaLibVolData_ParamSet.js';
 import {
   IOcaLibVolIdentifier,
   OcaLibVolIdentifier,
-} from '../../types/OcaLibVolIdentifier';
-import { OcaObjectIdentification } from '../../types/OcaObjectIdentification';
-import { IOcaSignalPath, OcaSignalPath } from '../../types/OcaSignalPath';
-import { IOcaStringComparisonType } from '../../types/OcaStringComparisonType';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
+} from '../../types/OcaLibVolIdentifier.js';
+import { OcaObjectIdentification } from '../../types/OcaObjectIdentification.js';
+import { IOcaSignalPath, OcaSignalPath } from '../../types/OcaSignalPath.js';
+import { IOcaStringComparisonType } from '../../types/OcaStringComparisonType.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * Collection object for hierarchical structuring of Control Object populations.

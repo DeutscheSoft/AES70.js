@@ -1,23 +1,23 @@
-import { IOcaProperty, OcaProperty } from '../../types/OcaProperty';
-import { IOcaRamperCommand } from '../../types/OcaRamperCommand';
+import { IOcaProperty, OcaProperty } from '../../types/OcaProperty.js';
+import { IOcaRamperCommand } from '../../types/OcaRamperCommand.js';
 import {
   IOcaRamperInterpolationLaw,
   OcaRamperInterpolationLaw,
-} from '../../types/OcaRamperInterpolationLaw';
-import { OcaRamperState } from '../../types/OcaRamperState';
-import { IOcaTimeMode, OcaTimeMode } from '../../types/OcaTimeMode';
+} from '../../types/OcaRamperInterpolationLaw.js';
+import { OcaRamperState } from '../../types/OcaRamperState.js';
+import { IOcaTimeMode, OcaTimeMode } from '../../types/OcaTimeMode.js';
 import {
   IOcaWhenPhysicalAbsolute,
   OcaWhenPhysicalAbsolute,
-} from '../../types/OcaWhenPhysicalAbsolute';
+} from '../../types/OcaWhenPhysicalAbsolute.js';
 import {
   IOcaWhenPhysicalRelative,
   OcaWhenPhysicalRelative,
-} from '../../types/OcaWhenPhysicalRelative';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaWhenPhysicalRelative.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Agent that gradually changes a property setting from one value to another.

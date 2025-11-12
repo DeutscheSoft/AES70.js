@@ -1,10 +1,10 @@
 import {
   IOcaPolarityState,
   OcaPolarityState,
-} from '../../types/OcaPolarityState';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+} from '../../types/OcaPolarityState.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Signal inverter

@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaEventID, OcaEventID } from './OcaEventID';
+import { IOcaEventID, OcaEventID } from './OcaEventID.js';
 
 export declare interface IOcaEvent {
   /**

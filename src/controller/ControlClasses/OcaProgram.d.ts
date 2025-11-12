@@ -1,7 +1,7 @@
-import { IOcaProgramRunMode } from '../../types/OcaProgramRunMode';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaDataset } from './OcaDataset';
+import { IOcaProgramRunMode } from '../../types/OcaProgramRunMode.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaDataset } from './OcaDataset.js';
 
 /**
  * A Program. Child of **OcaDataset**. **Execution:** A program executes in a

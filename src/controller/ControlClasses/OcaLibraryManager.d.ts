@@ -1,12 +1,12 @@
 import {
   IOcaLibVolIdentifier,
   OcaLibVolIdentifier,
-} from '../../types/OcaLibVolIdentifier';
-import { IOcaLibVolType } from '../../types/OcaLibVolType';
-import { OcaLibraryIdentifier } from '../../types/OcaLibraryIdentifier';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+} from '../../types/OcaLibVolIdentifier.js';
+import { IOcaLibVolType } from '../../types/OcaLibVolType.js';
+import { OcaLibraryIdentifier } from '../../types/OcaLibraryIdentifier.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager for handling device presets -- Patch and ParamSet libraries.

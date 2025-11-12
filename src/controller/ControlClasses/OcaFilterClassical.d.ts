@@ -1,16 +1,16 @@
 import {
   IOcaClassicalFilterShape,
   OcaClassicalFilterShape,
-} from '../../types/OcaClassicalFilterShape';
+} from '../../types/OcaClassicalFilterShape.js';
 import {
   IOcaFilterPassband,
   OcaFilterPassband,
-} from '../../types/OcaFilterPassband';
-import { IOcaParameterMask } from '../../types/OcaParameterMask';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+} from '../../types/OcaFilterPassband.js';
+import { IOcaParameterMask } from '../../types/OcaParameterMask.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Classical analog-style filter - highpass, lowpass, bandpass, etc., with shape

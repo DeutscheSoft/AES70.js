@@ -1,4 +1,4 @@
-import { RemoteDevice } from './remote_device';
+import { RemoteDevice } from './remote_device.js';
 
 export async function fetchDeviceContent(
   device: RemoteDevice

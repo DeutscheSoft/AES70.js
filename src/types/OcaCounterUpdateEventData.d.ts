@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaCounterUpdate, OcaCounterUpdate } from './OcaCounterUpdate';
+import { IOcaCounterUpdate, OcaCounterUpdate } from './OcaCounterUpdate.js';
 
 export declare interface IOcaCounterUpdateEventData {
   /**

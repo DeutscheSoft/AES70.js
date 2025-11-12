@@ -1,5 +1,5 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * Abstract base class for all actuators (i.e. classes) that affect the routing

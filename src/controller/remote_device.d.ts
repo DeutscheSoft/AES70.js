@@ -1,22 +1,22 @@
-import { ClientConnection } from './client_connection';
-import { Events } from '../events';
+import { ClientConnection } from './client_connection.js';
+import { Events } from '../events.js';
 
-import { ObjectBase } from './object_base';
+import { ObjectBase } from './object_base.js';
 
-import { OcaDeviceManager } from './ControlClasses/OcaDeviceManager';
-import { OcaSecurityManager } from './ControlClasses/OcaSecurityManager';
-import { OcaFirmwareManager } from './ControlClasses/OcaFirmwareManager';
-import { OcaSubscriptionManager } from './ControlClasses/OcaSubscriptionManager';
-import { OcaPowerManager } from './ControlClasses/OcaPowerManager';
-import { OcaNetworkManager } from './ControlClasses/OcaNetworkManager';
-import { OcaMediaClockManager } from './ControlClasses/OcaMediaClockManager';
-import { OcaLibraryManager } from './ControlClasses/OcaLibraryManager';
-import { OcaAudioProcessingManager } from './ControlClasses/OcaAudioProcessingManager';
-import { OcaDeviceTimeManager } from './ControlClasses/OcaDeviceTimeManager';
-import { OcaTaskManager } from './ControlClasses/OcaTaskManager';
-import { OcaCodingManager } from './ControlClasses/OcaCodingManager';
-import { OcaDiagnosticManager } from './ControlClasses/OcaDiagnosticManager';
-import { OcaBlock } from './ControlClasses/OcaBlock';
+import { OcaDeviceManager } from './ControlClasses/OcaDeviceManager.js';
+import { OcaSecurityManager } from './ControlClasses/OcaSecurityManager.js';
+import { OcaFirmwareManager } from './ControlClasses/OcaFirmwareManager.js';
+import { OcaSubscriptionManager } from './ControlClasses/OcaSubscriptionManager.js';
+import { OcaPowerManager } from './ControlClasses/OcaPowerManager.js';
+import { OcaNetworkManager } from './ControlClasses/OcaNetworkManager.js';
+import { OcaMediaClockManager } from './ControlClasses/OcaMediaClockManager.js';
+import { OcaLibraryManager } from './ControlClasses/OcaLibraryManager.js';
+import { OcaAudioProcessingManager } from './ControlClasses/OcaAudioProcessingManager.js';
+import { OcaDeviceTimeManager } from './ControlClasses/OcaDeviceTimeManager.js';
+import { OcaTaskManager } from './ControlClasses/OcaTaskManager.js';
+import { OcaCodingManager } from './ControlClasses/OcaCodingManager.js';
+import { OcaDiagnosticManager } from './ControlClasses/OcaDiagnosticManager.js';
+import { OcaBlock } from './ControlClasses/OcaBlock.js';
 
 type DeviceTreeNode = ObjectBase | DeviceTreeNode[];
 type DeviceTree = DeviceTreeNode[];

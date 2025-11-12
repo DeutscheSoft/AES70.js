@@ -4,7 +4,7 @@
 import {
   IOcaMediaFrameFormat,
   OcaMediaFrameFormat,
-} from './OcaMediaFrameFormat';
+} from './OcaMediaFrameFormat.js';
 
 export declare interface IOcaMediaStreamMode {
   /**

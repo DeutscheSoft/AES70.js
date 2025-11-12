@@ -1,6 +1,6 @@
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaBasicActuator } from './OcaBasicActuator';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaBasicActuator } from './OcaBasicActuator.js';
 
 /**
  * JSON value actuator.

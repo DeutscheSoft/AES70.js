@@ -1,8 +1,11 @@
 /*
  * This file has been generated.
  */
-import { IOcaCommandResult, OcaCommandResult } from './OcaCommandResult';
-import { IOcaGenericEndState, OcaGenericEndState } from './OcaGenericEndState';
+import { IOcaCommandResult, OcaCommandResult } from './OcaCommandResult.js';
+import {
+  IOcaGenericEndState,
+  OcaGenericEndState,
+} from './OcaGenericEndState.js';
 
 export declare interface IOcaCommandSetResult {
   /**

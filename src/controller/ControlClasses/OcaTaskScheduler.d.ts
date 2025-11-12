@@ -1,9 +1,12 @@
-import { IOcaJobQueueItem, OcaJobQueueItem } from '../../types/OcaJobQueueItem';
-import { OcaTaskSchedulerState } from '../../types/OcaTaskSchedulerState';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+import {
+  IOcaJobQueueItem,
+  OcaJobQueueItem,
+} from '../../types/OcaJobQueueItem.js';
+import { OcaTaskSchedulerState } from '../../types/OcaTaskSchedulerState.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Optional scheduler for scheduling tasks to run programs and commandsets in

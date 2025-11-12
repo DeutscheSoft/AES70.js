@@ -1,5 +1,5 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that provides application diagnostic aids. Unlike other

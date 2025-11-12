@@ -1,6 +1,6 @@
-import { Event } from '../event';
-import { RemoteDevice } from '../remote_device';
-import { OcaSensor } from './OcaSensor';
+import { Event } from '../event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaSensor } from './OcaSensor.js';
 
 /**
  * Sensor for device identification mechanism. This sensor shall detect the

@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaMethodID, OcaMethodID } from './OcaMethodID';
+import { IOcaMethodID, OcaMethodID } from './OcaMethodID.js';
 
 export declare interface IOcaMethod {
   /**

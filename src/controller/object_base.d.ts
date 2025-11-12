@@ -1,5 +1,5 @@
-import { RemoteDevice } from './remote_device';
-import { IOcaPropertyID, OcaPropertyID } from '../types/OcaPropertyID';
+import { RemoteDevice } from './remote_device.js';
+import { IOcaPropertyID, OcaPropertyID } from '../types/OcaPropertyID.js';
 
 export class ObjectBase {
   readonly device: RemoteDevice;

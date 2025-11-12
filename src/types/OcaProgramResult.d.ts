@@ -1,8 +1,11 @@
 /*
  * This file has been generated.
  */
-import { IOcaGenericEndState, OcaGenericEndState } from './OcaGenericEndState';
-import { IOcaTypedBlob, OcaTypedBlob } from './OcaTypedBlob';
+import {
+  IOcaGenericEndState,
+  OcaGenericEndState,
+} from './OcaGenericEndState.js';
+import { IOcaTypedBlob, OcaTypedBlob } from './OcaTypedBlob.js';
 
 export declare interface IOcaProgramResult {
   /**

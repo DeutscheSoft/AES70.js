@@ -1,11 +1,11 @@
-import { OcaCommandResult } from '../../types/OcaCommandResult';
-import { IOcaMatrixCommand } from '../../types/OcaMatrixCommand';
-import { IOcaMatrixCoordinates } from '../../types/OcaMatrixCoordinates';
-import { IOcaMethodID } from '../../types/OcaMethodID';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
+import { OcaCommandResult } from '../../types/OcaCommandResult.js';
+import { IOcaMatrixCommand } from '../../types/OcaMatrixCommand.js';
+import { IOcaMatrixCoordinates } from '../../types/OcaMatrixCoordinates.js';
+import { IOcaMethodID } from '../../types/OcaMethodID.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * Rectangular array of identical objects (**Matrix Members,** or just****

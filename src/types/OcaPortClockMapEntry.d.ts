@@ -4,7 +4,7 @@
 import {
   IOcaSamplingRateConverterType,
   OcaSamplingRateConverterType,
-} from './OcaSamplingRateConverterType';
+} from './OcaSamplingRateConverterType.js';
 
 export declare interface IOcaPortClockMapEntry {
   /**

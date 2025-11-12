@@ -2,7 +2,7 @@ import {
   ClientConnection,
   IClientConnectionOptions,
 } from './client_connection.js';
-import { Socket } from 'dgram';
+import { Socket } from 'node:dgram';
 
 export interface IUDPConnectionOptions extends IClientConnectionOptions {
   /**

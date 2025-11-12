@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaTaskState, OcaTaskState } from './OcaTaskState';
+import { IOcaTaskState, OcaTaskState } from './OcaTaskState.js';
 
 export declare interface IOcaTaskStatus {
   /**

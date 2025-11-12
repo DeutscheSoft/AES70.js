@@ -1,18 +1,18 @@
 import {
   IOcaGrouperCitizen,
   OcaGrouperCitizen,
-} from '../../types/OcaGrouperCitizen';
+} from '../../types/OcaGrouperCitizen.js';
 import {
   IOcaGrouperEnrollment,
   OcaGrouperEnrollment,
-} from '../../types/OcaGrouperEnrollment';
-import { OcaGrouperGroup } from '../../types/OcaGrouperGroup';
-import { IOcaGrouperMode, OcaGrouperMode } from '../../types/OcaGrouperMode';
-import { Arguments } from '../arguments';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaGrouperEnrollment.js';
+import { OcaGrouperGroup } from '../../types/OcaGrouperGroup.js';
+import { IOcaGrouperMode, OcaGrouperMode } from '../../types/OcaGrouperMode.js';
+import { Arguments } from '../arguments.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Control aggregator. See **[AES70-1(Control Aggregation)]** for the normative

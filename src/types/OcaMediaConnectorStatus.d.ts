@@ -4,7 +4,7 @@
 import {
   IOcaMediaConnectorState,
   OcaMediaConnectorState,
-} from './OcaMediaConnectorState';
+} from './OcaMediaConnectorState.js';
 
 export declare interface IOcaMediaConnectorStatus {
   /**

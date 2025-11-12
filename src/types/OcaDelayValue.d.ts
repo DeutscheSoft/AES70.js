@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaDelayUnit, OcaDelayUnit } from './OcaDelayUnit';
+import { IOcaDelayUnit, OcaDelayUnit } from './OcaDelayUnit.js';
 
 export declare interface IOcaDelayValue {
   /**

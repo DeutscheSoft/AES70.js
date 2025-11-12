@@ -1,14 +1,14 @@
-import { IOcaIODirection } from '../../types/OcaIODirection';
-import { OcaPort } from '../../types/OcaPort';
+import { IOcaIODirection } from '../../types/OcaIODirection.js';
+import { OcaPort } from '../../types/OcaPort.js';
 import {
   IOcaPortClockMapEntry,
   OcaPortClockMapEntry,
-} from '../../types/OcaPortClockMapEntry';
-import { IOcaPortID, OcaPortID } from '../../types/OcaPortID';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+} from '../../types/OcaPortClockMapEntry.js';
+import { IOcaPortID, OcaPortID } from '../../types/OcaPortID.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class for classes that represent the device's application and

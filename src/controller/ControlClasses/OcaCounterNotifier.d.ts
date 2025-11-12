@@ -1,12 +1,12 @@
 import {
   IOcaCounterNotifierFilterParameters,
   OcaCounterNotifierFilterParameters,
-} from '../../types/OcaCounterNotifierFilterParameters';
-import { OcaCounterUpdate } from '../../types/OcaCounterUpdate';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaCounterNotifierFilterParameters.js';
+import { OcaCounterUpdate } from '../../types/OcaCounterUpdate.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * **Notifier** for an OCA counter. Observes the value of the counter and emits

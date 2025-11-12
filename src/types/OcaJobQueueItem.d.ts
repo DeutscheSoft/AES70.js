@@ -1,15 +1,15 @@
 /*
  * This file has been generated.
  */
-import { IOcaProgramRunMode } from './OcaProgramRunMode';
+import { IOcaProgramRunMode } from './OcaProgramRunMode.js';
 import {
   IOcaWhenPhysicalAbsolute,
   OcaWhenPhysicalAbsolute,
-} from './OcaWhenPhysicalAbsolute';
+} from './OcaWhenPhysicalAbsolute.js';
 import {
   IOcaWhenPhysicalRelative,
   OcaWhenPhysicalRelative,
-} from './OcaWhenPhysicalRelative';
+} from './OcaWhenPhysicalRelative.js';
 
 export declare interface IOcaJobQueueItem {
   /**

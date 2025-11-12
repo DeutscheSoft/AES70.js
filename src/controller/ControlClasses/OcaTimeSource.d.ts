@@ -1,16 +1,16 @@
 import {
   IOcaTimeDeliveryMechanism,
   OcaTimeDeliveryMechanism,
-} from '../../types/OcaTimeDeliveryMechanism';
+} from '../../types/OcaTimeDeliveryMechanism.js';
 import {
   IOcaTimeReferenceType,
   OcaTimeReferenceType,
-} from '../../types/OcaTimeReferenceType';
-import { OcaTimeSourceAvailability } from '../../types/OcaTimeSourceAvailability';
-import { OcaTimeSourceSyncStatus } from '../../types/OcaTimeSourceSyncStatus';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaTimeReferenceType.js';
+import { OcaTimeSourceAvailability } from '../../types/OcaTimeSourceAvailability.js';
+import { OcaTimeSourceSyncStatus } from '../../types/OcaTimeSourceSyncStatus.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * A time source, internal or external, and the delivery method by which time

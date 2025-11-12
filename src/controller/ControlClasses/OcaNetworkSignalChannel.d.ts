@@ -1,8 +1,8 @@
-import { OcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink';
-import { OcaNetworkSignalChannelStatus } from '../../types/OcaNetworkSignalChannelStatus';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
+import { OcaNetworkMediaSourceOrSink } from '../../types/OcaNetworkMediaSourceOrSink.js';
+import { OcaNetworkSignalChannelStatus } from '../../types/OcaNetworkSignalChannelStatus.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * **DEPRECATED CLASS** *Replaced by features of the* **OcaMediaSinkConnector

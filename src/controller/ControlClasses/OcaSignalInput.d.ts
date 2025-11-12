@@ -1,5 +1,5 @@
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * A set of one or more non-network signal inputs. Number of channels shall be

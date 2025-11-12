@@ -1,7 +1,7 @@
-import { IOcaCommand } from '../../types/OcaCommand';
-import { OcaCommandResult } from '../../types/OcaCommandResult';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+import { IOcaCommand } from '../../types/OcaCommand.js';
+import { OcaCommandResult } from '../../types/OcaCommandResult.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Agent for immediate execution of commandsets. This agent provides a mechanism

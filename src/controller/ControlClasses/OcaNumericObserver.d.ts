@@ -1,13 +1,13 @@
-import { OcaObserverState } from '../../types/OcaObserverState';
-import { IOcaProperty, OcaProperty } from '../../types/OcaProperty';
+import { OcaObserverState } from '../../types/OcaObserverState.js';
+import { IOcaProperty, OcaProperty } from '../../types/OcaProperty.js';
 import {
   IOcaRelationalOperator,
   OcaRelationalOperator,
-} from '../../types/OcaRelationalOperator';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaRelationalOperator.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Observer of a scalar numeric or boolean property ("target property") of a

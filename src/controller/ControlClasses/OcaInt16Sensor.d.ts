@@ -1,7 +1,7 @@
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaBasicSensor } from './OcaBasicSensor';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaBasicSensor } from './OcaBasicSensor.js';
 
 /**
  * 16-bit signed integer sensor

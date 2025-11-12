@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaTime, OcaTime } from './OcaTime';
+import { IOcaTime, OcaTime } from './OcaTime.js';
 
 export declare interface IOcaLogRecord {
   /**

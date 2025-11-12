@@ -1,8 +1,8 @@
-import { IOcaComponent } from '../../types/OcaComponent';
-import { OcaVersion } from '../../types/OcaVersion';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { IOcaComponent } from '../../types/OcaComponent.js';
+import { OcaVersion } from '../../types/OcaVersion.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * Optional manager that manages versions of the different firmware and software

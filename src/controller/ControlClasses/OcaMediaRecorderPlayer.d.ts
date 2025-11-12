@@ -1,19 +1,19 @@
-import { IOcaLockState } from '../../types/OcaLockState';
-import { IOcaMediaAccessMode } from '../../types/OcaMediaAccessMode';
+import { IOcaLockState } from '../../types/OcaLockState.js';
+import { IOcaMediaAccessMode } from '../../types/OcaMediaAccessMode.js';
 import {
   IOcaMediaPlayOption,
   OcaMediaPlayOption,
-} from '../../types/OcaMediaPlayOption';
-import { OcaMediaRecorderPlayerState } from '../../types/OcaMediaRecorderPlayerState';
-import { IOcaMediaTrackFunction } from '../../types/OcaMediaTrackFunction';
+} from '../../types/OcaMediaPlayOption.js';
+import { OcaMediaRecorderPlayerState } from '../../types/OcaMediaRecorderPlayerState.js';
+import { IOcaMediaTrackFunction } from '../../types/OcaMediaTrackFunction.js';
 import {
   IOcaMediaVolumePosition,
   OcaMediaVolumePosition,
-} from '../../types/OcaMediaVolumePosition';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaDatasetWorker } from './OcaDatasetWorker';
+} from '../../types/OcaMediaVolumePosition.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaDatasetWorker } from './OcaDatasetWorker.js';
 
 /**
  * Media volume recorder/player that shall provide streaming data access into

@@ -1,7 +1,7 @@
-import { OcaSensorReadingState } from '../../types/OcaSensorReadingState';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaWorker } from './OcaWorker';
+import { OcaSensorReadingState } from '../../types/OcaSensorReadingState.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaWorker } from './OcaWorker.js';
 
 /**
  * Abstract base class for all sensor classes.

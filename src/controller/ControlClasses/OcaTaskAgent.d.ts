@@ -1,9 +1,9 @@
-import { IOcaProgramRunMode } from '../../types/OcaProgramRunMode';
-import { OcaTaskOperationalState } from '../../types/OcaTaskOperationalState';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+import { IOcaProgramRunMode } from '../../types/OcaProgramRunMode.js';
+import { OcaTaskOperationalState } from '../../types/OcaTaskOperationalState.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Task scheduler. Holds a queue of task-program pairs to be executed under

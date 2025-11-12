@@ -1,9 +1,9 @@
-import { IOcaApplicationNetworkCommand } from '../../types/OcaApplicationNetworkCommand';
-import { OcaApplicationNetworkState } from '../../types/OcaApplicationNetworkState';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaRoot } from './OcaRoot';
+import { IOcaApplicationNetworkCommand } from '../../types/OcaApplicationNetworkCommand.js';
+import { OcaApplicationNetworkState } from '../../types/OcaApplicationNetworkState.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaRoot } from './OcaRoot.js';
 
 /**
  * Abstract base class from which the application network classes inherit.

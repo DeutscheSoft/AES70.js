@@ -1,15 +1,15 @@
-import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol';
-import { OcaNetworkLinkType } from '../../types/OcaNetworkLinkType';
-import { OcaNetworkMediaProtocol } from '../../types/OcaNetworkMediaProtocol';
-import { OcaNetworkStatistics } from '../../types/OcaNetworkStatistics';
-import { OcaNetworkStatus } from '../../types/OcaNetworkStatus';
+import { OcaNetworkControlProtocol } from '../../types/OcaNetworkControlProtocol.js';
+import { OcaNetworkLinkType } from '../../types/OcaNetworkLinkType.js';
+import { OcaNetworkMediaProtocol } from '../../types/OcaNetworkMediaProtocol.js';
+import { OcaNetworkStatistics } from '../../types/OcaNetworkStatistics.js';
+import { OcaNetworkStatus } from '../../types/OcaNetworkStatus.js';
 import {
   IOcaNetworkSystemInterfaceID,
   OcaNetworkSystemInterfaceID,
-} from '../../types/OcaNetworkSystemInterfaceID';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaNetworkSystemInterfaceID.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * **DEPRECATED CLASS** *Replaced by class* **OcaControlNetwork ***in version 3

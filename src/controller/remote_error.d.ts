@@ -1,4 +1,4 @@
-import { OcaStatus } from '../types/OcaStatus';
+import { OcaStatus } from '../types/OcaStatus.js';
 
 export declare class RemoteError extends Error {
   status: OcaStatus;

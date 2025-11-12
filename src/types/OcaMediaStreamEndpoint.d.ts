@@ -1,14 +1,17 @@
 /*
  * This file has been generated.
  */
-import { IOcaIODirection, OcaIODirection } from './OcaIODirection';
+import { IOcaIODirection, OcaIODirection } from './OcaIODirection.js';
 import {
   IOcaMediaStreamCastMode,
   OcaMediaStreamCastMode,
-} from './OcaMediaStreamCastMode';
-import { IOcaMediaStreamMode, OcaMediaStreamMode } from './OcaMediaStreamMode';
-import { IOcaPortID, OcaPortID } from './OcaPortID';
-import { IOcaSecurityType, OcaSecurityType } from './OcaSecurityType';
+} from './OcaMediaStreamCastMode.js';
+import {
+  IOcaMediaStreamMode,
+  OcaMediaStreamMode,
+} from './OcaMediaStreamMode.js';
+import { IOcaPortID, OcaPortID } from './OcaPortID.js';
+import { IOcaSecurityType, OcaSecurityType } from './OcaSecurityType.js';
 
 export declare interface IOcaMediaStreamEndpoint {
   /**

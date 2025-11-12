@@ -12,22 +12,22 @@ export class Events {
   /**
    * Subscribe to an event.
    */
-  on(name: string, cb: (...args) => void): void;
+  on(name: string, cb: (...args: unknown[]) => void): void;
 
   /**
    * Subscribe to an event.
    */
-  addEventListener(name: string, cb: (...args) => void): void;
+  addEventListener(name: string, cb: (...args: unknown[]) => void): void;
 
   /**
    * Unsubscribe from an event.
    */
-  removeEventListener(name: string, cb: (...args) => void): void;
+  removeEventListener(name: string, cb: (...args: unknown[]) => void): void;
 
   /**
    * Unsubscribe from an event.
    */
-  off(name: string, cb: (...args) => void): void;
+  off(name: string, cb: (...args: unknown[]) => void): void;
 
   /**
    * Removes all event listeners.
@@ -38,5 +38,5 @@ export class Events {
    * Subscribe to an event. Returns a cleanup function which can be called to
    * unsubscribe.
    */
-  subscribe(name: string, cb: (...args) => void): () => void;
+  subscribe(name: string, cb: (...args: unknown[]) => void): () => void;
 }

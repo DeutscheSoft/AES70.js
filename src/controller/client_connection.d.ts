@@ -1,4 +1,4 @@
-import { IConnectionOptions, Connection } from '../connection';
+import { IConnectionOptions, Connection } from '../connection.js';
 
 export type IClientConnectionOptions = IConnectionOptions;
 

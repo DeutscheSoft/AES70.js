@@ -4,7 +4,7 @@
 import {
   IOcaObjectIdentification,
   OcaObjectIdentification,
-} from './OcaObjectIdentification';
+} from './OcaObjectIdentification.js';
 
 export declare interface IOcaActionObjectSearchResult {
   /**

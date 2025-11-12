@@ -1,27 +1,27 @@
-import { IOcaMediaCoding } from '../../types/OcaMediaCoding';
-import { IOcaMediaConnection } from '../../types/OcaMediaConnection';
-import { IOcaMediaConnectorCommand } from '../../types/OcaMediaConnectorCommand';
-import { IOcaMediaConnectorState } from '../../types/OcaMediaConnectorState';
+import { IOcaMediaCoding } from '../../types/OcaMediaCoding.js';
+import { IOcaMediaConnection } from '../../types/OcaMediaConnection.js';
+import { IOcaMediaConnectorCommand } from '../../types/OcaMediaConnectorCommand.js';
+import { IOcaMediaConnectorState } from '../../types/OcaMediaConnectorState.js';
 import {
   IOcaMediaConnectorStatus,
   OcaMediaConnectorStatus,
-} from '../../types/OcaMediaConnectorStatus';
+} from '../../types/OcaMediaConnectorStatus.js';
 import {
   IOcaMediaSinkConnector,
   OcaMediaSinkConnector,
-} from '../../types/OcaMediaSinkConnector';
+} from '../../types/OcaMediaSinkConnector.js';
 import {
   IOcaMediaSourceConnector,
   OcaMediaSourceConnector,
-} from '../../types/OcaMediaSourceConnector';
-import { OcaNetworkMediaProtocol } from '../../types/OcaNetworkMediaProtocol';
-import { OcaPort } from '../../types/OcaPort';
-import { IOcaPortID } from '../../types/OcaPortID';
-import { Arguments } from '../arguments';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaApplicationNetwork } from './OcaApplicationNetwork';
+} from '../../types/OcaMediaSourceConnector.js';
+import { OcaNetworkMediaProtocol } from '../../types/OcaNetworkMediaProtocol.js';
+import { OcaPort } from '../../types/OcaPort.js';
+import { IOcaPortID } from '../../types/OcaPortID.js';
+import { Arguments } from '../arguments.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaApplicationNetwork } from './OcaApplicationNetwork.js';
 
 /**
  * @extends OcaApplicationNetwork

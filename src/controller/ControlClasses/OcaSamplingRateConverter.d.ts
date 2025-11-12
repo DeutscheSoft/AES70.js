@@ -1,6 +1,6 @@
-import { OcaSamplingRateConverterType } from '../../types/OcaSamplingRateConverterType';
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+import { OcaSamplingRateConverterType } from '../../types/OcaSamplingRateConverterType.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Sampling rate converter. **ClockMap** property inherited from **OcaWorker**

@@ -1,7 +1,7 @@
 /*
  * This file has been generated.
  */
-import { IOcaCounter, OcaCounter } from './OcaCounter';
+import { IOcaCounter, OcaCounter } from './OcaCounter.js';
 
 export declare interface IOcaCounterSet {
   /**

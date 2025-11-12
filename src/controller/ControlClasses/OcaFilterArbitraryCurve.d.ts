@@ -1,11 +1,11 @@
 import {
   IOcaTransferFunction,
   OcaTransferFunction,
-} from '../../types/OcaTransferFunction';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+} from '../../types/OcaTransferFunction.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Arbitrary-curve filter, with transfer function specified as amplitude and

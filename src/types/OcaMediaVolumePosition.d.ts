@@ -4,7 +4,7 @@
 import {
   IOcaMediaVolumePositionType,
   OcaMediaVolumePositionType,
-} from './OcaMediaVolumePositionType';
+} from './OcaMediaVolumePositionType.js';
 
 export declare interface IOcaMediaVolumePosition {
   /**

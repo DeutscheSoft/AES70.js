@@ -1,11 +1,11 @@
-import { IOcaTask, OcaTask } from '../../types/OcaTask';
-import { IOcaTaskCommand } from '../../types/OcaTaskCommand';
-import { OcaTaskManagerState } from '../../types/OcaTaskManagerState';
-import { OcaTaskStatus } from '../../types/OcaTaskStatus';
-import { Event } from '../event';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaManager } from './OcaManager';
+import { IOcaTask, OcaTask } from '../../types/OcaTask.js';
+import { IOcaTaskCommand } from '../../types/OcaTaskCommand.js';
+import { OcaTaskManagerState } from '../../types/OcaTaskManagerState.js';
+import { OcaTaskStatus } from '../../types/OcaTaskStatus.js';
+import { Event } from '../event.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaManager } from './OcaManager.js';
 
 /**
  * This class is **deprecated** in version 2 (OCA 1.5). Optional manager that

@@ -1,12 +1,12 @@
-import { IOcaParameterMask } from '../../types/OcaParameterMask';
+import { IOcaParameterMask } from '../../types/OcaParameterMask.js';
 import {
   IOcaParametricEQShape,
   OcaParametricEQShape,
-} from '../../types/OcaParametricEQShape';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaActuator } from './OcaActuator';
+} from '../../types/OcaParametricEQShape.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaActuator } from './OcaActuator.js';
 
 /**
  * Parametric equalizer section with various shape options.

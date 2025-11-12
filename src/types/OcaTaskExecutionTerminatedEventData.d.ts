@@ -4,9 +4,9 @@
 import {
   IOcaCommandSetResult,
   OcaCommandSetResult,
-} from './OcaCommandSetResult';
-import { IOcaExecutableType, OcaExecutableType } from './OcaExecutableType';
-import { IOcaProgramResult, OcaProgramResult } from './OcaProgramResult';
+} from './OcaCommandSetResult.js';
+import { IOcaExecutableType, OcaExecutableType } from './OcaExecutableType.js';
+import { IOcaProgramResult, OcaProgramResult } from './OcaProgramResult.js';
 
 export declare interface IOcaTaskExecutionTerminatedEventData {
   /**

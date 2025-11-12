@@ -4,8 +4,8 @@
 import {
   IOcaLibVolIdentifier,
   OcaLibVolIdentifier,
-} from './OcaLibVolIdentifier';
-import { IOcaTaskStatus, OcaTaskStatus } from './OcaTaskStatus';
+} from './OcaLibVolIdentifier.js';
+import { IOcaTaskStatus, OcaTaskStatus } from './OcaTaskStatus.js';
 
 export declare interface IOcaTaskStatusChangedEventData {
   /**

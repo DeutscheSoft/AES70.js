@@ -1,10 +1,10 @@
 import {
   IOcaLevelMeterLaw,
   OcaLevelMeterLaw,
-} from '../../types/OcaLevelMeterLaw';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaLevelSensor } from './OcaLevelSensor';
+} from '../../types/OcaLevelMeterLaw.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaLevelSensor } from './OcaLevelSensor.js';
 
 /**
  * Child of **OcaLevelSensor** that shall return an audio meter reading in dB

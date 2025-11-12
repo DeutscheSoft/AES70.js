@@ -1,13 +1,13 @@
-import { OcaPositionCoordinateSystem } from '../../types/OcaPositionCoordinateSystem';
+import { OcaPositionCoordinateSystem } from '../../types/OcaPositionCoordinateSystem.js';
 import {
   IOcaPositionDescriptor,
   OcaPositionDescriptor,
-} from '../../types/OcaPositionDescriptor';
-import { IOcaPositionDescriptorFieldFlags } from '../../types/OcaPositionDescriptorFieldFlags';
-import { Arguments } from '../arguments';
-import { PropertyEvent } from '../property_event';
-import { RemoteDevice } from '../remote_device';
-import { OcaAgent } from './OcaAgent';
+} from '../../types/OcaPositionDescriptor.js';
+import { IOcaPositionDescriptorFieldFlags } from '../../types/OcaPositionDescriptorFieldFlags.js';
+import { Arguments } from '../arguments.js';
+import { PropertyEvent } from '../property_event.js';
+import { RemoteDevice } from '../remote_device.js';
+import { OcaAgent } from './OcaAgent.js';
 
 /**
  * Physical position of device or an element of it. AES70 supports a variety of

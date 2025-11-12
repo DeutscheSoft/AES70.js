@@ -4,9 +4,9 @@
 import {
   IOcaLibVolIdentifier,
   OcaLibVolIdentifier,
-} from './OcaLibVolIdentifier';
-import { IOcaTime, OcaTime } from './OcaTime';
-import { IOcaTimeMode, OcaTimeMode } from './OcaTimeMode';
+} from './OcaLibVolIdentifier.js';
+import { IOcaTime, OcaTime } from './OcaTime.js';
+import { IOcaTimeMode, OcaTimeMode } from './OcaTimeMode.js';
 
 export declare interface IOcaTask {
   /**
