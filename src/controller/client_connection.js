@@ -260,7 +260,11 @@ export class ClientConnection extends Connection {
       const subscriptions = [];
 
       const cleanup = () => {
-        subscriptions.forEach((cb) => cb());
+        subscriptions.forEach((cb) => {
+          try {
+            cb();
+          } catch (e) {}
+        });
         subscriptions.length = 0;
       };
       subscriptions.push(
