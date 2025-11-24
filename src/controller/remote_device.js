@@ -242,7 +242,7 @@ export class RemoteDevice extends Events {
         }
         return 2;
       } catch (err) {
-        if (!RemoteError.check_status(err, OcaStatus.NotImplemented)) {
+        if (!(err instanceof RemoteError)) {
           throw err;
         }
         this._supportsEV2 = false;
