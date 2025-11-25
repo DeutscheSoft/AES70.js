@@ -103,9 +103,13 @@ export class AbstractUDPConnection extends ClientConnection {
       options.type
     );
 
-    await waitForKeepalive(socket, options);
-
-    return new this(socket, options);
+    try {
+      await waitForKeepalive(socket, options);
+      return new this(socket, options);
+    } catch (err) {
+      socket.close();
+      throw err;
+    }
   }
 
   write(buf) {
