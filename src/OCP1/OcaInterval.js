@@ -6,12 +6,12 @@ import { Struct } from './Struct.js';
 import { OcaInterval as type } from '../types/OcaInterval.js';
 
 export function OcaInterval(DT) {
-  return class extends Struct(
+  return Struct(
     {
       Min: DT,
       Max: DT,
       Bounds: OcaIntervalBounds,
     },
     type
-  ) {};
+  );
 }
