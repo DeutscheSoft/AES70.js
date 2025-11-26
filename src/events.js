@@ -4,6 +4,7 @@
 export class Events {
   constructor() {
     this.event_handlers = new Map();
+    this.event_handlers_cleared = false;
   }
 
   /**
@@ -61,7 +62,10 @@ export class Events {
     const handlers = this.event_handlers.get(name);
 
     if (!handlers || !handlers.has(cb)) {
-      throw new Error('removeEventListeners(): not installed.');
+      if (!this.event_handlers_cleared) {
+        console.warn('removeEventListeners(): not installed:', name, cb);
+      }
+      return;
     }
 
     handlers.delete(cb);
@@ -82,6 +86,7 @@ export class Events {
    */
   removeAllEventListeners() {
     this.event_handlers.clear();
+    this.event_handlers_cleared = true;
   }
 
   /**
