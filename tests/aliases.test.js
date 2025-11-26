@@ -23,13 +23,26 @@ describe('aliases', { skip: !allClassesTarget }, async () => {
 
   // This is an alias for WidthParameter
   it('OcaFilterParametric/Q', async () => {
-    const gain = objectTree.get('MyActuators/MyFilterParametric');
+    const filter = objectTree.get('MyActuators/MyFilterParametric');
 
-    assert(gain.OnQChanged);
+    assert(filter.OnQChanged);
 
-    const property = gain.get_properties().find_property('Q');
+    const property = filter.get_properties().find_property('Q');
 
     assert(property);
-    equal(property, gain.get_properties().find_property('WidthParameter'));
+    equal(property, filter.get_properties().find_property('WidthParameter'));
+  });
+
+  it('OcaFilterParametric/InbandGain', async () => {
+    const filter = objectTree.get('MyActuators/MyFilterParametric');
+
+    assert(filter.OnInbandGainChanged);
+    assert(filter.OnInBandGainChanged);
+
+    const property = filter.get_properties().find_property('InbandGain');
+
+    assert(property);
+    assert(property.getter(filter));
+    assert(property.setter(filter));
   });
 });

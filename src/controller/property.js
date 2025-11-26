@@ -56,8 +56,7 @@ export class Property {
    * @returns {Function} The getter. If none could be found, null is returned.
    */
   getter(o, no_bind) {
-    let name = this.name;
-    let i = 0;
+    const name = this.name;
     const aliases = this.aliases;
     const accessors = this.accessors;
 
@@ -99,10 +98,13 @@ export class Property {
       return no_bind ? fun : fun.bind(o);
     }
 
-    do {
+    // iterate all possible names
+    const possibleNames = aliases ? [name, ...aliases] : [name];
+
+    for (const possibleName of possibleNames) {
       if (this.static) {
         const c = o.constructor;
-        const v = c[name];
+        const v = c[possibleName];
 
         if (v !== void 0) {
           return function () {
@@ -110,16 +112,11 @@ export class Property {
           };
         }
       } else {
-        const fun = o['Get' + name];
+        const fun = o['Get' + possibleName];
 
         if (fun) return no_bind ? fun : fun.bind(o);
       }
-
-      if (aliases && i < aliases.length) {
-        name = aliases[i++];
-        continue;
-      }
-    } while (false);
+    }
 
     return null;
   }
@@ -135,20 +132,15 @@ export class Property {
   setter(o, no_bind) {
     if (this.readonly || this.static) return null;
 
-    let name = this.name,
-      i = 0;
+    const name = this.name;
     const aliases = this.aliases;
+    const possibleNames = aliases ? [name, ...aliases] : [name];
 
-    do {
-      const fun = o['Set' + name];
+    for (const possibleName of possibleNames) {
+      const fun = o['Set' + possibleName];
 
       if (fun) return no_bind ? fun : fun.bind(o);
-
-      if (aliases && i < aliases.length) {
-        name = aliases[i++];
-        continue;
-      }
-    } while (false);
+    }
 
     return null;
   }
