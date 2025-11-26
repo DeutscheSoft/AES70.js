@@ -9,6 +9,8 @@ import { Arguments } from './arguments.js';
 import { OcaStatus } from '../types/OcaStatus.js';
 import { EncodedArguments } from '../OCP1/encoded_arguments.js';
 import { CloseError } from '../close_error.js';
+import { Subscriptions } from '../utils/subscriptions.js';
+import { subscribeEvent } from '../utils/subscribeEvent.js';
 
 class PendingCommand {
   get handle() {
@@ -254,34 +256,33 @@ export class ClientConnection extends Connection {
    * the connection will be closed and the returned promise will reject.
    * @param {number} interval
    *   Keepalive interval in seconds.
+   * @param {AbortSignal} [signal]
+   *   Optional abort signal which can be used to abort
+   *   the process.
    */
-  wait_for_keepalive(interval) {
-    return new Promise((resolve, reject) => {
-      const subscriptions = [];
+  wait_for_keepalive(interval, signal) {
+    const subscriptions = new Subscriptions();
 
-      const cleanup = () => {
-        subscriptions.forEach((cb) => {
-          try {
-            cb();
-          } catch (e) {}
-        });
-        subscriptions.length = 0;
-      };
-      subscriptions.push(
+    return new Promise((resolve, reject) => {
+      if (signal) {
+        subscriptions.add(
+          subscribeEvent(signal, 'abort', () => {
+            reject(signal.reason);
+          })
+        );
+      }
+      subscriptions.add(
         this.subscribe('error', (error) => {
           reject(error);
-          cleanup();
         }),
         this.subscribe('close', () => {
           reject(new CloseError());
-          cleanup();
         }),
         this.subscribe('keepalive', () => {
           resolve();
-          cleanup();
         })
       );
       this.set_keepalive_interval(interval);
-    });
+    }).finally(() => subscriptions.unsubscribe());
   }
 }

@@ -1,14 +1,16 @@
 /* eslint-env node */
 
 import { createSocket } from 'dgram';
-import { isIP } from 'net';
+import { isIP, isIPv4 } from 'net';
 import { lookup } from 'dns';
+import { Subscriptions } from '../utils/subscriptions.js';
+import { subscribeEvent } from '../utils/subscribeEvent.js';
 
-function lookup_address(host) {
+function lookup_address(host, family) {
   if (isIP(host)) return Promise.resolve(host);
 
   return new Promise((resolve, reject) => {
-    lookup(host, { family: 4 }, (err, address) => {
+    lookup(host, { family }, (err, address) => {
       if (err) reject(err);
       else resolve(address);
     });
@@ -52,7 +54,11 @@ export class NodeUDP {
     this._inbuf = [];
 
     for (let i = 0; i < inbuf.length; i++) {
-      onmessage(inbuf[i].buffer);
+      try {
+        onmessage(inbuf[i].buffer);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
@@ -73,30 +79,11 @@ export class NodeUDP {
     this.socket.send(Buffer.from(buf));
   }
 
-  receiveMessage(timeout) {
-    return new Promise((resolve, reject) => {
-      if (this._error) {
-        reject(this._error);
-      } else if (this._inbuf.length) {
-        resolve(this._inbuf.shift());
-      } else {
-        this.onmessage = (msg) => {
-          this.onmessage = null;
-          this.onerror = null;
-          resolve(msg);
-        };
-        this.onerror = (err) => {
-          this.onmessage = null;
-          this.onerror = null;
-          reject(err);
-        };
-      }
-    });
-  }
-
   close() {
-    this.socket.close();
-    this.socket = null;
+    if (this.socket) {
+      this.socket.close();
+      this.socket = null;
+    }
   }
 
   constructor(socket) {
@@ -114,14 +101,63 @@ export class NodeUDP {
     });
   }
 
-  static connect(host, port, type) {
-    return lookup_address(host).then((ip) => {
-      return new Promise((resolve, reject) => {
-        const socket = createSocket(type || 'udp4');
+  /**
+   * Creates a new udp socket and connects it to the target address.
+   * @param {string} options.host
+   *  The hostname or ip address to connect to.
+   * @param {number} options.port
+   *  The port.
+   * @param {'udp4' | 'udp6'} [options.type]
+   *  The ip protocol to use. This is only relevant if host is
+   *  not an ip address and hostname lookup is used.
+   * @param {Abortsignal} [options.signal]
+   *  An optional AbortSignal to abort the connect operation.
+   * @returns
+   */
+  static connect(options) {
+    const { host, port, type, signal } = options;
+
+    signal?.throwIfAborted();
+
+    const subscriptions = new Subscriptions();
+
+    return new Promise((resolve, reject) => {
+      let socket;
+
+      if (signal) {
+        subscriptions.add(
+          subscribeEvent(signal, 'abort', (reason) => {
+            const err = signal.reason;
+            reject(err);
+          })
+        );
+      }
+
+      const lookupFamily =
+        type === 'udp4' ? 4 : type === 'udp6' ? 6 : undefined;
+      lookup_address(host, lookupFamily).then((ip) => {
+        if (signal?.aborted) {
+          // IF the abort signal was triggered during the ip lookup,
+          // we have to simply ignore the resolve result.
+          return;
+        }
+        const type = isIPv4(ip) ? 'udp4' : 'udp6';
+        socket = createSocket(type);
+
+        if (signal) {
+          subscriptions.add(
+            subscribeEvent(signal, 'abort', () => {
+              socket.close();
+            })
+          );
+        }
+
         const onerror = function (ev) {
           reject(ev);
+          socket.close();
         };
-        socket.on('error', onerror);
+        subscriptions.add(subscribeEvent(socket, 'error', onerror));
+
         socket.bind(
           {
             exclusive: true,
@@ -129,12 +165,11 @@ export class NodeUDP {
           () => {
             socket.on('connect', () => {
               resolve(new this(socket));
-              socket.removeListener('error', onerror);
             });
-            socket.connect(port, host);
+            socket.connect(port, ip);
           }
         );
-      });
-    });
+      }, reject);
+    }).finally(() => subscriptions.unsubscribe());
   }
 }

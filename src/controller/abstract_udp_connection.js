@@ -1,37 +1,5 @@
 /* eslint-env node */
-
-import { encodeMessage } from '../OCP1/encode_message.js';
-import { decodeMessage } from '../OCP1/decode_message.js';
-import { KeepAlive } from '../OCP1/keepalive.js';
 import { ClientConnection } from './client_connection.js';
-
-function delay(n) {
-  return new Promise((resolve) => setTimeout(resolve, n));
-}
-
-async function waitForKeepalive(socket, options) {
-  const waiter = socket.receiveMessage().then((buffer) => {
-    const pdus = [];
-    const pos = decodeMessage(new DataView(buffer), 0, pdus);
-
-    if (pdus.length !== 1) throw new Error('Expected keepalive response.');
-    if (pos !== buffer.byteLength)
-      throw new Error('Trailing data in initial keepalive pdu.');
-
-    return true;
-  });
-
-  const msg = encodeMessage(new KeepAlive(1000));
-  const t = 5 * (options.retry_interval || 250);
-
-  for (let i = 0; i < 3; i++) {
-    socket.send(msg);
-
-    if (await Promise.race([waiter, delay(t)])) return;
-  }
-
-  throw new Error('Failed to connect.');
-}
 
 /**
  * :class:`ClientConnection` subclass which implements OCP.1 with UDP
@@ -78,8 +46,12 @@ export class AbstractUDPConnection extends ClientConnection {
   /**
    * Connect to the given endpoint.
    *
-   * @param {String} options.host - hostname or ip
-   * @param {number} options.port - port number
+   * @param {String} options.host
+   *  Hostname or ip address.
+   * @param {number} options.port
+   *  Port number.
+   * @param {'udp4' | 'udp6'} [options.type]
+   *  Optional ip protocol type.
    * @param {number} [options.delay=10] - Delay in ms between individual packets.
    *    This can be a useful strategy when communicating with devices which
    *    cannot handle high packet rates.
@@ -93,23 +65,33 @@ export class AbstractUDPConnection extends ClientConnection {
    *    in an individual UDP packet. Note that AES70 messages which are larger
    *    than this limit are sent anyway. This only limits how many seperate
    *    messages are batched into a single packet.
-   * @returns {Promise<UDPConnection>}
+   * @param {AbortSignal} [options.connectSignal]
+   *    An optional AbortSignal which can be used to abort the connect attempt.
+   *    Note that this is different from the `signal` option which will destroy
+   *    the socket also after the connect attempt has been successful.
+   * @returns {Promise<AbstractUDPConnection>}
    *    The connection.
    */
   static async connect(udpApi, options) {
-    const socket = await udpApi.connect(
-      options.host,
-      options.port,
-      options.type
-    );
+    const { host, port, type, connectSignal } = options;
+    const socket = await udpApi.connect({
+      host,
+      port,
+      type,
+      signal: connectSignal,
+    });
+
+    const connection = new this(socket, options);
 
     try {
-      await waitForKeepalive(socket, options);
-      return new this(socket, options);
+      await connection.wait_for_keepalive(1, connectSignal);
+      connectSignal?.throwIfAborted();
     } catch (err) {
-      socket.close();
+      connection.close();
       throw err;
     }
+
+    return connection;
   }
 
   write(buf) {
