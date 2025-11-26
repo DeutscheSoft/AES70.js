@@ -10,7 +10,7 @@ export class Events {
   /**
    * Emit an event.
    *
-   * @param {String} name - Name of the event.
+   * @param {string} name - Name of the event.
    * @param {...*} args - Extra arguments.
    */
   emit(name) {
@@ -31,7 +31,7 @@ export class Events {
   /**
    * Subscribe to an event.
    *
-   * @param {String} name - Name of the event.
+   * @param {string} name - Name of the event.
    * @param {Function} cb - Callback function.
    */
   on(name, cb) {
@@ -55,7 +55,7 @@ export class Events {
   /**
    * Removes an event handler.
    *
-   * @param {String} name - Name of the event.
+   * @param {string} name - Name of the event.
    * @param {Function} cb - Callback function.
    */
   removeEventListener(name, cb) {
@@ -74,7 +74,7 @@ export class Events {
   /**
    * Removes an event handler.
    *
-   * @param {strign} name
+   * @param {string} name
    * @param {Function} cb
    */
   off(name, cb) {
