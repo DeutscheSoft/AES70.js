@@ -1,4 +1,5 @@
 import { UDPConnection } from '../src/controller/udp_connection.js';
+import { RemoteDevice } from '../src/controller/remote_device.js';
 import { after, before, describe, it } from 'node:test';
 import assert, { equal, doesNotReject, rejects } from 'node:assert';
 import { delay } from './delay.js';
@@ -87,6 +88,30 @@ describe('UDPConnection', { skip: !allClassesTarget }, () => {
       ...allClassesTarget,
     });
     await con.wait_for_keepalive(1);
+    con.close();
+  });
+  it('overload with spurious timeouts', async () => {
+    // If not correctly implemented, this configuration should
+    // lead to commands timeing out incorrectly. IF the timeout
+    // handling is correct, this should comlete
+    const con = await UDPConnection.connect({
+      ...allClassesTarget,
+      delay: 100,
+      retry_interval: 200,
+      retry_count: 3,
+    });
+
+    equal(con.delay, 100);
+
+    const dev = new RemoteDevice(con);
+
+    // We should be able to issue several requests at the same time.
+    const tasks = [];
+
+    for (let i = 0; i < 500; i++) tasks.push(dev.Root.GetRole());
+
+    await Promise.all(tasks);
+
     con.close();
   });
 });
