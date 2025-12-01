@@ -19,6 +19,14 @@ export class MessageGenerator {
     };
   }
 
+  get bufferedAmount() {
+    return this._currentSize;
+  }
+
+  get batchSize() {
+    return this._batchSize;
+  }
+
   add(pdu) {
     const currentSize = this._currentSize;
     const encodedLength = pdu.encoded_length();
@@ -51,7 +59,7 @@ export class MessageGenerator {
     /* Keepalive packets are never combined into one message. */
     this._lastMessageType = messageType;
 
-    if (this._currentSize > this._batchSize) {
+    if (this._currentSize + additionalSize > this._batchSize) {
       this.flush();
     } else if (this._pdus.length === 1) {
       this.scheduleFlush();

@@ -11,6 +11,7 @@ import { EncodedArguments } from '../OCP1/encoded_arguments.js';
 import { CloseError } from '../close_error.js';
 import { Subscriptions } from '../utils/subscriptions.js';
 import { subscribeEvent } from '../utils/subscribeEvent.js';
+import { Timer } from '../utils/timer.js';
 
 class PendingCommand {
   get handle() {
@@ -90,17 +91,57 @@ function eventToKey(event) {
 export class ClientConnection extends Connection {
   constructor(options) {
     super(options);
+    // All pending commands by id/handle
     this._pendingCommands = new Map();
+    // All pending commands scheduled to be sent.
+    this._scheduledPendingCommands = new Set();
+    // All pending commands wich have been sent.
+    this._sentPendingCommands = new Set();
     this._nextCommandHandle = 0;
     this._subscribers = new Map();
+    this._sendCommandsTimer = new Timer(
+      () => {
+        this.sendCommands();
+      },
+      () => this._now()
+    );
+  }
+
+  shouldSendMoreCommands() {
+    return this.is_reliable;
+  }
+
+  sendCommands() {
+    const { _scheduledPendingCommands, _sentPendingCommands } = this;
+
+    for (const pendingCommand of _scheduledPendingCommands) {
+      if (!this.shouldSendMoreCommands()) break;
+      _scheduledPendingCommands.delete(pendingCommand);
+      _sentPendingCommands.add(pendingCommand);
+      this.send(pendingCommand.command);
+      pendingCommand.lastSent = this._now();
+      pendingCommand.retries++;
+    }
+  }
+
+  scheduleSendCommands() {
+    this._sendCommandsTimer.scheduleDeadlineIn(5);
+  }
+
+  poll() {
+    super.poll();
+    this._sendCommandsTimer.poll();
   }
 
   cleanup(error) {
     super.cleanup(error);
+    this._sendCommandsTimer.dispose();
     const subscribers = this._subscribers;
     this._subscribers = null;
     const pendingCommands = this._pendingCommands;
     this._pendingCommands = null;
+    this._scheduledPendingCommands.clear();
+    this._sentPendingCommands.clear();
 
     const e = new CloseError(error);
     pendingCommands.forEach((pendingCommand, id) => {
@@ -179,9 +220,8 @@ export class ClientConnection extends Connection {
       );
 
       this._pendingCommands.set(handle, pendingCommand);
-
-      pendingCommand.lastSent = this._estimate_next_tx_time();
-      this.send(command);
+      this._scheduledPendingCommands.add(pendingCommand);
+      this.scheduleSendCommands();
     };
 
     if (callback) {
@@ -201,6 +241,9 @@ export class ClientConnection extends Connection {
     if (!pendingCommand) return null;
 
     pendingCommands.delete(handle);
+
+    if (!this._sentPendingCommands.delete(pendingCommand))
+      this._scheduledPendingCommands.delete(pendingCommand);
 
     return pendingCommand;
   }

@@ -57,6 +57,23 @@ export declare class Connection extends Events {
   get rx_idle_time(): number;
 
   /**
+   * Amount of bytes currently buffered to be sent out.
+   */
+  get bufferedAmount(): number;
+
+  /**
+   * Amount of bytes which will be batched into single
+   * aes70 messages. This can be configured using the
+   * `batch` option when creating a connection.
+   */
+  get batchSize(): number;
+
+  /**
+   * The number of currently pending write operations.
+   */
+  get pendingWrites(): number;
+
+  /**
    * Closes this connection.
    */
   close(): void;

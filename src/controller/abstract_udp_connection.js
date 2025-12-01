@@ -1,4 +1,5 @@
 /* eslint-env node */
+import { Timer } from '../utils/timer.js';
 import { ClientConnection } from './client_connection.js';
 
 /**
@@ -17,15 +18,20 @@ export class AbstractUDPConnection extends ClientConnection {
     this.retry_interval =
       options.retry_interval >= 0 ? options.retry_interval : 250;
     this.retry_count = options.retry_count >= 0 ? options.retry_count : 3;
-    this._write_out_id = -1;
-    this._write_out_callback = () => {
-      this._write_out_id = -1;
-      this._write_out();
-    };
-    this._retry_id =
-      this.retry_interval > 0
-        ? setInterval(() => this._retryCommands(), this.retry_interval)
-        : -1;
+    this._write_out_timer = new Timer(
+      () => {
+        this._write_out();
+      },
+      () => this._now()
+    );
+    this._retry_timer = new Timer(
+      () => {
+        this._retryCommands();
+        this._retry_timer.scheduleIn(this.retry_interval);
+      },
+      () => this._now()
+    );
+    this._retry_timer.scheduleIn(this.retry_interval);
     this.q = [];
     socket.onmessage = (buffer) => {
       try {
@@ -41,6 +47,24 @@ export class AbstractUDPConnection extends ClientConnection {
 
   get is_reliable() {
     return false;
+  }
+
+  get bufferedAmount() {
+    let amount = super.bufferedAmount;
+
+    for (const buf of this.q) {
+      amount += buf.byteLength;
+    }
+
+    return amount;
+  }
+
+  get pendingWrites() {
+    return super.pendingWrites + this.q.length;
+  }
+
+  shouldSendMoreCommands() {
+    return this.q.length < 3;
   }
 
   /**
@@ -112,14 +136,8 @@ export class AbstractUDPConnection extends ClientConnection {
       this.socket.close();
       this.socket = null;
     }
-    if (this._write_out_id !== -1) {
-      clearTimeout(this._write_out_id);
-      this._write_out_id = -1;
-    }
-    if (this._retry_id !== -1) {
-      clearInterval(this._retry_id);
-      this._retry_id = -1;
-    }
+    this._write_out_timer.dispose();
+    this._retry_timer.dispose();
   }
 
   _estimate_next_tx_time() {
@@ -136,8 +154,16 @@ export class AbstractUDPConnection extends ClientConnection {
 
     this.socket.send(buf);
     super.write(buf);
+    console.log('wrote', buf.byteLength);
 
     if (q.length) this._schedule_write_out();
+    this.scheduleSendCommands();
+  }
+
+  poll() {
+    super.poll();
+    this._write_out_timer.poll();
+    this._retry_timer.poll();
   }
 
   _schedule_write_out() {
@@ -149,36 +175,34 @@ export class AbstractUDPConnection extends ClientConnection {
       return;
     }
 
-    // Already scheduled.
-    if (this._write_out_id !== -1) return;
-
-    this._write_out_id = setTimeout(
-      this._write_out_callback,
-      delay - tx_idle_time
-    );
+    this._write_out_timer.scheduleIn(delay - tx_idle_time);
   }
 
   _retryCommands() {
     const now = this._now();
     const retryTime = now - this.retry_interval;
-    // This is an estimate for how many commands we would manage to send
-    // off.
-    const max = 5 * (this.retry_interval / this.delay) - this.q.length;
     const pendingCommands = this._pendingCommands;
+    const _sentPendingCommands = this._sentPendingCommands;
+    const _scheduledPendingCommands = this._scheduledPendingCommands;
 
-    const retries = [];
+    let scheduledCount = 0;
     const failed = [];
 
-    for (const entry of pendingCommands) {
-      const [, pendingCommand] = entry;
-
-      // All later commands are newer than the cutoff.
+    for (const pendingCommand of _sentPendingCommands) {
       if (pendingCommand.lastSent > retryTime) break;
+
+      _sentPendingCommands.delete(pendingCommand);
+
       if (pendingCommand.retries >= this.retry_count) {
-        failed.push(entry);
-      } else if (retries.length < max) {
-        retries.push(entry);
+        failed.push(pendingCommand);
+      } else {
+        _scheduledPendingCommands.add(pendingCommand);
+        scheduledCount++;
       }
+    }
+
+    if (scheduledCount) {
+      this.scheduleSendCommands();
     }
 
     if (failed.length) {
@@ -189,13 +213,5 @@ export class AbstractUDPConnection extends ClientConnection {
         pendingCommand.reject(timeoutError);
       });
     }
-
-    retries.forEach(([handle, pendingCommand]) => {
-      pendingCommands.delete(handle);
-      pendingCommands.set(handle, pendingCommand);
-      this.send(pendingCommand.command);
-      pendingCommand.lastSent = now;
-      pendingCommand.retries++;
-    });
   }
 }

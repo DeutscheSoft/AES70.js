@@ -3,6 +3,7 @@ import { decodeMessage } from './OCP1/decode_message.js';
 import { KeepAlive } from './OCP1/keepalive.js';
 import { MessageGenerator } from './OCP1/message_generator.js';
 import { TimeoutError } from './timeout_error.js';
+import { Timer } from './utils/timer.js';
 
 /**
  * Connection base class. It extends :class:`Events` and defines two events:
@@ -40,8 +41,11 @@ export class Connection extends Events {
     this.last_tx_time = now;
     this.rx_bytes = 0;
     this.tx_bytes = 0;
+    this._keepalive_timer = new Timer(
+      () => this._check_keepalive(),
+      () => this._now()
+    );
     this.keepalive_interval = -1;
-    this._keepalive_interval_id = null;
     this._closed = false;
     this.on('close', () => {
       if (this._closed) return;
@@ -58,6 +62,18 @@ export class Connection extends Events {
 
   get is_reliable() {
     return true;
+  }
+
+  get bufferedAmount() {
+    return this._message_generator.bufferedAmount;
+  }
+
+  get batchSize() {
+    return this._message_generator.batchSize;
+  }
+
+  get pendingWrites() {
+    return this._message_generator.bufferedAmount > 0 ? 1 : 0;
   }
 
   send(pdu) {
@@ -117,7 +133,7 @@ export class Connection extends Events {
       }
     }
 
-    this._check_keepalive();
+    this.poll();
   }
 
   incoming(a) {}
@@ -149,15 +165,18 @@ export class Connection extends Events {
 
     // disable keepalive
     this.set_keepalive_interval(0);
+    this._keepalive_timer.dispose();
     this._message_generator.dispose();
     this._message_generator = null;
     this.removeAllEventListeners();
   }
 
   _check_keepalive() {
-    if (!(this.keepalive_interval > 0)) return;
-
+    if (this.is_closed()) return;
     const t = this.keepalive_interval;
+    if (!(t > 0)) return;
+
+    this._keepalive_timer.scheduleIn(t / 2 + 10);
 
     if (this.rx_idle_time() > t * 3) {
       this.emit('timeout');
@@ -167,6 +186,13 @@ export class Connection extends Events {
       this.flush();
       if (this.tx_idle_time() > t * 0.75) this.send(new KeepAlive(t));
     }
+  }
+
+  /**
+   * Check if some regular internal timers must run.
+   */
+  poll() {
+    this._keepalive_timer.poll();
   }
 
   /**
@@ -194,11 +220,6 @@ export class Connection extends Events {
 
     const t = seconds * 1000;
 
-    if (this._keepalive_interval_id !== null) {
-      clearInterval(this._keepalive_interval_id);
-      this._keepalive_interval_id = null;
-    }
-
     this.keepalive_interval = t;
 
     // Notify the other side about our new keepalive
@@ -206,11 +227,11 @@ export class Connection extends Events {
 
     this.send(new KeepAlive(t));
 
-    if (!(t > 0)) return;
-
-    // we check twice as often to make sure we stay within the timers
-    this._keepalive_interval_id = setInterval(() => {
-      this._check_keepalive();
-    }, t / 2);
+    if (t > 0) {
+      // we check twice as often to make sure we stay within the timers
+      this._keepalive_timer.scheduleIn(t / 2 + 10);
+    } else {
+      this._keepalive_timer.stop();
+    }
   }
 }
