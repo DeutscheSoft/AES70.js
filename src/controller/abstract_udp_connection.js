@@ -154,7 +154,6 @@ export class AbstractUDPConnection extends ClientConnection {
 
     this.socket.send(buf);
     super.write(buf);
-    console.log('wrote', buf.byteLength);
 
     if (q.length) this._schedule_write_out();
     this.scheduleSendCommands();
