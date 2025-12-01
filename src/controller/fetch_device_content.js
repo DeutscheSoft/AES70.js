@@ -13,6 +13,10 @@ function formatValue(value) {
       }
       return value;
     }
+  } else if (typeof value === 'bigint') {
+    return value >= Number.MIN_SAFE_INTEGER && value <= Number.MAX_SAFE_INTEGER
+      ? Number(value)
+      : value.toString();
   } else {
     return value;
   }
