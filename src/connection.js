@@ -164,7 +164,6 @@ export class Connection extends Events {
     if (this.is_closed()) throw new Error('cleanup() called twice.');
 
     // disable keepalive
-    this.set_keepalive_interval(0);
     this._keepalive_timer.dispose();
     this._message_generator.dispose();
     this._message_generator = null;
