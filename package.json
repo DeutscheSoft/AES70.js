@@ -1,6 +1,6 @@
 {
   "name": "aes70",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "description": "A controller library for the AES70 protocol.",
   "type": "module",
   "main": "src/index.js",
