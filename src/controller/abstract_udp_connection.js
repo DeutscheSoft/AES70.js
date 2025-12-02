@@ -207,7 +207,8 @@ export class AbstractUDPConnection extends ClientConnection {
     if (failed.length) {
       const timeoutError = new Error('Timeout.');
 
-      failed.forEach(([handle, pendingCommand]) => {
+      failed.forEach((pendingCommand) => {
+        const handle = pendingCommand.handle;
         pendingCommands.delete(handle);
         pendingCommand.reject(timeoutError);
       });
