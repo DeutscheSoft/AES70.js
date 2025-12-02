@@ -79,7 +79,11 @@ async function fetchObjectInfo(o) {
 
         Object.assign(info, formatReturnValue(name, currentValue));
       } catch (err) {
-        if (err.status != 8)
+        // 8 - NotImplemented
+        // 11 - BadMethod
+        // Note: Some implementations respond with BadMethod for methods which have been
+        // defined in more recent vrsions of aes70
+        if (err.status != 8 && err.status != 11)
           console.error(
             'Fetching property',
             o.ClassName,
