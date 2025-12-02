@@ -111,10 +111,13 @@ async function managerExists(manager) {
   }
 }
 
-async function fetchDeviceContentRec(objects) {
+async function fetchDeviceContentRec(objects, reportProgress) {
   const result = [];
 
   for (let i = 0; i < objects.length; i++) {
+    if (reportProgress) {
+      reportProgress(i, objects.length);
+    }
     const o = objects[i];
     const info = await fetchObjectInfo(o);
 
@@ -133,7 +136,7 @@ async function fetchDeviceContentRec(objects) {
   return result;
 }
 
-export async function fetchDeviceContent(device) {
+export async function fetchDeviceContent(device, reportProgress) {
   const objects = await device.GetDeviceTree();
   const managers = [
     device.DeviceManager,
@@ -155,5 +158,5 @@ export async function fetchDeviceContent(device) {
     if (await managerExists(manager)) objects.push(manager);
   }
 
-  return await fetchDeviceContentRec(objects);
+  return await fetchDeviceContentRec(objects, reportProgress);
 }

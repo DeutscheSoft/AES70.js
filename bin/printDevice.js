@@ -7,18 +7,24 @@ import { UDPConnection } from '../src/controller/udp_connection.js';
 import { fetchDeviceContent } from '../src/controller/fetch_device_content.js';
 
 function badArguments() {
-  console.log('Usage: node print_tree.js [--json] [--udp] <ip> <port>');
+  console.log(
+    'Usage: node print_tree.js [--json] [--udp] [--progress] <ip> <port>'
+  );
   exit(1);
 }
 
 let jsonMode = false;
 let useUdp = false;
 const rest = [];
+let progress = false;
 
 argv.slice(2).forEach((option) => {
   switch (option) {
     case '--json':
       jsonMode = true;
+      break;
+    case '--progress':
+      progress = true;
       break;
     case '-h':
     case '--help':
@@ -76,8 +82,13 @@ function printTreeJson(content) {
 
 async function printDevice(device) {
   try {
-    const content = await fetchDeviceContent(device);
-
+    const reportProgress = progress
+      ? (finished, total) => {
+          process.stderr.write(`\r${finished} of ${total}`);
+        }
+      : undefined;
+    const content = await fetchDeviceContent(device, reportProgress);
+    if (progress) process.stderr.write(`\ndone.\n`);
     if (jsonMode) {
       printTreeJson(content);
     } else {
