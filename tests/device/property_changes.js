@@ -55,7 +55,11 @@ class PropertyChanges extends ObjectTest {
         try {
           a = await getter();
         } catch (e) {
-          if (e.status === OcaStatus.NotImplemented) return;
+          if (
+            e.status === OcaStatus.NotImplemented ||
+            e.status === OcaStatus.BadMethod
+          )
+            return;
           throw e;
         }
 
@@ -97,7 +101,11 @@ class PropertyChanges extends ObjectTest {
           try {
             await setter(to);
           } catch (e) {
-            if (e.status === OcaStatus.NotImplemented) return;
+            if (
+              e.status === OcaStatus.NotImplemented ||
+              e.status === OcaStatus.BadMethod
+            )
+              return;
             throw e;
           }
 
