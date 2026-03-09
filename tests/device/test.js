@@ -35,7 +35,7 @@ export class Test {
   run() {}
 
   close_device(device) {
-    if (device !== null) {
+    if (device) {
       device.connection.emit('test_done');
       device.close();
       device = null;
