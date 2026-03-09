@@ -219,6 +219,8 @@ export class Connection extends Events {
 
     const t = seconds * 1000;
 
+    if (this.keepalive_interval === t) return;
+
     this.keepalive_interval = t;
 
     // Notify the other side about our new keepalive
