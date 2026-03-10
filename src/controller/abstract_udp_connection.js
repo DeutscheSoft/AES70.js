@@ -192,6 +192,13 @@ export class AbstractUDPConnection extends ClientConnection {
 
       _sentPendingCommands.delete(pendingCommand);
 
+      if (pendingCommand.lastSent + pendingCommand.duration > retryTime) {
+        // This command is expected to take longer. Simply push it back to the queue,
+        // we will pick it up later.
+        _sentPendingCommands.add(pendingCommand);
+        continue;
+      }
+
       if (pendingCommand.retries >= this.retry_count) {
         failed.push(pendingCommand);
       } else {

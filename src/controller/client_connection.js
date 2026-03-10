@@ -27,6 +27,19 @@ class PendingCommand {
     this.name = name;
     this.lastSent = 0;
     this.retries = 0;
+    this.duration = 0;
+  }
+
+  /**
+   * Sets the expected processing time for this command on the device.
+   * This duration is used when scheduling retries.
+   * Only has an effect for UDP connections.
+   *
+   * @param {number} interval
+   *  The interval in milliseconds.
+   */
+  set_duration(interval) {
+    this.duration = interval;
   }
 
   get_arguments() {
@@ -97,7 +110,7 @@ export class ClientConnection extends Connection {
     this._scheduledPendingCommands = new Set();
     // All pending commands wich have been sent.
     this._sentPendingCommands = new Set();
-    this._nextCommandHandle = 0;
+    this._lastCommandHandle = 0;
     this._subscribers = new Map();
     this._sendCommandsTimer = new Timer(
       () => {
@@ -181,8 +194,8 @@ export class ClientConnection extends Connection {
     }
 
     do {
-      handle = this._nextCommandHandle;
-      this._nextCommandHandle = (handle + 1) | 0;
+      handle = this._lastCommandHandle;
+      this._lastCommandHandle = (handle + 1) | 0;
     } while (pendingCommands.has(handle));
 
     return handle;
@@ -202,6 +215,10 @@ export class ClientConnection extends Connection {
     } else {
       throw new Error(`Expected command or response.`);
     }
+  }
+
+  get_last_pending_command() {
+    return this._pendingCommands.get(this._lastCommandHandle);
   }
 
   send_command(command, returnTypes, callback, stack, name) {

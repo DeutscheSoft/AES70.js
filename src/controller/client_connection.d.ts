@@ -25,7 +25,17 @@ export interface PendingCommand {
    * If available, returns the arguments of this
    * remote method call.
    */
-  get_arguments(): unknwon[] | undefined;
+  get_arguments(): unknown[] | undefined;
+
+  /**
+   * Sets the expected processing time for this command on the device.
+   * This duration is used when scheduling retries.
+   * Only has an effect for UDP connections.
+   *
+   * @param {number} interval
+   *  The interval in milliseconds.
+   */
+  set_duration(interval: number): void;
 }
 
 /**
@@ -42,4 +52,6 @@ export declare class ClientConnection extends Connection {
    *   Keepalive interval in seconds.
    */
   wait_for_keepalive(interval: number): Promise<void>;
+
+  get_last_pending_command(): PendingCommand | undefined;
 }
