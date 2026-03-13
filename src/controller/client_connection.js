@@ -158,7 +158,7 @@ export class ClientConnection extends Connection {
 
     const e = new CloseError(error);
     pendingCommands.forEach((pendingCommand, id) => {
-      pendingCommand.handleError(structuredClone(e));
+      pendingCommand.handleError(e);
     });
 
     subscribers.forEach((cb) => {

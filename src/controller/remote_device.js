@@ -1,4 +1,4 @@
-import { warn, error } from '../log.js';
+import { warn } from '../log.js';
 
 import { Events } from '../events.js';
 
@@ -17,13 +17,13 @@ import { OcaCodingManager } from './ControlClasses/OcaCodingManager.js';
 import { OcaDiagnosticManager } from './ControlClasses/OcaDiagnosticManager.js';
 import { OcaBlock } from './ControlClasses/OcaBlock.js';
 import { RemoteError } from './remote_error.js';
-import { OcaStatus } from '../types/OcaStatus.js';
 import tree_to_rolemap from './tree_to_rolemap.js';
 
 import * as RemoteControlClasses from './ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from '../types/OcaManagerDefaultObjectNumbers.js';
 import { OcaNotificationDeliveryMode } from '../types/OcaNotificationDeliveryMode.js';
+import { CloseError } from '../close_error.js';
 
 const emptyUint8Array = new Uint8Array(0);
 
@@ -314,7 +314,8 @@ export class RemoteDevice extends Events {
       } else if (S.version > 0 && !S.has_subscribers()) {
         dropSubscribers();
         this._doUnsubscribe(S, event).catch((error) => {
-          console.error('Unsubscribe failed: ', error);
+          if (error.name === 'aes70.CloseError') return;
+          console.error('Unsubscribe failed: %o', error);
         });
       }
     };
