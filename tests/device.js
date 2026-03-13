@@ -197,7 +197,16 @@ async function run_tests(type, target) {
   });
 
   const get_device = async () => {
-    const connection = await type.connect(connect_options(target));
+    let connection;
+    const options = connect_options(target);
+
+    if (type === WebSocketConnection) {
+      const ws = await import('ws');
+      connection = await type.connect(options, ws.WebSocket);
+    } else {
+      connection = await type.connect(options);
+    }
+
     const device = new RemoteDevice(connection);
 
     device.set_keepalive_interval(1);
@@ -250,7 +259,7 @@ async function run(targets) {
         console.log('');
         console.log(
           'Testing device at %o (with packet fragmentation):',
-          remote
+          remote,
         );
 
         const target = parse(remote);
@@ -280,7 +289,7 @@ async function run(targets) {
               console.log('');
               console.log(
                 'Testing device at %o (with packet fragmentation):',
-                remote
+                remote,
               );
 
               const fragmentation = new FragmentationProxy(target);
@@ -319,5 +328,5 @@ run(argv).then(
   function (e) {
     console.error(e);
     exit(1);
-  }
+  },
 );

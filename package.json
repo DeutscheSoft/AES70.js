@@ -41,9 +41,6 @@
     "url": "https://github.com/DeutscheSoft/AES70.js/issues"
   },
   "homepage": "https://github.com/DeutscheSoft/AES70.js#readme",
-  "optionalDependencies": {
-    "ws": "^5.2.4"
-  },
   "sideEffects": [
     "src/bundle.browser.js",
     "dist/AES70.es5.js"

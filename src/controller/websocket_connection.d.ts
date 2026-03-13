@@ -1,17 +1,20 @@
 import {
   WebSocketConnectionBase,
   IWebSocketConnectionBaseOptions,
+  IWebSocketLike,
+  WebSocketConstructor,
 } from './websocket_connection_base.js';
 
 export type IWebSocketConnectionOptions = IWebSocketConnectionBaseOptions;
+export type { IWebSocketLike, WebSocketConstructor };
 
 export class WebSocketConnection extends WebSocketConnectionBase {
-  constructor(ws: WebSocket, options: WebSocketConnectionOptions);
-  static connectWebSocket(
-    WebSocket: typeof WebSocket,
-    options: WebSocketConnectionOptions
-  ): Promise<WebSocket>;
+  constructor(ws: IWebSocketLike, options: IWebSocketConnectionOptions);
   static connect(
-    options: WebSocketConnectionOptions
+    options: IWebSocketConnectionOptions
+  ): Promise<WebSocketConnection>;
+  static connect(
+    options: IWebSocketConnectionOptions,
+    WebSocket: WebSocketConstructor
   ): Promise<WebSocketConnection>;
 }

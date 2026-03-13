@@ -96,11 +96,22 @@ NodeJS both TCP and UDP are available in addition to that.
             port: 65000,
         });
 
-In a web browser using a WebSocket this looks similar.
+In a web browser using a WebSocket this looks similar (the global
+`WebSocket` is used automatically):
 
         const connection = await OCA.WebSocketConnection.connect({
           url: 'ws://example.org',
         });
+
+On Node.js, WebSocket support requires passing the WebSocket constructor
+as the second argument to `connect()`, since there is no built-in
+WebSocket. For example, install the `ws` package and use:
+
+        import { WebSocket } from 'ws';
+        const connection = await WebSocketConnection.connect(
+          { url: 'ws://example.org' },
+          WebSocket
+        );
 
 The next step is to discover what kind of objects the device has. This can be
 done using the method `RemoteDevice.get_device_tree()` method.
@@ -178,7 +189,7 @@ connection.on('receive', (pdu) => {
         pendingCommand.name,
         pendingCommand.get_arguments(),
         '->',
-        Types.OcaStatus.getName(pdu.status_code)
+        Types.OcaStatus.getName(pdu.status_code),
       );
     }
   } else {
