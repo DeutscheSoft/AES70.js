@@ -1,0 +1,7 @@
+image: node:24-bookworm
+
+ci:
+  script:
+    - npx -y eslint@10 .
+    - npm run test
+    - npm run prepublishOnly
