@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 import { NodeUDP } from './node_udp.js';
 import { performance } from 'perf_hooks';
 import { AbstractUDPConnection } from './abstract_udp_connection.js';

@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 import { createSocket } from 'dgram';
 import { isIP, isIPv4 } from 'net';
 import { lookup } from 'dns';

@@ -8,7 +8,7 @@ import { fetchDeviceContent } from '../src/controller/fetch_device_content.js';
 
 function badArguments() {
   console.log(
-    'Usage: node print_tree.js [--json] [--udp] [--progress] <ip> <port>'
+    'Usage: node print_tree.js [--json] [--udp] [--progress] <ip> <port>',
   );
   exit(1);
 }
@@ -61,7 +61,7 @@ async function printTree(content, prefix) {
   if (!prefix) prefix = [];
 
   for (const info of content) {
-    const { Role, type, Members, ...Rest } = info;
+    const { Role, type: _type, Members, ...Rest } = info;
     const path = prefix.concat([Role]);
 
     console.log('Path: %s', path.join('/'));

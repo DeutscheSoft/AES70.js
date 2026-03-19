@@ -1,5 +1,3 @@
-/* eslint-env node */
-
 import { createConnection } from 'net';
 import { Buffer } from 'buffer';
 import { performance } from 'perf_hooks';
@@ -34,7 +32,7 @@ export class TCPConnection extends ClientConnection {
     super.cleanup();
     try {
       this.socket.destroy();
-    } catch (e) {
+    } catch (_e) {
       // ignore error
     }
   }

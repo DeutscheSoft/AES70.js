@@ -1,4 +1,3 @@
-/* eslint-env node */
 import { Timer } from '../utils/timer.js';
 import { ClientConnection } from './client_connection.js';
 

@@ -12,7 +12,13 @@ export default [
       'prefer-const': 'error',
       'no-unused-vars': [
         'error',
-        { args: 'none', varsIgnorePattern: '^_', argsIgnorePattern: '^_' },
+        {
+          args: 'none',
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+        },
       ],
       'no-var': 'error',
     },

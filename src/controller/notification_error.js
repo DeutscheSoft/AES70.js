@@ -21,8 +21,11 @@ function parseNotificationExceptionData(buffer) {
 
   let type, try_again, data;
 
+  // eslint-disable-next-line prefer-const
   [pos, type] = OcaNotificationExceptionTypeDecoder.decodeFrom(view, pos);
+  // eslint-disable-next-line prefer-const
   [pos, try_again] = OcaBoolean.decodeFrom(view, pos);
+  // eslint-disable-next-line prefer-const
   [pos, data] = OcaBlob.decodeFrom(view, pos);
 
   return [type, try_again, data];
@@ -43,7 +46,7 @@ export class NotificationError extends Error {
 
     try {
       const [type, try_again, data] = parseNotificationExceptionData(
-        notification.parameters
+        notification.parameters,
       );
       this.type = type;
       this.try_again = try_again;
