@@ -20,7 +20,7 @@
     "docs": "cd esdoc && npm run build",
     "prettier": "npx prettier@2.0.5 --write .",
     "format": "npx prettier@2.0.5 --write .",
-    "eslint": "./eslint/node_modules/.bin/eslint ."
+    "lint": "npx -y eslint@10 ."
   },
   "repository": {
     "type": "git",
