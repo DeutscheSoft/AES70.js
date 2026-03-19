@@ -23,7 +23,6 @@ import * as RemoteControlClasses from './ControlClasses.js';
 
 import { OcaManagerDefaultObjectNumbers } from '../types/OcaManagerDefaultObjectNumbers.js';
 import { OcaNotificationDeliveryMode } from '../types/OcaNotificationDeliveryMode.js';
-import { CloseError } from '../close_error.js';
 
 const emptyUint8Array = new Uint8Array(0);
 

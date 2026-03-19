@@ -1,6 +1,5 @@
 import { createType } from './createType.js';
 import { isTypedArray } from './is_typed_array.js';
-import { getLengthEncoder } from './getLengthEncoder.js';
 
 function OcaArray1DConstantLength(Type, length) {
   const encodedLength = Type.encodedLength(void 0);

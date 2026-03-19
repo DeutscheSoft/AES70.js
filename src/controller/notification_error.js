@@ -48,7 +48,7 @@ export class NotificationError extends Error {
       this.type = type;
       this.try_again = try_again;
       this.data = data;
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to decode notification exception data.');
       this.type = OcaNotificationExceptionType.Unspecified;
       this.try_again = false;

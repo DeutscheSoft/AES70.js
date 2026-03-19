@@ -1,7 +1,7 @@
 export function warn(...args) {
   try {
     console.warn(...args);
-  } catch (e) {
+  } catch (_e) {
     // ignore error
   }
 }
@@ -9,7 +9,7 @@ export function warn(...args) {
 export function log(...args) {
   try {
     console.log(...args);
-  } catch (e) {
+  } catch (_e) {
     // ignore error
   }
 }
@@ -17,7 +17,7 @@ export function log(...args) {
 export function error(...args) {
   try {
     console.error(...args);
-  } catch (e) {
+  } catch (_e) {
     // ignore error
   }
 }

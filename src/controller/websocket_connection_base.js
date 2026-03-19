@@ -69,7 +69,7 @@ export class WebSocketConnectionBase extends ClientConnection {
         ws.removeEventListener('close', this._onclose);
         ws.removeEventListener('error', this._onerror);
         ws.close();
-      } catch (err) {
+      } catch (_err) {
         // ignore error
       }
     }

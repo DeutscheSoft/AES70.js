@@ -1,5 +1,4 @@
 import { Arguments } from './arguments.js';
-import { OcaPropertyChangeType } from '../types/OcaPropertyChangeType.js';
 import { observeProperty } from './observeProperty.js';
 import { RemoteError } from './remote_error.js';
 

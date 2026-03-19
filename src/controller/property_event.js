@@ -1,5 +1,4 @@
 import { BaseEvent } from './base_event.js';
-import { error } from '../log.js';
 
 /**
  * Class used to represent property changes.
