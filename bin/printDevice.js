@@ -8,7 +8,7 @@ import { fetchDeviceContent } from '../src/controller/fetch_device_content.js';
 
 function badArguments() {
   console.log(
-    'Usage: node print_tree.js [--json] [--udp] [--progress] <ip> <port>',
+    'Usage: node print_tree.js [--json] [--udp] [--progress] <ip> <port>'
   );
   exit(1);
 }

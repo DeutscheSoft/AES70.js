@@ -189,7 +189,7 @@ connection.on('receive', (pdu) => {
         pendingCommand.name,
         pendingCommand.get_arguments(),
         '->',
-        Types.OcaStatus.getName(pdu.status_code),
+        Types.OcaStatus.getName(pdu.status_code)
       );
     }
   } else {

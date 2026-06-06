@@ -46,7 +46,7 @@ export class NotificationError extends Error {
 
     try {
       const [type, try_again, data] = parseNotificationExceptionData(
-        notification.parameters,
+        notification.parameters
       );
       this.type = type;
       this.try_again = try_again;

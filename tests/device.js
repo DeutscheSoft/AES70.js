@@ -259,7 +259,7 @@ async function run(targets) {
         console.log('');
         console.log(
           'Testing device at %o (with packet fragmentation):',
-          remote,
+          remote
         );
 
         const target = parse(remote);
@@ -289,7 +289,7 @@ async function run(targets) {
               console.log('');
               console.log(
                 'Testing device at %o (with packet fragmentation):',
-                remote,
+                remote
               );
 
               const fragmentation = new FragmentationProxy(target);
@@ -328,5 +328,5 @@ run(argv).then(
   function (e) {
     console.error(e);
     exit(1);
-  },
+  }
 );
