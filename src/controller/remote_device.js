@@ -234,7 +234,9 @@ export class RemoteDevice extends Events {
       );
 
       try {
-        if (_supportsEV2 === undefined) this._checkEV2Promise = p;
+        if (_supportsEV2 === undefined) {
+          this._checkEV2Promise = p.catch((err) => {});
+        }
         await p;
         if (_supportsEV2 === undefined) {
           this._supportsEV2 = true;

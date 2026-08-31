@@ -11,13 +11,21 @@ import { allClassesTarget } from './all_classes_target.js';
 describe('observeProperty', { skip: !allClassesTarget }, async () => {
   let device, objectTree;
 
-  before(async () => {
+  const connect = async () => {
     const connection = await TCPConnection.connect({
       ...allClassesTarget,
     });
-    device = new RemoteDevice(connection);
+    const device = new RemoteDevice(connection);
 
-    objectTree = await device.get_role_map();
+    const objectTree = await device.get_role_map();
+
+    return { connection, device, objectTree };
+  };
+
+  before(async () => {
+    const tmp = await connect();
+    device = tmp.device;
+    objectTree = tmp.objectTree;
     assert(objectTree instanceof Map);
   });
 
@@ -138,5 +146,37 @@ describe('observeProperty', { skip: !allClassesTarget }, async () => {
     equal(observations[0].changeIndex, undefined);
 
     unsub();
+  });
+
+  it('simultaneous subscriptions regression github#15', async () => {
+    const { connection, objectTree } = await connect();
+    const gain = objectTree.get('MyActuators/MyGain');
+    const level = objectTree.get('MySensors/MyLevelSensor');
+
+    let observedGainFailed = false;
+    let observedLevelFailed = false;
+
+    const unsub1 = observeProperty(gain, 'Gain', (ok, value, changeIndex) => {
+      console.log(ok, value, changeIndex);
+      if (!ok) observedGainFailed = true;
+    });
+    const unsub2 = observeProperty(
+      level,
+      'Reading',
+      (ok, value, changeIndex) => {
+        console.log(ok, value, changeIndex);
+        if (!ok) observedLevelFailed = true;
+      }
+    );
+
+    for (let i = 0; i < 10; i++) await gain.GetClassIdentification();
+
+    unsub1();
+    unsub2();
+
+    connection.close();
+
+    assert(!observedGainFailed);
+    assert(!observedLevelFailed);
   });
 });
