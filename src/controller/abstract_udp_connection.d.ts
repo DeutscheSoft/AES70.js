@@ -23,9 +23,11 @@ export interface IUDPPlatformSocket {
 
   /**
    * Called when a transport error occurs. Only one handler may be
-   * installed at a time.
+   * installed at a time. The reference :class:`NodeUDP` implementation
+   * always passes a Node.js ``Error`` (from the underlying ``dgram``
+   * socket).
    */
-  onerror: ((err: unknown) => void) | null;
+  onerror: ((err: Error) => void) | null;
 
   /**
    * Send a single UDP datagram.
