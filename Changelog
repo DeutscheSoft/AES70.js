@@ -2,6 +2,14 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [2.0.20] - 2026-09-01
+
+- Fixed some linter issues and switched to new linter
+
+- Added typescript declarations for AbstractUDPConnection
+
+- Fixed a bug in the EV1/EV2 compatibility logic
+
 ## [2.0.19] - 2026-03-13
 
 - Remove ws dependency. WebSocket connections can use a compatible
