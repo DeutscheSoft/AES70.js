@@ -1,7 +1,7 @@
 import { TCPConnection } from '../src/controller/tcp_connection.js';
 import { after, before, describe, it } from 'node:test';
 import { RemoteDevice } from '../src/controller/remote_device.js';
-import assert, { equal } from 'node:assert';
+import assert, { equal, rejects } from 'node:assert';
 import { OcaGain } from '../src/controller/ControlClasses.js';
 import { observeProperty } from '../src/controller/observeProperty.js';
 import { Arguments } from '../src/controller/arguments.js';
@@ -41,6 +41,17 @@ describe('PropertySync', { skip: !allClassesTarget }, async () => {
 
     equal(property_sync.Gain, max);
 
+    property_sync.Dispose();
+  });
+
+  it('sync() fails on close', async () => {
+    const gain = objectTree.get('MyActuators/MyGain');
+
+    const property_sync = gain.GetPropertySync();
+    const syncPromise = property_sync.sync();
+    await delay(1);
+    device.close();
+    await rejects(syncPromise);
     property_sync.Dispose();
   });
 });

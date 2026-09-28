@@ -48,7 +48,16 @@ export class PropertySync {
               result instanceof Arguments ? result.item(0) : result;
             resolve();
           } else if (result instanceof RemoteError) {
+            // Note: The remote device may respond with an error, for instance
+            // when the corresponding method is not implemented. Exactly what result
+            // to expect is not always clear. We simply treat having a response from
+            // the device as a success, event if no value has been received.
+            // In that situation the value remains undefined.
             resolve();
+          } else {
+            // This case is usually a connection being closed or a timeout (in case of
+            // UDP).
+            reject(result);
           }
         });
         this.subscriptions.push(unsubscribe);
