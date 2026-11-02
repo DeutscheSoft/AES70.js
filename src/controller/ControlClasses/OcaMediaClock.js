@@ -31,7 +31,16 @@ export const OcaMediaClock = make_control_class(
   [
     ['Type', [OcaMediaClockType], 3, 1, false, false, null],
     ['DomainID', [OcaUint16], 3, 2, false, false, null],
-    ['RatesSupported', [OcaList(OcaMediaClockRate)], 3, 3, false, false, null],
+    [
+      'RatesSupported',
+      [OcaList(OcaMediaClockRate)],
+      3,
+      3,
+      false,
+      false,
+      null,
+      { get: { name: 'GetSupportedRates', index: 0 } },
+    ],
     ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, ['Rate']],
     ['LockState', [OcaMediaClockLockState], 3, 5, false, false, null],
   ],

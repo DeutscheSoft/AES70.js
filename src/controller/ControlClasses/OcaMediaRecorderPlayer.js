@@ -66,8 +66,32 @@ export const OcaMediaRecorderPlayer = make_control_class(
       null,
     ],
     ['PlayOption', [OcaMediaPlayOption], 4, 4, false, false, null],
-    ['WindowStart', [OcaMediaVolumePosition], 4, 5, false, false, null],
-    ['WindowEnd', [OcaMediaVolumePosition], 4, 6, false, false, null],
+    [
+      'WindowStart',
+      [OcaMediaVolumePosition],
+      4,
+      5,
+      false,
+      false,
+      null,
+      {
+        get: { name: 'GetWindowRange', index: 0 },
+        set: { name: 'SetWindowRange', index: 0 },
+      },
+    ],
+    [
+      'WindowEnd',
+      [OcaMediaVolumePosition],
+      4,
+      6,
+      false,
+      false,
+      null,
+      {
+        get: { name: 'GetWindowRange', index: 1 },
+        set: { name: 'SetWindowRange', index: 1 },
+      },
+    ],
   ],
   []
 );

@@ -15,8 +15,26 @@ export const OcaPowerSensor = make_control_class(
   OcaSensor,
   [['GetReading', 4, 1, [], [OcaFloat32, OcaFloat32, OcaFloat32, OcaFloat32]]],
   [
-    ['Power', [OcaFloat32], 4, 1, false, false, null],
-    ['PowerFactor', [OcaFloat32], 4, 2, false, false, null],
+    [
+      'Power',
+      [OcaFloat32],
+      4,
+      1,
+      false,
+      false,
+      null,
+      { get: { name: 'GetReading', index: 0 } },
+    ],
+    [
+      'PowerFactor',
+      [OcaFloat32],
+      4,
+      2,
+      false,
+      false,
+      null,
+      { get: { name: 'GetReading', index: 1 } },
+    ],
   ],
   []
 );

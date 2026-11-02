@@ -36,7 +36,16 @@ export const OcaMediaClock3 = make_control_class(
   ],
   [
     ['Availability', [OcaMediaClockAvailability], 3, 1, false, false, null],
-    ['TimeSourceONo', [OcaUint32], 3, 2, false, false, null],
+    [
+      'TimeSourceONo',
+      [OcaUint32],
+      3,
+      2,
+      false,
+      false,
+      null,
+      { get: { name: 'GetCurrentRate', index: 1 } },
+    ],
     ['Offset', [OcaTime], 3, 3, false, false, null],
     ['CurrentRate', [OcaMediaClockRate], 3, 4, false, false, null],
     [

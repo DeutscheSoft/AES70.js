@@ -54,7 +54,16 @@ export const OcaDataset = make_control_class(
     ['Type', [OcaString], 2, 3, false, false, null],
     ['ReadOnly', [OcaBoolean], 2, 4, false, false, null],
     ['LastModificationTime', [OcaTime], 2, 5, false, false, null],
-    ['MaxSize', [OcaUint64], 2, 6, false, false, null],
+    [
+      'MaxSize',
+      [OcaUint64],
+      2,
+      6,
+      false,
+      false,
+      null,
+      { get: { name: 'GetDatasetSizes', index: 1 } },
+    ],
   ],
   []
 );

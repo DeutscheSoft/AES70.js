@@ -107,7 +107,19 @@ export const OcaDynamicsCurve = make_control_class(
     ['GetThresholds', 4, 14, [], [OcaList(OcaDBr), OcaFloat32, OcaFloat32]],
   ],
   [
-    ['nSegments', [OcaUint8], 4, 1, false, false, null],
+    [
+      'nSegments',
+      [OcaUint8],
+      4,
+      1,
+      false,
+      false,
+      null,
+      {
+        get: { name: 'GetNSegments', index: 0 },
+        set: { name: 'SetNSegments', index: 0 },
+      },
+    ],
     ['Thresholds', [OcaList(OcaDBr)], 4, 2, false, false, ['Threshold']],
     ['Slopes', [OcaList(OcaFloat32)], 4, 3, false, false, ['Slope']],
     [

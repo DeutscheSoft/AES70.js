@@ -39,6 +39,7 @@ export const OcaMediaClockManager = make_control_class(
       false,
       false,
       null,
+      { get: { name: 'GetMediaClockTypesSupported', index: 0 } },
     ],
     ['Clocks', [OcaList(OcaUint32)], 3, 2, false, false, null],
     ['Clock3s', [OcaList(OcaUint32)], 3, 3, false, false, null],

@@ -82,7 +82,19 @@ export const OcaMediaTransportNetwork = make_control_class(
     ['GetAlignmentGain', 3, 26, [], [OcaFloat32, OcaFloat32, OcaFloat32]],
   ],
   [
-    ['Protocol', [OcaNetworkMediaProtocol], 3, 1, false, false, null],
+    [
+      'Protocol',
+      [OcaNetworkMediaProtocol],
+      3,
+      1,
+      false,
+      false,
+      null,
+      {
+        get: { name: 'GetMediaProtocol', index: 0 },
+        set: { name: 'SetMediaProtocol', index: 0 },
+      },
+    ],
     ['Ports', [OcaList(OcaPort)], 3, 2, false, false, null],
     ['MaxSourceConnectors', [OcaUint16], 3, 3, false, false, null],
     ['MaxSinkConnectors', [OcaUint16], 3, 4, false, false, null],
