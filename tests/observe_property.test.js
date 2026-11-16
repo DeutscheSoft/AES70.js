@@ -157,16 +157,16 @@ describe('observeProperty', { skip: !allClassesTarget }, async () => {
     let observedLevelFailed = false;
 
     const unsub1 = observeProperty(gain, 'Gain', (ok, value, changeIndex) => {
-      console.log(ok, value, changeIndex);
+      //console.log(ok, value, changeIndex);
       if (!ok) observedGainFailed = true;
     });
     const unsub2 = observeProperty(
       level,
       'Reading',
       (ok, value, changeIndex) => {
-        console.log(ok, value, changeIndex);
+        //console.log(ok, value, changeIndex);
         if (!ok) observedLevelFailed = true;
-      }
+      },
     );
 
     for (let i = 0; i < 10; i++) await gain.GetClassIdentification();
