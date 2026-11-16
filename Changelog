@@ -2,6 +2,15 @@
 
 All notable changes and version updates will be documented in this file.
 
+## [2.0.23] - 2026-11-16
+
+- Fix Connection.parse() when used with buffer views. This can happen
+  when using Connection with tls.
+
+## [2.0.22] - 2026-11-02
+
+- Fix some missing getter and setter infos in control classes.
+
 ## [2.0.21] - 2026-09-28
 
 - Fixes a bug in close and timeout handling in PropertySync.sync()
