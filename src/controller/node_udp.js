@@ -53,7 +53,7 @@ export class NodeUDP {
 
     for (let i = 0; i < inbuf.length; i++) {
       try {
-        onmessage(inbuf[i].buffer);
+        onmessage(inbuf[i]);
       } catch (err) {
         console.error(err);
       }
@@ -127,7 +127,7 @@ export class NodeUDP {
           subscribeEvent(signal, 'abort', (reason) => {
             const err = signal.reason;
             reject(err);
-          })
+          }),
         );
       }
 
@@ -146,7 +146,7 @@ export class NodeUDP {
           subscriptions.add(
             subscribeEvent(signal, 'abort', () => {
               socket.close();
-            })
+            }),
           );
         }
 
@@ -165,7 +165,7 @@ export class NodeUDP {
               resolve(new this(socket));
             });
             socket.connect(port, ip);
-          }
+          },
         );
       }, reject);
     }).finally(() => subscriptions.unsubscribe());

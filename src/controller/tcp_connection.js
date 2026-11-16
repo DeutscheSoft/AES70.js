@@ -18,7 +18,7 @@ export class TCPConnection extends ClientConnection {
     super(options);
     this.socket = socket;
     socket.on('data', (data) => {
-      this.read(data.buffer);
+      this.read(data);
     });
     socket.on('error', (e) => {
       this.emit('error', e);

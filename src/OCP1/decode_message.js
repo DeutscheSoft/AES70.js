@@ -15,7 +15,7 @@ const PDUTypes = [
 ];
 
 export function decodeMessage(data, pos, ret) {
-  if (data.byteLength < data.byteOffset + pos + 10) return -1;
+  if (pos + 10 > data.byteLength) return -1;
 
   pos = pos | 0;
   if (data.getUint8(pos) != 0x3b) throw new Error('Bad sync value.');
@@ -29,8 +29,8 @@ export function decodeMessage(data, pos, ret) {
   const messageCount = data.getUint16(pos);
   pos += 2;
 
-  // this is one index after this message
-  const message_offset = data.byteOffset + pos - 9 + messageSize;
+  // this is one index after this message (view-relative)
+  const message_offset = pos - 9 + messageSize;
 
   if (message_offset > data.byteLength) return -1;
 
@@ -45,7 +45,7 @@ export function decodeMessage(data, pos, ret) {
 
   for (let i = 0; i < messageCount; i++) {
     ret[i] = new PDUType();
-    pos = ret[i].decode_from(data, pos, message_offset - data.byteOffset - pos);
+    pos = ret[i].decode_from(data, pos, message_offset - pos);
   }
 
   if (pos != message_offset)

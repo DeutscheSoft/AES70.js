@@ -86,8 +86,12 @@ export declare class Connection extends Events {
   /**
    * Receive and handle some incoming data. This is usually called
    * internally when data is received on e.g. a tcp socket.
+   *
+   * Accepts an ``ArrayBuffer`` or ``Uint8Array`` (including Node.js
+   * ``Buffer``). Uint8Arrays are parsed in place using their
+   * ``byteOffset`` / ``byteLength``.
    */
-  read(data: ArrayBuffer): void;
+  read(data: ArrayBuffer | Uint8Array): void;
 
   /**
    * Set the keepalive interval. Setting the keepalive interval to a

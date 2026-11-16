@@ -36,7 +36,6 @@ export class Connection extends Events {
       this.write(buf)
     );
     this.inbuf = null;
-    this.inpos = 0;
     this.last_rx_time = now;
     this.last_tx_time = now;
     this.rx_bytes = 0;
@@ -91,37 +90,37 @@ export class Connection extends Events {
   }
 
   read(buf) {
-    this.rx_bytes += buf.byteLength;
+    // Accept ArrayBuffer or Uint8Array (Node.js Buffer is a Uint8Array).
+    // Full messages are parsed in place via byteOffset/byteLength.
+    let u8 = buf instanceof Uint8Array ? buf : new Uint8Array(buf);
+
+    this.rx_bytes += u8.byteLength;
     this.last_rx_time = this._now();
 
-    if (this.inbuf) {
-      const len = this.inbuf.byteLength - this.inpos;
-      const tmp = new Uint8Array(new ArrayBuffer(len + buf.byteLength));
-
-      tmp.set(new Uint8Array(this.inbuf, this.inpos));
-      tmp.set(new Uint8Array(buf), len);
-
+    if (this.inbuf !== null) {
+      const tmp = new Uint8Array(this.inbuf.byteLength + u8.byteLength);
+      tmp.set(this.inbuf);
+      tmp.set(u8, this.inbuf.byteLength);
       this.inbuf = null;
-      this.inpos = 0;
-
-      buf = tmp.buffer;
+      u8 = tmp;
     }
 
     let pos = 0;
-    const view = new DataView(buf);
+    const view = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
 
     try {
       do {
         const ret = [];
         const len = decodeMessage(view, pos, ret);
-        if (len == -1) {
-          this.inbuf = buf;
-          this.inpos = pos;
+        if (len === -1) {
+          // Keep the unparsed remainder. Copy so Node pooled/TLS buffers
+          // cannot overwrite retained bytes after this callback returns.
+          this.inbuf = u8.subarray(pos).slice();
           break;
         }
         pos = len;
         this.incoming(ret);
-      } while (pos < buf.byteLength);
+      } while (pos < u8.byteLength);
     } catch (e) {
       // If this is a reliably connection we close it. If not,
       // we print decoding errors and throw away the packet.
